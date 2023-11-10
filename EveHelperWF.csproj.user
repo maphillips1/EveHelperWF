@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\mrphi\source\repos\EveHelperWF\EveHelperWF\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Objects\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Default Setting Tabs\InventionDefaults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Default Setting Tabs\MainDefaults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Default Setting Tabs\ManufacturingDefaults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Default Setting Tabs\ReactionDefaults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\BlueprintBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\LootAppraisal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\PlanetPlanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\SystemFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\SolarSystemInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
