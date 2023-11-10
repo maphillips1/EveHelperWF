@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Images\EveHelperIcon.ico</ApplicationIcon>
-    <IsPublishable>False</IsPublishable>
+    <IsPublishable>True</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>

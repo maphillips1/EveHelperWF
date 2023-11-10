@@ -874,11 +874,13 @@ namespace EveHelperWF.ScreenHelper
                 {
                     if (isBuyOrder)
                     {
+                        prod.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId);
                         prod.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId, prod.quantity);
                     }
                     else
                     {
-                        prod.priceTotal = ESI_Calls.ESIMarketData.GetSellOrderPriceForQuantity(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId, prod.quantity);
+                        prod.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId);
+                        prod.priceTotal = prod.pricePer * prod.quantity;
                     }
                 }
             }
