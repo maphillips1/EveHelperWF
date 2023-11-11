@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Label StationsListLabel;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolarSystemInfo));
             SolarSystemNameLabel = new Label();
             PlanetsLabel = new Label();
             PlanetListLabel = new Label();
@@ -253,6 +255,7 @@
             Controls.Add(SolarSystemNameLabel);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SolarSystemInfo";
             Text = "System Info";
             ResumeLayout(false);

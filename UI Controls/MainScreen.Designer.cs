@@ -39,6 +39,8 @@
             label4 = new Label();
             label5 = new Label();
             DefaultsButtonClick = new Button();
+            label6 = new Label();
+            MarketBrowserButton = new Button();
             SuspendLayout();
             // 
             // BlueprintBrowserButton
@@ -159,11 +161,36 @@
             DefaultsButtonClick.UseVisualStyleBackColor = true;
             DefaultsButtonClick.Click += DefaultsButtonClick_Click;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(475, 193);
+            label6.Name = "label6";
+            label6.Size = new Size(147, 25);
+            label6.TabIndex = 11;
+            label6.Text = "Market Browser";
+            // 
+            // MarketBrowserButton
+            // 
+            MarketBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            MarketBrowserButton.ForeColor = Color.Black;
+            MarketBrowserButton.Image = (Image)resources.GetObject("MarketBrowserButton.Image");
+            MarketBrowserButton.Location = new Point(475, 40);
+            MarketBrowserButton.Name = "MarketBrowserButton";
+            MarketBrowserButton.Size = new Size(150, 150);
+            MarketBrowserButton.TabIndex = 10;
+            MarketBrowserButton.UseVisualStyleBackColor = true;
+            MarketBrowserButton.Click += MarketBrowserButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label6);
+            Controls.Add(MarketBrowserButton);
             Controls.Add(label5);
             Controls.Add(DefaultsButtonClick);
             Controls.Add(label4);
@@ -176,6 +203,7 @@
             Controls.Add(BlueprintBrowserButton);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainScreen";
             Text = "Eve Helper";
             ResumeLayout(false);
@@ -194,5 +222,7 @@
         private Label label4;
         private Label label5;
         private Button DefaultsButtonClick;
+        private Label label6;
+        private Button MarketBrowserButton;
     }
 }

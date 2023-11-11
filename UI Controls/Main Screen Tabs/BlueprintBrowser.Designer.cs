@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueprintBrowser));
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
@@ -143,6 +143,7 @@
             MEResearchPage = new TabPage();
             TEResearchPage = new TabPage();
             InventionPage = new TabPage();
+            InventionImagePanel = new Panel();
             InventionSCILabel = new Label();
             Label100 = new Label();
             InventionJobCostLabel = new Label();
@@ -218,7 +219,6 @@
             ManuImageWorker = new System.ComponentModel.BackgroundWorker();
             ReactionImageWorker = new System.ComponentModel.BackgroundWorker();
             InventionImageWorker = new System.ComponentModel.BackgroundWorker();
-            InventionImagePanel = new Panel();
             Menu.SuspendLayout();
             ManufacturingPanel.SuspendLayout();
             panel1.SuspendLayout();
@@ -292,8 +292,28 @@
             // skillsToolStripMenuItem
             // 
             skillsToolStripMenuItem.Name = "skillsToolStripMenuItem";
-            skillsToolStripMenuItem.Size = new Size(247, 26);
+            skillsToolStripMenuItem.Size = new Size(125, 26);
             skillsToolStripMenuItem.Text = "Skills";
+            // 
+            // mainDefaultsToolStripMenuItem
+            // 
+            mainDefaultsToolStripMenuItem.Name = "mainDefaultsToolStripMenuItem";
+            mainDefaultsToolStripMenuItem.Size = new Size(125, 26);
+            // 
+            // manufacturingDefaultsToolStripMenuItem
+            // 
+            manufacturingDefaultsToolStripMenuItem.Name = "manufacturingDefaultsToolStripMenuItem";
+            manufacturingDefaultsToolStripMenuItem.Size = new Size(125, 26);
+            // 
+            // inventionDefaultsToolStripMenuItem
+            // 
+            inventionDefaultsToolStripMenuItem.Name = "inventionDefaultsToolStripMenuItem";
+            inventionDefaultsToolStripMenuItem.Size = new Size(125, 26);
+            // 
+            // reactionDefaultsToolStripMenuItem
+            // 
+            reactionDefaultsToolStripMenuItem.Name = "reactionDefaultsToolStripMenuItem";
+            reactionDefaultsToolStripMenuItem.Size = new Size(125, 26);
             // 
             // helpToolStripMenuItem
             // 
@@ -1130,22 +1150,22 @@
             // 
             // ManuInputGrid
             // 
-            dataGridViewCellStyle11.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle11.ForeColor = Color.Black;
-            ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ManuInputGrid.BackgroundColor = SystemColors.WindowFrame;
             ManuInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ManuInputGrid.Columns.AddRange(new DataGridViewColumn[] { materialName, quantityTotal, Cost, build, react, quantity, volume, pricePer, manufacturable, reactable, materialTypeID, parentMaterialTypeID });
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle16.ForeColor = Color.White;
-            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
-            ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ManuInputGrid.GridColor = SystemColors.AppWorkspace;
             ManuInputGrid.Location = new Point(690, 2);
             ManuInputGrid.Margin = new Padding(2);
@@ -1168,10 +1188,10 @@
             // quantityTotal
             // 
             quantityTotal.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.Format = "N0";
-            dataGridViewCellStyle12.NullValue = null;
-            quantityTotal.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            quantityTotal.DefaultCellStyle = dataGridViewCellStyle2;
             quantityTotal.HeaderText = "Total Quantity";
             quantityTotal.MinimumWidth = 6;
             quantityTotal.Name = "quantityTotal";
@@ -1181,9 +1201,9 @@
             // Cost
             // 
             Cost.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle13.Format = "C2";
-            dataGridViewCellStyle13.NullValue = null;
-            Cost.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            Cost.DefaultCellStyle = dataGridViewCellStyle3;
             Cost.HeaderText = "Cost";
             Cost.MinimumWidth = 6;
             Cost.Name = "Cost";
@@ -1223,10 +1243,10 @@
             // volume
             // 
             volume.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            volume.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            volume.DefaultCellStyle = dataGridViewCellStyle4;
             volume.HeaderText = "Volume (m3)";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -1236,9 +1256,9 @@
             // pricePer
             // 
             pricePer.DataPropertyName = "pricePer";
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            pricePer.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            pricePer.DefaultCellStyle = dataGridViewCellStyle5;
             pricePer.HeaderText = "Price Per";
             pricePer.MinimumWidth = 6;
             pricePer.Name = "pricePer";
@@ -1478,6 +1498,15 @@
             InventionPage.Size = new Size(1356, 565);
             InventionPage.TabIndex = 4;
             InventionPage.Text = "Invention";
+            // 
+            // InventionImagePanel
+            // 
+            InventionImagePanel.BackColor = Color.Transparent;
+            InventionImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
+            InventionImagePanel.Location = new Point(696, 143);
+            InventionImagePanel.Name = "InventionImagePanel";
+            InventionImagePanel.Size = new Size(64, 64);
+            InventionImagePanel.TabIndex = 17;
             // 
             // InventionSCILabel
             // 
@@ -1930,20 +1959,20 @@
             // 
             // InventionInputGrid
             // 
-            dataGridViewCellStyle17.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle17.ForeColor = Color.Black;
-            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle7.BackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle7.ForeColor = Color.Black;
+            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             InventionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             InventionInputGrid.BackgroundColor = SystemColors.WindowFrame;
             InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle18.ForeColor = Color.White;
-            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
-            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle8;
             InventionInputGrid.Location = new Point(2, 314);
             InventionInputGrid.Margin = new Padding(2);
             InventionInputGrid.Name = "InventionInputGrid";
@@ -2226,20 +2255,20 @@
             // 
             // ReactionInputGrid
             // 
-            dataGridViewCellStyle19.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle19.ForeColor = SystemColors.ActiveCaptionText;
-            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle9.BackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle9.ForeColor = SystemColors.ActiveCaptionText;
+            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             ReactionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ReactionInputGrid.BackgroundColor = SystemColors.WindowFrame;
             ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle20.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle20.ForeColor = Color.White;
-            dataGridViewCellStyle20.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
-            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle10;
             ReactionInputGrid.Location = new Point(2, 251);
             ReactionInputGrid.Margin = new Padding(2);
             ReactionInputGrid.Name = "ReactionInputGrid";
@@ -2299,15 +2328,6 @@
             // 
             InventionImageWorker.DoWork += InventionImageWorker_DoWork;
             InventionImageWorker.RunWorkerCompleted += InventionImageWorker_RunWorkerCompleted;
-            // 
-            // InventionImagePanel
-            // 
-            InventionImagePanel.BackColor = Color.Transparent;
-            InventionImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            InventionImagePanel.Location = new Point(696, 143);
-            InventionImagePanel.Name = "InventionImagePanel";
-            InventionImagePanel.Size = new Size(64, 64);
-            InventionImagePanel.TabIndex = 17;
             // 
             // BlueprintBrowser
             // 

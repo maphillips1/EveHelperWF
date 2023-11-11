@@ -22,11 +22,8 @@ namespace EveHelperWF.Objects
             security = Math.Round(Convert.ToDecimal(dr["security"]), 1);
         }
 
-        [Browsable(false)]
         public int regionID { get; set; }
-        [Browsable(false)]
         public int constellationID { get; set; }
-        [Browsable(false)]
         public int solarSystemID { get; set; }
         public string regionName { get; set; }
         public string constellationName { get; set; }

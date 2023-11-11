@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemFinder));
             SolarSystemResultsGrid = new DataGridView();
             regionName = new DataGridViewTextBoxColumn();
             constellationName = new DataGridViewTextBoxColumn();
@@ -381,6 +382,7 @@
             Controls.Add(SearchButton);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SystemFinder";
             Text = "PlanetSystemFinder";
             ((System.ComponentModel.ISupportInitialize)SolarSystemResultsGrid).EndInit();

@@ -464,6 +464,29 @@ namespace EveHelperWF.Database
 
             return sb.ToString();
         }
+
+        private static string GetSolarSystemsForRegionIDCommand(int regionID)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("SELECT solarSystemName, solarSystemID");
+            sb.AppendLine("FROM mapSolarSystems");
+	        sb.AppendLine("WHERE regionID = " + regionID.ToString());
+            sb.AppendLine("ORDER BY solarSystemName");
+
+            return sb.ToString();
+        }
+
+        private static string GetStationNameFromStationIDCommand(long stationID)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select stationID, stationName");
+            sb.AppendLine("from staStations");
+            sb.AppendLine("where stationID = " + stationID.ToString());
+
+            return  sb.ToString();
+        }
         #endregion
 
         #region "Public Functions"
@@ -1315,6 +1338,56 @@ namespace EveHelperWF.Database
             }
 
             return marketGroupID;
+        }
+
+        public static List<Objects.SolarSystem> GetSolarSystemsForRegionID(int regionID)
+        {
+            List<Objects.SolarSystem> solarSystems = new List<Objects.SolarSystem>();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(GetSolarSystemsForRegionIDCommand(regionID), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                SolarSystem solarSystem = null;
+                while (query.Read())
+                {
+                    solarSystem = new SolarSystem();
+                    solarSystem.solarSystemName = query.GetString(0);
+                    solarSystem.solarSystemID = query.GetInt32(1);
+                    solarSystems.Add(solarSystem);
+                }
+            }
+
+            return solarSystems;
+        }
+
+        public static string GetStationNameForStationID(long stationID)
+        {
+            string stationName = string.Empty;
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(GetStationNameFromStationIDCommand(stationID), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                SolarSystem solarSystem = null;
+                while (query.Read())
+                {
+                    stationName = query.GetString(1);
+                    break;
+                }
+            }
+
+            return stationName;
         }
         #endregion
 

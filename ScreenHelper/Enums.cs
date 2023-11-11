@@ -15,8 +15,21 @@ namespace EveHelperWF.ScreenHelper
         public const int ActivityReverseEngineering = 7;
         public const int ActivityInvention = 8;
         public const int ActivityReactions = 11;
+
         public const int TheForgeRegionId = 10000002;
         public const int JitaSystemId = 30000142;
+
+        public const int RensSystemID = 30002510;
+        public const int HeimatarRegionID = 10000030;
+
+        public const int AmarrSystemID = 30002187;
+        public const int DomainRegionID = 10000043;
+
+        public const int DodixieSystemID = 30002659;
+        public const int SinqLiason = 10000032;
+
+        public const int TheraRegion = 11000031;
+        public const int TheraSystem = 31000005;
 
         public enum PlanetMatTierGroupId
         {

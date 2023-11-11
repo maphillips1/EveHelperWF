@@ -16,6 +16,9 @@
     <Compile Update="UI Controls\Main Screen Tabs\LootAppraisal.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\MarketBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\PlanetPlanner.cs">
       <SubType>Form</SubType>
     </Compile>

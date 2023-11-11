@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LootAppraisal));
             InputTextMultiLine = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -155,6 +156,7 @@
             Controls.Add(InputTextMultiLine);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LootAppraisal";
             Text = "LootAppraisal";
             ((System.ComponentModel.ISupportInitialize)ResultsGridView).EndInit();

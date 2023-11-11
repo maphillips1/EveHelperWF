@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigureDefaults));
             DefaultsTabContainer = new TabControl();
             MainDefaultTabPage = new TabPage();
             InventBlueprintCheckbox = new CheckBox();
@@ -754,6 +755,7 @@
             Controls.Add(DefaultsTabContainer);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ConfigureDefaults";
             Text = "Configure Defaults";
             DefaultsTabContainer.ResumeLayout(false);

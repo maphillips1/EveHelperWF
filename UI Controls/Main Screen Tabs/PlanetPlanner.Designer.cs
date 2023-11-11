@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanetPlanner));
             OutputTreeView = new TreeView();
             SchematicNameLabel = new Label();
             BubbleTreePanel = new Panel();
@@ -302,6 +303,7 @@
             Controls.Add(OutputTreeView);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PlanetPlanner";
             Text = "Planetary Interaction";
             Resize += PlanetPlanner_Resize;

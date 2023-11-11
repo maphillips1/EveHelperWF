@@ -20,6 +20,14 @@ namespace EveHelperWF.Objects
         public int type_id { get; set; }
         public int volume_remain { get; set; }
         public int volume_total { get; set; }
+        public string LocationName { get; set; }
+        public string FormattedPriceString
+        {
+            get
+            {
+                return price.ToString("N0");
+            }
+        }
     }
 
     public class CachedMarketOrders

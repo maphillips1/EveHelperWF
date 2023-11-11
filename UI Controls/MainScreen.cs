@@ -53,5 +53,12 @@ namespace EveHelperWF.UI_Controls
             configureDefaults.StartPosition = FormStartPosition.CenterScreen;
             configureDefaults.Show();
         }
+
+        private void MarketBrowserButton_Click(object sender, EventArgs e)
+        {
+            MarketBrowser marketBrowser = new MarketBrowser();
+            marketBrowser.StartPosition = FormStartPosition.CenterScreen;
+            marketBrowser.Show();
+        }
     }
 }

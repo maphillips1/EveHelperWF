@@ -177,26 +177,48 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAACUWAAAlFgAAAAAAAAAA
-        AAD/////////////////////////////////////////////////////////////////////////////
-        /////////f7//////P/m+v//FTpc/wAAAP8PAAD/78ec/3erxf+0lmz//////8bj+/9malj///jk//3/
-        //////7///////3+//////3/2PP//2xlZP//787/+/////////9vm7j/tppv///////G4/v/ZmpY///4
-        5P/9///////+///////9/v/////9/9jz//9sZWT//+/O//v/////////b5u4/7aab///////xuP7/2Zq
-        WP//+OT//f///////v///////f7//////f/Y8///bGVk///vzv/7/////////2+buP+2mm///////8bj
-        +/9malj///jk//3///////7///////3+//////3/2PP//2xlZP//787/+/////////9vm7j/tppv////
-        ///G4/v/ZmpY///45P/9///////+///////9/v/////8/+b6//8XPV7/AAAA/0QtFP///+T/aKTU/wAA
-        Af8IBAD/AAAA/2xCDf////L//f///////v///////f7//////f/Y8///bGVk///vzv/7/////////2+b
-        uP+2mm///////8bj+/9malj///jk//3///////7///////3+//////3/2PP//2xlZP//787/+///////
-        //9vm7j/tppv///////G4/v/ZmpY///45P/9///////+///////9/v/////9/9jz//9sZWT//+/O//v/
-        ////////b5u4/7aab///////xuP7/2ZqWP//+OT//f///////v///////f7//////P/m+v//FTpc/wAA
-        AP8PAAD/78ec/3erxf+0lmz//////8bj+/9malj///jk//3///////7/////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAA==
+        AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAkAAHQSAAB0EgAAAAAAAAAA
+        AABKIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0ohA/9KIQP/SiED////
+        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP//////////////////////0ohA/9KIQP/SiED//////////////////////9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0oh
+        A/9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/////////////////////////////////////////////////////////
+        //9KIQP/SiED//////////////////////////////////////////////////////9KIQP/////////
+        //////////////////////////////////////////////////9KIQP/SiED////////////////////
+        //////////////////////////////////9KIQP/////////////////////////////////////////
+        //////////////////9KIQP/SiED////////////////////////////////////////////////////
+        //9KIQP//////////////////////0ohA/9KIQP/SiED//////////////////////9KIQP/SiED////
+        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0oh
+        A/9KIQP/SiED//////////////////////9KIQP/SiED//////////////////////9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP//////////////////////0ohA/9KIQP/SiED////////////////////
+        //9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////
+        //////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////////////////////
+        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////
+        //////////////////////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED//////////////////////9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////
+        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////////////////////
+        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////
+        //////////////////////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////
+        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
+        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAA=
 </value>
   </data>
 </root>
