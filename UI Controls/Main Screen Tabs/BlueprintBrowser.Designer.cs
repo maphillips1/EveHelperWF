@@ -295,34 +295,6 @@
             skillsToolStripMenuItem.Size = new Size(247, 26);
             skillsToolStripMenuItem.Text = "Skills";
             // 
-            // mainDefaultsToolStripMenuItem
-            // 
-            mainDefaultsToolStripMenuItem.Name = "mainDefaultsToolStripMenuItem";
-            mainDefaultsToolStripMenuItem.Size = new Size(247, 26);
-            mainDefaultsToolStripMenuItem.Text = "Main Defaults";
-            mainDefaultsToolStripMenuItem.Click += mainDefaultsToolStripMenuItem_Click;
-            // 
-            // manufacturingDefaultsToolStripMenuItem
-            // 
-            manufacturingDefaultsToolStripMenuItem.Name = "manufacturingDefaultsToolStripMenuItem";
-            manufacturingDefaultsToolStripMenuItem.Size = new Size(247, 26);
-            manufacturingDefaultsToolStripMenuItem.Text = "Manufacturing Defaults";
-            manufacturingDefaultsToolStripMenuItem.Click += manufacturingDefaultsToolStripMenuItem_Click;
-            // 
-            // inventionDefaultsToolStripMenuItem
-            // 
-            inventionDefaultsToolStripMenuItem.Name = "inventionDefaultsToolStripMenuItem";
-            inventionDefaultsToolStripMenuItem.Size = new Size(247, 26);
-            inventionDefaultsToolStripMenuItem.Text = "Invention Defaults";
-            inventionDefaultsToolStripMenuItem.Click += inventionDefaultsToolStripMenuItem_Click;
-            // 
-            // reactionDefaultsToolStripMenuItem
-            // 
-            reactionDefaultsToolStripMenuItem.Name = "reactionDefaultsToolStripMenuItem";
-            reactionDefaultsToolStripMenuItem.Size = new Size(247, 26);
-            reactionDefaultsToolStripMenuItem.Text = "Reaction Defaults";
-            reactionDefaultsToolStripMenuItem.Click += reactionDefaultsToolStripMenuItem_Click;
-            // 
             // helpToolStripMenuItem
             // 
             helpToolStripMenuItem.Name = "helpToolStripMenuItem";

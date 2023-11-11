@@ -46,5 +46,12 @@ namespace EveHelperWF.UI_Controls
             systemFinder.StartPosition = FormStartPosition.CenterScreen;
             systemFinder.Show();
         }
+
+        private void DefaultsButtonClick_Click(object sender, EventArgs e)
+        {
+            ConfigureDefaults configureDefaults = new ConfigureDefaults();
+            configureDefaults.StartPosition = FormStartPosition.CenterScreen;
+            configureDefaults.Show();
+        }
     }
 }

@@ -469,34 +469,6 @@ namespace EveHelperWF
         {
             LoadDefaultFormValues();
         }
-
-        private void manufacturingDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ManufacturingDefaults manufacturingDefaults = new ManufacturingDefaults(DefaultFormValues);
-            manufacturingDefaults.FormClosed += new FormClosedEventHandler(DefaultsClosed);
-            manufacturingDefaults.ShowDialog();
-        }
-
-        private void mainDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MainDefaults mainDefaults = new MainDefaults(DefaultFormValues);
-            mainDefaults.FormClosed += new FormClosedEventHandler(this.DefaultsClosed);
-            mainDefaults.ShowDialog(this);
-        }
-
-        private void reactionDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ReactionDefaults reactionDefaults = new ReactionDefaults(DefaultFormValues);
-            reactionDefaults.FormClosed += new FormClosedEventHandler(this.DefaultsClosed);
-            reactionDefaults.ShowDialog();
-        }
-
-        private void inventionDefaultsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            InventionDefaults inventionDefaults = new InventionDefaults(DefaultFormValues);
-            inventionDefaults.FormClosed += new FormClosedEventHandler(this.DefaultsClosed);
-            inventionDefaults.ShowDialog();
-        }
         #endregion
 
         #region "Item Selected Methods"

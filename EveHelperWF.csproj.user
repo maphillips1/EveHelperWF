@@ -7,19 +7,10 @@
     <Compile Update="Objects\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI Controls\Default Setting Tabs\InventionDefaults.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI Controls\Default Setting Tabs\MainDefaults.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI Controls\Default Setting Tabs\ManufacturingDefaults.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="UI Controls\Default Setting Tabs\ReactionDefaults.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\BlueprintBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\ConfigureDefaults.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\LootAppraisal.cs">
