@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json;
+using EveHelperWF.Objects;
 
 namespace EveHelperWF.ESI_Calls
 {
@@ -13,6 +14,7 @@ namespace EveHelperWF.ESI_Calls
         public const string cachedBuyFolder = @"C:\Temp\EveHelper\Market\buy\";
         public const string cachedSellFolder = @"C:\Temp\EveHelper\Market\sell\";
         public const string cachedAdjustedCosts = @"C:\Temp\EveHelper\Market\";
+        public const string cachedPriceHistory = @"C:\Temp\EveHelper\Market\PriceHistory";
 
         #region "Cache Methods"
 
@@ -31,7 +33,7 @@ namespace EveHelperWF.ESI_Calls
 
             string fileName = string.Concat(directory, region_id.ToString(), "_", type_id.ToString(), ".json");
 
-            string content = FileIO.FileHelper.GetCachedFileContent(fileName);
+            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 EveHelperWF.Objects.CachedMarketOrders cachedMarketOrders = new EveHelperWF.Objects.CachedMarketOrders();
@@ -84,7 +86,7 @@ namespace EveHelperWF.ESI_Calls
 
             string fileName = string.Concat(directory, "adjusted_costs.json");
 
-            string content = FileIO.FileHelper.GetCachedFileContent(fileName);
+            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 EveHelperWF.Objects.CachedAdjustedCost cachedAdjustedCosts = new EveHelperWF.Objects.CachedAdjustedCost();
@@ -156,7 +158,7 @@ namespace EveHelperWF.ESI_Calls
             List<EveHelperWF.Objects.MarketOrder> marketOrders = new List<EveHelperWF.Objects.MarketOrder>();
 
             marketOrders = GetCachedOrders(false, type_id, region_id);
-            
+
             if (marketOrders == null || marketOrders.Count == 0)
             {
                 string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=sell&page=1&type_id={1}", region_id, type_id);
@@ -248,7 +250,7 @@ namespace EveHelperWF.ESI_Calls
                 }
             }
 
-            return adjustedCosts;           
+            return adjustedCosts;
         }
 
         public static decimal GetBuyOrderPrice(int type_id, int region_id)
@@ -291,5 +293,68 @@ namespace EveHelperWF.ESI_Calls
             return price;
         }
 
+        private static List<ESIPriceHistory> GetCachedPriceHistory(int regionID, int typeID)
+        {
+            List<ESIPriceHistory> priceHistory = null;
+            string directory = cachedPriceHistory;
+            string fileName = string.Concat(directory, regionID.ToString(), "_", typeID.ToString(), ".json");
+
+            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                EveHelperWF.Objects.CachedPriceHistory cachedPriceHistory = new EveHelperWF.Objects.CachedPriceHistory();
+                cachedPriceHistory = Newtonsoft.Json.JsonConvert.DeserializeObject<EveHelperWF.Objects.CachedPriceHistory>(content);
+                if (cachedPriceHistory != null)
+                {
+                    if (cachedPriceHistory.cachedTime > System.DateTime.Now.AddMinutes(-5))
+                    {
+                        priceHistory = cachedPriceHistory.priceHistory;
+                    }
+                }
+            }
+
+            return priceHistory;
+        }
+
+        private static void CachePriceHistory(int regionID, int typeID, List<ESIPriceHistory> priceHistory)
+        {
+            string directory = ESIMarketData.cachedPriceHistory;
+            string fileName = string.Concat(directory, regionID.ToString(), "_", typeID.ToString(), ".json");
+
+            EveHelperWF.Objects.CachedPriceHistory cachedPriceHistory = new EveHelperWF.Objects.CachedPriceHistory();
+            cachedPriceHistory.priceHistory = priceHistory;
+            cachedPriceHistory.cachedTime = System.DateTime.Now;
+
+            string content = JsonConvert.SerializeObject(cachedPriceHistory);
+
+            FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
+        }
+
+        public static List<Objects.ESIPriceHistory> GetPriceHistoryForRegion(int regionID, int typeID)
+        {
+            List<ESIPriceHistory> priceHistory = new List<ESIPriceHistory>();
+
+            priceHistory = GetCachedPriceHistory(regionID, typeID);
+
+            if (priceHistory == null || priceHistory.Count <= 0)
+            {
+                string url = string.Format("https://esi.evetech.net/latest/markets/{0}/history/?datasource=tranquility&type_id={1}", regionID, typeID);
+                System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                System.Net.Http.HttpResponseMessage response = client.GetAsync(url).Result;
+
+                if (response != null && response.IsSuccessStatusCode)
+                {
+                    string priceHistoryContent = response.Content.ReadAsStringAsync().Result;
+                    priceHistory = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.ESIPriceHistory>>(priceHistoryContent);
+                    if (priceHistory != null)
+                    {
+                        CachePriceHistory(regionID, typeID, priceHistory);
+                    }
+                }
+            }
+
+
+            return priceHistory;
+        }
     }
 }

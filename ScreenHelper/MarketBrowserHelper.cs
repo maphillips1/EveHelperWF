@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -180,5 +181,84 @@ namespace EveHelperWF.ScreenHelper
             return hasItems;
         }
         #endregion
+
+        private static List<ESIPriceHistory> GetCurrentPriceHistories(int regionID, int typeID)
+        {
+            List<Objects.ESIPriceHistory> currentPriceHistories = null;
+            string directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                                         "PriceHistory\\");
+            string fileName = string.Format("PriceHistory_region_{0}_type_{1}.json", regionID, typeID);
+
+            string fullFileName = Path.Combine(directory, fileName);
+
+            string currentHistoryContent = FileIO.FileHelper.GetCachedFileContent(directory, fullFileName);
+            if (!string.IsNullOrEmpty(currentHistoryContent))
+            {
+                currentPriceHistories = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ESIPriceHistory>>(currentHistoryContent);
+            }
+            return currentPriceHistories;
+        }
+
+        private static void SaveNewPriceHistory(int regionID, int typeID, List<ESIPriceHistory> priceHistories)
+        {
+            List<Objects.ESIPriceHistory> currentPriceHistories = null;
+            string directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                                         "PriceHistory\\");
+            string fileName = string.Format("PriceHistory_region_{0}_type_{1}.json", regionID, typeID);
+            string fullFileName = Path.Combine(directory, fileName);
+            
+            string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(priceHistories);
+
+            FileIO.FileHelper.SaveCachedFile(directory, fullFileName, fileContent);
+        }
+
+        private static List<ESIPriceHistory> GetCombinedPriceHistory(int regionID, int typeID)
+        {
+            List<ESIPriceHistory> currentHistory = GetCurrentPriceHistories(regionID, typeID);
+            List<ESIPriceHistory> newPriceHistory = ESI_Calls.ESIMarketData.GetPriceHistoryForRegion(regionID, typeID);
+
+            if (currentHistory != null)
+            {
+                ESIPriceHistory existingHistory = null;
+                foreach (ESIPriceHistory history in newPriceHistory)
+                {
+                    existingHistory = currentHistory.Find(x => x.date == history.date);
+                    if (existingHistory == null)
+                    {
+                        currentHistory.Add(history);
+                    }
+                    else
+                    {
+                        //Update existing values. 
+                        //Assume that the data could be out of date. 
+                        existingHistory.average = history.average;
+                        existingHistory.volume = history.volume;
+                        existingHistory.order_count = history.order_count;
+                        existingHistory.lowest = history.lowest;
+                        existingHistory.highest = history.highest;
+                    }
+                }
+            }
+            else
+            {
+                currentHistory = newPriceHistory;
+            }
+
+            return currentHistory;
+        }
+
+        public static List<ESIPriceHistory> GetPriceHistoryForRegionAndType(int regionID, int typeID)
+        {
+            List<ESIPriceHistory> priceHistory = new List<ESIPriceHistory>();
+
+            priceHistory = GetCombinedPriceHistory(regionID, typeID);
+
+            if (priceHistory != null)
+            {
+                SaveNewPriceHistory(regionID, typeID, priceHistory);
+            }
+
+            return priceHistory;
+        }
     }
 }

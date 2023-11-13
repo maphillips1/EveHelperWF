@@ -145,7 +145,7 @@ namespace EveHelperWF
         private void LoadDefaultFormValues()
         {
             string combinedFileName = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
-            string content = FileIO.FileHelper.GetCachedFileContent(combinedFileName);
+            string content = FileIO.FileHelper.GetCachedFileContent(CachedFormValuesDirectory, combinedFileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 DefaultFormValues = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.DefaultFormValue>(content);

@@ -63,7 +63,7 @@ namespace EveHelperWF.ESI_Calls
 
             string directory = CachedCostIndicesDirectory;
             string fileName = string.Concat(directory, CachedCostIndicesFileName);
-            string cachedContent = FileIO.FileHelper.GetCachedFileContent(fileName);
+            string cachedContent = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(cachedContent))
             {
                 EveHelperWF.Objects.CachedCostIndices cachedCostIndices = new EveHelperWF.Objects.CachedCostIndices();

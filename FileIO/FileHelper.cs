@@ -10,13 +10,16 @@ namespace FileIO
 {
     public static class FileHelper
     {
-        public static string GetCachedFileContent(string filename)
+        public static string GetCachedFileContent(string directoryName, string filename)
         {
             string fileContent = "";
 
-            if (File.Exists(filename))
+            if (Directory.Exists(directoryName))
             {
-                fileContent = File.ReadAllText(filename);
+                if (File.Exists(filename))
+                {
+                    fileContent = File.ReadAllText(filename);
+                }
             }
 
             return fileContent;

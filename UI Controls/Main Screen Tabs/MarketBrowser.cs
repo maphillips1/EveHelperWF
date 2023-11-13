@@ -20,6 +20,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private List<Objects.SolarSystem> solarSystems = new List<Objects.SolarSystem>();
         private int SelectedTypeID;
         private InventoryTypeWIthMarketOrders selectedTypeMarketOrders = null;
+        private List<ESIPriceHistory> priceHistory = new List<ESIPriceHistory>();
+
         public MarketBrowser()
         {
             MarketBrowserHelper.Init();
@@ -146,6 +148,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.BuyOrdersGridView.DataSource = selectedTypeMarketOrders.BuyOrders;
                 this.SellOrdersGridView.DataSource = selectedTypeMarketOrders.SellOrders;
             }
+            if (priceHistory != null)
+            {
+                PriceHistoryGridView.DataSource = priceHistory;
+            }
         }
 
         private void SelectedItemImageWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -185,10 +191,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadDataForSelectedType()
         {
-
+            int regionID = (int)RegionCombo.SelectedValue;
             LoadMarketData(SelectedTypeID);
             MarketBrowserHelper.FillInventoryTypeInformation(ref selectedTypeMarketOrders);
             SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
+            priceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(regionID, SelectedTypeID);
             DatabindGrids();
         }
 
