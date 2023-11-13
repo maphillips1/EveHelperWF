@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Eve Helper - Info</title>
+</head>
+<body>
+    <h1>
+        What is Eve Helper?
+    </h1>
+    <p>
+        Eve Helper is a companion app to Eve Online, developed by CCPGames. I created this app to replace a myriad of tools that used to be
+        hosted online by various third party developers which have since gone dark.
+    </p>
+
+    <br />
+
+     <h1>
+         Why a Windows app and not a website?
+     </h1>
+    <p>
+        Websites cost money to maintain, apps deployed like this don't. I do this in my spare time for myself. I'm only deploying this because
+        other people showed interest. In addition, if I take a break from Eve and decide not to udpate the app, you can update it yourself. No 
+        need for me. More on that later. 
+    </p>
+
+    <br />
+
+    <h1>
+        What does this app do?
+    </h1>
+    <p>
+        This app currently has the the below tools. 
+
+        <ul>
+            <li>Blueprint Browser - Blueprint Cost Calculator</li>
+            <li>Planetary Interaction Guid - Gives a list of items you can produce on planets and shows you the build tree for how to make it</li>
+            <li>System FInder - Helps you find systems with matching criteria.</li>
+            <li>Loot Appraisal - Copy and paste items from Eve and I give you the market value</li>
+            <li>Market Browser - Allows you to lookup items on the market. Also captures price history.</li>
+            <li>Default Configuration - Allows you to configure defaults used elsewhere in the app.</li>
+        </ul>
+    </p>
+
+    <br />
+    <h1>
+        How do I update the app myself?
+    </h1>
+    <p>
+        The app is built to use the static data dump SQLite file that is provided by fuzzworks. This means that if you want to update the app
+        to use the new data from a new expansion, all you have to do is go and download the new static data SQLite file from Fuzzworks website
+        and then replace the current file the app is using. I will be adding a built-in method that allows you to do this without knowing where the apps
+        files are located. This way you can download the SDE dump and then select the file from your downloads folder. 
+    </p>
+
+    <br />
+
+    <h1>
+        More detailed information about each tool.
+    </h1>
+    <h3>
+        Blueprint Browser
+    </h3>
+    <p>
+        This tool gives you a list of blueprints in a tree view. When you select one ( reactions included ), the panel on the right will give you all of the
+        materials needed to build the item, and based on selections on the screen, the costs involved. 
+
+        <br />The cost of manufacturing for example includes
+        <ul>
+            <li>The cost of the materials needed</li>
+            <li>THe manufacturing cost based on the System Cost Index (value provided by Eve) and the Adjusted Cost of the product (also given by Eve).</li>
+            <li>The sales tax when you sell the item on the market.</li>
+        </ul>
+        The tool takes all of this information and tells you if you will make a profit on the item or lose isk. It also gives you the Return on Investment value
+        and the profit per hour value. True min-maxers care most about these. 
+    </p>
+</body>
+</html>
