@@ -487,6 +487,17 @@ namespace EveHelperWF.Database
 
             return  sb.ToString();
         }
+
+        private static string GetFilamentTypesForDropDownCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select typeID, typeName from invTypes");
+            sb.AppendLine("where groupID = 1979");
+            sb.AppendLine("order by typeName");
+
+            return sb.ToString();
+        }
         #endregion
 
         #region "Public Functions"
@@ -1388,6 +1399,33 @@ namespace EveHelperWF.Database
             }
 
             return stationName;
+        }
+
+        public static List<InventoryTypes> GetFilamentTypesForDropDown()
+        {
+            List<InventoryTypes> filamentTypes = new List<InventoryTypes>();
+            filamentTypes.Add(new InventoryTypes());
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(GetFilamentTypesForDropDownCommand(), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                InventoryTypes filamentType = null;
+                while (query.Read())
+                {
+                    filamentType = new InventoryTypes();
+                    filamentType.typeId = query.GetInt32(0);
+                    filamentType.typeName = query.GetString(1);
+                    filamentTypes.Add(filamentType);
+                }
+            }
+
+            return filamentTypes;
         }
         #endregion
 

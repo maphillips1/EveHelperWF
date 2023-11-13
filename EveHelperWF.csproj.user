@@ -7,6 +7,9 @@
     <Compile Update="Objects\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\AbyssTracker.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\BlueprintBrowser.cs">
       <SubType>Form</SubType>
     </Compile>

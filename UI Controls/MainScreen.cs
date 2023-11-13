@@ -60,5 +60,12 @@ namespace EveHelperWF.UI_Controls
             marketBrowser.StartPosition = FormStartPosition.CenterScreen;
             marketBrowser.Show();
         }
+
+        private void AbyssTrackerButton_Click(object sender, EventArgs e)
+        {
+            AbyssTracker abyssTracker = new AbyssTracker();
+            abyssTracker.StartPosition = FormStartPosition.CenterScreen;
+            abyssTracker.Show();
+        }
     }
 }

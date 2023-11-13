@@ -8,6 +8,7 @@ namespace EveHelperWF.Objects
 {
     public class InventoryTypeWIthMarketOrders : InventoryTypes
     {
+        public int Quantity { get; set; }
         public List<MarketOrder> BuyOrders { get; set; }
         public List<MarketOrder> SellOrders { get; set; }
     }

@@ -41,6 +41,8 @@
             DefaultsButtonClick = new Button();
             label6 = new Label();
             MarketBrowserButton = new Button();
+            label7 = new Label();
+            AbyssTrackerButton = new Button();
             SuspendLayout();
             // 
             // BlueprintBrowserButton
@@ -184,11 +186,36 @@
             MarketBrowserButton.UseVisualStyleBackColor = true;
             MarketBrowserButton.Click += MarketBrowserButton_Click;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(690, 193);
+            label7.Name = "label7";
+            label7.Size = new Size(130, 25);
+            label7.TabIndex = 13;
+            label7.Text = "Abyss Tracker";
+            // 
+            // AbyssTrackerButton
+            // 
+            AbyssTrackerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            AbyssTrackerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            AbyssTrackerButton.ForeColor = Color.Black;
+            AbyssTrackerButton.Image = (Image)resources.GetObject("AbyssTrackerButton.Image");
+            AbyssTrackerButton.Location = new Point(679, 40);
+            AbyssTrackerButton.Name = "AbyssTrackerButton";
+            AbyssTrackerButton.Size = new Size(150, 150);
+            AbyssTrackerButton.TabIndex = 12;
+            AbyssTrackerButton.UseVisualStyleBackColor = true;
+            AbyssTrackerButton.Click += AbyssTrackerButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(939, 450);
+            Controls.Add(label7);
+            Controls.Add(AbyssTrackerButton);
             Controls.Add(label6);
             Controls.Add(MarketBrowserButton);
             Controls.Add(label5);
@@ -224,5 +251,7 @@
         private Button DefaultsButtonClick;
         private Label label6;
         private Button MarketBrowserButton;
+        private Label label7;
+        private Button AbyssTrackerButton;
     }
 }
