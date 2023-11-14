@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbyssTracker));
             splitContainer1 = new SplitContainer();
             AddRunButton = new Button();
             label5 = new Label();
@@ -374,8 +375,9 @@
             Controls.Add(splitContainer1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AbyssTracker";
-            Text = "AbyssTracker";
+            Text = "Abyss Tracker";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
