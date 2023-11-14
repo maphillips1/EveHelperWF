@@ -5,9 +5,40 @@
     <title>Eve Helper - Info</title>
 </head>
 <body>
-    <h1>
+    <h2>
+        Download Link
+    </h2>
+    <p>
+        <a href="https://www.dropbox.com/scl/fi/kbmei1nm92wou95scxaio/EveHelper-ClickOnce-Version-1.0.1-BETA.zip?rlkey=myjbm803dt0de4brqookeuxqm&dl=0">Dropbox download link.</a>
+        <br />
+        The app is currently downloaded from dropbox due to file size limitations on the free version of GitHub. I plan to fix this in the future
+        and allow you to download the app from github which would then download the static data file separately post-install, but for now, this is
+        what we've got.
+    </p>
+
+    <h2>
+        Install Directions
+    </h2>
+    <p>
+        <ol>
+            <li>Download the zip file from the dropbox link above</li>
+            <li>Extract the files</li>
+            <li>Go into the folder and click the file named "setup". This is the installer.</li>
+            <li>The installer may ask you to install some desktop runtime libraries, currently, .net 7. This is just Microsoft code that does not
+            normally come with your base install of windows but the app needs it to run correctly. Install this dependency.</li>
+            <li>After all dependencies have been installed, a second window will ask you to install the app. Since this is a beta release
+            you will get a warning saying the publisher couldn't be verified. This is because I have not gotten a security certificate. This is ok for now.
+             When I do the full release after beta testing is complete, the app will get a certificiate.</li>
+            <li>Once the app is installed, it will auto-run. You can access it anytime by searching for 'EveHelper' in the start menu.</li>
+            <li>Done. ENjoy the app.</li>
+        </ol>
+    </p>
+
+    <br />
+
+    <h2>
         What is Eve Helper?
-    </h1>
+    </h2>
     <p>
         Eve Helper is a companion app to Eve Online, developed by CCPGames. I created this app to replace a myriad of tools that used to be
         hosted online by various third party developers which have since gone dark.
@@ -15,9 +46,9 @@
 
     <br />
 
-     <h1>
+     <h2>
          Why a Windows app and not a website?
-     </h1>
+     </h2>
     <p>
         Websites cost money to maintain, apps deployed like this don't. I do this in my spare time for myself. I'm only deploying this because
         other people showed interest. In addition, if I take a break from Eve and decide not to udpate the app, you can update it yourself. No 
@@ -26,9 +57,9 @@
 
     <br />
 
-    <h1>
+    <h2>
         What does this app do?
-    </h1>
+    </h2>
     <p>
         This app currently has the the below tools. 
 
@@ -38,14 +69,15 @@
             <li>System FInder - Helps you find systems with matching criteria.</li>
             <li>Loot Appraisal - Copy and paste items from Eve and I give you the market value</li>
             <li>Market Browser - Allows you to lookup items on the market. Also captures price history.</li>
+            <li>Price History Utility - Allows you to download price history data and view it for items.</li>
             <li>Default Configuration - Allows you to configure defaults used elsewhere in the app.</li>
         </ul>
     </p>
 
     <br />
-    <h1>
+    <h2>
         How do I update the app myself?
-    </h1>
+    </h2>
     <p>
         The app is built to use the static data dump SQLite file that is provided by fuzzworks. This means that if you want to update the app
         to use the new data from a new expansion, all you have to do is go and download the new static data SQLite file from Fuzzworks website
@@ -55,24 +87,20 @@
 
     <br />
 
-    <h1>
+    <h2>
         More detailed information about each tool.
-    </h1>
-    <h3>
-        <a href="BlueprintBrowser.html">Blueprint Browser</a>
-    </h3>
+    </h2>
     <p>
-        This tool gives you a list of blueprints in a tree view. When you select one ( reactions included ), the panel on the right will give you all of the
-        materials needed to build the item, and based on selections on the screen, the costs involved. 
-
-        <br />The cost of manufacturing for example includes
         <ul>
-            <li>The cost of the materials needed</li>
-            <li>THe manufacturing cost based on the System Cost Index (value provided by Eve) and the Adjusted Cost of the product (also given by Eve).</li>
-            <li>The sales tax when you sell the item on the market.</li>
+            <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
+            <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
+            <li><a href="PlanetaryInteraction.html">Planetary Interaction</a></li>
+            <li><a href="SystemFinder.html">System Finder</a></li>
+            <li><a href="MarketBrowser.html">Market Browser</a></li>
+            <li><a href="PriceHistoryUtility.html">Price History Utility</a></li>
+            <li><a href="AbyssTracker.html">Abyss Tracker</a></li>
+            <li><a href="DefaultConfiguration.html">Defaults Configuration</a></li>
         </ul>
-        The tool takes all of this information and tells you if you will make a profit on the item or lose isk. It also gives you the Return on Investment value
-        and the profit per hour value. True min-maxers care most about these. 
     </p>
 </body>
 </html>
