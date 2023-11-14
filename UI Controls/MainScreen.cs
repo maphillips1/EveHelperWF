@@ -1,9 +1,11 @@
-﻿using EveHelperWF.UI_Controls.Main_Screen_Tabs;
+﻿using EveHelperWF.Objects;
+using EveHelperWF.UI_Controls.Main_Screen_Tabs;
 using EveHelperWF.UI_Controls.Support_Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -66,6 +68,21 @@ namespace EveHelperWF.UI_Controls
             AbyssTracker abyssTracker = new AbyssTracker();
             abyssTracker.StartPosition = FormStartPosition.CenterScreen;
             abyssTracker.Show();
+        }
+
+        private void FuzzworksLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string dotLanURL = String.Format("https://www.fuzzwork.co.uk/");
+            ProcessStartInfo startInfo = new ProcessStartInfo(dotLanURL);
+            startInfo.UseShellExecute = true;
+            Process.Start(startInfo);
+        }
+
+        private void PriceHistoryButton_Click(object sender, EventArgs e)
+        {
+            PriceHistoryUtility priceHistoryUtility = new PriceHistoryUtility();
+            priceHistoryUtility.StartPosition = FormStartPosition.CenterScreen;
+            priceHistoryUtility.Show();
         }
     }
 }

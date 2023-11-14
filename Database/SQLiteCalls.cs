@@ -696,6 +696,32 @@ namespace EveHelperWF.Database
             return foundType;
         }
 
+        public static List<InventoryTypes> InventoryTypeSearchLoadAll(string searchText)
+        {
+            List<InventoryTypes> inventoryTypes = new List<InventoryTypes>();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(InventoryTypeSearchCommand(searchText), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                InventoryTypes type = null;
+                while (query.Read())
+                {
+                    type = new InventoryTypes();
+                    type.typeId = Convert.ToInt32(query.GetString(0));
+                    type.typeName = query.GetString(1);
+                    inventoryTypes.Add(type);
+                }
+            }
+
+            return inventoryTypes;
+        }
+
         public static List<SolarSystem> SolarSystemSearch(bool temperate,
                                                                 bool ice,
                                                                 bool gas,

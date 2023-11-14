@@ -25,10 +25,16 @@
     <Compile Update="UI Controls\Main Screen Tabs\PlanetPlanner.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\PriceHistoryUtility.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\SystemFinder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\PriceHistoryViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\SolarSystemInfo.cs">

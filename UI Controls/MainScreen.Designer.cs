@@ -43,10 +43,15 @@
             MarketBrowserButton = new Button();
             label7 = new Label();
             AbyssTrackerButton = new Button();
+            label8 = new Label();
+            FuzzworksLinkLabel = new LinkLabel();
+            label9 = new Label();
+            PriceHistoryButton = new Button();
             SuspendLayout();
             // 
             // BlueprintBrowserButton
             // 
+            BlueprintBrowserButton.Cursor = Cursors.Hand;
             BlueprintBrowserButton.FlatAppearance.BorderColor = Color.FromArgb(192, 192, 0);
             BlueprintBrowserButton.FlatAppearance.BorderSize = 6;
             BlueprintBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
@@ -62,6 +67,7 @@
             // 
             // PlanetPlannerButton
             // 
+            PlanetPlannerButton.Cursor = Cursors.Hand;
             PlanetPlannerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PlanetPlannerButton.ForeColor = Color.Black;
@@ -75,6 +81,7 @@
             // 
             // LootAppraisalButton
             // 
+            LootAppraisalButton.Cursor = Cursors.Hand;
             LootAppraisalButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             LootAppraisalButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             LootAppraisalButton.ForeColor = Color.Black;
@@ -89,6 +96,7 @@
             // 
             // SystemFinderButton
             // 
+            SystemFinderButton.Cursor = Cursors.Hand;
             SystemFinderButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             SystemFinderButton.ForeColor = Color.Black;
@@ -144,7 +152,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(466, 393);
+            label5.Location = new Point(670, 393);
             label5.Name = "label5";
             label5.Size = new Size(172, 25);
             label5.TabIndex = 9;
@@ -152,11 +160,12 @@
             // 
             // DefaultsButtonClick
             // 
+            DefaultsButtonClick.Cursor = Cursors.Hand;
             DefaultsButtonClick.FlatAppearance.MouseDownBackColor = Color.Cyan;
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
             DefaultsButtonClick.ForeColor = Color.Black;
             DefaultsButtonClick.Image = (Image)resources.GetObject("DefaultsButtonClick.Image");
-            DefaultsButtonClick.Location = new Point(475, 240);
+            DefaultsButtonClick.Location = new Point(679, 240);
             DefaultsButtonClick.Name = "DefaultsButtonClick";
             DefaultsButtonClick.Size = new Size(150, 150);
             DefaultsButtonClick.TabIndex = 8;
@@ -175,6 +184,7 @@
             // 
             // MarketBrowserButton
             // 
+            MarketBrowserButton.Cursor = Cursors.Hand;
             MarketBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             MarketBrowserButton.ForeColor = Color.Black;
@@ -198,6 +208,7 @@
             // 
             // AbyssTrackerButton
             // 
+            AbyssTrackerButton.Cursor = Cursors.Hand;
             AbyssTrackerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             AbyssTrackerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             AbyssTrackerButton.ForeColor = Color.Black;
@@ -209,11 +220,61 @@
             AbyssTrackerButton.UseVisualStyleBackColor = true;
             AbyssTrackerButton.Click += AbyssTrackerButton_Click;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label8.Location = new Point(56, 439);
+            label8.Name = "label8";
+            label8.Size = new Size(689, 25);
+            label8.TabIndex = 14;
+            label8.Text = "Special thank you to Fuzzworks who provides the static data dump in SQLite format. ";
+            // 
+            // FuzzworksLinkLabel
+            // 
+            FuzzworksLinkLabel.AutoSize = true;
+            FuzzworksLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
+            FuzzworksLinkLabel.Location = new Point(751, 444);
+            FuzzworksLinkLabel.Name = "FuzzworksLinkLabel";
+            FuzzworksLinkLabel.Size = new Size(133, 20);
+            FuzzworksLinkLabel.TabIndex = 15;
+            FuzzworksLinkLabel.TabStop = true;
+            FuzzworksLinkLabel.Text = "Fuzzworks Website";
+            FuzzworksLinkLabel.LinkClicked += FuzzworksLinkLabel_LinkClicked;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Location = new Point(459, 393);
+            label9.Name = "label9";
+            label9.Size = new Size(179, 25);
+            label9.TabIndex = 17;
+            label9.Text = "Price History Utility";
+            // 
+            // PriceHistoryButton
+            // 
+            PriceHistoryButton.Cursor = Cursors.Hand;
+            PriceHistoryButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            PriceHistoryButton.ForeColor = Color.Black;
+            PriceHistoryButton.Image = (Image)resources.GetObject("PriceHistoryButton.Image");
+            PriceHistoryButton.Location = new Point(472, 240);
+            PriceHistoryButton.Name = "PriceHistoryButton";
+            PriceHistoryButton.Size = new Size(150, 150);
+            PriceHistoryButton.TabIndex = 16;
+            PriceHistoryButton.UseVisualStyleBackColor = true;
+            PriceHistoryButton.Click += PriceHistoryButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 450);
+            ClientSize = new Size(939, 530);
+            Controls.Add(label9);
+            Controls.Add(PriceHistoryButton);
+            Controls.Add(FuzzworksLinkLabel);
+            Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(AbyssTrackerButton);
             Controls.Add(label6);
@@ -253,5 +314,9 @@
         private Button MarketBrowserButton;
         private Label label7;
         private Button AbyssTrackerButton;
+        private Label label8;
+        private LinkLabel FuzzworksLinkLabel;
+        private Label label9;
+        private Button PriceHistoryButton;
     }
 }
