@@ -3,40 +3,54 @@
 <html>
 <head>
     <title>Abyss Tracker</title>
+
+    <link rel="stylesheet" href="CSS/Main.css" />
 </head>
 <body>
-    <h1>
-        Abyss Tracker
-    </h1>
-    <div>
-        <p>
-            The Abyss Tracker is a tool designed to track your profts from running abyssal sites. The tool is relatively straightforward.
-
-            <br />
-            <br />
-            On the left hand side of the screen, you input the details of your run. The type of abyss you ran (Level and Weather), the
-            size of ship you ran (Determines filament cost on the right), whether the run was a success, and you can copy &amp; paste
-            your loot. When you click "Add Run", it will add the abyss run to the right hand side of the screen. The history of your
-            runs is also stored on the local file system, so if you close the app and come back, your progress is saved. I will also
-            be adding a "Statistics" screen to track different stats for you in a later release.
-            <br /><br />
-            The Values on the right are auto-calculated and stored at the time you added the run. So for example, if you logged a "Cataclysmic Electrical"
-            run on November First, with a cruiser, and a total loot value of 400 million isks, those values are stored and never reloaded. This way, if the
-            value of abyss runs starts to increase, you will be able to see what you were getting vs what you're getting now.
-
-            <br /><br />
-            The filament cost is calculated by (Filament Lowest Sell order from Jita) * (Number of Filaments Needed for Ship Type). So for a cruiser,
-            it's just the lowest sell order. For frigates, it's lowest sell order * 3. The abyssal loot value is determined by the (buy orders in Jita
-            for the selected types) * (the quantity of each type). We do the buy value instead of sell value because sell values can be highly inflated
-            and not realistic of what people are willing to pay for said item.
-            <br />
-            <br />
-            You can also highlight and delete a run with the "Delete Run" button.
-            <br />
-            <br />
-            <img src="Images/Abyss Tracker.png" style="width:1200px; height:675px;" />
-        </p>
+    <div class="Menubar">
+        <div class="Links">
+            <a href="index.html">Home</a>
+            <a href="BlueprintBrowser.html">Blueprint Browser</a>
+            <a href="LootAppraisal.html">Loot Appraisal</a>
+            <a href="PlanetaryInteraction.html">PI</a>
+            <a href="SystemFinder.html">System Finder</a>
+            <a href="MarketBrowser.html">Market Browser</a>
+            <a href="PriceHistoryUtility.html">Price History</a>
+            <a href="AbyssTracker.html">Abyss Tracker</a>
+            <a href="DefaultConfiguration.html">Default Config</a>
+        </div>
     </div>
     <br />
+    <br />
+    <h3>
+        Abyss Tracker
+    </h3>
+    <div class="InfoParagraph">
+        The Abyss Tracker is a tool designed to track your profts from running abyssal sites. The tool is relatively straightforward.
+
+        <br />
+        <br />
+        On the left hand side of the screen, you input the details of your run. The type of abyss you ran (Level and Weather), the
+        size of ship you ran (Determines filament cost on the right), whether the run was a success, and you can copy &amp; paste
+        your loot. When you click "Add Run", it will add the abyss run to the right hand side of the screen. The history of your
+        runs is also stored on the local file system, so if you close the app and come back, your progress is saved. I will also
+        be adding a "Statistics" screen to track different stats for you in a later release.
+        <br /><br />
+        The Values on the right are auto-calculated and stored at the time you added the run. So for example, if you logged a "Cataclysmic Electrical"
+        run on November First, with a cruiser, and a total loot value of 400 million isks, those values are stored and never reloaded. This way, if the
+        value of abyss runs starts to increase, you will be able to see what you were getting vs what you're getting now.
+
+        <br /><br />
+        The filament cost is calculated by (Filament Lowest Sell order from Jita) * (Number of Filaments Needed for Ship Type). So for a cruiser,
+        it's just the lowest sell order. For frigates, it's lowest sell order * 3. The abyssal loot value is determined by the (buy orders in Jita
+        for the selected types) * (the quantity of each type). We do the buy value instead of sell value because sell values can be highly inflated
+        and not realistic of what people are willing to pay for said item.
+        <br />
+        <br />
+        You can also highlight and delete a run with the "Delete Run" button.
+    </div>
+    <br />
+    <br />
+    <img src="Images/Abyss Tracker.png" style="width:1200px; height:675px;" />
 </body>
 </html>

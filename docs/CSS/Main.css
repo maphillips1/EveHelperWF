@@ -1,0 +1,78 @@
+body {
+    /*background-color: rgb(5, 34, 48);*/
+    background-color: rgb(2, 23, 38);
+    color: white;
+    text-align: center;
+}
+
+.InfoParagraph {
+    background-color: black;
+    opacity: 80%;
+    margin: auto;
+    padding: 10PX;
+    width: auto;
+    max-width: 80%;
+    text-align: left;
+    display: inline-block;
+    overflow: auto;
+}
+
+a {
+    color: white;
+    font-size: larger;
+}
+
+    a:visited {
+        color: white;
+    }
+
+ul > li {
+    padding: 2px;
+}
+
+ol > li {
+    padding: 2px;
+}
+
+h3, h4 {
+    color: gold;
+}
+
+.Menubar {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: black;
+    opacity: 80%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.Links{
+    z-index:10;
+    float:left;
+    clear:both;
+    background-color: black;
+    display: inline;
+    padding: 10px;
+    margin-left: 5px;
+}
+    .Links > a{
+        text-decoration: none;
+    }
+
+    .Links > a:hover {
+        background-color: black;
+        color: gold;
+    }
+
+    .Links > a::before{
+        content: " | ";
+    }
+
+.Menubar:hover  {
+    display: blockk;
+    color: gold;
+    /*cursor: pointer;*/
+}
+

@@ -3,45 +3,60 @@
 <html>
 <head>
     <title>Market Browser</title>
+
+    <link rel="stylesheet" href="CSS/Main.css" />
 </head>
 <body>
-    <h1>
-        Market Browser
-    </h1>
-    <div>
-        <p>
-            The Market Browser tool allows you to view the buy orders, sell orders, and price history for any item in Eve in any region and system. 
-            You can also have multiple windows open at the same time allowing you to view two different markets for the same item at the same time. 
-            If you're a trader, this tool will most likely be the highest interest for you. 
-            <br /><br />
-
-            The buy and sell orders window is straight forward. Sell orders on top are listed in prices ascending meaning lowest value at top. Just like in the Eve client. 
-            The buy orders are listed in most valuable at top. 
-
-            <br /><br />
-            Price history in this app will be something that is unique from other apps like EveMarketer.com. CCP by default only provides the price history
-            for an item for the past one year. Anything before that is lost. With this app, in order to give you the best experience, I store the price history 
-            of every item on your local machine and when you go back to view the item, I load both what you viewed previously, and any new information that CCP
-            has provided. 
-
-            <br /><br />
-            This means that as you use this over months/years, the price history of each item will show you the history from more than one year ago. 
-            If you use the <a href="PriceHistoryUtility.html">Price History Tool</a>, you can track certain items and update their price history with 
-            the click of a button. More on that in the linked page. I also plan on adding a chart view similar to the Eve client so you can see trends
-            without just reading the numbers. That will be in a future release. 
-
-            <br /><br />
-            Please note that due to limitations of the ESI, we are not able to see market orders for items in a structure. In order for that functionality to work
-            I would need to add the ability for you to login with your Eve online character and then pull data from the character ESI. I never intend for this
-            app to have any character login data because of the complexity and maintenance. This app is designed to be as maintenance free as possible and 
-            character level ESI data does not fit with that view. 
-
-            <br /><br />
-            <img src="Images/Market Browser - Orders.png" style="width:1200px; height:675px;" />
-            <br />
-            <img src="Images/Market Browser - Price History.png" style="width:1200px; height:675px;" />
-        </p>
+    <div class="Menubar">
+        <div class="Links">
+            <a href="index.html">Home</a>
+            <a href="BlueprintBrowser.html">Blueprint Browser</a>
+            <a href="LootAppraisal.html">Loot Appraisal</a>
+            <a href="PlanetaryInteraction.html">PI</a>
+            <a href="SystemFinder.html">System Finder</a>
+            <a href="MarketBrowser.html">Market Browser</a>
+            <a href="PriceHistoryUtility.html">Price History</a>
+            <a href="AbyssTracker.html">Abyss Tracker</a>
+            <a href="DefaultConfiguration.html">Default Config</a>
+        </div>
     </div>
     <br />
+    <br />
+    <h3>
+        Market Browser
+    </h3>
+    <div class="InfoParagraph">
+        The Market Browser tool allows you to view the buy orders, sell orders, and price history for any item in Eve in any region and system.
+        You can also have multiple windows open at the same time allowing you to view two different markets for the same item at the same time.
+        If you're a trader, this tool will most likely be the highest interest for you.
+        <br /><br />
+
+        The buy and sell orders window is straight forward. Sell orders on top are listed in prices ascending meaning lowest value at top. Just like in the Eve client.
+        The buy orders are listed in most valuable at top.
+
+        <br /><br />
+        Price history in this app will be something that is unique from other apps like EveMarketer.com. CCP by default only provides the price history
+        for an item for the past one year. Anything before that is lost. With this app, in order to give you the best experience, I store the price history
+        of every item on your local machine and when you go back to view the item, I load both what you viewed previously, and any new information that CCP
+        has provided.
+
+        <br /><br />
+        This means that as you use this over months/years, the price history of each item will show you the history from more than one year ago.
+        If you use the <a href="PriceHistoryUtility.html">Price History Tool</a>, you can track certain items and update their price history with
+        the click of a button. More on that in the linked page. I also plan on adding a chart view similar to the Eve client so you can see trends
+        without just reading the numbers. That will be in a future release.
+
+        <br /><br />
+        Please note that due to limitations of the ESI, we are not able to see market orders for items in a structure. In order for that functionality to work
+        I would need to add the ability for you to login with your Eve online character and then pull data from the character ESI. I never intend for this
+        app to have any character login data because of the complexity and maintenance. This app is designed to be as maintenance free as possible and
+        character level ESI data does not fit with that view.
+    </div>
+
+    <br /><br />
+    <img src="Images/Market Browser - Orders.png" style="width:1200px; height:675px;" />
+    <br />
+    <br />
+    <img src="Images/Market Browser - Price History.png" style="width:1200px; height:675px;" />
 </body>
 </html>

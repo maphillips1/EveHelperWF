@@ -3,43 +3,58 @@
 <html>
 <head>
     <title>Price History Utility</title>
+
+    <link rel="stylesheet" href="CSS/Main.css" />
 </head>
 <body>
-    <h1>
-        Price History Utility
-    </h1>
-    <div>
-        <p>
-            The Price History Utility was one of the features that users requested on the original Reddit thread. The purpose of this utility
-            is to make tracking the price history of a list of items easier than having to go to the <a href="MarketBrowser.html">Market Browser</a>,
-            navigating to the item you want to track, and then viewing the price history on that screen.
-
-            <br /><br />
-            On the left side of the screen is a search textbox and results grid and on the right is the items that you currently want to track.
-            On this screen, you can add all of the items that you want to track. Once you do, this list is then saved on your local file system,
-            meaning that you don't have to keep re-selecting these items each time you come back.
-
-            <br /><br />
-            Once you've selected all of the items you want to track, or if you are coming back to this screen, the button on the right
-            named "Update Price History For All Items" can be clicked. This will grab the price history for every item in the list
-            on the right hand side of the screen at once for the selected region. If you want to switch between regions, just change the combo.
-            A progress bar will also appear. Most of the time, the progress bar is short lived because the calls are generally quick, but if you
-            add a numerous amount of items, it could take longer and the progress bar will inform you how much we've completed.
-
-            <br /><br />
-            If you no longer want to track an item, you can select the row in the grid on the right and then click "Delete Tracked Item".
-
-            <br /><br />
-            To view the price history details of an item, highlight it in the grid and then select "View Price History" or you can just
-            double click the item. Please note that I also load the price history of the item for the selected region when you view it so it
-            may take a second to load.
-
-            <br /><br />
-            <img src="Images/Price History Utility.png" style="width:1200px; height:675px;" />
-            <br />
-            <img src="Images/Price History Utility View.png" style="width:1200px; height:675px;" />
-        </p>
+    <div class="Menubar">
+        <div class="Links">
+            <a href="index.html">Home</a>
+            <a href="BlueprintBrowser.html">Blueprint Browser</a>
+            <a href="LootAppraisal.html">Loot Appraisal</a>
+            <a href="PlanetaryInteraction.html">PI</a>
+            <a href="SystemFinder.html">System Finder</a>
+            <a href="MarketBrowser.html">Market Browser</a>
+            <a href="PriceHistoryUtility.html">Price History</a>
+            <a href="AbyssTracker.html">Abyss Tracker</a>
+            <a href="DefaultConfiguration.html">Default Config</a>
+        </div>
     </div>
     <br />
+    <br />
+    <h3>
+        Price History Utility
+    </h3>
+    <div class="InfoParagraph">
+        The Price History Utility was one of the features that users requested on the original Reddit thread. The purpose of this utility
+        is to make tracking the price history of a list of items easier than having to go to the <a href="MarketBrowser.html">Market Browser</a>,
+        navigating to the item you want to track, and then viewing the price history on that screen.
+
+        <br /><br />
+        On the left side of the screen is a search textbox and results grid and on the right is the items that you currently want to track.
+        On this screen, you can add all of the items that you want to track. Once you do, this list is then saved on your local file system,
+        meaning that you don't have to keep re-selecting these items each time you come back.
+
+        <br /><br />
+        Once you've selected all of the items you want to track, or if you are coming back to this screen, the button on the right
+        named "Update Price History For All Items" can be clicked. This will grab the price history for every item in the list
+        on the right hand side of the screen at once for the selected region. If you want to switch between regions, just change the combo.
+        A progress bar will also appear. Most of the time, the progress bar is short lived because the calls are generally quick, but if you
+        add a numerous amount of items, it could take longer and the progress bar will inform you how much we've completed.
+
+        <br /><br />
+        If you no longer want to track an item, you can select the row in the grid on the right and then click "Delete Tracked Item".
+
+        <br /><br />
+        To view the price history details of an item, highlight it in the grid and then select "View Price History" or you can just
+        double click the item. Please note that I also load the price history of the item for the selected region when you view it so it
+        may take a second to load.
+    </div>
+
+    <br /><br />
+    <img src="Images/Price History Utility.png" style="width:1200px; height:675px;" />
+    <br />
+    <br />
+    <img src="Images/Price History Utility View.png" style="width:1200px; height:675px;" />
 </body>
 </html>
