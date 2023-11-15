@@ -47,6 +47,10 @@
             FuzzworksLinkLabel = new LinkLabel();
             label9 = new Label();
             PriceHistoryButton = new Button();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            fileLocationsToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // BlueprintBrowserButton
@@ -266,6 +270,31 @@
             PriceHistoryButton.UseVisualStyleBackColor = true;
             PriceHistoryButton.Click += PriceHistoryButton_Click;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(939, 28);
+            menuStrip1.TabIndex = 18;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileLocationsToolStripMenuItem });
+            fileToolStripMenuItem.ForeColor = Color.Black;
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(46, 24);
+            fileToolStripMenuItem.Text = "File";
+            // 
+            // fileLocationsToolStripMenuItem
+            // 
+            fileLocationsToolStripMenuItem.Name = "fileLocationsToolStripMenuItem";
+            fileLocationsToolStripMenuItem.Size = new Size(224, 26);
+            fileLocationsToolStripMenuItem.Text = "File Locations";
+            fileLocationsToolStripMenuItem.Click += fileLocationsToolStripMenuItem_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -289,11 +318,15 @@
             Controls.Add(LootAppraisalButton);
             Controls.Add(PlanetPlannerButton);
             Controls.Add(BlueprintBrowserButton);
+            Controls.Add(menuStrip1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
             Name = "MainScreen";
             Text = "Eve Helper";
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -318,5 +351,8 @@
         private LinkLabel FuzzworksLinkLabel;
         private Label label9;
         private Button PriceHistoryButton;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem fileLocationsToolStripMenuItem;
     }
 }

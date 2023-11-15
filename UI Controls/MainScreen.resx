@@ -2083,7 +2083,7 @@
   <data name="PriceHistoryButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cwAAEnMBjCK5BwAAhIZJREFUeF7t/Yd/ZcWZ7wuvndPaOWftvbWVc85SS+ogdc4556AOkjrnnBPQNNBA
+        cgAAEnIBXmVb4wAAhIZJREFUeF7t/Yd/ZcWZ7wuvndPaOWftvbWVc85SS+ogdc4556AOkjrnnBPQNNBA
         A46AbQw2NjZgjG2ccxqPZzzh3JkzM2fOe99z719wv7VKyLKAGbDxGWY+pz6PSrVqVf7Vk1baijdVlCws
         y2WKYh5vdTKecTsqMulcKp7PF+eKyrNF1dFkUTyVz5WUxwoKgumCRHldJF+ZyJWWV1QVZXP5TLYok08l
         s6lkLldYkkkX5nNFsUi0oKAgmy2MxhKpVEGCKFUQjcZJJJPpwsKieDxZWlpOXFRUIgpmC8lMpzPEFONU
@@ -2651,6 +2651,9 @@
         RbtARQ4FKEl5YAMqThGDOlgCLZn0IvlVgjcRwv9AkgNgqMSRSOz/A0jh5+oj8qmvAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAkAAHQSAAB0EgAAAAAAAAAA

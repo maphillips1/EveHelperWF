@@ -84,5 +84,12 @@ namespace EveHelperWF.UI_Controls
             priceHistoryUtility.StartPosition = FormStartPosition.CenterScreen;
             priceHistoryUtility.Show();
         }
+
+        private void fileLocationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FIleLocations fIleLocations = new FIleLocations();
+            fIleLocations.StartPosition = FormStartPosition.CenterScreen;
+            fIleLocations.Show();
+        }
     }
 }
