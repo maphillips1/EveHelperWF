@@ -20,9 +20,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         BindingList<InventoryTypes> foundTypes = null;
         BindingList<InventoryTypes> TrackedTypes = new BindingList<InventoryTypes>();
 
-        private string PriceHistoryDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "PriceHistory\\");
-
         private static string TrackedTypeDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                                      "TrackedTypes\\");
         private static string TrackedTypeFileName = Path.Combine(TrackedTypeDirectory, "TrackedTypes.json");

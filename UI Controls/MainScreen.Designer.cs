@@ -50,6 +50,10 @@
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             fileLocationsToolStripMenuItem = new ToolStripMenuItem();
+            backupFilesToolStripMenuItem = new ToolStripMenuItem();
+            FreyaLinkLabel = new LinkLabel();
+            label10 = new Label();
+            label11 = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -282,7 +286,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileLocationsToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileLocationsToolStripMenuItem, backupFilesToolStripMenuItem });
             fileToolStripMenuItem.ForeColor = Color.Black;
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
@@ -291,15 +295,57 @@
             // fileLocationsToolStripMenuItem
             // 
             fileLocationsToolStripMenuItem.Name = "fileLocationsToolStripMenuItem";
-            fileLocationsToolStripMenuItem.Size = new Size(224, 26);
+            fileLocationsToolStripMenuItem.Size = new Size(182, 26);
             fileLocationsToolStripMenuItem.Text = "File Locations";
             fileLocationsToolStripMenuItem.Click += fileLocationsToolStripMenuItem_Click;
+            // 
+            // backupFilesToolStripMenuItem
+            // 
+            backupFilesToolStripMenuItem.Name = "backupFilesToolStripMenuItem";
+            backupFilesToolStripMenuItem.Size = new Size(182, 26);
+            backupFilesToolStripMenuItem.Text = "Backup Files";
+            backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
+            // 
+            // FreyaLinkLabel
+            // 
+            FreyaLinkLabel.AutoSize = true;
+            FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
+            FreyaLinkLabel.Location = new Point(518, 505);
+            FreyaLinkLabel.Name = "FreyaLinkLabel";
+            FreyaLinkLabel.Size = new Size(105, 20);
+            FreyaLinkLabel.TabIndex = 20;
+            FreyaLinkLabel.TabStop = true;
+            FreyaLinkLabel.Text = "Freya Partanen";
+            FreyaLinkLabel.LinkClicked += FreyaLinkLabel_LinkClicked;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label10.Location = new Point(56, 475);
+            label10.Name = "label10";
+            label10.Size = new Size(448, 25);
+            label10.TabIndex = 19;
+            label10.Text = "To donate to this project, send isk to \"Freya Partanen\".";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label11.Location = new Point(56, 500);
+            label11.Name = "label11";
+            label11.Size = new Size(456, 25);
+            label11.TabIndex = 21;
+            label11.Text = "All donations are voluntary and very much appreciated.";
             // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(939, 530);
+            ClientSize = new Size(939, 563);
+            Controls.Add(label11);
+            Controls.Add(FreyaLinkLabel);
+            Controls.Add(label10);
             Controls.Add(label9);
             Controls.Add(PriceHistoryButton);
             Controls.Add(FuzzworksLinkLabel);
@@ -354,5 +400,9 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem fileLocationsToolStripMenuItem;
+        private ToolStripMenuItem backupFilesToolStripMenuItem;
+        private LinkLabel FreyaLinkLabel;
+        private Label label10;
+        private Label label11;
     }
 }

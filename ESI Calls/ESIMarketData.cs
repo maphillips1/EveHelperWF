@@ -191,7 +191,7 @@ namespace EveHelperWF.ESI_Calls
 
                 if (filteredOrders.Count > 0)
                 {
-                    while (orderCount < orders.Count && remainingQuantity > 0)
+                    while (orderCount < filteredOrders.Count && remainingQuantity > 0)
                     {
                         if (filteredOrders[orderCount].volume_remain > remainingQuantity)
                         {
@@ -204,6 +204,11 @@ namespace EveHelperWF.ESI_Calls
                             remainingQuantity -= filteredOrders[orderCount].volume_remain;
                         }
                         orderCount++;
+                    }
+                    if (remainingQuantity > 0)
+                    {
+                        price += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
+                        remainingQuantity = 0;
                     }
                 }
             }

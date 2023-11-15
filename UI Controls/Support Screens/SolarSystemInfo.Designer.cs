@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Label StationsListLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolarSystemInfo));
             SolarSystemNameLabel = new Label();
             PlanetsLabel = new Label();

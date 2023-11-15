@@ -1154,6 +1154,7 @@
             dataGridViewCellStyle1.ForeColor = Color.Black;
             ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ManuInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ManuInputGrid.BackgroundColor = SystemColors.WindowFrame;
             ManuInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1183,7 +1184,7 @@
             materialName.MinimumWidth = 50;
             materialName.Name = "materialName";
             materialName.ReadOnly = true;
-            materialName.Width = 125;
+            materialName.Width = 93;
             // 
             // quantityTotal
             // 
@@ -1196,7 +1197,7 @@
             quantityTotal.MinimumWidth = 6;
             quantityTotal.Name = "quantityTotal";
             quantityTotal.ReadOnly = true;
-            quantityTotal.Width = 125;
+            quantityTotal.Width = 131;
             // 
             // Cost
             // 
@@ -1208,7 +1209,7 @@
             Cost.MinimumWidth = 6;
             Cost.Name = "Cost";
             Cost.ReadOnly = true;
-            Cost.Width = 125;
+            Cost.Width = 67;
             // 
             // build
             // 
@@ -1218,7 +1219,7 @@
             build.Name = "build";
             build.ReadOnly = true;
             build.Visible = false;
-            build.Width = 125;
+            build.Width = 72;
             // 
             // react
             // 
@@ -1228,7 +1229,7 @@
             react.Name = "react";
             react.ReadOnly = true;
             react.Visible = false;
-            react.Width = 125;
+            react.Width = 75;
             // 
             // quantity
             // 
@@ -1238,7 +1239,7 @@
             quantity.Name = "quantity";
             quantity.ReadOnly = true;
             quantity.Visible = false;
-            quantity.Width = 125;
+            quantity.Width = 94;
             // 
             // volume
             // 
@@ -1251,7 +1252,7 @@
             volume.MinimumWidth = 6;
             volume.Name = "volume";
             volume.ReadOnly = true;
-            volume.Width = 125;
+            volume.Width = 123;
             // 
             // pricePer
             // 
@@ -1263,7 +1264,7 @@
             pricePer.MinimumWidth = 6;
             pricePer.Name = "pricePer";
             pricePer.ReadOnly = true;
-            pricePer.Width = 125;
+            pricePer.Width = 94;
             // 
             // manufacturable
             // 
@@ -1273,7 +1274,7 @@
             manufacturable.Name = "manufacturable";
             manufacturable.ReadOnly = true;
             manufacturable.Visible = false;
-            manufacturable.Width = 125;
+            manufacturable.Width = 142;
             // 
             // reactable
             // 
@@ -1283,7 +1284,6 @@
             reactable.Name = "reactable";
             reactable.ReadOnly = true;
             reactable.Visible = false;
-            reactable.Width = 125;
             // 
             // materialTypeID
             // 
@@ -1293,7 +1293,7 @@
             materialTypeID.Name = "materialTypeID";
             materialTypeID.ReadOnly = true;
             materialTypeID.Visible = false;
-            materialTypeID.Width = 125;
+            materialTypeID.Width = 147;
             // 
             // parentMaterialTypeID
             // 
@@ -1303,7 +1303,7 @@
             parentMaterialTypeID.Name = "parentMaterialTypeID";
             parentMaterialTypeID.ReadOnly = true;
             parentMaterialTypeID.Visible = false;
-            parentMaterialTypeID.Width = 125;
+            parentMaterialTypeID.Width = 144;
             // 
             // ManuRigTEBonusCombo
             // 

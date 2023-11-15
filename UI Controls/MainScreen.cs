@@ -72,8 +72,8 @@ namespace EveHelperWF.UI_Controls
 
         private void FuzzworksLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string dotLanURL = String.Format("https://www.fuzzwork.co.uk/");
-            ProcessStartInfo startInfo = new ProcessStartInfo(dotLanURL);
+            string fuzzLabel = String.Format("https://www.fuzzwork.co.uk/");
+            ProcessStartInfo startInfo = new ProcessStartInfo(fuzzLabel);
             startInfo.UseShellExecute = true;
             Process.Start(startInfo);
         }
@@ -90,6 +90,21 @@ namespace EveHelperWF.UI_Controls
             FIleLocations fIleLocations = new FIleLocations();
             fIleLocations.StartPosition = FormStartPosition.CenterScreen;
             fIleLocations.Show();
+        }
+
+        private void backupFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackupFiles backupFiles = new BackupFiles();
+            backupFiles.StartPosition = FormStartPosition.CenterScreen;
+            backupFiles.Show();
+        }
+
+        private void FreyaLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string freyaLink = String.Format("https://evewho.com/character/96542763");
+            ProcessStartInfo startInfo = new ProcessStartInfo(freyaLink);
+            startInfo.UseShellExecute = true;
+            Process.Start(startInfo);
         }
     }
 }

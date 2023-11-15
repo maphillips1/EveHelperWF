@@ -476,12 +476,31 @@ namespace EveHelperWF
         {
             if (SelectedType != null)
             {
+
+                ShowHideInventCheckbox();
+                //Set Label
                 BlueprintNameLabel.Text = SelectedType.typeName;
+                //Load Activity Types
                 IndustryActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(SelectedType.typeId);
+                //Show Hide Tabs
                 EnableDisableTabsForActivities();
+                this.Refresh();
+                //Run Numbers
                 RunNumbers(true);
 
                 BlueprintImageBackgroundWorker.RunWorkerAsync();
+            }
+        }
+
+        private void ShowHideInventCheckbox()
+        {
+            if (IsBlueprintInvented())
+            {
+                InventBlueprintCheckbox.Visible = true;
+            }
+            else
+            {
+                InventBlueprintCheckbox.Visible = false;
             }
         }
 
@@ -492,25 +511,36 @@ namespace EveHelperWF
             if (!IsInit && SelectedType != null)
             {
                 this.Cursor = Cursors.WaitCursor;
+
                 StatusLabel.Text = "Loading Materials...";
                 GetIndustryActivityMaterials();
+
+                LoadInventionCombo(DBInventionCombo);
+
                 StatusLabel.Text = "Loading Products...";
                 GetIndustryActivityProducts();
-                if (DBInventionCombo)
-                {
-                    LoadInventionProductsCombo();
-                }
-                else
-                {
-                    InventionOutcomeBPCombo.DisplayMember = "Value";
-                    InventionOutcomeBPCombo.ValueMember = "Key";
-                }
+
                 StatusLabel.Text = "Running Calcs...";
                 CalculateTotals();
+
                 StatusLabel.Text = "Loading Materials...";
                 DatabindScreen();
+
                 StatusLabel.Text = "Done;";
                 this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void LoadInventionCombo(bool DBInventionCombo)
+        {
+            if (DBInventionCombo)
+            {
+                LoadInventionProductsCombo();
+            }
+            else
+            {
+                InventionOutcomeBPCombo.DisplayMember = "Value";
+                InventionOutcomeBPCombo.ValueMember = "Key";
             }
         }
 
@@ -540,20 +570,25 @@ namespace EveHelperWF
             int outputPriceType = Convert.ToInt32(OutputTypeCombo.SelectedValue);
             ManuProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityManufacturing);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ManuProds);
+
             ResMEProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityResearchingMaterialEfficiency);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ResMEProds);
+
             ResTEProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityResearchingTimeEfficiency);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ResTEProds);
+
             CopyProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityCopying);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref CopyProds);
+
             ReverseEngProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityReverseEngineering);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ReverseEngProds);
+
             InventionProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityInvention);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref InventionProds);
+
             ReactionProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityReactions);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ReactionProds);
         }
-
 
         private static bool HasManufacturingActivity()
         {
@@ -605,107 +640,123 @@ namespace EveHelperWF
 
             if (HasManufacturingActivity())
             {
-                ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingInputQuantAndPrice(ref ManuMats, calculationHelperClass);
-                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ManuMats);
-                ManufacturingTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingTime(IndustryActivityTypes, calculationHelperClass);
-                if (calculationHelperClass.BuildComponents)
-                {
-                    ManufacturingTotalComponentTime = ScreenHelper.BlueprintBrowserHelper.GetComponentManufacturingTime(ManuMats, calculationHelperClass);
-                }
-                TotalManufacturingJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass);
-                TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass);
-                TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-                TotalManufacturingTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, ManuMats);
-                TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-                TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-
-                if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
-                {
-                    int tech1BlueprintId = Database.SQLiteCalls.GetTech1BlueprintTypeId(SelectedType.typeId);
-                    List<Objects.IndustryActivityTypes> inventionIndustryActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(tech1BlueprintId);
-                    List<Objects.MaterialsWithMarketData> inventionMats = new List<Objects.MaterialsWithMarketData>();
-
-                    ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(inventionIndustryActivityTypes, tech1BlueprintId, Enums.Enums.ActivityInvention, ref inventionMats, false);
-
-                    Objects.CalculationHelperClass defaultInventionHelperClass = BuildDefaultInventionHelperClass(tech1BlueprintId);
-
-                    ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref inventionMats, defaultInventionHelperClass);
-                    ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(defaultInventionHelperClass.InputOrderType, ref inventionMats);
-                    TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(defaultInventionHelperClass);
-                    FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(defaultInventionHelperClass);
-                    int avgTriesForSuccess = Convert.ToInt32(Math.Ceiling(1 / FinalInventionProbability));
-                    decimal totalInventionInputPrice = 0;
-                    foreach (Objects.MaterialsWithMarketData mat in inventionMats)
-                    {
-                        mat.quantityTotal = mat.quantityTotal * avgTriesForSuccess;
-                        totalInventionInputPrice += mat.priceTotal;
-                        mat.priceTotal = mat.priceTotal * avgTriesForSuccess;
-                    }
-                    ManuMats.AddRange(inventionMats);
-                    //Average out invention cost for 100% success rate for at least one blueprint to invent. 
-                    //This will avoid under valuing the invention cost. Especially on lower probability BPC's. 
-                    TotalManufacturingJobCost += ((totalInventionInputPrice + TotalInventionJobCost) * avgTriesForSuccess);
-
-                }
-
-                decimal totalPrice = 0;
-                foreach (Objects.MaterialsWithMarketData mat in ManuMats)
-                {
-                    totalPrice += mat.priceTotal;
-
-                }
-                ManufacturingTotalInputPrice = totalPrice;
+                CalculateManufacturingTotals(calculationHelperClass);
             }
 
             if (HasReactionActivity())
             {
-                ScreenHelper.BlueprintBrowserHelper.CalculateReactionInputQuantAndPrice(ref ReactionMats, calculationHelperClass);
-                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats);
-                ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
-                TotalReactionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass);
-                TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass);
-                TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-                TotalReactionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, ReactionMats);
-                TotalReactionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-                TotalReactionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-
-                decimal totalPrice = 0;
-                foreach (Objects.MaterialsWithMarketData mat in ReactionMats)
-                {
-                    totalPrice += mat.priceTotal;
-
-                }
-                ReactionTotalInputPrice = totalPrice;
+                CalculateReactionsTotals(calculationHelperClass);
             }
 
             if (HasInventionActivity())
             {
-                ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref InventionMats, calculationHelperClass);
-                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref InventionMats);
-                InventionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateInventionTime(IndustryActivityTypes, calculationHelperClass);
-                TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(calculationHelperClass);
-                TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass);
-                TotalInventionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, InventionMats);
-                TotalInventionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
-                TotalInventionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
-                FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(calculationHelperClass);
-                InventionRuns = ScreenHelper.BlueprintBrowserHelper.GetInventionRuns(calculationHelperClass, InventionProds);
-                InventionME = ScreenHelper.BlueprintBrowserHelper.GetInventionME(calculationHelperClass);
-                InventionTE = ScreenHelper.BlueprintBrowserHelper.GetInventionTE(calculationHelperClass);
-
-                decimal totalPrice = 0;
-                foreach (Objects.MaterialsWithMarketData mat in InventionMats)
-                {
-                    totalPrice += mat.priceTotal;
-
-                }
-                InventionTotalInputPrice = totalPrice;
+                CalculateInventionTotals(calculationHelperClass);
             }
 
             TotalManufacturingJobTime = ManufacturingTotalComponentTime + ManufacturingTotalTime;
             TotalReactionJobTime = ReactionTotalTime;
             TotalInventionJobTime = InventionTotalTime;
         }
+
+        private void CalculateManufacturingTotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingInputQuantAndPrice(ref ManuMats, calculationHelperClass);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ManuMats);
+            ManufacturingTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingTime(IndustryActivityTypes, calculationHelperClass);
+            if (calculationHelperClass.BuildComponents)
+            {
+                ManufacturingTotalComponentTime = ScreenHelper.BlueprintBrowserHelper.GetComponentManufacturingTime(ManuMats, calculationHelperClass);
+            }
+            TotalManufacturingJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass);
+            TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass);
+            TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
+            TotalManufacturingTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, ManuMats);
+            TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
+            TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
+
+            if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
+            {
+                int tech1BlueprintId = Database.SQLiteCalls.GetTech1BlueprintTypeId(SelectedType.typeId);
+                List<Objects.IndustryActivityTypes> inventionIndustryActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(tech1BlueprintId);
+                List<Objects.MaterialsWithMarketData> inventionMats = new List<Objects.MaterialsWithMarketData>();
+
+                ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(inventionIndustryActivityTypes, tech1BlueprintId, Enums.Enums.ActivityInvention, ref inventionMats, false);
+
+                Objects.CalculationHelperClass defaultInventionHelperClass = BuildDefaultInventionHelperClass(tech1BlueprintId);
+
+                ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref inventionMats, defaultInventionHelperClass);
+                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(defaultInventionHelperClass.InputOrderType, ref inventionMats);
+                TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(defaultInventionHelperClass);
+                FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(defaultInventionHelperClass);
+                int avgTriesForSuccess = Convert.ToInt32(Math.Ceiling(1 / FinalInventionProbability));
+                decimal totalInventionInputPrice = 0;
+                foreach (Objects.MaterialsWithMarketData mat in inventionMats)
+                {
+                    mat.quantityTotal = mat.quantityTotal * avgTriesForSuccess;
+                    totalInventionInputPrice += mat.priceTotal;
+                    mat.priceTotal = mat.priceTotal * avgTriesForSuccess;
+                }
+                ManuMats.AddRange(inventionMats);
+                //Average out invention cost for 100% success rate for at least one blueprint to invent. 
+                //This will avoid under valuing the invention cost. Especially on lower probability BPC's. 
+                TotalManufacturingJobCost += ((totalInventionInputPrice + TotalInventionJobCost) * avgTriesForSuccess);
+
+            }
+
+            decimal totalPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in ManuMats)
+            {
+                totalPrice += mat.priceTotal;
+
+            }
+            ManufacturingTotalInputPrice = totalPrice;
+        }
+
+        private void CalculateReactionsTotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            ScreenHelper.BlueprintBrowserHelper.CalculateReactionInputQuantAndPrice(ref ReactionMats, calculationHelperClass);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats);
+            ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
+            TotalReactionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass);
+            TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass);
+            TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
+            TotalReactionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, ReactionMats);
+            TotalReactionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
+            TotalReactionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
+
+            decimal totalPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in ReactionMats)
+            {
+                totalPrice += mat.priceTotal;
+
+            }
+            ReactionTotalInputPrice = totalPrice;
+        }
+
+        private void CalculateInventionTotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref InventionMats, calculationHelperClass);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref InventionMats);
+            InventionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateInventionTime(IndustryActivityTypes, calculationHelperClass);
+            TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(calculationHelperClass);
+            TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass);
+            TotalInventionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, InventionMats);
+            TotalInventionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
+            TotalInventionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
+            FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(calculationHelperClass);
+            InventionRuns = ScreenHelper.BlueprintBrowserHelper.GetInventionRuns(calculationHelperClass, InventionProds);
+            InventionME = ScreenHelper.BlueprintBrowserHelper.GetInventionME(calculationHelperClass);
+            InventionTE = ScreenHelper.BlueprintBrowserHelper.GetInventionTE(calculationHelperClass);
+
+            decimal totalPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in InventionMats)
+            {
+                totalPrice += mat.priceTotal;
+
+            }
+            InventionTotalInputPrice = totalPrice;
+        }
+
         private void ResetTotals()
         {
             //Time
@@ -1158,7 +1209,11 @@ namespace EveHelperWF
                 DatabindInventionMatGrid();
                 DatabindInventionLabels();
 
-                int productTypeId = (int)InventionOutcomeBPCombo.SelectedValue;
+                int productTypeId = 0;
+                if (InventionOutcomeBPCombo.SelectedValue != null)
+                {
+                    productTypeId = (int)InventionOutcomeBPCombo.SelectedValue;
+                }
                 if (productTypeId <= 0)
                 {
                     productTypeId = InventionProds[0].productTypeID;
@@ -1453,7 +1508,6 @@ namespace EveHelperWF
                 ReactionsImagePanel.BackgroundImage = null;
             }
         }
-        #endregion
 
         private void InventionImageWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -1492,5 +1546,6 @@ namespace EveHelperWF
                 InventionImagePanel.BackgroundImage = null;
             }
         }
+        #endregion
     }
 }

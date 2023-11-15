@@ -47,7 +47,8 @@ namespace EveHelperWF.Database
             sb.AppendLine("CASE");
             sb.AppendLine("WHEN mssj.fromRegionID<> mssj.toRegionID THEN 1");
             sb.AppendLine("ELSE 0");
-            sb.AppendLine("END AS is_regionalJump");
+            sb.AppendLine("END AS is_regionalJump,");
+            sb.AppendLine("MSS.security");
             sb.AppendLine("from mapSolarSystemJumps mssj");
             sb.AppendLine("INNER JOIN mapSolarSystems MSS");
             sb.AppendLine("ON MSS.solarSystemID = MSSJ.toSolarSystemID");
@@ -545,6 +546,7 @@ namespace EveHelperWF.Database
                     jump = new Objects.SolarSystemJump();
                     jump.solarSystemName = query.GetString(0);
                     jump.isRegional = Convert.ToBoolean(Convert.ToInt32(query.GetString(1)));
+                    jump.security = Math.Round(query.GetDecimal(2), 1);
                     solarSystemJumps.Add(jump);
                 }
             }

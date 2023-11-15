@@ -124,11 +124,11 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             {
                 if (jump.isRegional)
                 {
-                    sb.AppendLine(jump.solarSystemName + " - Regional");
+                    sb.AppendLine(jump.security.ToString() + " " + jump.solarSystemName + " - Regional");
                 }
                 else
                 {
-                    sb.AppendLine(jump.solarSystemName);
+                    sb.AppendLine(jump.security.ToString() + " " + jump.solarSystemName);
                 }
 
             }
