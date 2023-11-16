@@ -158,7 +158,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LootAppraisal";
-            Text = "LootAppraisal";
+            Text = "Loot Appraisal";
             ((System.ComponentModel.ISupportInitialize)ResultsGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

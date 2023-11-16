@@ -384,7 +384,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "SystemFinder";
-            Text = "PlanetSystemFinder";
+            Text = "System Finder";
             ((System.ComponentModel.ISupportInitialize)SolarSystemResultsGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)MinSecurityUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)MaxSecurityUpDown).EndInit();
