@@ -36,9 +36,17 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueprintBrowser));
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
@@ -186,7 +194,6 @@
             label29 = new Label();
             label28 = new Label();
             label27 = new Label();
-            InventionInputGrid = new DataGridView();
             ReverseEngineerPage = new TabPage();
             ReactionPage = new TabPage();
             ReactionsImagePanel = new Panel();
@@ -210,7 +217,6 @@
             label18 = new Label();
             label17 = new Label();
             ReactionSolarSystemCombo = new ComboBox();
-            ReactionInputGrid = new DataGridView();
             BlueprintNameLabel = new Label();
             label3 = new Label();
             industryActivityMaterialsBindingSource = new BindingSource(components);
@@ -219,6 +225,32 @@
             ManuImageWorker = new System.ComponentModel.BackgroundWorker();
             ReactionImageWorker = new System.ComponentModel.BackgroundWorker();
             InventionImageWorker = new System.ComponentModel.BackgroundWorker();
+            InventionInputGrid = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            ReactionInputGrid = new DataGridView();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn21 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn23 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn24 = new DataGridViewTextBoxColumn();
             Menu.SuspendLayout();
             ManufacturingPanel.SuspendLayout();
             panel1.SuspendLayout();
@@ -233,11 +265,11 @@
             ((System.ComponentModel.ISupportInitialize)ManuInputGrid).BeginInit();
             InventionPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).BeginInit();
             ReactionPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)industryActivityMaterialsBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).BeginInit();
             SuspendLayout();
             // 
             // ReactionStructureCombo
@@ -1284,6 +1316,7 @@
             reactable.Name = "reactable";
             reactable.ReadOnly = true;
             reactable.Visible = false;
+            reactable.Width = 125;
             // 
             // materialTypeID
             // 
@@ -1447,6 +1480,7 @@
             // InventionPage
             // 
             InventionPage.BackColor = Color.FromArgb(54, 57, 53);
+            InventionPage.Controls.Add(InventionInputGrid);
             InventionPage.Controls.Add(InventionImagePanel);
             InventionPage.Controls.Add(InventionSCILabel);
             InventionPage.Controls.Add(Label100);
@@ -1490,7 +1524,6 @@
             InventionPage.Controls.Add(label29);
             InventionPage.Controls.Add(label28);
             InventionPage.Controls.Add(label27);
-            InventionPage.Controls.Add(InventionInputGrid);
             InventionPage.Location = new Point(4, 29);
             InventionPage.Margin = new Padding(2);
             InventionPage.Name = "InventionPage";
@@ -1957,30 +1990,6 @@
             label27.TabIndex = 1;
             label27.Text = "Solar System";
             // 
-            // InventionInputGrid
-            // 
-            dataGridViewCellStyle7.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle7.ForeColor = Color.Black;
-            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            InventionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            InventionInputGrid.BackgroundColor = SystemColors.WindowFrame;
-            InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle8;
-            InventionInputGrid.Location = new Point(2, 314);
-            InventionInputGrid.Margin = new Padding(2);
-            InventionInputGrid.Name = "InventionInputGrid";
-            InventionInputGrid.RowHeadersWidth = 62;
-            InventionInputGrid.RowTemplate.Height = 33;
-            InventionInputGrid.Size = new Size(1288, 249);
-            InventionInputGrid.TabIndex = 0;
-            // 
             // ReverseEngineerPage
             // 
             ReverseEngineerPage.BackColor = Color.FromArgb(54, 57, 53);
@@ -1995,6 +2004,7 @@
             // ReactionPage
             // 
             ReactionPage.BackColor = Color.FromArgb(54, 57, 53);
+            ReactionPage.Controls.Add(ReactionInputGrid);
             ReactionPage.Controls.Add(ReactionsImagePanel);
             ReactionPage.Controls.Add(ReactionsSCILabel);
             ReactionPage.Controls.Add(label56);
@@ -2017,7 +2027,6 @@
             ReactionPage.Controls.Add(label18);
             ReactionPage.Controls.Add(label17);
             ReactionPage.Controls.Add(ReactionSolarSystemCombo);
-            ReactionPage.Controls.Add(ReactionInputGrid);
             ReactionPage.Location = new Point(4, 29);
             ReactionPage.Margin = new Padding(2);
             ReactionPage.Name = "ReactionPage";
@@ -2253,30 +2262,6 @@
             ReactionSolarSystemCombo.TabIndex = 1;
             ReactionSolarSystemCombo.SelectedIndexChanged += ReactionSolarSystemCombo_SelectedIndexChanged;
             // 
-            // ReactionInputGrid
-            // 
-            dataGridViewCellStyle9.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle9.ForeColor = SystemColors.ActiveCaptionText;
-            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
-            ReactionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ReactionInputGrid.BackgroundColor = SystemColors.WindowFrame;
-            ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle10;
-            ReactionInputGrid.Location = new Point(2, 251);
-            ReactionInputGrid.Margin = new Padding(2);
-            ReactionInputGrid.Name = "ReactionInputGrid";
-            ReactionInputGrid.RowHeadersWidth = 62;
-            ReactionInputGrid.RowTemplate.Height = 33;
-            ReactionInputGrid.Size = new Size(1352, 312);
-            ReactionInputGrid.TabIndex = 0;
-            // 
             // BlueprintNameLabel
             // 
             BlueprintNameLabel.AutoSize = true;
@@ -2329,6 +2314,322 @@
             InventionImageWorker.DoWork += InventionImageWorker_DoWork;
             InventionImageWorker.RunWorkerCompleted += InventionImageWorker_RunWorkerCompleted;
             // 
+            // InventionInputGrid
+            // 
+            dataGridViewCellStyle7.BackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle7.ForeColor = Color.Black;
+            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            InventionInputGrid.BackgroundColor = SystemColors.WindowFrame;
+            InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            InventionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            InventionInputGrid.Dock = DockStyle.Bottom;
+            InventionInputGrid.GridColor = SystemColors.AppWorkspace;
+            InventionInputGrid.Location = new Point(2, 345);
+            InventionInputGrid.Margin = new Padding(2);
+            InventionInputGrid.Name = "InventionInputGrid";
+            InventionInputGrid.ReadOnly = true;
+            InventionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            InventionInputGrid.RowTemplate.Height = 33;
+            InventionInputGrid.Size = new Size(1136, 218);
+            InventionInputGrid.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "materialName";
+            dataGridViewTextBoxColumn1.HeaderText = "Material";
+            dataGridViewTextBoxColumn1.MinimumWidth = 50;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "quantityTotal";
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewTextBoxColumn2.HeaderText = "Total Quantity";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            dataGridViewTextBoxColumn2.Width = 131;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "priceTotal";
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewTextBoxColumn3.HeaderText = "Cost";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            dataGridViewTextBoxColumn3.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "Build";
+            dataGridViewTextBoxColumn4.HeaderText = "Build";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            dataGridViewTextBoxColumn4.Visible = false;
+            dataGridViewTextBoxColumn4.Width = 72;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "React";
+            dataGridViewTextBoxColumn5.HeaderText = "React";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            dataGridViewTextBoxColumn5.Visible = false;
+            dataGridViewTextBoxColumn5.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "quantity";
+            dataGridViewTextBoxColumn6.HeaderText = "Quantity";
+            dataGridViewTextBoxColumn6.MinimumWidth = 15;
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
+            dataGridViewTextBoxColumn6.Visible = false;
+            dataGridViewTextBoxColumn6.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "volumeTotal";
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewTextBoxColumn7.HeaderText = "Volume (m3)";
+            dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            dataGridViewTextBoxColumn7.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.DataPropertyName = "pricePer";
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewTextBoxColumn8.HeaderText = "Price Per";
+            dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            dataGridViewTextBoxColumn8.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            dataGridViewTextBoxColumn9.DataPropertyName = "Manufacturable";
+            dataGridViewTextBoxColumn9.HeaderText = "Manufacturable";
+            dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
+            dataGridViewTextBoxColumn9.Visible = false;
+            dataGridViewTextBoxColumn9.Width = 142;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.DataPropertyName = "Reactable";
+            dataGridViewTextBoxColumn10.HeaderText = "reactable";
+            dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.ReadOnly = true;
+            dataGridViewTextBoxColumn10.Visible = false;
+            dataGridViewTextBoxColumn10.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.DataPropertyName = "materialTypeID";
+            dataGridViewTextBoxColumn11.HeaderText = "Material Type ID";
+            dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
+            dataGridViewTextBoxColumn11.Visible = false;
+            dataGridViewTextBoxColumn11.Width = 147;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.DataPropertyName = "parentMaterialTypeID";
+            dataGridViewTextBoxColumn12.HeaderText = "parent mat type";
+            dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
+            dataGridViewTextBoxColumn12.Visible = false;
+            dataGridViewTextBoxColumn12.Width = 144;
+            // 
+            // ReactionInputGrid
+            // 
+            dataGridViewCellStyle13.BackColor = SystemColors.ControlLight;
+            dataGridViewCellStyle13.ForeColor = Color.Black;
+            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            ReactionInputGrid.BackgroundColor = SystemColors.WindowFrame;
+            ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ReactionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn23, dataGridViewTextBoxColumn24 });
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle18;
+            ReactionInputGrid.Dock = DockStyle.Bottom;
+            ReactionInputGrid.GridColor = SystemColors.AppWorkspace;
+            ReactionInputGrid.Location = new Point(2, 270);
+            ReactionInputGrid.Margin = new Padding(2);
+            ReactionInputGrid.Name = "ReactionInputGrid";
+            ReactionInputGrid.ReadOnly = true;
+            ReactionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            ReactionInputGrid.RowTemplate.Height = 33;
+            ReactionInputGrid.Size = new Size(1078, 293);
+            ReactionInputGrid.TabIndex = 39;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.DataPropertyName = "materialName";
+            dataGridViewTextBoxColumn13.HeaderText = "Material";
+            dataGridViewTextBoxColumn13.MinimumWidth = 50;
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.ReadOnly = true;
+            dataGridViewTextBoxColumn13.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            dataGridViewTextBoxColumn14.DataPropertyName = "quantityTotal";
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.Format = "N0";
+            dataGridViewCellStyle14.NullValue = null;
+            dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewTextBoxColumn14.HeaderText = "Total Quantity";
+            dataGridViewTextBoxColumn14.MinimumWidth = 6;
+            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            dataGridViewTextBoxColumn14.ReadOnly = true;
+            dataGridViewTextBoxColumn14.Width = 131;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.DataPropertyName = "priceTotal";
+            dataGridViewCellStyle15.Format = "C2";
+            dataGridViewCellStyle15.NullValue = null;
+            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewTextBoxColumn15.HeaderText = "Cost";
+            dataGridViewTextBoxColumn15.MinimumWidth = 6;
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.ReadOnly = true;
+            dataGridViewTextBoxColumn15.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            dataGridViewTextBoxColumn16.DataPropertyName = "Build";
+            dataGridViewTextBoxColumn16.HeaderText = "Build";
+            dataGridViewTextBoxColumn16.MinimumWidth = 6;
+            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            dataGridViewTextBoxColumn16.ReadOnly = true;
+            dataGridViewTextBoxColumn16.Visible = false;
+            dataGridViewTextBoxColumn16.Width = 72;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            dataGridViewTextBoxColumn17.DataPropertyName = "React";
+            dataGridViewTextBoxColumn17.HeaderText = "React";
+            dataGridViewTextBoxColumn17.MinimumWidth = 6;
+            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            dataGridViewTextBoxColumn17.ReadOnly = true;
+            dataGridViewTextBoxColumn17.Visible = false;
+            dataGridViewTextBoxColumn17.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewTextBoxColumn18.DataPropertyName = "quantity";
+            dataGridViewTextBoxColumn18.HeaderText = "Quantity";
+            dataGridViewTextBoxColumn18.MinimumWidth = 15;
+            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            dataGridViewTextBoxColumn18.ReadOnly = true;
+            dataGridViewTextBoxColumn18.Visible = false;
+            dataGridViewTextBoxColumn18.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            dataGridViewTextBoxColumn19.DataPropertyName = "volumeTotal";
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewTextBoxColumn19.HeaderText = "Volume (m3)";
+            dataGridViewTextBoxColumn19.MinimumWidth = 6;
+            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            dataGridViewTextBoxColumn19.ReadOnly = true;
+            dataGridViewTextBoxColumn19.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            dataGridViewTextBoxColumn20.DataPropertyName = "pricePer";
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewTextBoxColumn20.HeaderText = "Price Per";
+            dataGridViewTextBoxColumn20.MinimumWidth = 6;
+            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            dataGridViewTextBoxColumn20.ReadOnly = true;
+            dataGridViewTextBoxColumn20.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            dataGridViewTextBoxColumn21.DataPropertyName = "Manufacturable";
+            dataGridViewTextBoxColumn21.HeaderText = "Manufacturable";
+            dataGridViewTextBoxColumn21.MinimumWidth = 6;
+            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            dataGridViewTextBoxColumn21.ReadOnly = true;
+            dataGridViewTextBoxColumn21.Visible = false;
+            dataGridViewTextBoxColumn21.Width = 142;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            dataGridViewTextBoxColumn22.DataPropertyName = "Reactable";
+            dataGridViewTextBoxColumn22.HeaderText = "reactable";
+            dataGridViewTextBoxColumn22.MinimumWidth = 6;
+            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            dataGridViewTextBoxColumn22.ReadOnly = true;
+            dataGridViewTextBoxColumn22.Visible = false;
+            dataGridViewTextBoxColumn22.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            dataGridViewTextBoxColumn23.DataPropertyName = "materialTypeID";
+            dataGridViewTextBoxColumn23.HeaderText = "Material Type ID";
+            dataGridViewTextBoxColumn23.MinimumWidth = 6;
+            dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            dataGridViewTextBoxColumn23.ReadOnly = true;
+            dataGridViewTextBoxColumn23.Visible = false;
+            dataGridViewTextBoxColumn23.Width = 147;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            dataGridViewTextBoxColumn24.DataPropertyName = "parentMaterialTypeID";
+            dataGridViewTextBoxColumn24.HeaderText = "parent mat type";
+            dataGridViewTextBoxColumn24.MinimumWidth = 6;
+            dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            dataGridViewTextBoxColumn24.ReadOnly = true;
+            dataGridViewTextBoxColumn24.Visible = false;
+            dataGridViewTextBoxColumn24.Width = 144;
+            // 
             // BlueprintBrowser
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -2366,12 +2667,12 @@
             InventionPage.ResumeLayout(false);
             InventionPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).EndInit();
             ReactionPage.ResumeLayout(false);
             ReactionPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)industryActivityMaterialsBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2465,7 +2766,6 @@
         private Label label18;
         private Label label17;
         private ComboBox ReactionSolarSystemCombo;
-        private DataGridView ReactionInputGrid;
         private NumericUpDown ReactionTaxUpDown;
         private Label label26;
         private Label TotalOutputVolumeLabel;
@@ -2497,7 +2797,6 @@
         private Label label29;
         private Label label28;
         private Label label27;
-        private DataGridView InventionInputGrid;
         private ComboBox InventionOutcomeBPCombo;
         private Label label40;
         private Label label45;
@@ -2556,5 +2855,31 @@
         private System.ComponentModel.BackgroundWorker ReactionImageWorker;
         private System.ComponentModel.BackgroundWorker InventionImageWorker;
         private Panel InventionImagePanel;
+        private DataGridView InventionInputGrid;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridView ReactionInputGrid;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
     }
 }
