@@ -68,7 +68,7 @@
             BlueprintBrowserButton.Image = (Image)resources.GetObject("BlueprintBrowserButton.Image");
             BlueprintBrowserButton.Location = new Point(56, 40);
             BlueprintBrowserButton.Name = "BlueprintBrowserButton";
-            BlueprintBrowserButton.Size = new Size(150, 150);
+            BlueprintBrowserButton.Size = new Size(128, 128);
             BlueprintBrowserButton.TabIndex = 0;
             BlueprintBrowserButton.UseVisualStyleBackColor = true;
             BlueprintBrowserButton.Click += BlueprintBrowserButton_Click;
@@ -82,7 +82,7 @@
             PlanetPlannerButton.Image = (Image)resources.GetObject("PlanetPlannerButton.Image");
             PlanetPlannerButton.Location = new Point(266, 40);
             PlanetPlannerButton.Name = "PlanetPlannerButton";
-            PlanetPlannerButton.Size = new Size(150, 150);
+            PlanetPlannerButton.Size = new Size(128, 128);
             PlanetPlannerButton.TabIndex = 1;
             PlanetPlannerButton.UseVisualStyleBackColor = true;
             PlanetPlannerButton.Click += PlanetPlannerButton_Click;
@@ -96,7 +96,7 @@
             LootAppraisalButton.Image = (Image)resources.GetObject("LootAppraisalButton.Image");
             LootAppraisalButton.Location = new Point(56, 240);
             LootAppraisalButton.Name = "LootAppraisalButton";
-            LootAppraisalButton.Size = new Size(150, 150);
+            LootAppraisalButton.Size = new Size(128, 128);
             LootAppraisalButton.TabIndex = 2;
             LootAppraisalButton.Text = "'";
             LootAppraisalButton.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             SystemFinderButton.Image = (Image)resources.GetObject("SystemFinderButton.Image");
             SystemFinderButton.Location = new Point(266, 240);
             SystemFinderButton.Name = "SystemFinderButton";
-            SystemFinderButton.Size = new Size(150, 150);
+            SystemFinderButton.Size = new Size(128, 128);
             SystemFinderButton.TabIndex = 3;
             SystemFinderButton.UseVisualStyleBackColor = true;
             SystemFinderButton.Click += SystemFinderButton_Click;
@@ -120,7 +120,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(80, 193);
+            label1.Location = new Point(74, 171);
             label1.Name = "label1";
             label1.Size = new Size(99, 25);
             label1.TabIndex = 4;
@@ -130,7 +130,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(248, 193);
+            label2.Location = new Point(234, 171);
             label2.Name = "label2";
             label2.Size = new Size(193, 25);
             label2.TabIndex = 5;
@@ -140,7 +140,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(276, 393);
+            label3.Location = new Point(266, 371);
             label3.Name = "label3";
             label3.Size = new Size(131, 25);
             label3.TabIndex = 6;
@@ -150,7 +150,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(65, 393);
+            label4.Location = new Point(54, 371);
             label4.Name = "label4";
             label4.Size = new Size(135, 25);
             label4.TabIndex = 7;
@@ -160,7 +160,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(670, 393);
+            label5.Location = new Point(668, 371);
             label5.Name = "label5";
             label5.Size = new Size(172, 25);
             label5.TabIndex = 9;
@@ -175,7 +175,7 @@
             DefaultsButtonClick.Image = (Image)resources.GetObject("DefaultsButtonClick.Image");
             DefaultsButtonClick.Location = new Point(679, 240);
             DefaultsButtonClick.Name = "DefaultsButtonClick";
-            DefaultsButtonClick.Size = new Size(150, 150);
+            DefaultsButtonClick.Size = new Size(128, 128);
             DefaultsButtonClick.TabIndex = 8;
             DefaultsButtonClick.UseVisualStyleBackColor = true;
             DefaultsButtonClick.Click += DefaultsButtonClick_Click;
@@ -184,7 +184,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(475, 193);
+            label6.Location = new Point(472, 171);
             label6.Name = "label6";
             label6.Size = new Size(147, 25);
             label6.TabIndex = 11;
@@ -199,7 +199,7 @@
             MarketBrowserButton.Image = (Image)resources.GetObject("MarketBrowserButton.Image");
             MarketBrowserButton.Location = new Point(475, 40);
             MarketBrowserButton.Name = "MarketBrowserButton";
-            MarketBrowserButton.Size = new Size(150, 150);
+            MarketBrowserButton.Size = new Size(128, 128);
             MarketBrowserButton.TabIndex = 10;
             MarketBrowserButton.UseVisualStyleBackColor = true;
             MarketBrowserButton.Click += MarketBrowserButton_Click;
@@ -208,7 +208,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(690, 193);
+            label7.Location = new Point(679, 171);
             label7.Name = "label7";
             label7.Size = new Size(130, 25);
             label7.TabIndex = 13;
@@ -223,7 +223,7 @@
             AbyssTrackerButton.Image = (Image)resources.GetObject("AbyssTrackerButton.Image");
             AbyssTrackerButton.Location = new Point(679, 40);
             AbyssTrackerButton.Name = "AbyssTrackerButton";
-            AbyssTrackerButton.Size = new Size(150, 150);
+            AbyssTrackerButton.Size = new Size(128, 128);
             AbyssTrackerButton.TabIndex = 12;
             AbyssTrackerButton.UseVisualStyleBackColor = true;
             AbyssTrackerButton.Click += AbyssTrackerButton_Click;
@@ -254,7 +254,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(459, 393);
+            label9.Location = new Point(453, 371);
             label9.Name = "label9";
             label9.Size = new Size(179, 25);
             label9.TabIndex = 17;
@@ -269,7 +269,7 @@
             PriceHistoryButton.Image = (Image)resources.GetObject("PriceHistoryButton.Image");
             PriceHistoryButton.Location = new Point(472, 240);
             PriceHistoryButton.Name = "PriceHistoryButton";
-            PriceHistoryButton.Size = new Size(150, 150);
+            PriceHistoryButton.Size = new Size(128, 128);
             PriceHistoryButton.TabIndex = 16;
             PriceHistoryButton.UseVisualStyleBackColor = true;
             PriceHistoryButton.Click += PriceHistoryButton_Click;
