@@ -96,6 +96,11 @@ h3, h4 {
 
 .MenuDiv > ul {
     list-style-type: circle;
+    height: 100%;
+}
+
+.MenuDiv > ul > li {
+    padding-top: 15px;
 }
 
 .MenuDiv > ul > li > a{
