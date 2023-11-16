@@ -7,63 +7,62 @@
     <link rel="stylesheet" href="CSS/Main.css" />
 </head>
 <body>
-    <div class="Menubar">
-        <div class="Links">
-            <a href="index.html">Home</a>
-            <a href="BlueprintBrowser.html">Blueprint Browser</a>
-            <a href="LootAppraisal.html">Loot Appraisal</a>
-            <a href="PlanetaryInteraction.html">PI</a>
-            <a href="SystemFinder.html">System Finder</a>
-            <a href="MarketBrowser.html">Market Browser</a>
-            <a href="PriceHistoryUtility.html">Price History</a>
-            <a href="AbyssTracker.html">Abyss Tracker</a>
-            <a href="DefaultConfiguration.html">Default Config</a>
+    <div class="MenuDiv">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
+            <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
+            <li><a href="PlanetaryInteraction.html">PI</a></li>
+            <li><a href="SystemFinder.html">System Finder</a></li>
+            <li><a href="MarketBrowser.html">Market Browser</a></li>
+            <li><a href="PriceHistoryUtility.html">Price History</a></li>
+            <li><a href="AbyssTracker.html">Abyss Tracker</a></li>
+            <li><a href="DefaultConfiguration.html">Default Config</a></li>
+        </ul>
+    </div>
+    <div class="BodyDiv">
+        <h3>
+            Blueprint Browser
+        </h3>
+
+        <div class="InfoParagraph">
+            <div>
+                The Blueprint Browser is a utility that allows a user to view all current Blueprints and Reactions that are in Eve. When selected, it
+                will give you the available job types for that blueprint, the materials required to complete that job, and if relevant, the profit you make
+                and the return on investment (ROI). Note that I include reactions in this list.
+            </div>
         </div>
-    </div>
-    <br />
-    <br />
 
-    <h3>
-        Blueprint Browser
-    </h3>
+        <br />
+        <br />
 
-    <div class="InfoParagraph">
-        <div>
-            The Blueprint Browser is a utility that allows a user to view all current Blueprints and Reactions that are in Eve. When selected, it
-            will give you the available job types for that blueprint, the materials required to complete that job, and if relevant, the profit you make
-            and the return on investment (ROI). Note that I include reactions in this list.
+        <div class="InfoParagraph">
+            In the below screenshot, I've selected the Zealot to build. You can see that it tells you all of the materials
+            you need on the right of the screen while allowing you to select where you're building it, what structure or station
+            it's in, the ME/TE of the blueprint, etc. All of the pieces of information that could change the profit of the blueprint.
+
+            <br />
+            <br />
+
+            <img src="Images/Blueprints - Manufacturing.png" style="width:600px; height:338px;" />
         </div>
-    </div>
-
-    <br />
-    <br />
-
-    <div class="InfoParagraph">
-        In the below screenshot, I've selected the Zealot to build. You can see that it tells you all of the materials
-        you need on the right of the screen while allowing you to select where you're building it, what structure or station
-        it's in, the ME/TE of the blueprint, etc. All of the pieces of information that could change the profit of the blueprint.
 
         <br />
         <br />
 
-        <img src="Images/Blueprints - Manufacturing.png" style="width:600px; height:338px;" />
-    </div>
+        <div class="InfoParagraph">
+            The top right hand section of the screen is a summary of the input costs, the manufacturing cost, and the profit/loss.
+            These values include any sales tax and broker fees. Broker fees only apply if you select the output order type as "Sell". If
+            the output order type is "Buy", no broker fees are included. This is also true for calculating the input cost of the materials.
 
-    <br />
-    <br />
+            <br /><br />
 
-    <div class="InfoParagraph">
-        The top right hand section of the screen is a summary of the input costs, the manufacturing cost, and the profit/loss.
-        These values include any sales tax and broker fees. Broker fees only apply if you select the output order type as "Sell". If
-        the output order type is "Buy", no broker fees are included. This is also true for calculating the input cost of the materials.
-
-        <br /><br />
-
-        Here's an example of the reactions page. Same concept as manufcaturing but the "System" dropdown is limited to any system with a
-        security of 0.4 or lower since reactions can't be run in high sec.
-        <br />
-        <br />
-        <img src="Images/Blueprints - Reactions.png" style="width:600px; height:338px;" />
+            Here's an example of the reactions page. Same concept as manufcaturing but the "System" dropdown is limited to any system with a
+            security of 0.4 or lower since reactions can't be run in high sec.
+            <br />
+            <br />
+            <img src="Images/Blueprints - Reactions.png" style="width:600px; height:338px;" />
+        </div>
     </div>
 </body>
 </html>

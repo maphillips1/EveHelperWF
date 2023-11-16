@@ -1,3 +1,7 @@
+html{
+    height: 100%;
+}
+
 body {
     /*background-color: rgb(5, 34, 48);*/
     background-color: rgb(2, 23, 38);
@@ -76,3 +80,32 @@ h3, h4 {
     /*cursor: pointer;*/
 }
 
+.MenuDiv {
+    width: 20%;
+    min-height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    text-align: left;
+    text-decoration: none;
+    position: fixed;
+}
+
+.MenuDiv > a{
+    cursor: pointer;
+    color: gold;
+}
+
+.MenuDiv > ul {
+    list-style-type: circle;
+}
+
+.MenuDiv > ul > li > a{
+    text-decoration: none;
+    color: gold;
+}
+
+.BodyDiv{
+    left: 22%;
+    width: 70%;
+    min-height:100%;
+    position: absolute;
+}
