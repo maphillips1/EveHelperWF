@@ -23,6 +23,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private static string AbyssRunFileName = Path.Combine(AbyssRunDirectory, "AbyssRuns.json");
         private BindingList<AbyssRun> AbyssRuns = new BindingList<AbyssRun>();
 
+
+        #region "Load"
+
         public AbyssTracker()
         {
             InitializeComponent();
@@ -38,6 +41,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             FilamentTypeCombo.ValueMember = "typeID";
             FilamentTypeCombo.DataSource = filamentTypes;
         }
+
         private void LoadShipTypeCombo()
         {
             shipTypes.Add(new AbyssRunShipType { shipType = 1, shipTypeName = "Cruiser" });
@@ -62,49 +66,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 AbyssRuns = new BindingList<AbyssRun>();
             }
 
-            AbyssTrackerGridView.DataSource = AbyssRuns;
-            DatabindSummaryInfo();
-            this.Refresh();
+            DataBindTrackerGrid();
         }
+        #endregion
 
-        private void DatabindSummaryInfo()
-        {
-            decimal totalLootValue = 0;
-            decimal totalFilamentCost = 0;
-            decimal averageLootValue = 0;
-
-            foreach (AbyssRun run in AbyssRuns)
-            {
-                totalFilamentCost += run.FilamentCost;
-                foreach (InventoryTypeWIthMarketOrders type in run.Loot)
-                {
-                    if (type.BuyOrders != null && type.BuyOrders.Count > 0)
-                    {
-                        totalLootValue += (type.Quantity * type.BuyOrders.OrderByDescending(x => x.price).ToList()[0].price);
-                    }
-                }
-            }
-
-            if (AbyssRuns.Count > 0)
-            {
-                averageLootValue = totalLootValue / AbyssRuns.Count;
-            }
-
-            TotalLootValueLabel.Text = totalLootValue.ToString("N0");
-            TotalFilamentCostLabel.Text = totalFilamentCost.ToString("N0");
-            AverageLootLabel.Text = averageLootValue.ToString("N0");
-        }
-
-        private void SaveRunsToFile()
-        {
-            string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(AbyssRuns);
-
-            if (!string.IsNullOrWhiteSpace(fileContent))
-            {
-                FileIO.FileHelper.SaveCachedFile(AbyssRunDirectory, AbyssRunFileName, fileContent);
-            }
-        }
-
+        #region "Events"
         private void DeleteRunButton_Click(object sender, EventArgs e)
         {
             if (AbyssTrackerGridView.SelectedRows.Count > 0)
@@ -120,9 +86,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                 }
             }
-            AbyssTrackerGridView.DataSource = AbyssRuns;
-            DatabindSummaryInfo();
-            this.Refresh();
+            DataBindTrackerGrid();
         }
 
         private void AddRunButton_Click(object sender, EventArgs e)
@@ -202,11 +166,61 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 AbyssRuns.Add(run);
 
                 SaveRunsToFile();
+                DataBindTrackerGrid();
 
-                AbyssTrackerGridView.DataSource = AbyssRuns;
-                DatabindSummaryInfo();
-                this.Refresh();
+                //Reset Loot TextBox
+                LootTextBox.Text = string.Empty;
             }
         }
+        #endregion
+
+        #region "Methods"
+
+        private void DatabindSummaryInfo()
+        {
+            decimal totalLootValue = 0;
+            decimal totalFilamentCost = 0;
+            decimal averageLootValue = 0;
+
+            foreach (AbyssRun run in AbyssRuns)
+            {
+                totalFilamentCost += run.FilamentCost;
+                foreach (InventoryTypeWIthMarketOrders type in run.Loot)
+                {
+                    if (type.BuyOrders != null && type.BuyOrders.Count > 0)
+                    {
+                        totalLootValue += (type.Quantity * type.BuyOrders.OrderByDescending(x => x.price).ToList()[0].price);
+                    }
+                }
+            }
+
+            if (AbyssRuns.Count > 0)
+            {
+                averageLootValue = totalLootValue / AbyssRuns.Count;
+            }
+
+            TotalLootValueLabel.Text = totalLootValue.ToString("N0");
+            TotalFilamentCostLabel.Text = totalFilamentCost.ToString("N0");
+            AverageLootLabel.Text = averageLootValue.ToString("N0");
+        }
+
+        private void SaveRunsToFile()
+        {
+            string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(AbyssRuns);
+
+            if (!string.IsNullOrWhiteSpace(fileContent))
+            {
+                FileIO.FileHelper.SaveCachedFile(AbyssRunDirectory, AbyssRunFileName, fileContent);
+            }
+        }
+
+        private void DataBindTrackerGrid()
+        {
+
+            AbyssTrackerGridView.DataSource = AbyssRuns.OrderByDescending(x => x.AbyssRunID).ToList();
+            DatabindSummaryInfo();
+            this.Refresh();
+        }
+        #endregion
     }
 }
