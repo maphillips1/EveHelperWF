@@ -22,6 +22,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private InventoryTypeWIthMarketOrders selectedTypeMarketOrders = null;
         private List<ESIPriceHistory> priceHistory = new List<ESIPriceHistory>();
 
+
+        #region "Init"
         public MarketBrowser()
         {
             MarketBrowserHelper.Init();
@@ -61,6 +63,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             MarketListTreeView.Nodes.AddRange(treeNodes.ToArray());
             MarketListTreeView.Sort();
         }
+        #endregion
+
+        #region "Events"
 
         private void JitaButton_Click(object sender, EventArgs e)
         {
@@ -110,13 +115,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void LoadMarketData(int selectedTypeId)
-        {
-            int regionID = (int)RegionCombo.SelectedValue;
-            int systemID = (int)SystemCombo.SelectedValue;
-            selectedTypeMarketOrders = ScreenHelper.MarketBrowserHelper.GetMarketOrders(selectedTypeId, regionID, systemID);
-        }
-
         private void MarketListTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (MarketListTreeView.SelectedNode != null)
@@ -141,6 +139,46 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int regionID = (int)RegionCombo.SelectedValue;
+            LoadSystems(regionID);
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+        }
+
+        private void SystemCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+        }
+
+        private void TheraButton_Click(object sender, EventArgs e)
+        {
+            RegionCombo.SelectedValue = ScreenHelper.Enums.TheraRegion;
+            LoadSystems(ScreenHelper.Enums.TheraRegion);
+            SystemCombo.SelectedValue = ScreenHelper.Enums.TheraSystem;
+
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+        }
+        #endregion
+
+        #region "Methods"
+
+        private void LoadMarketData(int selectedTypeId)
+        {
+            int regionID = (int)RegionCombo.SelectedValue;
+            int systemID = (int)SystemCombo.SelectedValue;
+            selectedTypeMarketOrders = ScreenHelper.MarketBrowserHelper.GetMarketOrders(selectedTypeId, regionID, systemID);
+        }
+
         private void DatabindGrids()
         {
             if (selectedTypeMarketOrders != null)
@@ -150,9 +188,22 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             if (priceHistory != null)
             {
-                PriceHistoryGridView.DataSource = priceHistory;
+                PriceHistoryGridView.DataSource = priceHistory.OrderByDescending(x => x.date).ToList(); ;
             }
         }
+
+        private void LoadDataForSelectedType()
+        {
+            int regionID = (int)RegionCombo.SelectedValue;
+            LoadMarketData(SelectedTypeID);
+            MarketBrowserHelper.FillInventoryTypeInformation(ref selectedTypeMarketOrders);
+            SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
+            priceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(regionID, SelectedTypeID);
+            DatabindGrids();
+        }
+        #endregion
+
+        #region "Background Worker"
 
         private void SelectedItemImageWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -188,45 +239,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.SelectedItemImagePanel.BackgroundImage = null;
             }
         }
+        #endregion
 
-        private void LoadDataForSelectedType()
-        {
-            int regionID = (int)RegionCombo.SelectedValue;
-            LoadMarketData(SelectedTypeID);
-            MarketBrowserHelper.FillInventoryTypeInformation(ref selectedTypeMarketOrders);
-            SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
-            priceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(regionID, SelectedTypeID);
-            DatabindGrids();
-        }
-
-        private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int regionID = (int)RegionCombo.SelectedValue;
-            LoadSystems(regionID);
-            if (SelectedTypeID > 0)
-            {
-                LoadDataForSelectedType();
-            }
-        }
-
-        private void SystemCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SelectedTypeID > 0)
-            {
-                LoadDataForSelectedType();
-            }
-        }
-
-        private void TheraButton_Click(object sender, EventArgs e)
-        {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.TheraRegion;
-            LoadSystems(ScreenHelper.Enums.TheraRegion);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.TheraSystem;
-
-            if (SelectedTypeID > 0)
-            {
-                LoadDataForSelectedType();
-            }
-        }
     }
 }

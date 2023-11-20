@@ -29,16 +29,19 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
         private static string CachedFormValuesFileName = "form_values.json";
 
+        #region "Init"
         public BackupFiles()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region "Events"
         private void BackupFilesButton_Click(object sender, EventArgs e)
         {
             DialogResult result = BackupFilesDialog.ShowDialog();
-         
-            if(result == DialogResult.OK)
+
+            if (result == DialogResult.OK)
             {
                 string SelectedPath = BackupFilesDialog.SelectedPath;
 
@@ -64,13 +67,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 MessageBox.Show("Backup Complete");
             }
         }
+        #endregion
 
+        #region "Methods"
         private void BackupAbyssRuns(string selectedPath)
         {
             string fileContent = FileIO.FileHelper.GetCachedFileContent(AbyssRunDirectory, AbyssRunFileName);
             if (fileContent != null)
             {
-                AbyssRunFileName =  Path.Combine(selectedPath, "AbyssRuns.json");
+                AbyssRunFileName = Path.Combine(selectedPath, "AbyssRuns.json");
                 FileIO.FileHelper.SaveCachedFile(selectedPath, AbyssRunFileName, fileContent);
             }
         }
@@ -83,7 +88,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 string fileContent = null;
                 string actualFileName;
                 string newFileName;
-                foreach(string fileName in priceHistoryFiles)
+                foreach (string fileName in priceHistoryFiles)
                 {
                     fileContent = FileIO.FileHelper.GetCachedFileContent(PriceHistoryDirectory, fileName);
                     if (fileContent != null)
@@ -116,6 +121,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 FileIO.FileHelper.SaveCachedFile(selectedPath, CachedFormValuesFileName, fileContent);
             }
         }
+        #endregion
     }
 
 }

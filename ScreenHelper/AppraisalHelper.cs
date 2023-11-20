@@ -18,22 +18,25 @@ namespace EveHelperWF.ScreenHelper
             AppraisedItem item = null;
             foreach (string inputType in inputTypes)
             {
-                item = ParseStringToAppraisedItem(inputType);
-                if (item != null)
+                if (!string.IsNullOrWhiteSpace(inputType))
                 {
-                    AppraisedItem existingItem = appraisedItems.Find(x => x.typeID == item.typeID);
-                    if (existingItem != null)
+                    item = ParseStringToAppraisedItem(inputType);
+                    if (item != null)
                     {
-                        existingItem.quantity += item.quantity;
+                        AppraisedItem existingItem = appraisedItems.Find(x => x.typeID == item.typeID);
+                        if (existingItem != null)
+                        {
+                            existingItem.quantity += item.quantity;
+                        }
+                        else
+                        {
+                            appraisedItems.Add(item);
+                        }
                     }
                     else
                     {
-                        appraisedItems.Add(item);
+                        appraisedItems.Add(new AppraisedItem { typeName = "Could not parse " + inputType });
                     }
-                }
-                else
-                {
-                    appraisedItems.Add(new AppraisedItem { typeName = "Could not parse " + inputType });
                 }
             }
 

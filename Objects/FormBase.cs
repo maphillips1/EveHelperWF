@@ -14,7 +14,7 @@ namespace EveHelperWF.Objects
         {
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
-            Color mainBackgroundColor = Color.FromArgb(255, 54, 57, 53);
+            Color mainBackgroundColor = Color.FromArgb(255, 2, 23, 38);
 
             this.BackColor = mainBackgroundColor;
             this.ForeColor = Color.White;

@@ -74,6 +74,11 @@ namespace EveHelperWF.ScreenHelper
             Shattered = 30889
         }
 
-        
+        public enum StationFilter
+        {
+            DoNotFilter = 1,
+            HasStation = 2,
+            NoStation = 3
+        }
     }
 }

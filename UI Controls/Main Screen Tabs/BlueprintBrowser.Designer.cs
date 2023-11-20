@@ -50,15 +50,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueprintBrowser));
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
-            Menu = new MenuStrip();
-            fileToolStripMenuItem = new ToolStripMenuItem();
-            settingsToolStripMenuItem = new ToolStripMenuItem();
-            skillsToolStripMenuItem = new ToolStripMenuItem();
-            mainDefaultsToolStripMenuItem = new ToolStripMenuItem();
-            manufacturingDefaultsToolStripMenuItem = new ToolStripMenuItem();
-            inventionDefaultsToolStripMenuItem = new ToolStripMenuItem();
-            reactionDefaultsToolStripMenuItem = new ToolStripMenuItem();
-            helpToolStripMenuItem = new ToolStripMenuItem();
             ManufacturingPanel = new Panel();
             BlueprintImagePanel = new Panel();
             InventBlueprintCheckbox = new CheckBox();
@@ -66,9 +57,6 @@
             panel1 = new Panel();
             ROILabel = new Label();
             label55 = new Label();
-            label54 = new Label();
-            TotalOutputVolumeLabel = new Label();
-            label25 = new Label();
             SummaryTypeLabel = new Label();
             TotalCostLabel = new Label();
             TaxFeesLabel = new Label();
@@ -91,7 +79,6 @@
             label11 = new Label();
             TotalOutcomeIskLabel = new Label();
             label8 = new Label();
-            TotalInputVolumeLabel = new Label();
             TotalJobCostLabel = new Label();
             label10 = new Label();
             RunsUpDown = new NumericUpDown();
@@ -101,6 +88,8 @@
             InputTypeCombo = new ComboBox();
             ActivityTabPanel = new TabControl();
             ManufacturingPage = new TabPage();
+            TotalOutputVolumeLabel = new Label();
+            label25 = new Label();
             ManufacturingImagePanel = new Panel();
             ManufacturingSCILabel = new Label();
             label57 = new Label();
@@ -108,8 +97,6 @@
             label46 = new Label();
             ComponentManuTimeLabel = new Label();
             label16 = new Label();
-            ManuTotalInputCost = new Label();
-            label14 = new Label();
             ManuSkillsTextBox = new TextBox();
             ManuTEUpDown = new NumericUpDown();
             CompTEUpDown = new NumericUpDown();
@@ -151,6 +138,19 @@
             MEResearchPage = new TabPage();
             TEResearchPage = new TabPage();
             InventionPage = new TabPage();
+            InventionInputGrid = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
             InventionImagePanel = new Panel();
             InventionSCILabel = new Label();
             Label100 = new Label();
@@ -196,6 +196,19 @@
             label27 = new Label();
             ReverseEngineerPage = new TabPage();
             ReactionPage = new TabPage();
+            ReactionInputGrid = new DataGridView();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn21 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn23 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn24 = new DataGridViewTextBoxColumn();
             ReactionsImagePanel = new Panel();
             ReactionsSCILabel = new Label();
             label56 = new Label();
@@ -225,33 +238,6 @@
             ManuImageWorker = new System.ComponentModel.BackgroundWorker();
             ReactionImageWorker = new System.ComponentModel.BackgroundWorker();
             InventionImageWorker = new System.ComponentModel.BackgroundWorker();
-            InventionInputGrid = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
-            ReactionInputGrid = new DataGridView();
-            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn16 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn18 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn19 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn20 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn21 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn22 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn23 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn24 = new DataGridViewTextBoxColumn();
-            Menu.SuspendLayout();
             ManufacturingPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -264,12 +250,12 @@
             ((System.ComponentModel.ISupportInitialize)ManuTaxUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ManuInputGrid).BeginInit();
             InventionPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
             ReactionPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)industryActivityMaterialsBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).BeginInit();
             SuspendLayout();
             // 
             // ReactionStructureCombo
@@ -284,78 +270,22 @@
             // 
             // TreeViewList
             // 
-            TreeViewList.BackColor = Color.FromArgb(54, 57, 53);
+            TreeViewList.BackColor = Color.FromArgb(2, 23, 38);
             TreeViewList.CausesValidation = false;
             TreeViewList.Dock = DockStyle.Left;
             TreeViewList.ForeColor = SystemColors.ControlLight;
             TreeViewList.HideSelection = false;
             TreeViewList.HotTracking = true;
-            TreeViewList.Location = new Point(0, 28);
+            TreeViewList.Location = new Point(0, 0);
             TreeViewList.Margin = new Padding(2);
             TreeViewList.Name = "TreeViewList";
-            TreeViewList.Size = new Size(282, 825);
+            TreeViewList.Size = new Size(282, 853);
             TreeViewList.TabIndex = 1;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
             // 
-            // Menu
-            // 
-            Menu.ImageScalingSize = new Size(24, 24);
-            Menu.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, settingsToolStripMenuItem, helpToolStripMenuItem });
-            Menu.Location = new Point(0, 0);
-            Menu.Name = "Menu";
-            Menu.Padding = new Padding(5, 2, 0, 2);
-            Menu.Size = new Size(1646, 28);
-            Menu.TabIndex = 2;
-            Menu.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 24);
-            fileToolStripMenuItem.Text = "File";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { skillsToolStripMenuItem, mainDefaultsToolStripMenuItem, manufacturingDefaultsToolStripMenuItem, inventionDefaultsToolStripMenuItem, reactionDefaultsToolStripMenuItem });
-            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(76, 24);
-            settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // skillsToolStripMenuItem
-            // 
-            skillsToolStripMenuItem.Name = "skillsToolStripMenuItem";
-            skillsToolStripMenuItem.Size = new Size(125, 26);
-            skillsToolStripMenuItem.Text = "Skills";
-            // 
-            // mainDefaultsToolStripMenuItem
-            // 
-            mainDefaultsToolStripMenuItem.Name = "mainDefaultsToolStripMenuItem";
-            mainDefaultsToolStripMenuItem.Size = new Size(125, 26);
-            // 
-            // manufacturingDefaultsToolStripMenuItem
-            // 
-            manufacturingDefaultsToolStripMenuItem.Name = "manufacturingDefaultsToolStripMenuItem";
-            manufacturingDefaultsToolStripMenuItem.Size = new Size(125, 26);
-            // 
-            // inventionDefaultsToolStripMenuItem
-            // 
-            inventionDefaultsToolStripMenuItem.Name = "inventionDefaultsToolStripMenuItem";
-            inventionDefaultsToolStripMenuItem.Size = new Size(125, 26);
-            // 
-            // reactionDefaultsToolStripMenuItem
-            // 
-            reactionDefaultsToolStripMenuItem.Name = "reactionDefaultsToolStripMenuItem";
-            reactionDefaultsToolStripMenuItem.Size = new Size(125, 26);
-            // 
-            // helpToolStripMenuItem
-            // 
-            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new Size(55, 24);
-            helpToolStripMenuItem.Text = "Help";
-            // 
             // ManufacturingPanel
             // 
-            ManufacturingPanel.BackColor = Color.FromArgb(54, 57, 53);
+            ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
             ManufacturingPanel.Controls.Add(BlueprintImagePanel);
             ManufacturingPanel.Controls.Add(InventBlueprintCheckbox);
             ManufacturingPanel.Controls.Add(StatusLabel);
@@ -369,10 +299,10 @@
             ManufacturingPanel.Controls.Add(BlueprintNameLabel);
             ManufacturingPanel.Controls.Add(label3);
             ManufacturingPanel.Dock = DockStyle.Fill;
-            ManufacturingPanel.Location = new Point(282, 28);
+            ManufacturingPanel.Location = new Point(282, 0);
             ManufacturingPanel.Margin = new Padding(2);
             ManufacturingPanel.Name = "ManufacturingPanel";
-            ManufacturingPanel.Size = new Size(1364, 825);
+            ManufacturingPanel.Size = new Size(1364, 853);
             ManufacturingPanel.TabIndex = 0;
             // 
             // BlueprintImagePanel
@@ -411,12 +341,9 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            panel1.BackColor = Color.FromArgb(104, 107, 103);
+            panel1.BackColor = Color.FromArgb(2, 23, 38);
             panel1.Controls.Add(ROILabel);
             panel1.Controls.Add(label55);
-            panel1.Controls.Add(label54);
-            panel1.Controls.Add(TotalOutputVolumeLabel);
-            panel1.Controls.Add(label25);
             panel1.Controls.Add(SummaryTypeLabel);
             panel1.Controls.Add(TotalCostLabel);
             panel1.Controls.Add(TaxFeesLabel);
@@ -439,7 +366,6 @@
             panel1.Controls.Add(label11);
             panel1.Controls.Add(TotalOutcomeIskLabel);
             panel1.Controls.Add(label8);
-            panel1.Controls.Add(TotalInputVolumeLabel);
             panel1.Controls.Add(TotalJobCostLabel);
             panel1.Controls.Add(label10);
             panel1.Location = new Point(522, 0);
@@ -453,7 +379,7 @@
             ROILabel.AutoSize = true;
             ROILabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             ROILabel.ForeColor = SystemColors.ControlLightLight;
-            ROILabel.Location = new Point(545, 195);
+            ROILabel.Location = new Point(625, 185);
             ROILabel.Margin = new Padding(2, 0, 2, 0);
             ROILabel.Name = "ROILabel";
             ROILabel.Size = new Size(51, 23);
@@ -465,48 +391,12 @@
             label55.AutoSize = true;
             label55.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label55.ForeColor = SystemColors.ControlLightLight;
-            label55.Location = new Point(486, 195);
+            label55.Location = new Point(566, 185);
             label55.Margin = new Padding(2, 0, 2, 0);
             label55.Name = "label55";
             label55.Size = new Size(39, 23);
             label55.TabIndex = 18;
             label55.Text = "ROI";
-            // 
-            // label54
-            // 
-            label54.AutoSize = true;
-            label54.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label54.ForeColor = SystemColors.ControlLightLight;
-            label54.Location = new Point(-1, 92);
-            label54.Margin = new Padding(2, 0, 2, 0);
-            label54.Name = "label54";
-            label54.Size = new Size(162, 23);
-            label54.TabIndex = 17;
-            label54.Text = "Total Input Volume";
-            // 
-            // TotalOutputVolumeLabel
-            // 
-            TotalOutputVolumeLabel.AutoSize = true;
-            TotalOutputVolumeLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TotalOutputVolumeLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalOutputVolumeLabel.Location = new Point(172, 184);
-            TotalOutputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
-            TotalOutputVolumeLabel.Name = "TotalOutputVolumeLabel";
-            TotalOutputVolumeLabel.Size = new Size(145, 23);
-            TotalOutputVolumeLabel.TabIndex = 16;
-            TotalOutputVolumeLabel.Text = "[Output Volume]";
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label25.ForeColor = SystemColors.ControlLightLight;
-            label25.Location = new Point(29, 184);
-            label25.Margin = new Padding(2, 0, 2, 0);
-            label25.Name = "label25";
-            label25.Size = new Size(133, 23);
-            label25.TabIndex = 15;
-            label25.Text = "Output Volume";
             // 
             // SummaryTypeLabel
             // 
@@ -525,7 +415,7 @@
             TotalCostLabel.AutoSize = true;
             TotalCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalCostLabel.ForeColor = SystemColors.ButtonHighlight;
-            TotalCostLabel.Location = new Point(545, 92);
+            TotalCostLabel.Location = new Point(625, 43);
             TotalCostLabel.Margin = new Padding(2, 0, 2, 0);
             TotalCostLabel.Name = "TotalCostLabel";
             TotalCostLabel.Size = new Size(101, 23);
@@ -537,7 +427,7 @@
             TaxFeesLabel.AutoSize = true;
             TaxFeesLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TaxFeesLabel.ForeColor = SystemColors.ButtonHighlight;
-            TaxFeesLabel.Location = new Point(545, 47);
+            TaxFeesLabel.Location = new Point(134, 185);
             TaxFeesLabel.Margin = new Padding(2, 0, 2, 0);
             TaxFeesLabel.Name = "TaxFeesLabel";
             TaxFeesLabel.Size = new Size(123, 23);
@@ -549,7 +439,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = SystemColors.ButtonHighlight;
-            label4.Location = new Point(414, 47);
+            label4.Location = new Point(19, 185);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(111, 23);
@@ -561,7 +451,7 @@
             OutputPricePerLabel.AutoSize = true;
             OutputPricePerLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             OutputPricePerLabel.ForeColor = SystemColors.ButtonHighlight;
-            OutputPricePerLabel.Location = new Point(172, 161);
+            OutputPricePerLabel.Location = new Point(160, 161);
             OutputPricePerLabel.Margin = new Padding(2, 0, 2, 0);
             OutputPricePerLabel.Name = "OutputPricePerLabel";
             OutputPricePerLabel.Size = new Size(154, 23);
@@ -573,7 +463,7 @@
             IskHourLabel.AutoSize = true;
             IskHourLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             IskHourLabel.ForeColor = SystemColors.ButtonHighlight;
-            IskHourLabel.Location = new Point(545, 172);
+            IskHourLabel.Location = new Point(625, 162);
             IskHourLabel.Margin = new Padding(2, 0, 2, 0);
             IskHourLabel.Name = "IskHourLabel";
             IskHourLabel.Size = new Size(92, 23);
@@ -597,7 +487,7 @@
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = SystemColors.ButtonHighlight;
-            label12.Location = new Point(446, 172);
+            label12.Location = new Point(526, 162);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
             label12.Size = new Size(80, 23);
@@ -609,7 +499,7 @@
             label50.AutoSize = true;
             label50.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label50.ForeColor = Color.Aquamarine;
-            label50.Location = new Point(133, 114);
+            label50.Location = new Point(19, 111);
             label50.Margin = new Padding(2, 0, 2, 0);
             label50.Name = "label50";
             label50.Size = new Size(75, 23);
@@ -621,7 +511,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = SystemColors.ButtonHighlight;
-            label7.Location = new Point(431, 116);
+            label7.Location = new Point(511, 94);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
             label7.Size = new Size(94, 23);
@@ -633,7 +523,7 @@
             label52.AutoSize = true;
             label52.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label52.ForeColor = Color.YellowGreen;
-            label52.Location = new Point(499, 20);
+            label52.Location = new Point(579, 19);
             label52.Margin = new Padding(2, 0, 2, 0);
             label52.Name = "label52";
             label52.Size = new Size(56, 23);
@@ -645,7 +535,7 @@
             label49.AutoSize = true;
             label49.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label49.ForeColor = Color.Tomato;
-            label49.Location = new Point(133, 20);
+            label49.Location = new Point(19, 19);
             label49.Margin = new Padding(2, 0, 2, 0);
             label49.Name = "label49";
             label49.Size = new Size(60, 23);
@@ -657,7 +547,7 @@
             TotalTimeLabel.AutoSize = true;
             TotalTimeLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalTimeLabel.ForeColor = SystemColors.ButtonHighlight;
-            TotalTimeLabel.Location = new Point(545, 116);
+            TotalTimeLabel.Location = new Point(625, 94);
             TotalTimeLabel.Margin = new Padding(2, 0, 2, 0);
             TotalTimeLabel.Name = "TotalTimeLabel";
             TotalTimeLabel.Size = new Size(200, 23);
@@ -669,7 +559,7 @@
             label53.AutoSize = true;
             label53.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label53.ForeColor = SystemColors.ButtonHighlight;
-            label53.Location = new Point(325, 92);
+            label53.Location = new Point(405, 43);
             label53.Margin = new Padding(2, 0, 2, 0);
             label53.Name = "label53";
             label53.Size = new Size(200, 23);
@@ -693,7 +583,7 @@
             TotalInputCostLabel.AutoSize = true;
             TotalInputCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalInputCostLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalInputCostLabel.Location = new Point(172, 43);
+            TotalInputCostLabel.Location = new Point(160, 43);
             TotalInputCostLabel.Margin = new Padding(2, 0, 2, 0);
             TotalInputCostLabel.Name = "TotalInputCostLabel";
             TotalInputCostLabel.Size = new Size(155, 23);
@@ -705,7 +595,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = SystemColors.ButtonHighlight;
-            label9.Location = new Point(24, 43);
+            label9.Location = new Point(19, 43);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
             label9.Size = new Size(137, 23);
@@ -717,7 +607,7 @@
             OutputProdQuantLabel.AutoSize = true;
             OutputProdQuantLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             OutputProdQuantLabel.ForeColor = SystemColors.ButtonHighlight;
-            OutputProdQuantLabel.Location = new Point(172, 138);
+            OutputProdQuantLabel.Location = new Point(160, 138);
             OutputProdQuantLabel.Margin = new Padding(2, 0, 2, 0);
             OutputProdQuantLabel.Name = "OutputProdQuantLabel";
             OutputProdQuantLabel.Size = new Size(223, 23);
@@ -729,7 +619,7 @@
             ProfitLabel.AutoSize = true;
             ProfitLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             ProfitLabel.ForeColor = Color.White;
-            ProfitLabel.Location = new Point(545, 150);
+            ProfitLabel.Location = new Point(625, 140);
             ProfitLabel.Margin = new Padding(2, 0, 2, 0);
             ProfitLabel.Name = "ProfitLabel";
             ProfitLabel.Size = new Size(68, 23);
@@ -741,7 +631,7 @@
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = SystemColors.ButtonHighlight;
-            label11.Location = new Point(469, 148);
+            label11.Location = new Point(549, 138);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
             label11.Size = new Size(56, 23);
@@ -753,7 +643,7 @@
             TotalOutcomeIskLabel.AutoSize = true;
             TotalOutcomeIskLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalOutcomeIskLabel.ForeColor = SystemColors.ButtonHighlight;
-            TotalOutcomeIskLabel.Location = new Point(545, 70);
+            TotalOutcomeIskLabel.Location = new Point(625, 71);
             TotalOutcomeIskLabel.Margin = new Padding(2, 0, 2, 0);
             TotalOutcomeIskLabel.Name = "TotalOutcomeIskLabel";
             TotalOutcomeIskLabel.Size = new Size(122, 23);
@@ -765,31 +655,19 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = SystemColors.ButtonHighlight;
-            label8.Location = new Point(372, 69);
+            label8.Location = new Point(451, 71);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
             label8.Size = new Size(154, 23);
             label8.TabIndex = 6;
             label8.Text = "Total Outcome Isk";
             // 
-            // TotalInputVolumeLabel
-            // 
-            TotalInputVolumeLabel.AutoSize = true;
-            TotalInputVolumeLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            TotalInputVolumeLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalInputVolumeLabel.Location = new Point(172, 92);
-            TotalInputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
-            TotalInputVolumeLabel.Name = "TotalInputVolumeLabel";
-            TotalInputVolumeLabel.Size = new Size(136, 23);
-            TotalInputVolumeLabel.TabIndex = 5;
-            TotalInputVolumeLabel.Text = "100,000,000m3";
-            // 
             // TotalJobCostLabel
             // 
             TotalJobCostLabel.AutoSize = true;
             TotalJobCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalJobCostLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalJobCostLabel.Location = new Point(172, 70);
+            TotalJobCostLabel.Location = new Point(146, 69);
             TotalJobCostLabel.Margin = new Padding(2, 0, 2, 0);
             TotalJobCostLabel.Name = "TotalJobCostLabel";
             TotalJobCostLabel.Size = new Size(155, 23);
@@ -801,7 +679,7 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = SystemColors.ButtonHighlight;
-            label10.Location = new Point(38, 69);
+            label10.Location = new Point(19, 69);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
             label10.Size = new Size(123, 23);
@@ -879,13 +757,15 @@
             ActivityTabPanel.Margin = new Padding(2);
             ActivityTabPanel.Name = "ActivityTabPanel";
             ActivityTabPanel.SelectedIndex = 0;
-            ActivityTabPanel.Size = new Size(1364, 598);
+            ActivityTabPanel.Size = new Size(1364, 626);
             ActivityTabPanel.TabIndex = 1;
             ActivityTabPanel.SelectedIndexChanged += ActivityTabPanel_SelectedIndexChanged;
             // 
             // ManufacturingPage
             // 
-            ManufacturingPage.BackColor = Color.FromArgb(54, 57, 53);
+            ManufacturingPage.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPage.Controls.Add(TotalOutputVolumeLabel);
+            ManufacturingPage.Controls.Add(label25);
             ManufacturingPage.Controls.Add(ManufacturingImagePanel);
             ManufacturingPage.Controls.Add(ManufacturingSCILabel);
             ManufacturingPage.Controls.Add(label57);
@@ -893,8 +773,6 @@
             ManufacturingPage.Controls.Add(label46);
             ManufacturingPage.Controls.Add(ComponentManuTimeLabel);
             ManufacturingPage.Controls.Add(label16);
-            ManufacturingPage.Controls.Add(ManuTotalInputCost);
-            ManufacturingPage.Controls.Add(label14);
             ManufacturingPage.Controls.Add(ManuSkillsTextBox);
             ManufacturingPage.Controls.Add(ManuTEUpDown);
             ManufacturingPage.Controls.Add(CompTEUpDown);
@@ -924,9 +802,30 @@
             ManufacturingPage.Margin = new Padding(2);
             ManufacturingPage.Name = "ManufacturingPage";
             ManufacturingPage.Padding = new Padding(2);
-            ManufacturingPage.Size = new Size(1356, 565);
+            ManufacturingPage.Size = new Size(1356, 593);
             ManufacturingPage.TabIndex = 0;
             ManufacturingPage.Text = "Manufacturing";
+            // 
+            // TotalOutputVolumeLabel
+            // 
+            TotalOutputVolumeLabel.AutoSize = true;
+            TotalOutputVolumeLabel.Location = new Point(517, 478);
+            TotalOutputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
+            TotalOutputVolumeLabel.Name = "TotalOutputVolumeLabel";
+            TotalOutputVolumeLabel.Size = new Size(117, 20);
+            TotalOutputVolumeLabel.TabIndex = 44;
+            TotalOutputVolumeLabel.Text = "[output Volume]";
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label25.Location = new Point(349, 478);
+            label25.Margin = new Padding(2, 0, 2, 0);
+            label25.Name = "label25";
+            label25.Size = new Size(155, 20);
+            label25.TabIndex = 43;
+            label25.Text = "Total Output Volume";
             // 
             // ManufacturingImagePanel
             // 
@@ -940,7 +839,7 @@
             // ManufacturingSCILabel
             // 
             ManufacturingSCILabel.AutoSize = true;
-            ManufacturingSCILabel.Location = new Point(516, 508);
+            ManufacturingSCILabel.Location = new Point(518, 517);
             ManufacturingSCILabel.Margin = new Padding(2, 0, 2, 0);
             ManufacturingSCILabel.Name = "ManufacturingSCILabel";
             ManufacturingSCILabel.Size = new Size(139, 20);
@@ -951,7 +850,7 @@
             // 
             label57.AutoSize = true;
             label57.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label57.Location = new Point(366, 508);
+            label57.Location = new Point(366, 517);
             label57.Margin = new Padding(2, 0, 2, 0);
             label57.Name = "label57";
             label57.Size = new Size(138, 20);
@@ -1000,27 +899,6 @@
             label16.Size = new Size(246, 20);
             label16.TabIndex = 37;
             label16.Text = "Component Manufacturing Time: ";
-            // 
-            // ManuTotalInputCost
-            // 
-            ManuTotalInputCost.AutoSize = true;
-            ManuTotalInputCost.Location = new Point(517, 472);
-            ManuTotalInputCost.Margin = new Padding(2, 0, 2, 0);
-            ManuTotalInputCost.Name = "ManuTotalInputCost";
-            ManuTotalInputCost.Size = new Size(152, 20);
-            ManuTotalInputCost.TabIndex = 36;
-            ManuTotalInputCost.Text = "[ManuTotalInputCost]";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(384, 472);
-            label14.Margin = new Padding(2, 0, 2, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(121, 20);
-            label14.TabIndex = 35;
-            label14.Text = "Total Input Cost";
             // 
             // ManuSkillsTextBox
             // 
@@ -1182,24 +1060,24 @@
             // 
             // ManuInputGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.ForeColor = Color.White;
             ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManuInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ManuInputGrid.BackgroundColor = SystemColors.WindowFrame;
+            ManuInputGrid.BackgroundColor = Color.Black;
             ManuInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ManuInputGrid.Columns.AddRange(new DataGridViewColumn[] { materialName, quantityTotal, Cost, build, react, quantity, volume, pricePer, manufacturable, reactable, materialTypeID, parentMaterialTypeID });
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle6.BackColor = Color.Black;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle6.ForeColor = Color.White;
             dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle6;
-            ManuInputGrid.GridColor = SystemColors.AppWorkspace;
+            ManuInputGrid.GridColor = Color.White;
             ManuInputGrid.Location = new Point(690, 2);
             ManuInputGrid.Margin = new Padding(2);
             ManuInputGrid.Name = "ManuInputGrid";
@@ -1446,40 +1324,40 @@
             // 
             // CopyPage
             // 
-            CopyPage.BackColor = Color.FromArgb(54, 57, 53);
+            CopyPage.BackColor = Color.FromArgb(2, 23, 38);
             CopyPage.Location = new Point(4, 29);
             CopyPage.Margin = new Padding(2);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(2);
-            CopyPage.Size = new Size(1356, 565);
+            CopyPage.Size = new Size(1356, 593);
             CopyPage.TabIndex = 1;
             CopyPage.Text = "Copy";
             // 
             // MEResearchPage
             // 
-            MEResearchPage.BackColor = Color.FromArgb(54, 57, 53);
+            MEResearchPage.BackColor = Color.FromArgb(2, 23, 38);
             MEResearchPage.Location = new Point(4, 29);
             MEResearchPage.Margin = new Padding(2);
             MEResearchPage.Name = "MEResearchPage";
             MEResearchPage.Padding = new Padding(2);
-            MEResearchPage.Size = new Size(1356, 565);
+            MEResearchPage.Size = new Size(1356, 593);
             MEResearchPage.TabIndex = 2;
             MEResearchPage.Text = "ME Research";
             // 
             // TEResearchPage
             // 
-            TEResearchPage.BackColor = Color.FromArgb(54, 57, 53);
+            TEResearchPage.BackColor = Color.FromArgb(2, 23, 38);
             TEResearchPage.Location = new Point(4, 29);
             TEResearchPage.Margin = new Padding(2);
             TEResearchPage.Name = "TEResearchPage";
             TEResearchPage.Padding = new Padding(2);
-            TEResearchPage.Size = new Size(1356, 565);
+            TEResearchPage.Size = new Size(1356, 593);
             TEResearchPage.TabIndex = 3;
             TEResearchPage.Text = "TE Research";
             // 
             // InventionPage
             // 
-            InventionPage.BackColor = Color.FromArgb(54, 57, 53);
+            InventionPage.BackColor = Color.FromArgb(2, 23, 38);
             InventionPage.Controls.Add(InventionInputGrid);
             InventionPage.Controls.Add(InventionImagePanel);
             InventionPage.Controls.Add(InventionSCILabel);
@@ -1528,9 +1406,167 @@
             InventionPage.Margin = new Padding(2);
             InventionPage.Name = "InventionPage";
             InventionPage.Padding = new Padding(2);
-            InventionPage.Size = new Size(1356, 565);
+            InventionPage.Size = new Size(1356, 593);
             InventionPage.TabIndex = 4;
             InventionPage.Text = "Invention";
+            // 
+            // InventionInputGrid
+            // 
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            InventionInputGrid.BackgroundColor = Color.Black;
+            InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            InventionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.Black;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            InventionInputGrid.Dock = DockStyle.Bottom;
+            InventionInputGrid.GridColor = Color.White;
+            InventionInputGrid.Location = new Point(2, 373);
+            InventionInputGrid.Margin = new Padding(2);
+            InventionInputGrid.Name = "InventionInputGrid";
+            InventionInputGrid.ReadOnly = true;
+            InventionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            InventionInputGrid.RowTemplate.Height = 33;
+            InventionInputGrid.Size = new Size(1136, 218);
+            InventionInputGrid.TabIndex = 18;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "materialName";
+            dataGridViewTextBoxColumn1.HeaderText = "Material";
+            dataGridViewTextBoxColumn1.MinimumWidth = 50;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "quantityTotal";
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewTextBoxColumn2.HeaderText = "Total Quantity";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            dataGridViewTextBoxColumn2.Width = 131;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "priceTotal";
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewTextBoxColumn3.HeaderText = "Cost";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            dataGridViewTextBoxColumn3.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "Build";
+            dataGridViewTextBoxColumn4.HeaderText = "Build";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            dataGridViewTextBoxColumn4.Visible = false;
+            dataGridViewTextBoxColumn4.Width = 72;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "React";
+            dataGridViewTextBoxColumn5.HeaderText = "React";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
+            dataGridViewTextBoxColumn5.Visible = false;
+            dataGridViewTextBoxColumn5.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "quantity";
+            dataGridViewTextBoxColumn6.HeaderText = "Quantity";
+            dataGridViewTextBoxColumn6.MinimumWidth = 15;
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
+            dataGridViewTextBoxColumn6.Visible = false;
+            dataGridViewTextBoxColumn6.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "volumeTotal";
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewTextBoxColumn7.HeaderText = "Volume (m3)";
+            dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.ReadOnly = true;
+            dataGridViewTextBoxColumn7.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.DataPropertyName = "pricePer";
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewTextBoxColumn8.HeaderText = "Price Per";
+            dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.ReadOnly = true;
+            dataGridViewTextBoxColumn8.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            dataGridViewTextBoxColumn9.DataPropertyName = "Manufacturable";
+            dataGridViewTextBoxColumn9.HeaderText = "Manufacturable";
+            dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.ReadOnly = true;
+            dataGridViewTextBoxColumn9.Visible = false;
+            dataGridViewTextBoxColumn9.Width = 142;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.DataPropertyName = "Reactable";
+            dataGridViewTextBoxColumn10.HeaderText = "reactable";
+            dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.ReadOnly = true;
+            dataGridViewTextBoxColumn10.Visible = false;
+            dataGridViewTextBoxColumn10.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.DataPropertyName = "materialTypeID";
+            dataGridViewTextBoxColumn11.HeaderText = "Material Type ID";
+            dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.ReadOnly = true;
+            dataGridViewTextBoxColumn11.Visible = false;
+            dataGridViewTextBoxColumn11.Width = 147;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.DataPropertyName = "parentMaterialTypeID";
+            dataGridViewTextBoxColumn12.HeaderText = "parent mat type";
+            dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.ReadOnly = true;
+            dataGridViewTextBoxColumn12.Visible = false;
+            dataGridViewTextBoxColumn12.Width = 144;
             // 
             // InventionImagePanel
             // 
@@ -1696,7 +1732,7 @@
             InventionSkillsTextbox.Multiline = true;
             InventionSkillsTextbox.Name = "InventionSkillsTextbox";
             InventionSkillsTextbox.ReadOnly = true;
-            InventionSkillsTextbox.Size = new Size(216, 561);
+            InventionSkillsTextbox.Size = new Size(216, 589);
             InventionSkillsTextbox.TabIndex = 8;
             // 
             // InventionRunsFor100Label
@@ -1992,18 +2028,18 @@
             // 
             // ReverseEngineerPage
             // 
-            ReverseEngineerPage.BackColor = Color.FromArgb(54, 57, 53);
+            ReverseEngineerPage.BackColor = Color.FromArgb(2, 23, 38);
             ReverseEngineerPage.Location = new Point(4, 29);
             ReverseEngineerPage.Margin = new Padding(2);
             ReverseEngineerPage.Name = "ReverseEngineerPage";
             ReverseEngineerPage.Padding = new Padding(2);
-            ReverseEngineerPage.Size = new Size(1356, 565);
+            ReverseEngineerPage.Size = new Size(1356, 593);
             ReverseEngineerPage.TabIndex = 5;
             ReverseEngineerPage.Text = "Reverse Engineering";
             // 
             // ReactionPage
             // 
-            ReactionPage.BackColor = Color.FromArgb(54, 57, 53);
+            ReactionPage.BackColor = Color.FromArgb(2, 23, 38);
             ReactionPage.Controls.Add(ReactionInputGrid);
             ReactionPage.Controls.Add(ReactionsImagePanel);
             ReactionPage.Controls.Add(ReactionsSCILabel);
@@ -2031,9 +2067,167 @@
             ReactionPage.Margin = new Padding(2);
             ReactionPage.Name = "ReactionPage";
             ReactionPage.Padding = new Padding(2);
-            ReactionPage.Size = new Size(1356, 565);
+            ReactionPage.Size = new Size(1356, 593);
             ReactionPage.TabIndex = 6;
             ReactionPage.Text = "Reactions";
+            // 
+            // ReactionInputGrid
+            // 
+            dataGridViewCellStyle13.BackColor = Color.Black;
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            ReactionInputGrid.BackgroundColor = Color.Black;
+            ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ReactionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn23, dataGridViewTextBoxColumn24 });
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = Color.Black;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle18;
+            ReactionInputGrid.Dock = DockStyle.Bottom;
+            ReactionInputGrid.GridColor = Color.White;
+            ReactionInputGrid.Location = new Point(2, 298);
+            ReactionInputGrid.Margin = new Padding(2);
+            ReactionInputGrid.Name = "ReactionInputGrid";
+            ReactionInputGrid.ReadOnly = true;
+            ReactionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            ReactionInputGrid.RowTemplate.Height = 33;
+            ReactionInputGrid.Size = new Size(1078, 293);
+            ReactionInputGrid.TabIndex = 39;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.DataPropertyName = "materialName";
+            dataGridViewTextBoxColumn13.HeaderText = "Material";
+            dataGridViewTextBoxColumn13.MinimumWidth = 50;
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.ReadOnly = true;
+            dataGridViewTextBoxColumn13.Width = 93;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            dataGridViewTextBoxColumn14.DataPropertyName = "quantityTotal";
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.Format = "N0";
+            dataGridViewCellStyle14.NullValue = null;
+            dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewTextBoxColumn14.HeaderText = "Total Quantity";
+            dataGridViewTextBoxColumn14.MinimumWidth = 6;
+            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            dataGridViewTextBoxColumn14.ReadOnly = true;
+            dataGridViewTextBoxColumn14.Width = 131;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            dataGridViewTextBoxColumn15.DataPropertyName = "priceTotal";
+            dataGridViewCellStyle15.Format = "C2";
+            dataGridViewCellStyle15.NullValue = null;
+            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewTextBoxColumn15.HeaderText = "Cost";
+            dataGridViewTextBoxColumn15.MinimumWidth = 6;
+            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            dataGridViewTextBoxColumn15.ReadOnly = true;
+            dataGridViewTextBoxColumn15.Width = 67;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            dataGridViewTextBoxColumn16.DataPropertyName = "Build";
+            dataGridViewTextBoxColumn16.HeaderText = "Build";
+            dataGridViewTextBoxColumn16.MinimumWidth = 6;
+            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            dataGridViewTextBoxColumn16.ReadOnly = true;
+            dataGridViewTextBoxColumn16.Visible = false;
+            dataGridViewTextBoxColumn16.Width = 72;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            dataGridViewTextBoxColumn17.DataPropertyName = "React";
+            dataGridViewTextBoxColumn17.HeaderText = "React";
+            dataGridViewTextBoxColumn17.MinimumWidth = 6;
+            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            dataGridViewTextBoxColumn17.ReadOnly = true;
+            dataGridViewTextBoxColumn17.Visible = false;
+            dataGridViewTextBoxColumn17.Width = 75;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            dataGridViewTextBoxColumn18.DataPropertyName = "quantity";
+            dataGridViewTextBoxColumn18.HeaderText = "Quantity";
+            dataGridViewTextBoxColumn18.MinimumWidth = 15;
+            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            dataGridViewTextBoxColumn18.ReadOnly = true;
+            dataGridViewTextBoxColumn18.Visible = false;
+            dataGridViewTextBoxColumn18.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            dataGridViewTextBoxColumn19.DataPropertyName = "volumeTotal";
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewTextBoxColumn19.HeaderText = "Volume (m3)";
+            dataGridViewTextBoxColumn19.MinimumWidth = 6;
+            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            dataGridViewTextBoxColumn19.ReadOnly = true;
+            dataGridViewTextBoxColumn19.Width = 123;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            dataGridViewTextBoxColumn20.DataPropertyName = "pricePer";
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewTextBoxColumn20.HeaderText = "Price Per";
+            dataGridViewTextBoxColumn20.MinimumWidth = 6;
+            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            dataGridViewTextBoxColumn20.ReadOnly = true;
+            dataGridViewTextBoxColumn20.Width = 94;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            dataGridViewTextBoxColumn21.DataPropertyName = "Manufacturable";
+            dataGridViewTextBoxColumn21.HeaderText = "Manufacturable";
+            dataGridViewTextBoxColumn21.MinimumWidth = 6;
+            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            dataGridViewTextBoxColumn21.ReadOnly = true;
+            dataGridViewTextBoxColumn21.Visible = false;
+            dataGridViewTextBoxColumn21.Width = 142;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            dataGridViewTextBoxColumn22.DataPropertyName = "Reactable";
+            dataGridViewTextBoxColumn22.HeaderText = "reactable";
+            dataGridViewTextBoxColumn22.MinimumWidth = 6;
+            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            dataGridViewTextBoxColumn22.ReadOnly = true;
+            dataGridViewTextBoxColumn22.Visible = false;
+            dataGridViewTextBoxColumn22.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            dataGridViewTextBoxColumn23.DataPropertyName = "materialTypeID";
+            dataGridViewTextBoxColumn23.HeaderText = "Material Type ID";
+            dataGridViewTextBoxColumn23.MinimumWidth = 6;
+            dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            dataGridViewTextBoxColumn23.ReadOnly = true;
+            dataGridViewTextBoxColumn23.Visible = false;
+            dataGridViewTextBoxColumn23.Width = 147;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            dataGridViewTextBoxColumn24.DataPropertyName = "parentMaterialTypeID";
+            dataGridViewTextBoxColumn24.HeaderText = "parent mat type";
+            dataGridViewTextBoxColumn24.MinimumWidth = 6;
+            dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            dataGridViewTextBoxColumn24.ReadOnly = true;
+            dataGridViewTextBoxColumn24.Visible = false;
+            dataGridViewTextBoxColumn24.Width = 144;
             // 
             // ReactionsImagePanel
             // 
@@ -2094,7 +2288,7 @@
             ReactionSkillsTextBox.Multiline = true;
             ReactionSkillsTextBox.Name = "ReactionSkillsTextBox";
             ReactionSkillsTextBox.ReadOnly = true;
-            ReactionSkillsTextBox.Size = new Size(274, 561);
+            ReactionSkillsTextBox.Size = new Size(274, 589);
             ReactionSkillsTextBox.TabIndex = 17;
             // 
             // ReactionTotalOutcomeIskLabel
@@ -2266,7 +2460,7 @@
             // 
             BlueprintNameLabel.AutoSize = true;
             BlueprintNameLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
-            BlueprintNameLabel.ForeColor = SystemColors.ControlLightLight;
+            BlueprintNameLabel.ForeColor = Color.Gold;
             BlueprintNameLabel.Location = new Point(13, 9);
             BlueprintNameLabel.Margin = new Padding(2, 0, 2, 0);
             BlueprintNameLabel.Name = "BlueprintNameLabel";
@@ -2314,322 +2508,6 @@
             InventionImageWorker.DoWork += InventionImageWorker_DoWork;
             InventionImageWorker.RunWorkerCompleted += InventionImageWorker_RunWorkerCompleted;
             // 
-            // InventionInputGrid
-            // 
-            dataGridViewCellStyle7.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle7.ForeColor = Color.Black;
-            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            InventionInputGrid.BackgroundColor = SystemColors.WindowFrame;
-            InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            InventionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle12.ForeColor = Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle12;
-            InventionInputGrid.Dock = DockStyle.Bottom;
-            InventionInputGrid.GridColor = SystemColors.AppWorkspace;
-            InventionInputGrid.Location = new Point(2, 345);
-            InventionInputGrid.Margin = new Padding(2);
-            InventionInputGrid.Name = "InventionInputGrid";
-            InventionInputGrid.ReadOnly = true;
-            InventionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            InventionInputGrid.RowTemplate.Height = 33;
-            InventionInputGrid.Size = new Size(1136, 218);
-            InventionInputGrid.TabIndex = 18;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "materialName";
-            dataGridViewTextBoxColumn1.HeaderText = "Material";
-            dataGridViewTextBoxColumn1.MinimumWidth = 50;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            dataGridViewTextBoxColumn1.Width = 93;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.Format = "N0";
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle8;
-            dataGridViewTextBoxColumn2.HeaderText = "Total Quantity";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            dataGridViewTextBoxColumn2.Width = 131;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = null;
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle9;
-            dataGridViewTextBoxColumn3.HeaderText = "Cost";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            dataGridViewTextBoxColumn3.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.DataPropertyName = "Build";
-            dataGridViewTextBoxColumn4.HeaderText = "Build";
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.ReadOnly = true;
-            dataGridViewTextBoxColumn4.Visible = false;
-            dataGridViewTextBoxColumn4.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.DataPropertyName = "React";
-            dataGridViewTextBoxColumn5.HeaderText = "React";
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.ReadOnly = true;
-            dataGridViewTextBoxColumn5.Visible = false;
-            dataGridViewTextBoxColumn5.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.DataPropertyName = "quantity";
-            dataGridViewTextBoxColumn6.HeaderText = "Quantity";
-            dataGridViewTextBoxColumn6.MinimumWidth = 15;
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.ReadOnly = true;
-            dataGridViewTextBoxColumn6.Visible = false;
-            dataGridViewTextBoxColumn6.Width = 94;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewTextBoxColumn7.HeaderText = "Volume (m3)";
-            dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.ReadOnly = true;
-            dataGridViewTextBoxColumn7.Width = 123;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            dataGridViewTextBoxColumn8.DataPropertyName = "pricePer";
-            dataGridViewCellStyle11.Format = "C2";
-            dataGridViewCellStyle11.NullValue = null;
-            dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle11;
-            dataGridViewTextBoxColumn8.HeaderText = "Price Per";
-            dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            dataGridViewTextBoxColumn8.ReadOnly = true;
-            dataGridViewTextBoxColumn8.Width = 94;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            dataGridViewTextBoxColumn9.DataPropertyName = "Manufacturable";
-            dataGridViewTextBoxColumn9.HeaderText = "Manufacturable";
-            dataGridViewTextBoxColumn9.MinimumWidth = 6;
-            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            dataGridViewTextBoxColumn9.ReadOnly = true;
-            dataGridViewTextBoxColumn9.Visible = false;
-            dataGridViewTextBoxColumn9.Width = 142;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            dataGridViewTextBoxColumn10.DataPropertyName = "Reactable";
-            dataGridViewTextBoxColumn10.HeaderText = "reactable";
-            dataGridViewTextBoxColumn10.MinimumWidth = 6;
-            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            dataGridViewTextBoxColumn10.ReadOnly = true;
-            dataGridViewTextBoxColumn10.Visible = false;
-            dataGridViewTextBoxColumn10.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            dataGridViewTextBoxColumn11.DataPropertyName = "materialTypeID";
-            dataGridViewTextBoxColumn11.HeaderText = "Material Type ID";
-            dataGridViewTextBoxColumn11.MinimumWidth = 6;
-            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            dataGridViewTextBoxColumn11.ReadOnly = true;
-            dataGridViewTextBoxColumn11.Visible = false;
-            dataGridViewTextBoxColumn11.Width = 147;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            dataGridViewTextBoxColumn12.DataPropertyName = "parentMaterialTypeID";
-            dataGridViewTextBoxColumn12.HeaderText = "parent mat type";
-            dataGridViewTextBoxColumn12.MinimumWidth = 6;
-            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            dataGridViewTextBoxColumn12.ReadOnly = true;
-            dataGridViewTextBoxColumn12.Visible = false;
-            dataGridViewTextBoxColumn12.Width = 144;
-            // 
-            // ReactionInputGrid
-            // 
-            dataGridViewCellStyle13.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle13.ForeColor = Color.Black;
-            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ReactionInputGrid.BackgroundColor = SystemColors.WindowFrame;
-            ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ReactionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn23, dataGridViewTextBoxColumn24 });
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle18.ForeColor = Color.White;
-            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
-            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle18;
-            ReactionInputGrid.Dock = DockStyle.Bottom;
-            ReactionInputGrid.GridColor = SystemColors.AppWorkspace;
-            ReactionInputGrid.Location = new Point(2, 270);
-            ReactionInputGrid.Margin = new Padding(2);
-            ReactionInputGrid.Name = "ReactionInputGrid";
-            ReactionInputGrid.ReadOnly = true;
-            ReactionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            ReactionInputGrid.RowTemplate.Height = 33;
-            ReactionInputGrid.Size = new Size(1078, 293);
-            ReactionInputGrid.TabIndex = 39;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            dataGridViewTextBoxColumn13.DataPropertyName = "materialName";
-            dataGridViewTextBoxColumn13.HeaderText = "Material";
-            dataGridViewTextBoxColumn13.MinimumWidth = 50;
-            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            dataGridViewTextBoxColumn13.ReadOnly = true;
-            dataGridViewTextBoxColumn13.Width = 93;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            dataGridViewTextBoxColumn14.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.Format = "N0";
-            dataGridViewCellStyle14.NullValue = null;
-            dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle14;
-            dataGridViewTextBoxColumn14.HeaderText = "Total Quantity";
-            dataGridViewTextBoxColumn14.MinimumWidth = 6;
-            dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            dataGridViewTextBoxColumn14.ReadOnly = true;
-            dataGridViewTextBoxColumn14.Width = 131;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            dataGridViewTextBoxColumn15.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle15;
-            dataGridViewTextBoxColumn15.HeaderText = "Cost";
-            dataGridViewTextBoxColumn15.MinimumWidth = 6;
-            dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            dataGridViewTextBoxColumn15.ReadOnly = true;
-            dataGridViewTextBoxColumn15.Width = 67;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            dataGridViewTextBoxColumn16.DataPropertyName = "Build";
-            dataGridViewTextBoxColumn16.HeaderText = "Build";
-            dataGridViewTextBoxColumn16.MinimumWidth = 6;
-            dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            dataGridViewTextBoxColumn16.ReadOnly = true;
-            dataGridViewTextBoxColumn16.Visible = false;
-            dataGridViewTextBoxColumn16.Width = 72;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            dataGridViewTextBoxColumn17.DataPropertyName = "React";
-            dataGridViewTextBoxColumn17.HeaderText = "React";
-            dataGridViewTextBoxColumn17.MinimumWidth = 6;
-            dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            dataGridViewTextBoxColumn17.ReadOnly = true;
-            dataGridViewTextBoxColumn17.Visible = false;
-            dataGridViewTextBoxColumn17.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            dataGridViewTextBoxColumn18.DataPropertyName = "quantity";
-            dataGridViewTextBoxColumn18.HeaderText = "Quantity";
-            dataGridViewTextBoxColumn18.MinimumWidth = 15;
-            dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            dataGridViewTextBoxColumn18.ReadOnly = true;
-            dataGridViewTextBoxColumn18.Visible = false;
-            dataGridViewTextBoxColumn18.Width = 94;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            dataGridViewTextBoxColumn19.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle16;
-            dataGridViewTextBoxColumn19.HeaderText = "Volume (m3)";
-            dataGridViewTextBoxColumn19.MinimumWidth = 6;
-            dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            dataGridViewTextBoxColumn19.ReadOnly = true;
-            dataGridViewTextBoxColumn19.Width = 123;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            dataGridViewTextBoxColumn20.DataPropertyName = "pricePer";
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle17;
-            dataGridViewTextBoxColumn20.HeaderText = "Price Per";
-            dataGridViewTextBoxColumn20.MinimumWidth = 6;
-            dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            dataGridViewTextBoxColumn20.ReadOnly = true;
-            dataGridViewTextBoxColumn20.Width = 94;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            dataGridViewTextBoxColumn21.DataPropertyName = "Manufacturable";
-            dataGridViewTextBoxColumn21.HeaderText = "Manufacturable";
-            dataGridViewTextBoxColumn21.MinimumWidth = 6;
-            dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            dataGridViewTextBoxColumn21.ReadOnly = true;
-            dataGridViewTextBoxColumn21.Visible = false;
-            dataGridViewTextBoxColumn21.Width = 142;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            dataGridViewTextBoxColumn22.DataPropertyName = "Reactable";
-            dataGridViewTextBoxColumn22.HeaderText = "reactable";
-            dataGridViewTextBoxColumn22.MinimumWidth = 6;
-            dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            dataGridViewTextBoxColumn22.ReadOnly = true;
-            dataGridViewTextBoxColumn22.Visible = false;
-            dataGridViewTextBoxColumn22.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            dataGridViewTextBoxColumn23.DataPropertyName = "materialTypeID";
-            dataGridViewTextBoxColumn23.HeaderText = "Material Type ID";
-            dataGridViewTextBoxColumn23.MinimumWidth = 6;
-            dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            dataGridViewTextBoxColumn23.ReadOnly = true;
-            dataGridViewTextBoxColumn23.Visible = false;
-            dataGridViewTextBoxColumn23.Width = 147;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            dataGridViewTextBoxColumn24.DataPropertyName = "parentMaterialTypeID";
-            dataGridViewTextBoxColumn24.HeaderText = "parent mat type";
-            dataGridViewTextBoxColumn24.MinimumWidth = 6;
-            dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            dataGridViewTextBoxColumn24.ReadOnly = true;
-            dataGridViewTextBoxColumn24.Visible = false;
-            dataGridViewTextBoxColumn24.Width = 144;
-            // 
             // BlueprintBrowser
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
@@ -2639,17 +2517,13 @@
             ClientSize = new Size(1646, 853);
             Controls.Add(ManufacturingPanel);
             Controls.Add(TreeViewList);
-            Controls.Add(Menu);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MainMenuStrip = Menu;
             Margin = new Padding(2);
             Name = "BlueprintBrowser";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Blueprints";
-            Menu.ResumeLayout(false);
-            Menu.PerformLayout();
             ManufacturingPanel.ResumeLayout(false);
             ManufacturingPanel.PerformLayout();
             panel1.ResumeLayout(false);
@@ -2666,24 +2540,18 @@
             ((System.ComponentModel.ISupportInitialize)ManuInputGrid).EndInit();
             InventionPage.ResumeLayout(false);
             InventionPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
             ReactionPage.ResumeLayout(false);
             ReactionPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)industryActivityMaterialsBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)InventionInputGrid).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ReactionInputGrid).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
         private TreeView TreeViewList;
-        private MenuStrip Menu;
-        private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem settingsToolStripMenuItem;
-        private ToolStripMenuItem skillsToolStripMenuItem;
-        private ToolStripMenuItem helpToolStripMenuItem;
         private Panel ManufacturingPanel;
         private TabControl ActivityTabPanel;
         private TabPage ManufacturingPage;
@@ -2741,8 +2609,6 @@
         private Label label15;
         private Label OutputProdQuantLabel;
         private Label label13;
-        private Label ManuTotalInputCost;
-        private Label label14;
         private Label ComponentManuTimeLabel;
         private Label label16;
         private Label StatusLabel;
@@ -2768,8 +2634,6 @@
         private ComboBox ReactionSolarSystemCombo;
         private NumericUpDown ReactionTaxUpDown;
         private Label label26;
-        private Label TotalOutputVolumeLabel;
-        private Label label25;
         private TextBox InventionSkillsTextbox;
         private Label InventionRunsFor100Label;
         private Label label39;
@@ -2815,19 +2679,13 @@
         private CheckBox InventBlueprintCheckbox;
         private Label InventionJobCostLabel;
         private Label label47;
-        private Label label54;
         private Label TotalCostLabel;
         private Label label50;
         private Label label52;
         private Label label49;
         private Label label53;
-        private Label TotalInputVolumeLabel;
         private Label ROILabel;
         private Label label55;
-        private ToolStripMenuItem manufacturingDefaultsToolStripMenuItem;
-        private ToolStripMenuItem inventionDefaultsToolStripMenuItem;
-        private ToolStripMenuItem reactionDefaultsToolStripMenuItem;
-        private ToolStripMenuItem mainDefaultsToolStripMenuItem;
         private Label ReactionsSCILabel;
         private Label label56;
         private Label ManufacturingSCILabel;
@@ -2881,5 +2739,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
+        private Label TotalOutputVolumeLabel;
+        private Label label25;
     }
 }

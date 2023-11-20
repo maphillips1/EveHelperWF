@@ -21,6 +21,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private List<SolarSystemJump> solarSystemJumps = new List<SolarSystemJump>();
         private EveHelperWF.Objects.CostIndice costIndice = null;
 
+        #region "Init"
         public SolarSystemInfo(SolarSystem passedInSystem)
         {
             InitializeComponent();
@@ -79,7 +80,27 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
             BuildCostIndiceLabel();
         }
+        #endregion
 
+        #region "Events"
+        private void ZKillLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string zKillURL = String.Format("https://zkillboard.com/system/{0}/", solarSystem.solarSystemID);
+            ProcessStartInfo startInfo = new ProcessStartInfo(zKillURL);
+            startInfo.UseShellExecute = true;
+            Process.Start(startInfo);
+        }
+
+        private void DotlanLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string dotLanURL = String.Format("https://evemaps.dotlan.net/system/{0}/", solarSystem.solarSystemName);
+            ProcessStartInfo startInfo = new ProcessStartInfo(dotLanURL);
+            startInfo.UseShellExecute = true;
+            Process.Start(startInfo);
+        }
+        #endregion
+
+        #region "Methods"
         private void BuildPlanetsLabel()
         {
             StringBuilder sb = new StringBuilder();
@@ -149,21 +170,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
             SystemCostIndexLabel.Text = sb.ToString();
         }
-
-        private void ZKillLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string zKillURL = String.Format("https://zkillboard.com/system/{0}/", solarSystem.solarSystemID);
-            ProcessStartInfo startInfo = new ProcessStartInfo(zKillURL);
-            startInfo.UseShellExecute = true;
-            Process.Start(startInfo);
-        }
-
-        private void DotlanLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string dotLanURL = String.Format("https://evemaps.dotlan.net/system/{0}/", solarSystem.solarSystemName);
-            ProcessStartInfo startInfo = new ProcessStartInfo(dotLanURL);
-            startInfo.UseShellExecute = true;
-            Process.Start(startInfo);
-        }
+        #endregion
     }
 }

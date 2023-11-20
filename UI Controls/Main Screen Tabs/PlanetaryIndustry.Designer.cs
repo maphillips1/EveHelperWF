@@ -1,6 +1,6 @@
 ﻿namespace EveHelperWF
 {
-    partial class PlanetPlanner
+    partial class PlanetaryIndustry
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanetPlanner));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanetaryIndustry));
             OutputTreeView = new TreeView();
             SchematicNameLabel = new Label();
             BubbleTreePanel = new Panel();
@@ -57,7 +57,7 @@
             // 
             // OutputTreeView
             // 
-            OutputTreeView.BackColor = Color.FromArgb(54, 57, 53);
+            OutputTreeView.BackColor = Color.FromArgb(2, 23, 38);
             OutputTreeView.ForeColor = SystemColors.ControlLight;
             OutputTreeView.HotTracking = true;
             OutputTreeView.Location = new Point(12, 12);
@@ -79,7 +79,7 @@
             // BubbleTreePanel
             // 
             BubbleTreePanel.AutoScroll = true;
-            BubbleTreePanel.BackColor = SystemColors.AppWorkspace;
+            BubbleTreePanel.BackColor = Color.Black;
             BubbleTreePanel.BorderStyle = BorderStyle.Fixed3D;
             BubbleTreePanel.Location = new Point(288, 122);
             BubbleTreePanel.Name = "BubbleTreePanel";
@@ -239,7 +239,7 @@
             // 
             CycleTimeLabel.AutoSize = true;
             CycleTimeLabel.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            CycleTimeLabel.Location = new Point(603, 12);
+            CycleTimeLabel.Location = new Point(684, 9);
             CycleTimeLabel.Name = "CycleTimeLabel";
             CycleTimeLabel.Size = new Size(134, 35);
             CycleTimeLabel.TabIndex = 4;

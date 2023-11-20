@@ -57,6 +57,7 @@
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
             label1 = new Label();
+            ViewPriceHistoryButton = new Button();
             ProgressLabel = new Label();
             UpdateHistoryProgressBar = new ProgressBar();
             TrackedTypesGrid = new DataGridView();
@@ -83,7 +84,6 @@
             label3 = new Label();
             UpdatePriceHistoryButton = new Button();
             UpdatePriceHistoryWorker = new System.ComponentModel.BackgroundWorker();
-            ViewPriceHistoryButton = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -135,21 +135,24 @@
             // 
             // ItemSearchResultsGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
             ItemSearchResultsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ItemSearchResultsGrid.BackgroundColor = Color.Black;
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ItemSearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { typeID, typeName, marketGroupName, groupId, description, volume, portionSize, raceId, basePrice, marketGroupId, parentMarketGroupId, iconId, soundId, graphicId, groupName, categoryID, categoryName });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            ItemSearchResultsGrid.GridColor = Color.White;
             ItemSearchResultsGrid.Location = new Point(12, 141);
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
             ItemSearchResultsGrid.RowHeadersWidth = 51;
@@ -345,6 +348,17 @@
             label1.TabIndex = 0;
             label1.Text = "Select Items to Track";
             // 
+            // ViewPriceHistoryButton
+            // 
+            ViewPriceHistoryButton.ForeColor = Color.Black;
+            ViewPriceHistoryButton.Location = new Point(422, 638);
+            ViewPriceHistoryButton.Name = "ViewPriceHistoryButton";
+            ViewPriceHistoryButton.Size = new Size(150, 29);
+            ViewPriceHistoryButton.TabIndex = 16;
+            ViewPriceHistoryButton.Text = "View Price History";
+            ViewPriceHistoryButton.UseVisualStyleBackColor = true;
+            ViewPriceHistoryButton.Click += ViewPriceHistoryButton_Click;
+            // 
             // ProgressLabel
             // 
             ProgressLabel.AutoSize = true;
@@ -364,21 +378,24 @@
             // 
             // TrackedTypesGrid
             // 
-            dataGridViewCellStyle3.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
             TrackedTypesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             TrackedTypesGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TrackedTypesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            TrackedTypesGrid.BackgroundColor = Color.Black;
             TrackedTypesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TrackedTypesGrid.Columns.AddRange(new DataGridViewColumn[] { trackedTypeId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17 });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle4.BackColor = Color.Black;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle4.ForeColor = Color.White;
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             TrackedTypesGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            TrackedTypesGrid.GridColor = Color.White;
             TrackedTypesGrid.Location = new Point(26, 141);
             TrackedTypesGrid.MultiSelect = false;
             TrackedTypesGrid.Name = "TrackedTypesGrid";
@@ -599,17 +616,6 @@
             UpdatePriceHistoryWorker.DoWork += UpdatePriceHistoryWorker_DoWork;
             UpdatePriceHistoryWorker.ProgressChanged += UpdatePriceHistoryWorker_ProgressChanged;
             UpdatePriceHistoryWorker.RunWorkerCompleted += UpdatePriceHistoryWorker_RunWorkerCompleted;
-            // 
-            // ViewPriceHistoryButton
-            // 
-            ViewPriceHistoryButton.ForeColor = Color.Black;
-            ViewPriceHistoryButton.Location = new Point(422, 638);
-            ViewPriceHistoryButton.Name = "ViewPriceHistoryButton";
-            ViewPriceHistoryButton.Size = new Size(150, 29);
-            ViewPriceHistoryButton.TabIndex = 16;
-            ViewPriceHistoryButton.Text = "View Price History";
-            ViewPriceHistoryButton.UseVisualStyleBackColor = true;
-            ViewPriceHistoryButton.Click += ViewPriceHistoryButton_Click;
             // 
             // PriceHistoryUtility
             // 

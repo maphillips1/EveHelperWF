@@ -30,7 +30,7 @@ namespace EveHelperWF.UI_Controls
 
         private void PlanetPlannerButton_Click(object sender, EventArgs e)
         {
-            PlanetPlanner planetPlanner = new PlanetPlanner();
+            PlanetaryIndustry planetPlanner = new PlanetaryIndustry();
             planetPlanner.StartPosition = FormStartPosition.CenterScreen;
             planetPlanner.Show();
         }

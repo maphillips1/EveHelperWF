@@ -36,6 +36,9 @@
             constellationName = new DataGridViewTextBoxColumn();
             systemName = new DataGridViewTextBoxColumn();
             security = new DataGridViewTextBoxColumn();
+            regionID = new DataGridViewTextBoxColumn();
+            constellationID = new DataGridViewTextBoxColumn();
+            solarSystemID = new DataGridViewTextBoxColumn();
             SearchButton = new Button();
             TemperateCheckbox = new CheckBox();
             PlasmaCheckbox = new CheckBox();
@@ -53,13 +56,14 @@
             IncludePochvenCheckbox = new CheckBox();
             PlanetSearchBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             LoadingLabel = new Label();
-            HasStationCheckBox = new CheckBox();
             label3 = new Label();
             label4 = new Label();
             RegionCombobox = new ComboBox();
             label5 = new Label();
             label6 = new Label();
             SystemNameTextBox = new TextBox();
+            label7 = new Label();
+            StationComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)SolarSystemResultsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MinSecurityUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxSecurityUpDown).BeginInit();
@@ -67,27 +71,28 @@
             // 
             // SolarSystemResultsGrid
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.ForeColor = Color.White;
             SolarSystemResultsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            SolarSystemResultsGrid.BackgroundColor = SystemColors.WindowFrame;
+            SolarSystemResultsGrid.BackgroundColor = Color.Black;
             SolarSystemResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SolarSystemResultsGrid.Columns.AddRange(new DataGridViewColumn[] { regionName, constellationName, systemName, security });
+            SolarSystemResultsGrid.Columns.AddRange(new DataGridViewColumn[] { regionName, constellationName, systemName, security, regionID, constellationID, solarSystemID });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.ControlDark;
+            dataGridViewCellStyle2.BackColor = Color.Black;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            SolarSystemResultsGrid.Location = new Point(21, 263);
+            SolarSystemResultsGrid.Dock = DockStyle.Bottom;
+            SolarSystemResultsGrid.Location = new Point(0, 307);
             SolarSystemResultsGrid.MultiSelect = false;
             SolarSystemResultsGrid.Name = "SolarSystemResultsGrid";
             SolarSystemResultsGrid.RowHeadersWidth = 51;
             SolarSystemResultsGrid.RowTemplate.Height = 29;
             SolarSystemResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            SolarSystemResultsGrid.Size = new Size(608, 489);
+            SolarSystemResultsGrid.Size = new Size(695, 457);
             SolarSystemResultsGrid.TabIndex = 15;
             SolarSystemResultsGrid.DoubleClick += SolarSystemResultsGrid_DoubleClick;
             // 
@@ -123,10 +128,37 @@
             security.Name = "security";
             security.Width = 125;
             // 
+            // regionID
+            // 
+            regionID.DataPropertyName = "regionID";
+            regionID.HeaderText = "Region ID";
+            regionID.MinimumWidth = 6;
+            regionID.Name = "regionID";
+            regionID.Visible = false;
+            regionID.Width = 125;
+            // 
+            // constellationID
+            // 
+            constellationID.DataPropertyName = "constellationID";
+            constellationID.HeaderText = "Constellation ID";
+            constellationID.MinimumWidth = 6;
+            constellationID.Name = "constellationID";
+            constellationID.Visible = false;
+            constellationID.Width = 125;
+            // 
+            // solarSystemID
+            // 
+            solarSystemID.DataPropertyName = "solarSystemID";
+            solarSystemID.HeaderText = "solarSystemID";
+            solarSystemID.MinimumWidth = 6;
+            solarSystemID.Name = "solarSystemID";
+            solarSystemID.Visible = false;
+            solarSystemID.Width = 125;
+            // 
             // SearchButton
             // 
             SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(8, 228);
+            SearchButton.Location = new Point(8, 255);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(94, 29);
             SearchButton.TabIndex = 0;
@@ -236,7 +268,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(228, 111);
+            label2.Location = new Point(9, 146);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.No;
             label2.Size = new Size(37, 20);
@@ -247,7 +279,7 @@
             // 
             MaxSecurityUpDown.DecimalPlaces = 1;
             MaxSecurityUpDown.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            MaxSecurityUpDown.Location = new Point(271, 104);
+            MaxSecurityUpDown.Location = new Point(52, 139);
             MaxSecurityUpDown.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
             MaxSecurityUpDown.Name = "MaxSecurityUpDown";
             MaxSecurityUpDown.Size = new Size(150, 27);
@@ -256,7 +288,7 @@
             // WormholesCheckbox
             // 
             WormholesCheckbox.AutoSize = true;
-            WormholesCheckbox.Location = new Point(12, 146);
+            WormholesCheckbox.Location = new Point(219, 106);
             WormholesCheckbox.Name = "WormholesCheckbox";
             WormholesCheckbox.Size = new Size(158, 24);
             WormholesCheckbox.TabIndex = 13;
@@ -266,7 +298,7 @@
             // IncludePochvenCheckbox
             // 
             IncludePochvenCheckbox.AutoSize = true;
-            IncludePochvenCheckbox.Location = new Point(176, 146);
+            IncludePochvenCheckbox.Location = new Point(219, 136);
             IncludePochvenCheckbox.Name = "IncludePochvenCheckbox";
             IncludePochvenCheckbox.Size = new Size(137, 24);
             IncludePochvenCheckbox.TabIndex = 14;
@@ -281,27 +313,18 @@
             // LoadingLabel
             // 
             LoadingLabel.AutoSize = true;
-            LoadingLabel.Location = new Point(130, 232);
+            LoadingLabel.Location = new Point(130, 259);
             LoadingLabel.Name = "LoadingLabel";
             LoadingLabel.Size = new Size(72, 20);
             LoadingLabel.TabIndex = 16;
             LoadingLabel.Text = "Loading...";
             LoadingLabel.Visible = false;
             // 
-            // HasStationCheckBox
-            // 
-            HasStationCheckBox.AutoSize = true;
-            HasStationCheckBox.Location = new Point(327, 146);
-            HasStationCheckBox.Name = "HasStationCheckBox";
-            HasStationCheckBox.Size = new Size(107, 24);
-            HasStationCheckBox.TabIndex = 17;
-            HasStationCheckBox.Text = "Has Station";
-            HasStationCheckBox.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.Gold;
             label3.Location = new Point(12, 9);
             label3.Name = "label3";
             label3.Size = new Size(90, 20);
@@ -312,6 +335,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.Gold;
             label4.Location = new Point(12, 78);
             label4.Name = "label4";
             label4.Size = new Size(65, 20);
@@ -321,7 +345,7 @@
             // RegionCombobox
             // 
             RegionCombobox.FormattingEnabled = true;
-            RegionCombobox.Location = new Point(74, 185);
+            RegionCombobox.Location = new Point(80, 201);
             RegionCombobox.Name = "RegionCombobox";
             RegionCombobox.Size = new Size(151, 28);
             RegionCombobox.TabIndex = 20;
@@ -329,7 +353,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 188);
+            label5.Location = new Point(12, 204);
             label5.Name = "label5";
             label5.Size = new Size(56, 20);
             label5.TabIndex = 21;
@@ -338,7 +362,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(254, 188);
+            label6.Location = new Point(256, 204);
             label6.Name = "label6";
             label6.Size = new Size(100, 20);
             label6.TabIndex = 22;
@@ -346,23 +370,43 @@
             // 
             // SystemNameTextBox
             // 
-            SystemNameTextBox.Location = new Point(360, 185);
+            SystemNameTextBox.Location = new Point(362, 201);
             SystemNameTextBox.Name = "SystemNameTextBox";
             SystemNameTextBox.Size = new Size(125, 27);
             SystemNameTextBox.TabIndex = 23;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.Gold;
+            label7.Location = new Point(496, 76);
+            label7.Name = "label7";
+            label7.Size = new Size(64, 23);
+            label7.TabIndex = 24;
+            label7.Text = "Station";
+            // 
+            // StationComboBox
+            // 
+            StationComboBox.FormattingEnabled = true;
+            StationComboBox.Location = new Point(456, 108);
+            StationComboBox.Name = "StationComboBox";
+            StationComboBox.Size = new Size(151, 28);
+            StationComboBox.TabIndex = 25;
             // 
             // SystemFinder
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(640, 764);
+            ClientSize = new Size(695, 764);
+            Controls.Add(StationComboBox);
+            Controls.Add(label7);
             Controls.Add(SystemNameTextBox);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(RegionCombobox);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(HasStationCheckBox);
             Controls.Add(LoadingLabel);
             Controls.Add(SolarSystemResultsGrid);
             Controls.Add(IncludePochvenCheckbox);
@@ -412,16 +456,20 @@
         private DataGridView SolarSystemResultsGrid;
         private System.ComponentModel.BackgroundWorker PlanetSearchBackgroundWorker;
         private Label LoadingLabel;
-        private CheckBox HasStationCheckBox;
         private Label label3;
         private Label label4;
         private ComboBox RegionCombobox;
         private Label label5;
         private Label label6;
         private TextBox SystemNameTextBox;
+        private Label label7;
+        private ComboBox StationComboBox;
         private DataGridViewTextBoxColumn regionName;
         private DataGridViewTextBoxColumn constellationName;
         private DataGridViewTextBoxColumn systemName;
         private DataGridViewTextBoxColumn security;
+        private DataGridViewTextBoxColumn regionID;
+        private DataGridViewTextBoxColumn constellationID;
+        private DataGridViewTextBoxColumn solarSystemID;
     }
 }
