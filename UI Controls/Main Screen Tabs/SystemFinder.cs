@@ -17,10 +17,14 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private List<SolarSystem> solarSystems = new List<SolarSystem>();
         List<Objects.Region> regions = new List<Objects.Region>();
         int selectedRegion;
+        int stationFilter;
+
+        #region "Init"
         public SystemFinder()
         {
             InitializeComponent();
             LoadRegions();
+            LoadStationCombo();
             MaxSecurityUpDown.Value = 1;
         }
 
@@ -33,6 +37,21 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             RegionCombobox.SelectedIndex = -1;
         }
 
+        private void LoadStationCombo()
+        {
+            Dictionary<int, string> stations = new Dictionary<int, string>();
+            stations.Add(1, "Do Not Filter");
+            stations.Add(2, "Has Station");
+            stations.Add(3, "Has No Station");
+
+            StationComboBox.DisplayMember = "Value";
+            StationComboBox.ValueMember = "Key";
+            StationComboBox.DataSource = stations.ToList();
+            StationComboBox.SelectedValue = 1;
+        }
+        #endregion
+
+        #region "Events"
         private void SearchButton_Click(object sender, EventArgs e)
         {
             if (RegionCombobox.SelectedValue != null)
@@ -49,14 +68,25 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 LoadingLabel.Visible = true;
                 PlanetSearchBackgroundWorker.RunWorkerAsync();
             }
+            if (StationComboBox.SelectedValue != null)
+            {
+                stationFilter = (int)StationComboBox.SelectedValue;
+            }
+            else
+            {
+                stationFilter = (int)(ScreenHelper.Enums.StationFilter.DoNotFilter);
+            }
         }
+        #endregion
 
+        #region "Background Worker"
         private void PlanetSearchBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+
             List<SolarSystem> solarSystems = Database.SQLiteCalls.SolarSystemSearch(TemperateCheckbox.Checked,
                IceCheckBox.Checked, GasCheckBox.Checked, OceanicCheckbox.Checked, LavaCheckbox.Checked, BarrenCheckbox.Checked,
                StormCheckbox.Checked, PlasmaCheckbox.Checked, WormholesCheckbox.Checked, IncludePochvenCheckbox.Checked,
-               HasStationCheckBox.Checked, MinSecurityUpDown.Value, MaxSecurityUpDown.Value, selectedRegion, SystemNameTextBox.Text);
+               stationFilter, MinSecurityUpDown.Value, MaxSecurityUpDown.Value, selectedRegion, SystemNameTextBox.Text);
             e.Result = solarSystems;
         }
 
@@ -90,5 +120,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 solarSystemInfo.Show();
             }
         }
+        #endregion
     }
 }

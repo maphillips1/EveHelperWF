@@ -22,7 +22,7 @@
     <Compile Update="UI Controls\Main Screen Tabs\MarketBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI Controls\Main Screen Tabs\PlanetPlanner.cs">
+    <Compile Update="UI Controls\Main Screen Tabs\PlanetaryIndustry.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\PriceHistoryUtility.cs">

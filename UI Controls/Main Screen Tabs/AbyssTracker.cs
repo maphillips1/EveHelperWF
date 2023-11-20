@@ -170,6 +170,30 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 //Reset Loot TextBox
                 LootTextBox.Text = string.Empty;
+                MessageBox.Show("Added Run!");
+            }
+            else
+            {
+                MessageBox.Show("Enter the Filament Type and Ship Type");
+            }
+        }
+
+        private void LootTextBox_TextChanged(object sender, EventArgs e)
+        {
+            string text = LootTextBox.Text;
+
+            if (text.Contains("\n"))
+            {
+                if (!text.Contains("\r"))
+                {
+                    text = text.Replace("\n", "\r\n");
+                    LootTextBox.Text = text;
+                }
+            }
+            else
+            {
+                text = text + "\r\n";
+                LootTextBox.Text = text;
             }
         }
         #endregion

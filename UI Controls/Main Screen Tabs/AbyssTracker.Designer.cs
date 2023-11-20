@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbyssTracker));
             splitContainer1 = new SplitContainer();
@@ -52,9 +53,9 @@
             AbyssTrackerGridView = new DataGridView();
             abyssRunID = new DataGridViewTextBoxColumn();
             FilamentName = new DataGridViewTextBoxColumn();
-            Success = new DataGridViewTextBoxColumn();
-            LootValue = new DataGridViewTextBoxColumn();
             FilamentCost = new DataGridViewTextBoxColumn();
+            LootValue = new DataGridViewTextBoxColumn();
+            Success = new DataGridViewTextBoxColumn();
             ShipType = new DataGridViewTextBoxColumn();
             loot = new DataGridViewTextBoxColumn();
             FilamentType = new DataGridViewTextBoxColumn();
@@ -94,14 +95,14 @@
             splitContainer1.Panel2.Controls.Add(label7);
             splitContainer1.Panel2.Controls.Add(label6);
             splitContainer1.Panel2.Controls.Add(AbyssTrackerGridView);
-            splitContainer1.Size = new Size(1153, 751);
-            splitContainer1.SplitterDistance = 549;
+            splitContainer1.Size = new Size(1415, 751);
+            splitContainer1.SplitterDistance = 491;
             splitContainer1.TabIndex = 0;
             // 
             // AddRunButton
             // 
             AddRunButton.ForeColor = Color.Black;
-            AddRunButton.Location = new Point(438, 187);
+            AddRunButton.Location = new Point(380, 192);
             AddRunButton.Name = "AddRunButton";
             AddRunButton.Size = new Size(94, 29);
             AddRunButton.TabIndex = 10;
@@ -124,8 +125,9 @@
             LootTextBox.Location = new Point(12, 229);
             LootTextBox.Multiline = true;
             LootTextBox.Name = "LootTextBox";
-            LootTextBox.Size = new Size(520, 510);
+            LootTextBox.Size = new Size(462, 510);
             LootTextBox.TabIndex = 8;
+            LootTextBox.TextChanged += LootTextBox_TextChanged;
             // 
             // SuccessCheckbox
             // 
@@ -269,20 +271,25 @@
             // 
             // AbyssTrackerGridView
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
             AbyssTrackerGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             AbyssTrackerGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            AbyssTrackerGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            AbyssTrackerGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            AbyssTrackerGridView.BackgroundColor = Color.Black;
             AbyssTrackerGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AbyssTrackerGridView.Columns.AddRange(new DataGridViewColumn[] { abyssRunID, FilamentName, Success, LootValue, FilamentCost, ShipType, loot, FilamentType });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            AbyssTrackerGridView.Columns.AddRange(new DataGridViewColumn[] { abyssRunID, FilamentName, FilamentCost, LootValue, Success, ShipType, loot, FilamentType });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            AbyssTrackerGridView.GridColor = Color.White;
             AbyssTrackerGridView.Location = new Point(22, 229);
             AbyssTrackerGridView.MultiSelect = false;
             AbyssTrackerGridView.Name = "AbyssTrackerGridView";
@@ -290,7 +297,7 @@
             AbyssTrackerGridView.RowHeadersWidth = 51;
             AbyssTrackerGridView.RowTemplate.Height = 29;
             AbyssTrackerGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AbyssTrackerGridView.Size = new Size(566, 510);
+            AbyssTrackerGridView.Size = new Size(886, 510);
             AbyssTrackerGridView.TabIndex = 0;
             // 
             // abyssRunID
@@ -300,7 +307,7 @@
             abyssRunID.MinimumWidth = 6;
             abyssRunID.Name = "abyssRunID";
             abyssRunID.ReadOnly = true;
-            abyssRunID.Width = 125;
+            abyssRunID.Width = 82;
             // 
             // FilamentName
             // 
@@ -309,16 +316,19 @@
             FilamentName.MinimumWidth = 6;
             FilamentName.Name = "FilamentName";
             FilamentName.ReadOnly = true;
-            FilamentName.Width = 125;
+            FilamentName.Width = 139;
             // 
-            // Success
+            // FilamentCost
             // 
-            Success.DataPropertyName = "Success";
-            Success.HeaderText = "Success";
-            Success.MinimumWidth = 6;
-            Success.Name = "Success";
-            Success.ReadOnly = true;
-            Success.Width = 125;
+            FilamentCost.DataPropertyName = "FilamentCost";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            FilamentCost.DefaultCellStyle = dataGridViewCellStyle2;
+            FilamentCost.HeaderText = "FilamentCost";
+            FilamentCost.MinimumWidth = 6;
+            FilamentCost.Name = "FilamentCost";
+            FilamentCost.ReadOnly = true;
+            FilamentCost.Width = 124;
             // 
             // LootValue
             // 
@@ -327,16 +337,16 @@
             LootValue.MinimumWidth = 6;
             LootValue.Name = "LootValue";
             LootValue.ReadOnly = true;
-            LootValue.Width = 125;
+            LootValue.Width = 146;
             // 
-            // FilamentCost
+            // Success
             // 
-            FilamentCost.DataPropertyName = "FilamentCost";
-            FilamentCost.HeaderText = "FilamentCost";
-            FilamentCost.MinimumWidth = 6;
-            FilamentCost.Name = "FilamentCost";
-            FilamentCost.ReadOnly = true;
-            FilamentCost.Width = 125;
+            Success.DataPropertyName = "Success";
+            Success.HeaderText = "Success";
+            Success.MinimumWidth = 6;
+            Success.Name = "Success";
+            Success.ReadOnly = true;
+            Success.Width = 88;
             // 
             // ShipType
             // 
@@ -345,7 +355,7 @@
             ShipType.MinimumWidth = 6;
             ShipType.Name = "ShipType";
             ShipType.ReadOnly = true;
-            ShipType.Width = 125;
+            ShipType.Width = 102;
             // 
             // loot
             // 
@@ -355,7 +365,7 @@
             loot.Name = "loot";
             loot.ReadOnly = true;
             loot.Visible = false;
-            loot.Width = 125;
+            loot.Width = 68;
             // 
             // FilamentType
             // 
@@ -365,13 +375,13 @@
             FilamentType.Name = "FilamentType";
             FilamentType.ReadOnly = true;
             FilamentType.Visible = false;
-            FilamentType.Width = 125;
+            FilamentType.Width = 130;
             // 
             // AbyssTracker
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1153, 751);
+            ClientSize = new Size(1415, 751);
             Controls.Add(splitContainer1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -411,9 +421,9 @@
         private Button DeleteRunButton;
         private DataGridViewTextBoxColumn abyssRunID;
         private DataGridViewTextBoxColumn FilamentName;
-        private DataGridViewTextBoxColumn Success;
-        private DataGridViewTextBoxColumn LootValue;
         private DataGridViewTextBoxColumn FilamentCost;
+        private DataGridViewTextBoxColumn LootValue;
+        private DataGridViewTextBoxColumn Success;
         private DataGridViewTextBoxColumn ShipType;
         private DataGridViewTextBoxColumn loot;
         private DataGridViewTextBoxColumn FilamentType;

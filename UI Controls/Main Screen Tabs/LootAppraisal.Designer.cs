@@ -29,21 +29,19 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LootAppraisal));
             InputTextMultiLine = new TextBox();
             label1 = new Label();
             label2 = new Label();
             ResultsGridView = new DataGridView();
-            AppraiseButton = new Button();
-            GetPricesWorker = new System.ComponentModel.BackgroundWorker();
-            label3 = new Label();
-            TotalBuyValueLabel = new Label();
-            TotalSellValueLabel = new Label();
             typeName = new DataGridViewTextBoxColumn();
             typeID = new DataGridViewTextBoxColumn();
             quantity = new DataGridViewTextBoxColumn();
@@ -51,11 +49,17 @@
             buyPriceTotal = new DataGridViewTextBoxColumn();
             sellPricePer = new DataGridViewTextBoxColumn();
             buyPricePer = new DataGridViewTextBoxColumn();
+            AppraiseButton = new Button();
+            GetPricesWorker = new System.ComponentModel.BackgroundWorker();
+            label3 = new Label();
+            TotalBuyValueLabel = new Label();
+            TotalSellValueLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)ResultsGridView).BeginInit();
             SuspendLayout();
             // 
             // InputTextMultiLine
             // 
+            InputTextMultiLine.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             InputTextMultiLine.BackColor = Color.WhiteSmoke;
             InputTextMultiLine.Location = new Point(12, 114);
             InputTextMultiLine.Multiline = true;
@@ -86,33 +90,122 @@
             // 
             // ResultsGridView
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.ForeColor = Color.White;
             ResultsGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            ResultsGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ResultsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ResultsGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ResultsGridView.BackgroundColor = SystemColors.WindowFrame;
+            ResultsGridView.BackgroundColor = Color.Black;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            ResultsGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             ResultsGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ResultsGridView.Columns.AddRange(new DataGridViewColumn[] { typeName, typeID, quantity, sellPriceTotal, buyPriceTotal, sellPricePer, buyPricePer });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            ResultsGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            ResultsGridView.Location = new Point(550, 114);
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            ResultsGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            ResultsGridView.Location = new Point(482, 114);
             ResultsGridView.Name = "ResultsGridView";
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.Black;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            ResultsGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             ResultsGridView.RowHeadersWidth = 51;
+            dataGridViewCellStyle9.BackColor = Color.Black;
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            ResultsGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
             ResultsGridView.RowTemplate.Height = 29;
-            ResultsGridView.Size = new Size(756, 644);
+            ResultsGridView.Size = new Size(1052, 644);
             ResultsGridView.TabIndex = 4;
+            // 
+            // typeName
+            // 
+            typeName.DataPropertyName = "typeName";
+            typeName.HeaderText = "Item Name";
+            typeName.MinimumWidth = 6;
+            typeName.Name = "typeName";
+            typeName.Width = 112;
+            // 
+            // typeID
+            // 
+            typeID.DataPropertyName = "typeID";
+            typeID.HeaderText = "typeID";
+            typeID.MinimumWidth = 6;
+            typeID.Name = "typeID";
+            typeID.Visible = false;
+            typeID.Width = 125;
+            // 
+            // quantity
+            // 
+            quantity.DataPropertyName = "quantity";
+            quantity.HeaderText = "Quantity";
+            quantity.MinimumWidth = 6;
+            quantity.Name = "quantity";
+            quantity.Width = 94;
+            // 
+            // sellPriceTotal
+            // 
+            sellPriceTotal.DataPropertyName = "sellPriceTotal";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            sellPriceTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            sellPriceTotal.HeaderText = "Sell Price Total";
+            sellPriceTotal.MinimumWidth = 6;
+            sellPriceTotal.Name = "sellPriceTotal";
+            sellPriceTotal.Width = 135;
+            // 
+            // buyPriceTotal
+            // 
+            buyPriceTotal.DataPropertyName = "buyPriceTotal";
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            buyPriceTotal.DefaultCellStyle = dataGridViewCellStyle4;
+            buyPriceTotal.HeaderText = "Buy Price Total";
+            buyPriceTotal.MinimumWidth = 6;
+            buyPriceTotal.Name = "buyPriceTotal";
+            buyPriceTotal.Width = 135;
+            // 
+            // sellPricePer
+            // 
+            sellPricePer.DataPropertyName = "sellPricePer";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = "0.00";
+            sellPricePer.DefaultCellStyle = dataGridViewCellStyle5;
+            sellPricePer.HeaderText = "Sell Price Per";
+            sellPricePer.MinimumWidth = 6;
+            sellPricePer.Name = "sellPricePer";
+            sellPricePer.Width = 122;
+            // 
+            // buyPricePer
+            // 
+            buyPricePer.DataPropertyName = "buyPricePer";
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            buyPricePer.DefaultCellStyle = dataGridViewCellStyle6;
+            buyPricePer.HeaderText = "Buy Price Per";
+            buyPricePer.MinimumWidth = 6;
+            buyPricePer.Name = "buyPricePer";
+            buyPricePer.Width = 122;
             // 
             // AppraiseButton
             // 
             AppraiseButton.ForeColor = Color.Black;
-            AppraiseButton.Location = new Point(450, 395);
+            AppraiseButton.Location = new Point(349, 79);
             AppraiseButton.Name = "AppraiseButton";
             AppraiseButton.Size = new Size(94, 29);
             AppraiseButton.TabIndex = 5;
@@ -155,80 +248,11 @@
             TotalSellValueLabel.TabIndex = 7;
             TotalSellValueLabel.Text = "Total Sell Value";
             // 
-            // typeName
-            // 
-            typeName.DataPropertyName = "typeName";
-            typeName.HeaderText = "Item Name";
-            typeName.MinimumWidth = 6;
-            typeName.Name = "typeName";
-            typeName.Width = 103;
-            // 
-            // typeID
-            // 
-            typeID.DataPropertyName = "typeID";
-            typeID.HeaderText = "typeID";
-            typeID.MinimumWidth = 6;
-            typeID.Name = "typeID";
-            typeID.Visible = false;
-            typeID.Width = 125;
-            // 
-            // quantity
-            // 
-            quantity.DataPropertyName = "quantity";
-            quantity.HeaderText = "Quantity";
-            quantity.MinimumWidth = 6;
-            quantity.Name = "quantity";
-            quantity.Width = 94;
-            // 
-            // sellPriceTotal
-            // 
-            sellPriceTotal.DataPropertyName = "sellPriceTotal";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            sellPriceTotal.DefaultCellStyle = dataGridViewCellStyle2;
-            sellPriceTotal.HeaderText = "Sell Price Total";
-            sellPriceTotal.MinimumWidth = 6;
-            sellPriceTotal.Name = "sellPriceTotal";
-            sellPriceTotal.Width = 124;
-            // 
-            // buyPriceTotal
-            // 
-            buyPriceTotal.DataPropertyName = "buyPriceTotal";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            buyPriceTotal.DefaultCellStyle = dataGridViewCellStyle3;
-            buyPriceTotal.HeaderText = "Buy Price Total";
-            buyPriceTotal.MinimumWidth = 6;
-            buyPriceTotal.Name = "buyPriceTotal";
-            buyPriceTotal.Width = 124;
-            // 
-            // sellPricePer
-            // 
-            sellPricePer.DataPropertyName = "sellPricePer";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = "0.00";
-            sellPricePer.DefaultCellStyle = dataGridViewCellStyle4;
-            sellPricePer.HeaderText = "Sell Price Per";
-            sellPricePer.MinimumWidth = 6;
-            sellPricePer.Name = "sellPricePer";
-            sellPricePer.Width = 94;
-            // 
-            // buyPricePer
-            // 
-            buyPricePer.DataPropertyName = "buyPricePer";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            buyPricePer.DefaultCellStyle = dataGridViewCellStyle5;
-            buyPricePer.HeaderText = "Buy Price Per";
-            buyPricePer.MinimumWidth = 6;
-            buyPricePer.Name = "buyPricePer";
-            buyPricePer.Width = 94;
-            // 
             // LootAppraisal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1318, 794);
+            ClientSize = new Size(1546, 794);
             Controls.Add(TotalBuyValueLabel);
             Controls.Add(TotalSellValueLabel);
             Controls.Add(label3);

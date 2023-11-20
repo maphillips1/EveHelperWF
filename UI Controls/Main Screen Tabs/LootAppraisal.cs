@@ -15,11 +15,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     public partial class LootAppraisal : Objects.FormBase
     {
         private List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
+
+        #region "Init"
         public LootAppraisal()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region "Events"
         private void AppraiseButton_Click(object sender, EventArgs e)
         {
             string rawText = InputTextMultiLine.Text;
@@ -51,12 +55,32 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             GetPricesWorker.RunWorkerAsync();
                         }
                     }
-                    this.Cursor = Cursors.Default;
                 }
 
             }
         }
 
+        private void InputTextMultiLine_TextChanged(object sender, EventArgs e)
+        {
+            string text = InputTextMultiLine.Text;
+
+            if (text.Contains("\n"))
+            {
+                if (!text.Contains("\r"))
+                {
+                    text = text.Replace("\n", "\r\n");
+                    InputTextMultiLine.Text = text;
+                }
+            }
+            else
+            {
+                text = text + "\r\n";
+                InputTextMultiLine.Text = text;
+            }
+        }
+        #endregion
+
+        #region "Background Worker Processes"
         private void GetPricesWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             foreach (AppraisedItem appraisedItem in appraisedItems)
@@ -101,20 +125,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             AppraiseButton.Enabled = true;
             this.Refresh();
+            this.Cursor = Cursors.Default;
         }
-
-        private void InputTextMultiLine_TextChanged(object sender, EventArgs e)
-        {
-            string text = InputTextMultiLine.Text;
-
-            if (text.Contains("\n"))
-            {
-                if (!text.Contains("\r"))
-                {
-                    text = text.Replace("\n", "\r\n");
-                    InputTextMultiLine.Text = text;
-                }
-            }
-        }
+        #endregion
     }
 }

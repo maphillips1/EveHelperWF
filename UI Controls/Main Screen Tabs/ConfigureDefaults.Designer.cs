@@ -117,7 +117,7 @@
             // 
             // MainDefaultTabPage
             // 
-            MainDefaultTabPage.BackColor = Color.FromArgb(54, 57, 53);
+            MainDefaultTabPage.BackColor = Color.FromArgb(2, 23, 38);
             MainDefaultTabPage.Controls.Add(InventBlueprintCheckbox);
             MainDefaultTabPage.Controls.Add(OutputOrderTypeCombo);
             MainDefaultTabPage.Controls.Add(InputOrderTypeCombo);
@@ -218,7 +218,7 @@
             // 
             // ManufacturingDefaultsTabPage
             // 
-            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(54, 57, 53);
+            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
             ManufacturingDefaultsTabPage.Controls.Add(BuildComponentCheckbox);
             ManufacturingDefaultsTabPage.Controls.Add(StructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(StructureMERigCombo);
@@ -476,7 +476,7 @@
             // 
             // InventionDefaultsTabPage
             // 
-            InventionDefaultsTabPage.BackColor = Color.FromArgb(54, 57, 53);
+            InventionDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
             InventionDefaultsTabPage.Controls.Add(InventionTaxUpDown);
             InventionDefaultsTabPage.Controls.Add(InventionDecryptorCombo);
             InventionDefaultsTabPage.Controls.Add(InventionStructureTimeRigCombo);
@@ -617,7 +617,7 @@
             // 
             // ReactionsDefaultTabPage
             // 
-            ReactionsDefaultTabPage.BackColor = Color.FromArgb(54, 57, 53);
+            ReactionsDefaultTabPage.BackColor = Color.FromArgb(2, 23, 38);
             ReactionsDefaultTabPage.Controls.Add(label26);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);

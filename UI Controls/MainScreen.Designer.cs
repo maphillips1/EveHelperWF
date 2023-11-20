@@ -49,11 +49,10 @@
             PriceHistoryButton = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            fileLocationsToolStripMenuItem = new ToolStripMenuItem();
-            backupFilesToolStripMenuItem = new ToolStripMenuItem();
             FreyaLinkLabel = new LinkLabel();
             label10 = new Label();
             label11 = new Label();
+            backupFilesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -277,7 +276,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(939, 28);
@@ -286,25 +285,11 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileLocationsToolStripMenuItem, backupFilesToolStripMenuItem });
             fileToolStripMenuItem.ForeColor = Color.Black;
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(46, 24);
-            fileToolStripMenuItem.Text = "File";
-            // 
-            // fileLocationsToolStripMenuItem
-            // 
-            fileLocationsToolStripMenuItem.Name = "fileLocationsToolStripMenuItem";
-            fileLocationsToolStripMenuItem.Size = new Size(182, 26);
-            fileLocationsToolStripMenuItem.Text = "File Locations";
-            fileLocationsToolStripMenuItem.Click += fileLocationsToolStripMenuItem_Click;
-            // 
-            // backupFilesToolStripMenuItem
-            // 
-            backupFilesToolStripMenuItem.Name = "backupFilesToolStripMenuItem";
-            backupFilesToolStripMenuItem.Size = new Size(182, 26);
-            backupFilesToolStripMenuItem.Text = "Backup Files";
-            backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
+            fileToolStripMenuItem.Size = new Size(113, 24);
+            fileToolStripMenuItem.Text = "File Locations";
+            fileToolStripMenuItem.Click += fileLocationsToolStripMenuItem_Click;
             // 
             // FreyaLinkLabel
             // 
@@ -337,6 +322,13 @@
             label11.Size = new Size(456, 25);
             label11.TabIndex = 21;
             label11.Text = "All donations are voluntary and very much appreciated.";
+            // 
+            // backupFilesToolStripMenuItem
+            // 
+            backupFilesToolStripMenuItem.Name = "backupFilesToolStripMenuItem";
+            backupFilesToolStripMenuItem.Size = new Size(104, 24);
+            backupFilesToolStripMenuItem.Text = "Backup Files";
+            backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
             // 
             // MainScreen
             // 
@@ -399,10 +391,9 @@
         private Button PriceHistoryButton;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem fileLocationsToolStripMenuItem;
-        private ToolStripMenuItem backupFilesToolStripMenuItem;
         private LinkLabel FreyaLinkLabel;
         private Label label10;
         private Label label11;
+        private ToolStripMenuItem backupFilesToolStripMenuItem;
     }
 }

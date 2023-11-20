@@ -17,7 +17,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF
 {
-    public partial class PlanetPlanner : Objects.FormBase
+    public partial class PlanetaryIndustry : Objects.FormBase
     {
 
         private List<PlanetMaterial> planetOutputTypes = new List<PlanetMaterial>();
@@ -25,7 +25,7 @@ namespace EveHelperWF
         private PlanetMaterial SelectedType;
 
         #region "Init"
-        public PlanetPlanner()
+        public PlanetaryIndustry()
         {
             PlanetSchematicsHelper.Init();
             InitializeComponent();

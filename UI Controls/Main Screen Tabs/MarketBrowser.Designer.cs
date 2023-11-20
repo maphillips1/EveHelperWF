@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
             MarketBrowserSplitContainer = new SplitContainer();
             MarketListTreeView = new TreeView();
@@ -124,7 +126,7 @@
             // 
             // MarketBrowserSplitContainer.Panel2
             // 
-            MarketBrowserSplitContainer.Panel2.BackColor = Color.FromArgb(54, 57, 53);
+            MarketBrowserSplitContainer.Panel2.BackColor = Color.FromArgb(2, 23, 38);
             MarketBrowserSplitContainer.Panel2.Controls.Add(TheraButton);
             MarketBrowserSplitContainer.Panel2.Controls.Add(SystemCombo);
             MarketBrowserSplitContainer.Panel2.Controls.Add(SelectedItemImagePanel);
@@ -144,7 +146,7 @@
             // 
             // MarketListTreeView
             // 
-            MarketListTreeView.BackColor = Color.FromArgb(54, 57, 53);
+            MarketListTreeView.BackColor = Color.FromArgb(2, 23, 38);
             MarketListTreeView.Dock = DockStyle.Fill;
             MarketListTreeView.ForeColor = Color.White;
             MarketListTreeView.Location = new Point(0, 0);
@@ -217,17 +219,17 @@
             // 
             // OrdersSplitContainer.Panel1
             // 
-            OrdersSplitContainer.Panel1.BackColor = Color.FromArgb(54, 57, 53);
+            OrdersSplitContainer.Panel1.BackColor = Color.FromArgb(2, 23, 38);
             OrdersSplitContainer.Panel1.Controls.Add(label3);
             OrdersSplitContainer.Panel1.Controls.Add(SellOrdersGridView);
             // 
             // OrdersSplitContainer.Panel2
             // 
-            OrdersSplitContainer.Panel2.BackColor = Color.FromArgb(54, 57, 53);
+            OrdersSplitContainer.Panel2.BackColor = Color.FromArgb(2, 23, 38);
             OrdersSplitContainer.Panel2.Controls.Add(BuyOrdersGridView);
             OrdersSplitContainer.Panel2.Controls.Add(label4);
             OrdersSplitContainer.Size = new Size(1307, 671);
-            OrdersSplitContainer.SplitterDistance = 434;
+            OrdersSplitContainer.SplitterDistance = 335;
             OrdersSplitContainer.SplitterWidth = 10;
             OrdersSplitContainer.TabIndex = 0;
             // 
@@ -244,26 +246,29 @@
             // 
             // SellOrdersGridView
             // 
-            dataGridViewCellStyle1.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
             SellOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            SellOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             SellOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            SellOrdersGridView.BackgroundColor = Color.Black;
             SellOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SellOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { range, volumeRemaining, minVolume, formattedPrice, locationName, duration, issued, isBuyOrder, locationID, orderID, price, systemID, typeID, volumeTotal });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            SellOrdersGridView.Location = new Point(0, 46);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            SellOrdersGridView.Dock = DockStyle.Bottom;
+            SellOrdersGridView.GridColor = Color.White;
+            SellOrdersGridView.Location = new Point(0, 57);
             SellOrdersGridView.Name = "SellOrdersGridView";
             SellOrdersGridView.RowHeadersWidth = 51;
             SellOrdersGridView.RowTemplate.Height = 29;
-            SellOrdersGridView.Size = new Size(1307, 388);
+            SellOrdersGridView.Size = new Size(1307, 278);
             SellOrdersGridView.TabIndex = 0;
             // 
             // range
@@ -293,6 +298,9 @@
             // formattedPrice
             // 
             formattedPrice.DataPropertyName = "FormattedPriceString";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            formattedPrice.DefaultCellStyle = dataGridViewCellStyle2;
             formattedPrice.HeaderText = "Price";
             formattedPrice.MinimumWidth = 6;
             formattedPrice.Name = "formattedPrice";
@@ -387,26 +395,29 @@
             // 
             // BuyOrdersGridView
             // 
-            dataGridViewCellStyle3.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            BuyOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            BuyOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            dataGridViewCellStyle4.BackColor = Color.Black;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            BuyOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             BuyOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            BuyOrdersGridView.BackgroundColor = Color.Black;
             BuyOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             BuyOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, formattedPriceColumn, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle4;
-            BuyOrdersGridView.Location = new Point(0, 54);
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.Black;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            BuyOrdersGridView.Dock = DockStyle.Bottom;
+            BuyOrdersGridView.GridColor = Color.White;
+            BuyOrdersGridView.Location = new Point(0, 45);
             BuyOrdersGridView.Name = "BuyOrdersGridView";
             BuyOrdersGridView.RowHeadersWidth = 51;
             BuyOrdersGridView.RowTemplate.Height = 29;
-            BuyOrdersGridView.Size = new Size(1307, 131);
+            BuyOrdersGridView.Size = new Size(1307, 281);
             BuyOrdersGridView.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -436,6 +447,9 @@
             // formattedPriceColumn
             // 
             formattedPriceColumn.DataPropertyName = "FormattedPriceString";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            formattedPriceColumn.DefaultCellStyle = dataGridViewCellStyle5;
             formattedPriceColumn.HeaderText = "Price";
             formattedPriceColumn.MinimumWidth = 6;
             formattedPriceColumn.Name = "formattedPriceColumn";
@@ -551,21 +565,24 @@
             // 
             // PriceHistoryGridView
             // 
-            dataGridViewCellStyle5.BackColor = SystemColors.ControlLight;
-            dataGridViewCellStyle5.ForeColor = Color.Black;
-            PriceHistoryGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            PriceHistoryGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, formattedAverage, formattedLowest, formattedHighest, volume, orderCount, average, highest, lowest });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = SystemColors.ControlDark;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.Black;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
             PriceHistoryGridView.Dock = DockStyle.Fill;
+            PriceHistoryGridView.GridColor = Color.White;
             PriceHistoryGridView.Location = new Point(3, 3);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
@@ -730,6 +747,7 @@
             // 
             SelectedItemLabel.AutoSize = true;
             SelectedItemLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            SelectedItemLabel.ForeColor = Color.Gold;
             SelectedItemLabel.Location = new Point(137, 9);
             SelectedItemLabel.Name = "SelectedItemLabel";
             SelectedItemLabel.Size = new Size(136, 28);
@@ -796,6 +814,17 @@
         private Label label3;
         private Label label4;
         private DataGridView BuyOrdersGridView;
+        private Button TheraButton;
+        private DataGridView PriceHistoryGridView;
+        private DataGridViewTextBoxColumn date;
+        private DataGridViewTextBoxColumn formattedAverage;
+        private DataGridViewTextBoxColumn formattedLowest;
+        private DataGridViewTextBoxColumn formattedHighest;
+        private DataGridViewTextBoxColumn volume;
+        private DataGridViewTextBoxColumn orderCount;
+        private DataGridViewTextBoxColumn average;
+        private DataGridViewTextBoxColumn highest;
+        private DataGridViewTextBoxColumn lowest;
         private DataGridViewTextBoxColumn range;
         private DataGridViewTextBoxColumn volumeRemaining;
         private DataGridViewTextBoxColumn minVolume;
@@ -824,16 +853,5 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private Button TheraButton;
-        private DataGridView PriceHistoryGridView;
-        private DataGridViewTextBoxColumn date;
-        private DataGridViewTextBoxColumn formattedAverage;
-        private DataGridViewTextBoxColumn formattedLowest;
-        private DataGridViewTextBoxColumn formattedHighest;
-        private DataGridViewTextBoxColumn volume;
-        private DataGridViewTextBoxColumn orderCount;
-        private DataGridViewTextBoxColumn average;
-        private DataGridViewTextBoxColumn highest;
-        private DataGridViewTextBoxColumn lowest;
     }
 }

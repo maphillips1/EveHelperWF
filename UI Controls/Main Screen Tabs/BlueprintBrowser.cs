@@ -140,6 +140,8 @@ namespace EveHelperWF
             LoadImplantCombos();
             LoadStructureRigCombos();
             LoadDecryptorCombo();
+            InventionOutcomeBPCombo.DisplayMember = "Value";
+            InventionOutcomeBPCombo.ValueMember = "Key";
         }
 
         private void LoadDefaultFormValues()
@@ -297,8 +299,6 @@ namespace EveHelperWF
             if (InventionProds != null && InventionProds.Count > 0)
             {
                 InventionOutcomeBPCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionProductItems(InventionProds);
-                InventionOutcomeBPCombo.DisplayMember = "Value";
-                InventionOutcomeBPCombo.ValueMember = "Key";
             }
         }
 
@@ -515,13 +515,13 @@ namespace EveHelperWF
                 StatusLabel.Text = "Loading Materials...";
                 GetIndustryActivityMaterials();
 
-                LoadInventionCombo(DBInventionCombo);
-
                 StatusLabel.Text = "Loading Products...";
                 GetIndustryActivityProducts();
 
                 StatusLabel.Text = "Running Calcs...";
                 CalculateTotals();
+
+                LoadInventionCombo(DBInventionCombo);
 
                 StatusLabel.Text = "Loading Materials...";
                 DatabindScreen();
@@ -887,9 +887,16 @@ namespace EveHelperWF
             helperClass.InventionDecryptorId = Convert.ToInt32(InventionDecryptorCombo.SelectedValue);
 
             //Invention Outcome BP
-            if (InventionOutcomeBPCombo.Items.Count > 0)
+            if (InventionProds.Count > 0)
             {
-                helperClass.InventionProductTypeId = Convert.ToInt32(InventionOutcomeBPCombo.SelectedValue);
+                if (InventionOutcomeBPCombo.SelectedValue != null)
+                {
+                    helperClass.InventionProductTypeId = Convert.ToInt32(InventionOutcomeBPCombo.SelectedValue);
+                }
+                else
+                {
+                    helperClass.InventionProductTypeId = InventionProds[0].productTypeID;
+                }
             }
 
             return helperClass;
@@ -975,9 +982,6 @@ namespace EveHelperWF
                 List<Objects.MaterialsWithMarketData> combinedMats = ScreenHelper.BlueprintBrowserHelper.CombinedInputMats(ManuMats).OrderBy(x => x.materialName).ToList();
 
                 ManuInputGrid.DataSource = combinedMats.OrderByDescending(x => x.priceTotal).ToList<Objects.MaterialsWithMarketData>();
-
-                //Total Input Cost Label
-                ManuTotalInputCost.Text = ManufacturingTotalInputPrice.ToString("C");
 
                 //Total Volume Label
                 ManuInputVolLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingInputVolume);
@@ -1265,7 +1269,6 @@ namespace EveHelperWF
             TotalOutcomeIskLabel.Text = "";
             TotalOutputVolumeLabel.Text = "";
             TaxFeesLabel.Text = "";
-            TotalInputVolumeLabel.Text = "";
             TotalCostLabel.Text = "";
             ROILabel.Text = "";
 
@@ -1281,7 +1284,6 @@ namespace EveHelperWF
             TotalOutcomeIskLabel.Visible = true;
             TotalOutputVolumeLabel.Visible = true;
             TaxFeesLabel.Visible = true;
-            TotalInputVolumeLabel.Visible = true;
             TotalCostLabel.Visible = true;
             ROILabel.Visible = true;
         }
@@ -1321,7 +1323,7 @@ namespace EveHelperWF
             OutputPricePerLabel.Text = ManuProds[0].pricePer.ToString("C");
             TotalOutcomeIskLabel.Text = TotalManufacturingOutputPrice.ToString("C");
             TotalOutputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingOutputVolume);
-            TotalInputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingInputVolume);
+            
             decimal totalCost = ManufacturingTotalInputPrice + TotalManufacturingTaxesAndFees + TotalManufacturingJobCost;
             TotalCostLabel.Text = String.Concat("- ", totalCost.ToString("C"));
             if (totalCost > 0)
@@ -1366,7 +1368,7 @@ namespace EveHelperWF
             OutputPricePerLabel.Text = ReactionProds[0].pricePer.ToString("C");
             TotalOutcomeIskLabel.Text = TotalReactionOutputPrice.ToString("C");
             TotalOutputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalReactionOutputVolume);
-            TotalInputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalReactionInputVolume);
+            
             decimal totalCost = ReactionTotalInputPrice + TotalReactionTaxesAndFees + TotalReactionJobCost;
             TotalCostLabel.Text = string.Concat("- ", totalCost.ToString("C"));
             decimal roi = Math.Round(profit / totalCost, 4);
@@ -1389,7 +1391,7 @@ namespace EveHelperWF
             OutputPricePerLabel.Visible = false;
             TotalOutcomeIskLabel.Visible = false;
             TotalOutputVolumeLabel.Visible = false;
-            TotalInputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalInventionInputVolume);
+            
             decimal totalCost = InventionTotalInputPrice + TotalInventionTaxesAndFees + TotalInventionJobCost;
             TotalCostLabel.Text = string.Concat("- ", totalCost.ToString("C"));
             ROILabel.Visible = false;

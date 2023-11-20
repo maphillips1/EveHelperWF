@@ -734,7 +734,7 @@ namespace EveHelperWF.Database
                                                                 bool plasma,
                                                                 bool wormholes,
                                                                 bool pochven,
-                                                                bool hasStation,
+                                                                int stationFilter,
                                                                 decimal min_security,
                                                                 decimal max_security,
                                                                 int regionID,
@@ -887,14 +887,27 @@ namespace EveHelperWF.Database
                 }
             }
 
-            if (hasStation)
+            if (stationFilter > 1)
             {
                 List<int> stationSystem = StationSystems();
-                foreach (int solarSystemID in solarSystemIDs)
+                if (stationFilter == (int)(ScreenHelper.Enums.StationFilter.HasStation))
                 {
-                    if (!stationSystem.Contains(solarSystemID))
+                    foreach (int solarSystemID in solarSystemIDs)
                     {
-                        solarSystemsToRemove.Add(solarSystemID);
+                        if (!stationSystem.Contains(solarSystemID))
+                        {
+                            solarSystemsToRemove.Add(solarSystemID);
+                        }
+                    }
+                }
+                else if (stationFilter == (int)(ScreenHelper.Enums.StationFilter.NoStation))
+                {
+                    foreach (int solarSystemID in solarSystemIDs)
+                    {
+                        if (stationSystem.Contains(solarSystemID))
+                        {
+                            solarSystemsToRemove.Add(solarSystemID);
+                        }
                     }
                 }
             }

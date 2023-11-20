@@ -24,6 +24,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                      "TrackedTypes\\");
         private static string TrackedTypeFileName = Path.Combine(TrackedTypeDirectory, "TrackedTypes.json");
 
+        #region "Init"
         public PriceHistoryUtility()
         {
             InitializeComponent();
@@ -51,7 +52,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 TrackedTypesGrid.DataSource = TrackedTypes;
             }
         }
+        #endregion
 
+        #region "Events"
         private void SearchButton_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(ItemSearchTextBox.Text))
@@ -65,12 +68,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
                 ItemSearchResultsGrid.DataSource = foundTypes;
             }
-        }
-
-        private void SaveTrackedTypes()
-        {
-            string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(TrackedTypes);
-            FileIO.FileHelper.SaveCachedFile(TrackedTypeDirectory, TrackedTypeFileName, fileContent);
         }
 
         private void TrackItemsButton_Click(object sender, EventArgs e)
@@ -92,34 +89,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 SaveTrackedTypes();
                 TrackedTypesGrid.DataSource = TrackedTypes;
             }
-        }
-
-        private void UpdatePriceHistoryWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            PriceHistoryBackgroundWorkerClass typesToUpdate = (PriceHistoryBackgroundWorkerClass)(e.Argument);
-
-            int i = 1;
-            int progress = 0;
-            foreach (InventoryTypes type in typesToUpdate.InventoryTypes)
-            {
-                ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(typesToUpdate.RegionID, type.typeId);
-                progress = (int)(i / typesToUpdate.InventoryTypes.Count);
-                UpdatePriceHistoryWorker.ReportProgress(progress);
-                i++;
-            }
-        }
-
-        private void UpdatePriceHistoryWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            UpdateHistoryProgressBar.Value = e.ProgressPercentage;
-        }
-
-        private void UpdatePriceHistoryWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            ProgressLabel.Visible = false;
-            UpdateHistoryProgressBar.Visible = false;
-            UpdatePriceHistoryButton.Enabled = true;
-            RegionCombo.Enabled = true;
         }
 
         private void UpdatePriceHistoryButton_Click(object sender, EventArgs e)
@@ -147,6 +116,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             LoadPriceHistoryViewer();
         }
+        #endregion
+
+        #region "Methods"
+        private void SaveTrackedTypes()
+        {
+            string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(TrackedTypes);
+            FileIO.FileHelper.SaveCachedFile(TrackedTypeDirectory, TrackedTypeFileName, fileContent);
+        }
 
         private void LoadPriceHistoryViewer()
         {
@@ -169,5 +146,36 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
             }
         }
+        #endregion
+
+        #region "Background Worker"
+        private void UpdatePriceHistoryWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            PriceHistoryBackgroundWorkerClass typesToUpdate = (PriceHistoryBackgroundWorkerClass)(e.Argument);
+
+            int i = 1;
+            int progress = 0;
+            foreach (InventoryTypes type in typesToUpdate.InventoryTypes)
+            {
+                ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(typesToUpdate.RegionID, type.typeId);
+                progress = (int)(i / typesToUpdate.InventoryTypes.Count);
+                UpdatePriceHistoryWorker.ReportProgress(progress);
+                i++;
+            }
+        }
+
+        private void UpdatePriceHistoryWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            UpdateHistoryProgressBar.Value = e.ProgressPercentage;
+        }
+
+        private void UpdatePriceHistoryWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            ProgressLabel.Visible = false;
+            UpdateHistoryProgressBar.Visible = false;
+            UpdatePriceHistoryButton.Enabled = true;
+            RegionCombo.Enabled = true;
+        }
+        #endregion
     }
 }

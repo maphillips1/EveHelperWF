@@ -16,6 +16,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private const string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
         private const string CachedFormValuesFileName = "form_values.json";
 
+        #region "Init"
         public ConfigureDefaults()
         {
             LoadDefaultsFromFile();
@@ -150,7 +151,22 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 ReactionTaxUpDown.Value = DefaultFormValues.ReactionTaxValue;
             }
         }
+        #endregion
 
+        #region "Events"
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            SaveFormValues();
+
+            string content = Newtonsoft.Json.JsonConvert.SerializeObject(DefaultFormValues);
+            string filename = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
+            FileIO.FileHelper.SaveCachedFile(CachedFormValuesDirectory, filename, content);
+
+            this.Close();
+        }
+        #endregion
+
+        #region "Methods"
         private void SaveFormValues()
         {
             //Main
@@ -187,16 +203,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.ReactionStructureTERigValue = Convert.ToInt32(ReactionStructureTERig.SelectedValue);
             DefaultFormValues.ReactionTaxValue = Convert.ToDecimal(ReactionTaxUpDown.Value);
         }
-
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            SaveFormValues();
-
-            string content = Newtonsoft.Json.JsonConvert.SerializeObject(DefaultFormValues);
-            string filename = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
-            FileIO.FileHelper.SaveCachedFile(CachedFormValuesDirectory, filename, content);
-
-            this.Close();
-        }
+        #endregion
     }
 }

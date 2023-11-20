@@ -20,6 +20,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private int RegionId = 0;
         private BindingList<Objects.ESIPriceHistory> PriceHistory = new BindingList<ESIPriceHistory>();
 
+
+        #region "Init"
         public PriceHistoryViewer(int selectedTypeId, int regionID, string selectedTypeName)
         {
             InitializeComponent();
@@ -37,14 +39,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             {
                 PriceHistory.Add(priceHistory);
             }
-            PriceHistoryGridView.DataSource = PriceHistory;
+            PriceHistoryGridView.DataSource = PriceHistory.OrderByDescending(x => x.date).ToList();
         }
 
         private void LoadImage()
         {
             GetImageBackgroundWorker.RunWorkerAsync(argument: SelectedTypeId);
         }
+        #endregion
 
+        #region "Background Worker"
         private void GetImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             byte[] iamge = null;
@@ -78,5 +82,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 this.SelectedItemImagePanel.BackgroundImage = null;
             }
         }
+        #endregion
     }
 }
