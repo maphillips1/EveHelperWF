@@ -41,16 +41,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadCombos()
         {
             //Main
-            InputOrderTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInputPriceTypeItems();
+            InputOrderTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             InputOrderTypeCombo.DisplayMember = "Value";
             InputOrderTypeCombo.ValueMember = "Key";
 
-            OutputOrderTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetOutputPriceTypeItems();
+            OutputOrderTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             OutputOrderTypeCombo.DisplayMember = "Value";
             OutputOrderTypeCombo.ValueMember = "Key";
 
             //Manufacturing
-            SystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingSolarSystemItems();
+            SystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             SystemCombo.DisplayMember = "Value";
             SystemCombo.ValueMember = "Key";
 
@@ -58,11 +58,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             StructureCombo.DisplayMember = "Value";
             StructureCombo.ValueMember = "Key";
 
-            StructureMERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureMERigs();
+            StructureMERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             StructureMERigCombo.DisplayMember = "Value";
             StructureMERigCombo.ValueMember = "Key";
 
-            StructureTERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureTERigs();
+            StructureTERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             StructureTERigCombo.DisplayMember = "Value";
             StructureTERigCombo.ValueMember = "Key";
 
@@ -71,7 +71,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ImplantCombo.ValueMember = "Key";
 
             //Invention
-            InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionSolarSystemItems();
+            InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             InventionSolarSystemCombo.DisplayMember = "Value";
             InventionSolarSystemCombo.ValueMember = "Key";
 
@@ -79,11 +79,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             InventionStructureCombo.DisplayMember = "Value";
             InventionStructureCombo.ValueMember = "Key";
 
-            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionStructureCostRigs();
+            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureCostRigCombo.DisplayMember = "Value";
             InventionStructureCostRigCombo.ValueMember = "Key";
 
-            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionStructureTERigs();
+            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
 
@@ -92,7 +92,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             InventionDecryptorCombo.ValueMember = "typeID";
 
             //Reactions
-            ReactionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionSolarSystemItems();
+            ReactionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetLowAndNullSecComboItems();
             ReactionSolarSystemCombo.DisplayMember = "Value";
             ReactionSolarSystemCombo.ValueMember = "Key";
 
@@ -100,11 +100,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ReactionStructureCombo.DisplayMember = "Value";
             ReactionStructureCombo.ValueMember = "Key";
 
-            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionStructureMERigs();
+            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureMERig.DisplayMember = "Value";
             ReactionStructureMERig.ValueMember = "Key";
 
-            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionStructureTERigs();
+            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureTERig.DisplayMember = "Value";
             ReactionStructureTERig.ValueMember = "Key";
         }

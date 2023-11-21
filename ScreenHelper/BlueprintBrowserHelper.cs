@@ -11,15 +11,12 @@ namespace EveHelperWF.ScreenHelper
     {
         #region "Static Variables"
         public static List<Objects.ComboListItem> InputPriceTypeItems = null;
-        public static List<Objects.ComboListItem> OutputPriceTypeItems = null;
         public static List<Objects.ComboListItem> ManufacturingSolarSystemComboItems = null;
         public static List<Objects.ComboListItem> ReactionSolarSystemComboItems = null;
-        public static List<Objects.ComboListItem> InventionSolarSystemComboItems = null;
         public static List<Objects.InventoryTypes> InventoryTypes = null;
         public static List<Objects.EngineerngComplex> EngineerngComplices = null;
         public static List<Objects.RefineryComplex> RefinerComplices = null;
         public static List<Objects.ComboListItem> EngineeringComboItems = null;
-        public static List<Objects.ComboListItem> InventionEngineeringComboItems = null;
         public static List<Objects.ComboListItem> RefineryComboItems = null;
         public static List<Objects.IndustryImplant> ManufacturingImplants = null;
         public static List<Objects.IndustryImplant> MEImplants = null;
@@ -30,11 +27,6 @@ namespace EveHelperWF.ScreenHelper
         public static List<Objects.ComboListItem> TEImplantItems = null;
         public static List<Objects.ComboListItem> CopyImplantItems = null;
         public static List<Objects.ComboListItem> StructureManufacturingMERigs = null;
-        public static List<Objects.ComboListItem> StructureManufacturingTERigs = null;
-        public static List<Objects.ComboListItem> StructureInventionCostRigs = null;
-        public static List<Objects.ComboListItem> StructureInventionTERigs = null;
-        public static List<Objects.ComboListItem> StructureReactionMERigs = null;
-        public static List<Objects.ComboListItem> StructureReactionTERigs = null;
         private static List<Objects.AdjustedCost> AdjustedCosts = null;
         public static List<Objects.CostIndice> CostIndicies = null;
         private static List<Objects.SolarSystem> SolarSystemList = null;
@@ -239,7 +231,7 @@ namespace EveHelperWF.ScreenHelper
         #endregion 
 
         #region "Drop Down Load Helpers"
-        public static List<Objects.ComboListItem> GetInputPriceTypeItems()
+        public static List<Objects.ComboListItem> GetPriceTypeComboItems()
         {
             if (InputPriceTypeItems == null)
             {
@@ -258,26 +250,7 @@ namespace EveHelperWF.ScreenHelper
             return InputPriceTypeItems;
         }
 
-        public static List<Objects.ComboListItem> GetOutputPriceTypeItems()
-        {
-            if (OutputPriceTypeItems == null)
-            {
-                OutputPriceTypeItems = new List<Objects.ComboListItem>();
-                Objects.ComboListItem SellItem = new Objects.ComboListItem();
-                SellItem.key = 1;
-                SellItem.value = "Sell";
-                OutputPriceTypeItems.Add(SellItem);
-
-                Objects.ComboListItem BuyItem = new Objects.ComboListItem();
-                BuyItem.key = 2;
-                BuyItem.value = "Buy";
-                OutputPriceTypeItems.Add(BuyItem);
-            }
-
-            return OutputPriceTypeItems;
-        }
-
-        public static List<Objects.ComboListItem> GetManufacturingSolarSystemItems()
+        public static List<Objects.ComboListItem> GetAllSolarSystemComboItems()
         {
             if (ManufacturingSolarSystemComboItems == null)
             {
@@ -294,24 +267,7 @@ namespace EveHelperWF.ScreenHelper
             return ManufacturingSolarSystemComboItems;
         }
 
-        public static List<Objects.ComboListItem> GetInventionSolarSystemItems()
-        {
-            if (InventionSolarSystemComboItems == null)
-            {
-                InventionSolarSystemComboItems = new List<Objects.ComboListItem>();
-
-                foreach (Objects.SolarSystem system in SolarSystemList)
-                {
-                    Objects.ComboListItem comboListItem = new Objects.ComboListItem();
-                    comboListItem.key = system.solarSystemID;
-                    comboListItem.value = system.solarSystemName;
-                    InventionSolarSystemComboItems.Add(comboListItem);
-                }
-            }
-            return InventionSolarSystemComboItems;
-        }
-
-        public static List<Objects.ComboListItem> GetReactionSolarSystemItems()
+        public static List<Objects.ComboListItem> GetLowAndNullSecComboItems()
         {
             if (ReactionSolarSystemComboItems == null)
             {
@@ -350,29 +306,6 @@ namespace EveHelperWF.ScreenHelper
             }
 
             return EngineeringComboItems;
-        }
-
-        public static List<Objects.ComboListItem> GetInventionEngineeringStructureItems()
-        {
-            if (InventionEngineeringComboItems == null)
-            {
-                InventionEngineeringComboItems = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem npcStation = new Objects.ComboListItem();
-                npcStation.value = "NPC Station";
-                npcStation.key = 0;
-                InventionEngineeringComboItems.Add(npcStation);
-
-                foreach (Objects.EngineerngComplex complex in EngineerngComplices)
-                {
-                    Objects.ComboListItem comboListItem = new Objects.ComboListItem();
-                    comboListItem.key = complex.StructureTypeId;
-                    comboListItem.value = complex.StructureName;
-                    InventionEngineeringComboItems.Add(comboListItem);
-                }
-            }
-
-            return InventionEngineeringComboItems;
         }
 
         public static List<Objects.ComboListItem> GetRefineryComboItems()
@@ -480,7 +413,7 @@ namespace EveHelperWF.ScreenHelper
             return CopyImplantItems;
         }
 
-        public static List<Objects.ComboListItem> GetManufacturingStructureMERigs()
+        public static List<Objects.ComboListItem> GetStructureRigComboItems()
         {
             if (StructureManufacturingMERigs == null)
             {
@@ -502,126 +435,6 @@ namespace EveHelperWF.ScreenHelper
                 StructureManufacturingMERigs.Add(tech2Item);
             }
             return StructureManufacturingMERigs;
-        }
-
-        public static List<Objects.ComboListItem> GetManufacturingStructureTERigs()
-        {
-            if (StructureManufacturingTERigs == null)
-            {
-                StructureManufacturingTERigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureManufacturingTERigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureManufacturingTERigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureManufacturingTERigs.Add(tech2Item);
-            }
-            return StructureManufacturingTERigs;
-        }
-
-        public static List<Objects.ComboListItem> GetReactionStructureMERigs()
-        {
-            if (StructureReactionMERigs == null)
-            {
-                StructureReactionMERigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureReactionMERigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureReactionMERigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureReactionMERigs.Add(tech2Item);
-            }
-            return StructureReactionMERigs;
-        }
-
-        public static List<Objects.ComboListItem> GetReactionStructureTERigs()
-        {
-            if (StructureReactionTERigs == null)
-            {
-                StructureReactionTERigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureReactionTERigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureReactionTERigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureReactionTERigs.Add(tech2Item);
-            }
-            return StructureReactionTERigs;
-        }
-
-        public static List<Objects.ComboListItem> GetInventionStructureCostRigs()
-        {
-            if (StructureInventionCostRigs == null)
-            {
-                StructureInventionCostRigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureInventionCostRigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureInventionCostRigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureInventionCostRigs.Add(tech2Item);
-            }
-            return StructureInventionCostRigs;
-        }
-
-        public static List<Objects.ComboListItem> GetInventionStructureTERigs()
-        {
-            if (StructureInventionTERigs == null)
-            {
-                StructureInventionTERigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureInventionTERigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureInventionTERigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureInventionTERigs.Add(tech2Item);
-            }
-            return StructureInventionTERigs;
         }
 
         public static List<Objects.Decryptor> GetDecryptors()
@@ -716,7 +529,6 @@ namespace EveHelperWF.ScreenHelper
 
             return comboListItems;
         }
-
         #endregion
 
         #region "Build Tree View"
@@ -898,10 +710,12 @@ namespace EveHelperWF.ScreenHelper
                     }
                     if (isBuyOrder)
                     {
+                        mat.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
                         mat.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
                     }
                     else
                     {
+                        mat.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
                         mat.priceTotal = ESI_Calls.ESIMarketData.GetSellOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
                     }
                 }
@@ -1101,6 +915,45 @@ namespace EveHelperWF.ScreenHelper
             }
 
             return combinedMats;
+        }
+
+        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats)
+        {
+            decimal baseCost = 0;
+            AdjustedCost adjustedCost = null;
+            foreach (MaterialsWithMarketData mat in manuMats)
+            {
+                adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
+                if (adjustedCost != null)
+                {
+                    if (adjustedCost.adjusted_price > 0)
+                    {
+                        baseCost += (adjustedCost.adjusted_price * mat.quantity);
+                    }
+                    else
+                    {
+                        baseCost += (adjustedCost.average_price * mat.quantity);
+                    }
+                }
+            }
+
+            return baseCost;
+        }
+
+        public static decimal GetCostIndexForSystemID(int solarSystemID, string activityName)
+        {
+            decimal costIndex = 0;
+
+            if (CostIndicies.Count > 0)
+            {
+                CostIndice costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
+                if (costIndice != null)
+                {
+                    costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;
+                }
+            }
+
+            return costIndex;
         }
         #endregion
 
@@ -1339,16 +1192,9 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ManufacturingSolarSystemID > 0)
             {
-                Objects.CostIndice indice = CostIndicies.Find(x => x.solar_system_id == helperClass.ManufacturingSolarSystemID);
-                if (indice != null)
-                {
-                    Objects.CostIndiceActivity costIndiceActivity = indice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ActivityManufacturing);
-                    if (costIndiceActivity != null)
-                    {
-                        costIndice = costIndiceActivity.cost_index;
-                    }
-                }
+                costIndice = GetCostIndexForSystemID(helperClass.ManufacturingSolarSystemID, CostIndiceActivity.ActivityManufacturing);
             }
+
             jobCost = Math.Round(jobCost);
 
             jobCost = Math.Round(jobCost * costIndice);
@@ -1645,16 +1491,9 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ReactionSolarSystemID > 0)
             {
-                Objects.CostIndice indice = CostIndicies.Find(x => x.solar_system_id == helperClass.ReactionSolarSystemID);
-                if (indice != null)
-                {
-                    Objects.CostIndiceActivity costIndiceActivity = indice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ACtivityReaction);
-                    if (costIndiceActivity != null)
-                    {
-                        costIndice = costIndiceActivity.cost_index;
-                    }
-                }
+                costIndice = GetCostIndexForSystemID(helperClass.ReactionSolarSystemID, CostIndiceActivity.ACtivityReaction);
             }
+
             jobCost = Math.Round(jobCost);
 
             jobCost = Math.Round(jobCost * costIndice);
@@ -1781,16 +1620,9 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionSolarSystemID > 0)
             {
-                Objects.CostIndice indice = CostIndicies.Find(x => x.solar_system_id == helperClass.InventionSolarSystemID);
-                if (indice != null)
-                {
-                    Objects.CostIndiceActivity costIndiceActivity = indice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ActivityInvention);
-                    if (costIndiceActivity != null)
-                    {
-                        costIndice = costIndiceActivity.cost_index;
-                    }
-                }
+                costIndice = GetCostIndexForSystemID(helperClass.InventionSolarSystemID, CostIndiceActivity.ActivityInvention);
             }
+
             jobCost = Math.Round(estimatedItemValue * Convert.ToDecimal(0.02));
 
             jobCost = Math.Round(jobCost * costIndice);
@@ -2063,29 +1895,6 @@ namespace EveHelperWF.ScreenHelper
             return cost;
         }
 
-        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats)
-        {
-            decimal baseCost = 0;
-            AdjustedCost adjustedCost = null;
-            foreach (MaterialsWithMarketData mat in manuMats)
-            {
-                adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
-                if (adjustedCost != null)
-                {
-                    if (adjustedCost.adjusted_price > 0)
-                    {
-                        baseCost += (adjustedCost.adjusted_price * mat.quantity);
-                    }
-                    else
-                    {
-                        baseCost += (adjustedCost.average_price * mat.quantity);
-                    }
-                }
-            }
-
-            return baseCost;
-        }
-
         private static decimal GetProcessTimeValue(decimal baseCost, int fromLevel, int toLevel)
         {
             decimal processTimeValue = 0;
@@ -2142,22 +1951,6 @@ namespace EveHelperWF.ScreenHelper
                     break;
             }
             return levelModifier;
-        }
-
-        public static decimal GetCostIndexForSystemID(int solarSystemID, string activityName)
-        {
-            decimal costIndex = 0;
-
-            if (CostIndicies.Count > 0)
-            {
-                CostIndice costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
-                if (costIndice != null)
-                {
-                    costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;
-                }
-            }
-
-            return costIndex;
         }
 
         public static decimal GetMETETotalInputMats(ref List<MaterialsWithMarketData> inputMats, int fromLevel, int toLevel)
