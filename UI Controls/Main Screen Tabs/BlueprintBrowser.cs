@@ -217,12 +217,12 @@ namespace EveHelperWF
 
         private void LoadPriceTypeCombos()
         {
-            InputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInputPriceTypeItems();
+            InputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             InputTypeCombo.DisplayMember = "Value";
             InputTypeCombo.ValueMember = "Key";
             InputTypeCombo.SelectedValue = 1;
 
-            OutputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetOutputPriceTypeItems();
+            OutputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             OutputTypeCombo.DisplayMember = "Value";
             OutputTypeCombo.ValueMember = "Key";
             OutputTypeCombo.SelectedValue = 2;
@@ -230,19 +230,19 @@ namespace EveHelperWF
 
         private void LoadSolarSystemCombos()
         {
-            ManuSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingSolarSystemItems();
+            ManuSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             ManuSystemCombo.DisplayMember = "Value";
             ManuSystemCombo.ValueMember = "Key";
 
-            ReactionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionSolarSystemItems();
+            ReactionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetLowAndNullSecComboItems();
             ReactionSolarSystemCombo.DisplayMember = "Value";
             ReactionSolarSystemCombo.ValueMember = "Key";
 
-            InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionSolarSystemItems();
+            InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             InventionSolarSystemCombo.DisplayMember = "Value";
             InventionSolarSystemCombo.ValueMember = "Key";
 
-            MESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingSolarSystemItems();
+            MESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             MESystemCombo.DisplayMember = "Value";
             MESystemCombo.ValueMember = "Key";
         }
@@ -257,7 +257,7 @@ namespace EveHelperWF
             ReactionStructureCombo.DisplayMember = "Value";
             ReactionStructureCombo.ValueMember = "Key";
 
-            InventionStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionEngineeringStructureItems();
+            InventionStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
             InventionStructureCombo.DisplayMember = "Value";
             InventionStructureCombo.ValueMember = "Key";
 
@@ -279,31 +279,31 @@ namespace EveHelperWF
 
         private void LoadStructureRigCombos()
         {
-            ManuRigMEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureMERigs();
+            ManuRigMEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ManuRigMEBonusCombo.DisplayMember = "Value";
             ManuRigMEBonusCombo.ValueMember = "Key";
 
-            ManuRigTEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureTERigs();
+            ManuRigTEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ManuRigTEBonusCombo.DisplayMember = "Value";
             ManuRigTEBonusCombo.ValueMember = "Key";
 
-            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionStructureMERigs();
+            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureMERig.DisplayMember = "Value";
             ReactionStructureMERig.ValueMember = "Key";
 
-            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetReactionStructureTERigs();
+            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureTERig.DisplayMember = "Value";
             ReactionStructureTERig.ValueMember = "Key";
 
-            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionStructureCostRigs();
+            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureCostRigCombo.DisplayMember = "Value";
             InventionStructureCostRigCombo.ValueMember = "Key";
 
-            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionStructureTERigs();
+            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
 
-            METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureTERigs();
+            METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             METimeRigCombo.DisplayMember = "Value";
             METimeRigCombo.ValueMember = "Key";
 
@@ -1087,15 +1087,11 @@ namespace EveHelperWF
                 //Total Volume Label
                 ManuInputVolLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingInputVolume);
 
-                if (ScreenHelper.BlueprintBrowserHelper.CostIndicies != null && ScreenHelper.BlueprintBrowserHelper.CostIndicies.Count > 0)
+                int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
+                if (solarSystemId > 0)
                 {
-                    int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
-                    Objects.CostIndice costIndice = ScreenHelper.BlueprintBrowserHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemId);
-                    if (costIndice != null)
-                    {
-                        decimal costIndex = costIndice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ActivityManufacturing).cost_index;
-                        ManufacturingSCILabel.Text = String.Format("{0:P2}.", costIndex);
-                    }
+                    decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityManufacturing);
+                    ManufacturingSCILabel.Text = String.Format("{0:P2}.", costIndex);
                 }
             }
         }
@@ -1147,15 +1143,11 @@ namespace EveHelperWF
             ReactionTotalInputCostLabel.Text = ReactionTotalInputPrice.ToString("C");
             ReactionTotalOutcomeIskLabel.Text = TotalReactionOutputPrice.ToString("C");
 
-            if (ScreenHelper.BlueprintBrowserHelper.CostIndicies != null && ScreenHelper.BlueprintBrowserHelper.CostIndicies.Count > 0)
+            int solarSystemId = (Int32)ReactionSolarSystemCombo.SelectedValue;
+            if (solarSystemId > 0)
             {
-                int solarSystemId = (Int32)ReactionSolarSystemCombo.SelectedValue;
-                Objects.CostIndice costIndice = ScreenHelper.BlueprintBrowserHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemId);
-                if (costIndice != null)
-                {
-                    decimal costIndex = costIndice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ACtivityReaction).cost_index;
-                    ReactionsSCILabel.Text = String.Format("{0:P2}.", costIndex);
-                }
+                decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ACtivityReaction);
+                ReactionsSCILabel.Text = String.Format("{0:P2}.", costIndex);
             }
         }
         #endregion
@@ -1217,16 +1209,11 @@ namespace EveHelperWF
             InventionJobCostLabel.Text = TotalInventionJobCost.ToString("C");
 
 
-            if (ScreenHelper.BlueprintBrowserHelper.CostIndicies != null && ScreenHelper.BlueprintBrowserHelper.CostIndicies.Count > 0)
+            int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
+            if (solarSystemId > 0)
             {
-                int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
-                Objects.CostIndice costIndice = ScreenHelper.BlueprintBrowserHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemId);
-                if (costIndice != null)
-                {
-                    decimal costIndex = costIndice.cost_indices.Find(x => x.activity == Objects.CostIndiceActivity.ActivityInvention).cost_index;
-                    InventionSCILabel.Text = String.Format("{0:P2}.", costIndex);
-
-                }
+                decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ActivityInvention);
+                InventionSCILabel.Text = String.Format("{0:P2}.", costIndex);
             }
 
         }
@@ -1514,17 +1501,11 @@ namespace EveHelperWF
             MEResearchTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
 
             //Cost Index Label
-            if (ScreenHelper.BlueprintBrowserHelper.CostIndicies.Count > 0)
+            int solarSystemId = (int)MESystemCombo.SelectedValue;
+            if (solarSystemId > 0)
             {
-                int solarSystemId = (int)MESystemCombo.SelectedValue;
-                if (solarSystemId > 0)
-                {
-                    CostIndice costIndex = BlueprintBrowserHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemId);
-                    if (costIndex != null)
-                    {
-                        MESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndex.cost_indices.Find(x => x.activity == CostIndiceActivity.ActivityME).cost_index);
-                    }
-                }
+                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityME);
+                MESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
             }
 
             //Total Input Volume Label
