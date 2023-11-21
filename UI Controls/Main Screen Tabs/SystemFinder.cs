@@ -74,7 +74,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
             else
             {
-                stationFilter = (int)(ScreenHelper.Enums.StationFilter.DoNotFilter);
+                stationFilter = (int)(Enums.Enums.StationFilter.DoNotFilter);
             }
         }
         #endregion

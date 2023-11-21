@@ -45,12 +45,15 @@ namespace EveHelperWF
         private static Int64 ManufacturingTotalTime = 0;
         private static Int64 ReactionTotalTime = 0;
         private static Int64 InventionTotalTime = 0;
+        private static Int64 ResMETime = 0;
+        private static Int64 ResTETime = 0;
         //Component Time
         private static Int64 ManufacturingTotalComponentTime = 0;
         //Input Price
         private static decimal ManufacturingTotalInputPrice = 0;
         private static decimal ReactionTotalInputPrice = 0;
         private static decimal InventionTotalInputPrice = 0;
+        private static decimal METotalInputPrice = 0;
         //Run Time
         private static Int64 TotalManufacturingJobTime = 0;
         private static Int64 TotalReactionJobTime = 0;
@@ -59,6 +62,7 @@ namespace EveHelperWF
         private static Decimal TotalManufacturingJobCost = 0;
         private static Decimal TotalReactionJobCost = 0;
         private static Decimal TotalInventionJobCost = 0;
+        private static decimal TotalMEJobCost = 0;
         //Output Price
         private static Decimal TotalManufacturingOutputPrice = 0;
         private static Decimal TotalReactionOutputPrice = 0;
@@ -66,6 +70,7 @@ namespace EveHelperWF
         private static Decimal TotalManufacturingInputVolume = 0;
         private static Decimal TotalReactionInputVolume = 0;
         private static Decimal TotalInventionInputVolume = 0;
+        private static decimal TotalMEInputVolume = 0;
         //Output Volume
         private static Decimal TotalManufacturingOutputVolume = 0;
         private static Decimal TotalReactionOutputVolume = 0;
@@ -78,6 +83,7 @@ namespace EveHelperWF
         private static Decimal TotalManufacturingTaxesAndFees = 0;
         private static Decimal TotalReactionTaxesAndFees = 0;
         private static Decimal TotalInventionTaxesAndFees = 0;
+        private static decimal TotalMETaxesAndFees = 0;
 
         //Invention Specific
         private static Decimal FinalInventionProbability = 0;
@@ -235,6 +241,10 @@ namespace EveHelperWF
             InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionSolarSystemItems();
             InventionSolarSystemCombo.DisplayMember = "Value";
             InventionSolarSystemCombo.ValueMember = "Key";
+
+            MESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingSolarSystemItems();
+            MESystemCombo.DisplayMember = "Value";
+            MESystemCombo.ValueMember = "Key";
         }
 
         private void LoadStructureCombos()
@@ -250,6 +260,10 @@ namespace EveHelperWF
             InventionStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionEngineeringStructureItems();
             InventionStructureCombo.DisplayMember = "Value";
             InventionStructureCombo.ValueMember = "Key";
+
+            MEStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
+            MEStructureCombo.DisplayMember = "Value";
+            MEStructureCombo.ValueMember = "Key";
         }
 
         private void LoadImplantCombos()
@@ -257,6 +271,10 @@ namespace EveHelperWF
             ManuImplantCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingImplantItems();
             ManuImplantCombo.DisplayMember = "Value";
             ManuImplantCombo.ValueMember = "Key";
+
+            MEImplantCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetMEIMplentItems();
+            MEImplantCombo.DisplayMember = "Value";
+            MEImplantCombo.ValueMember = "Key";
         }
 
         private void LoadStructureRigCombos()
@@ -284,6 +302,10 @@ namespace EveHelperWF
             InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetInventionStructureTERigs();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
+
+            METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetManufacturingStructureTERigs();
+            METimeRigCombo.DisplayMember = "Value";
+            METimeRigCombo.ValueMember = "Key";
 
         }
 
@@ -512,18 +534,18 @@ namespace EveHelperWF
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                StatusLabel.Text = "Loading Materials...";
+                StatusLabel.Text = "Loading Materials..";
                 GetIndustryActivityMaterials();
 
-                StatusLabel.Text = "Loading Products...";
+                StatusLabel.Text = "Loading Products..";
                 GetIndustryActivityProducts();
 
-                StatusLabel.Text = "Running Calcs...";
+                StatusLabel.Text = "Running Calcs..";
                 CalculateTotals();
 
                 LoadInventionCombo(DBInventionCombo);
 
-                StatusLabel.Text = "Loading Materials...";
+                StatusLabel.Text = "Loading Materials..";
                 DatabindScreen();
 
                 StatusLabel.Text = "Done;";
@@ -624,6 +646,42 @@ namespace EveHelperWF
             return hasInventionActivity;
         }
 
+        private static bool HasMEResearchActivity()
+        {
+            bool hasActivity = false;
+
+            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)) != null)
+            {
+                hasActivity = true;
+            }
+
+            return hasActivity;
+        }
+
+        private static bool HasTEResearchActivity()
+        {
+            bool hasActivity = false;
+
+            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingTimeEfficiency)) != null)
+            {
+                hasActivity = true;
+            }
+
+            return hasActivity;
+        }
+
+        private static bool HasCopyResearchActivity()
+        {
+            bool hasActivity = false;
+
+            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityCopying)) != null)
+            {
+                hasActivity = true;
+            }
+
+            return hasActivity;
+        }
+
         private static bool IsBlueprintInvented()
         {
             bool isBlueprintInvented = false;
@@ -651,6 +709,11 @@ namespace EveHelperWF
             if (HasInventionActivity())
             {
                 CalculateInventionTotals(calculationHelperClass);
+            }
+
+            if (HasMEResearchActivity())
+            {
+                CalculateMETotals(calculationHelperClass);
             }
 
             TotalManufacturingJobTime = ManufacturingTotalComponentTime + ManufacturingTotalTime;
@@ -757,6 +820,20 @@ namespace EveHelperWF
             InventionTotalInputPrice = totalPrice;
         }
 
+        private void CalculateMETotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)).time;
+            ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResMEMats, calculationHelperClass.MEFromLevel,calculationHelperClass.METoLevel);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResMEMats);
+            ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
+            TotalMEJobCost = BlueprintBrowserHelper.GetMEJobCost(calculationHelperClass, ManuMats);
+            TotalMEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResMEMats, calculationHelperClass);
+            foreach (Objects.MaterialsWithMarketData mat in ResMEMats)
+            {
+                METotalInputPrice += mat.priceTotal;
+            }
+        }
+
         private void ResetTotals()
         {
             //Time
@@ -827,6 +904,7 @@ namespace EveHelperWF
             helperClass.ManufacturingStructureTypeID = Convert.ToInt32(ManuStructCombo.SelectedValue);
             helperClass.ReactionsStructureTypeID = Convert.ToInt32(ReactionStructureCombo.SelectedValue);
             helperClass.InventionStructureTypeID = Convert.ToInt32(InventionStructureCombo.SelectedValue);
+            helperClass.MEStructureTypeID = Convert.ToInt32(MEStructureCombo.SelectedValue);
 
             //Structure Rigs
             helperClass.ManufacturingStructureRigBonus = new Objects.StructureRigBonus();
@@ -847,18 +925,26 @@ namespace EveHelperWF
                 helperClass.InventionStructureRigBonus.RigMEBonus = Convert.ToInt32(InventionStructureCostRigCombo.SelectedValue);
                 helperClass.InventionStructureRigBonus.RigTEBonus = Convert.ToInt32(InventionStructureTimeRigCombo.SelectedValue);
             }
+            helperClass.MEStructureRigBonus = new Objects.StructureRigBonus();
+            if (helperClass.MEStructureTypeID > 0)
+            {
+                helperClass.MEStructureRigBonus.RigTEBonus = Convert.ToInt32(METimeRigCombo.SelectedValue);
+            }
 
             //Input Output order type
             helperClass.InputOrderType = Convert.ToInt32(InputTypeCombo.SelectedValue);
             helperClass.OutputOrderType = Convert.ToInt32(OutputTypeCombo.SelectedValue);
 
+
             //Implant types
             helperClass.ManufacturingImplantTypeID = Convert.ToInt32(ManuImplantCombo.SelectedValue);
+            helperClass.MEImplantTypeID = Convert.ToInt32(MEImplantCombo.SelectedValue);
 
             //Solar Systems
             helperClass.ManufacturingSolarSystemID = Convert.ToInt32(ManuSystemCombo.SelectedValue);
             helperClass.ReactionSolarSystemID = Convert.ToInt32(ReactionSolarSystemCombo.SelectedValue);
             helperClass.InventionSolarSystemID = Convert.ToInt32(InventionSolarSystemCombo.SelectedValue);
+            helperClass.MESolarSystemID = Convert.ToInt32(MESystemCombo.SelectedValue);
 
             //Facility Tax
             if (Convert.ToInt32(ManuStructCombo.SelectedValue) == 0)
@@ -873,11 +959,21 @@ namespace EveHelperWF
             helperClass.ReactionsFacilityTax = Convert.ToDecimal(ReactionTaxUpDown.Value);
             if (Convert.ToInt32(InventionStructureCombo.SelectedValue) == 0)
             {
+                //NPC Facility Tax
                 helperClass.InventionFacilityTax = 10;
             }
             else
             {
                 helperClass.InventionFacilityTax = Convert.ToDecimal(InventionTaxUpDown.Value);
+            }
+            if (Convert.ToInt32(MEStructureCombo.SelectedValue) == 0)
+            {
+                //NPE Facility Tax
+                helperClass.MEFacilityTax = (decimal).25;
+            }
+            else
+            {
+                helperClass.MEFacilityTax = Convert.ToDecimal(METaxUpDown.Value);
             }
 
             //Build Components
@@ -898,6 +994,11 @@ namespace EveHelperWF
                     helperClass.InventionProductTypeId = InventionProds[0].productTypeID;
                 }
             }
+
+            //ME and TE From TO Level
+            helperClass.MEFromLevel = (int)MEFromLevel.Value;
+            helperClass.METoLevel = (int)METoLevel.Value;
+            
 
             return helperClass;
         }
@@ -1228,6 +1329,12 @@ namespace EveHelperWF
                 }
             }
 
+            if (HasMEResearchActivity())
+            {
+                DatabindMEResearchLabels();
+                DatabindMEResearchMatGrid();
+            }
+
             //Summaries
             DatabindSummaryScreen();
         }
@@ -1253,6 +1360,10 @@ namespace EveHelperWF
             else if (ActivityTabPanel.SelectedTab == InventionPage && InventionProds != null && InventionProds.Count > 0)
             {
                 DatabindInventionSummary();
+            }
+            else if(ActivityTabPanel.SelectedTab == MEResearchPage)
+            {
+                DatabindResearchMESummary();
             }
         }
 
@@ -1323,7 +1434,7 @@ namespace EveHelperWF
             OutputPricePerLabel.Text = ManuProds[0].pricePer.ToString("C");
             TotalOutcomeIskLabel.Text = TotalManufacturingOutputPrice.ToString("C");
             TotalOutputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingOutputVolume);
-            
+
             decimal totalCost = ManufacturingTotalInputPrice + TotalManufacturingTaxesAndFees + TotalManufacturingJobCost;
             TotalCostLabel.Text = String.Concat("- ", totalCost.ToString("C"));
             if (totalCost > 0)
@@ -1368,7 +1479,7 @@ namespace EveHelperWF
             OutputPricePerLabel.Text = ReactionProds[0].pricePer.ToString("C");
             TotalOutcomeIskLabel.Text = TotalReactionOutputPrice.ToString("C");
             TotalOutputVolumeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalReactionOutputVolume);
-            
+
             decimal totalCost = ReactionTotalInputPrice + TotalReactionTaxesAndFees + TotalReactionJobCost;
             TotalCostLabel.Text = string.Concat("- ", totalCost.ToString("C"));
             decimal roi = Math.Round(profit / totalCost, 4);
@@ -1391,9 +1502,70 @@ namespace EveHelperWF
             OutputPricePerLabel.Visible = false;
             TotalOutcomeIskLabel.Visible = false;
             TotalOutputVolumeLabel.Visible = false;
-            
+
             decimal totalCost = InventionTotalInputPrice + TotalInventionTaxesAndFees + TotalInventionJobCost;
             TotalCostLabel.Text = string.Concat("- ", totalCost.ToString("C"));
+            ROILabel.Visible = false;
+        }
+
+        private void DatabindMEResearchLabels()
+        {
+            //Research Time
+            MEResearchTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
+
+            //Cost Index Label
+            if (ScreenHelper.BlueprintBrowserHelper.CostIndicies.Count > 0)
+            {
+                int solarSystemId = (int)MESystemCombo.SelectedValue;
+                if (solarSystemId > 0)
+                {
+                    CostIndice costIndex = BlueprintBrowserHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemId);
+                    if (costIndex != null)
+                    {
+                        MESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndex.cost_indices.Find(x => x.activity == CostIndiceActivity.ActivityME).cost_index);
+                    }
+                }
+            }
+
+            //Total Input Volume Label
+            MEInputVolumeLabel.Text = TotalMEInputVolume.ToString("N0");
+        }
+
+        private void DatabindMEResearchMatGrid()
+        {
+            MEMaterialsGrid.DataSource = ResMEMats.OrderBy(x => x.materialName).ToList();
+        }
+
+        private void DatabindResearchMESummary()
+        {
+            MEResearchTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
+
+            SummaryTypeLabel.Text = "ME Research";
+            TotalTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
+            TotalJobCostLabel.Text = TotalMEJobCost.ToString("C");
+            IskHourLabel.Text = "";
+            TotalInputCostLabel.Text = "";
+            OutputProdQuantLabel.Text = "";
+            OutputPricePerLabel.Text = "";
+            TotalOutcomeIskLabel.Text = "";
+            TotalOutputVolumeLabel.Text = "";
+            TaxFeesLabel.Text = "";
+            TotalCostLabel.Text = "";
+            ROILabel.Text = "";
+
+
+            SummaryTypeLabel.Visible = true;
+            TotalTimeLabel.Visible = true;
+            TotalJobCostLabel.Visible = true;
+            ProfitLabel.Visible = false;
+            IskHourLabel.Visible = false;
+            TotalInputCostLabel.Visible = true;
+            OutputProdQuantLabel.Visible = false;
+            OutputPricePerLabel.Visible = false;
+            TotalOutcomeIskLabel.Visible = false;
+            TotalOutputVolumeLabel.Visible = false;
+            TaxFeesLabel.Visible = true;
+            TotalCostLabel.Visible = true;
             ROILabel.Visible = false;
         }
         #endregion

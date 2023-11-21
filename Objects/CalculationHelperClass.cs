@@ -75,6 +75,12 @@ namespace EveHelperWF.Objects
 
         public int InventionDecryptorId { get; set; }
         public int InventionProductTypeId { get; set; }
+
+        public int MEFromLevel { get; set; }
+        public int METoLevel { get; set; }
+
+        public int TEFromLevel { get; set; }
+        public int TEToLevel { get; set;}
     }
 
     public class StructureRigBonus

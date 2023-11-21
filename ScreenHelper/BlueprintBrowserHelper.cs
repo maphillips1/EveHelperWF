@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EveHelperWF.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,6 @@ namespace EveHelperWF.ScreenHelper
 {
     public static class BlueprintBrowserHelper
     {
-
-
-
         #region "Static Variables"
         public static List<Objects.ComboListItem> InputPriceTypeItems = null;
         public static List<Objects.ComboListItem> OutputPriceTypeItems = null;
@@ -41,7 +39,7 @@ namespace EveHelperWF.ScreenHelper
         public static List<Objects.CostIndice> CostIndicies = null;
         private static List<Objects.SolarSystem> SolarSystemList = null;
         private static List<Objects.Decryptor> Decryptors = null;
-        
+
         #endregion
 
         #region "Init Functions"
@@ -635,7 +633,7 @@ namespace EveHelperWF.ScreenHelper
             noneDecryptor.typeName = "None";
             Decryptors.Add(noneDecryptor);
 
-            foreach (Objects.InventoryTypes inventoryType in InventoryTypes.FindAll(x=> x.groupId == 1304))
+            foreach (Objects.InventoryTypes inventoryType in InventoryTypes.FindAll(x => x.groupId == 1304))
             {
                 Objects.Decryptor decryptor = new Objects.Decryptor();
                 decryptor.typeID = inventoryType.typeId;
@@ -874,12 +872,12 @@ namespace EveHelperWF.ScreenHelper
                 {
                     if (isBuyOrder)
                     {
-                        prod.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId);
-                        prod.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId, prod.quantity);
+                        prod.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(prod.productTypeID, Enums.Enums.TheForgeRegionId);
+                        prod.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(prod.productTypeID, Enums.Enums.TheForgeRegionId, prod.quantity);
                     }
                     else
                     {
-                        prod.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(prod.productTypeID, ScreenHelper.Enums.TheForgeRegionId);
+                        prod.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(prod.productTypeID, Enums.Enums.TheForgeRegionId);
                         prod.priceTotal = prod.pricePer * prod.quantity;
                     }
                 }
@@ -900,11 +898,11 @@ namespace EveHelperWF.ScreenHelper
                     }
                     if (isBuyOrder)
                     {
-                        mat.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(mat.materialTypeID, ScreenHelper.Enums.TheForgeRegionId, mat.quantityTotal);
+                        mat.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
                     }
                     else
                     {
-                        mat.priceTotal = ESI_Calls.ESIMarketData.GetSellOrderPriceForQuantity(mat.materialTypeID, ScreenHelper.Enums.TheForgeRegionId, mat.quantityTotal);
+                        mat.priceTotal = ESI_Calls.ESIMarketData.GetSellOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
                     }
                 }
             }
@@ -1050,7 +1048,7 @@ namespace EveHelperWF.ScreenHelper
             decimal baseSalesTax = Convert.ToDecimal(0.08);
             decimal baseBrokersFee = Convert.ToDecimal(0.03);
             int accountingSkillLevel = 5;
-            decimal accountingSkillBonus = 1- (Convert.ToDecimal(.11) * Convert.ToDecimal(accountingSkillLevel));
+            decimal accountingSkillBonus = 1 - (Convert.ToDecimal(.11) * Convert.ToDecimal(accountingSkillLevel));
             int brokerRelationsSKillLevel = 5;
             decimal brokerRelationsSkillBonus = Convert.ToDecimal(.003) * Convert.ToDecimal(brokerRelationsSKillLevel);
             bool isBuyOrder = (helperClass.OutputOrderType == 2);
@@ -1224,7 +1222,7 @@ namespace EveHelperWF.ScreenHelper
             decimal structureTEBonus = GetManufacturingStructureTEBonus(helperClass);
             decimal implantsSkillsTEBonus = GetManufacturingImplantAndSkillBonus(helperClass);
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.ActivityManufacturing);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityManufacturing);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
@@ -1395,8 +1393,8 @@ namespace EveHelperWF.ScreenHelper
                 helperClass.TE = helperClass.CompTE;
 
                 List<Objects.IndustryActivityTypes> bpActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(blueprintTypeID);
-                GetMatsForTypeAndActivity(bpActivityTypes, blueprintTypeID, Enums.ActivityManufacturing, ref childMaterials, false);
-                List<Objects.IndustryActivityProduct> bpProducts = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintTypeID, Enums.ActivityManufacturing);
+                GetMatsForTypeAndActivity(bpActivityTypes, blueprintTypeID, Enums.Enums.ActivityManufacturing, ref childMaterials, false);
+                List<Objects.IndustryActivityProduct> bpProducts = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintTypeID, Enums.Enums.ActivityManufacturing);
                 int runsNeeded = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(parentMat.quantityTotal) / Convert.ToDecimal(bpProducts[0].quantity)));
 
                 //Save current state of helper class variables
@@ -1445,7 +1443,7 @@ namespace EveHelperWF.ScreenHelper
                             if (blueprintTypeID > 0)
                             {
                                 List<Objects.IndustryActivityTypes> bpActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(blueprintTypeID);
-                                List<Objects.IndustryActivityProduct> bpProducts = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintTypeID, Enums.ActivityManufacturing);
+                                List<Objects.IndustryActivityProduct> bpProducts = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintTypeID, Enums.Enums.ActivityManufacturing);
                                 int runsNeeded = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(parentMat.quantityTotal) / Convert.ToDecimal(bpProducts[0].quantity)));
 
                                 int originalRuns = helperClass.Runs;
@@ -1549,7 +1547,7 @@ namespace EveHelperWF.ScreenHelper
             decimal structureTEBonus = GetReactionStructureTEBonus(helperClass);
             decimal skillsBonus = GetReactionSkillBonus(helperClass);
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.ActivityReactions);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityReactions);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
@@ -1706,7 +1704,7 @@ namespace EveHelperWF.ScreenHelper
             decimal structureTEBonus = GetInventionStructureTEBonus(helperClass);
             decimal skillBonus = Convert.ToDecimal(0.85);
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.ActivityInvention);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityInvention);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
@@ -1810,7 +1808,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionProductTypeId > 0)
             {
-                List<Objects.IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(helperClass.InventionProductTypeId, Enums.ActivityManufacturing);
+                List<Objects.IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(helperClass.InventionProductTypeId, Enums.Enums.ActivityManufacturing);
                 if (products != null && products.Count > 0)
                 {
                     int productTypeId = products[0].productTypeID;
@@ -1895,7 +1893,7 @@ namespace EveHelperWF.ScreenHelper
             decimal skillBonus = 1 + Convert.ToDecimal(encryptionSkillLevel / Convert.ToDecimal(40)) + ((dataCoreSkill1Level + dataCoreSkillLevel2) / 30);
             decimal decryptorBonus = 1;
 
-            List<Objects.InventionProbability> probabilities = Database.SQLiteCalls.GetInventionProbabilities(helperClass.SelectedTypeID, Enums.ActivityInvention);
+            List<Objects.InventionProbability> probabilities = Database.SQLiteCalls.GetInventionProbabilities(helperClass.SelectedTypeID, Enums.Enums.ActivityInvention);
             if (probabilities != null && probabilities.Count > 0 && helperClass.InventionProductTypeId > 0)
             {
                 Objects.InventionProbability prob = probabilities.Find(x => x.productTypeID == helperClass.InventionProductTypeId);
@@ -1983,5 +1981,200 @@ namespace EveHelperWF.ScreenHelper
 
         #endregion
 
+        #region "ME and TE Research Methods"
+        public static Int64 GetMeResearchTime(long baseTime, CalculationHelperClass helperClass)
+        {
+            Int64 seconds = 0;
+            double implantBonus = 1;
+            double skillBonus = (1 * .75 * .85);
+            int levelModifier = 0;
+
+            if (helperClass.METoLevel > helperClass.MEFromLevel)
+            {
+                if (helperClass.MEImplantTypeID > 0)
+                {
+                    Objects.IndustryImplant industryImplant = MEImplants.Find(x => x.ImplantTypeID == helperClass.MEImplantTypeID);
+
+                    implantBonus -= (industryImplant.ImplantBonus / 100);
+                }
+                levelModifier = GetMETELevelTime(helperClass.METoLevel);
+
+                seconds = Convert.ToInt64(baseTime * (1 * skillBonus * implantBonus) * levelModifier);
+                seconds = seconds / 105;
+            }
+
+            return seconds;
+        }
+
+        private static int GetMETELevelTime(int toLevelId)
+        {
+            int levelModifier = 0;
+            switch (toLevelId)
+            {
+                case 1:
+                    levelModifier = Enums.Enums.ResLevel1Modifier;
+                    break;
+                case 2:
+                    levelModifier = Enums.Enums.ResLevel2Modifier;
+                    break;
+                case 3:
+                    levelModifier = Enums.Enums.ResLevel3Modifier;
+                    break;
+                case 4:
+                    levelModifier = Enums.Enums.ResLevel4Modifier;
+                    break;
+                case 5:
+                    levelModifier = Enums.Enums.ResLevel5Modifier;
+                    break;
+                case 6:
+                    levelModifier = Enums.Enums.ResLevel6Modifier;
+                    break;
+                case 7:
+                    levelModifier = Enums.Enums.ResLevel7Modifier;
+                    break;
+                case 8:
+                    levelModifier = Enums.Enums.ResLevel8Modifier;
+                    break;
+                case 9:
+                    levelModifier = Enums.Enums.ResLevel9Modifier;
+                    break;
+                case 10:
+                    levelModifier = Enums.Enums.ResLevel10Modifier;
+                    break;
+            }
+            return levelModifier;
+        }
+
+        public static decimal GetMEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
+        {
+            decimal cost = 0;
+            decimal baseCost = GetBaseCost(manuMats);
+            decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
+            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
+            decimal facilityTax = calculationHelperClass.MEFacilityTax / 100;
+            decimal sccSurcharge = (decimal).015;
+            baseCost = processTimeValue;
+
+            cost = Math.Ceiling(baseCost * costIndex);
+            cost += Math.Ceiling(processTimeValue * facilityTax);
+            cost += Math.Ceiling(processTimeValue * sccSurcharge);
+            cost = Math.Ceiling(cost);
+
+            return cost;
+        }
+
+        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats)
+        {
+            decimal baseCost = 0;
+            AdjustedCost adjustedCost = null;
+            foreach (MaterialsWithMarketData mat in manuMats)
+            {
+                adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
+                if (adjustedCost != null)
+                {
+                    if (adjustedCost.adjusted_price > 0)
+                    {
+                        baseCost += (adjustedCost.adjusted_price * mat.quantity);
+                    }
+                    else
+                    {
+                        baseCost += (adjustedCost.average_price * mat.quantity);
+                    }
+                }
+            }
+
+            return baseCost;
+        }
+
+        private static decimal GetProcessTimeValue(decimal baseCost, int fromLevel, int toLevel)
+        {
+            decimal processTimeValue = 0;
+
+            if (toLevel > fromLevel)
+            {
+                int counter = fromLevel;
+                decimal modifier = 0;
+                while (counter < toLevel)
+                {
+                    counter += 1;
+                    modifier = GetMETECostModifier(counter);
+                    processTimeValue += (baseCost * (decimal).02 * modifier);
+                }
+            }
+
+            return processTimeValue;
+        }
+
+        private static decimal GetMETECostModifier(int level)
+        {
+            decimal levelModifier = 0;
+            switch (level)
+            {
+                case 1:
+                    levelModifier = Enums.Enums.ResLevel1CostModifier;
+                    break;
+                case 2:
+                    levelModifier = Enums.Enums.ResLevel2CostModifier;
+                    break;
+                case 3:
+                    levelModifier = Enums.Enums.ResLevel3CostModifier;
+                    break;
+                case 4:
+                    levelModifier = Enums.Enums.ResLevel4CostModifier;
+                    break;
+                case 5:
+                    levelModifier = Enums.Enums.ResLevel5CostModifier;
+                    break;
+                case 6:
+                    levelModifier = Enums.Enums.ResLevel6CostModifier;
+                    break;
+                case 7:
+                    levelModifier = Enums.Enums.ResLevel7CostModifier;
+                    break;
+                case 8:
+                    levelModifier = Enums.Enums.ResLevel8CostModifier;
+                    break;
+                case 9:
+                    levelModifier = Enums.Enums.ResLevel9CostModifier;
+                    break;
+                case 10:
+                    levelModifier = Enums.Enums.ResLevel10CostModifier;
+                    break;
+            }
+            return levelModifier;
+        }
+
+        public static decimal GetCostIndexForSystemID(int solarSystemID, string activityName)
+        {
+            decimal costIndex = 0;
+
+            if (CostIndicies.Count > 0)
+            {
+                CostIndice costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
+                if (costIndice != null)
+                {
+                    costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;
+                }
+            }
+
+            return costIndex;
+        }
+
+        public static decimal GetMETETotalInputMats(ref List<MaterialsWithMarketData> inputMats, int fromLevel, int toLevel)
+        {
+            decimal multipler = (toLevel - fromLevel);
+            decimal totalVolume = 0;
+            foreach (MaterialsWithMarketData mat in  inputMats)
+            {
+                mat.quantityTotal = (mat.quantity * (toLevel - fromLevel));
+                Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                totalVolume += mat.quantityTotal * matType.volume;
+                mat.volumeTotal = mat.quantityTotal * matType.volume;
+            }
+            return totalVolume;
+        }
+        #endregion
     }
+
+
 }

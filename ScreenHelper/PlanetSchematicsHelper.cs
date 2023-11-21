@@ -14,21 +14,21 @@ namespace EveHelperWF.ScreenHelper
         public static void Init()
         {
             PlanetsForTypeID.Clear();
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.BaseMetals, "Lava,Plasma,Barren,Storm,Gas");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.NobleMetals, "Barren,Plasma");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.HeavyMetals, "Lava,Plasma,Ice");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.NonCSCrystals, "Lava,Plasma");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.FelsicMagma, "Lava");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.AqueousLiquids, "Barren,Temperate,Storm,Oceanic,Ice,Gas");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.SuspendedPlasma, "Plasma,Lava,Storm");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.IonicSolutions, "Storm,Gas");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.NobleGas, "Ice,Storm,Gas");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.ReactiveGas, "Gas");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.Microorganisms, "Ice,Barren,Temperate,Oceanic");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.PlankticColonies, "Ice,Oceanic");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.ComplexOrganisms, "Temperate,Oceanic");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.CarbonCompounds, "Barren,Temperate,Oceanic");
-            PlanetsForTypeID.Add((int)Enums.T0_PlanetTypeIDs.Autotrophs, "Temperate");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.BaseMetals, "Lava,Plasma,Barren,Storm,Gas");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.NobleMetals, "Barren,Plasma");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.HeavyMetals, "Lava,Plasma,Ice");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.NonCSCrystals, "Lava,Plasma");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.FelsicMagma, "Lava");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.AqueousLiquids, "Barren,Temperate,Storm,Oceanic,Ice,Gas");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.SuspendedPlasma, "Plasma,Lava,Storm");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.IonicSolutions, "Storm,Gas");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.NobleGas, "Ice,Storm,Gas");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.ReactiveGas, "Gas");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.Microorganisms, "Ice,Barren,Temperate,Oceanic");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.PlankticColonies, "Ice,Oceanic");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.ComplexOrganisms, "Temperate,Oceanic");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.CarbonCompounds, "Barren,Temperate,Oceanic");
+            PlanetsForTypeID.Add((int)Enums.Enums.T0_PlanetTypeIDs.Autotrophs, "Temperate");
         }
 
         public static List<Objects.PlanetMaterial> GetAllOutputs()
@@ -58,8 +58,8 @@ namespace EveHelperWF.ScreenHelper
         public static void GetPrices(PlanetMaterial planetOutputType)
         {
 
-            List<Objects.MarketOrder> buyOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, ScreenHelper.Enums.TheForgeRegionId, true);
-            List<Objects.MarketOrder> sellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, ScreenHelper.Enums.TheForgeRegionId, false);
+            List<Objects.MarketOrder> buyOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, Enums.Enums.TheForgeRegionId, true);
+            List<Objects.MarketOrder> sellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, Enums.Enums.TheForgeRegionId, false);
 
             if (buyOrders != null && buyOrders.Count > 0)
             {
@@ -169,9 +169,9 @@ namespace EveHelperWF.ScreenHelper
 
             foreach (PlanetMaterial input in selectedType.Inputs)
             {
-                if (input.groupID == (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Gas ||
-                    input.groupID == (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Solid ||
-                    input.groupID == (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Organic)
+                if (input.groupID == (int)Enums.Enums.PlanetMatTierGroupId.T0_Gas ||
+                    input.groupID == (int)Enums.Enums.PlanetMatTierGroupId.T0_Solid ||
+                    input.groupID == (int)Enums.Enums.PlanetMatTierGroupId.T0_Organic)
                 {
                     neededT0.Add(input.typeID);
                 }

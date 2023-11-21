@@ -120,7 +120,7 @@ namespace EveHelperWF.ScreenHelper
         {
             decimal price = 0;
 
-            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, ScreenHelper.Enums.TheForgeRegionId, true);
+            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, Enums.Enums.TheForgeRegionId, true);
 
             if (orders != null && orders.Count > 0)
             {
@@ -136,7 +136,7 @@ namespace EveHelperWF.ScreenHelper
 
             decimal price = 0;
 
-            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, ScreenHelper.Enums.TheForgeRegionId, false);
+            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, Enums.Enums.TheForgeRegionId, false);
 
             if (orders != null && orders.Count > 0)
             {

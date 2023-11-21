@@ -201,31 +201,31 @@ namespace EveHelperWF
             outputTextBox.BorderStyle = BorderStyle.FixedSingle;
             switch (type.groupID)
             {
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Gas:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T0_Gas:
                     outputTextBox.BackColor = System.Drawing.Color.AntiqueWhite;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Solid:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T0_Solid:
                     outputTextBox.BackColor = System.Drawing.Color.AntiqueWhite;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T0_Organic:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T0_Organic:
                     outputTextBox.BackColor = System.Drawing.Color.AntiqueWhite;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T1:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T1:
                     outputTextBox.BackColor = System.Drawing.Color.OrangeRed;
                     outputTextBox.ForeColor = System.Drawing.Color.White;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T2:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T2:
                     outputTextBox.BackColor = System.Drawing.Color.LightGoldenrodYellow;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T3:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T3:
                     outputTextBox.BackColor = System.Drawing.Color.LightGreen;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
-                case (int)ScreenHelper.Enums.PlanetMatTierGroupId.T4:
+                case (int)Enums.Enums.PlanetMatTierGroupId.T4:
                     outputTextBox.BackColor = System.Drawing.Color.Green;
                     outputTextBox.ForeColor = System.Drawing.Color.Black;
                     break;
@@ -289,11 +289,11 @@ namespace EveHelperWF
 
         private void SetPriceLabelLoad()
         {
-            SellPriceTotalLabel.Text = "Loading...";
-            InputSellTotalLabel.Text = "Loading...";
+            SellPriceTotalLabel.Text = "Loading..";
+            InputSellTotalLabel.Text = "Loading..";
 
-            BuyPriceTotalLabel.Text = "Loading...";
-            InputBuyTotalLabel.Text = "Loading...";
+            BuyPriceTotalLabel.Text = "Loading..";
+            InputBuyTotalLabel.Text = "Loading..";
         }
 
         private void SetPerfectPlanetsLabel(PlanetMaterial selectedType)
