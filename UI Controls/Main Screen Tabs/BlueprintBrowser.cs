@@ -96,6 +96,9 @@ namespace EveHelperWF
         //Images
         private static byte[] BlueprintImage = null;
         private static byte[] ManufacturingImage = null;
+
+        //Ignore Event
+        private static bool IgnoreChangedEvent = false;
         #endregion
 
         #region "MAIN"
@@ -330,9 +333,15 @@ namespace EveHelperWF
 
         private void LoadDecryptorCombo()
         {
+            InventionDecryptorCombo.BindingContext = new BindingContext();
             InventionDecryptorCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetDecryptors();
             InventionDecryptorCombo.DisplayMember = "typeName";
             InventionDecryptorCombo.ValueMember = "typeID";
+
+            ManuInventDecryptorCombo.BindingContext = new BindingContext();
+            ManuInventDecryptorCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetDecryptors();
+            ManuInventDecryptorCombo.DisplayMember = "typeName";
+            ManuInventDecryptorCombo.ValueMember = "typeID";
         }
 
         private void LoadInventionProductsCombo()
@@ -378,12 +387,77 @@ namespace EveHelperWF
 
         private void Generic_ItemChanged(object sender, EventArgs e)
         {
-            RunNumbers();
+            if (!IgnoreChangedEvent)
+            {
+                RunNumbers();
+            }
         }
 
         private void ActivityTabPanel_SelectedIndexChanged(object sender, EventArgs e)
         {
             DatabindSummaryScreen();
+        }
+
+        private void InventBlueprintCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (!IsInit && SelectedType != null)
+            {
+                if (InventBlueprintCheckbox.Checked)
+                {
+                    ManuMEUpDown.Enabled = false;
+                    ManuTEUpDown.Enabled = false;
+
+                    int defaultME = 2;
+                    int defaultTE = 4;
+
+                    if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
+                    {
+                        Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
+                        if (decryptor != null)
+                        {
+                            defaultME += decryptor.meModifier;
+                            defaultME += decryptor.teModifier;
+                        }
+                    }
+                    IgnoreChangedEvent = true;
+                    ManuMEUpDown.Value = defaultME;
+                    ManuTEUpDown.Value = defaultTE;
+                    IgnoreChangedEvent = false;
+                }
+                else
+                {
+                    ManuMEUpDown.Enabled = true;
+                    ManuTEUpDown.Enabled = true;
+                }
+
+                RunNumbers();
+            }
+        }
+
+        private void ManuInventDecryptorCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!IsInit && SelectedType != null)
+            {
+                int defaultME = 2;
+                int defaultTE = 4;
+
+                if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
+                {
+                    Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
+                    if (decryptor != null)
+                    {
+                        defaultME += decryptor.meModifier;
+                        defaultTE += decryptor.teModifier;
+                    }
+                }
+                IgnoreChangedEvent = true;
+                ManuMEUpDown.Value = defaultME;
+                ManuTEUpDown.Value = defaultTE;
+                IgnoreChangedEvent = false;
+
+                RunNumbers();
+            }
         }
         #endregion
 
@@ -392,8 +466,7 @@ namespace EveHelperWF
         {
             if (SelectedType != null)
             {
-
-                ShowHideInventCheckbox();
+                SetupValuesForBlueprintInvention();
                 //Set Label
                 BlueprintNameLabel.Text = SelectedType.typeName;
                 //Load Activity Types
@@ -408,16 +481,54 @@ namespace EveHelperWF
             }
         }
 
-        private void ShowHideInventCheckbox()
+        private void SetupValuesForBlueprintInvention()
         {
             if (IsBlueprintInvented())
             {
                 InventBlueprintCheckbox.Visible = true;
+                ManuInventDecryptorLabel.Visible = true;
+                ManuInventDecryptorCombo.Visible = true;
+
+                if (InventBlueprintCheckbox.Checked)
+                {
+                    ManuMEUpDown.Enabled = false;
+                    ManuTEUpDown.Enabled = false;
+
+                    int defaultME = 2;
+                    int defaultTE = 4;
+
+                    if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
+                    {
+                        Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
+                        if (decryptor != null)
+                        {
+                            defaultME += decryptor.meModifier;
+                            defaultTE += decryptor.teModifier;
+                        }
+                    }
+                    IgnoreChangedEvent = true;
+                    ManuMEUpDown.Value = defaultME;
+                    ManuTEUpDown.Value = defaultTE;
+                    IgnoreChangedEvent = false;
+                }
+                else
+                {
+                    ManuMEUpDown.Enabled = true;
+                    ManuTEUpDown.Enabled = true;
+                }
             }
             else
             {
                 InventBlueprintCheckbox.Visible = false;
+                ManuInventDecryptorLabel.Visible = false;
+                ManuInventDecryptorCombo.Visible = false;
+
+                ManuMEUpDown.Enabled = true;
+                ManuTEUpDown.Enabled = true;
             }
+
+
+
         }
 
         #region "Calculation Methods"
@@ -713,7 +824,7 @@ namespace EveHelperWF
         private void CalculateMETotals(Objects.CalculationHelperClass calculationHelperClass)
         {
             long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)).time;
-            ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResMEMats, calculationHelperClass.MEFromLevel,calculationHelperClass.METoLevel);
+            ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResMEMats, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResMEMats);
             ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
             TotalMEJobCost = BlueprintBrowserHelper.GetMEJobCost(calculationHelperClass, ManuMats);
@@ -890,7 +1001,7 @@ namespace EveHelperWF
             //ME and TE From TO Level
             helperClass.MEFromLevel = (int)MEFromLevel.Value;
             helperClass.METoLevel = (int)METoLevel.Value;
-            
+
 
             return helperClass;
         }
@@ -944,7 +1055,10 @@ namespace EveHelperWF
             }
 
             //Decryptor
-            helperClass.InventionDecryptorId = DefaultFormValues.InventionDecryptorValue;
+            if (ManuInventDecryptorCombo.SelectedValue != null)
+            {
+                helperClass.InventionDecryptorId = (int)ManuInventDecryptorCombo.SelectedValue;
+            }
 
             //Invention Outcome BP
             helperClass.InventionProductTypeId = SelectedType.typeId;
@@ -1240,7 +1354,7 @@ namespace EveHelperWF
             {
                 DatabindInventionSummary();
             }
-            else if(ActivityTabPanel.SelectedTab == MEResearchPage)
+            else if (ActivityTabPanel.SelectedTab == MEResearchPage)
             {
                 DatabindResearchMESummary();
             }
