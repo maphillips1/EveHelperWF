@@ -181,7 +181,7 @@ namespace EveHelperWF.ESI_Calls
             decimal price = 0;
 
             List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetSellOrder(type_id, Enums.Enums.TheForgeRegionId);
-            if (orders.Count > 0)
+            if (orders != null && orders.Count > 0)
             {
                 //order by price low to High
                 List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();
@@ -223,7 +223,7 @@ namespace EveHelperWF.ESI_Calls
 
             List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrder(type_id, Enums.Enums.TheForgeRegionId);
 
-            if (orders.Count > 0)
+            if (orders != null && orders.Count > 0)
             {
                 //order by price High to Low
                 List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
@@ -265,7 +265,7 @@ namespace EveHelperWF.ESI_Calls
 
             List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrder(type_id, Enums.Enums.TheForgeRegionId);
 
-            if (orders.Count > 0)
+            if (orders != null && orders.Count > 0)
             {
                 //order by price High to Low
                 List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
@@ -284,7 +284,7 @@ namespace EveHelperWF.ESI_Calls
             decimal price = 0;
 
             List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetSellOrder(type_id, Enums.Enums.TheForgeRegionId);
-            if (orders.Count > 0)
+            if (orders != null && orders.Count > 0)
             {
                 //order by price low to High
                 List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();

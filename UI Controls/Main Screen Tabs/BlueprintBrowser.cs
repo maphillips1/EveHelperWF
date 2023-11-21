@@ -119,6 +119,8 @@ namespace EveHelperWF
             TotalOutcomeIskLabel.Text = "";
             TotalOutputVolumeLabel.Text = "";
             TaxFeesLabel.Text = "";
+            TotalCostLabel.Text = "";
+            ROILabel.Text = "";
 
             if (!BlueprintInitBackgroundWorker.IsBusy)
             {
@@ -217,11 +219,13 @@ namespace EveHelperWF
 
         private void LoadPriceTypeCombos()
         {
+            InputTypeCombo.BindingContext = new BindingContext();
             InputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             InputTypeCombo.DisplayMember = "Value";
             InputTypeCombo.ValueMember = "Key";
             InputTypeCombo.SelectedValue = 1;
 
+            OutputTypeCombo.BindingContext = new BindingContext();
             OutputTypeCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetPriceTypeComboItems();
             OutputTypeCombo.DisplayMember = "Value";
             OutputTypeCombo.ValueMember = "Key";
@@ -230,18 +234,22 @@ namespace EveHelperWF
 
         private void LoadSolarSystemCombos()
         {
+            ManuSystemCombo.BindingContext = new BindingContext();
             ManuSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             ManuSystemCombo.DisplayMember = "Value";
             ManuSystemCombo.ValueMember = "Key";
 
+            ReactionSolarSystemCombo.BindingContext = new BindingContext();
             ReactionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetLowAndNullSecComboItems();
             ReactionSolarSystemCombo.DisplayMember = "Value";
             ReactionSolarSystemCombo.ValueMember = "Key";
 
+            InventionSolarSystemCombo.BindingContext = new BindingContext();
             InventionSolarSystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             InventionSolarSystemCombo.DisplayMember = "Value";
             InventionSolarSystemCombo.ValueMember = "Key";
 
+            MESystemCombo.BindingContext = new BindingContext();
             MESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             MESystemCombo.DisplayMember = "Value";
             MESystemCombo.ValueMember = "Key";
@@ -249,18 +257,22 @@ namespace EveHelperWF
 
         private void LoadStructureCombos()
         {
+            ManuStructCombo.BindingContext = new BindingContext();
             ManuStructCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
             ManuStructCombo.DisplayMember = "Value";
             ManuStructCombo.ValueMember = "Key";
 
+            ReactionStructureCombo.BindingContext = new BindingContext();
             ReactionStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetRefineryComboItems();
             ReactionStructureCombo.DisplayMember = "Value";
             ReactionStructureCombo.ValueMember = "Key";
 
+            InventionStructureCombo.BindingContext = new BindingContext();
             InventionStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
             InventionStructureCombo.DisplayMember = "Value";
             InventionStructureCombo.ValueMember = "Key";
 
+            MEStructureCombo.BindingContext = new BindingContext();
             MEStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
             MEStructureCombo.DisplayMember = "Value";
             MEStructureCombo.ValueMember = "Key";
@@ -279,30 +291,37 @@ namespace EveHelperWF
 
         private void LoadStructureRigCombos()
         {
+            ManuRigMEBonusCombo.BindingContext = new BindingContext();
             ManuRigMEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ManuRigMEBonusCombo.DisplayMember = "Value";
             ManuRigMEBonusCombo.ValueMember = "Key";
 
+            ManuRigTEBonusCombo.BindingContext = new BindingContext();
             ManuRigTEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ManuRigTEBonusCombo.DisplayMember = "Value";
             ManuRigTEBonusCombo.ValueMember = "Key";
 
+            ReactionStructureMERig.BindingContext = new BindingContext();
             ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureMERig.DisplayMember = "Value";
             ReactionStructureMERig.ValueMember = "Key";
 
+            ReactionStructureTERig.BindingContext = new BindingContext();
             ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             ReactionStructureTERig.DisplayMember = "Value";
             ReactionStructureTERig.ValueMember = "Key";
 
+            InventionStructureCostRigCombo.BindingContext = new BindingContext();
             InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureCostRigCombo.DisplayMember = "Value";
             InventionStructureCostRigCombo.ValueMember = "Key";
 
+            InventionStructureTimeRigCombo.BindingContext = new BindingContext();
             InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
 
+            METimeRigCombo.BindingContext = new BindingContext();
             METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             METimeRigCombo.DisplayMember = "Value";
             METimeRigCombo.ValueMember = "Key";
@@ -357,127 +376,7 @@ namespace EveHelperWF
             }
         }
 
-        private void RunsUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InputTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void OutputTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuMEUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuTEUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuSystemCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuStructCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuRig1Combo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuRig2Combo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuTaxUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ManuImplantCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void BuildComponentsCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ReactionSolarSystemCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ReactionStructureCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ReactionStructureMERig_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ReactionStructureTERig_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void ReactionTaxUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionSolarSystemCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionStructureCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionStructureCostRig_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionStructureTimeRigCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionDecryptorCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionTaxUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventBlueprintCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            RunNumbers();
-        }
-
-        private void InventionOutcomeBPCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void Generic_ItemChanged(object sender, EventArgs e)
         {
             RunNumbers();
         }
@@ -485,11 +384,6 @@ namespace EveHelperWF
         private void ActivityTabPanel_SelectedIndexChanged(object sender, EventArgs e)
         {
             DatabindSummaryScreen();
-        }
-
-        private void DefaultsClosed(object sender, EventArgs e)
-        {
-            LoadDefaultFormValues();
         }
         #endregion
 
@@ -568,9 +462,8 @@ namespace EveHelperWF
 
         private void GetIndustryActivityMaterials()
         {
-            int inputType = Convert.ToInt32(InputTypeCombo.SelectedValue);
-            int runs = Convert.ToInt32(RunsUpDown.Value);
             bool buildComponents = BuildComponentsCheckbox.Checked;
+
             ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityManufacturing, ref ManuMats, buildComponents);
 
             ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityResearchingMaterialEfficiency, ref ResMEMats, buildComponents);
@@ -763,7 +656,6 @@ namespace EveHelperWF
                 //Average out invention cost for 100% success rate for at least one blueprint to invent. 
                 //This will avoid under valuing the invention cost. Especially on lower probability BPC's. 
                 TotalManufacturingJobCost += ((totalInventionInputPrice + TotalInventionJobCost) * avgTriesForSuccess);
-
             }
 
             decimal totalPrice = 0;
@@ -787,13 +679,12 @@ namespace EveHelperWF
             TotalReactionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
             TotalReactionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
 
-            decimal totalPrice = 0;
+            ReactionTotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ReactionMats)
             {
-                totalPrice += mat.priceTotal;
+                ReactionTotalInputPrice += mat.priceTotal;
 
             }
-            ReactionTotalInputPrice = totalPrice;
         }
 
         private void CalculateInventionTotals(Objects.CalculationHelperClass calculationHelperClass)
@@ -811,13 +702,12 @@ namespace EveHelperWF
             InventionME = ScreenHelper.BlueprintBrowserHelper.GetInventionME(calculationHelperClass);
             InventionTE = ScreenHelper.BlueprintBrowserHelper.GetInventionTE(calculationHelperClass);
 
-            decimal totalPrice = 0;
+            InventionTotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in InventionMats)
             {
-                totalPrice += mat.priceTotal;
+                InventionTotalInputPrice += mat.priceTotal;
 
             }
-            InventionTotalInputPrice = totalPrice;
         }
 
         private void CalculateMETotals(Objects.CalculationHelperClass calculationHelperClass)
@@ -828,6 +718,8 @@ namespace EveHelperWF
             ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
             TotalMEJobCost = BlueprintBrowserHelper.GetMEJobCost(calculationHelperClass, ManuMats);
             TotalMEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResMEMats, calculationHelperClass);
+            TotalMETaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, ResMEMats);
+            METotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ResMEMats)
             {
                 METotalInputPrice += mat.priceTotal;
@@ -1525,12 +1417,12 @@ namespace EveHelperWF
             TotalTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
             TotalJobCostLabel.Text = TotalMEJobCost.ToString("C");
             IskHourLabel.Text = "";
-            TotalInputCostLabel.Text = "";
+            TotalInputCostLabel.Text = METotalInputPrice.ToString("C");
             OutputProdQuantLabel.Text = "";
             OutputPricePerLabel.Text = "";
             TotalOutcomeIskLabel.Text = "";
             TotalOutputVolumeLabel.Text = "";
-            TaxFeesLabel.Text = "";
+            TaxFeesLabel.Text = TotalMETaxesAndFees.ToString("C");
             TotalCostLabel.Text = "";
             ROILabel.Text = "";
 
