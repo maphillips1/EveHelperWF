@@ -1827,7 +1827,7 @@ namespace EveHelperWF.ScreenHelper
                 {
                     Objects.IndustryImplant industryImplant = MEImplants.Find(x => x.ImplantTypeID == helperClass.MEImplantTypeID);
 
-                    implantBonus -= (industryImplant.ImplantBonus / 100);
+                    implantBonus -= (Convert.ToDouble(industryImplant.ImplantBonus) / 100);
                 }
                 levelModifier = GetMETELevelTime(helperClass.METoLevel);
 
