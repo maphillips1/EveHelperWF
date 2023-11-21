@@ -40,7 +40,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             RegionCombo.DisplayMember = "regionName";
             RegionCombo.ValueMember = "regionID";
             RegionCombo.DataSource = regions;
-            RegionCombo.SelectedValue = ScreenHelper.Enums.TheForgeRegionId;
+            RegionCombo.SelectedValue = Enums.Enums.TheForgeRegionId;
         }
         private void LoadTrackedTypes()
         {

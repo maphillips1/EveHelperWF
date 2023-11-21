@@ -890,7 +890,7 @@ namespace EveHelperWF.Database
             if (stationFilter > 1)
             {
                 List<int> stationSystem = StationSystems();
-                if (stationFilter == (int)(ScreenHelper.Enums.StationFilter.HasStation))
+                if (stationFilter == (int)(Enums.Enums.StationFilter.HasStation))
                 {
                     foreach (int solarSystemID in solarSystemIDs)
                     {
@@ -900,7 +900,7 @@ namespace EveHelperWF.Database
                         }
                     }
                 }
-                else if (stationFilter == (int)(ScreenHelper.Enums.StationFilter.NoStation))
+                else if (stationFilter == (int)(Enums.Enums.StationFilter.NoStation))
                 {
                     foreach (int solarSystemID in solarSystemIDs)
                     {

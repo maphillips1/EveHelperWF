@@ -43,8 +43,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 if (inputItems != null)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    TotalSellValueLabel.Text = "Loading...";
-                    TotalBuyValueLabel.Text = "Loading...";
+                    TotalSellValueLabel.Text = "Loading..";
+                    TotalBuyValueLabel.Text = "Loading..";
                     appraisedItems = AppraisalHelper.ParseTypeIds(inputItems);
                     if (appraisedItems.Count > 0)
                     {

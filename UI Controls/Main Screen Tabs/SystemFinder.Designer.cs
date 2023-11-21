@@ -317,7 +317,7 @@
             LoadingLabel.Name = "LoadingLabel";
             LoadingLabel.Size = new Size(72, 20);
             LoadingLabel.TabIndex = 16;
-            LoadingLabel.Text = "Loading...";
+            LoadingLabel.Text = "Loading..";
             LoadingLabel.Visible = false;
             // 
             // label3

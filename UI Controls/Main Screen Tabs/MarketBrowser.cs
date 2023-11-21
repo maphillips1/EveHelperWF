@@ -38,11 +38,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             RegionCombo.DisplayMember = "regionName";
             RegionCombo.ValueMember = "regionID";
             RegionCombo.DataSource = regions;
-            RegionCombo.SelectedValue = ScreenHelper.Enums.TheForgeRegionId;
+            RegionCombo.SelectedValue = Enums.Enums.TheForgeRegionId;
 
             //Default to the forge and jita. Most people wnat this. 
-            LoadSystems(ScreenHelper.Enums.TheForgeRegionId);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.JitaSystemId;
+            LoadSystems(Enums.Enums.TheForgeRegionId);
+            SystemCombo.SelectedValue = Enums.Enums.JitaSystemId;
         }
 
         private void LoadSystems(int regionID)
@@ -69,9 +69,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void JitaButton_Click(object sender, EventArgs e)
         {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.TheForgeRegionId;
-            LoadSystems(ScreenHelper.Enums.TheForgeRegionId);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.JitaSystemId;
+            RegionCombo.SelectedValue = Enums.Enums.TheForgeRegionId;
+            LoadSystems(Enums.Enums.TheForgeRegionId);
+            SystemCombo.SelectedValue = Enums.Enums.JitaSystemId;
 
             if (SelectedTypeID > 0)
             {
@@ -81,9 +81,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AmarrButton_Click(object sender, EventArgs e)
         {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.DomainRegionID;
-            LoadSystems(ScreenHelper.Enums.DomainRegionID);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.AmarrSystemID;
+            RegionCombo.SelectedValue = Enums.Enums.DomainRegionID;
+            LoadSystems(Enums.Enums.DomainRegionID);
+            SystemCombo.SelectedValue = Enums.Enums.AmarrSystemID;
 
             if (SelectedTypeID > 0)
             {
@@ -93,9 +93,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void RensButton_Click(object sender, EventArgs e)
         {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.HeimatarRegionID;
-            LoadSystems(ScreenHelper.Enums.HeimatarRegionID);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.RensSystemID;
+            RegionCombo.SelectedValue = Enums.Enums.HeimatarRegionID;
+            LoadSystems(Enums.Enums.HeimatarRegionID);
+            SystemCombo.SelectedValue = Enums.Enums.RensSystemID;
 
             if (SelectedTypeID > 0)
             {
@@ -105,9 +105,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void DodixieButton_Click(object sender, EventArgs e)
         {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.SinqLiason;
-            LoadSystems(ScreenHelper.Enums.SinqLiason);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.DodixieSystemID;
+            RegionCombo.SelectedValue = Enums.Enums.SinqLiason;
+            LoadSystems(Enums.Enums.SinqLiason);
+            SystemCombo.SelectedValue = Enums.Enums.DodixieSystemID;
 
             if (SelectedTypeID > 0)
             {
@@ -159,9 +159,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void TheraButton_Click(object sender, EventArgs e)
         {
-            RegionCombo.SelectedValue = ScreenHelper.Enums.TheraRegion;
-            LoadSystems(ScreenHelper.Enums.TheraRegion);
-            SystemCombo.SelectedValue = ScreenHelper.Enums.TheraSystem;
+            RegionCombo.SelectedValue = Enums.Enums.TheraRegion;
+            LoadSystems(Enums.Enums.TheraRegion);
+            SystemCombo.SelectedValue = Enums.Enums.TheraSystem;
 
             if (SelectedTypeID > 0)
             {
