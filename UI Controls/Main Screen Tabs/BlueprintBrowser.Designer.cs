@@ -310,7 +310,7 @@
             ReactionStructureCombo.Name = "ReactionStructureCombo";
             ReactionStructureCombo.Size = new Size(152, 28);
             ReactionStructureCombo.TabIndex = 4;
-            ReactionStructureCombo.SelectedIndexChanged += ReactionStructureCombo_SelectedIndexChanged;
+            ReactionStructureCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // TreeViewList
             // 
@@ -369,7 +369,7 @@
             InventBlueprintCheckbox.TabIndex = 36;
             InventBlueprintCheckbox.Text = "Invent Blueprint";
             InventBlueprintCheckbox.UseVisualStyleBackColor = true;
-            InventBlueprintCheckbox.CheckedChanged += InventBlueprintCheckbox_CheckedChanged;
+            InventBlueprintCheckbox.CheckedChanged += Generic_ItemChanged;
             // 
             // StatusLabel
             // 
@@ -740,7 +740,7 @@
             RunsUpDown.Size = new Size(150, 27);
             RunsUpDown.TabIndex = 4;
             RunsUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            RunsUpDown.ValueChanged += RunsUpDown_ValueChanged;
+            RunsUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // label6
             // 
@@ -762,7 +762,7 @@
             OutputTypeCombo.Name = "OutputTypeCombo";
             OutputTypeCombo.Size = new Size(152, 28);
             OutputTypeCombo.TabIndex = 33;
-            OutputTypeCombo.SelectedIndexChanged += OutputTypeCombo_SelectedIndexChanged;
+            OutputTypeCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label5
             // 
@@ -784,7 +784,7 @@
             InputTypeCombo.Name = "InputTypeCombo";
             InputTypeCombo.Size = new Size(152, 28);
             InputTypeCombo.TabIndex = 32;
-            InputTypeCombo.SelectedIndexChanged += InputTypeCombo_SelectedIndexChanged;
+            InputTypeCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // ActivityTabPanel
             // 
@@ -964,7 +964,7 @@
             ManuTEUpDown.Name = "ManuTEUpDown";
             ManuTEUpDown.Size = new Size(150, 27);
             ManuTEUpDown.TabIndex = 29;
-            ManuTEUpDown.ValueChanged += ManuTEUpDown_ValueChanged;
+            ManuTEUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // CompTEUpDown
             // 
@@ -975,7 +975,7 @@
             CompTEUpDown.Name = "CompTEUpDown";
             CompTEUpDown.Size = new Size(150, 27);
             CompTEUpDown.TabIndex = 28;
-            CompTEUpDown.ValueChanged += ManuMEUpDown_ValueChanged;
+            CompTEUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // CompMEUpDown
             // 
@@ -985,7 +985,7 @@
             CompMEUpDown.Name = "CompMEUpDown";
             CompMEUpDown.Size = new Size(150, 27);
             CompMEUpDown.TabIndex = 28;
-            CompMEUpDown.ValueChanged += ManuMEUpDown_ValueChanged;
+            CompMEUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // BuildComponentsCheckbox
             // 
@@ -999,7 +999,7 @@
             BuildComponentsCheckbox.TabIndex = 2;
             BuildComponentsCheckbox.Text = "Build Components";
             BuildComponentsCheckbox.UseVisualStyleBackColor = true;
-            BuildComponentsCheckbox.CheckedChanged += BuildComponentsCheckbox_CheckedChanged;
+            BuildComponentsCheckbox.CheckedChanged += Generic_ItemChanged;
             // 
             // ManuMEUpDown
             // 
@@ -1010,7 +1010,7 @@
             ManuMEUpDown.Name = "ManuMEUpDown";
             ManuMEUpDown.Size = new Size(150, 27);
             ManuMEUpDown.TabIndex = 28;
-            ManuMEUpDown.ValueChanged += ManuMEUpDown_ValueChanged;
+            ManuMEUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // ManuTaxUpDown
             // 
@@ -1020,7 +1020,7 @@
             ManuTaxUpDown.Name = "ManuTaxUpDown";
             ManuTaxUpDown.Size = new Size(150, 27);
             ManuTaxUpDown.TabIndex = 27;
-            ManuTaxUpDown.ValueChanged += ManuTaxUpDown_ValueChanged;
+            ManuTaxUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // manuTaxLabel
             // 
@@ -1046,7 +1046,7 @@
             ManuSystemCombo.Name = "ManuSystemCombo";
             ManuSystemCombo.Size = new Size(152, 28);
             ManuSystemCombo.TabIndex = 25;
-            ManuSystemCombo.SelectedIndexChanged += ManuSystemCombo_SelectedIndexChanged;
+            ManuSystemCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // SystemLabel
             // 
@@ -1067,7 +1067,7 @@
             ManuImplantCombo.Name = "ManuImplantCombo";
             ManuImplantCombo.Size = new Size(216, 28);
             ManuImplantCombo.TabIndex = 20;
-            ManuImplantCombo.SelectedIndexChanged += ManuImplantCombo_SelectedIndexChanged;
+            ManuImplantCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // ManuImpllantLabel
             // 
@@ -1268,7 +1268,7 @@
             ManuRigTEBonusCombo.Name = "ManuRigTEBonusCombo";
             ManuRigTEBonusCombo.Size = new Size(152, 28);
             ManuRigTEBonusCombo.TabIndex = 11;
-            ManuRigTEBonusCombo.SelectedIndexChanged += ManuRig2Combo_SelectedIndexChanged;
+            ManuRigTEBonusCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // ManuRig2Label
             // 
@@ -1289,7 +1289,7 @@
             ManuRigMEBonusCombo.Name = "ManuRigMEBonusCombo";
             ManuRigMEBonusCombo.Size = new Size(152, 28);
             ManuRigMEBonusCombo.TabIndex = 9;
-            ManuRigMEBonusCombo.SelectedIndexChanged += ManuRig1Combo_SelectedIndexChanged;
+            ManuRigMEBonusCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // StructureMERigLabel
             // 
@@ -1310,7 +1310,7 @@
             ManuStructCombo.Name = "ManuStructCombo";
             ManuStructCombo.Size = new Size(152, 28);
             ManuStructCombo.TabIndex = 7;
-            ManuStructCombo.SelectedIndexChanged += ManuStructCombo_SelectedIndexChanged;
+            ManuStructCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // ManuStructLabel
             // 
@@ -1776,7 +1776,7 @@
             InventionOutcomeBPCombo.Name = "InventionOutcomeBPCombo";
             InventionOutcomeBPCombo.Size = new Size(152, 28);
             InventionOutcomeBPCombo.TabIndex = 10;
-            InventionOutcomeBPCombo.SelectedIndexChanged += InventionOutcomeBPCombo_SelectedIndexChanged;
+            InventionOutcomeBPCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label40
             // 
@@ -1966,7 +1966,7 @@
             InventionTaxUpDown.Name = "InventionTaxUpDown";
             InventionTaxUpDown.Size = new Size(150, 27);
             InventionTaxUpDown.TabIndex = 3;
-            InventionTaxUpDown.ValueChanged += InventionTaxUpDown_ValueChanged;
+            InventionTaxUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // InventionDecryptorCombo
             // 
@@ -1976,7 +1976,7 @@
             InventionDecryptorCombo.Name = "InventionDecryptorCombo";
             InventionDecryptorCombo.Size = new Size(152, 28);
             InventionDecryptorCombo.TabIndex = 2;
-            InventionDecryptorCombo.SelectedIndexChanged += InventionDecryptorCombo_SelectedIndexChanged;
+            InventionDecryptorCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // InventionStructureTimeRigCombo
             // 
@@ -1986,7 +1986,7 @@
             InventionStructureTimeRigCombo.Name = "InventionStructureTimeRigCombo";
             InventionStructureTimeRigCombo.Size = new Size(152, 28);
             InventionStructureTimeRigCombo.TabIndex = 2;
-            InventionStructureTimeRigCombo.SelectedIndexChanged += InventionStructureTimeRigCombo_SelectedIndexChanged;
+            InventionStructureTimeRigCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // InventionStructureCostRigCombo
             // 
@@ -1996,7 +1996,7 @@
             InventionStructureCostRigCombo.Name = "InventionStructureCostRigCombo";
             InventionStructureCostRigCombo.Size = new Size(152, 28);
             InventionStructureCostRigCombo.TabIndex = 2;
-            InventionStructureCostRigCombo.SelectedIndexChanged += InventionStructureCostRig_SelectedIndexChanged;
+            InventionStructureCostRigCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // InventionStructureCombo
             // 
@@ -2008,7 +2008,7 @@
             InventionStructureCombo.Name = "InventionStructureCombo";
             InventionStructureCombo.Size = new Size(152, 28);
             InventionStructureCombo.TabIndex = 2;
-            InventionStructureCombo.SelectedIndexChanged += InventionStructureCombo_SelectedIndexChanged;
+            InventionStructureCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // InventionSolarSystemCombo
             // 
@@ -2023,7 +2023,7 @@
             InventionSolarSystemCombo.Name = "InventionSolarSystemCombo";
             InventionSolarSystemCombo.Size = new Size(152, 28);
             InventionSolarSystemCombo.TabIndex = 2;
-            InventionSolarSystemCombo.SelectedIndexChanged += InventionSolarSystemCombo_SelectedIndexChanged;
+            InventionSolarSystemCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label32
             // 
@@ -2332,7 +2332,7 @@
             ReactionTaxUpDown.Name = "ReactionTaxUpDown";
             ReactionTaxUpDown.Size = new Size(150, 27);
             ReactionTaxUpDown.TabIndex = 19;
-            ReactionTaxUpDown.ValueChanged += ReactionTaxUpDown_ValueChanged;
+            ReactionTaxUpDown.ValueChanged += Generic_ItemChanged;
             // 
             // label26
             // 
@@ -2449,7 +2449,7 @@
             ReactionStructureTERig.Name = "ReactionStructureTERig";
             ReactionStructureTERig.Size = new Size(152, 28);
             ReactionStructureTERig.TabIndex = 8;
-            ReactionStructureTERig.SelectedIndexChanged += ReactionStructureTERig_SelectedIndexChanged;
+            ReactionStructureTERig.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label20
             // 
@@ -2470,7 +2470,7 @@
             ReactionStructureMERig.Name = "ReactionStructureMERig";
             ReactionStructureMERig.Size = new Size(152, 28);
             ReactionStructureMERig.TabIndex = 6;
-            ReactionStructureMERig.SelectedIndexChanged += ReactionStructureMERig_SelectedIndexChanged;
+            ReactionStructureMERig.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label19
             // 
@@ -2519,7 +2519,7 @@
             ReactionSolarSystemCombo.Name = "ReactionSolarSystemCombo";
             ReactionSolarSystemCombo.Size = new Size(152, 28);
             ReactionSolarSystemCombo.TabIndex = 1;
-            ReactionSolarSystemCombo.SelectedIndexChanged += ReactionSolarSystemCombo_SelectedIndexChanged;
+            ReactionSolarSystemCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // BlueprintNameLabel
             // 
