@@ -30,7 +30,7 @@ namespace EveHelperWF.ScreenHelper
         private static List<Objects.AdjustedCost> AdjustedCosts = null;
         public static List<Objects.CostIndice> CostIndicies = null;
         private static List<Objects.SolarSystem> SolarSystemList = null;
-        private static List<Objects.Decryptor> Decryptors = null;
+        public static List<Objects.Decryptor> Decryptors = null;
 
         #endregion
 
