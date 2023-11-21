@@ -57,10 +57,7 @@
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
             ManufacturingPanel = new Panel();
-            ManuInventDecryptorCombo = new ComboBox();
-            ManuInventDecryptorLabel = new Label();
             BlueprintImagePanel = new Panel();
-            InventBlueprintCheckbox = new CheckBox();
             StatusLabel = new Label();
             panel1 = new Panel();
             ROILabel = new Label();
@@ -96,9 +93,12 @@
             InputTypeCombo = new ComboBox();
             ActivityTabPanel = new TabControl();
             ManufacturingPage = new TabPage();
+            ManuInventDecryptorCombo = new ComboBox();
+            ManuInventDecryptorLabel = new Label();
             TotalOutputVolumeLabel = new Label();
             label25 = new Label();
             ManufacturingImagePanel = new Panel();
+            InventBlueprintCheckbox = new CheckBox();
             ManufacturingSCILabel = new Label();
             label57 = new Label();
             label48 = new Label();
@@ -153,13 +153,13 @@
             METoLevel = new NumericUpDown();
             MEFromLevel = new NumericUpDown();
             METaxUpDown = new NumericUpDown();
-            label14 = new Label();
+            METaxLabel = new Label();
             MESystemCombo = new ComboBox();
             label51 = new Label();
             MEImplantCombo = new ComboBox();
             label54 = new Label();
             METimeRigCombo = new ComboBox();
-            label59 = new Label();
+            MEStructRigLabel = new Label();
             MEStructureCombo = new ComboBox();
             label60 = new Label();
             label61 = new Label();
@@ -229,10 +229,10 @@
             InventionStructureCostRigCombo = new ComboBox();
             InventionStructureCombo = new ComboBox();
             InventionSolarSystemCombo = new ComboBox();
-            label32 = new Label();
+            InventionTaxLabel = new Label();
             label31 = new Label();
-            label30 = new Label();
-            label29 = new Label();
+            InventionStructTERigLabel = new Label();
+            InventionStructMERigLabel = new Label();
             label28 = new Label();
             label27 = new Label();
             ReverseEngineerPage = new TabPage();
@@ -254,7 +254,7 @@
             ReactionsSCILabel = new Label();
             label56 = new Label();
             ReactionTaxUpDown = new NumericUpDown();
-            label26 = new Label();
+            ReactionTaxLabel = new Label();
             ReactionSkillsTextBox = new TextBox();
             ReactionTotalOutcomeIskLabel = new Label();
             ReactionTotalInputCostLabel = new Label();
@@ -265,9 +265,9 @@
             label22 = new Label();
             label21 = new Label();
             ReactionStructureTERig = new ComboBox();
-            label20 = new Label();
+            ReactionStructTERigLabel = new Label();
             ReactionStructureMERig = new ComboBox();
-            label19 = new Label();
+            ReactionStructMERigLabel = new Label();
             label18 = new Label();
             label17 = new Label();
             ReactionSolarSystemCombo = new ComboBox();
@@ -332,10 +332,7 @@
             // ManufacturingPanel
             // 
             ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
-            ManufacturingPanel.Controls.Add(ManuInventDecryptorCombo);
-            ManufacturingPanel.Controls.Add(ManuInventDecryptorLabel);
             ManufacturingPanel.Controls.Add(BlueprintImagePanel);
-            ManufacturingPanel.Controls.Add(InventBlueprintCheckbox);
             ManufacturingPanel.Controls.Add(StatusLabel);
             ManufacturingPanel.Controls.Add(panel1);
             ManufacturingPanel.Controls.Add(RunsUpDown);
@@ -353,27 +350,6 @@
             ManufacturingPanel.Size = new Size(1364, 853);
             ManufacturingPanel.TabIndex = 0;
             // 
-            // ManuInventDecryptorCombo
-            // 
-            ManuInventDecryptorCombo.FormattingEnabled = true;
-            ManuInventDecryptorCombo.Location = new Point(273, 182);
-            ManuInventDecryptorCombo.Margin = new Padding(2);
-            ManuInventDecryptorCombo.Name = "ManuInventDecryptorCombo";
-            ManuInventDecryptorCombo.Size = new Size(152, 28);
-            ManuInventDecryptorCombo.TabIndex = 39;
-            ManuInventDecryptorCombo.SelectedIndexChanged += ManuInventDecryptorCombo_SelectedIndexChanged;
-            // 
-            // ManuInventDecryptorLabel
-            // 
-            ManuInventDecryptorLabel.AutoSize = true;
-            ManuInventDecryptorLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            ManuInventDecryptorLabel.Location = new Point(186, 184);
-            ManuInventDecryptorLabel.Margin = new Padding(2, 0, 2, 0);
-            ManuInventDecryptorLabel.Name = "ManuInventDecryptorLabel";
-            ManuInventDecryptorLabel.Size = new Size(80, 20);
-            ManuInventDecryptorLabel.TabIndex = 38;
-            ManuInventDecryptorLabel.Text = "Decryptor";
-            // 
             // BlueprintImagePanel
             // 
             BlueprintImagePanel.BackColor = Color.CornflowerBlue;
@@ -381,20 +357,6 @@
             BlueprintImagePanel.Name = "BlueprintImagePanel";
             BlueprintImagePanel.Size = new Size(64, 64);
             BlueprintImagePanel.TabIndex = 37;
-            // 
-            // InventBlueprintCheckbox
-            // 
-            InventBlueprintCheckbox.AutoSize = true;
-            InventBlueprintCheckbox.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            InventBlueprintCheckbox.ForeColor = SystemColors.ControlLightLight;
-            InventBlueprintCheckbox.Location = new Point(13, 181);
-            InventBlueprintCheckbox.Margin = new Padding(2);
-            InventBlueprintCheckbox.Name = "InventBlueprintCheckbox";
-            InventBlueprintCheckbox.Size = new Size(162, 27);
-            InventBlueprintCheckbox.TabIndex = 36;
-            InventBlueprintCheckbox.Text = "Invent Blueprint";
-            InventBlueprintCheckbox.UseVisualStyleBackColor = true;
-            InventBlueprintCheckbox.CheckedChanged += InventBlueprintCheckbox_CheckedChanged;
             // 
             // StatusLabel
             // 
@@ -652,7 +614,7 @@
             TotalInputCostLabel.AutoSize = true;
             TotalInputCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalInputCostLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalInputCostLabel.Location = new Point(160, 43);
+            TotalInputCostLabel.Location = new Point(125, 43);
             TotalInputCostLabel.Margin = new Padding(2, 0, 2, 0);
             TotalInputCostLabel.Name = "TotalInputCostLabel";
             TotalInputCostLabel.Size = new Size(155, 23);
@@ -667,9 +629,9 @@
             label9.Location = new Point(19, 43);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(137, 23);
+            label9.Size = new Size(93, 23);
             label9.TabIndex = 2;
-            label9.Text = "Total Input Cost";
+            label9.Text = "Input Cost";
             // 
             // OutputProdQuantLabel
             // 
@@ -736,7 +698,7 @@
             TotalJobCostLabel.AutoSize = true;
             TotalJobCostLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TotalJobCostLabel.ForeColor = SystemColors.ControlLightLight;
-            TotalJobCostLabel.Location = new Point(146, 69);
+            TotalJobCostLabel.Location = new Point(125, 70);
             TotalJobCostLabel.Margin = new Padding(2, 0, 2, 0);
             TotalJobCostLabel.Name = "TotalJobCostLabel";
             TotalJobCostLabel.Size = new Size(155, 23);
@@ -751,9 +713,9 @@
             label10.Location = new Point(19, 69);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(123, 23);
+            label10.Size = new Size(79, 23);
             label10.TabIndex = 3;
-            label10.Text = "Total Job Cost";
+            label10.Text = "Job Cost";
             // 
             // RunsUpDown
             // 
@@ -833,9 +795,12 @@
             // ManufacturingPage
             // 
             ManufacturingPage.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPage.Controls.Add(ManuInventDecryptorCombo);
+            ManufacturingPage.Controls.Add(ManuInventDecryptorLabel);
             ManufacturingPage.Controls.Add(TotalOutputVolumeLabel);
             ManufacturingPage.Controls.Add(label25);
             ManufacturingPage.Controls.Add(ManufacturingImagePanel);
+            ManufacturingPage.Controls.Add(InventBlueprintCheckbox);
             ManufacturingPage.Controls.Add(ManufacturingSCILabel);
             ManufacturingPage.Controls.Add(label57);
             ManufacturingPage.Controls.Add(label48);
@@ -875,6 +840,27 @@
             ManufacturingPage.TabIndex = 0;
             ManufacturingPage.Text = "Manufacturing";
             // 
+            // ManuInventDecryptorCombo
+            // 
+            ManuInventDecryptorCombo.FormattingEnabled = true;
+            ManuInventDecryptorCombo.Location = new Point(93, 395);
+            ManuInventDecryptorCombo.Margin = new Padding(2);
+            ManuInventDecryptorCombo.Name = "ManuInventDecryptorCombo";
+            ManuInventDecryptorCombo.Size = new Size(152, 28);
+            ManuInventDecryptorCombo.TabIndex = 39;
+            ManuInventDecryptorCombo.SelectedIndexChanged += ManuInventDecryptorCombo_SelectedIndexChanged;
+            // 
+            // ManuInventDecryptorLabel
+            // 
+            ManuInventDecryptorLabel.AutoSize = true;
+            ManuInventDecryptorLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ManuInventDecryptorLabel.Location = new Point(6, 397);
+            ManuInventDecryptorLabel.Margin = new Padding(2, 0, 2, 0);
+            ManuInventDecryptorLabel.Name = "ManuInventDecryptorLabel";
+            ManuInventDecryptorLabel.Size = new Size(80, 20);
+            ManuInventDecryptorLabel.TabIndex = 38;
+            ManuInventDecryptorLabel.Text = "Decryptor";
+            // 
             // TotalOutputVolumeLabel
             // 
             TotalOutputVolumeLabel.AutoSize = true;
@@ -905,6 +891,20 @@
             ManufacturingImagePanel.Size = new Size(128, 128);
             ManufacturingImagePanel.TabIndex = 42;
             // 
+            // InventBlueprintCheckbox
+            // 
+            InventBlueprintCheckbox.AutoSize = true;
+            InventBlueprintCheckbox.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            InventBlueprintCheckbox.ForeColor = SystemColors.ControlLightLight;
+            InventBlueprintCheckbox.Location = new Point(55, 355);
+            InventBlueprintCheckbox.Margin = new Padding(2);
+            InventBlueprintCheckbox.Name = "InventBlueprintCheckbox";
+            InventBlueprintCheckbox.Size = new Size(162, 27);
+            InventBlueprintCheckbox.TabIndex = 36;
+            InventBlueprintCheckbox.Text = "Invent Blueprint";
+            InventBlueprintCheckbox.UseVisualStyleBackColor = true;
+            InventBlueprintCheckbox.CheckedChanged += InventBlueprintCheckbox_CheckedChanged;
+            // 
             // ManufacturingSCILabel
             // 
             ManufacturingSCILabel.AutoSize = true;
@@ -930,7 +930,7 @@
             // 
             label48.AutoSize = true;
             label48.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label48.Location = new Point(14, 458);
+            label48.Location = new Point(20, 552);
             label48.Margin = new Padding(2, 0, 2, 0);
             label48.Name = "label48";
             label48.Size = new Size(71, 20);
@@ -941,7 +941,7 @@
             // 
             label46.AutoSize = true;
             label46.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label46.Location = new Point(9, 422);
+            label46.Location = new Point(15, 516);
             label46.Margin = new Padding(2, 0, 2, 0);
             label46.Name = "label46";
             label46.Size = new Size(76, 20);
@@ -962,12 +962,12 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label16.Location = new Point(258, 395);
+            label16.Location = new Point(299, 395);
             label16.Margin = new Padding(2, 0, 2, 0);
             label16.Name = "label16";
-            label16.Size = new Size(246, 20);
+            label16.Size = new Size(205, 20);
             label16.TabIndex = 37;
-            label16.Text = "Component Manufacturing Time: ";
+            label16.Text = "Comp Manufacturing Time: ";
             // 
             // ManuSkillsTextBox
             // 
@@ -994,7 +994,7 @@
             // CompTEUpDown
             // 
             CompTEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            CompTEUpDown.Location = new Point(91, 458);
+            CompTEUpDown.Location = new Point(97, 552);
             CompTEUpDown.Margin = new Padding(2);
             CompTEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             CompTEUpDown.Name = "CompTEUpDown";
@@ -1004,7 +1004,7 @@
             // 
             // CompMEUpDown
             // 
-            CompMEUpDown.Location = new Point(91, 419);
+            CompMEUpDown.Location = new Point(97, 513);
             CompMEUpDown.Margin = new Padding(2);
             CompMEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             CompMEUpDown.Name = "CompMEUpDown";
@@ -1017,7 +1017,7 @@
             BuildComponentsCheckbox.AutoSize = true;
             BuildComponentsCheckbox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             BuildComponentsCheckbox.ForeColor = SystemColors.Control;
-            BuildComponentsCheckbox.Location = new Point(63, 380);
+            BuildComponentsCheckbox.Location = new Point(69, 474);
             BuildComponentsCheckbox.Margin = new Padding(2);
             BuildComponentsCheckbox.Name = "BuildComponentsCheckbox";
             BuildComponentsCheckbox.Size = new Size(160, 24);
@@ -1040,7 +1040,7 @@
             // ManuTaxUpDown
             // 
             ManuTaxUpDown.DecimalPlaces = 1;
-            ManuTaxUpDown.Location = new Point(145, 131);
+            ManuTaxUpDown.Location = new Point(145, 167);
             ManuTaxUpDown.Margin = new Padding(2);
             ManuTaxUpDown.Name = "ManuTaxUpDown";
             ManuTaxUpDown.Size = new Size(150, 27);
@@ -1051,7 +1051,7 @@
             // 
             manuTaxLabel.AutoSize = true;
             manuTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            manuTaxLabel.Location = new Point(106, 131);
+            manuTaxLabel.Location = new Point(106, 167);
             manuTaxLabel.Margin = new Padding(2, 0, 2, 0);
             manuTaxLabel.Name = "manuTaxLabel";
             manuTaxLabel.Size = new Size(33, 20);
@@ -1288,7 +1288,7 @@
             // ManuRigTEBonusCombo
             // 
             ManuRigTEBonusCombo.FormattingEnabled = true;
-            ManuRigTEBonusCombo.Location = new Point(144, 257);
+            ManuRigTEBonusCombo.Location = new Point(145, 249);
             ManuRigTEBonusCombo.Margin = new Padding(2);
             ManuRigTEBonusCombo.Name = "ManuRigTEBonusCombo";
             ManuRigTEBonusCombo.Size = new Size(152, 28);
@@ -1299,7 +1299,7 @@
             // 
             ManuRig2Label.AutoSize = true;
             ManuRig2Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            ManuRig2Label.Location = new Point(14, 260);
+            ManuRig2Label.Location = new Point(15, 252);
             ManuRig2Label.Margin = new Padding(2, 0, 2, 0);
             ManuRig2Label.Name = "ManuRig2Label";
             ManuRig2Label.Size = new Size(122, 20);
@@ -1309,7 +1309,7 @@
             // ManuRigMEBonusCombo
             // 
             ManuRigMEBonusCombo.FormattingEnabled = true;
-            ManuRigMEBonusCombo.Location = new Point(144, 216);
+            ManuRigMEBonusCombo.Location = new Point(145, 208);
             ManuRigMEBonusCombo.Margin = new Padding(2);
             ManuRigMEBonusCombo.Name = "ManuRigMEBonusCombo";
             ManuRigMEBonusCombo.Size = new Size(152, 28);
@@ -1320,7 +1320,7 @@
             // 
             StructureMERigLabel.AutoSize = true;
             StructureMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            StructureMERigLabel.Location = new Point(9, 216);
+            StructureMERigLabel.Location = new Point(10, 208);
             StructureMERigLabel.Margin = new Padding(2, 0, 2, 0);
             StructureMERigLabel.Name = "StructureMERigLabel";
             StructureMERigLabel.Size = new Size(127, 20);
@@ -1330,7 +1330,7 @@
             // ManuStructCombo
             // 
             ManuStructCombo.FormattingEnabled = true;
-            ManuStructCombo.Location = new Point(144, 176);
+            ManuStructCombo.Location = new Point(145, 127);
             ManuStructCombo.Margin = new Padding(2);
             ManuStructCombo.Name = "ManuStructCombo";
             ManuStructCombo.Size = new Size(152, 28);
@@ -1341,7 +1341,7 @@
             // 
             ManuStructLabel.AutoSize = true;
             ManuStructLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            ManuStructLabel.Location = new Point(63, 179);
+            ManuStructLabel.Location = new Point(64, 130);
             ManuStructLabel.Margin = new Padding(2, 0, 2, 0);
             ManuStructLabel.Name = "ManuStructLabel";
             ManuStructLabel.Size = new Size(74, 20);
@@ -1414,13 +1414,13 @@
             MEResearchPage.Controls.Add(METoLevel);
             MEResearchPage.Controls.Add(MEFromLevel);
             MEResearchPage.Controls.Add(METaxUpDown);
-            MEResearchPage.Controls.Add(label14);
+            MEResearchPage.Controls.Add(METaxLabel);
             MEResearchPage.Controls.Add(MESystemCombo);
             MEResearchPage.Controls.Add(label51);
             MEResearchPage.Controls.Add(MEImplantCombo);
             MEResearchPage.Controls.Add(label54);
             MEResearchPage.Controls.Add(METimeRigCombo);
-            MEResearchPage.Controls.Add(label59);
+            MEResearchPage.Controls.Add(MEStructRigLabel);
             MEResearchPage.Controls.Add(MEStructureCombo);
             MEResearchPage.Controls.Add(label60);
             MEResearchPage.Controls.Add(label61);
@@ -1507,6 +1507,7 @@
             METoLevel.Size = new Size(150, 27);
             METoLevel.TabIndex = 56;
             METoLevel.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            METoLevel.ValueChanged += Generic_ItemChanged;
             // 
             // MEFromLevel
             // 
@@ -1517,26 +1518,28 @@
             MEFromLevel.Name = "MEFromLevel";
             MEFromLevel.Size = new Size(150, 27);
             MEFromLevel.TabIndex = 55;
+            MEFromLevel.ValueChanged += Generic_ItemChanged;
             // 
             // METaxUpDown
             // 
             METaxUpDown.DecimalPlaces = 1;
-            METaxUpDown.Location = new Point(140, 129);
+            METaxUpDown.Location = new Point(139, 215);
             METaxUpDown.Margin = new Padding(2);
             METaxUpDown.Name = "METaxUpDown";
             METaxUpDown.Size = new Size(150, 27);
             METaxUpDown.TabIndex = 54;
+            METaxUpDown.ValueChanged += Generic_ItemChanged;
             // 
-            // label14
+            // METaxLabel
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(101, 129);
-            label14.Margin = new Padding(2, 0, 2, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(33, 20);
-            label14.TabIndex = 53;
-            label14.Text = "Tax";
+            METaxLabel.AutoSize = true;
+            METaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            METaxLabel.Location = new Point(100, 215);
+            METaxLabel.Margin = new Padding(2, 0, 2, 0);
+            METaxLabel.Name = "METaxLabel";
+            METaxLabel.Size = new Size(33, 20);
+            METaxLabel.TabIndex = 53;
+            METaxLabel.Text = "Tax";
             // 
             // MESystemCombo
             // 
@@ -1551,6 +1554,7 @@
             MESystemCombo.Name = "MESystemCombo";
             MESystemCombo.Size = new Size(152, 28);
             MESystemCombo.TabIndex = 52;
+            MESystemCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label51
             // 
@@ -1571,6 +1575,7 @@
             MEImplantCombo.Name = "MEImplantCombo";
             MEImplantCombo.Size = new Size(216, 28);
             MEImplantCombo.TabIndex = 50;
+            MEImplantCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label54
             // 
@@ -1587,37 +1592,39 @@
             // METimeRigCombo
             // 
             METimeRigCombo.FormattingEnabled = true;
-            METimeRigCombo.Location = new Point(139, 214);
+            METimeRigCombo.Location = new Point(140, 172);
             METimeRigCombo.Margin = new Padding(2);
             METimeRigCombo.Name = "METimeRigCombo";
             METimeRigCombo.Size = new Size(152, 28);
             METimeRigCombo.TabIndex = 46;
+            METimeRigCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
-            // label59
+            // MEStructRigLabel
             // 
-            label59.AutoSize = true;
-            label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label59.Location = new Point(30, 217);
-            label59.Margin = new Padding(2, 0, 2, 0);
-            label59.Name = "label59";
-            label59.Size = new Size(101, 20);
-            label59.TabIndex = 45;
-            label59.Text = "Structure Rig";
+            MEStructRigLabel.AutoSize = true;
+            MEStructRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            MEStructRigLabel.Location = new Point(31, 175);
+            MEStructRigLabel.Margin = new Padding(2, 0, 2, 0);
+            MEStructRigLabel.Name = "MEStructRigLabel";
+            MEStructRigLabel.Size = new Size(101, 20);
+            MEStructRigLabel.TabIndex = 45;
+            MEStructRigLabel.Text = "Structure Rig";
             // 
             // MEStructureCombo
             // 
             MEStructureCombo.FormattingEnabled = true;
-            MEStructureCombo.Location = new Point(139, 174);
+            MEStructureCombo.Location = new Point(140, 129);
             MEStructureCombo.Margin = new Padding(2);
             MEStructureCombo.Name = "MEStructureCombo";
             MEStructureCombo.Size = new Size(152, 28);
             MEStructureCombo.TabIndex = 44;
+            MEStructureCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
             // label60
             // 
             label60.AutoSize = true;
             label60.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label60.Location = new Point(58, 177);
+            label60.Location = new Point(59, 132);
             label60.Margin = new Padding(2, 0, 2, 0);
             label60.Name = "label60";
             label60.Size = new Size(74, 20);
@@ -1856,10 +1863,10 @@
             InventionPage.Controls.Add(InventionStructureCostRigCombo);
             InventionPage.Controls.Add(InventionStructureCombo);
             InventionPage.Controls.Add(InventionSolarSystemCombo);
-            InventionPage.Controls.Add(label32);
+            InventionPage.Controls.Add(InventionTaxLabel);
             InventionPage.Controls.Add(label31);
-            InventionPage.Controls.Add(label30);
-            InventionPage.Controls.Add(label29);
+            InventionPage.Controls.Add(InventionStructTERigLabel);
+            InventionPage.Controls.Add(InventionStructMERigLabel);
             InventionPage.Controls.Add(label28);
             InventionPage.Controls.Add(label27);
             InventionPage.Location = new Point(4, 29);
@@ -2356,7 +2363,7 @@
             // InventionTaxUpDown
             // 
             InventionTaxUpDown.DecimalPlaces = 2;
-            InventionTaxUpDown.Location = new Point(182, 246);
+            InventionTaxUpDown.Location = new Point(182, 202);
             InventionTaxUpDown.Margin = new Padding(2);
             InventionTaxUpDown.Name = "InventionTaxUpDown";
             InventionTaxUpDown.Size = new Size(150, 27);
@@ -2366,7 +2373,7 @@
             // InventionDecryptorCombo
             // 
             InventionDecryptorCombo.FormattingEnabled = true;
-            InventionDecryptorCombo.Location = new Point(182, 200);
+            InventionDecryptorCombo.Location = new Point(182, 246);
             InventionDecryptorCombo.Margin = new Padding(2);
             InventionDecryptorCombo.Name = "InventionDecryptorCombo";
             InventionDecryptorCombo.Size = new Size(152, 28);
@@ -2420,49 +2427,49 @@
             InventionSolarSystemCombo.TabIndex = 2;
             InventionSolarSystemCombo.SelectedIndexChanged += Generic_ItemChanged;
             // 
-            // label32
+            // InventionTaxLabel
             // 
-            label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label32.Location = new Point(142, 246);
-            label32.Margin = new Padding(2, 0, 2, 0);
-            label32.Name = "label32";
-            label32.Size = new Size(33, 20);
-            label32.TabIndex = 1;
-            label32.Text = "Tax";
+            InventionTaxLabel.AutoSize = true;
+            InventionTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            InventionTaxLabel.Location = new Point(142, 202);
+            InventionTaxLabel.Margin = new Padding(2, 0, 2, 0);
+            InventionTaxLabel.Name = "InventionTaxLabel";
+            InventionTaxLabel.Size = new Size(33, 20);
+            InventionTaxLabel.TabIndex = 1;
+            InventionTaxLabel.Text = "Tax";
             // 
             // label31
             // 
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label31.Location = new Point(95, 202);
+            label31.Location = new Point(95, 248);
             label31.Margin = new Padding(2, 0, 2, 0);
             label31.Name = "label31";
             label31.Size = new Size(80, 20);
             label31.TabIndex = 1;
             label31.Text = "Decryptor";
             // 
-            // label30
+            // InventionStructTERigLabel
             // 
-            label30.AutoSize = true;
-            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label30.Location = new Point(34, 161);
-            label30.Margin = new Padding(2, 0, 2, 0);
-            label30.Name = "label30";
-            label30.Size = new Size(140, 20);
-            label30.TabIndex = 1;
-            label30.Text = "Structure Time Rig";
+            InventionStructTERigLabel.AutoSize = true;
+            InventionStructTERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            InventionStructTERigLabel.Location = new Point(34, 161);
+            InventionStructTERigLabel.Margin = new Padding(2, 0, 2, 0);
+            InventionStructTERigLabel.Name = "InventionStructTERigLabel";
+            InventionStructTERigLabel.Size = new Size(140, 20);
+            InventionStructTERigLabel.TabIndex = 1;
+            InventionStructTERigLabel.Text = "Structure Time Rig";
             // 
-            // label29
+            // InventionStructMERigLabel
             // 
-            label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label29.Location = new Point(38, 116);
-            label29.Margin = new Padding(2, 0, 2, 0);
-            label29.Name = "label29";
-            label29.Size = new Size(136, 20);
-            label29.TabIndex = 1;
-            label29.Text = "Structure Cost Rig";
+            InventionStructMERigLabel.AutoSize = true;
+            InventionStructMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            InventionStructMERigLabel.Location = new Point(38, 116);
+            InventionStructMERigLabel.Margin = new Padding(2, 0, 2, 0);
+            InventionStructMERigLabel.Name = "InventionStructMERigLabel";
+            InventionStructMERigLabel.Size = new Size(136, 20);
+            InventionStructMERigLabel.TabIndex = 1;
+            InventionStructMERigLabel.Text = "Structure Cost Rig";
             // 
             // label28
             // 
@@ -2505,7 +2512,7 @@
             ReactionPage.Controls.Add(ReactionsSCILabel);
             ReactionPage.Controls.Add(label56);
             ReactionPage.Controls.Add(ReactionTaxUpDown);
-            ReactionPage.Controls.Add(label26);
+            ReactionPage.Controls.Add(ReactionTaxLabel);
             ReactionPage.Controls.Add(ReactionSkillsTextBox);
             ReactionPage.Controls.Add(ReactionTotalOutcomeIskLabel);
             ReactionPage.Controls.Add(ReactionTotalInputCostLabel);
@@ -2516,9 +2523,9 @@
             ReactionPage.Controls.Add(label22);
             ReactionPage.Controls.Add(label21);
             ReactionPage.Controls.Add(ReactionStructureTERig);
-            ReactionPage.Controls.Add(label20);
+            ReactionPage.Controls.Add(ReactionStructTERigLabel);
             ReactionPage.Controls.Add(ReactionStructureMERig);
-            ReactionPage.Controls.Add(label19);
+            ReactionPage.Controls.Add(ReactionStructMERigLabel);
             ReactionPage.Controls.Add(ReactionStructureCombo);
             ReactionPage.Controls.Add(label18);
             ReactionPage.Controls.Add(label17);
@@ -2729,16 +2736,16 @@
             ReactionTaxUpDown.TabIndex = 19;
             ReactionTaxUpDown.ValueChanged += Generic_ItemChanged;
             // 
-            // label26
+            // ReactionTaxLabel
             // 
-            label26.AutoSize = true;
-            label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label26.Location = new Point(104, 222);
-            label26.Margin = new Padding(2, 0, 2, 0);
-            label26.Name = "label26";
-            label26.Size = new Size(33, 20);
-            label26.TabIndex = 18;
-            label26.Text = "Tax";
+            ReactionTaxLabel.AutoSize = true;
+            ReactionTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ReactionTaxLabel.Location = new Point(104, 222);
+            ReactionTaxLabel.Margin = new Padding(2, 0, 2, 0);
+            ReactionTaxLabel.Name = "ReactionTaxLabel";
+            ReactionTaxLabel.Size = new Size(33, 20);
+            ReactionTaxLabel.TabIndex = 18;
+            ReactionTaxLabel.Text = "Tax";
             // 
             // ReactionSkillsTextBox
             // 
@@ -2846,16 +2853,16 @@
             ReactionStructureTERig.TabIndex = 8;
             ReactionStructureTERig.SelectedIndexChanged += Generic_ItemChanged;
             // 
-            // label20
+            // ReactionStructTERigLabel
             // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(13, 179);
-            label20.Margin = new Padding(2, 0, 2, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(122, 20);
-            label20.TabIndex = 7;
-            label20.Text = "Structure TE Rig";
+            ReactionStructTERigLabel.AutoSize = true;
+            ReactionStructTERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ReactionStructTERigLabel.Location = new Point(13, 179);
+            ReactionStructTERigLabel.Margin = new Padding(2, 0, 2, 0);
+            ReactionStructTERigLabel.Name = "ReactionStructTERigLabel";
+            ReactionStructTERigLabel.Size = new Size(122, 20);
+            ReactionStructTERigLabel.TabIndex = 7;
+            ReactionStructTERigLabel.Text = "Structure TE Rig";
             // 
             // ReactionStructureMERig
             // 
@@ -2867,16 +2874,16 @@
             ReactionStructureMERig.TabIndex = 6;
             ReactionStructureMERig.SelectedIndexChanged += Generic_ItemChanged;
             // 
-            // label19
+            // ReactionStructMERigLabel
             // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label19.Location = new Point(8, 129);
-            label19.Margin = new Padding(2, 0, 2, 0);
-            label19.Name = "label19";
-            label19.Size = new Size(127, 20);
-            label19.TabIndex = 5;
-            label19.Text = "Structure ME Rig";
+            ReactionStructMERigLabel.AutoSize = true;
+            ReactionStructMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ReactionStructMERigLabel.Location = new Point(8, 129);
+            ReactionStructMERigLabel.Margin = new Padding(2, 0, 2, 0);
+            ReactionStructMERigLabel.Name = "ReactionStructMERigLabel";
+            ReactionStructMERigLabel.Size = new Size(127, 20);
+            ReactionStructMERigLabel.TabIndex = 5;
+            ReactionStructMERigLabel.Text = "Structure ME Rig";
             // 
             // label18
             // 
@@ -3091,15 +3098,15 @@
         private Label label22;
         private Label label21;
         private ComboBox ReactionStructureTERig;
-        private Label label20;
+        private Label ReactionStructTERigLabel;
         private ComboBox ReactionStructureMERig;
-        private Label label19;
+        private Label ReactionStructMERigLabel;
         private ComboBox ReactionStructureCombo;
         private Label label18;
         private Label label17;
         private ComboBox ReactionSolarSystemCombo;
         private NumericUpDown ReactionTaxUpDown;
-        private Label label26;
+        private Label ReactionTaxLabel;
         private TextBox InventionSkillsTextbox;
         private Label InventionRunsFor100Label;
         private Label label39;
@@ -3121,10 +3128,10 @@
         private ComboBox InventionStructureCostRigCombo;
         private ComboBox InventionStructureCombo;
         private ComboBox InventionSolarSystemCombo;
-        private Label label32;
+        private Label InventionTaxLabel;
         private Label label31;
-        private Label label30;
-        private Label label29;
+        private Label InventionStructTERigLabel;
+        private Label InventionStructMERigLabel;
         private Label label28;
         private Label label27;
         private ComboBox InventionOutcomeBPCombo;
@@ -3223,13 +3230,13 @@
         private NumericUpDown METoLevel;
         private NumericUpDown MEFromLevel;
         private NumericUpDown METaxUpDown;
-        private Label label14;
+        private Label METaxLabel;
         private ComboBox MESystemCombo;
         private Label label51;
         private ComboBox MEImplantCombo;
         private Label label54;
         private ComboBox METimeRigCombo;
-        private Label label59;
+        private Label MEStructRigLabel;
         private ComboBox MEStructureCombo;
         private Label label60;
         private Label label61;

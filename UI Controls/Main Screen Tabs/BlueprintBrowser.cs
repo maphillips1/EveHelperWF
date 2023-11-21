@@ -165,6 +165,7 @@ namespace EveHelperWF
                 if (DefaultFormValues != null)
                 {
                     SetDefaultFormValue();
+                    ShowHideFieldsForStructureType();
                 }
             }
         }
@@ -387,8 +388,9 @@ namespace EveHelperWF
 
         private void Generic_ItemChanged(object sender, EventArgs e)
         {
-            if (!IgnoreChangedEvent)
+            if (!IsInit && !IgnoreChangedEvent)
             {
+                ShowHideFieldsForStructureType();
                 RunNumbers();
             }
         }
@@ -403,33 +405,7 @@ namespace EveHelperWF
 
             if (!IsInit && SelectedType != null)
             {
-                if (InventBlueprintCheckbox.Checked)
-                {
-                    ManuMEUpDown.Enabled = false;
-                    ManuTEUpDown.Enabled = false;
-
-                    int defaultME = 2;
-                    int defaultTE = 4;
-
-                    if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
-                    {
-                        Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
-                        if (decryptor != null)
-                        {
-                            defaultME += decryptor.meModifier;
-                            defaultME += decryptor.teModifier;
-                        }
-                    }
-                    IgnoreChangedEvent = true;
-                    ManuMEUpDown.Value = defaultME;
-                    ManuTEUpDown.Value = defaultTE;
-                    IgnoreChangedEvent = false;
-                }
-                else
-                {
-                    ManuMEUpDown.Enabled = true;
-                    ManuTEUpDown.Enabled = true;
-                }
+                SetDefaultManufacturingMETEValuesForBP();
 
                 RunNumbers();
             }
@@ -439,22 +415,7 @@ namespace EveHelperWF
         {
             if (!IsInit && SelectedType != null)
             {
-                int defaultME = 2;
-                int defaultTE = 4;
-
-                if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
-                {
-                    Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
-                    if (decryptor != null)
-                    {
-                        defaultME += decryptor.meModifier;
-                        defaultTE += decryptor.teModifier;
-                    }
-                }
-                IgnoreChangedEvent = true;
-                ManuMEUpDown.Value = defaultME;
-                ManuTEUpDown.Value = defaultTE;
-                IgnoreChangedEvent = false;
+                SetDefaultManufacturingMETEValuesForBP();
 
                 RunNumbers();
             }
@@ -489,33 +450,7 @@ namespace EveHelperWF
                 ManuInventDecryptorLabel.Visible = true;
                 ManuInventDecryptorCombo.Visible = true;
 
-                if (InventBlueprintCheckbox.Checked)
-                {
-                    ManuMEUpDown.Enabled = false;
-                    ManuTEUpDown.Enabled = false;
-
-                    int defaultME = 2;
-                    int defaultTE = 4;
-
-                    if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
-                    {
-                        Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
-                        if (decryptor != null)
-                        {
-                            defaultME += decryptor.meModifier;
-                            defaultTE += decryptor.teModifier;
-                        }
-                    }
-                    IgnoreChangedEvent = true;
-                    ManuMEUpDown.Value = defaultME;
-                    ManuTEUpDown.Value = defaultTE;
-                    IgnoreChangedEvent = false;
-                }
-                else
-                {
-                    ManuMEUpDown.Enabled = true;
-                    ManuTEUpDown.Enabled = true;
-                }
+                SetDefaultManufacturingMETEValuesForBP();
             }
             else
             {
@@ -526,9 +461,132 @@ namespace EveHelperWF
                 ManuMEUpDown.Enabled = true;
                 ManuTEUpDown.Enabled = true;
             }
+        }
 
+        private void SetDefaultManufacturingMETEValuesForBP()
+        {
 
+            if (InventBlueprintCheckbox.Checked)
+            {
+                ManuMEUpDown.Enabled = false;
+                ManuTEUpDown.Enabled = false;
 
+                int defaultME = 2;
+                int defaultTE = 4;
+
+                if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
+                {
+                    Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
+                    if (decryptor != null)
+                    {
+                        defaultME += decryptor.meModifier;
+                        defaultTE += decryptor.teModifier;
+                    }
+                }
+                IgnoreChangedEvent = true;
+                ManuMEUpDown.Value = defaultME;
+                ManuTEUpDown.Value = defaultTE;
+                IgnoreChangedEvent = false;
+            }
+            else
+            {
+                ManuMEUpDown.Enabled = true;
+                ManuTEUpDown.Enabled = true;
+            }
+        }
+
+        private void ShowHideFieldsForStructureType()
+        {
+            IgnoreChangedEvent = true;
+            //Manufacturing
+            if (ManuStructCombo.SelectedValue != null && (int)ManuStructCombo.SelectedValue <= 0)
+            {
+                StructureMERigLabel.Visible = false;
+                ManuRigMEBonusCombo.Visible = false;
+
+                ManuRig2Label.Visible = false;
+                ManuRigTEBonusCombo.Visible = false;
+
+                manuTaxLabel.Visible = false;
+                ManuTaxUpDown.Visible = false;
+            }
+            else
+            {
+                StructureMERigLabel.Visible = true;
+                ManuRigMEBonusCombo.Visible = true;
+
+                ManuRig2Label.Visible = true;
+                ManuRigTEBonusCombo.Visible = true;
+
+                manuTaxLabel.Visible = true;
+                ManuTaxUpDown.Visible = true;
+            }
+            //Reactions
+            if (ReactionStructureCombo.SelectedValue != null && (int)ReactionStructureCombo.SelectedValue <= 0)
+            {
+                ReactionStructMERigLabel.Visible = false;
+                ReactionStructureMERig.Visible = false;
+
+                ReactionStructTERigLabel.Visible = false;
+                ReactionStructureTERig.Visible = false;
+
+                ReactionTaxLabel.Visible = false;
+                ReactionTaxUpDown.Visible = false;
+            }
+            else
+            {
+                ReactionStructMERigLabel.Visible = true;
+                ReactionStructureMERig.Visible = true;
+
+                ReactionStructTERigLabel.Visible = true;
+                ReactionStructureTERig.Visible = true;
+
+                ReactionTaxLabel.Visible = true;
+                ReactionTaxUpDown.Visible = true;
+            }
+
+            //Invention
+            if (InventionStructureCombo.SelectedValue != null && (int)InventionStructureCombo.SelectedValue <= 0)
+            {
+                InventionStructMERigLabel.Visible = false;
+                InventionStructureCostRigCombo.Visible = false;
+
+                InventionStructTERigLabel.Visible = false;
+                InventionStructureTimeRigCombo.Visible = false;
+
+                InventionTaxLabel.Visible = false;
+                InventionTaxUpDown.Visible = false;
+            }
+            else
+            {
+                InventionStructMERigLabel.Visible = true;
+                InventionStructureCostRigCombo.Visible = true;
+
+                InventionStructTERigLabel.Visible = true;
+                InventionStructureTimeRigCombo.Visible = true;
+
+                InventionTaxLabel.Visible = true;
+                InventionTaxUpDown.Visible = true;
+            }
+
+            //ME Research
+            if (MEStructureCombo.SelectedValue != null && (int)MEStructureCombo.SelectedValue <= 0)
+            {
+                MEStructRigLabel.Visible = false;
+                METimeRigCombo.Visible = false;
+
+                METaxLabel.Visible = false;
+                METaxUpDown.Visible = false;
+            }
+            else
+            {
+                MEStructRigLabel.Visible = true;
+                METimeRigCombo.Visible = true;
+
+                METaxLabel.Visible = true;
+                METaxUpDown.Visible = true;
+            }
+            IgnoreChangedEvent = false;
         }
 
         #region "Calculation Methods"
