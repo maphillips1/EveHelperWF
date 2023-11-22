@@ -29,42 +29,42 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle37 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle42 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle38 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle39 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle40 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle41 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle43 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle48 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle44 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle45 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle46 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle47 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle49 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle54 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle50 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle51 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle52 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle53 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle55 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle60 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle56 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle57 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle58 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle59 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle61 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle66 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle62 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle63 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle64 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle65 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle67 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle72 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle68 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle69 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle70 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle71 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle30 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle29 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle31 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle36 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle32 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle33 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle34 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle35 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BlueprintBrowser));
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
@@ -357,6 +357,9 @@
             ManuImageWorker = new System.ComponentModel.BackgroundWorker();
             ReactionImageWorker = new System.ComponentModel.BackgroundWorker();
             InventionImageWorker = new System.ComponentModel.BackgroundWorker();
+            SearchTextBox = new TextBox();
+            SearchButton = new Button();
+            SearchResultsTreeView = new TreeView();
             ManufacturingPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -404,21 +407,22 @@
             // 
             // TreeViewList
             // 
+            TreeViewList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             TreeViewList.BackColor = Color.FromArgb(2, 23, 38);
             TreeViewList.CausesValidation = false;
-            TreeViewList.Dock = DockStyle.Left;
             TreeViewList.ForeColor = SystemColors.ControlLight;
             TreeViewList.HideSelection = false;
             TreeViewList.HotTracking = true;
-            TreeViewList.Location = new Point(0, 0);
+            TreeViewList.Location = new Point(5, 233);
             TreeViewList.Margin = new Padding(2);
             TreeViewList.Name = "TreeViewList";
-            TreeViewList.Size = new Size(282, 853);
+            TreeViewList.Size = new Size(273, 616);
             TreeViewList.TabIndex = 1;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
             // 
             // ManufacturingPanel
             // 
+            ManufacturingPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
             ManufacturingPanel.Controls.Add(BlueprintImagePanel);
             ManufacturingPanel.Controls.Add(StatusLabel);
@@ -431,7 +435,6 @@
             ManufacturingPanel.Controls.Add(ActivityTabPanel);
             ManufacturingPanel.Controls.Add(BlueprintNameLabel);
             ManufacturingPanel.Controls.Add(label3);
-            ManufacturingPanel.Dock = DockStyle.Fill;
             ManufacturingPanel.Location = new Point(282, 0);
             ManufacturingPanel.Margin = new Padding(2);
             ManufacturingPanel.Name = "ManufacturingPanel";
@@ -441,7 +444,7 @@
             // BlueprintImagePanel
             // 
             BlueprintImagePanel.BackColor = Color.CornflowerBlue;
-            BlueprintImagePanel.Location = new Point(338, 106);
+            BlueprintImagePanel.Location = new Point(335, 103);
             BlueprintImagePanel.Name = "BlueprintImagePanel";
             BlueprintImagePanel.Size = new Size(64, 64);
             BlueprintImagePanel.TabIndex = 37;
@@ -451,7 +454,7 @@
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             StatusLabel.ForeColor = SystemColors.ControlLightLight;
-            StatusLabel.Location = new Point(348, 68);
+            StatusLabel.Location = new Point(736, 92);
             StatusLabel.Margin = new Padding(2, 0, 2, 0);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Size = new Size(0, 25);
@@ -487,7 +490,7 @@
             panel1.Controls.Add(label8);
             panel1.Controls.Add(TotalJobCostLabel);
             panel1.Controls.Add(label10);
-            panel1.Location = new Point(522, 0);
+            panel1.Location = new Point(520, 2);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(842, 227);
@@ -807,7 +810,7 @@
             // 
             // RunsUpDown
             // 
-            RunsUpDown.Location = new Point(165, 67);
+            RunsUpDown.Location = new Point(162, 64);
             RunsUpDown.Margin = new Padding(2);
             RunsUpDown.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             RunsUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -822,7 +825,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = SystemColors.ButtonHighlight;
-            label6.Location = new Point(97, 68);
+            label6.Location = new Point(94, 65);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(44, 20);
@@ -832,7 +835,7 @@
             // OutputTypeCombo
             // 
             OutputTypeCombo.FormattingEnabled = true;
-            OutputTypeCombo.Location = new Point(165, 142);
+            OutputTypeCombo.Location = new Point(162, 139);
             OutputTypeCombo.Margin = new Padding(2);
             OutputTypeCombo.Name = "OutputTypeCombo";
             OutputTypeCombo.Size = new Size(152, 28);
@@ -844,7 +847,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = SystemColors.ButtonHighlight;
-            label5.Location = new Point(11, 145);
+            label5.Location = new Point(8, 142);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(140, 20);
@@ -854,7 +857,7 @@
             // InputTypeCombo
             // 
             InputTypeCombo.FormattingEnabled = true;
-            InputTypeCombo.Location = new Point(165, 106);
+            InputTypeCombo.Location = new Point(162, 103);
             InputTypeCombo.Margin = new Padding(2);
             InputTypeCombo.Name = "InputTypeCombo";
             InputTypeCombo.Size = new Size(152, 28);
@@ -872,11 +875,11 @@
             ActivityTabPanel.Controls.Add(ReverseEngineerPage);
             ActivityTabPanel.Controls.Add(ReactionPage);
             ActivityTabPanel.HotTrack = true;
-            ActivityTabPanel.Location = new Point(0, 227);
+            ActivityTabPanel.Location = new Point(0, 233);
             ActivityTabPanel.Margin = new Padding(2);
             ActivityTabPanel.Name = "ActivityTabPanel";
             ActivityTabPanel.SelectedIndex = 0;
-            ActivityTabPanel.Size = new Size(1364, 626);
+            ActivityTabPanel.Size = new Size(1364, 620);
             ActivityTabPanel.TabIndex = 1;
             ActivityTabPanel.SelectedIndexChanged += ActivityTabPanel_SelectedIndexChanged;
             // 
@@ -924,7 +927,7 @@
             ManufacturingPage.Margin = new Padding(2);
             ManufacturingPage.Name = "ManufacturingPage";
             ManufacturingPage.Padding = new Padding(2);
-            ManufacturingPage.Size = new Size(1356, 593);
+            ManufacturingPage.Size = new Size(1356, 587);
             ManufacturingPage.TabIndex = 0;
             ManufacturingPage.Text = "Manufacturing";
             // 
@@ -1217,23 +1220,23 @@
             // 
             // ManuInputGrid
             // 
-            dataGridViewCellStyle37.BackColor = Color.Black;
-            dataGridViewCellStyle37.ForeColor = Color.White;
-            ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManuInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ManuInputGrid.BackgroundColor = Color.Black;
             ManuInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ManuInputGrid.Columns.AddRange(new DataGridViewColumn[] { materialName, quantityTotal, Cost, build, react, quantity, volume, pricePer, manufacturable, reactable, materialTypeID, parentMaterialTypeID });
-            dataGridViewCellStyle42.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = Color.Black;
-            dataGridViewCellStyle42.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle42.ForeColor = Color.White;
-            dataGridViewCellStyle42.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle42.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = DataGridViewTriState.False;
-            ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.Black;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ManuInputGrid.GridColor = Color.White;
             ManuInputGrid.Location = new Point(690, 2);
             ManuInputGrid.Margin = new Padding(2);
@@ -1241,7 +1244,7 @@
             ManuInputGrid.ReadOnly = true;
             ManuInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             ManuInputGrid.RowTemplate.Height = 33;
-            ManuInputGrid.Size = new Size(664, 561);
+            ManuInputGrid.Size = new Size(664, 583);
             ManuInputGrid.TabIndex = 14;
             // 
             // materialName
@@ -1256,10 +1259,10 @@
             // quantityTotal
             // 
             quantityTotal.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle38.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle38.Format = "N0";
-            dataGridViewCellStyle38.NullValue = null;
-            quantityTotal.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            quantityTotal.DefaultCellStyle = dataGridViewCellStyle2;
             quantityTotal.HeaderText = "Total Quantity";
             quantityTotal.MinimumWidth = 6;
             quantityTotal.Name = "quantityTotal";
@@ -1269,9 +1272,9 @@
             // Cost
             // 
             Cost.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle39.Format = "C2";
-            dataGridViewCellStyle39.NullValue = null;
-            Cost.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            Cost.DefaultCellStyle = dataGridViewCellStyle3;
             Cost.HeaderText = "Cost";
             Cost.MinimumWidth = 6;
             Cost.Name = "Cost";
@@ -1311,10 +1314,10 @@
             // volume
             // 
             volume.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle40.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle40.Format = "N2";
-            dataGridViewCellStyle40.NullValue = null;
-            volume.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            volume.DefaultCellStyle = dataGridViewCellStyle4;
             volume.HeaderText = "Volume (m3)";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -1324,9 +1327,9 @@
             // pricePer
             // 
             pricePer.DataPropertyName = "pricePer";
-            dataGridViewCellStyle41.Format = "C2";
-            dataGridViewCellStyle41.NullValue = null;
-            pricePer.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            pricePer.DefaultCellStyle = dataGridViewCellStyle5;
             pricePer.HeaderText = "Price Per";
             pricePer.MinimumWidth = 6;
             pricePer.Name = "pricePer";
@@ -1507,28 +1510,28 @@
             CopyPage.Margin = new Padding(2);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(2);
-            CopyPage.Size = new Size(1356, 593);
+            CopyPage.Size = new Size(1356, 587);
             CopyPage.TabIndex = 1;
             CopyPage.Text = "Copy";
             // 
             // CopyMatGrid
             // 
-            dataGridViewCellStyle43.BackColor = Color.Black;
-            dataGridViewCellStyle43.ForeColor = Color.White;
-            CopyMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            CopyMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             CopyMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             CopyMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             CopyMatGrid.BackgroundColor = Color.Black;
             CopyMatGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CopyMatGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn49, dataGridViewTextBoxColumn50, dataGridViewTextBoxColumn51, dataGridViewTextBoxColumn52, dataGridViewTextBoxColumn53, dataGridViewTextBoxColumn54, dataGridViewTextBoxColumn55, dataGridViewTextBoxColumn56, dataGridViewTextBoxColumn57, dataGridViewTextBoxColumn58, dataGridViewTextBoxColumn59, dataGridViewTextBoxColumn60 });
-            dataGridViewCellStyle48.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle48.BackColor = Color.Black;
-            dataGridViewCellStyle48.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle48.ForeColor = Color.White;
-            dataGridViewCellStyle48.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle48.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle48.WrapMode = DataGridViewTriState.False;
-            CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = Color.Black;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle12;
             CopyMatGrid.Dock = DockStyle.Right;
             CopyMatGrid.GridColor = Color.White;
             CopyMatGrid.Location = new Point(634, 2);
@@ -1537,7 +1540,7 @@
             CopyMatGrid.ReadOnly = true;
             CopyMatGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             CopyMatGrid.RowTemplate.Height = 33;
-            CopyMatGrid.Size = new Size(720, 589);
+            CopyMatGrid.Size = new Size(720, 583);
             CopyMatGrid.TabIndex = 106;
             // 
             // dataGridViewTextBoxColumn49
@@ -1552,10 +1555,10 @@
             // dataGridViewTextBoxColumn50
             // 
             dataGridViewTextBoxColumn50.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle44.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle44.Format = "N0";
-            dataGridViewCellStyle44.NullValue = null;
-            dataGridViewTextBoxColumn50.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewTextBoxColumn50.DefaultCellStyle = dataGridViewCellStyle8;
             dataGridViewTextBoxColumn50.HeaderText = "Total Quantity";
             dataGridViewTextBoxColumn50.MinimumWidth = 6;
             dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
@@ -1565,9 +1568,9 @@
             // dataGridViewTextBoxColumn51
             // 
             dataGridViewTextBoxColumn51.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle45.Format = "C2";
-            dataGridViewCellStyle45.NullValue = null;
-            dataGridViewTextBoxColumn51.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewTextBoxColumn51.DefaultCellStyle = dataGridViewCellStyle9;
             dataGridViewTextBoxColumn51.HeaderText = "Cost";
             dataGridViewTextBoxColumn51.MinimumWidth = 6;
             dataGridViewTextBoxColumn51.Name = "dataGridViewTextBoxColumn51";
@@ -1607,10 +1610,10 @@
             // dataGridViewTextBoxColumn55
             // 
             dataGridViewTextBoxColumn55.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle46.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle46.Format = "N2";
-            dataGridViewCellStyle46.NullValue = null;
-            dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle10;
             dataGridViewTextBoxColumn55.HeaderText = "Volume (m3)";
             dataGridViewTextBoxColumn55.MinimumWidth = 6;
             dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
@@ -1620,9 +1623,9 @@
             // dataGridViewTextBoxColumn56
             // 
             dataGridViewTextBoxColumn56.DataPropertyName = "pricePer";
-            dataGridViewCellStyle47.Format = "C2";
-            dataGridViewCellStyle47.NullValue = null;
-            dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle11;
             dataGridViewTextBoxColumn56.HeaderText = "Price Per";
             dataGridViewTextBoxColumn56.MinimumWidth = 6;
             dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
@@ -1917,7 +1920,7 @@
             MEResearchPage.Margin = new Padding(2);
             MEResearchPage.Name = "MEResearchPage";
             MEResearchPage.Padding = new Padding(2);
-            MEResearchPage.Size = new Size(1356, 593);
+            MEResearchPage.Size = new Size(1356, 587);
             MEResearchPage.TabIndex = 2;
             MEResearchPage.Text = "ME Research";
             // 
@@ -2142,22 +2145,22 @@
             // 
             // MEMaterialsGrid
             // 
-            dataGridViewCellStyle49.BackColor = Color.Black;
-            dataGridViewCellStyle49.ForeColor = Color.White;
-            MEMaterialsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle13.BackColor = Color.Black;
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            MEMaterialsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             MEMaterialsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             MEMaterialsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             MEMaterialsGrid.BackgroundColor = Color.Black;
             MEMaterialsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MEMaterialsGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn25, dataGridViewTextBoxColumn26, dataGridViewTextBoxColumn27, dataGridViewTextBoxColumn28, dataGridViewTextBoxColumn29, dataGridViewTextBoxColumn30, dataGridViewTextBoxColumn31, dataGridViewTextBoxColumn32, dataGridViewTextBoxColumn33, dataGridViewTextBoxColumn34, dataGridViewTextBoxColumn35, dataGridViewTextBoxColumn36 });
-            dataGridViewCellStyle54.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle54.BackColor = Color.Black;
-            dataGridViewCellStyle54.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle54.ForeColor = Color.White;
-            dataGridViewCellStyle54.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle54.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle54.WrapMode = DataGridViewTriState.False;
-            MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = Color.Black;
+            dataGridViewCellStyle18.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle18.ForeColor = Color.White;
+            dataGridViewCellStyle18.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
+            MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle18;
             MEMaterialsGrid.Dock = DockStyle.Right;
             MEMaterialsGrid.GridColor = Color.White;
             MEMaterialsGrid.Location = new Point(634, 2);
@@ -2166,7 +2169,7 @@
             MEMaterialsGrid.ReadOnly = true;
             MEMaterialsGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             MEMaterialsGrid.RowTemplate.Height = 33;
-            MEMaterialsGrid.Size = new Size(720, 589);
+            MEMaterialsGrid.Size = new Size(720, 583);
             MEMaterialsGrid.TabIndex = 40;
             // 
             // dataGridViewTextBoxColumn25
@@ -2181,10 +2184,10 @@
             // dataGridViewTextBoxColumn26
             // 
             dataGridViewTextBoxColumn26.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle50.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle50.Format = "N0";
-            dataGridViewCellStyle50.NullValue = null;
-            dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.Format = "N0";
+            dataGridViewCellStyle14.NullValue = null;
+            dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle14;
             dataGridViewTextBoxColumn26.HeaderText = "Total Quantity";
             dataGridViewTextBoxColumn26.MinimumWidth = 6;
             dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
@@ -2194,9 +2197,9 @@
             // dataGridViewTextBoxColumn27
             // 
             dataGridViewTextBoxColumn27.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle51.Format = "C2";
-            dataGridViewCellStyle51.NullValue = null;
-            dataGridViewTextBoxColumn27.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle15.Format = "C2";
+            dataGridViewCellStyle15.NullValue = null;
+            dataGridViewTextBoxColumn27.DefaultCellStyle = dataGridViewCellStyle15;
             dataGridViewTextBoxColumn27.HeaderText = "Cost";
             dataGridViewTextBoxColumn27.MinimumWidth = 6;
             dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
@@ -2236,10 +2239,10 @@
             // dataGridViewTextBoxColumn31
             // 
             dataGridViewTextBoxColumn31.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle52.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.Format = "N2";
-            dataGridViewCellStyle52.NullValue = null;
-            dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle16;
             dataGridViewTextBoxColumn31.HeaderText = "Volume (m3)";
             dataGridViewTextBoxColumn31.MinimumWidth = 6;
             dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
@@ -2249,9 +2252,9 @@
             // dataGridViewTextBoxColumn32
             // 
             dataGridViewTextBoxColumn32.DataPropertyName = "pricePer";
-            dataGridViewCellStyle53.Format = "C2";
-            dataGridViewCellStyle53.NullValue = null;
-            dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridViewTextBoxColumn32.HeaderText = "Price Per";
             dataGridViewTextBoxColumn32.MinimumWidth = 6;
             dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
@@ -2326,7 +2329,7 @@
             TEResearchPage.Margin = new Padding(2);
             TEResearchPage.Name = "TEResearchPage";
             TEResearchPage.Padding = new Padding(2);
-            TEResearchPage.Size = new Size(1356, 593);
+            TEResearchPage.Size = new Size(1356, 587);
             TEResearchPage.TabIndex = 3;
             TEResearchPage.Text = "TE Research";
             // 
@@ -2552,22 +2555,22 @@
             // 
             // TEMatGrid
             // 
-            dataGridViewCellStyle55.BackColor = Color.Black;
-            dataGridViewCellStyle55.ForeColor = Color.White;
-            TEMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle19.BackColor = Color.Black;
+            dataGridViewCellStyle19.ForeColor = Color.White;
+            TEMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             TEMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TEMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             TEMatGrid.BackgroundColor = Color.Black;
             TEMatGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TEMatGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn37, dataGridViewTextBoxColumn38, dataGridViewTextBoxColumn39, dataGridViewTextBoxColumn40, dataGridViewTextBoxColumn41, dataGridViewTextBoxColumn42, dataGridViewTextBoxColumn43, dataGridViewTextBoxColumn44, dataGridViewTextBoxColumn45, dataGridViewTextBoxColumn46, dataGridViewTextBoxColumn47, dataGridViewTextBoxColumn48 });
-            dataGridViewCellStyle60.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle60.BackColor = Color.Black;
-            dataGridViewCellStyle60.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle60.ForeColor = Color.White;
-            dataGridViewCellStyle60.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle60.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle60.WrapMode = DataGridViewTriState.False;
-            TEMatGrid.DefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = Color.Black;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle24.ForeColor = Color.White;
+            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
+            TEMatGrid.DefaultCellStyle = dataGridViewCellStyle24;
             TEMatGrid.Dock = DockStyle.Right;
             TEMatGrid.GridColor = Color.White;
             TEMatGrid.Location = new Point(634, 2);
@@ -2576,7 +2579,7 @@
             TEMatGrid.ReadOnly = true;
             TEMatGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             TEMatGrid.RowTemplate.Height = 33;
-            TEMatGrid.Size = new Size(720, 589);
+            TEMatGrid.Size = new Size(720, 583);
             TEMatGrid.TabIndex = 65;
             // 
             // dataGridViewTextBoxColumn37
@@ -2591,10 +2594,10 @@
             // dataGridViewTextBoxColumn38
             // 
             dataGridViewTextBoxColumn38.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle56.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle56.Format = "N0";
-            dataGridViewCellStyle56.NullValue = null;
-            dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.Format = "N0";
+            dataGridViewCellStyle20.NullValue = null;
+            dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle20;
             dataGridViewTextBoxColumn38.HeaderText = "Total Quantity";
             dataGridViewTextBoxColumn38.MinimumWidth = 6;
             dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
@@ -2604,9 +2607,9 @@
             // dataGridViewTextBoxColumn39
             // 
             dataGridViewTextBoxColumn39.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle57.Format = "C2";
-            dataGridViewCellStyle57.NullValue = null;
-            dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle57;
+            dataGridViewCellStyle21.Format = "C2";
+            dataGridViewCellStyle21.NullValue = null;
+            dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle21;
             dataGridViewTextBoxColumn39.HeaderText = "Cost";
             dataGridViewTextBoxColumn39.MinimumWidth = 6;
             dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
@@ -2646,10 +2649,10 @@
             // dataGridViewTextBoxColumn43
             // 
             dataGridViewTextBoxColumn43.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle58.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle58.Format = "N2";
-            dataGridViewCellStyle58.NullValue = null;
-            dataGridViewTextBoxColumn43.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.Format = "N2";
+            dataGridViewCellStyle22.NullValue = null;
+            dataGridViewTextBoxColumn43.DefaultCellStyle = dataGridViewCellStyle22;
             dataGridViewTextBoxColumn43.HeaderText = "Volume (m3)";
             dataGridViewTextBoxColumn43.MinimumWidth = 6;
             dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
@@ -2659,9 +2662,9 @@
             // dataGridViewTextBoxColumn44
             // 
             dataGridViewTextBoxColumn44.DataPropertyName = "pricePer";
-            dataGridViewCellStyle59.Format = "C2";
-            dataGridViewCellStyle59.NullValue = null;
-            dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewCellStyle23.Format = "C2";
+            dataGridViewCellStyle23.NullValue = null;
+            dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle23;
             dataGridViewTextBoxColumn44.HeaderText = "Price Per";
             dataGridViewTextBoxColumn44.MinimumWidth = 6;
             dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
@@ -2759,31 +2762,31 @@
             InventionPage.Margin = new Padding(2);
             InventionPage.Name = "InventionPage";
             InventionPage.Padding = new Padding(2);
-            InventionPage.Size = new Size(1356, 593);
+            InventionPage.Size = new Size(1356, 587);
             InventionPage.TabIndex = 4;
             InventionPage.Text = "Invention";
             // 
             // InventionInputGrid
             // 
-            dataGridViewCellStyle61.BackColor = Color.Black;
-            dataGridViewCellStyle61.ForeColor = Color.White;
-            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle61;
+            dataGridViewCellStyle25.BackColor = Color.Black;
+            dataGridViewCellStyle25.ForeColor = Color.White;
+            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             InventionInputGrid.BackgroundColor = Color.Black;
             InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             InventionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
-            dataGridViewCellStyle66.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle66.BackColor = Color.Black;
-            dataGridViewCellStyle66.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle66.ForeColor = Color.White;
-            dataGridViewCellStyle66.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle66.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle66.WrapMode = DataGridViewTriState.False;
-            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle30.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = Color.Black;
+            dataGridViewCellStyle30.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle30.ForeColor = Color.White;
+            dataGridViewCellStyle30.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
+            InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle30;
             InventionInputGrid.Dock = DockStyle.Bottom;
             InventionInputGrid.GridColor = Color.White;
-            InventionInputGrid.Location = new Point(2, 373);
+            InventionInputGrid.Location = new Point(2, 367);
             InventionInputGrid.Margin = new Padding(2);
             InventionInputGrid.Name = "InventionInputGrid";
             InventionInputGrid.ReadOnly = true;
@@ -2804,10 +2807,10 @@
             // dataGridViewTextBoxColumn2
             // 
             dataGridViewTextBoxColumn2.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle62.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle62.Format = "N0";
-            dataGridViewCellStyle62.NullValue = null;
-            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle62;
+            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.Format = "N0";
+            dataGridViewCellStyle26.NullValue = null;
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle26;
             dataGridViewTextBoxColumn2.HeaderText = "Total Quantity";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -2817,9 +2820,9 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle63.Format = "C2";
-            dataGridViewCellStyle63.NullValue = null;
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle27.Format = "C2";
+            dataGridViewCellStyle27.NullValue = null;
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle27;
             dataGridViewTextBoxColumn3.HeaderText = "Cost";
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
@@ -2859,10 +2862,10 @@
             // dataGridViewTextBoxColumn7
             // 
             dataGridViewTextBoxColumn7.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle64.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle64.Format = "N2";
-            dataGridViewCellStyle64.NullValue = null;
-            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle64;
+            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.Format = "N2";
+            dataGridViewCellStyle28.NullValue = null;
+            dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle28;
             dataGridViewTextBoxColumn7.HeaderText = "Volume (m3)";
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
@@ -2872,9 +2875,9 @@
             // dataGridViewTextBoxColumn8
             // 
             dataGridViewTextBoxColumn8.DataPropertyName = "pricePer";
-            dataGridViewCellStyle65.Format = "C2";
-            dataGridViewCellStyle65.NullValue = null;
-            dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle29.Format = "C2";
+            dataGridViewCellStyle29.NullValue = null;
+            dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle29;
             dataGridViewTextBoxColumn8.HeaderText = "Price Per";
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
@@ -3085,7 +3088,7 @@
             InventionSkillsTextbox.Multiline = true;
             InventionSkillsTextbox.Name = "InventionSkillsTextbox";
             InventionSkillsTextbox.ReadOnly = true;
-            InventionSkillsTextbox.Size = new Size(216, 589);
+            InventionSkillsTextbox.Size = new Size(216, 583);
             InventionSkillsTextbox.TabIndex = 8;
             // 
             // InventionRunsFor100Label
@@ -3386,7 +3389,7 @@
             ReverseEngineerPage.Margin = new Padding(2);
             ReverseEngineerPage.Name = "ReverseEngineerPage";
             ReverseEngineerPage.Padding = new Padding(2);
-            ReverseEngineerPage.Size = new Size(1356, 593);
+            ReverseEngineerPage.Size = new Size(1356, 587);
             ReverseEngineerPage.TabIndex = 5;
             ReverseEngineerPage.Text = "Reverse Engineering";
             // 
@@ -3420,31 +3423,31 @@
             ReactionPage.Margin = new Padding(2);
             ReactionPage.Name = "ReactionPage";
             ReactionPage.Padding = new Padding(2);
-            ReactionPage.Size = new Size(1356, 593);
+            ReactionPage.Size = new Size(1356, 587);
             ReactionPage.TabIndex = 6;
             ReactionPage.Text = "Reactions";
             // 
             // ReactionInputGrid
             // 
-            dataGridViewCellStyle67.BackColor = Color.Black;
-            dataGridViewCellStyle67.ForeColor = Color.White;
-            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle31.BackColor = Color.Black;
+            dataGridViewCellStyle31.ForeColor = Color.White;
+            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ReactionInputGrid.BackgroundColor = Color.Black;
             ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ReactionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn23, dataGridViewTextBoxColumn24 });
-            dataGridViewCellStyle72.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle72.BackColor = Color.Black;
-            dataGridViewCellStyle72.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle72.ForeColor = Color.White;
-            dataGridViewCellStyle72.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle72.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle72.WrapMode = DataGridViewTriState.False;
-            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle36.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = Color.Black;
+            dataGridViewCellStyle36.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle36.ForeColor = Color.White;
+            dataGridViewCellStyle36.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = DataGridViewTriState.False;
+            ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle36;
             ReactionInputGrid.Dock = DockStyle.Bottom;
             ReactionInputGrid.GridColor = Color.White;
-            ReactionInputGrid.Location = new Point(2, 298);
+            ReactionInputGrid.Location = new Point(2, 292);
             ReactionInputGrid.Margin = new Padding(2);
             ReactionInputGrid.Name = "ReactionInputGrid";
             ReactionInputGrid.ReadOnly = true;
@@ -3465,10 +3468,10 @@
             // dataGridViewTextBoxColumn14
             // 
             dataGridViewTextBoxColumn14.DataPropertyName = "quantityTotal";
-            dataGridViewCellStyle68.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle68.Format = "N0";
-            dataGridViewCellStyle68.NullValue = null;
-            dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle32.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.Format = "N0";
+            dataGridViewCellStyle32.NullValue = null;
+            dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle32;
             dataGridViewTextBoxColumn14.HeaderText = "Total Quantity";
             dataGridViewTextBoxColumn14.MinimumWidth = 6;
             dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
@@ -3478,9 +3481,9 @@
             // dataGridViewTextBoxColumn15
             // 
             dataGridViewTextBoxColumn15.DataPropertyName = "priceTotal";
-            dataGridViewCellStyle69.Format = "C2";
-            dataGridViewCellStyle69.NullValue = null;
-            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle69;
+            dataGridViewCellStyle33.Format = "C2";
+            dataGridViewCellStyle33.NullValue = null;
+            dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle33;
             dataGridViewTextBoxColumn15.HeaderText = "Cost";
             dataGridViewTextBoxColumn15.MinimumWidth = 6;
             dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
@@ -3520,10 +3523,10 @@
             // dataGridViewTextBoxColumn19
             // 
             dataGridViewTextBoxColumn19.DataPropertyName = "volumeTotal";
-            dataGridViewCellStyle70.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle70.Format = "N2";
-            dataGridViewCellStyle70.NullValue = null;
-            dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle34.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle34.Format = "N2";
+            dataGridViewCellStyle34.NullValue = null;
+            dataGridViewTextBoxColumn19.DefaultCellStyle = dataGridViewCellStyle34;
             dataGridViewTextBoxColumn19.HeaderText = "Volume (m3)";
             dataGridViewTextBoxColumn19.MinimumWidth = 6;
             dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
@@ -3533,9 +3536,9 @@
             // dataGridViewTextBoxColumn20
             // 
             dataGridViewTextBoxColumn20.DataPropertyName = "pricePer";
-            dataGridViewCellStyle71.Format = "C2";
-            dataGridViewCellStyle71.NullValue = null;
-            dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle35.Format = "C2";
+            dataGridViewCellStyle35.NullValue = null;
+            dataGridViewTextBoxColumn20.DefaultCellStyle = dataGridViewCellStyle35;
             dataGridViewTextBoxColumn20.HeaderText = "Price Per";
             dataGridViewTextBoxColumn20.MinimumWidth = 6;
             dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
@@ -3641,7 +3644,7 @@
             ReactionSkillsTextBox.Multiline = true;
             ReactionSkillsTextBox.Name = "ReactionSkillsTextBox";
             ReactionSkillsTextBox.ReadOnly = true;
-            ReactionSkillsTextBox.Size = new Size(274, 589);
+            ReactionSkillsTextBox.Size = new Size(274, 583);
             ReactionSkillsTextBox.TabIndex = 17;
             // 
             // ReactionTotalOutcomeIskLabel
@@ -3814,7 +3817,7 @@
             BlueprintNameLabel.AutoSize = true;
             BlueprintNameLabel.Font = new Font("Segoe UI", 15F, FontStyle.Bold, GraphicsUnit.Point);
             BlueprintNameLabel.ForeColor = Color.Gold;
-            BlueprintNameLabel.Location = new Point(13, 9);
+            BlueprintNameLabel.Location = new Point(10, 6);
             BlueprintNameLabel.Margin = new Padding(2, 0, 2, 0);
             BlueprintNameLabel.Name = "BlueprintNameLabel";
             BlueprintNameLabel.Size = new Size(220, 35);
@@ -3826,7 +3829,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = SystemColors.ButtonHighlight;
-            label3.Location = new Point(23, 106);
+            label3.Location = new Point(20, 103);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(128, 20);
@@ -3861,13 +3864,48 @@
             InventionImageWorker.DoWork += InventionImageWorker_DoWork;
             InventionImageWorker.RunWorkerCompleted += InventionImageWorker_RunWorkerCompleted;
             // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Location = new Point(5, 2);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.Size = new Size(173, 27);
+            SearchTextBox.TabIndex = 2;
+            SearchTextBox.KeyPress += SearchTextBox_KeyPress;
+            // 
+            // SearchButton
+            // 
+            SearchButton.ForeColor = Color.Black;
+            SearchButton.Location = new Point(184, 1);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(94, 29);
+            SearchButton.TabIndex = 3;
+            SearchButton.Text = "Search";
+            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
+            // 
+            // SearchResultsTreeView
+            // 
+            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            SearchResultsTreeView.CausesValidation = false;
+            SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
+            SearchResultsTreeView.HideSelection = false;
+            SearchResultsTreeView.HotTracking = true;
+            SearchResultsTreeView.Location = new Point(5, 34);
+            SearchResultsTreeView.Margin = new Padding(2);
+            SearchResultsTreeView.Name = "SearchResultsTreeView";
+            SearchResultsTreeView.Size = new Size(273, 195);
+            SearchResultsTreeView.TabIndex = 4;
+            SearchResultsTreeView.AfterSelect += TreeViewList_AfterSelect;
+            // 
             // BlueprintBrowser
             // 
             AutoScaleDimensions = new SizeF(120F, 120F);
             AutoScaleMode = AutoScaleMode.Dpi;
-            AutoSize = true;
-            BackColor = SystemColors.ControlDark;
+            BackColor = Color.Black;
             ClientSize = new Size(1646, 853);
+            Controls.Add(SearchResultsTreeView);
+            Controls.Add(SearchButton);
+            Controls.Add(SearchTextBox);
             Controls.Add(ManufacturingPanel);
             Controls.Add(TreeViewList);
             ForeColor = Color.White;
@@ -3919,6 +3957,7 @@
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)industryActivityMaterialsBindingSource).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -4213,5 +4252,8 @@
         private Label label75;
         private Label label76;
         private Label label77;
+        private TextBox SearchTextBox;
+        private Button SearchButton;
+        private TreeView SearchResultsTreeView;
     }
 }
