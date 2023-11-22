@@ -152,7 +152,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            ItemSearchResultsGrid.GridColor = Color.White;
+            ItemSearchResultsGrid.GridColor = Color.Black;
             ItemSearchResultsGrid.Location = new Point(12, 141);
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
             ItemSearchResultsGrid.RowHeadersWidth = 51;
@@ -395,7 +395,7 @@
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             TrackedTypesGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            TrackedTypesGrid.GridColor = Color.White;
+            TrackedTypesGrid.GridColor = Color.Black;
             TrackedTypesGrid.Location = new Point(26, 141);
             TrackedTypesGrid.MultiSelect = false;
             TrackedTypesGrid.Name = "TrackedTypesGrid";

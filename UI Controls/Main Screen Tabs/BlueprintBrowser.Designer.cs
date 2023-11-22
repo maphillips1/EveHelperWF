@@ -1237,7 +1237,7 @@
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle6;
-            ManuInputGrid.GridColor = Color.White;
+            ManuInputGrid.GridColor = Color.Black;
             ManuInputGrid.Location = new Point(690, 2);
             ManuInputGrid.Margin = new Padding(2);
             ManuInputGrid.Name = "ManuInputGrid";
@@ -1533,7 +1533,7 @@
             dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
             CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle12;
             CopyMatGrid.Dock = DockStyle.Right;
-            CopyMatGrid.GridColor = Color.White;
+            CopyMatGrid.GridColor = Color.Black;
             CopyMatGrid.Location = new Point(634, 2);
             CopyMatGrid.Margin = new Padding(2);
             CopyMatGrid.Name = "CopyMatGrid";
@@ -2162,7 +2162,7 @@
             dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
             MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle18;
             MEMaterialsGrid.Dock = DockStyle.Right;
-            MEMaterialsGrid.GridColor = Color.White;
+            MEMaterialsGrid.GridColor = Color.Black;
             MEMaterialsGrid.Location = new Point(634, 2);
             MEMaterialsGrid.Margin = new Padding(2);
             MEMaterialsGrid.Name = "MEMaterialsGrid";
@@ -2572,7 +2572,7 @@
             dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
             TEMatGrid.DefaultCellStyle = dataGridViewCellStyle24;
             TEMatGrid.Dock = DockStyle.Right;
-            TEMatGrid.GridColor = Color.White;
+            TEMatGrid.GridColor = Color.Black;
             TEMatGrid.Location = new Point(634, 2);
             TEMatGrid.Margin = new Padding(2);
             TEMatGrid.Name = "TEMatGrid";
@@ -2785,7 +2785,7 @@
             dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
             InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle30;
             InventionInputGrid.Dock = DockStyle.Bottom;
-            InventionInputGrid.GridColor = Color.White;
+            InventionInputGrid.GridColor = Color.Black;
             InventionInputGrid.Location = new Point(2, 367);
             InventionInputGrid.Margin = new Padding(2);
             InventionInputGrid.Name = "InventionInputGrid";
@@ -3446,7 +3446,7 @@
             dataGridViewCellStyle36.WrapMode = DataGridViewTriState.False;
             ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle36;
             ReactionInputGrid.Dock = DockStyle.Bottom;
-            ReactionInputGrid.GridColor = Color.White;
+            ReactionInputGrid.GridColor = Color.Black;
             ReactionInputGrid.Location = new Point(2, 292);
             ReactionInputGrid.Margin = new Padding(2);
             ReactionInputGrid.Name = "ReactionInputGrid";

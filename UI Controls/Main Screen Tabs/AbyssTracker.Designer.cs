@@ -289,7 +289,7 @@
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle3;
-            AbyssTrackerGridView.GridColor = Color.White;
+            AbyssTrackerGridView.GridColor = Color.Black;
             AbyssTrackerGridView.Location = new Point(22, 229);
             AbyssTrackerGridView.MultiSelect = false;
             AbyssTrackerGridView.Name = "AbyssTrackerGridView";

@@ -237,7 +237,7 @@
             SelectedItemTabPanel.Location = new Point(0, 143);
             SelectedItemTabPanel.Name = "SelectedItemTabPanel";
             SelectedItemTabPanel.SelectedIndex = 0;
-            SelectedItemTabPanel.Size = new Size(1321, 710);
+            SelectedItemTabPanel.Size = new Size(1315, 710);
             SelectedItemTabPanel.TabIndex = 11;
             // 
             // OrdersTabPage
@@ -246,7 +246,7 @@
             OrdersTabPage.Location = new Point(4, 29);
             OrdersTabPage.Name = "OrdersTabPage";
             OrdersTabPage.Padding = new Padding(3);
-            OrdersTabPage.Size = new Size(1313, 677);
+            OrdersTabPage.Size = new Size(1307, 677);
             OrdersTabPage.TabIndex = 0;
             OrdersTabPage.Text = "Orders";
             OrdersTabPage.UseVisualStyleBackColor = true;
@@ -269,7 +269,7 @@
             OrdersSplitContainer.Panel2.BackColor = Color.FromArgb(2, 23, 38);
             OrdersSplitContainer.Panel2.Controls.Add(BuyOrdersGridView);
             OrdersSplitContainer.Panel2.Controls.Add(label4);
-            OrdersSplitContainer.Size = new Size(1307, 671);
+            OrdersSplitContainer.Size = new Size(1301, 671);
             OrdersSplitContainer.SplitterDistance = 335;
             OrdersSplitContainer.SplitterWidth = 10;
             OrdersSplitContainer.TabIndex = 0;
@@ -304,12 +304,12 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle3;
             SellOrdersGridView.Dock = DockStyle.Bottom;
-            SellOrdersGridView.GridColor = Color.White;
+            SellOrdersGridView.GridColor = Color.Black;
             SellOrdersGridView.Location = new Point(0, 57);
             SellOrdersGridView.Name = "SellOrdersGridView";
             SellOrdersGridView.RowHeadersWidth = 51;
             SellOrdersGridView.RowTemplate.Height = 29;
-            SellOrdersGridView.Size = new Size(1307, 278);
+            SellOrdersGridView.Size = new Size(1301, 278);
             SellOrdersGridView.TabIndex = 0;
             // 
             // range
@@ -453,12 +453,12 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle6;
             BuyOrdersGridView.Dock = DockStyle.Bottom;
-            BuyOrdersGridView.GridColor = Color.White;
+            BuyOrdersGridView.GridColor = Color.Black;
             BuyOrdersGridView.Location = new Point(0, 45);
             BuyOrdersGridView.Name = "BuyOrdersGridView";
             BuyOrdersGridView.RowHeadersWidth = 51;
             BuyOrdersGridView.RowTemplate.Height = 29;
-            BuyOrdersGridView.Size = new Size(1307, 281);
+            BuyOrdersGridView.Size = new Size(1301, 281);
             BuyOrdersGridView.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn1
@@ -600,7 +600,7 @@
             PriceHistoryTabPage.Location = new Point(4, 29);
             PriceHistoryTabPage.Name = "PriceHistoryTabPage";
             PriceHistoryTabPage.Padding = new Padding(3);
-            PriceHistoryTabPage.Size = new Size(1313, 677);
+            PriceHistoryTabPage.Size = new Size(1307, 677);
             PriceHistoryTabPage.TabIndex = 1;
             PriceHistoryTabPage.Text = "Price History";
             // 
@@ -623,12 +623,12 @@
             dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
             PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
             PriceHistoryGridView.Dock = DockStyle.Fill;
-            PriceHistoryGridView.GridColor = Color.White;
+            PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(3, 3);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1307, 671);
+            PriceHistoryGridView.Size = new Size(1301, 671);
             PriceHistoryGridView.TabIndex = 0;
             // 
             // date
