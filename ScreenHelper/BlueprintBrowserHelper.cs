@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace EveHelperWF.ScreenHelper
 {
@@ -531,15 +532,37 @@ namespace EveHelperWF.ScreenHelper
         }
         #endregion
 
+        public static List<TreeNode> SearchBlueprints(string searchText)
+        {
+            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
+            List<TreeNode> foundTypes = new List<TreeNode>();
+
+            invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
+
+            if (invTypes.Count > 0)
+            {
+                invTypes = invTypes.OrderBy(x => x.typeName).ToList();
+
+                foreach (InventoryTypes type in invTypes)
+                {
+                    TreeNode treeNode = new TreeNode();
+                    treeNode.Text = type.typeName;
+                    treeNode.Tag = string.Concat("typeID_", type.typeId);
+                    foundTypes.Add(treeNode);
+                }
+            }
+
+            return foundTypes;
+        }
+
         #region "Build Tree View"
         public static List<TreeNode> BuildBlueprintTreeView()
         {
             List<TreeNode> treeViewGroups = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> invTypes = Database.SQLiteCalls.GetInventoryTypes();
+            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
 
-            invTypes = invTypes.FindAll(x => x.categoryID == 9); //Blueprint
 
             treeViewGroups = GetTreeViewGroups(ref invTypes, marketGroups);
 

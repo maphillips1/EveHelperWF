@@ -413,9 +413,17 @@ namespace EveHelperWF
         #region "Form Events"
         private void TreeViewList_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
             if (TreeViewList.SelectedNode != null)
             {
-                TreeNode selectedNode = TreeViewList.SelectedNode;
+                selectedNode = TreeViewList.SelectedNode;
+            }
+            else if (SearchResultsTreeView.SelectedNode != null)
+            {
+                selectedNode = SearchResultsTreeView.SelectedNode;
+            }
+            if (selectedNode != null)
+            {
                 if (selectedNode.Tag.ToString().StartsWith("typeID"))
                 {
                     if (ScreenHelper.BlueprintBrowserHelper.InventoryTypes != null)
@@ -465,6 +473,28 @@ namespace EveHelperWF
                 SetDefaultManufacturingMETEValuesForBP();
 
                 RunNumbers();
+            }
+        }
+
+        private void SearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)(Keys.Enter))
+            {
+                SearchButton_Click(sender, new EventArgs());
+            }
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            SearchResultsTreeView.Nodes.Clear();
+            string searchText = SearchTextBox.Text.ToLowerInvariant();
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                List<TreeNode> foundNodes = BlueprintBrowserHelper.SearchBlueprints(searchText);
+                if (foundNodes.Count > 0)
+                {
+                    SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                }
             }
         }
         #endregion

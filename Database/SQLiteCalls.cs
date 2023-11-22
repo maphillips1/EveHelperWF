@@ -499,6 +499,17 @@ namespace EveHelperWF.Database
 
             return sb.ToString();
         }
+
+        private static string BlueprintSearchCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select typeID, typeName from invTypes");
+            sb.AppendLine("where groupID = 1979");
+            sb.AppendLine("order by typeName");
+
+            return sb.ToString();
+        }
         #endregion
 
         #region "Public Functions"
