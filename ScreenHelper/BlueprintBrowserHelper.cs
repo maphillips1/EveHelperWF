@@ -391,7 +391,7 @@ namespace EveHelperWF.ScreenHelper
             return MEImplantItems;
         }
 
-        public static List<Objects.ComboListItem> GetCopyImplantICopyms()
+        public static List<Objects.ComboListItem> GetCopyImplantItems()
         {
             if (CopyImplantItems == null)
             {
@@ -1837,6 +1837,29 @@ namespace EveHelperWF.ScreenHelper
 
             return seconds;
         }
+        public static Int64 GetTEResearchTime(long baseTime, CalculationHelperClass helperClass)
+        {
+            Int64 seconds = 0;
+            double implantBonus = 1;
+            double skillBonus = (1 * .75 * .85);
+            int levelModifier = 0;
+
+            if (helperClass.TEToLevel > helperClass.TEFromLevel)
+            {
+                if (helperClass.MEImplantTypeID > 0)
+                {
+                    Objects.IndustryImplant industryImplant = TEImplants.Find(x => x.ImplantTypeID == helperClass.TEImplantTypeID);
+
+                    implantBonus -= (Convert.ToDouble(industryImplant.ImplantBonus) / 100);
+                }
+                levelModifier = GetMETELevelTime(helperClass.TEToLevel / 2);
+
+                seconds = Convert.ToInt64(baseTime * (1 * skillBonus * implantBonus) * levelModifier);
+                seconds = seconds / 105;
+            }
+
+            return seconds;
+        }
 
         private static int GetMETELevelTime(int toLevelId)
         {
@@ -1884,6 +1907,24 @@ namespace EveHelperWF.ScreenHelper
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
             decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
             decimal facilityTax = calculationHelperClass.MEFacilityTax / 100;
+            decimal sccSurcharge = (decimal).015;
+            baseCost = processTimeValue;
+
+            cost = Math.Ceiling(baseCost * costIndex);
+            cost += Math.Ceiling(processTimeValue * facilityTax);
+            cost += Math.Ceiling(processTimeValue * sccSurcharge);
+            cost = Math.Ceiling(cost);
+
+            return cost;
+        }
+
+        public static decimal GetTEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
+        {
+            decimal cost = 0;
+            decimal baseCost = GetBaseCost(manuMats);
+            decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.TEFromLevel / 2, calculationHelperClass.TEToLevel / 2);
+            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.TESolarSystemID, Objects.CostIndiceActivity.ActivityTE);
+            decimal facilityTax = calculationHelperClass.TEFacilityTax / 100;
             decimal sccSurcharge = (decimal).015;
             baseCost = processTimeValue;
 
@@ -1965,6 +2006,58 @@ namespace EveHelperWF.ScreenHelper
                 mat.volumeTotal = mat.quantityTotal * matType.volume;
             }
             return totalVolume;
+        }
+        #endregion
+
+        #region "Copying"
+
+        public static decimal GetCopyingTotalMats(ref List<MaterialsWithMarketData> inputMats, CalculationHelperClass helperClass)
+        {
+            decimal multipler = (helperClass.NumCopies * helperClass.RunsPerCopy);
+            decimal totalVolume = 0;
+            foreach (MaterialsWithMarketData mat in inputMats)
+            {
+                mat.quantityTotal = (long)(mat.quantity * multipler);
+                Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                totalVolume += mat.quantityTotal * matType.volume;
+                mat.volumeTotal = mat.quantityTotal * matType.volume;
+            }
+            return totalVolume;
+        }
+
+        public static Int64 GetCopyingTime(long baseTime, CalculationHelperClass helperClass)
+        {
+            Int64 seconds = 0;
+            double implantBonus = 1;
+            double skillBonus = (1 * .75 * .85);
+            int levelModifier = 0;
+
+            if (helperClass.CopyImplantTypeID > 0)
+            {
+                Objects.IndustryImplant industryImplant = CopyImplants.Find(x => x.ImplantTypeID == helperClass.CopyImplantTypeID);
+
+                implantBonus -= (Convert.ToDouble(industryImplant.ImplantBonus) / 100);
+            }
+
+            seconds = Convert.ToInt64(baseTime * (1 * skillBonus * implantBonus) * helperClass.NumCopies * helperClass.RunsPerCopy);
+
+            return seconds;
+        }
+
+        public static decimal GetCopyJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
+        {
+            decimal cost = 0;
+            decimal baseCost = GetBaseCost(manuMats);
+            decimal jobCostBase = Math.Round(baseCost * (decimal).02 * calculationHelperClass.NumCopies * calculationHelperClass.RunsPerCopy);
+            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.CopyingSolarSystemID, Objects.CostIndiceActivity.ActivityCOPY);
+            decimal facilityTax = calculationHelperClass.CopyingFacilityTax / 100;
+            decimal sccSurcharge = (decimal).015;
+
+            cost = Math.Ceiling(jobCostBase * costIndex);
+            cost += Math.Ceiling(jobCostBase * facilityTax);
+            cost += Math.Ceiling(jobCostBase * sccSurcharge);            
+
+            return cost;
         }
         #endregion
     }

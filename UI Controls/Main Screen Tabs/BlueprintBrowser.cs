@@ -47,6 +47,7 @@ namespace EveHelperWF
         private static Int64 InventionTotalTime = 0;
         private static Int64 ResMETime = 0;
         private static Int64 ResTETime = 0;
+        private static Int64 ResCopyTime = 0;
         //Component Time
         private static Int64 ManufacturingTotalComponentTime = 0;
         //Input Price
@@ -54,6 +55,8 @@ namespace EveHelperWF
         private static decimal ReactionTotalInputPrice = 0;
         private static decimal InventionTotalInputPrice = 0;
         private static decimal METotalInputPrice = 0;
+        private static decimal TETotalInputPrice = 0;
+        private static decimal CopyingTotalInputPrice = 0;
         //Run Time
         private static Int64 TotalManufacturingJobTime = 0;
         private static Int64 TotalReactionJobTime = 0;
@@ -63,6 +66,8 @@ namespace EveHelperWF
         private static Decimal TotalReactionJobCost = 0;
         private static Decimal TotalInventionJobCost = 0;
         private static decimal TotalMEJobCost = 0;
+        private static decimal TotalTEJobCost = 0;
+        private static decimal TotalCopyJobCost = 0;
         //Output Price
         private static Decimal TotalManufacturingOutputPrice = 0;
         private static Decimal TotalReactionOutputPrice = 0;
@@ -71,6 +76,8 @@ namespace EveHelperWF
         private static Decimal TotalReactionInputVolume = 0;
         private static Decimal TotalInventionInputVolume = 0;
         private static decimal TotalMEInputVolume = 0;
+        private static decimal TotalTEInputVolume = 0;
+        private static decimal TotalCopyInputVolume = 0;
         //Output Volume
         private static Decimal TotalManufacturingOutputVolume = 0;
         private static Decimal TotalReactionOutputVolume = 0;
@@ -84,6 +91,8 @@ namespace EveHelperWF
         private static Decimal TotalReactionTaxesAndFees = 0;
         private static Decimal TotalInventionTaxesAndFees = 0;
         private static decimal TotalMETaxesAndFees = 0;
+        private static decimal TotalTETaxesAndFees = 0;
+        private static decimal TotalCopyTaxesAndFees = 0;
 
         //Invention Specific
         private static Decimal FinalInventionProbability = 0;
@@ -257,6 +266,16 @@ namespace EveHelperWF
             MESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
             MESystemCombo.DisplayMember = "Value";
             MESystemCombo.ValueMember = "Key";
+
+            TESystemCombo.BindingContext = new BindingContext();
+            TESystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
+            TESystemCombo.DisplayMember = "Value";
+            TESystemCombo.ValueMember = "Key";
+
+            CopySystemCombo.BindingContext = new BindingContext();
+            CopySystemCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetAllSolarSystemComboItems();
+            CopySystemCombo.DisplayMember = "Value";
+            CopySystemCombo.ValueMember = "Key";
         }
 
         private void LoadStructureCombos()
@@ -280,6 +299,16 @@ namespace EveHelperWF
             MEStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
             MEStructureCombo.DisplayMember = "Value";
             MEStructureCombo.ValueMember = "Key";
+
+            TEStructureCombo.BindingContext = new BindingContext();
+            TEStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
+            TEStructureCombo.DisplayMember = "Value";
+            TEStructureCombo.ValueMember = "Key";
+
+            CopyStructureCombo.BindingContext = new BindingContext();
+            CopyStructureCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetEngineeringStructureItems();
+            CopyStructureCombo.DisplayMember = "Value";
+            CopyStructureCombo.ValueMember = "Key";
         }
 
         private void LoadImplantCombos()
@@ -291,6 +320,14 @@ namespace EveHelperWF
             MEImplantCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetMEIMplentItems();
             MEImplantCombo.DisplayMember = "Value";
             MEImplantCombo.ValueMember = "Key";
+
+            TEImplantCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetTEImplantItems();
+            TEImplantCombo.DisplayMember = "Value";
+            TEImplantCombo.ValueMember = "Key";
+
+            CopyImplantCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetCopyImplantItems();
+            CopyImplantCombo.DisplayMember = "Value";
+            CopyImplantCombo.ValueMember = "Key";
         }
 
         private void LoadStructureRigCombos()
@@ -329,6 +366,16 @@ namespace EveHelperWF
             METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
             METimeRigCombo.DisplayMember = "Value";
             METimeRigCombo.ValueMember = "Key";
+
+            TEStructRigCombo.BindingContext = new BindingContext();
+            TEStructRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            TEStructRigCombo.DisplayMember = "Value";
+            TEStructRigCombo.ValueMember = "Key";
+
+            CopyTimeRigCombo.BindingContext = new BindingContext();
+            CopyTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            CopyTimeRigCombo.DisplayMember = "Value";
+            CopyTimeRigCombo.ValueMember = "Key";
 
         }
 
@@ -586,6 +633,43 @@ namespace EveHelperWF
                 METaxLabel.Visible = true;
                 METaxUpDown.Visible = true;
             }
+
+            //TE Research
+            if (TEStructureCombo.SelectedValue != null && (int)TEStructureCombo.SelectedValue <= 0)
+            {
+                TEStructureRigLabel.Visible = false;
+                TEStructRigCombo.Visible = false;
+
+                TETaxLabel.Visible = false;
+                TETaxUpDown.Visible = false;
+            }
+            else
+            {
+                TEStructureRigLabel.Visible = true;
+                TEStructRigCombo.Visible = true;
+
+                TETaxLabel.Visible = true;
+                TETaxUpDown.Visible = true;
+            }
+
+            //Copying
+            if (CopyStructureCombo.SelectedValue != null && (int)CopyStructureCombo.SelectedValue <= 0)
+            {
+                CopyRigLabel.Visible = false;
+                CopyTimeRigCombo.Visible = false;
+
+                CopyTaxLabel.Visible = false;
+                CopyTaxUpDown.Visible = false;
+            }
+            else
+            {
+                CopyRigLabel.Visible = true;
+                CopyTimeRigCombo.Visible = true;
+
+                CopyTaxLabel.Visible = true;
+                CopyTaxUpDown.Visible = true;
+            }
+
             IgnoreChangedEvent = false;
         }
 
@@ -778,6 +862,16 @@ namespace EveHelperWF
                 CalculateMETotals(calculationHelperClass);
             }
 
+            if (HasTEResearchActivity())
+            {
+                CalculateTETotals(calculationHelperClass);
+            }
+
+            if (HasCopyResearchActivity())
+            {
+                CalculateCopyTotals(calculationHelperClass);
+            }
+
             TotalManufacturingJobTime = ManufacturingTotalComponentTime + ManufacturingTotalTime;
             TotalReactionJobTime = ReactionTotalTime;
             TotalInventionJobTime = InventionTotalTime;
@@ -895,6 +989,40 @@ namespace EveHelperWF
             }
         }
 
+        private void CalculateTETotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingTimeEfficiency)).time;
+            int teFromLevel = calculationHelperClass.TEFromLevel / 2;
+            int teToLevel = calculationHelperClass.TEToLevel / 2;
+            ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResTEMats, teFromLevel, teToLevel);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResTEMats);
+            ResTETime = BlueprintBrowserHelper.GetTEResearchTime(baseTime, calculationHelperClass);
+            TotalTEJobCost = BlueprintBrowserHelper.GetTEJobCost(calculationHelperClass, ManuMats);
+            TotalTEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResTEMats, calculationHelperClass);
+            TotalTETaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, ResTEMats);
+            TETotalInputPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in ResTEMats)
+            {
+                TETotalInputPrice += mat.priceTotal;
+            }
+        }
+
+        private void CalculateCopyTotals(Objects.CalculationHelperClass calculationHelperClass)
+        {
+            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityCopying)).time;
+            ScreenHelper.BlueprintBrowserHelper.GetCopyingTotalMats(ref CopyMats, calculationHelperClass);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref CopyMats);
+            ResCopyTime = BlueprintBrowserHelper.GetCopyingTime(baseTime, calculationHelperClass);
+            TotalCopyJobCost = BlueprintBrowserHelper.GetCopyJobCost(calculationHelperClass, ManuMats);
+            TotalCopyInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(CopyMats, calculationHelperClass);
+            TotalCopyTaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, CopyMats);
+            CopyingTotalInputPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in CopyMats)
+            {
+                CopyingTotalInputPrice += mat.priceTotal;
+            }
+        }
+
         private void ResetTotals()
         {
             //Time
@@ -966,6 +1094,8 @@ namespace EveHelperWF
             helperClass.ReactionsStructureTypeID = Convert.ToInt32(ReactionStructureCombo.SelectedValue);
             helperClass.InventionStructureTypeID = Convert.ToInt32(InventionStructureCombo.SelectedValue);
             helperClass.MEStructureTypeID = Convert.ToInt32(MEStructureCombo.SelectedValue);
+            helperClass.TEStructureTypeID = Convert.ToInt32(TEStructureCombo.SelectedValue);
+            helperClass.CopyingStructureTypeID = Convert.ToInt32(CopyStructureCombo.SelectedValue);
 
             //Structure Rigs
             helperClass.ManufacturingStructureRigBonus = new Objects.StructureRigBonus();
@@ -991,6 +1121,16 @@ namespace EveHelperWF
             {
                 helperClass.MEStructureRigBonus.RigTEBonus = Convert.ToInt32(METimeRigCombo.SelectedValue);
             }
+            helperClass.TEStructureRigBonus = new Objects.StructureRigBonus();
+            if (helperClass.TEStructureTypeID > 0)
+            {
+                helperClass.TEStructureRigBonus.RigTEBonus = Convert.ToInt32(TEStructRigCombo.SelectedValue);
+            }
+            helperClass.CopyStructureRigBonus = new Objects.StructureRigBonus();
+            if (helperClass.CopyingStructureTypeID > 0)
+            {
+                helperClass.CopyStructureRigBonus.RigTEBonus = Convert.ToInt32(CopyTimeRigCombo.SelectedValue);
+            }
 
             //Input Output order type
             helperClass.InputOrderType = Convert.ToInt32(InputTypeCombo.SelectedValue);
@@ -1000,12 +1140,16 @@ namespace EveHelperWF
             //Implant types
             helperClass.ManufacturingImplantTypeID = Convert.ToInt32(ManuImplantCombo.SelectedValue);
             helperClass.MEImplantTypeID = Convert.ToInt32(MEImplantCombo.SelectedValue);
+            helperClass.TEImplantTypeID = Convert.ToInt32(TEImplantCombo.SelectedValue);
+            helperClass.CopyImplantTypeID = Convert.ToInt32(CopyImplantCombo.SelectedValue);
 
             //Solar Systems
             helperClass.ManufacturingSolarSystemID = Convert.ToInt32(ManuSystemCombo.SelectedValue);
             helperClass.ReactionSolarSystemID = Convert.ToInt32(ReactionSolarSystemCombo.SelectedValue);
             helperClass.InventionSolarSystemID = Convert.ToInt32(InventionSolarSystemCombo.SelectedValue);
             helperClass.MESolarSystemID = Convert.ToInt32(MESystemCombo.SelectedValue);
+            helperClass.TESolarSystemID = Convert.ToInt32(TESystemCombo.SelectedValue);
+            helperClass.CopyingSolarSystemID = Convert.ToInt32(CopySystemCombo.SelectedValue);
 
             //Facility Tax
             if (Convert.ToInt32(ManuStructCombo.SelectedValue) == 0)
@@ -1036,6 +1180,24 @@ namespace EveHelperWF
             {
                 helperClass.MEFacilityTax = Convert.ToDecimal(METaxUpDown.Value);
             }
+            if (Convert.ToInt32(TEStructureCombo.SelectedValue) == 0)
+            {
+                //NPE Facility Tax
+                helperClass.TEFacilityTax = (decimal).25;
+            }
+            else
+            {
+                helperClass.TEFacilityTax = Convert.ToDecimal(TETaxUpDown.Value);
+            }
+            if (Convert.ToInt32(CopyStructureCombo.SelectedValue) == 0)
+            {
+                //NPE Facility Tax
+                helperClass.CopyingFacilityTax = (decimal).25;
+            }
+            else
+            {
+                helperClass.CopyingFacilityTax = Convert.ToDecimal(CopyTaxUpDown.Value);
+            }
 
             //Build Components
             helperClass.BuildComponents = BuildComponentsCheckbox.Checked;
@@ -1057,8 +1219,14 @@ namespace EveHelperWF
             }
 
             //ME and TE From TO Level
-            helperClass.MEFromLevel = (int)MEFromLevel.Value;
-            helperClass.METoLevel = (int)METoLevel.Value;
+            helperClass.MEFromLevel = (int)MEFromLevelUpDown.Value;
+            helperClass.METoLevel = (int)METoLevelUpDown.Value;
+            helperClass.TEFromLevel = (int)TEFromLevelUpDown.Value;
+            helperClass.TEToLevel = (int)TEToLevelUpDown.Value;
+
+            //Copies and Runs per copy
+            helperClass.NumCopies = (int)CopyNumCopiesUpDown.Value;
+            helperClass.RunsPerCopy = (int)CopyRunsCopyUpDown.Value;
 
 
             return helperClass;
@@ -1386,6 +1554,18 @@ namespace EveHelperWF
                 DatabindMEResearchMatGrid();
             }
 
+            if (HasTEResearchActivity())
+            {
+                DatabindTEResearchLabels();
+                DatabindTEResearchMatGrid();
+            }
+
+            if (HasCopyResearchActivity())
+            {
+                DatabindCopyResearchLabels();
+                DatabindCopyResearchMatGrid();
+            }
+
             //Summaries
             DatabindSummaryScreen();
         }
@@ -1415,6 +1595,14 @@ namespace EveHelperWF
             else if (ActivityTabPanel.SelectedTab == MEResearchPage)
             {
                 DatabindResearchMESummary();
+            }
+            else if (ActivityTabPanel.SelectedTab == TEResearchPage)
+            {
+                DatabindResearchTESummary();
+            }
+            else if (ActivityTabPanel.SelectedTab == CopyPage)
+            {
+                DatabindResearchCopySummary();
             }
         }
 
@@ -1595,6 +1783,116 @@ namespace EveHelperWF
             TotalOutcomeIskLabel.Text = "";
             TotalOutputVolumeLabel.Text = "";
             TaxFeesLabel.Text = TotalMETaxesAndFees.ToString("C");
+            TotalCostLabel.Text = "";
+            ROILabel.Text = "";
+
+
+            SummaryTypeLabel.Visible = true;
+            TotalTimeLabel.Visible = true;
+            TotalJobCostLabel.Visible = true;
+            ProfitLabel.Visible = false;
+            IskHourLabel.Visible = false;
+            TotalInputCostLabel.Visible = true;
+            OutputProdQuantLabel.Visible = false;
+            OutputPricePerLabel.Visible = false;
+            TotalOutcomeIskLabel.Visible = false;
+            TotalOutputVolumeLabel.Visible = false;
+            TaxFeesLabel.Visible = true;
+            TotalCostLabel.Visible = true;
+            ROILabel.Visible = false;
+        }
+
+        private void DatabindTEResearchLabels()
+        {
+            //Research Time
+            TETimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
+
+            //Cost Index Label
+            int solarSystemId = (int)TESystemCombo.SelectedValue;
+            if (solarSystemId > 0)
+            {
+                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityTE);
+                TESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
+            }
+
+            //Total Input Volume Label
+            TEInputVolumeLabel.Text = TotalTEInputVolume.ToString("N0");
+        }
+
+        private void DatabindTEResearchMatGrid()
+        {
+            TEMatGrid.DataSource = ResTEMats.OrderBy(x => x.materialName).ToList();
+        }
+
+        private void DatabindResearchTESummary()
+        {
+            MEResearchTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
+
+            SummaryTypeLabel.Text = "TE Research";
+            TotalTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
+            TotalJobCostLabel.Text = TotalTEJobCost.ToString("C");
+            IskHourLabel.Text = "";
+            TotalInputCostLabel.Text = TETotalInputPrice.ToString("C");
+            OutputProdQuantLabel.Text = "";
+            OutputPricePerLabel.Text = "";
+            TotalOutcomeIskLabel.Text = "";
+            TotalOutputVolumeLabel.Text = "";
+            TaxFeesLabel.Text = TotalTETaxesAndFees.ToString("C");
+            TotalCostLabel.Text = "";
+            ROILabel.Text = "";
+
+
+            SummaryTypeLabel.Visible = true;
+            TotalTimeLabel.Visible = true;
+            TotalJobCostLabel.Visible = true;
+            ProfitLabel.Visible = false;
+            IskHourLabel.Visible = false;
+            TotalInputCostLabel.Visible = true;
+            OutputProdQuantLabel.Visible = false;
+            OutputPricePerLabel.Visible = false;
+            TotalOutcomeIskLabel.Visible = false;
+            TotalOutputVolumeLabel.Visible = false;
+            TaxFeesLabel.Visible = true;
+            TotalCostLabel.Visible = true;
+            ROILabel.Visible = false;
+        }
+
+        private void DatabindCopyResearchLabels()
+        {
+            //Research Time
+            CopyTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
+
+            //Cost Index Label
+            int solarSystemId = (int)CopySystemCombo.SelectedValue;
+            if (solarSystemId > 0)
+            {
+                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityCOPY);
+                CopySystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
+            }
+
+            //Total Input Volume Label
+            CopyInputVolumeLabel.Text = TotalTEInputVolume.ToString("N0");
+        }
+
+        private void DatabindCopyResearchMatGrid()
+        {
+            CopyMatGrid.DataSource = CopyMats.OrderBy(x => x.materialName).ToList();
+        }
+
+        private void DatabindResearchCopySummary()
+        {
+            CopyTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResCopyTime);
+
+            SummaryTypeLabel.Text = "Copying";
+            TotalTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResCopyTime);
+            TotalJobCostLabel.Text = TotalCopyJobCost.ToString("C");
+            IskHourLabel.Text = "";
+            TotalInputCostLabel.Text = CopyingTotalInputPrice.ToString("C");
+            OutputProdQuantLabel.Text = "";
+            OutputPricePerLabel.Text = "";
+            TotalOutcomeIskLabel.Text = "";
+            TotalOutputVolumeLabel.Text = "";
+            TaxFeesLabel.Text = TotalCopyTaxesAndFees.ToString("C");
             TotalCostLabel.Text = "";
             ROILabel.Text = "";
 
