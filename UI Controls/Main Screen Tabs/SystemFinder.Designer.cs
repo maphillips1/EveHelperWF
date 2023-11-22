@@ -86,6 +86,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
             SolarSystemResultsGrid.Dock = DockStyle.Bottom;
+            SolarSystemResultsGrid.GridColor = Color.Black;
             SolarSystemResultsGrid.Location = new Point(0, 307);
             SolarSystemResultsGrid.MultiSelect = false;
             SolarSystemResultsGrid.Name = "SolarSystemResultsGrid";
@@ -315,7 +316,7 @@
             LoadingLabel.AutoSize = true;
             LoadingLabel.Location = new Point(130, 259);
             LoadingLabel.Name = "LoadingLabel";
-            LoadingLabel.Size = new Size(72, 20);
+            LoadingLabel.Size = new Size(69, 20);
             LoadingLabel.TabIndex = 16;
             LoadingLabel.Text = "Loading..";
             LoadingLabel.Visible = false;

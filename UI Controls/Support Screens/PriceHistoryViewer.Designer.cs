@@ -66,6 +66,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle2;
             PriceHistoryGridView.Dock = DockStyle.Bottom;
+            PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(0, 93);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;

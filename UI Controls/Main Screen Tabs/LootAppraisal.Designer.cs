@@ -115,6 +115,7 @@
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
             ResultsGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            ResultsGridView.GridColor = Color.Black;
             ResultsGridView.Location = new Point(482, 114);
             ResultsGridView.Name = "ResultsGridView";
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
