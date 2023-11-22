@@ -59,6 +59,8 @@
             ShipType = new DataGridViewTextBoxColumn();
             loot = new DataGridViewTextBoxColumn();
             FilamentType = new DataGridViewTextBoxColumn();
+            ProfitLabel = new Label();
+            label10 = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -87,6 +89,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(ProfitLabel);
+            splitContainer1.Panel2.Controls.Add(label10);
             splitContainer1.Panel2.Controls.Add(DeleteRunButton);
             splitContainer1.Panel2.Controls.Add(AverageLootLabel);
             splitContainer1.Panel2.Controls.Add(TotalFilamentCostLabel);
@@ -201,7 +205,7 @@
             // DeleteRunButton
             // 
             DeleteRunButton.ForeColor = Color.Black;
-            DeleteRunButton.Location = new Point(494, 192);
+            DeleteRunButton.Location = new Point(22, 192);
             DeleteRunButton.Name = "DeleteRunButton";
             DeleteRunButton.Size = new Size(94, 29);
             DeleteRunButton.TabIndex = 7;
@@ -377,6 +381,26 @@
             FilamentType.Visible = false;
             FilamentType.Width = 130;
             // 
+            // ProfitLabel
+            // 
+            ProfitLabel.AutoSize = true;
+            ProfitLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            ProfitLabel.Location = new Point(240, 136);
+            ProfitLabel.Name = "ProfitLabel";
+            ProfitLabel.Size = new Size(74, 25);
+            ProfitLabel.TabIndex = 9;
+            ProfitLabel.Text = "[Profit]";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.Location = new Point(136, 135);
+            label10.Name = "label10";
+            label10.Size = new Size(60, 25);
+            label10.TabIndex = 8;
+            label10.Text = "Profit";
+            // 
             // AbyssTracker
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -427,5 +451,7 @@
         private DataGridViewTextBoxColumn ShipType;
         private DataGridViewTextBoxColumn loot;
         private DataGridViewTextBoxColumn FilamentType;
+        private Label ProfitLabel;
+        private Label label10;
     }
 }

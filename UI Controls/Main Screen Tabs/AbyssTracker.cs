@@ -23,6 +23,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private static string AbyssRunFileName = Path.Combine(AbyssRunDirectory, "AbyssRuns.json");
         private BindingList<AbyssRun> AbyssRuns = new BindingList<AbyssRun>();
 
+        private bool ignoreChangedEvent = false;
 
         #region "Load"
 
@@ -84,6 +85,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     {
                         AbyssRuns.Remove(run);
                     }
+                    SaveRunsToFile();
                 }
             }
             DataBindTrackerGrid();
@@ -91,6 +93,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AddRunButton_Click(object sender, EventArgs e)
         {
+            ignoreChangedEvent = true;
+            this.Cursor = Cursors.WaitCursor;
             int selectedFilamentId = (int)FilamentTypeCombo.SelectedValue;
             int selectedShipType = (int)(ShipTypeCombo.SelectedValue);
             bool success = SuccessCheckbox.Checked;
@@ -171,6 +175,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Reset Loot TextBox
                 LootTextBox.Text = string.Empty;
                 MessageBox.Show("Added Run!");
+                ignoreChangedEvent = false;
+                this.Cursor = Cursors.Default;
             }
             else
             {
@@ -180,20 +186,23 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LootTextBox_TextChanged(object sender, EventArgs e)
         {
-            string text = LootTextBox.Text;
-
-            if (text.Contains("\n"))
+            if (!ignoreChangedEvent)
             {
-                if (!text.Contains("\r"))
+                string text = LootTextBox.Text;
+
+                if (text.Contains("\n"))
                 {
-                    text = text.Replace("\n", "\r\n");
+                    if (!text.Contains("\r"))
+                    {
+                        text = text.Replace("\n", "\r\n");
+                        LootTextBox.Text = text;
+                    }
+                }
+                else
+                {
+                    text = text + "\r\n";
                     LootTextBox.Text = text;
                 }
-            }
-            else
-            {
-                text = text + "\r\n";
-                LootTextBox.Text = text;
             }
         }
         #endregion
@@ -226,6 +235,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             TotalLootValueLabel.Text = totalLootValue.ToString("N0");
             TotalFilamentCostLabel.Text = totalFilamentCost.ToString("N0");
             AverageLootLabel.Text = averageLootValue.ToString("N0");
+            ProfitLabel.Text = (totalLootValue - totalFilamentCost).ToString("N0");
         }
 
         private void SaveRunsToFile()
