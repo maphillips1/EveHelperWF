@@ -81,6 +81,9 @@ namespace EveHelperWF.Objects
 
         public int TEFromLevel { get; set; }
         public int TEToLevel { get; set;}
+
+        public int NumCopies { get; set; }
+        public int RunsPerCopy { get; set; }
     }
 
     public class StructureRigBonus
