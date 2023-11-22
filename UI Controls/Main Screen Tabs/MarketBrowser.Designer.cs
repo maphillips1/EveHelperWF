@@ -38,6 +38,9 @@
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
             MarketBrowserSplitContainer = new SplitContainer();
+            SearchResultsTreeView = new TreeView();
+            SearchButton = new Button();
+            SearchTextBox = new TextBox();
             MarketListTreeView = new TreeView();
             TheraButton = new Button();
             SystemCombo = new ComboBox();
@@ -122,6 +125,9 @@
             // 
             // MarketBrowserSplitContainer.Panel1
             // 
+            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchResultsTreeView);
+            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchButton);
+            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchTextBox);
             MarketBrowserSplitContainer.Panel1.Controls.Add(MarketListTreeView);
             // 
             // MarketBrowserSplitContainer.Panel2
@@ -144,14 +150,49 @@
             MarketBrowserSplitContainer.SplitterWidth = 10;
             MarketBrowserSplitContainer.TabIndex = 0;
             // 
+            // SearchResultsTreeView
+            // 
+            SearchResultsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            SearchResultsTreeView.CausesValidation = false;
+            SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
+            SearchResultsTreeView.HideSelection = false;
+            SearchResultsTreeView.HotTracking = true;
+            SearchResultsTreeView.Location = new Point(3, 35);
+            SearchResultsTreeView.Margin = new Padding(2);
+            SearchResultsTreeView.Name = "SearchResultsTreeView";
+            SearchResultsTreeView.Size = new Size(310, 195);
+            SearchResultsTreeView.TabIndex = 7;
+            SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
+            // 
+            // SearchButton
+            // 
+            SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            SearchButton.ForeColor = Color.Black;
+            SearchButton.Location = new Point(199, 3);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(111, 29);
+            SearchButton.TabIndex = 6;
+            SearchButton.Text = "Search";
+            SearchButton.UseVisualStyleBackColor = true;
+            // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            SearchTextBox.Location = new Point(3, 3);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.Size = new Size(190, 27);
+            SearchTextBox.TabIndex = 5;
+            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+            // 
             // MarketListTreeView
             // 
+            MarketListTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MarketListTreeView.BackColor = Color.FromArgb(2, 23, 38);
-            MarketListTreeView.Dock = DockStyle.Fill;
             MarketListTreeView.ForeColor = Color.White;
-            MarketListTreeView.Location = new Point(0, 0);
+            MarketListTreeView.Location = new Point(0, 232);
             MarketListTreeView.Name = "MarketListTreeView";
-            MarketListTreeView.Size = new Size(315, 853);
+            MarketListTreeView.Size = new Size(315, 621);
             MarketListTreeView.TabIndex = 0;
             MarketListTreeView.AfterSelect += MarketListTreeView_AfterSelect;
             // 
@@ -190,9 +231,9 @@
             // 
             // SelectedItemTabPanel
             // 
+            SelectedItemTabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             SelectedItemTabPanel.Controls.Add(OrdersTabPage);
             SelectedItemTabPanel.Controls.Add(PriceHistoryTabPage);
-            SelectedItemTabPanel.Dock = DockStyle.Bottom;
             SelectedItemTabPanel.Location = new Point(0, 143);
             SelectedItemTabPanel.Name = "SelectedItemTabPanel";
             SelectedItemTabPanel.SelectedIndex = 0;
@@ -771,6 +812,7 @@
             Name = "MarketBrowser";
             Text = "Market Browser";
             MarketBrowserSplitContainer.Panel1.ResumeLayout(false);
+            MarketBrowserSplitContainer.Panel1.PerformLayout();
             MarketBrowserSplitContainer.Panel2.ResumeLayout(false);
             MarketBrowserSplitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MarketBrowserSplitContainer).EndInit();
@@ -853,5 +895,8 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private TreeView SearchResultsTreeView;
+        private Button SearchButton;
+        private TextBox SearchTextBox;
     }
 }

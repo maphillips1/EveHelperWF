@@ -62,6 +62,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             List<TreeNode> treeNodes = ScreenHelper.MarketBrowserHelper.BuildTreeView();
             MarketListTreeView.Nodes.AddRange(treeNodes.ToArray());
             MarketListTreeView.Sort();
+            MarketListTreeView.SelectedNode = null;
         }
         #endregion
 
@@ -115,28 +116,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode selectedNode =  SearchResultsTreeView.SelectedNode;
+            AfterSelectHandler(selectedNode);
+        }
+
         private void MarketListTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (MarketListTreeView.SelectedNode != null)
-            {
-                TreeNode selectedNode = MarketListTreeView.SelectedNode;
-                if (selectedNode.Tag.ToString().StartsWith("typeID"))
-                {
-                    if (ScreenHelper.MarketBrowserHelper.InventoryTypes != null)
-                    {
-                        this.Cursor = Cursors.WaitCursor;
-                        SelectedTypeID = Convert.ToInt32(selectedNode.Tag.ToString().Split("_")[1]);
-
-                        LoadDataForSelectedType();
-
-                        if (!SelectedItemImageWorker.IsBusy)
-                        {
-                            SelectedItemImageWorker.RunWorkerAsync(argument: SelectedTypeID);
-                        }
-                        this.Cursor = Cursors.Default;
-                    }
-                }
-            }
+            TreeNode selectedNode = MarketListTreeView.SelectedNode;
+            AfterSelectHandler(selectedNode);
         }
 
         private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,6 +155,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (SelectedTypeID > 0)
             {
                 LoadDataForSelectedType();
+            }
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            SearchResultsTreeView.Nodes.Clear();
+            string searchText = SearchTextBox.Text.ToLowerInvariant();
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                List<TreeNode> foundNodes = MarketBrowserHelper.SearchBlueprints(searchText);
+                if (foundNodes.Count > 0)
+                {
+                    SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                }
+            }
+        }
+
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchButton_Click(sender, new EventArgs());
             }
         }
         #endregion
@@ -200,6 +211,29 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
             priceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(regionID, SelectedTypeID);
             DatabindGrids();
+        }
+
+        private void AfterSelectHandler(TreeNode selectedNode)
+        {
+            if (selectedNode != null)
+            {
+                if (selectedNode.Tag.ToString().StartsWith("typeID"))
+                {
+                    if (ScreenHelper.MarketBrowserHelper.InventoryTypes != null)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        SelectedTypeID = Convert.ToInt32(selectedNode.Tag.ToString().Split("_")[1]);
+
+                        LoadDataForSelectedType();
+
+                        if (!SelectedItemImageWorker.IsBusy)
+                        {
+                            SelectedItemImageWorker.RunWorkerAsync(argument: SelectedTypeID);
+                        }
+                        this.Cursor = Cursors.Default;
+                    }
+                }
+            }
         }
         #endregion
 
@@ -240,6 +274,5 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
         #endregion
-
     }
 }

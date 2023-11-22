@@ -260,5 +260,26 @@ namespace EveHelperWF.ScreenHelper
 
             return priceHistory;
         }
+
+        public static List<TreeNode> SearchBlueprints(string searchText)
+        {
+            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
+            List<TreeNode> foundTypes = new List<TreeNode>();
+
+            if (invTypes.Count > 0)
+            {
+                invTypes = invTypes.OrderBy(x => x.typeName).ToList();
+
+                foreach (InventoryTypes type in invTypes)
+                {
+                    TreeNode treeNode = new TreeNode();
+                    treeNode.Text = type.typeName;
+                    treeNode.Tag = string.Concat("typeID_", type.typeId);
+                    foundTypes.Add(treeNode);
+                }
+            }
+
+            return foundTypes;
+        }
     }
 }
