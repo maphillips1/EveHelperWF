@@ -114,3 +114,8 @@ h3, h4 {
     min-height:100%;
     position: absolute;
 }
+
+img {
+    border: 1px solid;
+    border-color: white;
+}
