@@ -4,6 +4,7 @@ using EveHelperWF.ScreenHelper;
 using System;
 using System.Diagnostics;
 using System.Text;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace EveHelperWF
 {
@@ -413,15 +414,16 @@ namespace EveHelperWF
         #region "Form Events"
         private void TreeViewList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
-            if (TreeViewList.SelectedNode != null)
-            {
-                selectedNode = TreeViewList.SelectedNode;
-            }
-            else if (SearchResultsTreeView.SelectedNode != null)
-            {
-                selectedNode = SearchResultsTreeView.SelectedNode;
-            }
+            TreeViewSelectionChanged(TreeViewList.SelectedNode);
+        }
+
+        private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeViewSelectionChanged(SearchResultsTreeView.SelectedNode);
+        }
+
+        private void TreeViewSelectionChanged(TreeNode selectedNode)
+        {
             if (selectedNode != null)
             {
                 if (selectedNode.Tag.ToString().StartsWith("typeID"))
