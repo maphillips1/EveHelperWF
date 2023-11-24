@@ -3895,7 +3895,7 @@
             SearchResultsTreeView.Name = "SearchResultsTreeView";
             SearchResultsTreeView.Size = new Size(273, 195);
             SearchResultsTreeView.TabIndex = 4;
-            SearchResultsTreeView.AfterSelect += TreeViewList_AfterSelect;
+            SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
             // 
             // BlueprintBrowser
             // 
