@@ -38,7 +38,23 @@ namespace FileIO
             }
 
             File.WriteAllText(filename, content);
-            
+
+        }
+
+        public static void SaveCachedFile(string directory, string filename, byte[] content)
+        {
+            if (!System.IO.Directory.Exists(directory))
+            {
+                System.IO.Directory.CreateDirectory(directory);
+            }
+
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+
+            File.WriteAllBytes(filename, content);
+
         }
     }
 }

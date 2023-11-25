@@ -18,10 +18,16 @@ namespace EveHelperWF.Database
     public static class SQLiteCalls
     {
 
-        private static string GetSQLitePath()
+        public static string GetSQLiteDirectory()
         {
-            string dbpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "SQLite FIles\\sqlite-latest.sqlite");
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                                         "SQLite FIles\\");
+        }
+        
+
+        public static string GetSQLitePath()
+        {
+            string dbpath = Path.Combine(GetSQLiteDirectory(), "sqlite-latest.sqlite");
 
             return dbpath;
         }

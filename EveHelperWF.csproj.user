@@ -46,5 +46,8 @@
     <Compile Update="UI Controls\Support Screens\SolarSystemInfo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\UpdateSDE.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ namespace EveHelperWF.Objects
         public int OutputTypeComboValue { get; set; }
         public bool InventBlueprintValue { get; set; }
         //Manufacturing
-        public bool InventBlueprintCheckboxValue { get; set; } 
+        public bool InventBlueprintCheckboxValue { get; set; }
         public decimal ManufacturingMEValue { get; set; }
         public decimal ManufacturingTEValue { get; set; }
         public decimal CompMEValue { get; set; }
@@ -39,5 +39,32 @@ namespace EveHelperWF.Objects
         public int InventionStructureTimeRigValue { get; set; }
         public int InventionDecryptorValue { get; set; }
         public decimal InventionTaxValue { get; set; }
+
+        //Copying
+        public int CopyNumCopies { get; set; }
+        public int CopyRunsCopy {  get; set; }
+        public int CopySystemID { get; set; }
+        public int CopyStructureTypeId { get; set; }
+        public int CopyStructureRig { get; set; }
+        public decimal CopyTax { get; set; }
+        public int CopyImplantTypeID { get; set; }
+
+        //ME
+        public int MEFromLevel { get; set; }
+        public int METoLevel { get; set;}
+        public int MESystemID { get; set; }
+        public int MEStructureTypeID { get; set; }
+        public int MEStructureRIg { get; set; }
+        public decimal METax { get; set; }
+        public int MEImplantTypeID { get; set; }
+
+        //TE
+        public int TEFromLevel { get; set; }
+        public int TEToLevel { get; set;}
+        public int TESystemID { get; set;}
+        public int TEStructureTypeID { get; set;}
+        public int TEStructureRIg { get;set; }
+        public decimal TETax { get; set; }
+        public int TEImplantTypeID { get; set;}
     }
 }

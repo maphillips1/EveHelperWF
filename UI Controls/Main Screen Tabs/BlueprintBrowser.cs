@@ -193,6 +193,9 @@ namespace EveHelperWF
             SetManufacturingDefaultValues();
             SetReactionDefaultValues();
             SetInventionDefaultValues();
+            SetDefaultCopyValues();
+            SetDefaultMEValues();
+            SetDefaultTEValues();
         }
 
         private void SetManufacturingDefaultValues()
@@ -227,6 +230,39 @@ namespace EveHelperWF
             InventionStructureTimeRigCombo.SelectedValue = DefaultFormValues.InventionStructureTimeRigValue;
             InventionTaxUpDown.Value = DefaultFormValues.InventionTaxValue;
             InventionDecryptorCombo.SelectedValue = DefaultFormValues.InventionDecryptorValue;
+        }
+
+        private void SetDefaultCopyValues()
+        {
+            CopyNumCopiesUpDown.Value = DefaultFormValues.CopyNumCopies;
+            CopyRunsCopyUpDown.Value = DefaultFormValues.CopyRunsCopy;
+            CopySystemCombo.SelectedValue = DefaultFormValues.CopySystemID;
+            CopyStructureCombo.SelectedValue = DefaultFormValues.CopyStructureTypeId;
+            CopyTimeRigCombo.SelectedValue = DefaultFormValues.CopyStructureRig;
+            CopyTaxUpDown.Value = DefaultFormValues.CopyTax;
+            CopyImplantCombo.SelectedValue = DefaultFormValues.CopyImplantTypeID;
+        }
+
+        private void SetDefaultMEValues()
+        {
+            MEFromLevelUpDown.Value = DefaultFormValues.MEFromLevel;
+            METoLevelUpDown.Value = DefaultFormValues.METoLevel;
+            MESystemCombo.SelectedValue = DefaultFormValues.MESystemID;
+            MEStructureCombo.SelectedValue = DefaultFormValues.MEStructureTypeID;
+            METimeRigCombo.SelectedValue = DefaultFormValues.MEStructureRIg;
+            METaxUpDown.Value = DefaultFormValues.METax;
+            MEImplantCombo.SelectedValue = DefaultFormValues.MEImplantTypeID;
+        }
+
+        private void SetDefaultTEValues()
+        {
+            TEFromLevelUpDown.Value = DefaultFormValues.TEFromLevel;
+            TEToLevelUpDown.Value = DefaultFormValues.TEToLevel;
+            TESystemCombo.SelectedValue = DefaultFormValues.TESystemID;
+            TEStructureCombo.SelectedValue = DefaultFormValues.TEStructureTypeID;
+            TEStructRigCombo.SelectedValue = DefaultFormValues.TEStructureRIg;
+            TETaxUpDown.Value = DefaultFormValues.TETax;
+            TEImplantCombo.SelectedValue = DefaultFormValues.TEImplantTypeID;
         }
 
         #region "Combo Load Methods"
@@ -1506,18 +1542,6 @@ namespace EveHelperWF
                 if (!ActivityTabPanel.TabPages.Contains(tabPage))
                 {
                     ActivityTabPanel.TabPages.Add(tabPage);
-                    switch (tabPage.Name)
-                    {
-                        case "ManufacturingPage":
-                            SetManufacturingDefaultValues();
-                            break;
-                        case "ReactionPage":
-                            SetReactionDefaultValues();
-                            break;
-                        case "InventionPage":
-                            SetInventionDefaultValues();
-                            break;
-                    }
                 }
                 skills = Database.SQLiteCalls.GetINdustryActivitySkills(SelectedType.typeId, activityID);
             }
