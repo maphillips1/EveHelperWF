@@ -18,7 +18,7 @@ namespace EveHelperWF.ESI_Calls
         public const string ActivityMEResearch = "researching_material_efficiency";
 
         public const string CachedCostIndicesFileName = @"cost_indicies.json";
-        public const string CachedCostIndicesDirectory = @"C:\Temp\EveHelper\Industry\CostIndicies\";
+        
         private static List<EveHelperWF.Objects.CostIndice> costIndices;
 
         public static List<EveHelperWF.Objects.CostIndice> GetCostIndices()
@@ -52,7 +52,7 @@ namespace EveHelperWF.ESI_Calls
             cachedCostIndices.cost_indices = costIndices;
 
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(cachedCostIndices);
-            string directory = CachedCostIndicesDirectory;
+            string directory = Enums.Enums.CachedCostIndicesDirectory;
             string fileName = string.Concat(directory, CachedCostIndicesFileName);
             FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
         }
@@ -61,7 +61,7 @@ namespace EveHelperWF.ESI_Calls
         {
             List<EveHelperWF.Objects.CostIndice> costIndices = new List<EveHelperWF.Objects.CostIndice>();
 
-            string directory = CachedCostIndicesDirectory;
+            string directory = Enums.Enums.CachedCostIndicesDirectory;
             string fileName = string.Concat(directory, CachedCostIndicesFileName);
             string cachedContent = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(cachedContent))

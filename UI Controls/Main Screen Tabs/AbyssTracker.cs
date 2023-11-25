@@ -18,9 +18,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     {
         private List<InventoryTypes> filamentTypes = new List<InventoryTypes>();
         private List<AbyssRunShipType> shipTypes = new List<AbyssRunShipType>();
-        private static string AbyssRunDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "AbyssRuns\\");
-        private static string AbyssRunFileName = Path.Combine(AbyssRunDirectory, "AbyssRuns.json");
+        private static string AbyssRunFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, "AbyssRuns.json");
         private BindingList<AbyssRun> AbyssRuns = new BindingList<AbyssRun>();
 
         private bool ignoreChangedEvent = false;
@@ -56,7 +54,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadCurrentAbyssRuns()
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(AbyssRunDirectory, AbyssRunFileName);
+            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
             if (!String.IsNullOrWhiteSpace(fileContent))
             {
                 AbyssRuns = Newtonsoft.Json.JsonConvert.DeserializeObject<BindingList<AbyssRun>>(fileContent);
@@ -244,7 +242,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (!string.IsNullOrWhiteSpace(fileContent))
             {
-                FileIO.FileHelper.SaveCachedFile(AbyssRunDirectory, AbyssRunFileName, fileContent);
+                FileIO.FileHelper.SaveCachedFile(Enums.Enums.AbyssRunDirectory, AbyssRunFileName, fileContent);
             }
         }
 

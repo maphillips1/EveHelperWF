@@ -20,9 +20,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         BindingList<InventoryTypes> foundTypes = null;
         BindingList<InventoryTypes> TrackedTypes = new BindingList<InventoryTypes>();
 
-        private static string TrackedTypeDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "TrackedTypes\\");
-        private static string TrackedTypeFileName = Path.Combine(TrackedTypeDirectory, "TrackedTypes.json");
+        private static string TrackedTypeFileName = Path.Combine(Enums.Enums.TrackedTypeDirectory, "TrackedTypes.json");
 
         #region "Init"
         public PriceHistoryUtility()
@@ -44,7 +42,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
         private void LoadTrackedTypes()
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(TrackedTypeDirectory, TrackedTypeFileName);
+            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
 
             if (!string.IsNullOrEmpty(fileContent))
             {
@@ -122,7 +120,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void SaveTrackedTypes()
         {
             string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(TrackedTypes);
-            FileIO.FileHelper.SaveCachedFile(TrackedTypeDirectory, TrackedTypeFileName, fileContent);
+            FileIO.FileHelper.SaveCachedFile(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName, fileContent);
         }
 
         private void LoadPriceHistoryViewer()

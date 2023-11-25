@@ -13,16 +13,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 {
     public partial class FIleLocations : Objects.FormBase
     {
-        private string SQLiteDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), 
-                                         "SQLite FIles\\");
-        private string AbyssRunDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "AbyssRuns\\");
-        private string PriceHistoryDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "PriceHistory\\");
-        private string TrackedTypeDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "TrackedTypes\\");
-        private string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
-
         public FIleLocations()
         {
             InitializeComponent();
@@ -31,11 +21,11 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void SetLabels()
         {
-            SQLiteLabel.Text = SQLiteDirectory;
-            AbyssRunLabel.Text = AbyssRunDirectory;
-            PriceHistoryLabel.Text = PriceHistoryDirectory;
-            TrackedItemsLabel.Text = TrackedTypeDirectory;
-            DefaultFormValuesLabel.Text = CachedFormValuesDirectory;
+            SQLiteLabel.Text = Database.SQLiteCalls.GetSQLiteDirectory();
+            AbyssRunLabel.Text = Enums.Enums.AbyssRunDirectory;
+            PriceHistoryLabel.Text =   Enums.Enums.CachedPriceHistory;
+            TrackedItemsLabel.Text = Enums.Enums.TrackedTypeDirectory;
+            DefaultFormValuesLabel.Text = Enums.Enums.CachedFormValuesDirectory;
         }
     }
 }

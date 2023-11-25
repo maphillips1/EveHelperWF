@@ -11,7 +11,6 @@ namespace EveHelperWF
     public partial class BlueprintBrowser : Objects.FormBase
     {
         #region "Static Variables"
-        private const string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
         private const string CachedFormValuesFileName = "form_values.json";
         private static Objects.DefaultFormValue DefaultFormValues = new Objects.DefaultFormValue();
 
@@ -167,8 +166,8 @@ namespace EveHelperWF
 
         private void LoadDefaultFormValues()
         {
-            string combinedFileName = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
-            string content = FileIO.FileHelper.GetCachedFileContent(CachedFormValuesDirectory, combinedFileName);
+            string combinedFileName = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
+            string content = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 DefaultFormValues = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.DefaultFormValue>(content);

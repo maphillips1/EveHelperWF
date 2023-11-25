@@ -12,13 +12,6 @@ namespace EveHelperWF.ESI_Calls
 {
     public static class ESIImageServer
     {
-        private static string GetImagesFolder()
-        {
-            string imagePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "Images\\");
-
-            return imagePath;
-        }
         
         private static byte[] GetImageFromLocal(int typeId, string modifier)
         {
@@ -26,7 +19,7 @@ namespace EveHelperWF.ESI_Calls
 
             string fileName = string.Format("eveImage_{0}_{1}.png", typeId, modifier);
 
-            string imagePath = Path.Combine(GetImagesFolder(), fileName);
+            string imagePath = Path.Combine(Enums.Enums.ImagesDirectory, fileName);
 
             if (File.Exists(imagePath))
             {
@@ -43,7 +36,7 @@ namespace EveHelperWF.ESI_Calls
                 //Images are given to us as PNG
 
                 string fileName = string.Format("eveImage_{0}_{1}.png", typeId, modifier);
-                string imagesFolder = GetImagesFolder();
+                string imagesFolder = Enums.Enums.ImagesDirectory;
 
                 string imagePath = Path.Combine(imagesFolder, fileName);
 

@@ -14,19 +14,10 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 {
     public partial class BackupFiles : Objects.FormBase
     {
-        private static string AbyssRunDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "AbyssRuns\\");
-        private string AbyssRunFileName = Path.Combine(AbyssRunDirectory, "AbyssRuns.json");
+        private string AbyssRunFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, "AbyssRuns.json");
 
-        private static string PriceHistoryDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "PriceHistory\\");
+        private string TrackedTypeFileName = Path.Combine(Enums.Enums.TrackedTypeDirectory, "TrackedTypes.json");
 
-        private static string TrackedTypeDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                     "TrackedTypes\\");
-        private string TrackedTypeFileName = Path.Combine(TrackedTypeDirectory, "TrackedTypes.json");
-
-
-        private string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
         private static string CachedFormValuesFileName = "form_values.json";
 
         #region "Init"
@@ -72,17 +63,17 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         #region "Methods"
         private void BackupAbyssRuns(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(AbyssRunDirectory, AbyssRunFileName);
+            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
             if (fileContent != null)
             {
-                AbyssRunFileName = Path.Combine(selectedPath, "AbyssRuns.json");
+                AbyssRunFileName = Path.Combine(selectedPath, AbyssRunFileName);
                 FileIO.FileHelper.SaveCachedFile(selectedPath, AbyssRunFileName, fileContent);
             }
         }
 
         private void BackupPriceHistory(string selectedPath)
         {
-            string[] priceHistoryFiles = Directory.GetFiles(PriceHistoryDirectory);
+            string[] priceHistoryFiles = Directory.GetFiles(Enums.Enums.CachedPriceHistory);
             if (priceHistoryFiles != null && priceHistoryFiles.Count() > 0)
             {
                 string fileContent = null;
@@ -90,7 +81,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 string newFileName;
                 foreach (string fileName in priceHistoryFiles)
                 {
-                    fileContent = FileIO.FileHelper.GetCachedFileContent(PriceHistoryDirectory, fileName);
+                    fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedPriceHistory, fileName);
                     if (fileContent != null)
                     {
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
@@ -103,18 +94,18 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void BackupTrackedItems(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(TrackedTypeDirectory, TrackedTypeFileName);
+            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
             if (fileContent != null)
             {
-                TrackedTypeFileName = Path.Combine(selectedPath, "TrackedTypes.json");
+                TrackedTypeFileName = Path.Combine(selectedPath, TrackedTypeFileName);
                 FileIO.FileHelper.SaveCachedFile(selectedPath, TrackedTypeFileName, fileContent);
             }
         }
 
         private void BackupDefaultValues(string selectedPath)
         {
-            string fileName = Path.Combine(CachedFormValuesDirectory, CachedFormValuesFileName);
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(CachedFormValuesDirectory, fileName);
+            string fileName = Path.Combine(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
+            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, fileName);
             if (fileContent != null)
             {
                 CachedFormValuesFileName = Path.Combine(selectedPath, CachedFormValuesFileName);

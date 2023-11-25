@@ -11,10 +11,7 @@ namespace EveHelperWF.ESI_Calls
 {
     public static class ESIMarketData
     {
-        public const string cachedBuyFolder = @"C:\Temp\EveHelper\Market\buy\";
-        public const string cachedSellFolder = @"C:\Temp\EveHelper\Market\sell\";
-        public const string cachedAdjustedCosts = @"C:\Temp\EveHelper\Market\";
-        public const string cachedPriceHistory = @"C:\Temp\EveHelper\Market\PriceHistory";
+        
 
         #region "Cache Methods"
 
@@ -24,11 +21,11 @@ namespace EveHelperWF.ESI_Calls
             string directory = "";
             if (is_buy_order)
             {
-                directory = cachedBuyFolder;
+                directory = Enums.Enums.CachedBuyFolder;
             }
             else
             {
-                directory = cachedSellFolder;
+                directory = Enums.Enums.CachedSellFolder;
             }
 
             string fileName = string.Concat(directory, region_id.ToString(), "_", type_id.ToString(), ".json");
@@ -59,11 +56,11 @@ namespace EveHelperWF.ESI_Calls
 
             if (is_buy_order)
             {
-                directory = cachedBuyFolder;
+                directory = Enums.Enums.CachedBuyFolder;
             }
             else
             {
-                directory = cachedSellFolder;
+                directory = Enums.Enums.CachedSellFolder;
             }
 
             fileName = string.Concat(directory, region_id.ToString(), "_", type_id.ToString(), ".json");
@@ -82,7 +79,7 @@ namespace EveHelperWF.ESI_Calls
         private static List<EveHelperWF.Objects.AdjustedCost> GetCachedAdjustedCosts()
         {
             List<EveHelperWF.Objects.AdjustedCost> adjustedCosts = null;
-            string directory = cachedAdjustedCosts;
+            string directory = Enums.Enums.CachedAdjustedCosts;
 
             string fileName = string.Concat(directory, "adjusted_costs.json");
 
@@ -105,8 +102,8 @@ namespace EveHelperWF.ESI_Calls
 
         private static void CacheAdjustedCosts(List<EveHelperWF.Objects.AdjustedCost> adjustedCosts)
         {
-            string directory = ESIMarketData.cachedAdjustedCosts;
-            string fileName = "adjusted_costs.json";
+            string directory = Enums.Enums.CachedAdjustedCosts;
+            string fileName = Path.Combine(directory,  "adjusted_costs.json");
 
             EveHelperWF.Objects.CachedAdjustedCost cachedAdjustedCosts = new EveHelperWF.Objects.CachedAdjustedCost();
             cachedAdjustedCosts.cachedTime = System.DateTime.Now;
@@ -301,7 +298,7 @@ namespace EveHelperWF.ESI_Calls
         private static List<ESIPriceHistory> GetCachedPriceHistory(int regionID, int typeID)
         {
             List<ESIPriceHistory> priceHistory = null;
-            string directory = cachedPriceHistory;
+            string directory = Enums.Enums.CachedPriceHistory;
             string fileName = string.Concat(directory, regionID.ToString(), "_", typeID.ToString(), ".json");
 
             string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
@@ -323,7 +320,7 @@ namespace EveHelperWF.ESI_Calls
 
         private static void CachePriceHistory(int regionID, int typeID, List<ESIPriceHistory> priceHistory)
         {
-            string directory = ESIMarketData.cachedPriceHistory;
+            string directory = Enums.Enums.CachedPriceHistory;
             string fileName = string.Concat(directory, regionID.ToString(), "_", typeID.ToString(), ".json");
 
             EveHelperWF.Objects.CachedPriceHistory cachedPriceHistory = new EveHelperWF.Objects.CachedPriceHistory();

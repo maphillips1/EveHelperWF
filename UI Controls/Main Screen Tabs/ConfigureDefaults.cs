@@ -13,7 +13,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     public partial class ConfigureDefaults : Objects.FormBase
     {
         public static Objects.DefaultFormValue DefaultFormValues = new Objects.DefaultFormValue();
-        private const string CachedFormValuesDirectory = @"C:\Temp\EveHelper\FormValues\";
         private const string CachedFormValuesFileName = "form_values.json";
 
         #region "Init"
@@ -29,8 +28,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadDefaultsFromFile()
         {
 
-            string combinedFileName = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
-            string content = FileIO.FileHelper.GetCachedFileContent(CachedFormValuesDirectory, combinedFileName);
+            string combinedFileName = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
+            string content = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 DefaultFormValues = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.DefaultFormValue>(content);
@@ -278,8 +277,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             SaveFormValues();
 
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(DefaultFormValues);
-            string filename = string.Concat(CachedFormValuesDirectory, CachedFormValuesFileName);
-            FileIO.FileHelper.SaveCachedFile(CachedFormValuesDirectory, filename, content);
+            string filename = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
+            FileIO.FileHelper.SaveCachedFile(Enums.Enums.CachedFormValuesDirectory, filename, content);
 
             this.Close();
         }

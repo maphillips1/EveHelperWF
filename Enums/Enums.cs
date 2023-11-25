@@ -53,6 +53,26 @@ namespace Enums
         public static decimal ResLevel9CostModifier = (4163 / 7);
         public static decimal ResLevel10CostModifier = (29660 / 21);
 
+        //Directories
+        public static string ImagesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\Images\\");
+        public static string CachedCostIndicesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\CostIndicies\\"); 
+        public static string CachedBuyFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\Market\\buy\\");
+        public static string CachedSellFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\Market\\sell\\");
+        public static string CachedAdjustedCosts = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\Market\\");
+        public static string CachedPriceHistory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\Market\\PriceHistory");
+        public static string AbyssRunDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\AbyssRuns\\");
+        public static string CachedFormValuesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\FormValues\\");
+        public static string TrackedTypeDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\TrackedTypes\\");
+
         public enum PlanetMatTierGroupId
         {
             T0_Organic = 1035,

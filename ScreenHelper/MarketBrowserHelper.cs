@@ -185,8 +185,7 @@ namespace EveHelperWF.ScreenHelper
         private static List<ESIPriceHistory> GetCurrentPriceHistories(int regionID, int typeID)
         {
             List<Objects.ESIPriceHistory> currentPriceHistories = null;
-            string directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "PriceHistory\\");
+            string directory = Enums.Enums.CachedPriceHistory;
             string fileName = string.Format("PriceHistory_region_{0}_type_{1}.json", regionID, typeID);
 
             string fullFileName = Path.Combine(directory, fileName);
@@ -202,8 +201,7 @@ namespace EveHelperWF.ScreenHelper
         private static void SaveNewPriceHistory(int regionID, int typeID, List<ESIPriceHistory> priceHistories)
         {
             List<Objects.ESIPriceHistory> currentPriceHistories = null;
-            string directory = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                         "PriceHistory\\");
+            string directory = Enums.Enums.CachedPriceHistory;
             string fileName = string.Format("PriceHistory_region_{0}_type_{1}.json", regionID, typeID);
             string fullFileName = Path.Combine(directory, fileName);
             

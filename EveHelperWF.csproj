@@ -9,6 +9,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Images\EveHelperIcon.ico</ApplicationIcon>
     <IsPublishable>True</IsPublishable>
+    <Authors>Michael Phillips</Authors>
+    <Company>EveHelper</Company>
+    <Product>EveHelper</Product>
+    <PackageIcon>EveHelperIcon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Version>1.1.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,6 +52,17 @@
   <ItemGroup>
     <Folder Include="docs\CSS\" />
     <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\EveHelperIcon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
