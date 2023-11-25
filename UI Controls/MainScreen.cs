@@ -106,5 +106,12 @@ namespace EveHelperWF.UI_Controls
             startInfo.UseShellExecute = true;
             Process.Start(startInfo);
         }
+
+        private void updateEveDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateSDE updateSDE = new UpdateSDE();
+            updateSDE.StartPosition = FormStartPosition.CenterParent;
+            updateSDE.Show();
+        }
     }
 }

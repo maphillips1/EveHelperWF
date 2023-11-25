@@ -49,10 +49,11 @@
             PriceHistoryButton = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
+            backupFilesToolStripMenuItem = new ToolStripMenuItem();
             FreyaLinkLabel = new LinkLabel();
             label10 = new Label();
             label11 = new Label();
-            backupFilesToolStripMenuItem = new ToolStripMenuItem();
+            updateEveDataToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -276,7 +277,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, updateEveDataToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(939, 28);
@@ -290,6 +291,13 @@
             fileToolStripMenuItem.Size = new Size(113, 24);
             fileToolStripMenuItem.Text = "File Locations";
             fileToolStripMenuItem.Click += fileLocationsToolStripMenuItem_Click;
+            // 
+            // backupFilesToolStripMenuItem
+            // 
+            backupFilesToolStripMenuItem.Name = "backupFilesToolStripMenuItem";
+            backupFilesToolStripMenuItem.Size = new Size(104, 24);
+            backupFilesToolStripMenuItem.Text = "Backup Files";
+            backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
             // 
             // FreyaLinkLabel
             // 
@@ -323,12 +331,12 @@
             label11.TabIndex = 21;
             label11.Text = "All donations are voluntary and very much appreciated.";
             // 
-            // backupFilesToolStripMenuItem
+            // updateEveDataToolStripMenuItem
             // 
-            backupFilesToolStripMenuItem.Name = "backupFilesToolStripMenuItem";
-            backupFilesToolStripMenuItem.Size = new Size(104, 24);
-            backupFilesToolStripMenuItem.Text = "Backup Files";
-            backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
+            updateEveDataToolStripMenuItem.Name = "updateEveDataToolStripMenuItem";
+            updateEveDataToolStripMenuItem.Size = new Size(135, 24);
+            updateEveDataToolStripMenuItem.Text = "Update Eve Data";
+            updateEveDataToolStripMenuItem.Click += updateEveDataToolStripMenuItem_Click;
             // 
             // MainScreen
             // 
@@ -395,5 +403,6 @@
         private Label label10;
         private Label label11;
         private ToolStripMenuItem backupFilesToolStripMenuItem;
+        private ToolStripMenuItem updateEveDataToolStripMenuItem;
     }
 }

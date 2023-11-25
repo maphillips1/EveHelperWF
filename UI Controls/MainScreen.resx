@@ -12,11 +12,11 @@
 
     Example:
 
-    .. ado.net/XML headers & schema ..
+    ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ..</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ..</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
     <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
@@ -121,7 +121,7 @@
   <data name="BlueprintBrowserButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cgAAEnIBXmVb4wAAqXJJREFUeF6c/XWcVVe2BYxyb3cnIbhT7u7u7u7u7i6UUAIUVri7QwKBEA9xQoQQ
+        cQAAEnEB89x6jgAAqXJJREFUeF6c/XWcVVe2BYxyb3cnIbhT7u7u7u7u7i6UUAIUVri7QwKBEA9xQoQQ
         YsTdPUASIgQfb8x1zqHp3P6+937vj8neZx9be40xxxxz7c2pMXq+LdDzbcVs33ZGB2b7/C3kGEPv/yH+
         /vqbx3Whe+7WY/9vx9U4GD6aUJ/n18no0oSvZl/fv1uFXsAc6Af0wMC/l9HH/X4YBM6FYdAADIMHYBA0
         qI0hHhuGUfA8GIXMg2GoNkKGGXxOhezLMc1rVITyPRKyz/fKZxgwDIP5+mD53AHoB/J7AuYy+jmmPuhx
@@ -1710,7 +1710,7 @@
   <data name="MarketBrowserButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAI0AAACACAIAAAC5on0sAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cwAAEnMBjCK5BwAAgBdJREFUeF6d/WW0XFeW54tqjFsm6fAJZuYTfCIOxmEmMTNZLIsMsmxZFlq2ZDEz
+        cgAAEnIBXmVb4wAAgBdJREFUeF6d/WW0XFeW54tqjFsm6fAJZuYTfCIOxmEmMTNZLIsMsmxZFlq2ZDEz
         WpZBtgxpTnJWdmZWQmXWLeyqvm9Uvw89qt+4/bpHf633m2vHASkzu+94OWZu79ix9oL5n/Cfa+84mmS0
         +yyugMMTdnhCdnfI5gyabX6jxVttcOlMHp3JXaV3VOrs2rFa56jWO3UGZ5XBWW1060yuSr1DWprdBqvP
         aPWb7EGzI2SyBcyIPciJxRW2eaIuf40/kgpE04FIyhdKOL1RqzNktPoMFq/R5tdZfNVmd7XRSVdVRmeV
@@ -2263,7 +2263,7 @@
   <data name="AbyssTrackerButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cgAAEnIBXmVb4wAAdfRJREFUeF7tvXdcFNnWLvz9ee99wwkz44yZnHPqphua1OScJYoK5pxzzjnnnHNW
+        cQAAEnEB89x6jgAAdfRJREFUeF7tvXdcFNnWLvz9ee99wwkz44yZnHPqphua1OScJYoK5pxzzjnnnHNW
         RBBQVERAEUEEBMkZJInZ51urtOZwvPPe90yec8/dv9+yu6uxa9dez3rWs3ZV7fr/8AdvHz9+/N9eP3z4
         gLdv3wr2+vVrwd68eSOY+Fnc9urVq//N+Luurq6/M/G77p/5lf9W/I5N3Afv+927d4L9UB//WdofHgDs
         bLb3798LxgPOgy86QnQMv//SWWyiQ7+0ly9f/h/th/4Pm/i7vC/ugwgEsX9if/9Z2h8aAGK08wB3dzg7

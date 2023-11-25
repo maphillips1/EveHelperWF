@@ -35,6 +35,7 @@
             TrackedItemsCheckbox = new CheckBox();
             BackupFilesButton = new Button();
             BackupFilesDialog = new FolderBrowserDialog();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // PriceHistoryCheckbox
@@ -99,11 +100,26 @@
             BackupFilesDialog.RootFolder = Environment.SpecialFolder.MyDocuments;
             BackupFilesDialog.UseDescriptionForTitle = true;
             // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(2, 23, 38);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Enabled = false;
+            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            textBox1.ForeColor = Color.White;
+            textBox1.Location = new Point(228, 12);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(278, 203);
+            textBox1.TabIndex = 5;
+            textBox1.Text = resources.GetString("textBox1.Text");
+            // 
             // BackupFiles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(208, 256);
+            ClientSize = new Size(555, 227);
+            Controls.Add(textBox1);
             Controls.Add(BackupFilesButton);
             Controls.Add(TrackedItemsCheckbox);
             Controls.Add(AbyssRunsCheckbox);
@@ -126,5 +142,6 @@
         private CheckBox TrackedItemsCheckbox;
         private Button BackupFilesButton;
         private FolderBrowserDialog BackupFilesDialog;
+        private TextBox textBox1;
     }
 }
