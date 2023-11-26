@@ -48,7 +48,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                             string dbDirectory = Database.SQLiteCalls.GetSQLiteDirectory();
                             string dbFileName = Database.SQLiteCalls.GetSQLitePath();
 
-                            FileIO.FileHelper.SaveCachedFile(dbDirectory, dbFileName, incomingContent);
+                            FileIO.FileHelper.SaveFileContent(dbDirectory, dbFileName, incomingContent);
 
                             MessageBox.Show("Database Saved!", "DB Saved");
                         }

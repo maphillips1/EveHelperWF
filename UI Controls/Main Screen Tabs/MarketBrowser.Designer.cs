@@ -37,17 +37,14 @@
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
-            MarketBrowserSplitContainer = new SplitContainer();
-            SearchResultsTreeView = new TreeView();
-            SearchButton = new Button();
-            SearchTextBox = new TextBox();
-            MarketListTreeView = new TreeView();
+            SelectedItemImageWorker = new System.ComponentModel.BackgroundWorker();
             TheraButton = new Button();
             SystemCombo = new ComboBox();
             SelectedItemImagePanel = new Panel();
+            SearchButton = new Button();
+            MarketListTreeView = new TreeView();
             SelectedItemTabPanel = new TabControl();
             OrdersTabPage = new TabPage();
-            OrdersSplitContainer = new SplitContainer();
             label3 = new Label();
             SellOrdersGridView = new DataGridView();
             range = new DataGridViewTextBoxColumn();
@@ -91,118 +88,38 @@
             average = new DataGridViewTextBoxColumn();
             highest = new DataGridViewTextBoxColumn();
             lowest = new DataGridViewTextBoxColumn();
-            AmarrButton = new Button();
             RensButton = new Button();
-            DodixieButton = new Button();
-            JitaButton = new Button();
-            RegionCombo = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             SelectedItemLabel = new Label();
-            SelectedItemImageWorker = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)MarketBrowserSplitContainer).BeginInit();
-            MarketBrowserSplitContainer.Panel1.SuspendLayout();
-            MarketBrowserSplitContainer.Panel2.SuspendLayout();
-            MarketBrowserSplitContainer.SuspendLayout();
+            SearchTextBox = new TextBox();
+            AmarrButton = new Button();
+            DodixieButton = new Button();
+            JitaButton = new Button();
+            RegionCombo = new ComboBox();
+            SearchResultsTreeView = new TreeView();
+            ClearSystemButton = new Button();
             SelectedItemTabPanel.SuspendLayout();
             OrdersTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)OrdersSplitContainer).BeginInit();
-            OrdersSplitContainer.Panel1.SuspendLayout();
-            OrdersSplitContainer.Panel2.SuspendLayout();
-            OrdersSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BuyOrdersGridView).BeginInit();
             PriceHistoryTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
             SuspendLayout();
             // 
-            // MarketBrowserSplitContainer
+            // SelectedItemImageWorker
             // 
-            MarketBrowserSplitContainer.BackColor = Color.FromArgb(57, 54, 53);
-            MarketBrowserSplitContainer.Dock = DockStyle.Fill;
-            MarketBrowserSplitContainer.Location = new Point(0, 0);
-            MarketBrowserSplitContainer.Name = "MarketBrowserSplitContainer";
-            // 
-            // MarketBrowserSplitContainer.Panel1
-            // 
-            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchResultsTreeView);
-            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchButton);
-            MarketBrowserSplitContainer.Panel1.Controls.Add(SearchTextBox);
-            MarketBrowserSplitContainer.Panel1.Controls.Add(MarketListTreeView);
-            // 
-            // MarketBrowserSplitContainer.Panel2
-            // 
-            MarketBrowserSplitContainer.Panel2.BackColor = Color.FromArgb(2, 23, 38);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(TheraButton);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(SystemCombo);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(SelectedItemImagePanel);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(SelectedItemTabPanel);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(AmarrButton);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(RensButton);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(DodixieButton);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(JitaButton);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(RegionCombo);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(label2);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(label1);
-            MarketBrowserSplitContainer.Panel2.Controls.Add(SelectedItemLabel);
-            MarketBrowserSplitContainer.Size = new Size(1646, 853);
-            MarketBrowserSplitContainer.SplitterDistance = 315;
-            MarketBrowserSplitContainer.SplitterWidth = 10;
-            MarketBrowserSplitContainer.TabIndex = 0;
-            // 
-            // SearchResultsTreeView
-            // 
-            SearchResultsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
-            SearchResultsTreeView.CausesValidation = false;
-            SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
-            SearchResultsTreeView.HideSelection = false;
-            SearchResultsTreeView.HotTracking = true;
-            SearchResultsTreeView.Location = new Point(3, 35);
-            SearchResultsTreeView.Margin = new Padding(2);
-            SearchResultsTreeView.Name = "SearchResultsTreeView";
-            SearchResultsTreeView.Size = new Size(310, 195);
-            SearchResultsTreeView.TabIndex = 7;
-            SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
-            // 
-            // SearchButton
-            // 
-            SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(199, 3);
-            SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(111, 29);
-            SearchButton.TabIndex = 6;
-            SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
-            // 
-            // SearchTextBox
-            // 
-            SearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            SearchTextBox.Location = new Point(3, 3);
-            SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(190, 27);
-            SearchTextBox.TabIndex = 5;
-            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
-            // 
-            // MarketListTreeView
-            // 
-            MarketListTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MarketListTreeView.BackColor = Color.FromArgb(2, 23, 38);
-            MarketListTreeView.ForeColor = Color.White;
-            MarketListTreeView.Location = new Point(0, 232);
-            MarketListTreeView.Name = "MarketListTreeView";
-            MarketListTreeView.Size = new Size(315, 621);
-            MarketListTreeView.TabIndex = 0;
-            MarketListTreeView.AfterSelect += MarketListTreeView_AfterSelect;
+            SelectedItemImageWorker.DoWork += SelectedItemImageWorker_DoWork;
+            SelectedItemImageWorker.RunWorkerCompleted += SelectedItemImageWorker_RunWorkerCompleted;
             // 
             // TheraButton
             // 
             TheraButton.ForeColor = Color.Black;
-            TheraButton.Location = new Point(588, 58);
+            TheraButton.Location = new Point(723, 48);
+            TheraButton.Margin = new Padding(3, 2, 3, 2);
             TheraButton.Name = "TheraButton";
-            TheraButton.Size = new Size(94, 29);
-            TheraButton.TabIndex = 14;
+            TheraButton.Size = new Size(82, 22);
+            TheraButton.TabIndex = 30;
             TheraButton.Text = "Thera";
             TheraButton.UseVisualStyleBackColor = true;
             TheraButton.Click += TheraButton_Click;
@@ -215,74 +132,82 @@
             SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
-            SystemCombo.Location = new Point(209, 95);
+            SystemCombo.Location = new Point(391, 76);
+            SystemCombo.Margin = new Padding(3, 2, 3, 2);
             SystemCombo.Name = "SystemCombo";
-            SystemCombo.Size = new Size(151, 28);
-            SystemCombo.TabIndex = 13;
-            SystemCombo.SelectedIndexChanged += SystemCombo_SelectedIndexChanged;
+            SystemCombo.Size = new Size(133, 23);
+            SystemCombo.TabIndex = 29;
+            SystemCombo.SelectionChangeCommitted += SystemCombo_SelectedIndexChanged;
             // 
             // SelectedItemImagePanel
             // 
             SelectedItemImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            SelectedItemImagePanel.Location = new Point(23, 53);
+            SelectedItemImagePanel.Location = new Point(256, 49);
+            SelectedItemImagePanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemImagePanel.Name = "SelectedItemImagePanel";
-            SelectedItemImagePanel.Size = new Size(64, 64);
-            SelectedItemImagePanel.TabIndex = 12;
+            SelectedItemImagePanel.Size = new Size(56, 48);
+            SelectedItemImagePanel.TabIndex = 28;
+            // 
+            // SearchButton
+            // 
+            SearchButton.ForeColor = Color.Black;
+            SearchButton.Location = new Point(153, 2);
+            SearchButton.Margin = new Padding(3, 2, 3, 2);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(97, 24);
+            SearchButton.TabIndex = 21;
+            SearchButton.Text = "Search";
+            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
+            // 
+            // MarketListTreeView
+            // 
+            MarketListTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            MarketListTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MarketListTreeView.ForeColor = Color.White;
+            MarketListTreeView.Location = new Point(2, 166);
+            MarketListTreeView.Margin = new Padding(3, 2, 3, 2);
+            MarketListTreeView.Name = "MarketListTreeView";
+            MarketListTreeView.Size = new Size(248, 466);
+            MarketListTreeView.TabIndex = 15;
+            MarketListTreeView.AfterSelect += MarketListTreeView_AfterSelect;
             // 
             // SelectedItemTabPanel
             // 
             SelectedItemTabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             SelectedItemTabPanel.Controls.Add(OrdersTabPage);
             SelectedItemTabPanel.Controls.Add(PriceHistoryTabPage);
-            SelectedItemTabPanel.Location = new Point(0, 143);
+            SelectedItemTabPanel.Location = new Point(256, 138);
+            SelectedItemTabPanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemTabPanel.Name = "SelectedItemTabPanel";
             SelectedItemTabPanel.SelectedIndex = 0;
-            SelectedItemTabPanel.Size = new Size(1315, 710);
-            SelectedItemTabPanel.TabIndex = 11;
+            SelectedItemTabPanel.Size = new Size(723, 494);
+            SelectedItemTabPanel.TabIndex = 27;
             // 
             // OrdersTabPage
             // 
-            OrdersTabPage.Controls.Add(OrdersSplitContainer);
-            OrdersTabPage.Location = new Point(4, 29);
+            OrdersTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            OrdersTabPage.Controls.Add(label3);
+            OrdersTabPage.Controls.Add(SellOrdersGridView);
+            OrdersTabPage.Controls.Add(BuyOrdersGridView);
+            OrdersTabPage.Controls.Add(label4);
+            OrdersTabPage.Location = new Point(4, 24);
+            OrdersTabPage.Margin = new Padding(3, 2, 3, 2);
             OrdersTabPage.Name = "OrdersTabPage";
-            OrdersTabPage.Padding = new Padding(3);
-            OrdersTabPage.Size = new Size(1307, 677);
+            OrdersTabPage.Padding = new Padding(3, 2, 3, 2);
+            OrdersTabPage.Size = new Size(715, 466);
             OrdersTabPage.TabIndex = 0;
             OrdersTabPage.Text = "Orders";
-            OrdersTabPage.UseVisualStyleBackColor = true;
-            // 
-            // OrdersSplitContainer
-            // 
-            OrdersSplitContainer.Dock = DockStyle.Fill;
-            OrdersSplitContainer.Location = new Point(3, 3);
-            OrdersSplitContainer.Name = "OrdersSplitContainer";
-            OrdersSplitContainer.Orientation = Orientation.Horizontal;
-            // 
-            // OrdersSplitContainer.Panel1
-            // 
-            OrdersSplitContainer.Panel1.BackColor = Color.FromArgb(2, 23, 38);
-            OrdersSplitContainer.Panel1.Controls.Add(label3);
-            OrdersSplitContainer.Panel1.Controls.Add(SellOrdersGridView);
-            // 
-            // OrdersSplitContainer.Panel2
-            // 
-            OrdersSplitContainer.Panel2.BackColor = Color.FromArgb(2, 23, 38);
-            OrdersSplitContainer.Panel2.Controls.Add(BuyOrdersGridView);
-            OrdersSplitContainer.Panel2.Controls.Add(label4);
-            OrdersSplitContainer.Size = new Size(1301, 671);
-            OrdersSplitContainer.SplitterDistance = 335;
-            OrdersSplitContainer.SplitterWidth = 10;
-            OrdersSplitContainer.TabIndex = 0;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(16, 13);
+            label3.Location = new Point(6, 4);
             label3.Name = "label3";
             label3.RightToLeft = RightToLeft.No;
-            label3.Size = new Size(92, 23);
-            label3.TabIndex = 1;
+            label3.Size = new Size(75, 19);
+            label3.TabIndex = 5;
             label3.Text = "Sell Orders";
             // 
             // SellOrdersGridView
@@ -291,7 +216,9 @@
             dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.White;
             SellOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            SellOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             SellOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            SellOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             SellOrdersGridView.BackgroundColor = Color.Black;
             SellOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SellOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { range, volumeRemaining, minVolume, formattedPrice, locationName, duration, issued, isBuyOrder, locationID, orderID, price, systemID, typeID, volumeTotal });
@@ -303,14 +230,14 @@
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle3;
-            SellOrdersGridView.Dock = DockStyle.Bottom;
             SellOrdersGridView.GridColor = Color.Black;
-            SellOrdersGridView.Location = new Point(0, 57);
+            SellOrdersGridView.Location = new Point(9, 25);
+            SellOrdersGridView.Margin = new Padding(3, 2, 3, 2);
             SellOrdersGridView.Name = "SellOrdersGridView";
             SellOrdersGridView.RowHeadersWidth = 51;
             SellOrdersGridView.RowTemplate.Height = 29;
-            SellOrdersGridView.Size = new Size(1301, 278);
-            SellOrdersGridView.TabIndex = 0;
+            SellOrdersGridView.Size = new Size(700, 191);
+            SellOrdersGridView.TabIndex = 4;
             // 
             // range
             // 
@@ -318,7 +245,7 @@
             range.HeaderText = "Range";
             range.MinimumWidth = 6;
             range.Name = "range";
-            range.Width = 80;
+            range.Width = 65;
             // 
             // volumeRemaining
             // 
@@ -326,7 +253,7 @@
             volumeRemaining.HeaderText = "Remaining";
             volumeRemaining.MinimumWidth = 6;
             volumeRemaining.Name = "volumeRemaining";
-            volumeRemaining.Width = 109;
+            volumeRemaining.Width = 89;
             // 
             // minVolume
             // 
@@ -334,7 +261,7 @@
             minVolume.HeaderText = "Min Volume";
             minVolume.MinimumWidth = 6;
             minVolume.Name = "minVolume";
-            minVolume.Width = 117;
+            minVolume.Width = 96;
             // 
             // formattedPrice
             // 
@@ -345,7 +272,7 @@
             formattedPrice.HeaderText = "Price";
             formattedPrice.MinimumWidth = 6;
             formattedPrice.Name = "formattedPrice";
-            formattedPrice.Width = 70;
+            formattedPrice.Width = 58;
             // 
             // locationName
             // 
@@ -353,7 +280,7 @@
             locationName.HeaderText = "Location";
             locationName.MinimumWidth = 6;
             locationName.Name = "locationName";
-            locationName.Width = 95;
+            locationName.Width = 78;
             // 
             // duration
             // 
@@ -361,7 +288,7 @@
             duration.HeaderText = "Duration";
             duration.MinimumWidth = 6;
             duration.Name = "duration";
-            duration.Width = 96;
+            duration.Width = 78;
             // 
             // issued
             // 
@@ -369,7 +296,7 @@
             issued.HeaderText = "Issued";
             issued.MinimumWidth = 6;
             issued.Name = "issued";
-            issued.Width = 79;
+            issued.Width = 65;
             // 
             // isBuyOrder
             // 
@@ -440,7 +367,9 @@
             dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle4.ForeColor = Color.White;
             BuyOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            BuyOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BuyOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            BuyOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             BuyOrdersGridView.BackgroundColor = Color.Black;
             BuyOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             BuyOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, formattedPriceColumn, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
@@ -452,14 +381,14 @@
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            BuyOrdersGridView.Dock = DockStyle.Bottom;
             BuyOrdersGridView.GridColor = Color.Black;
-            BuyOrdersGridView.Location = new Point(0, 45);
+            BuyOrdersGridView.Location = new Point(9, 253);
+            BuyOrdersGridView.Margin = new Padding(3, 2, 3, 2);
             BuyOrdersGridView.Name = "BuyOrdersGridView";
             BuyOrdersGridView.RowHeadersWidth = 51;
             BuyOrdersGridView.RowTemplate.Height = 29;
-            BuyOrdersGridView.Size = new Size(1301, 281);
-            BuyOrdersGridView.TabIndex = 3;
+            BuyOrdersGridView.Size = new Size(700, 208);
+            BuyOrdersGridView.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -467,7 +396,7 @@
             dataGridViewTextBoxColumn1.HeaderText = "Range";
             dataGridViewTextBoxColumn1.MinimumWidth = 6;
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 80;
+            dataGridViewTextBoxColumn1.Width = 65;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -475,7 +404,7 @@
             dataGridViewTextBoxColumn2.HeaderText = "Remaining";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 109;
+            dataGridViewTextBoxColumn2.Width = 89;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -483,7 +412,7 @@
             dataGridViewTextBoxColumn3.HeaderText = "Min Volume";
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 117;
+            dataGridViewTextBoxColumn3.Width = 96;
             // 
             // formattedPriceColumn
             // 
@@ -494,7 +423,7 @@
             formattedPriceColumn.HeaderText = "Price";
             formattedPriceColumn.MinimumWidth = 6;
             formattedPriceColumn.Name = "formattedPriceColumn";
-            formattedPriceColumn.Width = 70;
+            formattedPriceColumn.Width = 58;
             // 
             // dataGridViewTextBoxColumn5
             // 
@@ -502,7 +431,7 @@
             dataGridViewTextBoxColumn5.HeaderText = "Location";
             dataGridViewTextBoxColumn5.MinimumWidth = 6;
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.Width = 95;
+            dataGridViewTextBoxColumn5.Width = 78;
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -510,7 +439,7 @@
             dataGridViewTextBoxColumn6.HeaderText = "Duration";
             dataGridViewTextBoxColumn6.MinimumWidth = 6;
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 96;
+            dataGridViewTextBoxColumn6.Width = 78;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -518,7 +447,7 @@
             dataGridViewTextBoxColumn7.HeaderText = "Issued";
             dataGridViewTextBoxColumn7.MinimumWidth = 6;
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.Width = 79;
+            dataGridViewTextBoxColumn7.Width = 65;
             // 
             // dataGridViewTextBoxColumn8
             // 
@@ -587,20 +516,21 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(16, 12);
+            label4.Location = new Point(6, 232);
             label4.Name = "label4";
-            label4.Size = new Size(94, 23);
-            label4.TabIndex = 2;
+            label4.Size = new Size(78, 19);
+            label4.TabIndex = 6;
             label4.Text = "Buy Orders";
             // 
             // PriceHistoryTabPage
             // 
             PriceHistoryTabPage.BackColor = Color.FromArgb(54, 57, 53);
             PriceHistoryTabPage.Controls.Add(PriceHistoryGridView);
-            PriceHistoryTabPage.Location = new Point(4, 29);
+            PriceHistoryTabPage.Location = new Point(4, 24);
+            PriceHistoryTabPage.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryTabPage.Name = "PriceHistoryTabPage";
-            PriceHistoryTabPage.Padding = new Padding(3);
-            PriceHistoryTabPage.Size = new Size(1307, 677);
+            PriceHistoryTabPage.Padding = new Padding(3, 2, 3, 2);
+            PriceHistoryTabPage.Size = new Size(715, 466);
             PriceHistoryTabPage.TabIndex = 1;
             PriceHistoryTabPage.Text = "Price History";
             // 
@@ -624,11 +554,12 @@
             PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
             PriceHistoryGridView.Dock = DockStyle.Fill;
             PriceHistoryGridView.GridColor = Color.Black;
-            PriceHistoryGridView.Location = new Point(3, 3);
+            PriceHistoryGridView.Location = new Point(3, 2);
+            PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1301, 671);
+            PriceHistoryGridView.Size = new Size(709, 462);
             PriceHistoryGridView.TabIndex = 0;
             // 
             // date
@@ -637,7 +568,7 @@
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
-            date.Width = 70;
+            date.Width = 56;
             // 
             // formattedAverage
             // 
@@ -645,7 +576,7 @@
             formattedAverage.HeaderText = "Average";
             formattedAverage.MinimumWidth = 6;
             formattedAverage.Name = "formattedAverage";
-            formattedAverage.Width = 93;
+            formattedAverage.Width = 75;
             // 
             // formattedLowest
             // 
@@ -653,7 +584,7 @@
             formattedLowest.HeaderText = "Lowest";
             formattedLowest.MinimumWidth = 6;
             formattedLowest.Name = "formattedLowest";
-            formattedLowest.Width = 84;
+            formattedLowest.Width = 69;
             // 
             // formattedHighest
             // 
@@ -661,7 +592,7 @@
             formattedHighest.HeaderText = "Highest";
             formattedHighest.MinimumWidth = 6;
             formattedHighest.Name = "formattedHighest";
-            formattedHighest.Width = 89;
+            formattedHighest.Width = 73;
             // 
             // volume
             // 
@@ -669,7 +600,7 @@
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
-            volume.Width = 88;
+            volume.Width = 72;
             // 
             // orderCount
             // 
@@ -677,7 +608,7 @@
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
-            orderCount.Width = 119;
+            orderCount.Width = 98;
             // 
             // average
             // 
@@ -706,35 +637,78 @@
             lowest.Visible = false;
             lowest.Width = 62;
             // 
-            // AmarrButton
-            // 
-            AmarrButton.ForeColor = Color.Black;
-            AmarrButton.Location = new Point(388, 94);
-            AmarrButton.Name = "AmarrButton";
-            AmarrButton.Size = new Size(94, 29);
-            AmarrButton.TabIndex = 10;
-            AmarrButton.Text = "Amarr";
-            AmarrButton.UseVisualStyleBackColor = true;
-            AmarrButton.Click += AmarrButton_Click;
-            // 
             // RensButton
             // 
             RensButton.ForeColor = Color.Black;
-            RensButton.Location = new Point(488, 57);
+            RensButton.Location = new Point(635, 48);
+            RensButton.Margin = new Padding(3, 2, 3, 2);
             RensButton.Name = "RensButton";
-            RensButton.Size = new Size(94, 29);
-            RensButton.TabIndex = 9;
+            RensButton.Size = new Size(82, 22);
+            RensButton.TabIndex = 25;
             RensButton.Text = "Rens";
             RensButton.UseVisualStyleBackColor = true;
             RensButton.Click += RensButton_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(328, 75);
+            label2.Name = "label2";
+            label2.Size = new Size(57, 19);
+            label2.TabIndex = 18;
+            label2.Text = "System";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(328, 49);
+            label1.Name = "label1";
+            label1.Size = new Size(56, 19);
+            label1.TabIndex = 17;
+            label1.Text = "Region";
+            // 
+            // SelectedItemLabel
+            // 
+            SelectedItemLabel.AutoSize = true;
+            SelectedItemLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            SelectedItemLabel.ForeColor = Color.Gold;
+            SelectedItemLabel.Location = new Point(256, 3);
+            SelectedItemLabel.Name = "SelectedItemLabel";
+            SelectedItemLabel.Size = new Size(108, 21);
+            SelectedItemLabel.TabIndex = 16;
+            SelectedItemLabel.Text = "Selected Item";
+            // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Location = new Point(3, 2);
+            SearchTextBox.Margin = new Padding(3, 2, 3, 2);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.Size = new Size(144, 23);
+            SearchTextBox.TabIndex = 19;
+            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+            // 
+            // AmarrButton
+            // 
+            AmarrButton.ForeColor = Color.Black;
+            AmarrButton.Location = new Point(548, 75);
+            AmarrButton.Margin = new Padding(3, 2, 3, 2);
+            AmarrButton.Name = "AmarrButton";
+            AmarrButton.Size = new Size(82, 22);
+            AmarrButton.TabIndex = 26;
+            AmarrButton.Text = "Amarr";
+            AmarrButton.UseVisualStyleBackColor = true;
+            AmarrButton.Click += AmarrButton_Click;
+            // 
             // DodixieButton
             // 
             DodixieButton.ForeColor = Color.Black;
-            DodixieButton.Location = new Point(488, 94);
+            DodixieButton.Location = new Point(635, 75);
+            DodixieButton.Margin = new Padding(3, 2, 3, 2);
             DodixieButton.Name = "DodixieButton";
-            DodixieButton.Size = new Size(94, 29);
-            DodixieButton.TabIndex = 8;
+            DodixieButton.Size = new Size(82, 22);
+            DodixieButton.TabIndex = 24;
             DodixieButton.Text = "Dodixie";
             DodixieButton.UseVisualStyleBackColor = true;
             DodixieButton.Click += DodixieButton_Click;
@@ -742,10 +716,11 @@
             // JitaButton
             // 
             JitaButton.ForeColor = Color.Black;
-            JitaButton.Location = new Point(388, 57);
+            JitaButton.Location = new Point(548, 48);
+            JitaButton.Margin = new Padding(3, 2, 3, 2);
             JitaButton.Name = "JitaButton";
-            JitaButton.Size = new Size(94, 29);
-            JitaButton.TabIndex = 7;
+            JitaButton.Size = new Size(82, 22);
+            JitaButton.TabIndex = 22;
             JitaButton.Text = "Jita";
             JitaButton.UseVisualStyleBackColor = true;
             JitaButton.Click += JitaButton_Click;
@@ -758,105 +733,89 @@
             RegionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
-            RegionCombo.Location = new Point(209, 58);
+            RegionCombo.Location = new Point(391, 49);
+            RegionCombo.Margin = new Padding(3, 2, 3, 2);
             RegionCombo.Name = "RegionCombo";
-            RegionCombo.Size = new Size(151, 28);
-            RegionCombo.TabIndex = 5;
-            RegionCombo.SelectedIndexChanged += RegionCombo_SelectedIndexChanged;
+            RegionCombo.Size = new Size(133, 23);
+            RegionCombo.TabIndex = 20;
+            RegionCombo.SelectionChangeCommitted += RegionCombo_SelectedIndexChanged;
             // 
-            // label2
+            // SearchResultsTreeView
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(137, 94);
-            label2.Name = "label2";
-            label2.Size = new Size(68, 23);
-            label2.TabIndex = 4;
-            label2.Text = "System";
+            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            SearchResultsTreeView.CausesValidation = false;
+            SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
+            SearchResultsTreeView.HideSelection = false;
+            SearchResultsTreeView.HotTracking = true;
+            SearchResultsTreeView.Location = new Point(3, 28);
+            SearchResultsTreeView.Margin = new Padding(2);
+            SearchResultsTreeView.Name = "SearchResultsTreeView";
+            SearchResultsTreeView.Size = new Size(247, 134);
+            SearchResultsTreeView.TabIndex = 23;
+            SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
             // 
-            // label1
+            // ClearSystemButton
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(137, 59);
-            label1.Name = "label1";
-            label1.Size = new Size(66, 23);
-            label1.TabIndex = 3;
-            label1.Text = "Region";
-            // 
-            // SelectedItemLabel
-            // 
-            SelectedItemLabel.AutoSize = true;
-            SelectedItemLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            SelectedItemLabel.ForeColor = Color.Gold;
-            SelectedItemLabel.Location = new Point(137, 9);
-            SelectedItemLabel.Name = "SelectedItemLabel";
-            SelectedItemLabel.Size = new Size(136, 28);
-            SelectedItemLabel.TabIndex = 2;
-            SelectedItemLabel.Text = "Selected Item";
-            // 
-            // SelectedItemImageWorker
-            // 
-            SelectedItemImageWorker.DoWork += SelectedItemImageWorker_DoWork;
-            SelectedItemImageWorker.RunWorkerCompleted += SelectedItemImageWorker_RunWorkerCompleted;
+            ClearSystemButton.ForeColor = Color.Black;
+            ClearSystemButton.Location = new Point(400, 103);
+            ClearSystemButton.Margin = new Padding(3, 2, 3, 2);
+            ClearSystemButton.Name = "ClearSystemButton";
+            ClearSystemButton.Size = new Size(113, 22);
+            ClearSystemButton.TabIndex = 31;
+            ClearSystemButton.Text = "Clear System";
+            ClearSystemButton.UseVisualStyleBackColor = true;
+            ClearSystemButton.Click += ClearSystemButton_Click;
             // 
             // MarketBrowser
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1646, 853);
-            Controls.Add(MarketBrowserSplitContainer);
+            ClientSize = new Size(991, 634);
+            Controls.Add(ClearSystemButton);
+            Controls.Add(TheraButton);
+            Controls.Add(SystemCombo);
+            Controls.Add(SelectedItemImagePanel);
+            Controls.Add(SearchButton);
+            Controls.Add(MarketListTreeView);
+            Controls.Add(SelectedItemTabPanel);
+            Controls.Add(RensButton);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(SelectedItemLabel);
+            Controls.Add(SearchTextBox);
+            Controls.Add(AmarrButton);
+            Controls.Add(DodixieButton);
+            Controls.Add(JitaButton);
+            Controls.Add(RegionCombo);
+            Controls.Add(SearchResultsTreeView);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MarketBrowser";
             Text = "Market Browser";
-            MarketBrowserSplitContainer.Panel1.ResumeLayout(false);
-            MarketBrowserSplitContainer.Panel1.PerformLayout();
-            MarketBrowserSplitContainer.Panel2.ResumeLayout(false);
-            MarketBrowserSplitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)MarketBrowserSplitContainer).EndInit();
-            MarketBrowserSplitContainer.ResumeLayout(false);
             SelectedItemTabPanel.ResumeLayout(false);
             OrdersTabPage.ResumeLayout(false);
-            OrdersSplitContainer.Panel1.ResumeLayout(false);
-            OrdersSplitContainer.Panel1.PerformLayout();
-            OrdersSplitContainer.Panel2.ResumeLayout(false);
-            OrdersSplitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)OrdersSplitContainer).EndInit();
-            OrdersSplitContainer.ResumeLayout(false);
+            OrdersTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)BuyOrdersGridView).EndInit();
             PriceHistoryTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private SplitContainer MarketBrowserSplitContainer;
+        private TabPage tabPage1;
+        private System.ComponentModel.BackgroundWorker SelectedItemImageWorker;
+        private Button TheraButton;
+        private ComboBox SystemCombo;
+        private Panel SelectedItemImagePanel;
+        private Button SearchButton;
         private TreeView MarketListTreeView;
-        private Label label2;
-        private Label label1;
-        private Label SelectedItemLabel;
-        private ComboBox RegionCombo;
         private TabControl SelectedItemTabPanel;
         private TabPage OrdersTabPage;
         private TabPage PriceHistoryTabPage;
-        private Button AmarrButton;
-        private Button RensButton;
-        private Button DodixieButton;
-        private Button JitaButton;
-        private TabPage tabPage1;
-        private SplitContainer OrdersSplitContainer;
-        private DataGridView SellOrdersGridView;
-        private Panel SelectedItemImagePanel;
-        private System.ComponentModel.BackgroundWorker SelectedItemImageWorker;
-        private ComboBox SystemCombo;
-        private Label label3;
-        private Label label4;
-        private DataGridView BuyOrdersGridView;
-        private Button TheraButton;
         private DataGridView PriceHistoryGridView;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn formattedAverage;
@@ -867,6 +826,18 @@
         private DataGridViewTextBoxColumn average;
         private DataGridViewTextBoxColumn highest;
         private DataGridViewTextBoxColumn lowest;
+        private Button RensButton;
+        private Label label2;
+        private Label label1;
+        private Label SelectedItemLabel;
+        private TextBox SearchTextBox;
+        private Button AmarrButton;
+        private Button DodixieButton;
+        private Button JitaButton;
+        private ComboBox RegionCombo;
+        private TreeView SearchResultsTreeView;
+        private Label label3;
+        private DataGridView SellOrdersGridView;
         private DataGridViewTextBoxColumn range;
         private DataGridViewTextBoxColumn volumeRemaining;
         private DataGridViewTextBoxColumn minVolume;
@@ -881,6 +852,7 @@
         private DataGridViewTextBoxColumn systemID;
         private DataGridViewTextBoxColumn typeID;
         private DataGridViewTextBoxColumn volumeTotal;
+        private DataGridView BuyOrdersGridView;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -895,8 +867,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private TreeView SearchResultsTreeView;
-        private Button SearchButton;
-        private TextBox SearchTextBox;
+        private Label label4;
+        private Button ClearSystemButton;
     }
 }

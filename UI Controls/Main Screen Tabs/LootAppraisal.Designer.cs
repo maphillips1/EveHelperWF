@@ -61,10 +61,11 @@
             // 
             InputTextMultiLine.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             InputTextMultiLine.BackColor = Color.WhiteSmoke;
-            InputTextMultiLine.Location = new Point(12, 114);
+            InputTextMultiLine.Location = new Point(10, 86);
+            InputTextMultiLine.Margin = new Padding(3, 2, 3, 2);
             InputTextMultiLine.Multiline = true;
             InputTextMultiLine.Name = "InputTextMultiLine";
-            InputTextMultiLine.Size = new Size(431, 644);
+            InputTextMultiLine.Size = new Size(378, 349);
             InputTextMultiLine.TabIndex = 0;
             InputTextMultiLine.TextChanged += InputTextMultiLine_TextChanged;
             // 
@@ -72,9 +73,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(106, 9);
+            label1.Location = new Point(93, 58);
             label1.Name = "label1";
-            label1.Size = new Size(192, 28);
+            label1.Size = new Size(153, 21);
             label1.TabIndex = 1;
             label1.Text = "Copy and Paste Here";
             // 
@@ -82,9 +83,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(550, 9);
+            label2.Location = new Point(481, 7);
             label2.Name = "label2";
-            label2.Size = new Size(95, 28);
+            label2.Size = new Size(77, 21);
             label2.TabIndex = 3;
             label2.Text = "Sell Value";
             // 
@@ -116,7 +117,8 @@
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
             ResultsGridView.DefaultCellStyle = dataGridViewCellStyle7;
             ResultsGridView.GridColor = Color.Black;
-            ResultsGridView.Location = new Point(482, 114);
+            ResultsGridView.Location = new Point(422, 86);
+            ResultsGridView.Margin = new Padding(3, 2, 3, 2);
             ResultsGridView.Name = "ResultsGridView";
             dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = Color.Black;
@@ -131,7 +133,7 @@
             dataGridViewCellStyle9.ForeColor = Color.White;
             ResultsGridView.RowsDefaultCellStyle = dataGridViewCellStyle9;
             ResultsGridView.RowTemplate.Height = 29;
-            ResultsGridView.Size = new Size(1052, 644);
+            ResultsGridView.Size = new Size(719, 348);
             ResultsGridView.TabIndex = 4;
             // 
             // typeName
@@ -140,7 +142,7 @@
             typeName.HeaderText = "Item Name";
             typeName.MinimumWidth = 6;
             typeName.Name = "typeName";
-            typeName.Width = 112;
+            typeName.Width = 91;
             // 
             // typeID
             // 
@@ -157,7 +159,7 @@
             quantity.HeaderText = "Quantity";
             quantity.MinimumWidth = 6;
             quantity.Name = "quantity";
-            quantity.Width = 94;
+            quantity.Width = 78;
             // 
             // sellPriceTotal
             // 
@@ -168,7 +170,7 @@
             sellPriceTotal.HeaderText = "Sell Price Total";
             sellPriceTotal.MinimumWidth = 6;
             sellPriceTotal.Name = "sellPriceTotal";
-            sellPriceTotal.Width = 135;
+            sellPriceTotal.Width = 107;
             // 
             // buyPriceTotal
             // 
@@ -179,7 +181,7 @@
             buyPriceTotal.HeaderText = "Buy Price Total";
             buyPriceTotal.MinimumWidth = 6;
             buyPriceTotal.Name = "buyPriceTotal";
-            buyPriceTotal.Width = 135;
+            buyPriceTotal.Width = 109;
             // 
             // sellPricePer
             // 
@@ -190,7 +192,7 @@
             sellPricePer.HeaderText = "Sell Price Per";
             sellPricePer.MinimumWidth = 6;
             sellPricePer.Name = "sellPricePer";
-            sellPricePer.Width = 122;
+            sellPricePer.Width = 99;
             // 
             // buyPricePer
             // 
@@ -201,14 +203,15 @@
             buyPricePer.HeaderText = "Buy Price Per";
             buyPricePer.MinimumWidth = 6;
             buyPricePer.Name = "buyPricePer";
-            buyPricePer.Width = 122;
+            buyPricePer.Width = 101;
             // 
             // AppraiseButton
             // 
             AppraiseButton.ForeColor = Color.Black;
-            AppraiseButton.Location = new Point(349, 79);
+            AppraiseButton.Location = new Point(305, 59);
+            AppraiseButton.Margin = new Padding(3, 2, 3, 2);
             AppraiseButton.Name = "AppraiseButton";
-            AppraiseButton.Size = new Size(94, 29);
+            AppraiseButton.Size = new Size(82, 22);
             AppraiseButton.TabIndex = 5;
             AppraiseButton.Text = "Appraise";
             AppraiseButton.UseVisualStyleBackColor = true;
@@ -223,9 +226,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(550, 59);
+            label3.Location = new Point(481, 44);
             label3.Name = "label3";
-            label3.Size = new Size(96, 28);
+            label3.Size = new Size(78, 21);
             label3.TabIndex = 6;
             label3.Text = "Buy Value";
             // 
@@ -233,9 +236,9 @@
             // 
             TotalBuyValueLabel.AutoSize = true;
             TotalBuyValueLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            TotalBuyValueLabel.Location = new Point(683, 59);
+            TotalBuyValueLabel.Location = new Point(598, 44);
             TotalBuyValueLabel.Name = "TotalBuyValueLabel";
-            TotalBuyValueLabel.Size = new Size(143, 28);
+            TotalBuyValueLabel.Size = new Size(114, 21);
             TotalBuyValueLabel.TabIndex = 8;
             TotalBuyValueLabel.Text = "Total Buy Value";
             // 
@@ -243,17 +246,17 @@
             // 
             TotalSellValueLabel.AutoSize = true;
             TotalSellValueLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            TotalSellValueLabel.Location = new Point(683, 9);
+            TotalSellValueLabel.Location = new Point(598, 7);
             TotalSellValueLabel.Name = "TotalSellValueLabel";
-            TotalSellValueLabel.Size = new Size(142, 28);
+            TotalSellValueLabel.Size = new Size(113, 21);
             TotalSellValueLabel.TabIndex = 7;
             TotalSellValueLabel.Text = "Total Sell Value";
             // 
             // LootAppraisal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1546, 794);
+            ClientSize = new Size(1147, 461);
             Controls.Add(TotalBuyValueLabel);
             Controls.Add(TotalSellValueLabel);
             Controls.Add(label3);
@@ -265,6 +268,7 @@
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LootAppraisal";
             Text = "Loot Appraisal";
             ((System.ComponentModel.ISupportInitialize)ResultsGridView).EndInit();

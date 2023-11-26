@@ -57,6 +57,7 @@
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
             label1 = new Label();
+            CancelButton = new Button();
             ViewPriceHistoryButton = new Button();
             ProgressLabel = new Label();
             UpdateHistoryProgressBar = new ProgressBar();
@@ -96,6 +97,7 @@
             // 
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Margin = new Padding(3, 2, 3, 2);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -109,6 +111,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(CancelButton);
             splitContainer1.Panel2.Controls.Add(ViewPriceHistoryButton);
             splitContainer1.Panel2.Controls.Add(ProgressLabel);
             splitContainer1.Panel2.Controls.Add(UpdateHistoryProgressBar);
@@ -118,16 +121,18 @@
             splitContainer1.Panel2.Controls.Add(DeleteTrackedItemButton);
             splitContainer1.Panel2.Controls.Add(label3);
             splitContainer1.Panel2.Controls.Add(UpdatePriceHistoryButton);
-            splitContainer1.Size = new Size(1232, 734);
-            splitContainer1.SplitterDistance = 644;
+            splitContainer1.Size = new Size(1078, 550);
+            splitContainer1.SplitterDistance = 563;
             splitContainer1.TabIndex = 0;
             // 
             // TrackItemsButton
             // 
+            TrackItemsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             TrackItemsButton.ForeColor = Color.Black;
-            TrackItemsButton.Location = new Point(503, 638);
+            TrackItemsButton.Location = new Point(460, 478);
+            TrackItemsButton.Margin = new Padding(3, 2, 3, 2);
             TrackItemsButton.Name = "TrackItemsButton";
-            TrackItemsButton.Size = new Size(94, 29);
+            TrackItemsButton.Size = new Size(82, 22);
             TrackItemsButton.TabIndex = 5;
             TrackItemsButton.Text = "Track Items";
             TrackItemsButton.UseVisualStyleBackColor = true;
@@ -139,7 +144,7 @@
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.White;
             ItemSearchResultsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ItemSearchResultsGrid.BackgroundColor = Color.Black;
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -153,12 +158,13 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
             ItemSearchResultsGrid.GridColor = Color.Black;
-            ItemSearchResultsGrid.Location = new Point(12, 141);
+            ItemSearchResultsGrid.Location = new Point(10, 106);
+            ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
             ItemSearchResultsGrid.RowHeadersWidth = 51;
             ItemSearchResultsGrid.RowTemplate.Height = 29;
             ItemSearchResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ItemSearchResultsGrid.Size = new Size(609, 491);
+            ItemSearchResultsGrid.Size = new Size(532, 368);
             ItemSearchResultsGrid.TabIndex = 4;
             // 
             // typeID
@@ -167,7 +173,7 @@
             typeID.HeaderText = "Type ID";
             typeID.MinimumWidth = 6;
             typeID.Name = "typeID";
-            typeID.Width = 88;
+            typeID.Width = 70;
             // 
             // typeName
             // 
@@ -175,7 +181,7 @@
             typeName.HeaderText = "Type Name";
             typeName.MinimumWidth = 6;
             typeName.Name = "typeName";
-            typeName.Width = 113;
+            typeName.Width = 91;
             // 
             // marketGroupName
             // 
@@ -183,7 +189,7 @@
             marketGroupName.HeaderText = "Group";
             marketGroupName.MinimumWidth = 6;
             marketGroupName.Name = "marketGroupName";
-            marketGroupName.Width = 79;
+            marketGroupName.Width = 65;
             // 
             // groupId
             // 
@@ -313,10 +319,12 @@
             // 
             // SearchButton
             // 
+            SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(503, 93);
+            SearchButton.Location = new Point(440, 70);
+            SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(94, 29);
+            SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 3;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
@@ -324,17 +332,20 @@
             // 
             // ItemSearchTextBox
             // 
-            ItemSearchTextBox.Location = new Point(101, 94);
+            ItemSearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            ItemSearchTextBox.Location = new Point(88, 70);
+            ItemSearchTextBox.Margin = new Padding(3, 2, 3, 2);
             ItemSearchTextBox.Name = "ItemSearchTextBox";
-            ItemSearchTextBox.Size = new Size(385, 27);
+            ItemSearchTextBox.Size = new Size(337, 23);
             ItemSearchTextBox.TabIndex = 2;
+            ItemSearchTextBox.KeyDown += ItemSearchTextBox_KeyDown;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 97);
+            label2.Location = new Point(10, 73);
             label2.Name = "label2";
-            label2.Size = new Size(83, 20);
+            label2.Size = new Size(66, 15);
             label2.TabIndex = 1;
             label2.Text = "Item Name";
             // 
@@ -342,18 +353,33 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(195, 9);
+            label1.Location = new Point(171, 7);
             label1.Name = "label1";
-            label1.Size = new Size(209, 28);
+            label1.Size = new Size(166, 21);
             label1.TabIndex = 0;
             label1.Text = "Select Items to Track";
             // 
+            // CancelButton
+            // 
+            CancelButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CancelButton.ForeColor = Color.Black;
+            CancelButton.Location = new Point(353, 70);
+            CancelButton.Margin = new Padding(3, 2, 3, 2);
+            CancelButton.Name = "CancelButton";
+            CancelButton.Size = new Size(82, 22);
+            CancelButton.TabIndex = 17;
+            CancelButton.Text = "Cancel";
+            CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.Click += CancelButton_Click;
+            // 
             // ViewPriceHistoryButton
             // 
+            ViewPriceHistoryButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ViewPriceHistoryButton.ForeColor = Color.Black;
-            ViewPriceHistoryButton.Location = new Point(422, 638);
+            ViewPriceHistoryButton.Location = new Point(369, 478);
+            ViewPriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             ViewPriceHistoryButton.Name = "ViewPriceHistoryButton";
-            ViewPriceHistoryButton.Size = new Size(150, 29);
+            ViewPriceHistoryButton.Size = new Size(131, 22);
             ViewPriceHistoryButton.TabIndex = 16;
             ViewPriceHistoryButton.Text = "View Price History";
             ViewPriceHistoryButton.UseVisualStyleBackColor = true;
@@ -363,17 +389,18 @@
             // 
             ProgressLabel.AutoSize = true;
             ProgressLabel.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            ProgressLabel.Location = new Point(23, 97);
+            ProgressLabel.Location = new Point(20, 73);
             ProgressLabel.Name = "ProgressLabel";
-            ProgressLabel.Size = new Size(75, 23);
+            ProgressLabel.Size = new Size(62, 19);
             ProgressLabel.TabIndex = 15;
             ProgressLabel.Text = "Progress";
             // 
             // UpdateHistoryProgressBar
             // 
-            UpdateHistoryProgressBar.Location = new Point(104, 94);
+            UpdateHistoryProgressBar.Location = new Point(91, 70);
+            UpdateHistoryProgressBar.Margin = new Padding(3, 2, 3, 2);
             UpdateHistoryProgressBar.Name = "UpdateHistoryProgressBar";
-            UpdateHistoryProgressBar.Size = new Size(450, 29);
+            UpdateHistoryProgressBar.Size = new Size(251, 22);
             UpdateHistoryProgressBar.TabIndex = 14;
             // 
             // TrackedTypesGrid
@@ -382,7 +409,7 @@
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = Color.White;
             TrackedTypesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            TrackedTypesGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TrackedTypesGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TrackedTypesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TrackedTypesGrid.BackgroundColor = Color.Black;
             TrackedTypesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -396,13 +423,14 @@
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             TrackedTypesGrid.DefaultCellStyle = dataGridViewCellStyle4;
             TrackedTypesGrid.GridColor = Color.Black;
-            TrackedTypesGrid.Location = new Point(26, 141);
+            TrackedTypesGrid.Location = new Point(23, 106);
+            TrackedTypesGrid.Margin = new Padding(3, 2, 3, 2);
             TrackedTypesGrid.MultiSelect = false;
             TrackedTypesGrid.Name = "TrackedTypesGrid";
             TrackedTypesGrid.RowHeadersWidth = 51;
             TrackedTypesGrid.RowTemplate.Height = 29;
             TrackedTypesGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            TrackedTypesGrid.Size = new Size(546, 491);
+            TrackedTypesGrid.Size = new Size(478, 368);
             TrackedTypesGrid.TabIndex = 13;
             TrackedTypesGrid.DoubleClick += TrackedTypesGrid_DoubleClick;
             // 
@@ -412,7 +440,7 @@
             trackedTypeId.HeaderText = "Type ID";
             trackedTypeId.MinimumWidth = 6;
             trackedTypeId.Name = "trackedTypeId";
-            trackedTypeId.Width = 88;
+            trackedTypeId.Width = 70;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -420,7 +448,7 @@
             dataGridViewTextBoxColumn2.HeaderText = "Type Name";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 113;
+            dataGridViewTextBoxColumn2.Width = 91;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -428,7 +456,7 @@
             dataGridViewTextBoxColumn3.HeaderText = "Group";
             dataGridViewTextBoxColumn3.MinimumWidth = 6;
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 79;
+            dataGridViewTextBoxColumn3.Width = 65;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -564,47 +592,51 @@
             RegionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
-            RegionCombo.Location = new Point(403, 53);
+            RegionCombo.Location = new Point(353, 40);
+            RegionCombo.Margin = new Padding(3, 2, 3, 2);
             RegionCombo.Name = "RegionCombo";
-            RegionCombo.Size = new Size(151, 28);
+            RegionCombo.Size = new Size(133, 23);
             RegionCombo.TabIndex = 10;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(303, 54);
+            label4.Location = new Point(265, 40);
             label4.Name = "label4";
-            label4.Size = new Size(94, 23);
+            label4.Size = new Size(77, 19);
             label4.TabIndex = 9;
             label4.Text = "For Region";
             // 
             // DeleteTrackedItemButton
             // 
             DeleteTrackedItemButton.ForeColor = Color.Black;
-            DeleteTrackedItemButton.Location = new Point(26, 638);
+            DeleteTrackedItemButton.Location = new Point(23, 478);
+            DeleteTrackedItemButton.Margin = new Padding(3, 2, 3, 2);
             DeleteTrackedItemButton.Name = "DeleteTrackedItemButton";
-            DeleteTrackedItemButton.Size = new Size(169, 29);
+            DeleteTrackedItemButton.Size = new Size(148, 22);
             DeleteTrackedItemButton.TabIndex = 8;
             DeleteTrackedItemButton.Text = "Delete Tracked Item";
             DeleteTrackedItemButton.UseVisualStyleBackColor = true;
+            DeleteTrackedItemButton.Click += DeleteTrackedItemButton_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(211, 9);
+            label3.Location = new Point(185, 7);
             label3.Name = "label3";
-            label3.Size = new Size(143, 28);
+            label3.Size = new Size(115, 21);
             label3.TabIndex = 7;
             label3.Text = "Tracked Items";
             // 
             // UpdatePriceHistoryButton
             // 
             UpdatePriceHistoryButton.ForeColor = Color.Black;
-            UpdatePriceHistoryButton.Location = new Point(26, 52);
+            UpdatePriceHistoryButton.Location = new Point(23, 39);
+            UpdatePriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             UpdatePriceHistoryButton.Name = "UpdatePriceHistoryButton";
-            UpdatePriceHistoryButton.Size = new Size(268, 29);
+            UpdatePriceHistoryButton.Size = new Size(234, 22);
             UpdatePriceHistoryButton.TabIndex = 0;
             UpdatePriceHistoryButton.Text = "Update Price History For All Items";
             UpdatePriceHistoryButton.UseVisualStyleBackColor = true;
@@ -613,19 +645,21 @@
             // UpdatePriceHistoryWorker
             // 
             UpdatePriceHistoryWorker.WorkerReportsProgress = true;
+            UpdatePriceHistoryWorker.WorkerSupportsCancellation = true;
             UpdatePriceHistoryWorker.DoWork += UpdatePriceHistoryWorker_DoWork;
             UpdatePriceHistoryWorker.ProgressChanged += UpdatePriceHistoryWorker_ProgressChanged;
             UpdatePriceHistoryWorker.RunWorkerCompleted += UpdatePriceHistoryWorker_RunWorkerCompleted;
             // 
             // PriceHistoryUtility
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1232, 734);
+            ClientSize = new Size(1078, 550);
             Controls.Add(splitContainer1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PriceHistoryUtility";
             Text = "Price History Utility";
             splitContainer1.Panel1.ResumeLayout(false);
@@ -692,5 +726,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private Button ViewPriceHistoryButton;
+        private Button CancelButton;
     }
 }

@@ -63,11 +63,11 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         #region "Methods"
         private void BackupAbyssRuns(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
             if (fileContent != null)
             {
                 AbyssRunFileName = Path.Combine(selectedPath, AbyssRunFileName);
-                FileIO.FileHelper.SaveCachedFile(selectedPath, AbyssRunFileName, fileContent);
+                FileIO.FileHelper.SaveFileContent(selectedPath, AbyssRunFileName, fileContent);
             }
         }
 
@@ -81,12 +81,12 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 string newFileName;
                 foreach (string fileName in priceHistoryFiles)
                 {
-                    fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedPriceHistory, fileName);
+                    fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedPriceHistory, fileName);
                     if (fileContent != null)
                     {
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
                         newFileName = Path.Combine(selectedPath, actualFileName);
-                        FileHelper.SaveCachedFile(selectedPath, newFileName, fileContent);
+                        FileHelper.SaveFileContent(selectedPath, newFileName, fileContent);
                     }
                 }
             }
@@ -94,22 +94,22 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void BackupTrackedItems(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
             if (fileContent != null)
             {
                 TrackedTypeFileName = Path.Combine(selectedPath, TrackedTypeFileName);
-                FileIO.FileHelper.SaveCachedFile(selectedPath, TrackedTypeFileName, fileContent);
+                FileIO.FileHelper.SaveFileContent(selectedPath, TrackedTypeFileName, fileContent);
             }
         }
 
         private void BackupDefaultValues(string selectedPath)
         {
             string fileName = Path.Combine(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, fileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, fileName);
             if (fileContent != null)
             {
                 CachedFormValuesFileName = Path.Combine(selectedPath, CachedFormValuesFileName);
-                FileIO.FileHelper.SaveCachedFile(selectedPath, CachedFormValuesFileName, fileContent);
+                FileIO.FileHelper.SaveFileContent(selectedPath, CachedFormValuesFileName, fileContent);
             }
         }
         #endregion

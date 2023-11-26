@@ -29,7 +29,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
 
             string combinedFileName = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
-            string content = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
+            string content = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 DefaultFormValues = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.DefaultFormValue>(content);
@@ -278,7 +278,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(DefaultFormValues);
             string filename = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
-            FileIO.FileHelper.SaveCachedFile(Enums.Enums.CachedFormValuesDirectory, filename, content);
+            FileIO.FileHelper.SaveFileContent(Enums.Enums.CachedFormValuesDirectory, filename, content);
 
             this.Close();
         }

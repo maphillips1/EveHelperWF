@@ -35,6 +35,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private void LoadPriceHistory()
         {
             List<ESIPriceHistory> history = MarketBrowserHelper.GetPriceHistoryForRegionAndType(RegionId, SelectedTypeId);
+            if (history == null) { history = new List<ESIPriceHistory>(); }
             foreach (ESIPriceHistory priceHistory in history)
             {
                 PriceHistory.Add(priceHistory);

@@ -30,7 +30,7 @@ namespace EveHelperWF.ESI_Calls
 
             string fileName = string.Concat(directory, region_id.ToString(), "_", type_id.ToString(), ".json");
 
-            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
+            string content = FileIO.FileHelper.GetFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 EveHelperWF.Objects.CachedMarketOrders cachedMarketOrders = new EveHelperWF.Objects.CachedMarketOrders();
@@ -73,7 +73,7 @@ namespace EveHelperWF.ESI_Calls
 
             string content = JsonConvert.SerializeObject(cachedMarketOrders);
 
-            FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
+            FileIO.FileHelper.SaveFileContent(directory, fileName, content);
         }
 
         private static List<EveHelperWF.Objects.AdjustedCost> GetCachedAdjustedCosts()
@@ -83,7 +83,7 @@ namespace EveHelperWF.ESI_Calls
 
             string fileName = string.Concat(directory, "adjusted_costs.json");
 
-            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
+            string content = FileIO.FileHelper.GetFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 EveHelperWF.Objects.CachedAdjustedCost cachedAdjustedCosts = new EveHelperWF.Objects.CachedAdjustedCost();
@@ -111,7 +111,7 @@ namespace EveHelperWF.ESI_Calls
 
             string content = JsonConvert.SerializeObject(cachedAdjustedCosts);
 
-            FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
+            FileIO.FileHelper.SaveFileContent(directory, fileName, content);
         }
         #endregion
 
@@ -301,7 +301,7 @@ namespace EveHelperWF.ESI_Calls
             string directory = Enums.Enums.CachedPriceHistory;
             string fileName = string.Concat(directory, regionID.ToString(), "_", typeID.ToString(), ".json");
 
-            string content = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
+            string content = FileIO.FileHelper.GetFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 EveHelperWF.Objects.CachedPriceHistory cachedPriceHistory = new EveHelperWF.Objects.CachedPriceHistory();
@@ -329,7 +329,7 @@ namespace EveHelperWF.ESI_Calls
 
             string content = JsonConvert.SerializeObject(cachedPriceHistory);
 
-            FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
+            FileIO.FileHelper.SaveFileContent(directory, fileName, content);
         }
 
         public static List<Objects.ESIPriceHistory> GetPriceHistoryForRegion(int regionID, int typeID)

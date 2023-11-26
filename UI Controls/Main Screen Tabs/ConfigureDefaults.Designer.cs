@@ -86,10 +86,7 @@
             label18 = new Label();
             label17 = new Label();
             ReactionSolarSystemCombo = new ComboBox();
-            SaveButton = new Button();
             CopyPage = new TabPage();
-            MEPage = new TabPage();
-            TEPage = new TabPage();
             CopyRunsCopyUpDown = new NumericUpDown();
             CopyNumCopiesUpDown = new NumericUpDown();
             CopyTaxUpDown = new NumericUpDown();
@@ -104,6 +101,7 @@
             label75 = new Label();
             label76 = new Label();
             label77 = new Label();
+            MEPage = new TabPage();
             METoLevelUpDown = new NumericUpDown();
             MEFromLevelUpDown = new NumericUpDown();
             METaxUpDown = new NumericUpDown();
@@ -118,6 +116,7 @@
             label60 = new Label();
             label61 = new Label();
             label62 = new Label();
+            TEPage = new TabPage();
             TEToLevelUpDown = new NumericUpDown();
             TEFromLevelUpDown = new NumericUpDown();
             TETaxUpDown = new NumericUpDown();
@@ -132,6 +131,7 @@
             label64 = new Label();
             label66 = new Label();
             label67 = new Label();
+            SaveButton = new Button();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -146,14 +146,14 @@
             ReactionsDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
             CopyPage.SuspendLayout();
-            MEPage.SuspendLayout();
-            TEPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CopyRunsCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CopyNumCopiesUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CopyTaxUpDown).BeginInit();
+            MEPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)METoLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MEFromLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)METaxUpDown).BeginInit();
+            TEPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TEToLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).BeginInit();
@@ -189,7 +189,7 @@
             MainDefaultTabPage.Location = new Point(4, 29);
             MainDefaultTabPage.Name = "MainDefaultTabPage";
             MainDefaultTabPage.Padding = new Padding(3);
-            MainDefaultTabPage.Size = new Size(761, 324);
+            MainDefaultTabPage.Size = new Size(692, 324);
             MainDefaultTabPage.TabIndex = 0;
             MainDefaultTabPage.Text = "Main";
             // 
@@ -304,7 +304,7 @@
             ManufacturingDefaultsTabPage.Location = new Point(4, 29);
             ManufacturingDefaultsTabPage.Name = "ManufacturingDefaultsTabPage";
             ManufacturingDefaultsTabPage.Padding = new Padding(3);
-            ManufacturingDefaultsTabPage.Size = new Size(761, 324);
+            ManufacturingDefaultsTabPage.Size = new Size(692, 324);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
             // 
@@ -356,7 +356,12 @@
             // 
             // SystemCombo
             // 
+            SystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            SystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            SystemCombo.DropDownHeight = 150;
+            SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             SystemCombo.FormattingEnabled = true;
+            SystemCombo.IntegralHeight = false;
             SystemCombo.Location = new Point(160, 111);
             SystemCombo.Margin = new Padding(2);
             SystemCombo.Name = "SystemCombo";
@@ -551,7 +556,7 @@
             InventionDefaultsTabPage.Controls.Add(label27);
             InventionDefaultsTabPage.Location = new Point(4, 29);
             InventionDefaultsTabPage.Name = "InventionDefaultsTabPage";
-            InventionDefaultsTabPage.Size = new Size(761, 324);
+            InventionDefaultsTabPage.Size = new Size(692, 324);
             InventionDefaultsTabPage.TabIndex = 2;
             InventionDefaultsTabPage.Text = "Invention";
             // 
@@ -602,7 +607,12 @@
             // 
             // InventionSolarSystemCombo
             // 
+            InventionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InventionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InventionSolarSystemCombo.DropDownHeight = 150;
+            InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionSolarSystemCombo.FormattingEnabled = true;
+            InventionSolarSystemCombo.IntegralHeight = false;
             InventionSolarSystemCombo.Location = new Point(150, 16);
             InventionSolarSystemCombo.Margin = new Padding(2);
             InventionSolarSystemCombo.Name = "InventionSolarSystemCombo";
@@ -690,7 +700,7 @@
             ReactionsDefaultTabPage.Controls.Add(ReactionSolarSystemCombo);
             ReactionsDefaultTabPage.Location = new Point(4, 29);
             ReactionsDefaultTabPage.Name = "ReactionsDefaultTabPage";
-            ReactionsDefaultTabPage.Size = new Size(761, 324);
+            ReactionsDefaultTabPage.Size = new Size(692, 324);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
             // 
@@ -788,23 +798,17 @@
             // 
             // ReactionSolarSystemCombo
             // 
+            ReactionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ReactionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ReactionSolarSystemCombo.DropDownHeight = 150;
+            ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionSolarSystemCombo.FormattingEnabled = true;
+            ReactionSolarSystemCombo.IntegralHeight = false;
             ReactionSolarSystemCombo.Location = new Point(139, 18);
             ReactionSolarSystemCombo.Margin = new Padding(2);
             ReactionSolarSystemCombo.Name = "ReactionSolarSystemCombo";
             ReactionSolarSystemCombo.Size = new Size(146, 28);
             ReactionSolarSystemCombo.TabIndex = 30;
-            // 
-            // SaveButton
-            // 
-            SaveButton.ForeColor = Color.Black;
-            SaveButton.Location = new Point(12, 12);
-            SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(94, 29);
-            SaveButton.TabIndex = 1;
-            SaveButton.Text = "Save";
-            SaveButton.UseVisualStyleBackColor = true;
-            SaveButton.Click += SaveButton_Click;
             // 
             // CopyPage
             // 
@@ -825,55 +829,9 @@
             CopyPage.Controls.Add(label77);
             CopyPage.Location = new Point(4, 29);
             CopyPage.Name = "CopyPage";
-            CopyPage.Size = new Size(761, 324);
+            CopyPage.Size = new Size(692, 324);
             CopyPage.TabIndex = 4;
             CopyPage.Text = "Copying";
-            // 
-            // MEPage
-            // 
-            MEPage.BackColor = Color.FromArgb(2, 23, 38);
-            MEPage.Controls.Add(METoLevelUpDown);
-            MEPage.Controls.Add(MEFromLevelUpDown);
-            MEPage.Controls.Add(METaxUpDown);
-            MEPage.Controls.Add(METaxLabel);
-            MEPage.Controls.Add(MESystemCombo);
-            MEPage.Controls.Add(label51);
-            MEPage.Controls.Add(MEImplantCombo);
-            MEPage.Controls.Add(label54);
-            MEPage.Controls.Add(METimeRigCombo);
-            MEPage.Controls.Add(MEStructRigLabel);
-            MEPage.Controls.Add(MEStructureCombo);
-            MEPage.Controls.Add(label60);
-            MEPage.Controls.Add(label61);
-            MEPage.Controls.Add(label62);
-            MEPage.Location = new Point(4, 29);
-            MEPage.Name = "MEPage";
-            MEPage.Size = new Size(761, 324);
-            MEPage.TabIndex = 5;
-            MEPage.Text = "ME Research";
-            // 
-            // TEPage
-            // 
-            TEPage.BackColor = Color.FromArgb(2, 23, 38);
-            TEPage.Controls.Add(TEToLevelUpDown);
-            TEPage.Controls.Add(TEFromLevelUpDown);
-            TEPage.Controls.Add(TETaxUpDown);
-            TEPage.Controls.Add(TETaxLabel);
-            TEPage.Controls.Add(TESystemCombo);
-            TEPage.Controls.Add(label58);
-            TEPage.Controls.Add(TEImplantCombo);
-            TEPage.Controls.Add(label59);
-            TEPage.Controls.Add(TEStructRigCombo);
-            TEPage.Controls.Add(TEStructureRigLabel);
-            TEPage.Controls.Add(TEStructureCombo);
-            TEPage.Controls.Add(label64);
-            TEPage.Controls.Add(label66);
-            TEPage.Controls.Add(label67);
-            TEPage.Location = new Point(4, 29);
-            TEPage.Name = "TEPage";
-            TEPage.Size = new Size(692, 324);
-            TEPage.TabIndex = 6;
-            TEPage.Text = "TE Research";
             // 
             // CopyRunsCopyUpDown
             // 
@@ -1025,6 +983,29 @@
             label77.TabIndex = 100;
             label77.Text = "# of Copies";
             // 
+            // MEPage
+            // 
+            MEPage.BackColor = Color.FromArgb(2, 23, 38);
+            MEPage.Controls.Add(METoLevelUpDown);
+            MEPage.Controls.Add(MEFromLevelUpDown);
+            MEPage.Controls.Add(METaxUpDown);
+            MEPage.Controls.Add(METaxLabel);
+            MEPage.Controls.Add(MESystemCombo);
+            MEPage.Controls.Add(label51);
+            MEPage.Controls.Add(MEImplantCombo);
+            MEPage.Controls.Add(label54);
+            MEPage.Controls.Add(METimeRigCombo);
+            MEPage.Controls.Add(MEStructRigLabel);
+            MEPage.Controls.Add(MEStructureCombo);
+            MEPage.Controls.Add(label60);
+            MEPage.Controls.Add(label61);
+            MEPage.Controls.Add(label62);
+            MEPage.Location = new Point(4, 29);
+            MEPage.Name = "MEPage";
+            MEPage.Size = new Size(692, 324);
+            MEPage.TabIndex = 5;
+            MEPage.Text = "ME Research";
+            // 
             // METoLevelUpDown
             // 
             METoLevelUpDown.Location = new Point(127, 46);
@@ -1173,6 +1154,29 @@
             label62.Size = new Size(86, 20);
             label62.TabIndex = 57;
             label62.Text = "From Level";
+            // 
+            // TEPage
+            // 
+            TEPage.BackColor = Color.FromArgb(2, 23, 38);
+            TEPage.Controls.Add(TEToLevelUpDown);
+            TEPage.Controls.Add(TEFromLevelUpDown);
+            TEPage.Controls.Add(TETaxUpDown);
+            TEPage.Controls.Add(TETaxLabel);
+            TEPage.Controls.Add(TESystemCombo);
+            TEPage.Controls.Add(label58);
+            TEPage.Controls.Add(TEImplantCombo);
+            TEPage.Controls.Add(label59);
+            TEPage.Controls.Add(TEStructRigCombo);
+            TEPage.Controls.Add(TEStructureRigLabel);
+            TEPage.Controls.Add(TEStructureCombo);
+            TEPage.Controls.Add(label64);
+            TEPage.Controls.Add(label66);
+            TEPage.Controls.Add(label67);
+            TEPage.Location = new Point(4, 29);
+            TEPage.Name = "TEPage";
+            TEPage.Size = new Size(692, 324);
+            TEPage.TabIndex = 6;
+            TEPage.Text = "TE Research";
             // 
             // TEToLevelUpDown
             // 
@@ -1324,6 +1328,17 @@
             label67.TabIndex = 80;
             label67.Text = "From Level";
             // 
+            // SaveButton
+            // 
+            SaveButton.ForeColor = Color.Black;
+            SaveButton.Location = new Point(12, 12);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(94, 29);
+            SaveButton.TabIndex = 1;
+            SaveButton.Text = "Save";
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButton_Click;
+            // 
             // ConfigureDefaults
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1355,16 +1370,16 @@
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             CopyPage.ResumeLayout(false);
             CopyPage.PerformLayout();
-            MEPage.ResumeLayout(false);
-            MEPage.PerformLayout();
-            TEPage.ResumeLayout(false);
-            TEPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CopyRunsCopyUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)CopyNumCopiesUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)CopyTaxUpDown).EndInit();
+            MEPage.ResumeLayout(false);
+            MEPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)METoLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)MEFromLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)METaxUpDown).EndInit();
+            TEPage.ResumeLayout(false);
+            TEPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TEToLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).EndInit();

@@ -190,7 +190,7 @@ namespace EveHelperWF.ScreenHelper
 
             string fullFileName = Path.Combine(directory, fileName);
 
-            string currentHistoryContent = FileIO.FileHelper.GetCachedFileContent(directory, fullFileName);
+            string currentHistoryContent = FileIO.FileHelper.GetFileContent(directory, fullFileName);
             if (!string.IsNullOrEmpty(currentHistoryContent))
             {
                 currentPriceHistories = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ESIPriceHistory>>(currentHistoryContent);
@@ -207,7 +207,7 @@ namespace EveHelperWF.ScreenHelper
             
             string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(priceHistories);
 
-            FileIO.FileHelper.SaveCachedFile(directory, fullFileName, fileContent);
+            FileIO.FileHelper.SaveFileContent(directory, fullFileName, fileContent);
         }
 
         private static List<ESIPriceHistory> GetCombinedPriceHistory(int regionID, int typeID)

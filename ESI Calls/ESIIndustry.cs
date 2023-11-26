@@ -54,7 +54,7 @@ namespace EveHelperWF.ESI_Calls
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(cachedCostIndices);
             string directory = Enums.Enums.CachedCostIndicesDirectory;
             string fileName = string.Concat(directory, CachedCostIndicesFileName);
-            FileIO.FileHelper.SaveCachedFile(directory, fileName, content);
+            FileIO.FileHelper.SaveFileContent(directory, fileName, content);
         }
 
         private static List<EveHelperWF.Objects.CostIndice> GetCachedCostIndicies()
@@ -63,7 +63,7 @@ namespace EveHelperWF.ESI_Calls
 
             string directory = Enums.Enums.CachedCostIndicesDirectory;
             string fileName = string.Concat(directory, CachedCostIndicesFileName);
-            string cachedContent = FileIO.FileHelper.GetCachedFileContent(directory, fileName);
+            string cachedContent = FileIO.FileHelper.GetFileContent(directory, fileName);
             if (!string.IsNullOrWhiteSpace(cachedContent))
             {
                 EveHelperWF.Objects.CachedCostIndices cachedCostIndices = new EveHelperWF.Objects.CachedCostIndices();

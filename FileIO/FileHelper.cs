@@ -10,7 +10,7 @@ namespace FileIO
 {
     public static class FileHelper
     {
-        public static string GetCachedFileContent(string directoryName, string filename)
+        public static string GetFileContent(string directoryName, string filename)
         {
             string fileContent = "";
 
@@ -25,7 +25,7 @@ namespace FileIO
             return fileContent;
         }
 
-        public static void SaveCachedFile(string directory, string filename, string content)
+        public static void SaveFileContent(string directory, string filename, string content)
         {
             if (!System.IO.Directory.Exists(directory))
             {
@@ -41,7 +41,7 @@ namespace FileIO
 
         }
 
-        public static void SaveCachedFile(string directory, string filename, byte[] content)
+        public static void SaveFileContent(string directory, string filename, byte[] content)
         {
             if (!System.IO.Directory.Exists(directory))
             {

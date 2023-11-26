@@ -118,7 +118,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode =  SearchResultsTreeView.SelectedNode;
+            TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
             AfterSelectHandler(selectedNode);
         }
 
@@ -178,6 +178,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 SearchButton_Click(sender, new EventArgs());
             }
+        }
+
+        private void ClearSystemButton_Click(object sender, EventArgs e)
+        {
+            SystemCombo.SelectedValue = 0;
+            SystemCombo_SelectedIndexChanged(sender, e);
         }
         #endregion
 
@@ -274,5 +280,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
         #endregion
+
     }
 }

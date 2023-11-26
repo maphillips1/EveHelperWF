@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -23,9 +24,42 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             SQLiteLabel.Text = Database.SQLiteCalls.GetSQLiteDirectory();
             AbyssRunLabel.Text = Enums.Enums.AbyssRunDirectory;
-            PriceHistoryLabel.Text =   Enums.Enums.CachedPriceHistory;
+            PriceHistoryLabel.Text = Enums.Enums.CachedPriceHistory;
             TrackedItemsLabel.Text = Enums.Enums.TrackedTypeDirectory;
             DefaultFormValuesLabel.Text = Enums.Enums.CachedFormValuesDirectory;
+        }
+
+        private void SQLiteLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Database.SQLiteCalls.GetSQLiteDirectory());
+        }
+
+        private void PriceHistoryLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.CachedPriceHistory);
+        }
+
+        private void AbyssRunLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.AbyssRunDirectory);
+        }
+
+        private void TrackedItemsLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.TrackedTypeDirectory);
+        }
+
+        private void DefaultFormValuesLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.CachedFormValuesDirectory);
+        }
+
+        private void OpenFileExplorerToDirectory(string path)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo(path);
+            psi.Arguments = path;
+            psi.FileName = "explorer.exe";
+            Process.Start(psi);
         }
     }
 }

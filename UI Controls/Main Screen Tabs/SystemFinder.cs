@@ -77,6 +77,14 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 stationFilter = (int)(Enums.Enums.StationFilter.DoNotFilter);
             }
         }
+
+        private void SystemNameTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchButton_Click(sender, new EventArgs());
+            }
+        }
         #endregion
 
         #region "Background Worker"

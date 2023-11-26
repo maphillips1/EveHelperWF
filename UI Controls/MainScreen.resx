@@ -1710,7 +1710,7 @@
   <data name="MarketBrowserButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAI0AAACACAIAAAC5on0sAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
-        cgAAEnIBXmVb4wAAgBdJREFUeF6d/WW0XFeW54tqjFsm6fAJZuYTfCIOxmEmMTNZLIsMsmxZFlq2ZDEz
+        cQAAEnEB89x6jgAAgBdJREFUeF6d/WW0XFeW54tqjFsm6fAJZuYTfCIOxmEmMTNZLIsMsmxZFlq2ZDEz
         WpZBtgxpTnJWdmZWQmXWLeyqvm9Uvw89qt+4/bpHf633m2vHASkzu+94OWZu79ix9oL5n/Cfa+84mmS0
         +yyugMMTdnhCdnfI5gyabX6jxVttcOlMHp3JXaV3VOrs2rFa56jWO3UGZ5XBWW1060yuSr1DWprdBqvP
         aPWb7EGzI2SyBcyIPciJxRW2eaIuf40/kgpE04FIyhdKOL1RqzNktPoMFq/R5tdZfNVmd7XRSVdVRmeV
@@ -3342,6 +3342,9 @@
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="InitLongLoadingWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>153, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

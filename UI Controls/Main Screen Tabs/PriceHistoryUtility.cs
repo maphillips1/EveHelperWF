@@ -28,6 +28,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             InitializeComponent();
             ProgressLabel.Visible = false;
             UpdateHistoryProgressBar.Visible = false;
+            CancelButton.Visible = false;
             LoadRegions();
             LoadTrackedTypes();
         }
@@ -42,7 +43,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
         private void LoadTrackedTypes()
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
 
             if (!string.IsNullOrEmpty(fileContent))
             {
@@ -98,9 +99,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 RegionCombo.Enabled = false;
                 ProgressLabel.Visible = true;
                 UpdateHistoryProgressBar.Visible = true;
+                CancelButton.Visible = true;
                 PriceHistoryBackgroundWorkerClass utilityClass = new PriceHistoryBackgroundWorkerClass();
                 utilityClass.RegionID = (int)RegionCombo.SelectedValue;
                 utilityClass.InventoryTypes = TrackedTypes.ToList();
+                UpdateHistoryProgressBar.Minimum = 0;
+                UpdateHistoryProgressBar.Maximum = TrackedTypes.Count();
                 UpdatePriceHistoryWorker.RunWorkerAsync(argument: utilityClass);
             }
         }
@@ -114,13 +118,50 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             LoadPriceHistoryViewer();
         }
+
+        private void ItemSearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchButton_Click(sender, e);
+            }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            if (UpdatePriceHistoryWorker.IsBusy && !UpdatePriceHistoryWorker.CancellationPending)
+            {
+                UpdatePriceHistoryWorker.CancelAsync();
+                MessageBox.Show("Update Cancelled!", "Cancel");
+            }
+        }
+
+        private void DeleteTrackedItemButton_Click(object sender, EventArgs e)
+        {
+            int typeId = 0;
+            if (TrackedTypesGrid.SelectedRows.Count > 0)
+            {
+                typeId = Convert.ToInt32(TrackedTypesGrid.SelectedRows[0].Cells["trackedTypeId"].Value);
+                if (typeId > 0)
+                {
+
+                    InventoryTypes trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
+
+                    if (trackedType != null)
+                    {
+                        TrackedTypes.Remove(trackedType);
+                        SaveTrackedTypes();
+                    }
+                }
+            }
+        }
         #endregion
 
         #region "Methods"
         private void SaveTrackedTypes()
         {
             string fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(TrackedTypes);
-            FileIO.FileHelper.SaveCachedFile(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName, fileContent);
+            FileIO.FileHelper.SaveFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName, fileContent);
         }
 
         private void LoadPriceHistoryViewer()
@@ -152,12 +193,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             PriceHistoryBackgroundWorkerClass typesToUpdate = (PriceHistoryBackgroundWorkerClass)(e.Argument);
 
             int i = 1;
-            int progress = 0;
             foreach (InventoryTypes type in typesToUpdate.InventoryTypes)
             {
-                ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(typesToUpdate.RegionID, type.typeId);
-                progress = (int)(i / typesToUpdate.InventoryTypes.Count);
-                UpdatePriceHistoryWorker.ReportProgress(progress);
+                if (!UpdatePriceHistoryWorker.CancellationPending)
+                {
+                    ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(typesToUpdate.RegionID, type.typeId);
+                    UpdatePriceHistoryWorker.ReportProgress(i);
+                }
                 i++;
             }
         }
@@ -171,9 +213,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             ProgressLabel.Visible = false;
             UpdateHistoryProgressBar.Visible = false;
+            CancelButton.Visible = false;
             UpdatePriceHistoryButton.Enabled = true;
             RegionCombo.Enabled = true;
         }
+
         #endregion
     }
 }

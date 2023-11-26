@@ -134,11 +134,6 @@ namespace EveHelperWF
             TotalCostLabel.Text = "";
             ROILabel.Text = "";
 
-            if (!BlueprintInitBackgroundWorker.IsBusy)
-            {
-                BlueprintInitBackgroundWorker.RunWorkerAsync();
-            }
-
             IsInit = false;
         }
         #endregion
@@ -167,7 +162,7 @@ namespace EveHelperWF
         private void LoadDefaultFormValues()
         {
             string combinedFileName = string.Concat(Enums.Enums.CachedFormValuesDirectory, CachedFormValuesFileName);
-            string content = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
+            string content = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, combinedFileName);
             if (!string.IsNullOrWhiteSpace(content))
             {
                 DefaultFormValues = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.DefaultFormValue>(content);
@@ -463,11 +458,11 @@ namespace EveHelperWF
             {
                 if (selectedNode.Tag.ToString().StartsWith("typeID"))
                 {
-                    if (ScreenHelper.BlueprintBrowserHelper.InventoryTypes != null)
+                    if (CommonHelper.InventoryTypes != null)
                     {
                         int typeID = 0;
                         typeID = Convert.ToInt32(selectedNode.Tag.ToString().Split("_")[1]);
-                        Objects.InventoryTypes invType = ScreenHelper.BlueprintBrowserHelper.InventoryTypes.Find(x => x.typeId == typeID);
+                        Objects.InventoryTypes invType = CommonHelper.InventoryTypes.Find(x => x.typeId == typeID);
                         if (invType != null)
                         {
                             SelectedType = invType;
@@ -1971,10 +1966,6 @@ namespace EveHelperWF
         #endregion
 
         #region "Background Workers"
-        private void BlueprintInitBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            ScreenHelper.BlueprintBrowserHelper.InitLongLoading();
-        }
 
         private void BlueprintImageBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {

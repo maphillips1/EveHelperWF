@@ -14,7 +14,6 @@ namespace EveHelperWF.ScreenHelper
         public static List<Objects.ComboListItem> InputPriceTypeItems = null;
         public static List<Objects.ComboListItem> ManufacturingSolarSystemComboItems = null;
         public static List<Objects.ComboListItem> ReactionSolarSystemComboItems = null;
-        public static List<Objects.InventoryTypes> InventoryTypes = null;
         public static List<Objects.EngineerngComplex> EngineerngComplices = null;
         public static List<Objects.RefineryComplex> RefinerComplices = null;
         public static List<Objects.ComboListItem> EngineeringComboItems = null;
@@ -28,9 +27,6 @@ namespace EveHelperWF.ScreenHelper
         public static List<Objects.ComboListItem> TEImplantItems = null;
         public static List<Objects.ComboListItem> CopyImplantItems = null;
         public static List<Objects.ComboListItem> StructureManufacturingMERigs = null;
-        private static List<Objects.AdjustedCost> AdjustedCosts = null;
-        public static List<Objects.CostIndice> CostIndicies = null;
-        private static List<Objects.SolarSystem> SolarSystemList = null;
         public static List<Objects.Decryptor> Decryptors = null;
 
         #endregion
@@ -38,17 +34,9 @@ namespace EveHelperWF.ScreenHelper
         #region "Init Functions"
         public static void Init()
         {
-            InventoryTypes = Database.SQLiteCalls.GetInventoryTypes();
             LoadEngineeringComplexes();
             LoadRefineryComplices();
             LoadImplants();
-            LoadSolarSystems();
-        }
-
-        public static void InitLongLoading()
-        {
-            LoadAdjustedCosts();
-            LoadCostIndicies();
         }
 
         public static void LoadEngineeringComplexes()
@@ -214,21 +202,6 @@ namespace EveHelperWF.ScreenHelper
             CopyImplants.Add(Copy4Implant);
         }
 
-        private static void LoadAdjustedCosts()
-        {
-            AdjustedCosts = ESI_Calls.ESIMarketData.GetAdjustedCosts();
-        }
-
-        private static void LoadCostIndicies()
-        {
-            CostIndicies = ESI_Calls.ESIIndustry.GetCostIndices();
-        }
-
-        private static void LoadSolarSystems()
-        {
-            SolarSystemList = Database.SQLiteCalls.GetSolarSystems();
-        }
-
         #endregion 
 
         #region "Drop Down Load Helpers"
@@ -257,7 +230,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 ManufacturingSolarSystemComboItems = new List<Objects.ComboListItem>();
 
-                foreach (Objects.SolarSystem system in SolarSystemList)
+                foreach (Objects.SolarSystem system in CommonHelper.SolarSystemList)
                 {
                     Objects.ComboListItem comboListItem = new Objects.ComboListItem();
                     comboListItem.key = system.solarSystemID;
@@ -274,7 +247,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 ReactionSolarSystemComboItems = new List<Objects.ComboListItem>();
                 //Reactions can only occurr in Low, null, wormholes. 
-                List<Objects.SolarSystem> filteredSystems = SolarSystemList.FindAll(x => Math.Round(x.security, 1) < Convert.ToDecimal(0.5));
+                List<Objects.SolarSystem> filteredSystems = CommonHelper.SolarSystemList.FindAll(x => Math.Round(x.security, 1) < Convert.ToDecimal(0.5));
                 foreach (Objects.SolarSystem system in filteredSystems)
                 {
                     Objects.ComboListItem comboListItem = new Objects.ComboListItem();
@@ -447,7 +420,7 @@ namespace EveHelperWF.ScreenHelper
             noneDecryptor.typeName = "None";
             Decryptors.Add(noneDecryptor);
 
-            foreach (Objects.InventoryTypes inventoryType in InventoryTypes.FindAll(x => x.groupId == 1304))
+            foreach (Objects.InventoryTypes inventoryType in CommonHelper.InventoryTypes.FindAll(x => x.groupId == 1304))
             {
                 Objects.Decryptor decryptor = new Objects.Decryptor();
                 decryptor.typeID = inventoryType.typeId;
@@ -517,7 +490,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 foreach (Objects.IndustryActivityProduct product in invProducts)
                 {
-                    Objects.InventoryTypes invType = InventoryTypes.Find(x => x.typeId == product.productTypeID);
+                    Objects.InventoryTypes invType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
                     if (invType != null)
                     {
                         Objects.ComboListItem item = new Objects.ComboListItem();
@@ -534,7 +507,7 @@ namespace EveHelperWF.ScreenHelper
 
         public static List<TreeNode> SearchBlueprints(string searchText)
         {
-            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
+            List<Objects.InventoryTypes> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<TreeNode> foundTypes = new List<TreeNode>();
 
             invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
@@ -560,7 +533,7 @@ namespace EveHelperWF.ScreenHelper
         {
             List<TreeNode> treeViewGroups = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
+            List<Objects.InventoryTypes> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
 
 
@@ -812,7 +785,7 @@ namespace EveHelperWF.ScreenHelper
                 {
                     if (mat.ParentMaterialTypeID > 0 || !mat.Build)
                     {
-                        Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                        Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                         totalVolume += mat.quantityTotal * matType.volume;
                         mat.volumeTotal = mat.quantityTotal * matType.volume;
                     }
@@ -823,7 +796,7 @@ namespace EveHelperWF.ScreenHelper
                 }
                 else
                 {
-                    Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                    Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                     totalVolume += mat.quantityTotal * matType.volume;
                     mat.volumeTotal = mat.quantityTotal * matType.volume;
                 }
@@ -840,7 +813,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 if (product.activityID == activityID)
                 {
-                    Objects.InventoryTypes prodType = InventoryTypes.Find(x => x.typeId == product.productTypeID);
+                    Objects.InventoryTypes prodType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
                     if (prodType != null)
                     {
                         totalVolume += (runs * prodType.volume * product.quantity);
@@ -946,7 +919,7 @@ namespace EveHelperWF.ScreenHelper
             AdjustedCost adjustedCost = null;
             foreach (MaterialsWithMarketData mat in manuMats)
             {
-                adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
+                adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
                 if (adjustedCost != null)
                 {
                     if (adjustedCost.adjusted_price > 0)
@@ -967,9 +940,9 @@ namespace EveHelperWF.ScreenHelper
         {
             decimal costIndex = 0;
 
-            if (CostIndicies.Count > 0)
+            if (CommonHelper.CostIndicies.Count > 0)
             {
-                CostIndice costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
+                CostIndice costIndice = CommonHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemID);
                 if (costIndice != null)
                 {
                     costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;
@@ -1050,7 +1023,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (calculationHelperClass.ManufacturingSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ManufacturingSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ManufacturingSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -1127,7 +1100,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ManufacturingSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == helperClass.ManufacturingSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.ManufacturingSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -1206,7 +1179,7 @@ namespace EveHelperWF.ScreenHelper
 
             foreach (Objects.MaterialsWithMarketData mat in Mats)
             {
-                Objects.AdjustedCost adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
+                Objects.AdjustedCost adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
                 if (adjustedCost != null)
                 {
                     jobCost += (adjustedCost.adjusted_price * mat.quantity * helperClass.Runs);
@@ -1374,7 +1347,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (calculationHelperClass.ReactionSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ReactionSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ReactionSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -1441,7 +1414,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ReactionSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == helperClass.ReactionSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.ReactionSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -1505,7 +1478,7 @@ namespace EveHelperWF.ScreenHelper
 
             foreach (Objects.MaterialsWithMarketData mat in Mats)
             {
-                Objects.AdjustedCost adjustedCost = AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
+                Objects.AdjustedCost adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
                 if (adjustedCost != null)
                 {
                     jobCost += (adjustedCost.adjusted_price * mat.quantity * helperClass.Runs);
@@ -1592,7 +1565,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == helperClass.InventionSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.InventionSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -1669,7 +1642,7 @@ namespace EveHelperWF.ScreenHelper
                     int productTypeId = products[0].productTypeID;
                     if (productTypeId > 0)
                     {
-                        Objects.AdjustedCost adjustedCost = AdjustedCosts.Find(x => x.type_id == productTypeId);
+                        Objects.AdjustedCost adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == productTypeId);
                         if (adjustedCost != null)
                         {
                             if (adjustedCost.adjusted_price > 0)
@@ -1696,7 +1669,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionSolarSystemID > 0)
             {
-                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == helperClass.InventionSolarSystemID);
+                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.InventionSolarSystemID);
                 isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
@@ -2024,7 +1997,7 @@ namespace EveHelperWF.ScreenHelper
             foreach (MaterialsWithMarketData mat in  inputMats)
             {
                 mat.quantityTotal = (mat.quantity * (toLevel - fromLevel));
-                Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                 totalVolume += mat.quantityTotal * matType.volume;
                 mat.volumeTotal = mat.quantityTotal * matType.volume;
             }
@@ -2041,7 +2014,7 @@ namespace EveHelperWF.ScreenHelper
             foreach (MaterialsWithMarketData mat in inputMats)
             {
                 mat.quantityTotal = (long)(mat.quantity * multipler);
-                Objects.InventoryTypes matType = InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                 totalVolume += mat.quantityTotal * matType.volume;
                 mat.volumeTotal = mat.quantityTotal * matType.volume;
             }

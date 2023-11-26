@@ -54,7 +54,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadCurrentAbyssRuns()
         {
-            string fileContent = FileIO.FileHelper.GetCachedFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
             if (!String.IsNullOrWhiteSpace(fileContent))
             {
                 AbyssRuns = Newtonsoft.Json.JsonConvert.DeserializeObject<BindingList<AbyssRun>>(fileContent);
@@ -242,7 +242,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (!string.IsNullOrWhiteSpace(fileContent))
             {
-                FileIO.FileHelper.SaveCachedFile(Enums.Enums.AbyssRunDirectory, AbyssRunFileName, fileContent);
+                FileIO.FileHelper.SaveFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName, fileContent);
             }
         }
 

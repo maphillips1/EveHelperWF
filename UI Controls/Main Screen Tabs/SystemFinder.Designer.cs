@@ -87,13 +87,14 @@
             SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
             SolarSystemResultsGrid.Dock = DockStyle.Bottom;
             SolarSystemResultsGrid.GridColor = Color.Black;
-            SolarSystemResultsGrid.Location = new Point(0, 307);
+            SolarSystemResultsGrid.Location = new Point(0, 231);
+            SolarSystemResultsGrid.Margin = new Padding(3, 2, 3, 2);
             SolarSystemResultsGrid.MultiSelect = false;
             SolarSystemResultsGrid.Name = "SolarSystemResultsGrid";
             SolarSystemResultsGrid.RowHeadersWidth = 51;
             SolarSystemResultsGrid.RowTemplate.Height = 29;
             SolarSystemResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            SolarSystemResultsGrid.Size = new Size(695, 457);
+            SolarSystemResultsGrid.Size = new Size(559, 342);
             SolarSystemResultsGrid.TabIndex = 15;
             SolarSystemResultsGrid.DoubleClick += SolarSystemResultsGrid_DoubleClick;
             // 
@@ -159,9 +160,10 @@
             // SearchButton
             // 
             SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(8, 255);
+            SearchButton.Location = new Point(7, 191);
+            SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(94, 29);
+            SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 0;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
@@ -170,9 +172,10 @@
             // TemperateCheckbox
             // 
             TemperateCheckbox.AutoSize = true;
-            TemperateCheckbox.Location = new Point(12, 41);
+            TemperateCheckbox.Location = new Point(10, 31);
+            TemperateCheckbox.Margin = new Padding(3, 2, 3, 2);
             TemperateCheckbox.Name = "TemperateCheckbox";
-            TemperateCheckbox.Size = new Size(102, 24);
+            TemperateCheckbox.Size = new Size(81, 19);
             TemperateCheckbox.TabIndex = 1;
             TemperateCheckbox.Text = "Temperate";
             TemperateCheckbox.UseVisualStyleBackColor = true;
@@ -180,9 +183,10 @@
             // PlasmaCheckbox
             // 
             PlasmaCheckbox.AutoSize = true;
-            PlasmaCheckbox.Location = new Point(551, 41);
+            PlasmaCheckbox.Location = new Point(482, 31);
+            PlasmaCheckbox.Margin = new Padding(3, 2, 3, 2);
             PlasmaCheckbox.Name = "PlasmaCheckbox";
-            PlasmaCheckbox.Size = new Size(78, 24);
+            PlasmaCheckbox.Size = new Size(64, 19);
             PlasmaCheckbox.TabIndex = 2;
             PlasmaCheckbox.Text = "Plasma";
             PlasmaCheckbox.UseVisualStyleBackColor = true;
@@ -190,9 +194,10 @@
             // StormCheckbox
             // 
             StormCheckbox.AutoSize = true;
-            StormCheckbox.Location = new Point(474, 41);
+            StormCheckbox.Location = new Point(415, 31);
+            StormCheckbox.Margin = new Padding(3, 2, 3, 2);
             StormCheckbox.Name = "StormCheckbox";
-            StormCheckbox.Size = new Size(71, 24);
+            StormCheckbox.Size = new Size(58, 19);
             StormCheckbox.TabIndex = 3;
             StormCheckbox.Text = "Storm";
             StormCheckbox.UseVisualStyleBackColor = true;
@@ -200,9 +205,10 @@
             // BarrenCheckbox
             // 
             BarrenCheckbox.AutoSize = true;
-            BarrenCheckbox.Location = new Point(394, 41);
+            BarrenCheckbox.Location = new Point(345, 31);
+            BarrenCheckbox.Margin = new Padding(3, 2, 3, 2);
             BarrenCheckbox.Name = "BarrenCheckbox";
-            BarrenCheckbox.Size = new Size(74, 24);
+            BarrenCheckbox.Size = new Size(60, 19);
             BarrenCheckbox.TabIndex = 4;
             BarrenCheckbox.Text = "Barren";
             BarrenCheckbox.UseVisualStyleBackColor = true;
@@ -210,9 +216,10 @@
             // LavaCheckbox
             // 
             LavaCheckbox.AutoSize = true;
-            LavaCheckbox.Location = new Point(327, 41);
+            LavaCheckbox.Location = new Point(286, 31);
+            LavaCheckbox.Margin = new Padding(3, 2, 3, 2);
             LavaCheckbox.Name = "LavaCheckbox";
-            LavaCheckbox.Size = new Size(61, 24);
+            LavaCheckbox.Size = new Size(50, 19);
             LavaCheckbox.TabIndex = 5;
             LavaCheckbox.Text = "Lava";
             LavaCheckbox.UseVisualStyleBackColor = true;
@@ -220,9 +227,10 @@
             // OceanicCheckbox
             // 
             OceanicCheckbox.AutoSize = true;
-            OceanicCheckbox.Location = new Point(237, 41);
+            OceanicCheckbox.Location = new Point(207, 31);
+            OceanicCheckbox.Margin = new Padding(3, 2, 3, 2);
             OceanicCheckbox.Name = "OceanicCheckbox";
-            OceanicCheckbox.Size = new Size(84, 24);
+            OceanicCheckbox.Size = new Size(69, 19);
             OceanicCheckbox.TabIndex = 6;
             OceanicCheckbox.Text = "Oceanic";
             OceanicCheckbox.UseVisualStyleBackColor = true;
@@ -230,9 +238,10 @@
             // GasCheckBox
             // 
             GasCheckBox.AutoSize = true;
-            GasCheckBox.Location = new Point(176, 41);
+            GasCheckBox.Location = new Point(154, 31);
+            GasCheckBox.Margin = new Padding(3, 2, 3, 2);
             GasCheckBox.Name = "GasCheckBox";
-            GasCheckBox.Size = new Size(55, 24);
+            GasCheckBox.Size = new Size(45, 19);
             GasCheckBox.TabIndex = 7;
             GasCheckBox.Text = "Gas";
             GasCheckBox.UseVisualStyleBackColor = true;
@@ -240,9 +249,10 @@
             // IceCheckBox
             // 
             IceCheckBox.AutoSize = true;
-            IceCheckBox.Location = new Point(120, 41);
+            IceCheckBox.Location = new Point(105, 31);
+            IceCheckBox.Margin = new Padding(3, 2, 3, 2);
             IceCheckBox.Name = "IceCheckBox";
-            IceCheckBox.Size = new Size(50, 24);
+            IceCheckBox.Size = new Size(41, 19);
             IceCheckBox.TabIndex = 8;
             IceCheckBox.Text = "Ice";
             IceCheckBox.UseVisualStyleBackColor = true;
@@ -251,28 +261,29 @@
             // 
             MinSecurityUpDown.DecimalPlaces = 1;
             MinSecurityUpDown.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            MinSecurityUpDown.Location = new Point(52, 106);
+            MinSecurityUpDown.Location = new Point(46, 80);
+            MinSecurityUpDown.Margin = new Padding(3, 2, 3, 2);
             MinSecurityUpDown.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
             MinSecurityUpDown.Name = "MinSecurityUpDown";
-            MinSecurityUpDown.Size = new Size(150, 27);
+            MinSecurityUpDown.Size = new Size(131, 23);
             MinSecurityUpDown.TabIndex = 9;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(8, 111);
+            label1.Location = new Point(7, 83);
             label1.Name = "label1";
-            label1.Size = new Size(34, 20);
+            label1.Size = new Size(28, 15);
             label1.TabIndex = 10;
             label1.Text = "Min";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(9, 146);
+            label2.Location = new Point(8, 110);
             label2.Name = "label2";
             label2.RightToLeft = RightToLeft.No;
-            label2.Size = new Size(37, 20);
+            label2.Size = new Size(30, 15);
             label2.TabIndex = 12;
             label2.Text = "Max";
             // 
@@ -280,18 +291,20 @@
             // 
             MaxSecurityUpDown.DecimalPlaces = 1;
             MaxSecurityUpDown.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
-            MaxSecurityUpDown.Location = new Point(52, 139);
+            MaxSecurityUpDown.Location = new Point(46, 104);
+            MaxSecurityUpDown.Margin = new Padding(3, 2, 3, 2);
             MaxSecurityUpDown.Maximum = new decimal(new int[] { 1, 0, 0, 0 });
             MaxSecurityUpDown.Name = "MaxSecurityUpDown";
-            MaxSecurityUpDown.Size = new Size(150, 27);
+            MaxSecurityUpDown.Size = new Size(131, 23);
             MaxSecurityUpDown.TabIndex = 11;
             // 
             // WormholesCheckbox
             // 
             WormholesCheckbox.AutoSize = true;
-            WormholesCheckbox.Location = new Point(219, 106);
+            WormholesCheckbox.Location = new Point(192, 80);
+            WormholesCheckbox.Margin = new Padding(3, 2, 3, 2);
             WormholesCheckbox.Name = "WormholesCheckbox";
-            WormholesCheckbox.Size = new Size(158, 24);
+            WormholesCheckbox.Size = new Size(129, 19);
             WormholesCheckbox.TabIndex = 13;
             WormholesCheckbox.Text = "Include Wormholes";
             WormholesCheckbox.UseVisualStyleBackColor = true;
@@ -299,9 +312,10 @@
             // IncludePochvenCheckbox
             // 
             IncludePochvenCheckbox.AutoSize = true;
-            IncludePochvenCheckbox.Location = new Point(219, 136);
+            IncludePochvenCheckbox.Location = new Point(192, 102);
+            IncludePochvenCheckbox.Margin = new Padding(3, 2, 3, 2);
             IncludePochvenCheckbox.Name = "IncludePochvenCheckbox";
-            IncludePochvenCheckbox.Size = new Size(137, 24);
+            IncludePochvenCheckbox.Size = new Size(114, 19);
             IncludePochvenCheckbox.TabIndex = 14;
             IncludePochvenCheckbox.Text = "Include Pochven";
             IncludePochvenCheckbox.UseVisualStyleBackColor = true;
@@ -314,9 +328,9 @@
             // LoadingLabel
             // 
             LoadingLabel.AutoSize = true;
-            LoadingLabel.Location = new Point(130, 259);
+            LoadingLabel.Location = new Point(114, 194);
             LoadingLabel.Name = "LoadingLabel";
-            LoadingLabel.Size = new Size(69, 20);
+            LoadingLabel.Size = new Size(56, 15);
             LoadingLabel.TabIndex = 16;
             LoadingLabel.Text = "Loading..";
             LoadingLabel.Visible = false;
@@ -326,9 +340,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Gold;
-            label3.Location = new Point(12, 9);
+            label3.Location = new Point(10, 7);
             label3.Name = "label3";
-            label3.Size = new Size(90, 20);
+            label3.Size = new Size(70, 15);
             label3.TabIndex = 18;
             label3.Text = "Has Planets";
             // 
@@ -337,69 +351,73 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Gold;
-            label4.Location = new Point(12, 78);
+            label4.Location = new Point(10, 58);
             label4.Name = "label4";
-            label4.Size = new Size(65, 20);
+            label4.Size = new Size(53, 15);
             label4.TabIndex = 19;
             label4.Text = "Security";
             // 
             // RegionCombobox
             // 
             RegionCombobox.FormattingEnabled = true;
-            RegionCombobox.Location = new Point(80, 201);
+            RegionCombobox.Location = new Point(70, 151);
+            RegionCombobox.Margin = new Padding(3, 2, 3, 2);
             RegionCombobox.Name = "RegionCombobox";
-            RegionCombobox.Size = new Size(151, 28);
+            RegionCombobox.Size = new Size(133, 23);
             RegionCombobox.TabIndex = 20;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 204);
+            label5.Location = new Point(10, 153);
             label5.Name = "label5";
-            label5.Size = new Size(56, 20);
+            label5.Size = new Size(44, 15);
             label5.TabIndex = 21;
             label5.Text = "Region";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(256, 204);
+            label6.Location = new Point(224, 153);
             label6.Name = "label6";
-            label6.Size = new Size(100, 20);
+            label6.Size = new Size(80, 15);
             label6.TabIndex = 22;
             label6.Text = "System Name";
             // 
             // SystemNameTextBox
             // 
-            SystemNameTextBox.Location = new Point(362, 201);
+            SystemNameTextBox.Location = new Point(317, 151);
+            SystemNameTextBox.Margin = new Padding(3, 2, 3, 2);
             SystemNameTextBox.Name = "SystemNameTextBox";
-            SystemNameTextBox.Size = new Size(125, 27);
+            SystemNameTextBox.Size = new Size(110, 23);
             SystemNameTextBox.TabIndex = 23;
+            SystemNameTextBox.KeyDown += SystemNameTextBox_KeyDown;
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Gold;
-            label7.Location = new Point(496, 76);
+            label7.Location = new Point(434, 57);
             label7.Name = "label7";
-            label7.Size = new Size(64, 23);
+            label7.Size = new Size(54, 19);
             label7.TabIndex = 24;
             label7.Text = "Station";
             // 
             // StationComboBox
             // 
             StationComboBox.FormattingEnabled = true;
-            StationComboBox.Location = new Point(456, 108);
+            StationComboBox.Location = new Point(399, 81);
+            StationComboBox.Margin = new Padding(3, 2, 3, 2);
             StationComboBox.Name = "StationComboBox";
-            StationComboBox.Size = new Size(151, 28);
+            StationComboBox.Size = new Size(133, 23);
             StationComboBox.TabIndex = 25;
             // 
             // SystemFinder
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(695, 764);
+            ClientSize = new Size(559, 573);
             Controls.Add(StationComboBox);
             Controls.Add(label7);
             Controls.Add(SystemNameTextBox);
@@ -428,6 +446,7 @@
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SystemFinder";
             Text = "System Finder";
             ((System.ComponentModel.ISupportInitialize)SolarSystemResultsGrid).EndInit();

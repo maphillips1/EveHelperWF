@@ -60,9 +60,10 @@
             OutputTreeView.BackColor = Color.FromArgb(2, 23, 38);
             OutputTreeView.ForeColor = SystemColors.ControlLight;
             OutputTreeView.HotTracking = true;
-            OutputTreeView.Location = new Point(12, 12);
+            OutputTreeView.Location = new Point(10, 9);
+            OutputTreeView.Margin = new Padding(3, 2, 3, 2);
             OutputTreeView.Name = "OutputTreeView";
-            OutputTreeView.Size = new Size(270, 1014);
+            OutputTreeView.Size = new Size(237, 762);
             OutputTreeView.TabIndex = 0;
             OutputTreeView.AfterSelect += OutputTreeView_AfterSelect;
             // 
@@ -70,20 +71,22 @@
             // 
             SchematicNameLabel.AutoSize = true;
             SchematicNameLabel.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            SchematicNameLabel.Location = new Point(294, 12);
+            SchematicNameLabel.Location = new Point(257, 9);
             SchematicNameLabel.Name = "SchematicNameLabel";
-            SchematicNameLabel.Size = new Size(202, 35);
+            SchematicNameLabel.Size = new Size(158, 28);
             SchematicNameLabel.TabIndex = 1;
             SchematicNameLabel.Text = "Schematic Name";
             // 
             // BubbleTreePanel
             // 
+            BubbleTreePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BubbleTreePanel.AutoScroll = true;
             BubbleTreePanel.BackColor = Color.Black;
             BubbleTreePanel.BorderStyle = BorderStyle.Fixed3D;
-            BubbleTreePanel.Location = new Point(288, 122);
+            BubbleTreePanel.Location = new Point(252, 94);
+            BubbleTreePanel.Margin = new Padding(3, 2, 3, 2);
             BubbleTreePanel.Name = "BubbleTreePanel";
-            BubbleTreePanel.Size = new Size(1282, 904);
+            BubbleTreePanel.Size = new Size(1063, 529);
             BubbleTreePanel.TabIndex = 2;
             // 
             // PIOutputImagePanel
@@ -91,8 +94,9 @@
             PIOutputImagePanel.BackColor = Color.Transparent;
             PIOutputImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
             PIOutputImagePanel.Location = new Point(0, 2);
+            PIOutputImagePanel.Margin = new Padding(3, 2, 3, 2);
             PIOutputImagePanel.Name = "PIOutputImagePanel";
-            PIOutputImagePanel.Size = new Size(64, 64);
+            PIOutputImagePanel.Size = new Size(56, 48);
             PIOutputImagePanel.TabIndex = 8;
             // 
             // SchematicSummaryPanel
@@ -110,18 +114,19 @@
             SchematicSummaryPanel.Controls.Add(label2);
             SchematicSummaryPanel.Controls.Add(OutputQuantLabel);
             SchematicSummaryPanel.Controls.Add(label1);
-            SchematicSummaryPanel.Location = new Point(288, 50);
+            SchematicSummaryPanel.Location = new Point(252, 38);
+            SchematicSummaryPanel.Margin = new Padding(3, 2, 3, 2);
             SchematicSummaryPanel.Name = "SchematicSummaryPanel";
-            SchematicSummaryPanel.Size = new Size(1282, 66);
+            SchematicSummaryPanel.Size = new Size(1063, 50);
             SchematicSummaryPanel.TabIndex = 3;
             // 
             // InputBuyTotalLabel
             // 
             InputBuyTotalLabel.AutoSize = true;
             InputBuyTotalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            InputBuyTotalLabel.Location = new Point(876, 34);
+            InputBuyTotalLabel.Location = new Point(766, 26);
             InputBuyTotalLabel.Name = "InputBuyTotalLabel";
-            InputBuyTotalLabel.Size = new Size(88, 23);
+            InputBuyTotalLabel.Size = new Size(71, 19);
             InputBuyTotalLabel.TabIndex = 15;
             InputBuyTotalLabel.Text = "Price Total";
             // 
@@ -129,9 +134,9 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(698, 34);
+            label5.Location = new Point(611, 26);
             label5.Name = "label5";
-            label5.Size = new Size(150, 23);
+            label5.Size = new Size(121, 19);
             label5.TabIndex = 14;
             label5.Text = "Input Buy / Cycle: ";
             // 
@@ -139,9 +144,9 @@
             // 
             InputSellTotalLabel.AutoSize = true;
             InputSellTotalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            InputSellTotalLabel.Location = new Point(876, 6);
+            InputSellTotalLabel.Location = new Point(766, 4);
             InputSellTotalLabel.Name = "InputSellTotalLabel";
-            InputSellTotalLabel.Size = new Size(88, 23);
+            InputSellTotalLabel.Size = new Size(71, 19);
             InputSellTotalLabel.TabIndex = 13;
             InputSellTotalLabel.Text = "Price Total";
             // 
@@ -149,9 +154,9 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.Location = new Point(698, 6);
+            label8.Location = new Point(611, 4);
             label8.Name = "label8";
-            label8.Size = new Size(153, 23);
+            label8.Size = new Size(122, 19);
             label8.TabIndex = 12;
             label8.Text = "Input Sell / Cycle : ";
             // 
@@ -159,9 +164,9 @@
             // 
             BuyPriceTotalLabel.AutoSize = true;
             BuyPriceTotalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BuyPriceTotalLabel.Location = new Point(538, 34);
+            BuyPriceTotalLabel.Location = new Point(471, 26);
             BuyPriceTotalLabel.Name = "BuyPriceTotalLabel";
-            BuyPriceTotalLabel.Size = new Size(88, 23);
+            BuyPriceTotalLabel.Size = new Size(71, 19);
             BuyPriceTotalLabel.TabIndex = 11;
             BuyPriceTotalLabel.Text = "Price Total";
             // 
@@ -169,9 +174,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(396, 34);
+            label6.Location = new Point(346, 26);
             label6.Name = "label6";
-            label6.Size = new Size(104, 23);
+            label6.Size = new Size(84, 19);
             label6.TabIndex = 10;
             label6.Text = "Buy / Cycle: ";
             // 
@@ -179,9 +184,9 @@
             // 
             SellPriceTotalLabel.AutoSize = true;
             SellPriceTotalLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            SellPriceTotalLabel.Location = new Point(538, 6);
+            SellPriceTotalLabel.Location = new Point(471, 4);
             SellPriceTotalLabel.Name = "SellPriceTotalLabel";
-            SellPriceTotalLabel.Size = new Size(88, 23);
+            SellPriceTotalLabel.Size = new Size(71, 19);
             SellPriceTotalLabel.TabIndex = 7;
             SellPriceTotalLabel.Text = "Price Total";
             // 
@@ -189,9 +194,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(396, 6);
+            label4.Location = new Point(346, 4);
             label4.Name = "label4";
-            label4.Size = new Size(107, 23);
+            label4.Size = new Size(85, 19);
             label4.TabIndex = 6;
             label4.Text = "Sell / Cycle : ";
             // 
@@ -199,9 +204,9 @@
             // 
             OutputVolumeLabel.AutoSize = true;
             OutputVolumeLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputVolumeLabel.Location = new Point(266, 34);
+            OutputVolumeLabel.Location = new Point(233, 26);
             OutputVolumeLabel.Name = "OutputVolumeLabel";
-            OutputVolumeLabel.Size = new Size(68, 23);
+            OutputVolumeLabel.Size = new Size(55, 19);
             OutputVolumeLabel.TabIndex = 3;
             OutputVolumeLabel.Text = "Volume";
             // 
@@ -209,9 +214,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(90, 34);
+            label2.Location = new Point(79, 26);
             label2.Name = "label2";
-            label2.Size = new Size(118, 23);
+            label2.Size = new Size(95, 19);
             label2.TabIndex = 2;
             label2.Text = "Total Volume :";
             // 
@@ -219,9 +224,9 @@
             // 
             OutputQuantLabel.AutoSize = true;
             OutputQuantLabel.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputQuantLabel.Location = new Point(266, 6);
+            OutputQuantLabel.Location = new Point(233, 4);
             OutputQuantLabel.Name = "OutputQuantLabel";
-            OutputQuantLabel.Size = new Size(58, 23);
+            OutputQuantLabel.Size = new Size(48, 19);
             OutputQuantLabel.TabIndex = 1;
             OutputQuantLabel.Text = "Quant";
             // 
@@ -229,9 +234,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(90, 6);
+            label1.Location = new Point(79, 4);
             label1.Name = "label1";
-            label1.Size = new Size(150, 23);
+            label1.Size = new Size(123, 19);
             label1.TabIndex = 0;
             label1.Text = "Output Quantity : ";
             // 
@@ -239,9 +244,9 @@
             // 
             CycleTimeLabel.AutoSize = true;
             CycleTimeLabel.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            CycleTimeLabel.Location = new Point(684, 9);
+            CycleTimeLabel.Location = new Point(598, 7);
             CycleTimeLabel.Name = "CycleTimeLabel";
-            CycleTimeLabel.Size = new Size(134, 35);
+            CycleTimeLabel.Size = new Size(105, 28);
             CycleTimeLabel.TabIndex = 4;
             CycleTimeLabel.Text = "Cycle Time";
             // 
@@ -253,31 +258,35 @@
             // 
             // PerfectPlanetsListLabel
             // 
+            PerfectPlanetsListLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             PerfectPlanetsListLabel.AutoSize = true;
             PerfectPlanetsListLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            PerfectPlanetsListLabel.Location = new Point(1576, 135);
+            PerfectPlanetsListLabel.Location = new Point(1385, 120);
             PerfectPlanetsListLabel.Name = "PerfectPlanetsListLabel";
-            PerfectPlanetsListLabel.Size = new Size(41, 28);
+            PerfectPlanetsListLabel.Size = new Size(34, 21);
             PerfectPlanetsListLabel.TabIndex = 5;
             PerfectPlanetsListLabel.Text = "List";
             // 
             // label7
             // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(1576, 101);
+            label7.Location = new Point(1385, 94);
             label7.Name = "label7";
-            label7.Size = new Size(163, 28);
+            label7.Size = new Size(132, 21);
             label7.TabIndex = 6;
             label7.Text = "Minimum Planets";
             // 
             // SolarSystemSearchButton
             // 
+            SolarSystemSearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             SolarSystemSearchButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             SolarSystemSearchButton.ForeColor = Color.Black;
-            SolarSystemSearchButton.Location = new Point(1576, 50);
+            SolarSystemSearchButton.Location = new Point(1380, 64);
+            SolarSystemSearchButton.Margin = new Padding(3, 2, 3, 2);
             SolarSystemSearchButton.Name = "SolarSystemSearchButton";
-            SolarSystemSearchButton.Size = new Size(169, 29);
+            SolarSystemSearchButton.Size = new Size(148, 24);
             SolarSystemSearchButton.TabIndex = 7;
             SolarSystemSearchButton.Text = "Find Solar Systems";
             SolarSystemSearchButton.UseVisualStyleBackColor = true;
@@ -288,11 +297,11 @@
             PIOutputImageWorker.DoWork += PIOutputImageWorker_DoWork;
             PIOutputImageWorker.RunWorkerCompleted += PIOutputImageWorker_RunWorkerCompleted;
             // 
-            // PlanetPlanner
+            // PlanetaryIndustry
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1033);
+            ClientSize = new Size(1540, 634);
             Controls.Add(SolarSystemSearchButton);
             Controls.Add(label7);
             Controls.Add(PerfectPlanetsListLabel);
@@ -304,7 +313,8 @@
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "PlanetPlanner";
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "PlanetaryIndustry";
             Text = "Planetary Interaction";
             Resize += PlanetPlanner_Resize;
             SchematicSummaryPanel.ResumeLayout(false);

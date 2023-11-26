@@ -1,4 +1,5 @@
 ﻿using EveHelperWF.Objects;
+using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Main_Screen_Tabs;
 using EveHelperWF.UI_Controls.Support_Screens;
 using System;
@@ -19,6 +20,12 @@ namespace EveHelperWF.UI_Controls
         public MainScreen()
         {
             InitializeComponent();
+            CommonHelper.Init();
+
+            if (!InitLongLoadingWorker.IsBusy)
+            {
+                InitLongLoadingWorker.RunWorkerAsync();
+            }
         }
 
         private void BlueprintBrowserButton_Click(object sender, EventArgs e)
@@ -112,6 +119,11 @@ namespace EveHelperWF.UI_Controls
             UpdateSDE updateSDE = new UpdateSDE();
             updateSDE.StartPosition = FormStartPosition.CenterParent;
             updateSDE.Show();
+        }
+
+        private void InitLongLoadingWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CommonHelper.InitLongLoading();
         }
     }
 }

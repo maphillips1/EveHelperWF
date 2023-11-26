@@ -53,6 +53,7 @@
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = Color.White;
             PriceHistoryGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            PriceHistoryGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -65,13 +66,13 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            PriceHistoryGridView.Dock = DockStyle.Bottom;
             PriceHistoryGridView.GridColor = Color.Black;
-            PriceHistoryGridView.Location = new Point(0, 93);
+            PriceHistoryGridView.Location = new Point(0, 70);
+            PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1124, 643);
+            PriceHistoryGridView.Size = new Size(984, 482);
             PriceHistoryGridView.TabIndex = 1;
             // 
             // date
@@ -80,7 +81,7 @@
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
-            date.Width = 70;
+            date.Width = 56;
             // 
             // formattedAverage
             // 
@@ -88,7 +89,7 @@
             formattedAverage.HeaderText = "Average";
             formattedAverage.MinimumWidth = 6;
             formattedAverage.Name = "formattedAverage";
-            formattedAverage.Width = 93;
+            formattedAverage.Width = 75;
             // 
             // formattedLowest
             // 
@@ -96,7 +97,7 @@
             formattedLowest.HeaderText = "Lowest";
             formattedLowest.MinimumWidth = 6;
             formattedLowest.Name = "formattedLowest";
-            formattedLowest.Width = 84;
+            formattedLowest.Width = 69;
             // 
             // formattedHighest
             // 
@@ -104,7 +105,7 @@
             formattedHighest.HeaderText = "Highest";
             formattedHighest.MinimumWidth = 6;
             formattedHighest.Name = "formattedHighest";
-            formattedHighest.Width = 89;
+            formattedHighest.Width = 73;
             // 
             // volume
             // 
@@ -112,7 +113,7 @@
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
-            volume.Width = 88;
+            volume.Width = 72;
             // 
             // orderCount
             // 
@@ -120,7 +121,7 @@
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
-            orderCount.Width = 119;
+            orderCount.Width = 98;
             // 
             // average
             // 
@@ -154,18 +155,19 @@
             PriceHistoryForLabel.AutoSize = true;
             PriceHistoryForLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             PriceHistoryForLabel.ForeColor = Color.Gold;
-            PriceHistoryForLabel.Location = new Point(82, 9);
+            PriceHistoryForLabel.Location = new Point(72, 7);
             PriceHistoryForLabel.Name = "PriceHistoryForLabel";
-            PriceHistoryForLabel.Size = new Size(177, 28);
+            PriceHistoryForLabel.Size = new Size(140, 21);
             PriceHistoryForLabel.TabIndex = 2;
             PriceHistoryForLabel.Text = "Price History For ";
             // 
             // SelectedItemImagePanel
             // 
             SelectedItemImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            SelectedItemImagePanel.Location = new Point(12, 12);
+            SelectedItemImagePanel.Location = new Point(10, 9);
+            SelectedItemImagePanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemImagePanel.Name = "SelectedItemImagePanel";
-            SelectedItemImagePanel.Size = new Size(64, 64);
+            SelectedItemImagePanel.Size = new Size(56, 48);
             SelectedItemImagePanel.TabIndex = 3;
             // 
             // GetImageBackgroundWorker
@@ -175,16 +177,17 @@
             // 
             // PriceHistoryViewer
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.None;
-            ClientSize = new Size(1124, 736);
+            ClientSize = new Size(984, 552);
             Controls.Add(SelectedItemImagePanel);
             Controls.Add(PriceHistoryForLabel);
             Controls.Add(PriceHistoryGridView);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "PriceHistoryViewer";
             Text = "Price History";
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).EndInit();
