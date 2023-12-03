@@ -140,10 +140,6 @@
             // 
             // ItemSearchResultsGrid
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            ItemSearchResultsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ItemSearchResultsGrid.BackgroundColor = Color.Black;
@@ -405,10 +401,6 @@
             // 
             // TrackedTypesGrid
             // 
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            TrackedTypesGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             TrackedTypesGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TrackedTypesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TrackedTypesGrid.BackgroundColor = Color.Black;

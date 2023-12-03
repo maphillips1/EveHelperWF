@@ -117,72 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="GetImageBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="typeID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Avg.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="typeName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Low.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="marketGroupName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="High.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="groupId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="description.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="volume.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="orderCount.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="portionSize.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAGBgAAAEAIACICQAAFgAAACgAAAAYAAAAMAAAAAEAIAAAAAAAAAkAAHQSAAB0EgAAAAAAAAAA
-        AABKIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0ohA/9KIQP/SiED////
-        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP//////////////////////0ohA/9KIQP/SiED//////////////////////9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0oh
-        A/9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/////////////////////////////////////////////////////////
-        //9KIQP/SiED//////////////////////////////////////////////////////9KIQP/////////
-        //////////////////////////////////////////////////9KIQP/SiED////////////////////
-        //////////////////////////////////9KIQP/////////////////////////////////////////
-        //////////////////9KIQP/SiED////////////////////////////////////////////////////
-        //9KIQP//////////////////////0ohA/9KIQP/SiED//////////////////////9KIQP/SiED////
-        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP//////////////////////0oh
-        A/9KIQP/SiED//////////////////////9KIQP/SiED//////////////////////9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP//////////////////////0ohA/9KIQP/SiED////////////////////
-        //9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////
-        //////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////////////////////
-        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////
-        //////////////////////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED//////////////////////9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED//////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////
-        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////////////////////
-        //9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////
-        //////////////////////////////////////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED////////////////////////////////////
-        //////////////////9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/9KIQP/SiED/0oh
-        A/9KIQP/SiED/0ohA/9KIQP/SiED/0ohA/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAA=
-</value>
-  </data>
+  <metadata name="raceId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="basePrice.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="marketGroupId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="parentMarketGroupId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="iconId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="soundId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="graphicId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="groupName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="categoryID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="categoryName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

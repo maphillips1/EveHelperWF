@@ -91,9 +91,6 @@
             // 
             // ResultsGridView
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            ResultsGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ResultsGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ResultsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ResultsGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;

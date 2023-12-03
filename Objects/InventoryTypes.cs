@@ -11,28 +11,6 @@ namespace EveHelperWF.Objects
     {
         public InventoryTypes() { }
 
-        public InventoryTypes(System.Data.DataRow dr)
-        {
-            typeId = Convert.ToInt32(dr["typeID"]);
-            groupId = Convert.ToInt32(dr["groupID"]);
-            typeName = dr["typeName"].ToString();
-            description = dr["description"].ToString();
-            volume = Convert.ToDecimal(dr["volume"]);
-            portionSize = Convert.ToInt32(dr["portionSize"]);
-            if (!System.DBNull.Value.Equals(dr["raceID"])) { raceId = Convert.ToInt32(dr["raceID"]); }
-            if (!System.DBNull.Value.Equals(dr["basePrice"])) { basePrice = Convert.ToDecimal(dr["basePrice"]); }
-            if (!System.DBNull.Value.Equals(dr["marketGroupID"])) { marketGroupId = Convert.ToInt32(dr["marketGroupID"]); }
-            if (!System.DBNull.Value.Equals(dr["parentGroupID"])) { parentMarketGroupId = Convert.ToInt32(dr["parentGroupID"]); }
-            if (!System.DBNull.Value.Equals(dr["marketGroupName"])) { marketGroupName = dr["marketGroupName"].ToString(); }
-            if (!System.DBNull.Value.Equals(dr["iconID"])) { iconId = Convert.ToInt32(dr["iconID"]); }
-            if (!System.DBNull.Value.Equals(dr["soundID"])) { soundId = Convert.ToInt32(dr["soundID"]); }
-            if (!System.DBNull.Value.Equals(dr["graphicID"])) { graphicId = Convert.ToInt32(dr["graphicID"]); }
-            groupId = Convert.ToInt32(dr["groupID"]);
-            groupName = dr["groupName"].ToString();
-            categoryID = Convert.ToInt32(dr["categoryID"]);
-            categoryName = dr["categoryName"].ToString();
-        }
-
         public int typeId { get; set; }
         public int groupId { get; set; }
         public string typeName { get; set; }

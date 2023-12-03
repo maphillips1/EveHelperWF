@@ -304,10 +304,6 @@
             // 
             // AbyssTrackerGridView
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            AbyssTrackerGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             AbyssTrackerGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AbyssTrackerGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             AbyssTrackerGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;

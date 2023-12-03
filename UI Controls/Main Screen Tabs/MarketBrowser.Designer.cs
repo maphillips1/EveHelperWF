@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
             SelectedItemImageWorker = new System.ComponentModel.BackgroundWorker();
             TheraButton = new Button();
@@ -79,15 +84,6 @@
             label4 = new Label();
             PriceHistoryTabPage = new TabPage();
             PriceHistoryGridView = new DataGridView();
-            date = new DataGridViewTextBoxColumn();
-            formattedAverage = new DataGridViewTextBoxColumn();
-            formattedLowest = new DataGridViewTextBoxColumn();
-            formattedHighest = new DataGridViewTextBoxColumn();
-            volume = new DataGridViewTextBoxColumn();
-            orderCount = new DataGridViewTextBoxColumn();
-            average = new DataGridViewTextBoxColumn();
-            highest = new DataGridViewTextBoxColumn();
-            lowest = new DataGridViewTextBoxColumn();
             RensButton = new Button();
             label2 = new Label();
             label1 = new Label();
@@ -99,6 +95,12 @@
             RegionCombo = new ComboBox();
             SearchResultsTreeView = new TreeView();
             ClearSystemButton = new Button();
+            date = new DataGridViewTextBoxColumn();
+            Avg = new DataGridViewTextBoxColumn();
+            Low = new DataGridViewTextBoxColumn();
+            High = new DataGridViewTextBoxColumn();
+            volume = new DataGridViewTextBoxColumn();
+            orderCount = new DataGridViewTextBoxColumn();
             SelectedItemTabPanel.SuspendLayout();
             OrdersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).BeginInit();
@@ -212,10 +214,6 @@
             // 
             // SellOrdersGridView
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            SellOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             SellOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             SellOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             SellOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -250,6 +248,9 @@
             // volumeRemaining
             // 
             volumeRemaining.DataPropertyName = "volume_remain";
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = "0";
+            volumeRemaining.DefaultCellStyle = dataGridViewCellStyle1;
             volumeRemaining.HeaderText = "Remaining";
             volumeRemaining.MinimumWidth = 6;
             volumeRemaining.Name = "volumeRemaining";
@@ -305,7 +306,7 @@
             isBuyOrder.MinimumWidth = 6;
             isBuyOrder.Name = "isBuyOrder";
             isBuyOrder.Visible = false;
-            isBuyOrder.Width = 118;
+            isBuyOrder.Width = 96;
             // 
             // locationID
             // 
@@ -314,7 +315,7 @@
             locationID.MinimumWidth = 6;
             locationID.Name = "locationID";
             locationID.Visible = false;
-            locationID.Width = 114;
+            locationID.Width = 92;
             // 
             // orderID
             // 
@@ -323,7 +324,7 @@
             orderID.MinimumWidth = 6;
             orderID.Name = "orderID";
             orderID.Visible = false;
-            orderID.Width = 91;
+            orderID.Width = 73;
             // 
             // price
             // 
@@ -332,7 +333,7 @@
             price.MinimumWidth = 6;
             price.Name = "price";
             price.Visible = false;
-            price.Width = 70;
+            price.Width = 58;
             // 
             // systemID
             // 
@@ -341,7 +342,7 @@
             systemID.MinimumWidth = 6;
             systemID.Name = "systemID";
             systemID.Visible = false;
-            systemID.Width = 104;
+            systemID.Width = 84;
             // 
             // typeID
             // 
@@ -350,7 +351,7 @@
             typeID.MinimumWidth = 6;
             typeID.Name = "typeID";
             typeID.Visible = false;
-            typeID.Width = 88;
+            typeID.Width = 70;
             // 
             // volumeTotal
             // 
@@ -359,14 +360,9 @@
             volumeTotal.MinimumWidth = 6;
             volumeTotal.Name = "volumeTotal";
             volumeTotal.Visible = false;
-            volumeTotal.Width = 125;
             // 
             // BuyOrdersGridView
             // 
-            dataGridViewCellStyle4.BackColor = Color.Black;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            BuyOrdersGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             BuyOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BuyOrdersGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             BuyOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -401,6 +397,9 @@
             // dataGridViewTextBoxColumn2
             // 
             dataGridViewTextBoxColumn2.DataPropertyName = "volume_remain";
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewTextBoxColumn2.HeaderText = "Remaining";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -456,7 +455,7 @@
             dataGridViewTextBoxColumn8.MinimumWidth = 6;
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.Visible = false;
-            dataGridViewTextBoxColumn8.Width = 118;
+            dataGridViewTextBoxColumn8.Width = 96;
             // 
             // dataGridViewTextBoxColumn9
             // 
@@ -465,7 +464,7 @@
             dataGridViewTextBoxColumn9.MinimumWidth = 6;
             dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             dataGridViewTextBoxColumn9.Visible = false;
-            dataGridViewTextBoxColumn9.Width = 114;
+            dataGridViewTextBoxColumn9.Width = 92;
             // 
             // dataGridViewTextBoxColumn10
             // 
@@ -474,7 +473,7 @@
             dataGridViewTextBoxColumn10.MinimumWidth = 6;
             dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             dataGridViewTextBoxColumn10.Visible = false;
-            dataGridViewTextBoxColumn10.Width = 91;
+            dataGridViewTextBoxColumn10.Width = 73;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -483,7 +482,7 @@
             dataGridViewTextBoxColumn4.MinimumWidth = 6;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.Visible = false;
-            dataGridViewTextBoxColumn4.Width = 70;
+            dataGridViewTextBoxColumn4.Width = 58;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -492,7 +491,7 @@
             dataGridViewTextBoxColumn11.MinimumWidth = 6;
             dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             dataGridViewTextBoxColumn11.Visible = false;
-            dataGridViewTextBoxColumn11.Width = 104;
+            dataGridViewTextBoxColumn11.Width = 84;
             // 
             // dataGridViewTextBoxColumn12
             // 
@@ -501,7 +500,7 @@
             dataGridViewTextBoxColumn12.MinimumWidth = 6;
             dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             dataGridViewTextBoxColumn12.Visible = false;
-            dataGridViewTextBoxColumn12.Width = 88;
+            dataGridViewTextBoxColumn12.Width = 70;
             // 
             // dataGridViewTextBoxColumn13
             // 
@@ -510,7 +509,6 @@
             dataGridViewTextBoxColumn13.MinimumWidth = 6;
             dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             dataGridViewTextBoxColumn13.Visible = false;
-            dataGridViewTextBoxColumn13.Width = 125;
             // 
             // label4
             // 
@@ -536,22 +534,18 @@
             // 
             // PriceHistoryGridView
             // 
-            dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            PriceHistoryGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, formattedAverage, formattedLowest, formattedHighest, volume, orderCount, average, highest, lowest });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.Black;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.Black;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle13;
             PriceHistoryGridView.Dock = DockStyle.Fill;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(3, 2);
@@ -561,81 +555,6 @@
             PriceHistoryGridView.RowTemplate.Height = 29;
             PriceHistoryGridView.Size = new Size(709, 462);
             PriceHistoryGridView.TabIndex = 0;
-            // 
-            // date
-            // 
-            date.DataPropertyName = "date";
-            date.HeaderText = "Date";
-            date.MinimumWidth = 6;
-            date.Name = "date";
-            date.Width = 56;
-            // 
-            // formattedAverage
-            // 
-            formattedAverage.DataPropertyName = "formattedAverage";
-            formattedAverage.HeaderText = "Average";
-            formattedAverage.MinimumWidth = 6;
-            formattedAverage.Name = "formattedAverage";
-            formattedAverage.Width = 75;
-            // 
-            // formattedLowest
-            // 
-            formattedLowest.DataPropertyName = "formattedLowest";
-            formattedLowest.HeaderText = "Lowest";
-            formattedLowest.MinimumWidth = 6;
-            formattedLowest.Name = "formattedLowest";
-            formattedLowest.Width = 69;
-            // 
-            // formattedHighest
-            // 
-            formattedHighest.DataPropertyName = "formattedHighest";
-            formattedHighest.HeaderText = "Highest";
-            formattedHighest.MinimumWidth = 6;
-            formattedHighest.Name = "formattedHighest";
-            formattedHighest.Width = 73;
-            // 
-            // volume
-            // 
-            volume.DataPropertyName = "volume";
-            volume.HeaderText = "Volume";
-            volume.MinimumWidth = 6;
-            volume.Name = "volume";
-            volume.Width = 72;
-            // 
-            // orderCount
-            // 
-            orderCount.DataPropertyName = "order_count";
-            orderCount.HeaderText = "Order Count";
-            orderCount.MinimumWidth = 6;
-            orderCount.Name = "orderCount";
-            orderCount.Width = 98;
-            // 
-            // average
-            // 
-            average.DataPropertyName = "average";
-            average.HeaderText = "avg";
-            average.MinimumWidth = 6;
-            average.Name = "average";
-            average.Visible = false;
-            average.Width = 62;
-            // 
-            // highest
-            // 
-            highest.DataPropertyName = "highest";
-            highest.HeaderText = "high";
-            highest.MinimumWidth = 6;
-            highest.Name = "highest";
-            highest.Visible = false;
-            highest.Width = 67;
-            // 
-            // lowest
-            // 
-            lowest.DataPropertyName = "lowest";
-            lowest.HeaderText = "low";
-            lowest.MinimumWidth = 6;
-            lowest.Name = "lowest";
-            lowest.Visible = false;
-            lowest.Width = 62;
             // 
             // RensButton
             // 
@@ -766,6 +685,72 @@
             ClearSystemButton.UseVisualStyleBackColor = true;
             ClearSystemButton.Click += ClearSystemButton_Click;
             // 
+            // date
+            // 
+            date.DataPropertyName = "date";
+            dataGridViewCellStyle7.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle7;
+            date.HeaderText = "Date";
+            date.MinimumWidth = 6;
+            date.Name = "date";
+            date.Width = 56;
+            // 
+            // Avg
+            // 
+            Avg.DataPropertyName = "average";
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = "0";
+            dataGridViewCellStyle8.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle8;
+            Avg.HeaderText = "avg";
+            Avg.MinimumWidth = 6;
+            Avg.Name = "Avg";
+            Avg.Width = 51;
+            // 
+            // Low
+            // 
+            Low.DataPropertyName = "lowest";
+            dataGridViewCellStyle9.Format = "N0";
+            dataGridViewCellStyle9.NullValue = "0";
+            dataGridViewCellStyle9.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle9;
+            Low.HeaderText = "low";
+            Low.MinimumWidth = 6;
+            Low.Name = "Low";
+            Low.Width = 51;
+            // 
+            // High
+            // 
+            High.DataPropertyName = "highest";
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle10;
+            High.HeaderText = "high";
+            High.MinimumWidth = 6;
+            High.Name = "High";
+            High.Width = 56;
+            // 
+            // volume
+            // 
+            volume.DataPropertyName = "volume";
+            dataGridViewCellStyle11.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle11;
+            volume.HeaderText = "Volume";
+            volume.MinimumWidth = 6;
+            volume.Name = "volume";
+            volume.Width = 72;
+            // 
+            // orderCount
+            // 
+            orderCount.DataPropertyName = "order_count";
+            dataGridViewCellStyle12.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle12;
+            orderCount.HeaderText = "Order Count";
+            orderCount.MinimumWidth = 6;
+            orderCount.Name = "orderCount";
+            orderCount.Width = 98;
+            // 
             // MarketBrowser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -817,15 +802,6 @@
         private TabPage OrdersTabPage;
         private TabPage PriceHistoryTabPage;
         private DataGridView PriceHistoryGridView;
-        private DataGridViewTextBoxColumn date;
-        private DataGridViewTextBoxColumn formattedAverage;
-        private DataGridViewTextBoxColumn formattedLowest;
-        private DataGridViewTextBoxColumn formattedHighest;
-        private DataGridViewTextBoxColumn volume;
-        private DataGridViewTextBoxColumn orderCount;
-        private DataGridViewTextBoxColumn average;
-        private DataGridViewTextBoxColumn highest;
-        private DataGridViewTextBoxColumn lowest;
         private Button RensButton;
         private Label label2;
         private Label label1;
@@ -838,6 +814,9 @@
         private TreeView SearchResultsTreeView;
         private Label label3;
         private DataGridView SellOrdersGridView;
+        private DataGridView BuyOrdersGridView;
+        private Label label4;
+        private Button ClearSystemButton;
         private DataGridViewTextBoxColumn range;
         private DataGridViewTextBoxColumn volumeRemaining;
         private DataGridViewTextBoxColumn minVolume;
@@ -852,7 +831,6 @@
         private DataGridViewTextBoxColumn systemID;
         private DataGridViewTextBoxColumn typeID;
         private DataGridViewTextBoxColumn volumeTotal;
-        private DataGridView BuyOrdersGridView;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -867,7 +845,11 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private Label label4;
-        private Button ClearSystemButton;
+        private DataGridViewTextBoxColumn date;
+        private DataGridViewTextBoxColumn Avg;
+        private DataGridViewTextBoxColumn Low;
+        private DataGridViewTextBoxColumn High;
+        private DataGridViewTextBoxColumn volume;
+        private DataGridViewTextBoxColumn orderCount;
     }
 }

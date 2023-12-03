@@ -72,6 +72,8 @@ namespace Enums
                                          "EveHelper\\FormValues\\");
         public static string TrackedTypeDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\TrackedTypes\\");
+        public static string ShoppingListsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\ShoppingLists\\");
 
         public enum PlanetMatTierGroupId
         {

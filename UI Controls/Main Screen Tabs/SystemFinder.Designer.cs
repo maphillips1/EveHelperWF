@@ -71,9 +71,6 @@
             // 
             // SolarSystemResultsGrid
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            SolarSystemResultsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             SolarSystemResultsGrid.BackgroundColor = Color.Black;
             SolarSystemResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SolarSystemResultsGrid.Columns.AddRange(new DataGridViewColumn[] { regionName, constellationName, systemName, security, regionID, constellationID, solarSystemID });

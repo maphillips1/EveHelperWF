@@ -415,7 +415,7 @@
             TreeViewList.Location = new Point(4, 186);
             TreeViewList.Margin = new Padding(2);
             TreeViewList.Name = "TreeViewList";
-            TreeViewList.Size = new Size(219, 526);
+            TreeViewList.Size = new Size(219, 569);
             TreeViewList.TabIndex = 1;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
             // 
@@ -437,12 +437,13 @@
             ManufacturingPanel.Location = new Point(226, 0);
             ManufacturingPanel.Margin = new Padding(2);
             ManufacturingPanel.Name = "ManufacturingPanel";
-            ManufacturingPanel.Size = new Size(1126, 714);
+            ManufacturingPanel.Size = new Size(1126, 757);
             ManufacturingPanel.TabIndex = 0;
             // 
             // BlueprintImagePanel
             // 
             BlueprintImagePanel.BackColor = Color.CornflowerBlue;
+            BlueprintImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
             BlueprintImagePanel.Location = new Point(268, 82);
             BlueprintImagePanel.Margin = new Padding(2);
             BlueprintImagePanel.Name = "BlueprintImagePanel";
@@ -549,7 +550,7 @@
             TaxFeesLabel.AutoSize = true;
             TaxFeesLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             TaxFeesLabel.ForeColor = SystemColors.ButtonHighlight;
-            TaxFeesLabel.Location = new Point(107, 148);
+            TaxFeesLabel.Location = new Point(144, 148);
             TaxFeesLabel.Margin = new Padding(2, 0, 2, 0);
             TaxFeesLabel.Name = "TaxFeesLabel";
             TaxFeesLabel.Size = new Size(104, 19);
@@ -573,7 +574,7 @@
             OutputPricePerLabel.AutoSize = true;
             OutputPricePerLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             OutputPricePerLabel.ForeColor = SystemColors.ButtonHighlight;
-            OutputPricePerLabel.Location = new Point(128, 129);
+            OutputPricePerLabel.Location = new Point(144, 130);
             OutputPricePerLabel.Margin = new Padding(2, 0, 2, 0);
             OutputPricePerLabel.Name = "OutputPricePerLabel";
             OutputPricePerLabel.Size = new Size(130, 19);
@@ -729,7 +730,7 @@
             OutputProdQuantLabel.AutoSize = true;
             OutputProdQuantLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             OutputProdQuantLabel.ForeColor = SystemColors.ButtonHighlight;
-            OutputProdQuantLabel.Location = new Point(128, 110);
+            OutputProdQuantLabel.Location = new Point(144, 110);
             OutputProdQuantLabel.Margin = new Padding(2, 0, 2, 0);
             OutputProdQuantLabel.Name = "OutputProdQuantLabel";
             OutputProdQuantLabel.Size = new Size(183, 19);
@@ -879,7 +880,7 @@
             ActivityTabPanel.Margin = new Padding(2);
             ActivityTabPanel.Name = "ActivityTabPanel";
             ActivityTabPanel.SelectedIndex = 0;
-            ActivityTabPanel.Size = new Size(1126, 528);
+            ActivityTabPanel.Size = new Size(1126, 571);
             ActivityTabPanel.TabIndex = 1;
             ActivityTabPanel.SelectedIndexChanged += ActivityTabPanel_SelectedIndexChanged;
             // 
@@ -927,7 +928,7 @@
             ManufacturingPage.Margin = new Padding(2);
             ManufacturingPage.Name = "ManufacturingPage";
             ManufacturingPage.Padding = new Padding(2);
-            ManufacturingPage.Size = new Size(1118, 500);
+            ManufacturingPage.Size = new Size(1118, 543);
             ManufacturingPage.TabIndex = 0;
             ManufacturingPage.Text = "Manufacturing";
             // 
@@ -1223,9 +1224,6 @@
             // 
             // ManuInputGrid
             // 
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            ManuInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManuInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -1241,7 +1239,7 @@
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ManuInputGrid.GridColor = Color.Black;
-            ManuInputGrid.Location = new Point(550, 4);
+            ManuInputGrid.Location = new Point(555, 4);
             ManuInputGrid.Margin = new Padding(2);
             ManuInputGrid.Name = "ManuInputGrid";
             ManuInputGrid.ReadOnly = true;
@@ -1512,15 +1510,12 @@
             CopyPage.Margin = new Padding(2);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(2);
-            CopyPage.Size = new Size(1118, 500);
+            CopyPage.Size = new Size(1118, 543);
             CopyPage.TabIndex = 1;
             CopyPage.Text = "Copy";
             // 
             // CopyMatGrid
             // 
-            dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            CopyMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             CopyMatGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CopyMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             CopyMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -1921,7 +1916,7 @@
             MEResearchPage.Margin = new Padding(2);
             MEResearchPage.Name = "MEResearchPage";
             MEResearchPage.Padding = new Padding(2);
-            MEResearchPage.Size = new Size(1118, 500);
+            MEResearchPage.Size = new Size(1118, 543);
             MEResearchPage.TabIndex = 2;
             MEResearchPage.Text = "ME Research";
             // 
@@ -2146,9 +2141,6 @@
             // 
             // MEMaterialsGrid
             // 
-            dataGridViewCellStyle13.BackColor = Color.Black;
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            MEMaterialsGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             MEMaterialsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MEMaterialsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             MEMaterialsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -2164,13 +2156,13 @@
             dataGridViewCellStyle18.WrapMode = DataGridViewTriState.False;
             MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle18;
             MEMaterialsGrid.GridColor = Color.Black;
-            MEMaterialsGrid.Location = new Point(353, 2);
+            MEMaterialsGrid.Location = new Point(349, 5);
             MEMaterialsGrid.Margin = new Padding(2);
             MEMaterialsGrid.Name = "MEMaterialsGrid";
             MEMaterialsGrid.ReadOnly = true;
             MEMaterialsGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             MEMaterialsGrid.RowTemplate.Height = 33;
-            MEMaterialsGrid.Size = new Size(763, 464);
+            MEMaterialsGrid.Size = new Size(690, 464);
             MEMaterialsGrid.TabIndex = 40;
             // 
             // dataGridViewTextBoxColumn25
@@ -2329,7 +2321,7 @@
             TEResearchPage.Margin = new Padding(2);
             TEResearchPage.Name = "TEResearchPage";
             TEResearchPage.Padding = new Padding(2);
-            TEResearchPage.Size = new Size(1118, 500);
+            TEResearchPage.Size = new Size(1118, 543);
             TEResearchPage.TabIndex = 3;
             TEResearchPage.Text = "TE Research";
             // 
@@ -2555,9 +2547,6 @@
             // 
             // TEMatGrid
             // 
-            dataGridViewCellStyle19.BackColor = Color.Black;
-            dataGridViewCellStyle19.ForeColor = Color.White;
-            TEMatGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             TEMatGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TEMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TEMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -2573,13 +2562,13 @@
             dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
             TEMatGrid.DefaultCellStyle = dataGridViewCellStyle24;
             TEMatGrid.GridColor = Color.Black;
-            TEMatGrid.Location = new Point(353, 2);
+            TEMatGrid.Location = new Point(353, 0);
             TEMatGrid.Margin = new Padding(2);
             TEMatGrid.Name = "TEMatGrid";
             TEMatGrid.ReadOnly = true;
             TEMatGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             TEMatGrid.RowTemplate.Height = 33;
-            TEMatGrid.Size = new Size(763, 464);
+            TEMatGrid.Size = new Size(674, 464);
             TEMatGrid.TabIndex = 65;
             // 
             // dataGridViewTextBoxColumn37
@@ -2761,15 +2750,12 @@
             InventionPage.Margin = new Padding(2);
             InventionPage.Name = "InventionPage";
             InventionPage.Padding = new Padding(2);
-            InventionPage.Size = new Size(1118, 500);
+            InventionPage.Size = new Size(1118, 543);
             InventionPage.TabIndex = 4;
             InventionPage.Text = "Invention";
             // 
             // InventionInputGrid
             // 
-            dataGridViewCellStyle25.BackColor = Color.Black;
-            dataGridViewCellStyle25.ForeColor = Color.White;
-            InventionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             InventionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -3087,7 +3073,7 @@
             InventionSkillsTextbox.Multiline = true;
             InventionSkillsTextbox.Name = "InventionSkillsTextbox";
             InventionSkillsTextbox.ReadOnly = true;
-            InventionSkillsTextbox.Size = new Size(174, 496);
+            InventionSkillsTextbox.Size = new Size(174, 539);
             InventionSkillsTextbox.TabIndex = 8;
             // 
             // InventionRunsFor100Label
@@ -3388,7 +3374,7 @@
             ReverseEngineerPage.Margin = new Padding(2);
             ReverseEngineerPage.Name = "ReverseEngineerPage";
             ReverseEngineerPage.Padding = new Padding(2);
-            ReverseEngineerPage.Size = new Size(1118, 500);
+            ReverseEngineerPage.Size = new Size(1118, 543);
             ReverseEngineerPage.TabIndex = 5;
             ReverseEngineerPage.Text = "Reverse Engineering";
             // 
@@ -3422,15 +3408,12 @@
             ReactionPage.Margin = new Padding(2);
             ReactionPage.Name = "ReactionPage";
             ReactionPage.Padding = new Padding(2);
-            ReactionPage.Size = new Size(1118, 500);
+            ReactionPage.Size = new Size(1118, 543);
             ReactionPage.TabIndex = 6;
             ReactionPage.Text = "Reactions";
             // 
             // ReactionInputGrid
             // 
-            dataGridViewCellStyle31.BackColor = Color.Black;
-            dataGridViewCellStyle31.ForeColor = Color.White;
-            ReactionInputGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             ReactionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -3643,7 +3626,7 @@
             ReactionSkillsTextBox.Multiline = true;
             ReactionSkillsTextBox.Name = "ReactionSkillsTextBox";
             ReactionSkillsTextBox.ReadOnly = true;
-            ReactionSkillsTextBox.Size = new Size(220, 496);
+            ReactionSkillsTextBox.Size = new Size(220, 539);
             ReactionSkillsTextBox.TabIndex = 17;
             // 
             // ReactionTotalOutcomeIskLabel
@@ -3899,7 +3882,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(1267, 666);
+            ClientSize = new Size(1267, 677);
             Controls.Add(SearchResultsTreeView);
             Controls.Add(SearchButton);
             Controls.Add(SearchTextBox);

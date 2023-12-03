@@ -183,7 +183,6 @@ namespace EveHelperWF
             }
             InputTypeCombo.SelectedValue = DefaultFormValues.InputTypeComboValue;
             OutputTypeCombo.SelectedValue = DefaultFormValues.OutputTypeComboValue;
-            InventBlueprintCheckbox.Checked = DefaultFormValues.InventBlueprintCheckboxValue;
             SetManufacturingDefaultValues();
             SetReactionDefaultValues();
             SetInventionDefaultValues();
@@ -205,6 +204,8 @@ namespace EveHelperWF
             BuildComponentsCheckbox.Checked = DefaultFormValues.BuildComponentsValue;
             CompMEUpDown.Value = DefaultFormValues.CompMEValue;
             CompTEUpDown.Value = DefaultFormValues.CompTEValue;
+            ManuInventDecryptorCombo.SelectedValue = DefaultFormValues.InventionDecryptorValue;
+            InventBlueprintCheckbox.Checked = DefaultFormValues.InventBlueprintCheckboxValue;
         }
 
         private void SetReactionDefaultValues()
@@ -967,7 +968,7 @@ namespace EveHelperWF
 
                 ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref inventionMats, defaultInventionHelperClass);
                 ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(defaultInventionHelperClass.InputOrderType, ref inventionMats);
-                TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(defaultInventionHelperClass);
+                TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, defaultInventionHelperClass);
                 FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(defaultInventionHelperClass);
                 int avgTriesForSuccess = Convert.ToInt32(Math.Ceiling(1 / FinalInventionProbability));
                 decimal totalInventionInputPrice = 0;
@@ -1017,7 +1018,7 @@ namespace EveHelperWF
             ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref InventionMats, calculationHelperClass);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref InventionMats);
             InventionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateInventionTime(IndustryActivityTypes, calculationHelperClass);
-            TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(calculationHelperClass);
+            TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, calculationHelperClass);
             TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass);
             TotalInventionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, InventionMats);
             TotalInventionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);

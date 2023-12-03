@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -913,22 +914,32 @@ namespace EveHelperWF.ScreenHelper
             return combinedMats;
         }
 
-        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats)
+        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats, bool useQuantityTotal, CalculationHelperClass helperClass)
         {
             decimal baseCost = 0;
             AdjustedCost adjustedCost = null;
+            long quantity = 0;
             foreach (MaterialsWithMarketData mat in manuMats)
             {
+                if (useQuantityTotal)
+                {
+                    quantity = mat.quantity * helperClass.Runs;
+                }
+                else
+                {
+                    quantity = mat.quantity;
+                }
                 adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
                 if (adjustedCost != null)
                 {
                     if (adjustedCost.adjusted_price > 0)
                     {
-                        baseCost += (adjustedCost.adjusted_price * mat.quantity);
+                        
+                        baseCost += Math.Round(adjustedCost.adjusted_price * quantity);
                     }
                     else
                     {
-                        baseCost += (adjustedCost.average_price * mat.quantity);
+                        baseCost += Math.Round(adjustedCost.average_price * quantity);
                     }
                 }
             }
@@ -1173,32 +1184,27 @@ namespace EveHelperWF.ScreenHelper
 
         public static decimal CalculateManufacturingJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass)
         {
+            decimal baseCost = GetBaseCost(Mats, true, helperClass);
             decimal jobCost = 0;
             decimal costIndice = 0;
+            double sccSurcharge = 0.015;
             decimal structureBonus = GetManufacturingStructureCostBonus(helperClass);
+            decimal jobGrossCost = 0;
 
-            foreach (Objects.MaterialsWithMarketData mat in Mats)
-            {
-                Objects.AdjustedCost adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
-                if (adjustedCost != null)
-                {
-                    jobCost += (adjustedCost.adjusted_price * mat.quantity * helperClass.Runs);
-                }
-            }
-
-            if (helperClass.ManufacturingSolarSystemID > 0)
+            if (helperClass.ReactionSolarSystemID > 0)
             {
                 costIndice = GetCostIndexForSystemID(helperClass.ManufacturingSolarSystemID, CostIndiceActivity.ActivityManufacturing);
             }
 
-            jobCost = Math.Round(jobCost);
+            jobGrossCost = Math.Round(baseCost * costIndice);
 
-            jobCost = Math.Round(jobCost * costIndice);
+            jobGrossCost = Math.Round(jobGrossCost * structureBonus);
 
-            jobCost = Math.Round(jobCost * structureBonus);
+            jobCost = jobGrossCost;
 
+            jobCost += Math.Round(jobGrossCost * (Convert.ToDecimal(helperClass.ManufacturingFacilityTax) / 100));
 
-            jobCost = Math.Round(jobCost * (1 + (Convert.ToDecimal(helperClass.ManufacturingFacilityTax) / 100)));
+            jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
 
             return jobCost;
         }
@@ -1366,11 +1372,11 @@ namespace EveHelperWF.ScreenHelper
                     {
                         rigBonus = Convert.ToDecimal(0.024);
                     }
-                    if (isLowSec)
-                    {
-                        rigBonus *= Convert.ToDecimal(1.19);
-                    }
-                    else if (isNullSec)
+                    //if (isLowSec)
+                    //{
+                    //    rigBonus *= Convert.ToDecimal(1.19);
+                    //}
+                    if (isNullSec)
                     {
                         rigBonus *= Convert.ToDecimal(1.21);
                     }
@@ -1438,11 +1444,7 @@ namespace EveHelperWF.ScreenHelper
                         {
                             rigTEBonus = Convert.ToDecimal(0.24);
                         }
-                        if (isLowSec)
-                        {
-                            rigTEBonus *= Convert.ToDecimal(1.19);
-                        }
-                        else if (isNullSec)
+                        if (isNullSec)
                         {
                             rigTEBonus *= Convert.ToDecimal(1.21);
                         }
@@ -1473,35 +1475,46 @@ namespace EveHelperWF.ScreenHelper
 
         public static decimal CalculateReactionJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass)
         {
+            decimal baseCost = GetBaseCost(Mats, true, helperClass);
             decimal jobCost = 0;
             decimal costIndice = 0;
-
-            foreach (Objects.MaterialsWithMarketData mat in Mats)
-            {
-                Objects.AdjustedCost adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
-                if (adjustedCost != null)
-                {
-                    jobCost += (adjustedCost.adjusted_price * mat.quantity * helperClass.Runs);
-                }
-            }
+            double sccSurcharge = 0.015;
+            decimal jobGrossCost = 0;
 
             if (helperClass.ReactionSolarSystemID > 0)
             {
                 costIndice = GetCostIndexForSystemID(helperClass.ReactionSolarSystemID, CostIndiceActivity.ACtivityReaction);
             }
 
-            jobCost = Math.Round(jobCost);
+            jobGrossCost = Math.Round(baseCost * costIndice);
 
-            jobCost = Math.Round(jobCost * costIndice);
+            jobCost = jobGrossCost;
 
+            jobCost += Math.Round(baseCost * (Convert.ToDecimal(helperClass.ReactionsFacilityTax) / 100));
 
-            jobCost = Math.Round(jobCost * (1 + (Convert.ToDecimal(helperClass.ReactionsFacilityTax) / 100)));
+            jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
 
             return jobCost;
         }
         #endregion
 
         #region "Invention Methods"
+        private static decimal GetInventionStructureCostBonus(Objects.CalculationHelperClass helperClass)
+        {
+            decimal costBonus = 1;
+
+            if (helperClass.ManufacturingStructureTypeID > 0)
+            {
+                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
+                if (complex != null)
+                {
+                    costBonus -= (Convert.ToDecimal(complex.IskRequirementBonus) / 100);
+                }
+            }
+
+            return costBonus;
+        }
+
         public static void CalculateInventionInputQuantAndPrice(ref List<Objects.MaterialsWithMarketData> inputMats, Objects.CalculationHelperClass calculationHelperClass)
         {
             foreach (Objects.MaterialsWithMarketData mat in inputMats)
@@ -1607,25 +1620,29 @@ namespace EveHelperWF.ScreenHelper
             return teBonus;
         }
 
-        public static decimal CalculateInventionJobCost(Objects.CalculationHelperClass helperClass)
+        public static decimal CalculateInventionJobCost(List<MaterialsWithMarketData> manuMats, Objects.CalculationHelperClass helperClass)
         {
             decimal jobCost = 0;
+            decimal baseJobCost = 0;
             decimal costIndice = 0;
             decimal estimatedItemValue = GetEstimatedItemValueForBlueprintInvention(helperClass);
-            decimal structureBonus = GetStructureCostRigBonus(helperClass);
+            decimal structureBonus = GetInventionStructureCostBonus(helperClass);
+            double sccSurcharge = 0.015;
 
             if (helperClass.InventionSolarSystemID > 0)
             {
                 costIndice = GetCostIndexForSystemID(helperClass.InventionSolarSystemID, CostIndiceActivity.ActivityInvention);
             }
 
-            jobCost = Math.Round(estimatedItemValue * Convert.ToDecimal(0.02));
+            baseJobCost = Math.Round(estimatedItemValue * Convert.ToDecimal(0.02));
 
-            jobCost = Math.Round(jobCost * costIndice);
-
-            jobCost = Math.Round(jobCost * (1 + (Convert.ToDecimal(helperClass.InventionFacilityTax) / 100)));
+            jobCost = Math.Round(baseJobCost * costIndice);
 
             jobCost = Math.Round(jobCost * structureBonus);
+
+            jobCost += Math.Round(jobCost * (Convert.ToDecimal(helperClass.InventionFacilityTax) / 100));
+
+            jobCost += Math.Round(baseJobCost * (decimal)sccSurcharge);
 
             return jobCost;
         }
@@ -1658,7 +1675,7 @@ namespace EveHelperWF.ScreenHelper
                 }
             }
 
-            return estimatedItemValue;
+            return Math.Round(estimatedItemValue * helperClass.Runs);
         }
 
         private static decimal GetStructureCostRigBonus(Objects.CalculationHelperClass helperClass)
@@ -1899,7 +1916,7 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetMEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats);
+            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
             decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
             decimal facilityTax = calculationHelperClass.MEFacilityTax / 100;
@@ -1917,7 +1934,7 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetTEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats);
+            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.TEFromLevel / 2, calculationHelperClass.TEToLevel / 2);
             decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.TESolarSystemID, Objects.CostIndiceActivity.ActivityTE);
             decimal facilityTax = calculationHelperClass.TEFacilityTax / 100;
@@ -2043,7 +2060,7 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetCopyJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats);
+            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
             decimal jobCostBase = Math.Round(baseCost * (decimal).02 * calculationHelperClass.NumCopies * calculationHelperClass.RunsPerCopy);
             decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.CopyingSolarSystemID, Objects.CostIndiceActivity.ActivityCOPY);
             decimal facilityTax = calculationHelperClass.CopyingFacilityTax / 100;

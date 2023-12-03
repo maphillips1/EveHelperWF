@@ -56,5 +56,23 @@ namespace FileIO
             File.WriteAllBytes(filename, content);
 
         }
+
+        public static string[] GetFileNamesInDirectory(string directoryName)
+        {
+            string[] fileNames = null;
+            if (Directory.Exists(directoryName))
+            {
+                fileNames =  Directory.GetFiles(directoryName);
+            }
+            else
+            {
+                System.IO.Directory.CreateDirectory(directoryName);
+            }
+            if (fileNames == null)
+            {
+                fileNames = new string[0];
+            }
+            return fileNames;
+        }
     }
 }
