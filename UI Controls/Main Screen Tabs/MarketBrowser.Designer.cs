@@ -84,6 +84,8 @@
             label4 = new Label();
             PriceHistoryTabPage = new TabPage();
             PriceHistoryGridView = new DataGridView();
+            tabPage2 = new TabPage();
+            priceHistoryGraph1 = new Objects.Custom_Controls.PriceHistoryGraph();
             RensButton = new Button();
             label2 = new Label();
             label1 = new Label();
@@ -107,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)BuyOrdersGridView).BeginInit();
             PriceHistoryTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // SelectedItemImageWorker
@@ -179,6 +182,7 @@
             SelectedItemTabPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             SelectedItemTabPanel.Controls.Add(OrdersTabPage);
             SelectedItemTabPanel.Controls.Add(PriceHistoryTabPage);
+            SelectedItemTabPanel.Controls.Add(tabPage2);
             SelectedItemTabPanel.Location = new Point(256, 138);
             SelectedItemTabPanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemTabPanel.Name = "SelectedItemTabPanel";
@@ -360,6 +364,7 @@
             volumeTotal.MinimumWidth = 6;
             volumeTotal.Name = "volumeTotal";
             volumeTotal.Visible = false;
+            volumeTotal.Width = 125;
             // 
             // BuyOrdersGridView
             // 
@@ -509,6 +514,7 @@
             dataGridViewTextBoxColumn13.MinimumWidth = 6;
             dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             dataGridViewTextBoxColumn13.Visible = false;
+            dataGridViewTextBoxColumn13.Width = 125;
             // 
             // label4
             // 
@@ -555,6 +561,25 @@
             PriceHistoryGridView.RowTemplate.Height = 29;
             PriceHistoryGridView.Size = new Size(709, 462);
             PriceHistoryGridView.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            tabPage2.BackColor = Color.FromArgb(2, 23, 38);
+            tabPage2.Controls.Add(priceHistoryGraph1);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(3, 2, 3, 2);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Size = new Size(715, 466);
+            tabPage2.TabIndex = 2;
+            tabPage2.Text = "Price History Graph";
+            // 
+            // priceHistoryGraph1
+            // 
+            priceHistoryGraph1.Dock = DockStyle.Fill;
+            priceHistoryGraph1.Location = new Point(0, 0);
+            priceHistoryGraph1.Name = "priceHistoryGraph1";
+            priceHistoryGraph1.Size = new Size(715, 466);
+            priceHistoryGraph1.TabIndex = 0;
             // 
             // RensButton
             // 
@@ -734,6 +759,8 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
             dataGridViewCellStyle11.Padding = new Padding(2);
             volume.DefaultCellStyle = dataGridViewCellStyle11;
             volume.HeaderText = "Volume";
@@ -786,6 +813,7 @@
             ((System.ComponentModel.ISupportInitialize)BuyOrdersGridView).EndInit();
             PriceHistoryTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).EndInit();
+            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -845,6 +873,8 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private TabPage tabPage2;
+        private Objects.Custom_Controls.PriceHistoryGraph priceHistoryGraph1;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn Avg;
         private DataGridViewTextBoxColumn Low;

@@ -124,5 +124,16 @@ namespace Enums
             HasStation = 2,
             NoStation = 3
         }
+
+        public enum PriceHistoryTimePeriod
+        {
+            Week = 0,
+            ThirtyDays = 1,
+            SixtyDays = 2,
+            NinetyDays = 3,
+            SixMonths = 4,
+            OneYear = 5,
+            AllTime = 6
+        }
     }
 }

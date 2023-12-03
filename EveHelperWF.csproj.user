@@ -4,8 +4,11 @@
     <_LastSelectedProfileId>C:\Users\mrphi\source\repos\EveHelperWF\EveHelperWF\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Objects\FormBase.cs">
+    <Compile Update="Objects\Custom Controls\FormBase.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Objects\Custom Controls\PriceHistoryGraph.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\AbyssTracker.cs">
       <SubType>Form</SubType>

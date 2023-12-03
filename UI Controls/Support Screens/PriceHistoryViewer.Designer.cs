@@ -147,6 +147,8 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
             dataGridViewCellStyle5.Padding = new Padding(2);
             volume.DefaultCellStyle = dataGridViewCellStyle5;
             volume.HeaderText = "Volume";
