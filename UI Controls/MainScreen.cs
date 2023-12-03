@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,10 +18,19 @@ namespace EveHelperWF.UI_Controls
 {
     public partial class MainScreen : Objects.FormBase
     {
+        ConfigureDefaults configureDefaults;
+        AbyssTracker abyssTracker;
+        BackupFiles backupFiles;
+        FIleLocations fIleLocations;
+        PriceHistoryUtility priceHistoryUtility;
+        LootAppraisal lootAppraisal;
+
         public MainScreen()
         {
             InitializeComponent();
             CommonHelper.Init();
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta"; 
 
             if (!InitLongLoadingWorker.IsBusy)
             {
@@ -44,9 +54,10 @@ namespace EveHelperWF.UI_Controls
 
         private void LootAppraisalButton_Click(object sender, EventArgs e)
         {
-            LootAppraisal lootAppraisal = new LootAppraisal();
+            if (lootAppraisal == null) { lootAppraisal = new LootAppraisal(); }
             lootAppraisal.StartPosition = FormStartPosition.CenterScreen;
             lootAppraisal.Show();
+            lootAppraisal.BringToFront();
         }
 
         private void SystemFinderButton_Click(object sender, EventArgs e)
@@ -58,9 +69,10 @@ namespace EveHelperWF.UI_Controls
 
         private void DefaultsButtonClick_Click(object sender, EventArgs e)
         {
-            ConfigureDefaults configureDefaults = new ConfigureDefaults();
+            if (configureDefaults == null) { configureDefaults = new ConfigureDefaults(); }
             configureDefaults.StartPosition = FormStartPosition.CenterScreen;
             configureDefaults.Show();
+            configureDefaults.BringToFront();
         }
 
         private void MarketBrowserButton_Click(object sender, EventArgs e)
@@ -72,9 +84,10 @@ namespace EveHelperWF.UI_Controls
 
         private void AbyssTrackerButton_Click(object sender, EventArgs e)
         {
-            AbyssTracker abyssTracker = new AbyssTracker();
+            if (abyssTracker == null) { abyssTracker = new AbyssTracker(); }
             abyssTracker.StartPosition = FormStartPosition.CenterScreen;
             abyssTracker.Show();
+            abyssTracker.BringToFront();
         }
 
         private void FuzzworksLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -87,23 +100,26 @@ namespace EveHelperWF.UI_Controls
 
         private void PriceHistoryButton_Click(object sender, EventArgs e)
         {
-            PriceHistoryUtility priceHistoryUtility = new PriceHistoryUtility();
+            if (priceHistoryUtility == null) { priceHistoryUtility = new PriceHistoryUtility(); }
             priceHistoryUtility.StartPosition = FormStartPosition.CenterScreen;
             priceHistoryUtility.Show();
+            priceHistoryUtility.BringToFront();
         }
 
         private void fileLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FIleLocations fIleLocations = new FIleLocations();
+            if (fIleLocations == null) { fIleLocations = new FIleLocations(); }
             fIleLocations.StartPosition = FormStartPosition.CenterScreen;
             fIleLocations.Show();
+            fIleLocations.BringToFront();
         }
 
         private void backupFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BackupFiles backupFiles = new BackupFiles();
+            if (backupFiles == null) { backupFiles = new BackupFiles(); }
             backupFiles.StartPosition = FormStartPosition.CenterScreen;
             backupFiles.Show();
+            backupFiles.BringToFront();
         }
 
         private void FreyaLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
