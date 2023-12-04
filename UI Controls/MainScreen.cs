@@ -54,7 +54,7 @@ namespace EveHelperWF.UI_Controls
 
         private void LootAppraisalButton_Click(object sender, EventArgs e)
         {
-            if (lootAppraisal == null) { lootAppraisal = new LootAppraisal(); }
+            if (lootAppraisal == null || lootAppraisal.IsDisposed) { lootAppraisal = new LootAppraisal(); }
             lootAppraisal.StartPosition = FormStartPosition.CenterScreen;
             lootAppraisal.Show();
             lootAppraisal.BringToFront();
@@ -69,7 +69,7 @@ namespace EveHelperWF.UI_Controls
 
         private void DefaultsButtonClick_Click(object sender, EventArgs e)
         {
-            if (configureDefaults == null) { configureDefaults = new ConfigureDefaults(); }
+            if (configureDefaults == null || configureDefaults.IsDisposed) { configureDefaults = new ConfigureDefaults(); }
             configureDefaults.StartPosition = FormStartPosition.CenterScreen;
             configureDefaults.Show();
             configureDefaults.BringToFront();
@@ -84,7 +84,7 @@ namespace EveHelperWF.UI_Controls
 
         private void AbyssTrackerButton_Click(object sender, EventArgs e)
         {
-            if (abyssTracker == null) { abyssTracker = new AbyssTracker(); }
+            if (abyssTracker == null || abyssTracker.IsDisposed) { abyssTracker = new AbyssTracker(); }
             abyssTracker.StartPosition = FormStartPosition.CenterScreen;
             abyssTracker.Show();
             abyssTracker.BringToFront();
@@ -100,7 +100,7 @@ namespace EveHelperWF.UI_Controls
 
         private void PriceHistoryButton_Click(object sender, EventArgs e)
         {
-            if (priceHistoryUtility == null) { priceHistoryUtility = new PriceHistoryUtility(); }
+            if (priceHistoryUtility == null || priceHistoryUtility.IsDisposed) { priceHistoryUtility = new PriceHistoryUtility(); }
             priceHistoryUtility.StartPosition = FormStartPosition.CenterScreen;
             priceHistoryUtility.Show();
             priceHistoryUtility.BringToFront();
@@ -108,7 +108,7 @@ namespace EveHelperWF.UI_Controls
 
         private void fileLocationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fIleLocations == null) { fIleLocations = new FIleLocations(); }
+            if (fIleLocations == null || fIleLocations.IsDisposed) { fIleLocations = new FIleLocations(); }
             fIleLocations.StartPosition = FormStartPosition.CenterScreen;
             fIleLocations.Show();
             fIleLocations.BringToFront();
@@ -116,7 +116,7 @@ namespace EveHelperWF.UI_Controls
 
         private void backupFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (backupFiles == null) { backupFiles = new BackupFiles(); }
+            if (backupFiles == null || backupFiles.IsDisposed) { backupFiles = new BackupFiles(); }
             backupFiles.StartPosition = FormStartPosition.CenterScreen;
             backupFiles.Show();
             backupFiles.BringToFront();

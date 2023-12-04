@@ -267,6 +267,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 TEStructRigCombo.SelectedValue = DefaultFormValues.TEStructureRIg;
                 TETaxUpDown.Value = DefaultFormValues.TETax;
                 TEImplantCombo.SelectedValue = DefaultFormValues.TEImplantTypeID;
+
+                //Skills
+                AccountingLevelUpDown.Value = DefaultFormValues.AccountingSKill;
+                BrokerRelationsLevelUpDown.Value = DefaultFormValues.BrokersSkill;
             }
         }
         #endregion
@@ -347,6 +351,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.TEStructureRIg = (int)TEStructRigCombo.SelectedValue;
             DefaultFormValues.TETax = (decimal)TETaxUpDown.Value;
             DefaultFormValues.TEImplantTypeID = (int)TEImplantCombo.SelectedValue;
+
+            //Skills
+            DefaultFormValues.AccountingSKill = (int)AccountingLevelUpDown.Value;
+            DefaultFormValues.BrokersSkill = (int)BrokerRelationsLevelUpDown.Value;
         }
         #endregion
     }

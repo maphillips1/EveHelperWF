@@ -66,5 +66,9 @@ namespace EveHelperWF.Objects
         public int TEStructureRIg { get;set; }
         public decimal TETax { get; set; }
         public int TEImplantTypeID { get; set;}
+
+        // Skills
+        public int AccountingSKill { get; set; }
+        public int BrokersSkill { get; set; }
     }
 }

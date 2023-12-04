@@ -132,6 +132,11 @@
             label66 = new Label();
             label67 = new Label();
             SaveButton = new Button();
+            SkillsPage = new TabPage();
+            BrokerRelationsLevelUpDown = new NumericUpDown();
+            AccountingLevelUpDown = new NumericUpDown();
+            label16 = new Label();
+            label21 = new Label();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -157,6 +162,9 @@
             ((System.ComponentModel.ISupportInitialize)TEToLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).BeginInit();
+            SkillsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).BeginInit();
             SuspendLayout();
             // 
             // DefaultsTabContainer
@@ -168,11 +176,13 @@
             DefaultsTabContainer.Controls.Add(CopyPage);
             DefaultsTabContainer.Controls.Add(MEPage);
             DefaultsTabContainer.Controls.Add(TEPage);
+            DefaultsTabContainer.Controls.Add(SkillsPage);
             DefaultsTabContainer.Dock = DockStyle.Bottom;
-            DefaultsTabContainer.Location = new Point(0, 73);
+            DefaultsTabContainer.Location = new Point(0, 54);
+            DefaultsTabContainer.Margin = new Padding(3, 2, 3, 2);
             DefaultsTabContainer.Name = "DefaultsTabContainer";
             DefaultsTabContainer.SelectedIndex = 0;
-            DefaultsTabContainer.Size = new Size(700, 357);
+            DefaultsTabContainer.Size = new Size(612, 268);
             DefaultsTabContainer.TabIndex = 0;
             // 
             // MainDefaultTabPage
@@ -186,49 +196,50 @@
             MainDefaultTabPage.Controls.Add(label3);
             MainDefaultTabPage.Controls.Add(label2);
             MainDefaultTabPage.Controls.Add(label1);
-            MainDefaultTabPage.Location = new Point(4, 29);
+            MainDefaultTabPage.Location = new Point(4, 24);
+            MainDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             MainDefaultTabPage.Name = "MainDefaultTabPage";
-            MainDefaultTabPage.Padding = new Padding(3);
-            MainDefaultTabPage.Size = new Size(692, 324);
+            MainDefaultTabPage.Padding = new Padding(3, 2, 3, 2);
+            MainDefaultTabPage.Size = new Size(604, 240);
             MainDefaultTabPage.TabIndex = 0;
             MainDefaultTabPage.Text = "Main";
             // 
             // InventBlueprintCheckbox
             // 
             InventBlueprintCheckbox.AutoSize = true;
-            InventBlueprintCheckbox.Location = new Point(191, 164);
+            InventBlueprintCheckbox.Location = new Point(167, 123);
             InventBlueprintCheckbox.Margin = new Padding(2);
             InventBlueprintCheckbox.Name = "InventBlueprintCheckbox";
-            InventBlueprintCheckbox.Size = new Size(18, 17);
+            InventBlueprintCheckbox.Size = new Size(15, 14);
             InventBlueprintCheckbox.TabIndex = 12;
             InventBlueprintCheckbox.UseVisualStyleBackColor = true;
             // 
             // OutputOrderTypeCombo
             // 
             OutputOrderTypeCombo.FormattingEnabled = true;
-            OutputOrderTypeCombo.Location = new Point(191, 109);
+            OutputOrderTypeCombo.Location = new Point(167, 82);
             OutputOrderTypeCombo.Margin = new Padding(2);
             OutputOrderTypeCombo.Name = "OutputOrderTypeCombo";
-            OutputOrderTypeCombo.Size = new Size(146, 28);
+            OutputOrderTypeCombo.Size = new Size(128, 23);
             OutputOrderTypeCombo.TabIndex = 10;
             // 
             // InputOrderTypeCombo
             // 
             InputOrderTypeCombo.FormattingEnabled = true;
-            InputOrderTypeCombo.Location = new Point(191, 60);
+            InputOrderTypeCombo.Location = new Point(167, 45);
             InputOrderTypeCombo.Margin = new Padding(2);
             InputOrderTypeCombo.Name = "InputOrderTypeCombo";
-            InputOrderTypeCombo.Size = new Size(146, 28);
+            InputOrderTypeCombo.Size = new Size(128, 23);
             InputOrderTypeCombo.TabIndex = 11;
             // 
             // RunsUpDown
             // 
-            RunsUpDown.Location = new Point(191, 20);
+            RunsUpDown.Location = new Point(167, 15);
             RunsUpDown.Margin = new Padding(2);
             RunsUpDown.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
             RunsUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             RunsUpDown.Name = "RunsUpDown";
-            RunsUpDown.Size = new Size(144, 27);
+            RunsUpDown.Size = new Size(126, 23);
             RunsUpDown.TabIndex = 9;
             RunsUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -236,10 +247,10 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(26, 160);
+            label4.Location = new Point(23, 120);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(140, 23);
+            label4.Size = new Size(115, 19);
             label4.TabIndex = 5;
             label4.Text = "Invent Blueprint";
             // 
@@ -247,10 +258,10 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(7, 109);
+            label3.Location = new Point(6, 82);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(163, 23);
+            label3.Size = new Size(135, 19);
             label3.TabIndex = 6;
             label3.Text = "Output Order Type";
             // 
@@ -258,10 +269,10 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(20, 60);
+            label2.Location = new Point(18, 45);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(148, 23);
+            label2.Size = new Size(123, 19);
             label2.TabIndex = 7;
             label2.Text = "Input Order Type";
             // 
@@ -269,10 +280,10 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(112, 20);
+            label1.Location = new Point(98, 15);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 23);
+            label1.Size = new Size(40, 19);
             label1.TabIndex = 8;
             label1.Text = "Runs";
             // 
@@ -301,57 +312,58 @@
             ManufacturingDefaultsTabPage.Controls.Add(label13);
             ManufacturingDefaultsTabPage.Controls.Add(label14);
             ManufacturingDefaultsTabPage.Controls.Add(label15);
-            ManufacturingDefaultsTabPage.Location = new Point(4, 29);
+            ManufacturingDefaultsTabPage.Location = new Point(4, 24);
+            ManufacturingDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             ManufacturingDefaultsTabPage.Name = "ManufacturingDefaultsTabPage";
-            ManufacturingDefaultsTabPage.Padding = new Padding(3);
-            ManufacturingDefaultsTabPage.Size = new Size(692, 324);
+            ManufacturingDefaultsTabPage.Padding = new Padding(3, 2, 3, 2);
+            ManufacturingDefaultsTabPage.Size = new Size(604, 240);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
             // 
             // BuildComponentCheckbox
             // 
             BuildComponentCheckbox.AutoSize = true;
-            BuildComponentCheckbox.Location = new Point(490, 116);
+            BuildComponentCheckbox.Location = new Point(429, 87);
             BuildComponentCheckbox.Margin = new Padding(2);
             BuildComponentCheckbox.Name = "BuildComponentCheckbox";
-            BuildComponentCheckbox.Size = new Size(18, 17);
+            BuildComponentCheckbox.Size = new Size(15, 14);
             BuildComponentCheckbox.TabIndex = 25;
             BuildComponentCheckbox.UseVisualStyleBackColor = true;
             // 
             // StructureTERigCombo
             // 
             StructureTERigCombo.FormattingEnabled = true;
-            StructureTERigCombo.Location = new Point(160, 245);
+            StructureTERigCombo.Location = new Point(140, 184);
             StructureTERigCombo.Margin = new Padding(2);
             StructureTERigCombo.Name = "StructureTERigCombo";
-            StructureTERigCombo.Size = new Size(146, 28);
+            StructureTERigCombo.Size = new Size(128, 23);
             StructureTERigCombo.TabIndex = 24;
             // 
             // StructureMERigCombo
             // 
             StructureMERigCombo.FormattingEnabled = true;
-            StructureMERigCombo.Location = new Point(160, 199);
+            StructureMERigCombo.Location = new Point(140, 149);
             StructureMERigCombo.Margin = new Padding(2);
             StructureMERigCombo.Name = "StructureMERigCombo";
-            StructureMERigCombo.Size = new Size(146, 28);
+            StructureMERigCombo.Size = new Size(128, 23);
             StructureMERigCombo.TabIndex = 23;
             // 
             // StructureCombo
             // 
             StructureCombo.FormattingEnabled = true;
-            StructureCombo.Location = new Point(160, 155);
+            StructureCombo.Location = new Point(140, 116);
             StructureCombo.Margin = new Padding(2);
             StructureCombo.Name = "StructureCombo";
-            StructureCombo.Size = new Size(146, 28);
+            StructureCombo.Size = new Size(128, 23);
             StructureCombo.TabIndex = 22;
             // 
             // ImplantCombo
             // 
             ImplantCombo.FormattingEnabled = true;
-            ImplantCombo.Location = new Point(490, 64);
+            ImplantCombo.Location = new Point(429, 48);
             ImplantCombo.Margin = new Padding(2);
             ImplantCombo.Name = "ImplantCombo";
-            ImplantCombo.Size = new Size(146, 28);
+            ImplantCombo.Size = new Size(128, 23);
             ImplantCombo.TabIndex = 21;
             // 
             // SystemCombo
@@ -362,69 +374,69 @@
             SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
-            SystemCombo.Location = new Point(160, 111);
+            SystemCombo.Location = new Point(140, 83);
             SystemCombo.Margin = new Padding(2);
             SystemCombo.Name = "SystemCombo";
-            SystemCombo.Size = new Size(146, 28);
+            SystemCombo.Size = new Size(128, 23);
             SystemCombo.TabIndex = 20;
             // 
             // TEUpDown
             // 
             TEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEUpDown.Location = new Point(160, 64);
+            TEUpDown.Location = new Point(140, 48);
             TEUpDown.Margin = new Padding(2);
             TEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEUpDown.Minimum = new decimal(new int[] { 20, 0, 0, int.MinValue });
             TEUpDown.Name = "TEUpDown";
-            TEUpDown.Size = new Size(144, 27);
+            TEUpDown.Size = new Size(126, 23);
             TEUpDown.TabIndex = 18;
             // 
             // CompTEUpDown
             // 
             CompTEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            CompTEUpDown.Location = new Point(491, 199);
+            CompTEUpDown.Location = new Point(430, 149);
             CompTEUpDown.Margin = new Padding(2);
             CompTEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             CompTEUpDown.Name = "CompTEUpDown";
-            CompTEUpDown.Size = new Size(144, 27);
+            CompTEUpDown.Size = new Size(126, 23);
             CompTEUpDown.TabIndex = 17;
             // 
             // CompMEUpDown
             // 
-            CompMEUpDown.Location = new Point(491, 155);
+            CompMEUpDown.Location = new Point(430, 116);
             CompMEUpDown.Margin = new Padding(2);
             CompMEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             CompMEUpDown.Name = "CompMEUpDown";
-            CompMEUpDown.Size = new Size(144, 27);
+            CompMEUpDown.Size = new Size(126, 23);
             CompMEUpDown.TabIndex = 16;
             // 
             // TaxUpDown
             // 
             TaxUpDown.DecimalPlaces = 2;
-            TaxUpDown.Location = new Point(490, 18);
+            TaxUpDown.Location = new Point(429, 14);
             TaxUpDown.Margin = new Padding(2);
             TaxUpDown.Name = "TaxUpDown";
-            TaxUpDown.Size = new Size(144, 27);
+            TaxUpDown.Size = new Size(126, 23);
             TaxUpDown.TabIndex = 19;
             // 
             // MEUpDown
             // 
-            MEUpDown.Location = new Point(160, 15);
+            MEUpDown.Location = new Point(140, 11);
             MEUpDown.Margin = new Padding(2);
             MEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             MEUpDown.Minimum = new decimal(new int[] { 10, 0, 0, int.MinValue });
             MEUpDown.Name = "MEUpDown";
-            MEUpDown.Size = new Size(144, 27);
+            MEUpDown.Size = new Size(126, 23);
             MEUpDown.TabIndex = 15;
             // 
             // label11
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(402, 199);
+            label11.Location = new Point(352, 149);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(82, 23);
+            label11.Size = new Size(68, 19);
             label11.TabIndex = 13;
             label11.Text = "Comp TE";
             // 
@@ -432,10 +444,10 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(396, 155);
+            label10.Location = new Point(346, 116);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(88, 23);
+            label10.Size = new Size(73, 19);
             label10.TabIndex = 12;
             label10.Text = "Comp ME";
             // 
@@ -443,10 +455,10 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(330, 111);
+            label9.Location = new Point(289, 83);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(158, 23);
+            label9.Size = new Size(131, 19);
             label9.TabIndex = 11;
             label9.Text = "Build Components";
             // 
@@ -454,10 +466,10 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(410, 63);
+            label8.Location = new Point(359, 47);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(73, 23);
+            label8.Size = new Size(60, 19);
             label8.TabIndex = 10;
             label8.Text = "Implant";
             // 
@@ -465,10 +477,10 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(442, 18);
+            label7.Location = new Point(387, 14);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(37, 23);
+            label7.Size = new Size(32, 19);
             label7.TabIndex = 9;
             label7.Text = "Tax";
             // 
@@ -476,10 +488,10 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(14, 249);
+            label6.Location = new Point(12, 187);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(141, 23);
+            label6.Size = new Size(115, 19);
             label6.TabIndex = 8;
             label6.Text = "Structure TE Rig";
             // 
@@ -487,11 +499,11 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(8, 199);
+            label5.Location = new Point(7, 149);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.RightToLeft = RightToLeft.No;
-            label5.Size = new Size(147, 23);
+            label5.Size = new Size(120, 19);
             label5.TabIndex = 7;
             label5.Text = "Structure ME Rig";
             // 
@@ -499,10 +511,10 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(66, 155);
+            label12.Location = new Point(58, 116);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(85, 23);
+            label12.Size = new Size(70, 19);
             label12.TabIndex = 6;
             label12.Text = "Structure";
             // 
@@ -510,10 +522,10 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.Location = new Point(82, 111);
+            label13.Location = new Point(72, 83);
             label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
-            label13.Size = new Size(68, 23);
+            label13.Size = new Size(57, 19);
             label13.TabIndex = 5;
             label13.Text = "System";
             // 
@@ -521,10 +533,10 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label14.Location = new Point(118, 63);
+            label14.Location = new Point(103, 47);
             label14.Margin = new Padding(2, 0, 2, 0);
             label14.Name = "label14";
-            label14.Size = new Size(29, 23);
+            label14.Size = new Size(24, 19);
             label14.TabIndex = 14;
             label14.Text = "TE";
             // 
@@ -532,10 +544,10 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label15.Location = new Point(113, 18);
+            label15.Location = new Point(99, 14);
             label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
-            label15.Size = new Size(35, 23);
+            label15.Size = new Size(29, 19);
             label15.TabIndex = 4;
             label15.Text = "ME";
             // 
@@ -554,55 +566,56 @@
             InventionDefaultsTabPage.Controls.Add(label29);
             InventionDefaultsTabPage.Controls.Add(label28);
             InventionDefaultsTabPage.Controls.Add(label27);
-            InventionDefaultsTabPage.Location = new Point(4, 29);
+            InventionDefaultsTabPage.Location = new Point(4, 24);
+            InventionDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             InventionDefaultsTabPage.Name = "InventionDefaultsTabPage";
-            InventionDefaultsTabPage.Size = new Size(692, 324);
+            InventionDefaultsTabPage.Size = new Size(604, 240);
             InventionDefaultsTabPage.TabIndex = 2;
             InventionDefaultsTabPage.Text = "Invention";
             // 
             // InventionTaxUpDown
             // 
             InventionTaxUpDown.DecimalPlaces = 2;
-            InventionTaxUpDown.Location = new Point(150, 224);
+            InventionTaxUpDown.Location = new Point(131, 168);
             InventionTaxUpDown.Margin = new Padding(2);
             InventionTaxUpDown.Name = "InventionTaxUpDown";
-            InventionTaxUpDown.Size = new Size(144, 27);
+            InventionTaxUpDown.Size = new Size(126, 23);
             InventionTaxUpDown.TabIndex = 27;
             // 
             // InventionDecryptorCombo
             // 
             InventionDecryptorCombo.FormattingEnabled = true;
-            InventionDecryptorCombo.Location = new Point(150, 180);
+            InventionDecryptorCombo.Location = new Point(131, 135);
             InventionDecryptorCombo.Margin = new Padding(2);
             InventionDecryptorCombo.Name = "InventionDecryptorCombo";
-            InventionDecryptorCombo.Size = new Size(146, 28);
+            InventionDecryptorCombo.Size = new Size(128, 23);
             InventionDecryptorCombo.TabIndex = 22;
             // 
             // InventionStructureTimeRigCombo
             // 
             InventionStructureTimeRigCombo.FormattingEnabled = true;
-            InventionStructureTimeRigCombo.Location = new Point(150, 140);
+            InventionStructureTimeRigCombo.Location = new Point(131, 105);
             InventionStructureTimeRigCombo.Margin = new Padding(2);
             InventionStructureTimeRigCombo.Name = "InventionStructureTimeRigCombo";
-            InventionStructureTimeRigCombo.Size = new Size(146, 28);
+            InventionStructureTimeRigCombo.Size = new Size(128, 23);
             InventionStructureTimeRigCombo.TabIndex = 23;
             // 
             // InventionStructureCostRigCombo
             // 
             InventionStructureCostRigCombo.FormattingEnabled = true;
-            InventionStructureCostRigCombo.Location = new Point(150, 97);
+            InventionStructureCostRigCombo.Location = new Point(131, 73);
             InventionStructureCostRigCombo.Margin = new Padding(2);
             InventionStructureCostRigCombo.Name = "InventionStructureCostRigCombo";
-            InventionStructureCostRigCombo.Size = new Size(146, 28);
+            InventionStructureCostRigCombo.Size = new Size(128, 23);
             InventionStructureCostRigCombo.TabIndex = 24;
             // 
             // InventionStructureCombo
             // 
             InventionStructureCombo.FormattingEnabled = true;
-            InventionStructureCombo.Location = new Point(150, 54);
+            InventionStructureCombo.Location = new Point(131, 40);
             InventionStructureCombo.Margin = new Padding(2);
             InventionStructureCombo.Name = "InventionStructureCombo";
-            InventionStructureCombo.Size = new Size(146, 28);
+            InventionStructureCombo.Size = new Size(128, 23);
             InventionStructureCombo.TabIndex = 25;
             // 
             // InventionSolarSystemCombo
@@ -613,20 +626,20 @@
             InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionSolarSystemCombo.FormattingEnabled = true;
             InventionSolarSystemCombo.IntegralHeight = false;
-            InventionSolarSystemCombo.Location = new Point(150, 16);
+            InventionSolarSystemCombo.Location = new Point(131, 12);
             InventionSolarSystemCombo.Margin = new Padding(2);
             InventionSolarSystemCombo.Name = "InventionSolarSystemCombo";
-            InventionSolarSystemCombo.Size = new Size(146, 28);
+            InventionSolarSystemCombo.Size = new Size(128, 23);
             InventionSolarSystemCombo.TabIndex = 26;
             // 
             // label32
             // 
             label32.AutoSize = true;
             label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label32.Location = new Point(113, 224);
+            label32.Location = new Point(99, 168);
             label32.Margin = new Padding(2, 0, 2, 0);
             label32.Name = "label32";
-            label32.Size = new Size(33, 20);
+            label32.Size = new Size(26, 15);
             label32.TabIndex = 16;
             label32.Text = "Tax";
             // 
@@ -634,10 +647,10 @@
             // 
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label31.Location = new Point(67, 182);
+            label31.Location = new Point(59, 136);
             label31.Margin = new Padding(2, 0, 2, 0);
             label31.Name = "label31";
-            label31.Size = new Size(80, 20);
+            label31.Size = new Size(64, 15);
             label31.TabIndex = 17;
             label31.Text = "Decryptor";
             // 
@@ -645,10 +658,10 @@
             // 
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label30.Location = new Point(9, 142);
+            label30.Location = new Point(8, 106);
             label30.Margin = new Padding(2, 0, 2, 0);
             label30.Name = "label30";
-            label30.Size = new Size(140, 20);
+            label30.Size = new Size(113, 15);
             label30.TabIndex = 18;
             label30.Text = "Structure Time Rig";
             // 
@@ -656,10 +669,10 @@
             // 
             label29.AutoSize = true;
             label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label29.Location = new Point(13, 99);
+            label29.Location = new Point(11, 74);
             label29.Margin = new Padding(2, 0, 2, 0);
             label29.Name = "label29";
-            label29.Size = new Size(136, 20);
+            label29.Size = new Size(109, 15);
             label29.TabIndex = 19;
             label29.Text = "Structure Cost Rig";
             // 
@@ -667,10 +680,10 @@
             // 
             label28.AutoSize = true;
             label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label28.Location = new Point(73, 61);
+            label28.Location = new Point(64, 46);
             label28.Margin = new Padding(2, 0, 2, 0);
             label28.Name = "label28";
-            label28.Size = new Size(74, 20);
+            label28.Size = new Size(61, 15);
             label28.TabIndex = 20;
             label28.Text = "Structure";
             // 
@@ -678,10 +691,10 @@
             // 
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label27.Location = new Point(49, 18);
+            label27.Location = new Point(43, 14);
             label27.Margin = new Padding(2, 0, 2, 0);
             label27.Name = "label27";
-            label27.Size = new Size(99, 20);
+            label27.Size = new Size(79, 15);
             label27.TabIndex = 21;
             label27.Text = "Solar System";
             // 
@@ -698,9 +711,10 @@
             ReactionsDefaultTabPage.Controls.Add(label18);
             ReactionsDefaultTabPage.Controls.Add(label17);
             ReactionsDefaultTabPage.Controls.Add(ReactionSolarSystemCombo);
-            ReactionsDefaultTabPage.Location = new Point(4, 29);
+            ReactionsDefaultTabPage.Location = new Point(4, 24);
+            ReactionsDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             ReactionsDefaultTabPage.Name = "ReactionsDefaultTabPage";
-            ReactionsDefaultTabPage.Size = new Size(692, 324);
+            ReactionsDefaultTabPage.Size = new Size(604, 240);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
             // 
@@ -708,79 +722,79 @@
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label26.Location = new Point(97, 204);
+            label26.Location = new Point(85, 153);
             label26.Margin = new Padding(2, 0, 2, 0);
             label26.Name = "label26";
-            label26.Size = new Size(33, 20);
+            label26.Size = new Size(26, 15);
             label26.TabIndex = 39;
             label26.Text = "Tax";
             // 
             // ReactionTaxUpDown
             // 
             ReactionTaxUpDown.DecimalPlaces = 2;
-            ReactionTaxUpDown.Location = new Point(139, 203);
+            ReactionTaxUpDown.Location = new Point(122, 152);
             ReactionTaxUpDown.Margin = new Padding(2);
             ReactionTaxUpDown.Name = "ReactionTaxUpDown";
-            ReactionTaxUpDown.Size = new Size(144, 27);
+            ReactionTaxUpDown.Size = new Size(126, 23);
             ReactionTaxUpDown.TabIndex = 38;
             // 
             // ReactionStructureTERig
             // 
             ReactionStructureTERig.FormattingEnabled = true;
-            ReactionStructureTERig.Location = new Point(139, 163);
+            ReactionStructureTERig.Location = new Point(122, 122);
             ReactionStructureTERig.Margin = new Padding(2);
             ReactionStructureTERig.Name = "ReactionStructureTERig";
-            ReactionStructureTERig.Size = new Size(146, 28);
+            ReactionStructureTERig.Size = new Size(128, 23);
             ReactionStructureTERig.TabIndex = 37;
             // 
             // label20
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label20.Location = new Point(10, 163);
+            label20.Location = new Point(9, 122);
             label20.Margin = new Padding(2, 0, 2, 0);
             label20.Name = "label20";
-            label20.Size = new Size(122, 20);
+            label20.Size = new Size(98, 15);
             label20.TabIndex = 36;
             label20.Text = "Structure TE Rig";
             // 
             // ReactionStructureMERig
             // 
             ReactionStructureMERig.FormattingEnabled = true;
-            ReactionStructureMERig.Location = new Point(139, 115);
+            ReactionStructureMERig.Location = new Point(122, 86);
             ReactionStructureMERig.Margin = new Padding(2);
             ReactionStructureMERig.Name = "ReactionStructureMERig";
-            ReactionStructureMERig.Size = new Size(146, 28);
+            ReactionStructureMERig.Size = new Size(128, 23);
             ReactionStructureMERig.TabIndex = 35;
             // 
             // label19
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label19.Location = new Point(5, 115);
+            label19.Location = new Point(4, 86);
             label19.Margin = new Padding(2, 0, 2, 0);
             label19.Name = "label19";
-            label19.Size = new Size(127, 20);
+            label19.Size = new Size(102, 15);
             label19.TabIndex = 34;
             label19.Text = "Structure ME Rig";
             // 
             // ReactionStructureCombo
             // 
             ReactionStructureCombo.FormattingEnabled = true;
-            ReactionStructureCombo.Location = new Point(139, 69);
+            ReactionStructureCombo.Location = new Point(122, 52);
             ReactionStructureCombo.Margin = new Padding(2);
             ReactionStructureCombo.Name = "ReactionStructureCombo";
-            ReactionStructureCombo.Size = new Size(146, 28);
+            ReactionStructureCombo.Size = new Size(128, 23);
             ReactionStructureCombo.TabIndex = 33;
             // 
             // label18
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.Location = new Point(57, 69);
+            label18.Location = new Point(50, 52);
             label18.Margin = new Padding(2, 0, 2, 0);
             label18.Name = "label18";
-            label18.Size = new Size(74, 20);
+            label18.Size = new Size(61, 15);
             label18.TabIndex = 32;
             label18.Text = "Structure";
             // 
@@ -788,11 +802,11 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label17.Location = new Point(33, 20);
+            label17.Location = new Point(29, 15);
             label17.Margin = new Padding(2, 0, 2, 0);
             label17.Name = "label17";
             label17.RightToLeft = RightToLeft.No;
-            label17.Size = new Size(99, 20);
+            label17.Size = new Size(79, 15);
             label17.TabIndex = 31;
             label17.Text = "Solar System";
             // 
@@ -804,10 +818,10 @@
             ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionSolarSystemCombo.FormattingEnabled = true;
             ReactionSolarSystemCombo.IntegralHeight = false;
-            ReactionSolarSystemCombo.Location = new Point(139, 18);
+            ReactionSolarSystemCombo.Location = new Point(122, 14);
             ReactionSolarSystemCombo.Margin = new Padding(2);
             ReactionSolarSystemCombo.Name = "ReactionSolarSystemCombo";
-            ReactionSolarSystemCombo.Size = new Size(146, 28);
+            ReactionSolarSystemCombo.Size = new Size(128, 23);
             ReactionSolarSystemCombo.TabIndex = 30;
             // 
             // CopyPage
@@ -827,51 +841,52 @@
             CopyPage.Controls.Add(label75);
             CopyPage.Controls.Add(label76);
             CopyPage.Controls.Add(label77);
-            CopyPage.Location = new Point(4, 29);
+            CopyPage.Location = new Point(4, 24);
+            CopyPage.Margin = new Padding(3, 2, 3, 2);
             CopyPage.Name = "CopyPage";
-            CopyPage.Size = new Size(692, 324);
+            CopyPage.Size = new Size(604, 240);
             CopyPage.TabIndex = 4;
             CopyPage.Text = "Copying";
             // 
             // CopyRunsCopyUpDown
             // 
-            CopyRunsCopyUpDown.Location = new Point(118, 52);
+            CopyRunsCopyUpDown.Location = new Point(103, 39);
             CopyRunsCopyUpDown.Margin = new Padding(2);
             CopyRunsCopyUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             CopyRunsCopyUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             CopyRunsCopyUpDown.Name = "CopyRunsCopyUpDown";
-            CopyRunsCopyUpDown.Size = new Size(150, 27);
+            CopyRunsCopyUpDown.Size = new Size(131, 23);
             CopyRunsCopyUpDown.TabIndex = 113;
             CopyRunsCopyUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // CopyNumCopiesUpDown
             // 
-            CopyNumCopiesUpDown.Location = new Point(118, 17);
+            CopyNumCopiesUpDown.Location = new Point(103, 13);
             CopyNumCopiesUpDown.Margin = new Padding(2);
             CopyNumCopiesUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             CopyNumCopiesUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             CopyNumCopiesUpDown.Name = "CopyNumCopiesUpDown";
-            CopyNumCopiesUpDown.Size = new Size(150, 27);
+            CopyNumCopiesUpDown.Size = new Size(131, 23);
             CopyNumCopiesUpDown.TabIndex = 112;
             CopyNumCopiesUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // CopyTaxUpDown
             // 
             CopyTaxUpDown.DecimalPlaces = 1;
-            CopyTaxUpDown.Location = new Point(117, 215);
+            CopyTaxUpDown.Location = new Point(102, 161);
             CopyTaxUpDown.Margin = new Padding(2);
             CopyTaxUpDown.Name = "CopyTaxUpDown";
-            CopyTaxUpDown.Size = new Size(150, 27);
+            CopyTaxUpDown.Size = new Size(131, 23);
             CopyTaxUpDown.TabIndex = 111;
             // 
             // CopyTaxLabel
             // 
             CopyTaxLabel.AutoSize = true;
             CopyTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            CopyTaxLabel.Location = new Point(78, 215);
+            CopyTaxLabel.Location = new Point(68, 161);
             CopyTaxLabel.Margin = new Padding(2, 0, 2, 0);
             CopyTaxLabel.Name = "CopyTaxLabel";
-            CopyTaxLabel.Size = new Size(33, 20);
+            CopyTaxLabel.Size = new Size(26, 15);
             CopyTaxLabel.TabIndex = 110;
             CopyTaxLabel.Text = "Tax";
             // 
@@ -883,81 +898,81 @@
             CopySystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             CopySystemCombo.FormattingEnabled = true;
             CopySystemCombo.IntegralHeight = false;
-            CopySystemCombo.Location = new Point(118, 88);
+            CopySystemCombo.Location = new Point(103, 66);
             CopySystemCombo.Margin = new Padding(2);
             CopySystemCombo.Name = "CopySystemCombo";
-            CopySystemCombo.Size = new Size(152, 28);
+            CopySystemCombo.Size = new Size(134, 23);
             CopySystemCombo.TabIndex = 109;
             // 
             // label72
             // 
             label72.AutoSize = true;
             label72.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label72.Location = new Point(52, 88);
+            label72.Location = new Point(46, 66);
             label72.Margin = new Padding(2, 0, 2, 0);
             label72.Name = "label72";
-            label72.Size = new Size(60, 20);
+            label72.Size = new Size(48, 15);
             label72.TabIndex = 108;
             label72.Text = "System";
             // 
             // CopyImplantCombo
             // 
             CopyImplantCombo.FormattingEnabled = true;
-            CopyImplantCombo.Location = new Point(117, 260);
+            CopyImplantCombo.Location = new Point(102, 195);
             CopyImplantCombo.Margin = new Padding(2);
             CopyImplantCombo.Name = "CopyImplantCombo";
-            CopyImplantCombo.Size = new Size(216, 28);
+            CopyImplantCombo.Size = new Size(190, 23);
             CopyImplantCombo.TabIndex = 107;
             // 
             // label73
             // 
             label73.AutoSize = true;
             label73.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label73.Location = new Point(45, 263);
+            label73.Location = new Point(39, 197);
             label73.Margin = new Padding(2, 0, 2, 0);
             label73.Name = "label73";
             label73.RightToLeft = RightToLeft.No;
-            label73.Size = new Size(64, 20);
+            label73.Size = new Size(50, 15);
             label73.TabIndex = 106;
             label73.Text = "Implant";
             // 
             // CopyTimeRigCombo
             // 
             CopyTimeRigCombo.FormattingEnabled = true;
-            CopyTimeRigCombo.Location = new Point(118, 172);
+            CopyTimeRigCombo.Location = new Point(103, 129);
             CopyTimeRigCombo.Margin = new Padding(2);
             CopyTimeRigCombo.Name = "CopyTimeRigCombo";
-            CopyTimeRigCombo.Size = new Size(152, 28);
+            CopyTimeRigCombo.Size = new Size(134, 23);
             CopyTimeRigCombo.TabIndex = 105;
             // 
             // CopyRigLabel
             // 
             CopyRigLabel.AutoSize = true;
             CopyRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            CopyRigLabel.Location = new Point(9, 175);
+            CopyRigLabel.Location = new Point(8, 131);
             CopyRigLabel.Margin = new Padding(2, 0, 2, 0);
             CopyRigLabel.Name = "CopyRigLabel";
-            CopyRigLabel.Size = new Size(101, 20);
+            CopyRigLabel.Size = new Size(82, 15);
             CopyRigLabel.TabIndex = 104;
             CopyRigLabel.Text = "Structure Rig";
             // 
             // CopyStructureCombo
             // 
             CopyStructureCombo.FormattingEnabled = true;
-            CopyStructureCombo.Location = new Point(118, 129);
+            CopyStructureCombo.Location = new Point(103, 97);
             CopyStructureCombo.Margin = new Padding(2);
             CopyStructureCombo.Name = "CopyStructureCombo";
-            CopyStructureCombo.Size = new Size(152, 28);
+            CopyStructureCombo.Size = new Size(134, 23);
             CopyStructureCombo.TabIndex = 103;
             // 
             // label75
             // 
             label75.AutoSize = true;
             label75.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label75.Location = new Point(37, 132);
+            label75.Location = new Point(32, 99);
             label75.Margin = new Padding(2, 0, 2, 0);
             label75.Name = "label75";
-            label75.Size = new Size(74, 20);
+            label75.Size = new Size(61, 15);
             label75.TabIndex = 102;
             label75.Text = "Structure";
             // 
@@ -965,10 +980,10 @@
             // 
             label76.AutoSize = true;
             label76.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label76.Location = new Point(15, 54);
+            label76.Location = new Point(13, 40);
             label76.Margin = new Padding(2, 0, 2, 0);
             label76.Name = "label76";
-            label76.Size = new Size(94, 20);
+            label76.Size = new Size(72, 15);
             label76.TabIndex = 101;
             label76.Text = "Runs / Copy";
             // 
@@ -976,10 +991,10 @@
             // 
             label77.AutoSize = true;
             label77.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label77.Location = new Point(24, 19);
+            label77.Location = new Point(21, 14);
             label77.Margin = new Padding(2, 0, 2, 0);
             label77.Name = "label77";
-            label77.Size = new Size(87, 20);
+            label77.Size = new Size(68, 15);
             label77.TabIndex = 100;
             label77.Text = "# of Copies";
             // 
@@ -1000,50 +1015,51 @@
             MEPage.Controls.Add(label60);
             MEPage.Controls.Add(label61);
             MEPage.Controls.Add(label62);
-            MEPage.Location = new Point(4, 29);
+            MEPage.Location = new Point(4, 24);
+            MEPage.Margin = new Padding(3, 2, 3, 2);
             MEPage.Name = "MEPage";
-            MEPage.Size = new Size(692, 324);
+            MEPage.Size = new Size(604, 240);
             MEPage.TabIndex = 5;
             MEPage.Text = "ME Research";
             // 
             // METoLevelUpDown
             // 
-            METoLevelUpDown.Location = new Point(127, 46);
+            METoLevelUpDown.Location = new Point(111, 34);
             METoLevelUpDown.Margin = new Padding(2);
             METoLevelUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             METoLevelUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             METoLevelUpDown.Name = "METoLevelUpDown";
-            METoLevelUpDown.Size = new Size(150, 27);
+            METoLevelUpDown.Size = new Size(131, 23);
             METoLevelUpDown.TabIndex = 70;
             METoLevelUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // MEFromLevelUpDown
             // 
-            MEFromLevelUpDown.Location = new Point(127, 11);
+            MEFromLevelUpDown.Location = new Point(111, 8);
             MEFromLevelUpDown.Margin = new Padding(2);
             MEFromLevelUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             MEFromLevelUpDown.Minimum = new decimal(new int[] { 10, 0, 0, int.MinValue });
             MEFromLevelUpDown.Name = "MEFromLevelUpDown";
-            MEFromLevelUpDown.Size = new Size(150, 27);
+            MEFromLevelUpDown.Size = new Size(131, 23);
             MEFromLevelUpDown.TabIndex = 69;
             // 
             // METaxUpDown
             // 
             METaxUpDown.DecimalPlaces = 1;
-            METaxUpDown.Location = new Point(126, 209);
+            METaxUpDown.Location = new Point(110, 157);
             METaxUpDown.Margin = new Padding(2);
             METaxUpDown.Name = "METaxUpDown";
-            METaxUpDown.Size = new Size(150, 27);
+            METaxUpDown.Size = new Size(131, 23);
             METaxUpDown.TabIndex = 68;
             // 
             // METaxLabel
             // 
             METaxLabel.AutoSize = true;
             METaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            METaxLabel.Location = new Point(87, 209);
+            METaxLabel.Location = new Point(76, 157);
             METaxLabel.Margin = new Padding(2, 0, 2, 0);
             METaxLabel.Name = "METaxLabel";
-            METaxLabel.Size = new Size(33, 20);
+            METaxLabel.Size = new Size(26, 15);
             METaxLabel.TabIndex = 67;
             METaxLabel.Text = "Tax";
             // 
@@ -1055,81 +1071,81 @@
             MESystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             MESystemCombo.FormattingEnabled = true;
             MESystemCombo.IntegralHeight = false;
-            MESystemCombo.Location = new Point(127, 82);
+            MESystemCombo.Location = new Point(111, 62);
             MESystemCombo.Margin = new Padding(2);
             MESystemCombo.Name = "MESystemCombo";
-            MESystemCombo.Size = new Size(152, 28);
+            MESystemCombo.Size = new Size(134, 23);
             MESystemCombo.TabIndex = 66;
             // 
             // label51
             // 
             label51.AutoSize = true;
             label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label51.Location = new Point(61, 82);
+            label51.Location = new Point(53, 62);
             label51.Margin = new Padding(2, 0, 2, 0);
             label51.Name = "label51";
-            label51.Size = new Size(60, 20);
+            label51.Size = new Size(48, 15);
             label51.TabIndex = 65;
             label51.Text = "System";
             // 
             // MEImplantCombo
             // 
             MEImplantCombo.FormattingEnabled = true;
-            MEImplantCombo.Location = new Point(126, 254);
+            MEImplantCombo.Location = new Point(110, 190);
             MEImplantCombo.Margin = new Padding(2);
             MEImplantCombo.Name = "MEImplantCombo";
-            MEImplantCombo.Size = new Size(216, 28);
+            MEImplantCombo.Size = new Size(190, 23);
             MEImplantCombo.TabIndex = 64;
             // 
             // label54
             // 
             label54.AutoSize = true;
             label54.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label54.Location = new Point(54, 257);
+            label54.Location = new Point(47, 193);
             label54.Margin = new Padding(2, 0, 2, 0);
             label54.Name = "label54";
             label54.RightToLeft = RightToLeft.No;
-            label54.Size = new Size(64, 20);
+            label54.Size = new Size(50, 15);
             label54.TabIndex = 63;
             label54.Text = "Implant";
             // 
             // METimeRigCombo
             // 
             METimeRigCombo.FormattingEnabled = true;
-            METimeRigCombo.Location = new Point(127, 166);
+            METimeRigCombo.Location = new Point(111, 124);
             METimeRigCombo.Margin = new Padding(2);
             METimeRigCombo.Name = "METimeRigCombo";
-            METimeRigCombo.Size = new Size(152, 28);
+            METimeRigCombo.Size = new Size(134, 23);
             METimeRigCombo.TabIndex = 62;
             // 
             // MEStructRigLabel
             // 
             MEStructRigLabel.AutoSize = true;
             MEStructRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            MEStructRigLabel.Location = new Point(18, 169);
+            MEStructRigLabel.Location = new Point(16, 127);
             MEStructRigLabel.Margin = new Padding(2, 0, 2, 0);
             MEStructRigLabel.Name = "MEStructRigLabel";
-            MEStructRigLabel.Size = new Size(101, 20);
+            MEStructRigLabel.Size = new Size(82, 15);
             MEStructRigLabel.TabIndex = 61;
             MEStructRigLabel.Text = "Structure Rig";
             // 
             // MEStructureCombo
             // 
             MEStructureCombo.FormattingEnabled = true;
-            MEStructureCombo.Location = new Point(127, 123);
+            MEStructureCombo.Location = new Point(111, 92);
             MEStructureCombo.Margin = new Padding(2);
             MEStructureCombo.Name = "MEStructureCombo";
-            MEStructureCombo.Size = new Size(152, 28);
+            MEStructureCombo.Size = new Size(134, 23);
             MEStructureCombo.TabIndex = 60;
             // 
             // label60
             // 
             label60.AutoSize = true;
             label60.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label60.Location = new Point(46, 126);
+            label60.Location = new Point(40, 94);
             label60.Margin = new Padding(2, 0, 2, 0);
             label60.Name = "label60";
-            label60.Size = new Size(74, 20);
+            label60.Size = new Size(61, 15);
             label60.TabIndex = 59;
             label60.Text = "Structure";
             // 
@@ -1137,10 +1153,10 @@
             // 
             label61.AutoSize = true;
             label61.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label61.Location = new Point(52, 48);
+            label61.Location = new Point(46, 36);
             label61.Margin = new Padding(2, 0, 2, 0);
             label61.Name = "label61";
-            label61.Size = new Size(66, 20);
+            label61.Size = new Size(53, 15);
             label61.TabIndex = 58;
             label61.Text = "To Level";
             // 
@@ -1148,10 +1164,10 @@
             // 
             label62.AutoSize = true;
             label62.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label62.Location = new Point(32, 13);
+            label62.Location = new Point(28, 10);
             label62.Margin = new Padding(2, 0, 2, 0);
             label62.Name = "label62";
-            label62.Size = new Size(86, 20);
+            label62.Size = new Size(69, 15);
             label62.TabIndex = 57;
             label62.Text = "From Level";
             // 
@@ -1172,51 +1188,52 @@
             TEPage.Controls.Add(label64);
             TEPage.Controls.Add(label66);
             TEPage.Controls.Add(label67);
-            TEPage.Location = new Point(4, 29);
+            TEPage.Location = new Point(4, 24);
+            TEPage.Margin = new Padding(3, 2, 3, 2);
             TEPage.Name = "TEPage";
-            TEPage.Size = new Size(692, 324);
+            TEPage.Size = new Size(604, 240);
             TEPage.TabIndex = 6;
             TEPage.Text = "TE Research";
             // 
             // TEToLevelUpDown
             // 
             TEToLevelUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEToLevelUpDown.Location = new Point(111, 49);
+            TEToLevelUpDown.Location = new Point(97, 37);
             TEToLevelUpDown.Margin = new Padding(2);
             TEToLevelUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEToLevelUpDown.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
             TEToLevelUpDown.Name = "TEToLevelUpDown";
-            TEToLevelUpDown.Size = new Size(150, 27);
+            TEToLevelUpDown.Size = new Size(131, 23);
             TEToLevelUpDown.TabIndex = 93;
             TEToLevelUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
             // 
             // TEFromLevelUpDown
             // 
             TEFromLevelUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEFromLevelUpDown.Location = new Point(111, 14);
+            TEFromLevelUpDown.Location = new Point(97, 10);
             TEFromLevelUpDown.Margin = new Padding(2);
             TEFromLevelUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEFromLevelUpDown.Name = "TEFromLevelUpDown";
-            TEFromLevelUpDown.Size = new Size(150, 27);
+            TEFromLevelUpDown.Size = new Size(131, 23);
             TEFromLevelUpDown.TabIndex = 92;
             // 
             // TETaxUpDown
             // 
             TETaxUpDown.DecimalPlaces = 1;
-            TETaxUpDown.Location = new Point(110, 212);
+            TETaxUpDown.Location = new Point(96, 159);
             TETaxUpDown.Margin = new Padding(2);
             TETaxUpDown.Name = "TETaxUpDown";
-            TETaxUpDown.Size = new Size(150, 27);
+            TETaxUpDown.Size = new Size(131, 23);
             TETaxUpDown.TabIndex = 91;
             // 
             // TETaxLabel
             // 
             TETaxLabel.AutoSize = true;
             TETaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TETaxLabel.Location = new Point(71, 212);
+            TETaxLabel.Location = new Point(62, 159);
             TETaxLabel.Margin = new Padding(2, 0, 2, 0);
             TETaxLabel.Name = "TETaxLabel";
-            TETaxLabel.Size = new Size(33, 20);
+            TETaxLabel.Size = new Size(26, 15);
             TETaxLabel.TabIndex = 90;
             TETaxLabel.Text = "Tax";
             // 
@@ -1228,81 +1245,81 @@
             TESystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             TESystemCombo.FormattingEnabled = true;
             TESystemCombo.IntegralHeight = false;
-            TESystemCombo.Location = new Point(111, 85);
+            TESystemCombo.Location = new Point(97, 64);
             TESystemCombo.Margin = new Padding(2);
             TESystemCombo.Name = "TESystemCombo";
-            TESystemCombo.Size = new Size(152, 28);
+            TESystemCombo.Size = new Size(134, 23);
             TESystemCombo.TabIndex = 89;
             // 
             // label58
             // 
             label58.AutoSize = true;
             label58.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label58.Location = new Point(45, 85);
+            label58.Location = new Point(39, 64);
             label58.Margin = new Padding(2, 0, 2, 0);
             label58.Name = "label58";
-            label58.Size = new Size(60, 20);
+            label58.Size = new Size(48, 15);
             label58.TabIndex = 88;
             label58.Text = "System";
             // 
             // TEImplantCombo
             // 
             TEImplantCombo.FormattingEnabled = true;
-            TEImplantCombo.Location = new Point(110, 257);
+            TEImplantCombo.Location = new Point(96, 193);
             TEImplantCombo.Margin = new Padding(2);
             TEImplantCombo.Name = "TEImplantCombo";
-            TEImplantCombo.Size = new Size(216, 28);
+            TEImplantCombo.Size = new Size(190, 23);
             TEImplantCombo.TabIndex = 87;
             // 
             // label59
             // 
             label59.AutoSize = true;
             label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label59.Location = new Point(38, 260);
+            label59.Location = new Point(33, 195);
             label59.Margin = new Padding(2, 0, 2, 0);
             label59.Name = "label59";
             label59.RightToLeft = RightToLeft.No;
-            label59.Size = new Size(64, 20);
+            label59.Size = new Size(50, 15);
             label59.TabIndex = 86;
             label59.Text = "Implant";
             // 
             // TEStructRigCombo
             // 
             TEStructRigCombo.FormattingEnabled = true;
-            TEStructRigCombo.Location = new Point(111, 169);
+            TEStructRigCombo.Location = new Point(97, 127);
             TEStructRigCombo.Margin = new Padding(2);
             TEStructRigCombo.Name = "TEStructRigCombo";
-            TEStructRigCombo.Size = new Size(152, 28);
+            TEStructRigCombo.Size = new Size(134, 23);
             TEStructRigCombo.TabIndex = 85;
             // 
             // TEStructureRigLabel
             // 
             TEStructureRigLabel.AutoSize = true;
             TEStructureRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            TEStructureRigLabel.Location = new Point(2, 172);
+            TEStructureRigLabel.Location = new Point(2, 129);
             TEStructureRigLabel.Margin = new Padding(2, 0, 2, 0);
             TEStructureRigLabel.Name = "TEStructureRigLabel";
-            TEStructureRigLabel.Size = new Size(101, 20);
+            TEStructureRigLabel.Size = new Size(82, 15);
             TEStructureRigLabel.TabIndex = 84;
             TEStructureRigLabel.Text = "Structure Rig";
             // 
             // TEStructureCombo
             // 
             TEStructureCombo.FormattingEnabled = true;
-            TEStructureCombo.Location = new Point(111, 126);
+            TEStructureCombo.Location = new Point(97, 94);
             TEStructureCombo.Margin = new Padding(2);
             TEStructureCombo.Name = "TEStructureCombo";
-            TEStructureCombo.Size = new Size(152, 28);
+            TEStructureCombo.Size = new Size(134, 23);
             TEStructureCombo.TabIndex = 83;
             // 
             // label64
             // 
             label64.AutoSize = true;
             label64.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label64.Location = new Point(30, 129);
+            label64.Location = new Point(26, 97);
             label64.Margin = new Padding(2, 0, 2, 0);
             label64.Name = "label64";
-            label64.Size = new Size(74, 20);
+            label64.Size = new Size(61, 15);
             label64.TabIndex = 82;
             label64.Text = "Structure";
             // 
@@ -1310,10 +1327,10 @@
             // 
             label66.AutoSize = true;
             label66.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label66.Location = new Point(36, 51);
+            label66.Location = new Point(32, 38);
             label66.Margin = new Padding(2, 0, 2, 0);
             label66.Name = "label66";
-            label66.Size = new Size(66, 20);
+            label66.Size = new Size(53, 15);
             label66.TabIndex = 81;
             label66.Text = "To Level";
             // 
@@ -1321,34 +1338,90 @@
             // 
             label67.AutoSize = true;
             label67.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label67.Location = new Point(16, 16);
+            label67.Location = new Point(14, 12);
             label67.Margin = new Padding(2, 0, 2, 0);
             label67.Name = "label67";
-            label67.Size = new Size(86, 20);
+            label67.Size = new Size(69, 15);
             label67.TabIndex = 80;
             label67.Text = "From Level";
             // 
             // SaveButton
             // 
             SaveButton.ForeColor = Color.Black;
-            SaveButton.Location = new Point(12, 12);
+            SaveButton.Location = new Point(10, 9);
+            SaveButton.Margin = new Padding(3, 2, 3, 2);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(94, 29);
+            SaveButton.Size = new Size(82, 22);
             SaveButton.TabIndex = 1;
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButton_Click;
             // 
+            // SkillsPage
+            // 
+            SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
+            SkillsPage.Controls.Add(BrokerRelationsLevelUpDown);
+            SkillsPage.Controls.Add(AccountingLevelUpDown);
+            SkillsPage.Controls.Add(label16);
+            SkillsPage.Controls.Add(label21);
+            SkillsPage.Location = new Point(4, 24);
+            SkillsPage.Name = "SkillsPage";
+            SkillsPage.Size = new Size(604, 240);
+            SkillsPage.TabIndex = 7;
+            SkillsPage.Text = "Skills";
+            // 
+            // BrokerRelationsLevelUpDown
+            // 
+            BrokerRelationsLevelUpDown.Location = new Point(118, 42);
+            BrokerRelationsLevelUpDown.Margin = new Padding(2);
+            BrokerRelationsLevelUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            BrokerRelationsLevelUpDown.Name = "BrokerRelationsLevelUpDown";
+            BrokerRelationsLevelUpDown.Size = new Size(131, 23);
+            BrokerRelationsLevelUpDown.TabIndex = 97;
+            BrokerRelationsLevelUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            // 
+            // AccountingLevelUpDown
+            // 
+            AccountingLevelUpDown.Location = new Point(118, 12);
+            AccountingLevelUpDown.Margin = new Padding(2);
+            AccountingLevelUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AccountingLevelUpDown.Name = "AccountingLevelUpDown";
+            AccountingLevelUpDown.Size = new Size(131, 23);
+            AccountingLevelUpDown.TabIndex = 96;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.Location = new Point(2, 44);
+            label16.Margin = new Padding(2, 0, 2, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(100, 15);
+            label16.TabIndex = 95;
+            label16.Text = "Broker Relations";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label21.Location = new Point(6, 14);
+            label21.Margin = new Padding(2, 0, 2, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(70, 15);
+            label21.TabIndex = 94;
+            label21.Text = "Accounting";
+            // 
             // ConfigureDefaults
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 430);
+            ClientSize = new Size(612, 322);
             Controls.Add(SaveButton);
             Controls.Add(DefaultsTabContainer);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ConfigureDefaults";
             Text = "Configure Defaults";
             DefaultsTabContainer.ResumeLayout(false);
@@ -1383,6 +1456,10 @@
             ((System.ComponentModel.ISupportInitialize)TEToLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).EndInit();
+            SkillsPage.ResumeLayout(false);
+            SkillsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).EndInit();
             ResumeLayout(false);
         }
 
@@ -1491,5 +1568,10 @@
         private Label label64;
         private Label label66;
         private Label label67;
+        private TabPage SkillsPage;
+        private NumericUpDown BrokerRelationsLevelUpDown;
+        private NumericUpDown AccountingLevelUpDown;
+        private Label label16;
+        private Label label21;
     }
 }

@@ -84,6 +84,10 @@ namespace EveHelperWF.Objects
 
         public int NumCopies { get; set; }
         public int RunsPerCopy { get; set; }
+
+        //skills
+        public int AccountingSkill { get; set; }
+        public int BrokersSkill { get; set; }
     }
 
     public class StructureRigBonus

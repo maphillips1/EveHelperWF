@@ -858,12 +858,12 @@ namespace EveHelperWF.ScreenHelper
             decimal taxAndFees = 0;
             decimal baseSalesTax = Convert.ToDecimal(0.08);
             decimal baseBrokersFee = Convert.ToDecimal(0.03);
-            int accountingSkillLevel = 5;
-            decimal accountingSkillBonus = 1 - (Convert.ToDecimal(.11) * Convert.ToDecimal(accountingSkillLevel));
-            int brokerRelationsSKillLevel = 5;
+            int accountingSkillLevel = helperClass.AccountingSkill;
+            decimal accountingSkillBonus = (Convert.ToDecimal(.0088) * Convert.ToDecimal(accountingSkillLevel));
+            int brokerRelationsSKillLevel = helperClass.BrokersSkill;
             decimal brokerRelationsSkillBonus = Convert.ToDecimal(.003) * Convert.ToDecimal(brokerRelationsSKillLevel);
             bool isBuyOrder = (helperClass.OutputOrderType == 2);
-            decimal totalSalesTax = baseSalesTax * accountingSkillBonus;
+            decimal totalSalesTax = baseSalesTax - accountingSkillBonus;
             decimal totalBrokerFee = baseBrokersFee - brokerRelationsSkillBonus;
 
             if (isBuyOrder)

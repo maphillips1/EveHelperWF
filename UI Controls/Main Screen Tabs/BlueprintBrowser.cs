@@ -1292,6 +1292,10 @@ namespace EveHelperWF
             helperClass.RunsPerCopy = (int)CopyRunsCopyUpDown.Value;
 
 
+            //Skills
+            helperClass.AccountingSkill = DefaultFormValues.AccountingSKill;
+            helperClass.BrokersSkill = DefaultFormValues.BrokersSkill;
+
             return helperClass;
         }
 
