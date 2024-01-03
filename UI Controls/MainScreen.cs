@@ -24,9 +24,19 @@ namespace EveHelperWF.UI_Controls
         FIleLocations fIleLocations;
         PriceHistoryUtility priceHistoryUtility;
         LootAppraisal lootAppraisal;
+        System.Threading.Mutex objMutex;
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr handle);
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool ShowWindow(IntPtr handle, int nCmdShow);
+        [System.Runtime.InteropServices.DllImport("User32.dll")]
+        private static extern bool IsIconic(IntPtr handle);
+
+        const int SW_RESTORE = 9;
 
         public MainScreen()
         {
+            CheckForOtherInstance();
             InitializeComponent();
             CommonHelper.Init();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
@@ -35,6 +45,29 @@ namespace EveHelperWF.UI_Controls
             if (!InitLongLoadingWorker.IsBusy)
             {
                 InitLongLoadingWorker.RunWorkerAsync();
+            }
+        }
+
+        //Ensures that we only ever have one instance of EveHelper open at a given time. 
+        //You can have some tools open as many times as you want, but we only ever want one
+        //instance of eve helper. 
+        private void CheckForOtherInstance()
+        {
+            Process[] currentEveHelperInstance = System.Diagnostics.Process.GetProcessesByName(
+                    System.IO.Path.GetFileNameWithoutExtension(
+                        System.Reflection.Assembly.GetEntryAssembly().Location));
+            if (currentEveHelperInstance.Count() > 1)
+            {
+                Process otherInstance = currentEveHelperInstance.ToList().First(x => x.Id != Process.GetCurrentProcess().Id);
+                IntPtr handle = otherInstance.MainWindowHandle;
+                if (IsIconic(handle))
+                {
+                    ShowWindow(handle, SW_RESTORE);
+                }
+
+                SetForegroundWindow(handle);
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
+
             }
         }
 

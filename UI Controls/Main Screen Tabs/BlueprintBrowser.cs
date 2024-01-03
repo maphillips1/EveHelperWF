@@ -755,7 +755,7 @@ namespace EveHelperWF
 
                 LoadInventionCombo(DBInventionCombo);
 
-                StatusLabel.Text = "Loading Materials..";
+                StatusLabel.Text = "Databinding Screens..";
                 DatabindScreen();
 
                 StatusLabel.Text = "Done;";
