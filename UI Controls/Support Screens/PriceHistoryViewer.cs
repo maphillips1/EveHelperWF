@@ -40,7 +40,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             {
                 PriceHistory.Add(priceHistory);
             }
-            PriceHistoryGridView.DataSource = PriceHistory.OrderByDescending(x => x.date).ToList();
+
+            DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, PriceHistory.OrderByDescending(x => x.date).ToList());
         }
 
         private void LoadImage()

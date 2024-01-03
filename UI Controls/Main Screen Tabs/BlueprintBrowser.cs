@@ -1381,7 +1381,7 @@ namespace EveHelperWF
                 //Grid
                 List<Objects.MaterialsWithMarketData> combinedMats = ScreenHelper.BlueprintBrowserHelper.CombinedInputMats(ManuMats).OrderBy(x => x.materialName).ToList();
 
-                ManuInputGrid.DataSource = combinedMats.OrderByDescending(x => x.priceTotal).ToList<Objects.MaterialsWithMarketData>();
+                DatabindGridView<List<MaterialsWithMarketData>>(ManuInputGrid, combinedMats.OrderByDescending(x => x.priceTotal).ToList<Objects.MaterialsWithMarketData>());
 
                 //Total Volume Label
                 ManuInputVolLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingInputVolume);
@@ -1420,19 +1420,7 @@ namespace EveHelperWF
         private void DatabindReactionMatGrid()
         {
             List<Objects.MaterialsWithMarketData> combinedMats = ScreenHelper.BlueprintBrowserHelper.CombinedInputMats(ReactionMats).OrderBy(x => x.materialName).ToList();
-            ReactionInputGrid.DataSource = combinedMats;
-            ReactionInputGrid.Columns[0].Visible = false;
-            ReactionInputGrid.Columns[1].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            ReactionInputGrid.Columns[2].Visible = false;
-            ReactionInputGrid.Columns[3].DefaultCellStyle.Format = "N";
-            ReactionInputGrid.Columns[3].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            ReactionInputGrid.Columns[4].DefaultCellStyle.Format = "N";
-            ReactionInputGrid.Columns[4].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            ReactionInputGrid.Columns[5].DefaultCellStyle.Format = "C";
-            ReactionInputGrid.Columns[5].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            ReactionInputGrid.Columns[6].DefaultCellStyle.Format = "C";
-            ReactionInputGrid.Columns[6].AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            ReactionInputGrid.Columns[11].Visible = false;
+            DatabindGridView<List<Objects.MaterialsWithMarketData>>(ReactionInputGrid, combinedMats);
         }
 
         private void DatabindReactionLabels()
@@ -1468,7 +1456,7 @@ namespace EveHelperWF
 
         private void DatabindInventionMatGrid()
         {
-            InventionInputGrid.DataSource = InventionMats.OrderBy(x => x.materialName).ToList();
+            DatabindGridView<List<MaterialsWithMarketData>>(InventionInputGrid, InventionMats.OrderBy(x => x.materialName).ToList());
         }
 
         private void DatabindInventionLabels()
@@ -1821,7 +1809,7 @@ namespace EveHelperWF
 
         private void DatabindMEResearchMatGrid()
         {
-            MEMaterialsGrid.DataSource = ResMEMats.OrderBy(x => x.materialName).ToList();
+            DatabindGridView<List<MaterialsWithMarketData>>(MEMaterialsGrid, ResMEMats.OrderBy(x => x.materialName).ToList());
         }
 
         private void DatabindResearchMESummary()
@@ -1876,7 +1864,7 @@ namespace EveHelperWF
 
         private void DatabindTEResearchMatGrid()
         {
-            TEMatGrid.DataSource = ResTEMats.OrderBy(x => x.materialName).ToList();
+            DatabindGridView<List<MaterialsWithMarketData>>(TEMatGrid, ResTEMats.OrderBy(x => x.materialName).ToList());
         }
 
         private void DatabindResearchTESummary()
@@ -1931,7 +1919,7 @@ namespace EveHelperWF
 
         private void DatabindCopyResearchMatGrid()
         {
-            CopyMatGrid.DataSource = CopyMats.OrderBy(x => x.materialName).ToList();
+            DatabindGridView<List<MaterialsWithMarketData>>(CopyMatGrid, CopyMats.OrderBy(x => x.materialName).ToList());
         }
 
         private void DatabindResearchCopySummary()

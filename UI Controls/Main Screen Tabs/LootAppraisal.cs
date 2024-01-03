@@ -48,8 +48,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     appraisedItems = AppraisalHelper.ParseTypeIds(inputItems);
                     if (appraisedItems.Count > 0)
                     {
-                        ResultsGridView.DataSource = appraisedItems;
-                        AppraiseButton.Enabled = false;
+                        DatabindGridView<List<AppraisedItem>>(ResultsGridView, appraisedItems);
                         if (!GetPricesWorker.IsBusy)
                         {
                             GetPricesWorker.RunWorkerAsync();
@@ -104,7 +103,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.appraisedItems = (List<AppraisedItem>)e.Result;
             }
 
-            ResultsGridView.DataSource = appraisedItems.OrderByDescending(x => x.sellPriceTotal).ToList<AppraisedItem>();
+            DatabindGridView<List<AppraisedItem>>(ResultsGridView, appraisedItems.OrderByDescending(x => x.sellPriceTotal).ToList<AppraisedItem>());
 
             decimal totalBuyValue = 0;
             decimal totalSellValue = 0;

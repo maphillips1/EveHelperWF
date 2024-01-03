@@ -200,12 +200,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (selectedTypeMarketOrders != null)
             {
-                this.BuyOrdersGridView.DataSource = selectedTypeMarketOrders.BuyOrders;
-                this.SellOrdersGridView.DataSource = selectedTypeMarketOrders.SellOrders;
+                DatabindGridView<List<MarketOrder>>(BuyOrdersGridView, selectedTypeMarketOrders.BuyOrders);
+                DatabindGridView<List<MarketOrder>>(SellOrdersGridView, selectedTypeMarketOrders.SellOrders);
             }
             if (priceHistory != null)
             {
-                PriceHistoryGridView.DataSource = priceHistory.OrderByDescending(x => x.date).ToList(); ;
+                DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, priceHistory.OrderByDescending(x => x.date).ToList());
             }
         }
 

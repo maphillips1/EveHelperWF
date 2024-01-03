@@ -48,7 +48,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!string.IsNullOrEmpty(fileContent))
             {
                 TrackedTypes = Newtonsoft.Json.JsonConvert.DeserializeObject<BindingList<InventoryTypes>>(fileContent);
-                TrackedTypesGrid.DataSource = TrackedTypes;
+
+                DatabindGridView<BindingList<InventoryTypes>>(TrackedTypesGrid, TrackedTypes);
             }
         }
         #endregion
@@ -65,7 +66,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     foundTypes.Add(invType);
                 }
-                ItemSearchResultsGrid.DataSource = foundTypes;
+                DatabindGridView<BindingList<InventoryTypes>>(ItemSearchResultsGrid, foundTypes);
             }
         }
 
@@ -86,7 +87,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (TrackedTypes != null && TrackedTypes.Count > 0)
             {
                 SaveTrackedTypes();
-                TrackedTypesGrid.DataSource = TrackedTypes;
+                DatabindGridView<BindingList<InventoryTypes>>(TrackedTypesGrid, TrackedTypes);
             }
         }
 

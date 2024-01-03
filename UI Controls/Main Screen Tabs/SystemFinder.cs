@@ -106,7 +106,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
             if (this.solarSystems.Count > 0)
             {
-                SolarSystemResultsGrid.DataSource = solarSystems;
+                DatabindGridView<List<SolarSystem>>(SolarSystemResultsGrid, this.solarSystems);
             }
             SearchButton.Enabled = true;
             LoadingLabel.Visible = true;

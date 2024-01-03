@@ -22,5 +22,17 @@ namespace EveHelperWF.Objects
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
+
+        public void DatabindGridView<T>(DataGridView grid, T dataSource)
+        {
+            DataGridViewAutoSizeColumnsMode dataGridViewAutoSizeColumnsMode = grid.AutoSizeColumnsMode;
+            DataGridViewAutoSizeRowsMode dataGridViewAutoSizeRowMode = grid.AutoSizeRowsMode;
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            grid.DataSource = dataSource;
+            grid.AutoSizeColumnsMode = dataGridViewAutoSizeColumnsMode;
+            grid.AutoSizeRowsMode = dataGridViewAutoSizeRowMode;
+            
+        }
     }
 }

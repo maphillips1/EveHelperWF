@@ -248,8 +248,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void DataBindTrackerGrid()
         {
-
-            AbyssTrackerGridView.DataSource = AbyssRuns.OrderByDescending(x => x.AbyssRunID).ToList();
+            DatabindGridView<List<AbyssRun>>(AbyssTrackerGridView, AbyssRuns.OrderByDescending(x => x.AbyssRunID).ToList());
+            
             DatabindSummaryInfo();
             this.Refresh();
         }
