@@ -1,11 +1,13 @@
 ﻿using EveHelperWF.Database;
 using EveHelperWF.Objects;
+using EveHelperWF.ScreenHelper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -141,19 +143,46 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             StringBuilder sb = new StringBuilder();
 
+            LinkLabel systemLinkLabel = null;
+            SolarSystem borderSystem = null;
+            string linkText = "";
+            int currentY = 10;
             foreach (SolarSystemJump jump in solarSystemJumps)
             {
                 if (jump.isRegional)
                 {
-                    sb.AppendLine(jump.security.ToString() + " " + jump.solarSystemName + " - Regional");
+                    linkText = (jump.security.ToString() + " " + jump.solarSystemName + " - Regional");
                 }
                 else
                 {
-                    sb.AppendLine(jump.security.ToString() + " " + jump.solarSystemName);
+                    linkText = (jump.security.ToString() + " " + jump.solarSystemName);
                 }
 
+                systemLinkLabel = new LinkLabel();
+
+                borderSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == jump.toSolarSystemId);
+                if (borderSystem != null)
+                {
+                    switch (Math.Round(borderSystem.security, 1))
+                    {
+                        case decimal n when n < (decimal)(0.1):
+                            systemLinkLabel.LinkColor = Color.IndianRed;
+                            break;
+                        case decimal n when n < (decimal)(0.5) && n > (decimal)(0.0):
+                            systemLinkLabel.LinkColor = Color.DarkOrange;
+                            break;
+                        default:
+                            systemLinkLabel.LinkColor = Color.Green;
+                            break;
+                    }
+                }
+                systemLinkLabel.Text = linkText;
+                systemLinkLabel.Tag = jump.toSolarSystemId;
+                systemLinkLabel.Click += new EventHandler(SolarSystemLinkClicked);
+                systemLinkLabel.Location = new Point(10, currentY);
+                currentY += 20;
+                BorderingSystemsPanel.Controls.Add(systemLinkLabel);
             }
-            BorderSystemsListLabel.Text = sb.ToString();
         }
 
         private void BuildCostIndiceLabel()
@@ -169,6 +198,21 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 }
             }
             SystemCostIndexLabel.Text = sb.ToString();
+        }
+
+        private void SolarSystemLinkClicked(object sender, EventArgs e)
+        {
+            LinkLabel linkLabel = (LinkLabel) sender;
+            if (linkLabel.Tag != null)
+            {
+                long solarSystemId = (long)(linkLabel.Tag);
+                if (solarSystemId > 0)
+                {
+                    SolarSystemInfo borderInfo = new SolarSystemInfo(CommonHelper.SolarSystemList.Find(x => x.solarSystemID == solarSystemId)); ;
+                    borderInfo.StartPosition = FormStartPosition.CenterParent;
+                    borderInfo.Show();
+                }
+            }
         }
         #endregion
     }
