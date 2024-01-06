@@ -944,6 +944,13 @@ namespace EveHelperWF
             TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
 
+            decimal totalPrice = 0;
+            foreach (Objects.MaterialsWithMarketData mat in ManuMats)
+            {
+                totalPrice += mat.priceTotal;
+
+            }
+
             if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
             {
                 int tech1BlueprintId = Database.SQLiteCalls.GetTech1BlueprintTypeId(SelectedType.typeId);
@@ -969,13 +976,6 @@ namespace EveHelperWF
                 ManuMats.AddRange(inventionMats);
                 //Average out invention cost for 100% success rate for at least one blueprint to invent. 
                 //This will avoid under valuing the invention cost. Especially on lower probability BPC's. 
-            }
-
-            decimal totalPrice = 0;
-            foreach (Objects.MaterialsWithMarketData mat in ManuMats)
-            {
-                totalPrice += mat.priceTotal;
-
             }
             ManufacturingTotalInputPrice = totalPrice;
         }
