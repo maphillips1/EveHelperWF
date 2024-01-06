@@ -99,8 +99,8 @@ namespace EveHelperWF
         private static int InventionRuns = 0;
         private static int InventionME = 0;
         private static int InventionTE = 0;
-
         private static bool IsInit = true;
+        private static decimal TotalInventionInputCost;
 
         //Images
         private static byte[] BlueprintImage = null;
@@ -120,19 +120,7 @@ namespace EveHelperWF
             LoadCombos();
             BuildTreeView();
             LoadDefaultFormValues();
-            SummaryTypeLabel.Text = "";
-            TotalTimeLabel.Text = "";
-            TotalJobCostLabel.Text = "";
-            ProfitLabel.Text = "";
-            IskHourLabel.Text = "";
-            TotalInputCostLabel.Text = "";
-            OutputProdQuantLabel.Text = "";
-            OutputPricePerLabel.Text = "";
-            TotalOutcomeIskLabel.Text = "";
-            TotalOutputVolumeLabel.Text = "";
-            TaxFeesLabel.Text = "";
-            TotalCostLabel.Text = "";
-            ROILabel.Text = "";
+            ResetSummaryLabel();
 
             IsInit = false;
         }
@@ -971,17 +959,16 @@ namespace EveHelperWF
                 TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, defaultInventionHelperClass);
                 FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(defaultInventionHelperClass);
                 int avgTriesForSuccess = Convert.ToInt32(Math.Ceiling(1 / FinalInventionProbability));
-                decimal totalInventionInputPrice = 0;
+                TotalInventionInputCost = 0;
                 foreach (Objects.MaterialsWithMarketData mat in inventionMats)
                 {
                     mat.quantityTotal = mat.quantityTotal * avgTriesForSuccess;
-                    totalInventionInputPrice += mat.priceTotal;
+                    TotalInventionInputCost += mat.priceTotal;
                     mat.priceTotal = mat.priceTotal * avgTriesForSuccess;
                 }
                 ManuMats.AddRange(inventionMats);
                 //Average out invention cost for 100% success rate for at least one blueprint to invent. 
                 //This will avoid under valuing the invention cost. Especially on lower probability BPC's. 
-                TotalManufacturingJobCost += ((totalInventionInputPrice + TotalInventionJobCost) * avgTriesForSuccess);
             }
 
             decimal totalPrice = 0;
@@ -1664,7 +1651,8 @@ namespace EveHelperWF
             TaxFeesLabel.Text = "";
             TotalCostLabel.Text = "";
             ROILabel.Text = "";
-
+            AdditionalBPCostLabel.Text = "";
+            InventionCostLabel.Text = "";
 
             SummaryTypeLabel.Visible = true;
             TotalTimeLabel.Visible = true;
@@ -1679,6 +1667,9 @@ namespace EveHelperWF
             TaxFeesLabel.Visible = true;
             TotalCostLabel.Visible = true;
             ROILabel.Visible = true;
+            InventionCostLabel.Visible = false;
+            InventionCostLabelLabel.Visible = false;
+            AdditionalBPCostLabel.Visible = false;
         }
 
         private void DatabindManufacturingSumary()
@@ -1686,8 +1677,13 @@ namespace EveHelperWF
             SummaryTypeLabel.Text = "Manufacturing Summary";
             TotalTimeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatTimeAsString(TotalManufacturingJobTime);
             TotalJobCostLabel.Text = string.Concat("-", TotalManufacturingJobCost.ToString("C"));
-
-            decimal profit = TotalManufacturingOutputPrice - ManufacturingTotalInputPrice - TotalManufacturingJobCost - TotalManufacturingTaxesAndFees;
+            decimal totalInventionCost = 0;
+            if (FinalInventionProbability > 0)
+            {
+                totalInventionCost = (TotalInventionJobCost + TotalInventionInputCost) * (1 / FinalInventionProbability);
+            }
+            decimal additionalCosts = (decimal)AdditionalCostsNumeric.Value;
+            decimal profit = TotalManufacturingOutputPrice - ManufacturingTotalInputPrice - TotalManufacturingJobCost - TotalManufacturingTaxesAndFees - totalInventionCost - additionalCosts;
             ProfitLabel.Text = profit.ToString("C");
             if (profit < 0)
             {
@@ -1723,6 +1719,24 @@ namespace EveHelperWF
             {
                 decimal roi = Math.Round(profit / totalCost, 4);
                 ROILabel.Text = roi.ToString("P");
+            }
+
+            if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
+            {
+                InventionCostLabel.Visible = true;
+                InventionCostLabelLabel.Visible = true;
+            }
+            else
+            {
+                InventionCostLabel.Visible = false;
+                InventionCostLabelLabel.Visible = false;
+            }
+
+            InventionCostLabel.Text = totalInventionCost.ToString("C");
+            if (additionalCosts > 0)
+            {
+                AdditionalBPCostLabel.Visible = true;
+                AdditionalBPCostLabel.Text = additionalCosts.ToString("C");
             }
         }
 
@@ -2103,5 +2117,14 @@ namespace EveHelperWF
             }
         }
         #endregion
+
+        private void Numeric_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Back)
+            {
+                NumericUpDown numericUpDown = (NumericUpDown)sender;
+                numericUpDown.Value = 0;
+            }
+        }
     }
 }
