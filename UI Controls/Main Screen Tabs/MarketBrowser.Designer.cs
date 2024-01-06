@@ -84,6 +84,12 @@
             label4 = new Label();
             PriceHistoryTabPage = new TabPage();
             PriceHistoryGridView = new DataGridView();
+            date = new DataGridViewTextBoxColumn();
+            Avg = new DataGridViewTextBoxColumn();
+            Low = new DataGridViewTextBoxColumn();
+            High = new DataGridViewTextBoxColumn();
+            volume = new DataGridViewTextBoxColumn();
+            orderCount = new DataGridViewTextBoxColumn();
             tabPage2 = new TabPage();
             priceHistoryGraph1 = new Objects.Custom_Controls.PriceHistoryGraph();
             RensButton = new Button();
@@ -97,12 +103,6 @@
             RegionCombo = new ComboBox();
             SearchResultsTreeView = new TreeView();
             ClearSystemButton = new Button();
-            date = new DataGridViewTextBoxColumn();
-            Avg = new DataGridViewTextBoxColumn();
-            Low = new DataGridViewTextBoxColumn();
-            High = new DataGridViewTextBoxColumn();
-            volume = new DataGridViewTextBoxColumn();
-            orderCount = new DataGridViewTextBoxColumn();
             SelectedItemTabPanel.SuspendLayout();
             OrdersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).BeginInit();
@@ -562,6 +562,74 @@
             PriceHistoryGridView.Size = new Size(709, 462);
             PriceHistoryGridView.TabIndex = 0;
             // 
+            // date
+            // 
+            date.DataPropertyName = "date";
+            dataGridViewCellStyle7.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle7;
+            date.HeaderText = "Date";
+            date.MinimumWidth = 6;
+            date.Name = "date";
+            date.Width = 56;
+            // 
+            // Avg
+            // 
+            Avg.DataPropertyName = "average";
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = "0";
+            dataGridViewCellStyle8.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle8;
+            Avg.HeaderText = "avg";
+            Avg.MinimumWidth = 6;
+            Avg.Name = "Avg";
+            Avg.Width = 51;
+            // 
+            // Low
+            // 
+            Low.DataPropertyName = "lowest";
+            dataGridViewCellStyle9.Format = "N0";
+            dataGridViewCellStyle9.NullValue = "0";
+            dataGridViewCellStyle9.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle9;
+            Low.HeaderText = "low";
+            Low.MinimumWidth = 6;
+            Low.Name = "Low";
+            Low.Width = 51;
+            // 
+            // High
+            // 
+            High.DataPropertyName = "highest";
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle10;
+            High.HeaderText = "high";
+            High.MinimumWidth = 6;
+            High.Name = "High";
+            High.Width = 56;
+            // 
+            // volume
+            // 
+            volume.DataPropertyName = "volume";
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
+            dataGridViewCellStyle11.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle11;
+            volume.HeaderText = "Volume";
+            volume.MinimumWidth = 6;
+            volume.Name = "volume";
+            volume.Width = 72;
+            // 
+            // orderCount
+            // 
+            orderCount.DataPropertyName = "order_count";
+            dataGridViewCellStyle12.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle12;
+            orderCount.HeaderText = "Order Count";
+            orderCount.MinimumWidth = 6;
+            orderCount.Name = "orderCount";
+            orderCount.Width = 98;
+            // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(2, 23, 38);
@@ -576,8 +644,10 @@
             // priceHistoryGraph1
             // 
             priceHistoryGraph1.Dock = DockStyle.Fill;
+            priceHistoryGraph1.DrawDashedLines = false;
             priceHistoryGraph1.Location = new Point(0, 0);
             priceHistoryGraph1.Name = "priceHistoryGraph1";
+            priceHistoryGraph1.SelectedTimePeriod = 0;
             priceHistoryGraph1.Size = new Size(715, 466);
             priceHistoryGraph1.TabIndex = 0;
             // 
@@ -709,74 +779,6 @@
             ClearSystemButton.Text = "Clear System";
             ClearSystemButton.UseVisualStyleBackColor = true;
             ClearSystemButton.Click += ClearSystemButton_Click;
-            // 
-            // date
-            // 
-            date.DataPropertyName = "date";
-            dataGridViewCellStyle7.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle7;
-            date.HeaderText = "Date";
-            date.MinimumWidth = 6;
-            date.Name = "date";
-            date.Width = 56;
-            // 
-            // Avg
-            // 
-            Avg.DataPropertyName = "average";
-            dataGridViewCellStyle8.Format = "N0";
-            dataGridViewCellStyle8.NullValue = "0";
-            dataGridViewCellStyle8.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle8;
-            Avg.HeaderText = "avg";
-            Avg.MinimumWidth = 6;
-            Avg.Name = "Avg";
-            Avg.Width = 51;
-            // 
-            // Low
-            // 
-            Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle9.Format = "N0";
-            dataGridViewCellStyle9.NullValue = "0";
-            dataGridViewCellStyle9.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle9;
-            Low.HeaderText = "low";
-            Low.MinimumWidth = 6;
-            Low.Name = "Low";
-            Low.Width = 51;
-            // 
-            // High
-            // 
-            High.DataPropertyName = "highest";
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "0";
-            dataGridViewCellStyle10.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle10;
-            High.HeaderText = "high";
-            High.MinimumWidth = 6;
-            High.Name = "High";
-            High.Width = 56;
-            // 
-            // volume
-            // 
-            volume.DataPropertyName = "volume";
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = "0";
-            dataGridViewCellStyle11.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle11;
-            volume.HeaderText = "Volume";
-            volume.MinimumWidth = 6;
-            volume.Name = "volume";
-            volume.Width = 72;
-            // 
-            // orderCount
-            // 
-            orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle12.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle12;
-            orderCount.HeaderText = "Order Count";
-            orderCount.MinimumWidth = 6;
-            orderCount.Name = "orderCount";
-            orderCount.Width = 98;
             // 
             // MarketBrowser
             // 

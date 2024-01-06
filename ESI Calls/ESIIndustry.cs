@@ -71,7 +71,7 @@ namespace EveHelperWF.ESI_Calls
                 if (cachedCostIndices != null)
                 {
                     //If the cache is older than 60 minutes, refresh.
-                    if (cachedCostIndices.cachedTime > System.DateTime.Now.AddMinutes(-5))
+                    if (cachedCostIndices.cachedTime > System.DateTime.Now.AddMinutes(-15))
                     {
                         costIndices = cachedCostIndices.cost_indices;
                     }

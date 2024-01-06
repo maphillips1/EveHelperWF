@@ -51,6 +51,7 @@
 
   <ItemGroup>
     <Folder Include="docs\CSS\" />
+    <Folder Include="Objects\ESI_Objects\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
 

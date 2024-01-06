@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Net;
 using Newtonsoft.Json;
 using EveHelperWF.Objects;
+using System.Diagnostics;
 
 namespace EveHelperWF.ESI_Calls
 {
     public static class ESIMarketData
     {
-        
+        private static Dictionary<Int64, DateTime> cachedRegions = new Dictionary<Int64, DateTime>();
 
         #region "Cache Methods"
 
@@ -37,7 +38,7 @@ namespace EveHelperWF.ESI_Calls
                 cachedMarketOrders = Newtonsoft.Json.JsonConvert.DeserializeObject<EveHelperWF.Objects.CachedMarketOrders>(content);
                 if (cachedMarketOrders != null)
                 {
-                    if (cachedMarketOrders.cachedTime > System.DateTime.Now.AddMinutes(-5) &&
+                    if (cachedMarketOrders.cachedTime > System.DateTime.Now.AddMinutes(-15) &&
                             cachedMarketOrders.type_id == type_id &&
                             cachedMarketOrders.is_buy_order == is_buy_order)
                     {
@@ -103,7 +104,7 @@ namespace EveHelperWF.ESI_Calls
         private static void CacheAdjustedCosts(List<EveHelperWF.Objects.AdjustedCost> adjustedCosts)
         {
             string directory = Enums.Enums.CachedAdjustedCosts;
-            string fileName = Path.Combine(directory,  "adjusted_costs.json");
+            string fileName = Path.Combine(directory, "adjusted_costs.json");
 
             EveHelperWF.Objects.CachedAdjustedCost cachedAdjustedCosts = new EveHelperWF.Objects.CachedAdjustedCost();
             cachedAdjustedCosts.cachedTime = System.DateTime.Now;
@@ -308,7 +309,7 @@ namespace EveHelperWF.ESI_Calls
                 cachedPriceHistory = Newtonsoft.Json.JsonConvert.DeserializeObject<EveHelperWF.Objects.CachedPriceHistory>(content);
                 if (cachedPriceHistory != null)
                 {
-                    if (cachedPriceHistory.cachedTime > System.DateTime.Now.AddMinutes(-5))
+                    if (cachedPriceHistory.cachedTime > System.DateTime.Now.AddMinutes(-15))
                     {
                         priceHistory = cachedPriceHistory.priceHistory;
                     }
@@ -358,5 +359,127 @@ namespace EveHelperWF.ESI_Calls
 
             return priceHistory;
         }
+
+
+        //The below code will get all orders for a region and cache them
+        //However, it takes so long to do it that it's not beneficial in this use case
+        //Leve it here for now in case it ever does become useful, but for now, just don't
+        //do it. It's better to just call market orders as needed. 
+
+        //public static void GetAllOrdersForRegion(Int64 regionID)
+        //{
+        //    if (regionID > 0)
+        //    {
+        //        if (ShouldUpdateValues(regionID))
+        //        {
+        //            SetRegionCacheTime(regionID);
+        //            Stopwatch sw = new Stopwatch();
+        //            sw.Start();
+        //            List<Objects.MarketOrder> marketOrders = GetRegionMarketOrders(regionID);
+        //            sw.Stop();
+
+        //            if (marketOrders.Count > 0)
+        //            {
+        //                int typeId = 0;
+        //                while (marketOrders.Count > 0)
+        //                {
+        //                    typeId = marketOrders[0].type_id;
+        //                    CacheRegionMarketOrdersByTypeId(ref marketOrders, regionID, typeId);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+
+        //private static bool ShouldUpdateValues(Int64 regionId)
+        //{
+        //    bool shouldUpdate = false;
+
+        //    if (regionId > 0)
+        //    {
+        //        if (cachedRegions.ContainsKey(regionId))
+        //        {
+        //            if (cachedRegions[regionId] < DateTime.Now.AddMinutes(-15))
+        //            {
+        //                shouldUpdate = true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            shouldUpdate = true;
+        //        }
+        //    }
+
+        //    return shouldUpdate;
+        //}
+
+        //private static void SetRegionCacheTime(Int64 regionID)
+        //{
+        //    if (regionID > 0)
+        //    {
+        //        if (!cachedRegions.ContainsKey(regionID))
+        //        {
+        //            cachedRegions.Add(regionID, DateTime.Now);
+        //        }
+        //        else
+        //        {
+        //            cachedRegions[regionID] = DateTime.Now;
+        //        }
+        //    }
+        //}
+
+        //private static List<Objects.MarketOrder> GetRegionMarketOrders(Int64 regionID)
+        //{
+        //    List<Objects.MarketOrder> marketOrders = new List<Objects.MarketOrder>();
+        //    int pageNum = 1;
+        //    bool errored = false;
+        //    List<Objects.MarketOrder> tempOrders = null;
+        //    while (!errored)
+        //    {
+        //        tempOrders = GetRegionMarketOrdersPaged(regionID, pageNum);
+        //        if (tempOrders != null && tempOrders.Count > 0)
+        //        {
+        //            marketOrders.AddRange(tempOrders);
+        //            tempOrders = null;
+        //        }
+        //        else
+        //        {
+        //            tempOrders = null;
+        //            errored = true;
+        //        }
+        //        pageNum ++;
+        //    }
+        //    return marketOrders;
+        //}
+
+        //private static List<MarketOrder> GetRegionMarketOrdersPaged(Int64 regionID, int pageNum)
+        //{
+        //    List<MarketOrder> marketOrders = new List<MarketOrder>();
+        //    string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&page={1}", regionID, pageNum);
+        //    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+        //    System.Net.Http.HttpResponseMessage response = client.GetAsync(combinedURI).Result;
+
+        //    if (response != null && response.IsSuccessStatusCode)
+        //    {
+        //        string orders = response.Content.ReadAsStringAsync().Result;
+        //        marketOrders.AddRange(JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders));
+        //    }
+        //    return marketOrders;
+        //}
+
+        //private static void CacheRegionMarketOrdersByTypeId(ref List<MarketOrder> marketOrders, Int64 regionID, int typeId)
+        //{
+        //    List<MarketOrder> buyOrders = marketOrders.FindAll(x => x.is_buy_order == true && x.type_id == typeId);
+        //    List<MarketOrder> sellOrders = marketOrders.FindAll(x => x.is_buy_order == false && x.type_id == typeId);
+
+        //    if (buyOrders.Count > 0)
+        //    {
+        //        CacheMarketOrders(true, typeId, (int)regionID, buyOrders);
+        //    }
+        //    if (sellOrders.Count > 0)
+        //    {
+        //        CacheMarketOrders(false, typeId, (int)regionID, sellOrders);
+        //    }
+        //}
     }
 }

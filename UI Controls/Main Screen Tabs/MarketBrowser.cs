@@ -280,6 +280,5 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
         #endregion
-
     }
 }
