@@ -37,6 +37,7 @@ namespace EveHelperWF.UI_Controls
         public MainScreen()
         {
             CheckForOtherInstance();
+            CheckForUpdates();
             InitializeComponent();
             CommonHelper.Init();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
@@ -68,6 +69,17 @@ namespace EveHelperWF.UI_Controls
                 SetForegroundWindow(handle);
                 System.Diagnostics.Process.GetCurrentProcess().Kill();
 
+            }
+        }
+
+        private void CheckForUpdates()
+        {
+            Tuple<bool, Objects.GitHub_Objects.Release> ShouldUpdate = GitHub_Calls.GitHubCalls.CheckForUpdate();
+            if (ShouldUpdate.Item1)
+            {
+                UpdateMessageBox newReleaseScreen = new UpdateMessageBox(ShouldUpdate.Item2);
+                newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
+                newReleaseScreen.ShowDialog();
             }
         }
 

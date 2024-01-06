@@ -13,11 +13,11 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.6.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.6+2a16a13404991834c1ef7b78d7b1defa28f1c0c6")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.7.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.7+9b0b38c029c2e566e81a3960bdad1cc8261d710e")]
 [assembly: System.Reflection.AssemblyProductAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EveHelperWF")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.1.6.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.1.7.0")]
 [assembly: System.Runtime.Versioning.TargetPlatformAttribute("Windows7.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("Windows7.0")]
 
