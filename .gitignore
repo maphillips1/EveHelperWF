@@ -2,3 +2,4 @@ bin/
 obj/
 **.sqlite
 **.pubxml
+obj/Debug/net7.0-windows/EveHelperWF.AssemblyInfoInputs.cache

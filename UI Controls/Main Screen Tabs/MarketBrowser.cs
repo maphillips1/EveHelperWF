@@ -131,10 +131,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             int regionID = (int)RegionCombo.SelectedValue;
-            LoadSystems(regionID);
-            if (SelectedTypeID > 0)
+            if (regionID > 0)
             {
-                LoadDataForSelectedType();
+                LoadSystems(regionID);
+                if (SelectedTypeID > 0)
+                {
+                    LoadDataForSelectedType();
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must select a region", "Enter Region");
             }
         }
 
