@@ -1,6 +1,6 @@
 ﻿namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
-    partial class ShoppingList
+    partial class ShoppingListControl
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListControl));
             label1 = new Label();
             ShoppingListCombo = new ComboBox();
             NewListButton = new Button();
@@ -95,6 +95,7 @@
             NewListButton.TabIndex = 2;
             NewListButton.Text = "New Shopping List";
             NewListButton.UseVisualStyleBackColor = true;
+            NewListButton.Click += NewListButton_Click;
             // 
             // DeleteListButton
             // 
@@ -105,31 +106,36 @@
             DeleteListButton.TabIndex = 3;
             DeleteListButton.Text = "Delete List";
             DeleteListButton.UseVisualStyleBackColor = true;
+            DeleteListButton.Click += DeleteListButton_Click;
             // 
             // ItemSearchResultsGrid
             // 
+            ItemSearchResultsGrid.AllowUserToAddRows = false;
+            ItemSearchResultsGrid.AllowUserToDeleteRows = false;
             ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ItemSearchResultsGrid.BackgroundColor = Color.Black;
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ItemSearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { typeID, typeName, marketGroupName, groupId, description, volume, portionSize, raceId, basePrice, marketGroupId, parentMarketGroupId, iconId, soundId, graphicId, groupName, categoryID, categoryName });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
             ItemSearchResultsGrid.GridColor = Color.Black;
-            ItemSearchResultsGrid.Location = new Point(389, 125);
+            ItemSearchResultsGrid.Location = new Point(462, 125);
             ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
+            ItemSearchResultsGrid.MultiSelect = false;
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
             ItemSearchResultsGrid.RowHeadersWidth = 51;
             ItemSearchResultsGrid.RowTemplate.Height = 29;
             ItemSearchResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ItemSearchResultsGrid.Size = new Size(532, 383);
+            ItemSearchResultsGrid.Size = new Size(548, 383);
             ItemSearchResultsGrid.TabIndex = 8;
+            ItemSearchResultsGrid.DoubleClick += AddItemsButton_Click;
             // 
             // typeID
             // 
@@ -285,13 +291,14 @@
             // 
             SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(814, 56);
+            SearchButton.Location = new Point(903, 56);
             SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 7;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
             // 
             // ItemSearchTextBox
             // 
@@ -299,8 +306,9 @@
             ItemSearchTextBox.Location = new Point(462, 56);
             ItemSearchTextBox.Margin = new Padding(3, 2, 3, 2);
             ItemSearchTextBox.Name = "ItemSearchTextBox";
-            ItemSearchTextBox.Size = new Size(337, 23);
+            ItemSearchTextBox.Size = new Size(426, 23);
             ItemSearchTextBox.TabIndex = 6;
+            ItemSearchTextBox.KeyDown += ItemSearchTextBox_KeyDown;
             // 
             // label2
             // 
@@ -314,19 +322,21 @@
             // AddItemsButton
             // 
             AddItemsButton.ForeColor = Color.Black;
-            AddItemsButton.Location = new Point(389, 97);
+            AddItemsButton.Location = new Point(462, 97);
             AddItemsButton.Name = "AddItemsButton";
             AddItemsButton.Size = new Size(118, 23);
             AddItemsButton.TabIndex = 9;
             AddItemsButton.Text = "Add Items To List";
             AddItemsButton.UseVisualStyleBackColor = true;
+            AddItemsButton.Click += AddItemsButton_Click;
             // 
             // ShoppingListItemsPanel
             // 
             ShoppingListItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ShoppingListItemsPanel.Location = new Point(12, 97);
+            ShoppingListItemsPanel.AutoScroll = true;
+            ShoppingListItemsPanel.Location = new Point(12, 125);
             ShoppingListItemsPanel.Name = "ShoppingListItemsPanel";
-            ShoppingListItemsPanel.Size = new Size(349, 410);
+            ShoppingListItemsPanel.Size = new Size(443, 382);
             ShoppingListItemsPanel.TabIndex = 10;
             // 
             // ShowBoughtItemsCheckbox
@@ -343,17 +353,17 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(415, 15);
+            label3.Location = new Point(12, 107);
             label3.Name = "label3";
-            label3.Size = new Size(53, 15);
+            label3.Size = new Size(46, 15);
             label3.TabIndex = 12;
-            label3.Text = "Quantity";
+            label3.Text = "Bought";
             // 
-            // ShoppingList
+            // ShoppingListControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(933, 519);
+            ClientSize = new Size(1022, 519);
             Controls.Add(label3);
             Controls.Add(ShowBoughtItemsCheckbox);
             Controls.Add(ShoppingListItemsPanel);
@@ -368,8 +378,9 @@
             Controls.Add(label1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
-            Name = "ShoppingList";
+            Name = "ShoppingListControl";
             Text = "ShoppingList";
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).EndInit();
             ResumeLayout(false);

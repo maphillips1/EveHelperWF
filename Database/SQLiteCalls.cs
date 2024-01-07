@@ -147,6 +147,19 @@ namespace EveHelperWF.Database
             return sb.ToString();
         }
 
+        private static string InventoryTypeSearchForMarketCommand(string searchText)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("SELECT typeID, typeName");
+            sb.AppendLine("FROM invTypes");
+            sb.AppendLine("WHERE UPPER(typeName) LIKE '%' || " + searchText.ToUpperInvariant());
+            sb.AppendLine("AND marketGroupID > 0");
+            sb.AppendLine("order by length(typeName)");
+
+            return sb.ToString();
+        }
+
         private static string SolarSystemSearchCommand(List<int> solarSystemIDs)
         {
             StringBuilder sb = new StringBuilder();
@@ -1486,6 +1499,34 @@ namespace EveHelperWF.Database
             }
 
             return filamentTypes;
+        }
+
+        public static List<InventoryTypes> InventoryTypeSearchForMarket(string searchText)
+        {
+            List<InventoryTypes> inventoryTypes = new List<InventoryTypes>();
+
+            searchText = searchText.Trim().Replace(" ", "%");
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(InventoryTypeSearchForMarketCommand(searchText), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                InventoryTypes type = null;
+                while (query.Read())
+                {
+                    type = new InventoryTypes();
+                    type.typeId = Convert.ToInt32(query.GetString(0));
+                    type.typeName = query.GetString(1);
+                    inventoryTypes.Add(type);
+                }
+            }
+
+            return inventoryTypes;
         }
         #endregion
 

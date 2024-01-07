@@ -31,7 +31,7 @@
     <Compile Update="UI Controls\Main Screen Tabs\PriceHistoryUtility.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="UI Controls\Main Screen Tabs\ShoppingList.cs">
+    <Compile Update="UI Controls\Main Screen Tabs\ShoppingListControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\SystemFinder.cs">
@@ -44,6 +44,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\FIleLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\FileNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\PriceHistoryViewer.cs">
