@@ -74,7 +74,6 @@ namespace Enums
                                          "EveHelper\\TrackedTypes\\");
         public static string ShoppingListsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\ShoppingLists\\");
-
         public enum PlanetMatTierGroupId
         {
             T0_Organic = 1035,

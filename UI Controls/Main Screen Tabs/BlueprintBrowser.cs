@@ -518,6 +518,15 @@ namespace EveHelperWF
                 }
             }
         }
+
+        private void Numeric_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                NumericUpDown numericUpDown = (NumericUpDown)sender;
+                numericUpDown.Value = 0;
+            }
+        }
         #endregion
 
         #region "Item Selected Methods"
@@ -2117,14 +2126,5 @@ namespace EveHelperWF
             }
         }
         #endregion
-
-        private void Numeric_KeyUp(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Back)
-            {
-                NumericUpDown numericUpDown = (NumericUpDown)sender;
-                numericUpDown.Value = 0;
-            }
-        }
     }
 }

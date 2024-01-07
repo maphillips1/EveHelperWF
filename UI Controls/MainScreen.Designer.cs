@@ -55,6 +55,8 @@
             label10 = new Label();
             label11 = new Label();
             InitLongLoadingWorker = new System.ComponentModel.BackgroundWorker();
+            label12 = new Label();
+            ShoppingListButton = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -247,7 +249,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label8.Location = new Point(49, 363);
+            label8.Location = new Point(49, 505);
             label8.Name = "label8";
             label8.Size = new Size(584, 20);
             label8.TabIndex = 14;
@@ -257,7 +259,7 @@
             // 
             FuzzworksLinkLabel.AutoSize = true;
             FuzzworksLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FuzzworksLinkLabel.Location = new Point(639, 366);
+            FuzzworksLinkLabel.Location = new Point(639, 508);
             FuzzworksLinkLabel.Name = "FuzzworksLinkLabel";
             FuzzworksLinkLabel.Size = new Size(106, 15);
             FuzzworksLinkLabel.TabIndex = 15;
@@ -298,7 +300,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.Size = new Size(765, 24);
+            menuStrip1.Size = new Size(770, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -328,7 +330,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(453, 413);
+            FreyaLinkLabel.Location = new Point(453, 555);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -340,7 +342,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label10.Location = new Point(49, 390);
+            label10.Location = new Point(49, 532);
             label10.Name = "label10";
             label10.Size = new Size(381, 20);
             label10.TabIndex = 19;
@@ -350,7 +352,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label11.Location = new Point(49, 409);
+            label11.Location = new Point(49, 551);
             label11.Name = "label11";
             label11.Size = new Size(393, 20);
             label11.TabIndex = 21;
@@ -360,11 +362,40 @@
             // 
             InitLongLoadingWorker.DoWork += InitLongLoadingWorker_DoWork;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.Location = new Point(53, 457);
+            label12.Name = "label12";
+            label12.Size = new Size(111, 20);
+            label12.TabIndex = 23;
+            label12.Text = "Shopping Lists";
+            // 
+            // ShoppingListButton
+            // 
+            ShoppingListButton.Cursor = Cursors.Hand;
+            ShoppingListButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            ShoppingListButton.ForeColor = Color.Black;
+            ShoppingListButton.Image = (Image)resources.GetObject("ShoppingListButton.Image");
+            ShoppingListButton.Location = new Point(49, 335);
+            ShoppingListButton.Margin = new Padding(3, 2, 3, 2);
+            ShoppingListButton.MaximumSize = new Size(120, 120);
+            ShoppingListButton.Name = "ShoppingListButton";
+            ShoppingListButton.Size = new Size(120, 120);
+            ShoppingListButton.TabIndex = 22;
+            ShoppingListButton.Text = "'";
+            ShoppingListButton.UseVisualStyleBackColor = true;
+            ShoppingListButton.Click += ShoppingListButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(765, 446);
+            ClientSize = new Size(770, 601);
+            Controls.Add(label12);
+            Controls.Add(ShoppingListButton);
             Controls.Add(label11);
             Controls.Add(FreyaLinkLabel);
             Controls.Add(label10);
@@ -428,5 +459,7 @@
         private ToolStripMenuItem backupFilesToolStripMenuItem;
         private ToolStripMenuItem updateEveDataToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker InitLongLoadingWorker;
+        private Label label12;
+        private Button ShoppingListButton;
     }
 }

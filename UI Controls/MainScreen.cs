@@ -24,6 +24,7 @@ namespace EveHelperWF.UI_Controls
         FIleLocations fIleLocations;
         PriceHistoryUtility priceHistoryUtility;
         LootAppraisal lootAppraisal;
+        ShoppingListControl shoppingList;
         System.Threading.Mutex objMutex;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
@@ -41,7 +42,7 @@ namespace EveHelperWF.UI_Controls
             InitializeComponent();
             CommonHelper.Init();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta"; 
+            this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
 
             if (!InitLongLoadingWorker.IsBusy)
             {
@@ -185,6 +186,14 @@ namespace EveHelperWF.UI_Controls
         private void InitLongLoadingWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             CommonHelper.InitLongLoading();
+        }
+
+        private void ShoppingListButton_Click(object sender, EventArgs e)
+        {
+            if (shoppingList == null || shoppingList.IsDisposed) { shoppingList = new ShoppingListControl(); }
+            shoppingList.StartPosition = FormStartPosition.CenterScreen;
+            shoppingList.Show();
+            shoppingList.BringToFront();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Buffers;
+using System.Reflection.Metadata;
 
 namespace FileIO
 {
@@ -25,35 +26,35 @@ namespace FileIO
             return fileContent;
         }
 
-        public static void SaveFileContent(string directory, string filename, string content)
+        public static void SaveFileContent(string directoryName, string fileName, string content)
         {
-            if (!System.IO.Directory.Exists(directory))
+            if (!System.IO.Directory.Exists(directoryName))
             {
-                System.IO.Directory.CreateDirectory(directory);
+                System.IO.Directory.CreateDirectory(directoryName);
             }
 
-            if (File.Exists(filename))
+            if (File.Exists(fileName))
             {
-                File.Delete(filename);
+                File.Delete(fileName);
             }
 
-            File.WriteAllText(filename, content);
+            File.WriteAllText(fileName, content);
 
         }
 
-        public static void SaveFileContent(string directory, string filename, byte[] content)
+        public static void SaveFileContent(string directoryName, string fileName, byte[] content)
         {
-            if (!System.IO.Directory.Exists(directory))
+            if (!System.IO.Directory.Exists(directoryName))
             {
-                System.IO.Directory.CreateDirectory(directory);
+                System.IO.Directory.CreateDirectory(directoryName);
             }
 
-            if (File.Exists(filename))
+            if (File.Exists(fileName))
             {
-                File.Delete(filename);
+                File.Delete(fileName);
             }
 
-            File.WriteAllBytes(filename, content);
+            File.WriteAllBytes(fileName, content);
 
         }
 
@@ -73,6 +74,26 @@ namespace FileIO
                 fileNames = new string[0];
             }
             return fileNames;
+        }
+
+        public static void DeleteFile(string directoryName, string fileName)
+        {
+            if (!System.IO.Directory.Exists(directoryName))
+            {
+                System.IO.Directory.CreateDirectory(directoryName);
+            }
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            File.Delete(fileName);
+        }
+
+        public static string ReplaceInvalidChars(string filename)
+        {
+            return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
     }
 }
