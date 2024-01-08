@@ -359,6 +359,8 @@
             SearchTextBox = new TextBox();
             SearchButton = new Button();
             SearchResultsTreeView = new TreeView();
+            label29 = new Label();
+            CopyToClipboardButton = new Button();
             ManufacturingPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -424,6 +426,8 @@
             // 
             ManufacturingPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPanel.Controls.Add(label29);
+            ManufacturingPanel.Controls.Add(CopyToClipboardButton);
             ManufacturingPanel.Controls.Add(BlueprintImagePanel);
             ManufacturingPanel.Controls.Add(StatusLabel);
             ManufacturingPanel.Controls.Add(panel1);
@@ -3960,6 +3964,26 @@
             SearchResultsTreeView.TabIndex = 4;
             SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
             // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Location = new Point(99, 176);
+            label29.Name = "label29";
+            label29.Size = new Size(151, 15);
+            label29.TabIndex = 39;
+            label29.Text = "Works with Multibuy in Eve";
+            // 
+            // CopyToClipboardButton
+            // 
+            CopyToClipboardButton.ForeColor = Color.Black;
+            CopyToClipboardButton.Location = new Point(102, 199);
+            CopyToClipboardButton.Name = "CopyToClipboardButton";
+            CopyToClipboardButton.Size = new Size(138, 23);
+            CopyToClipboardButton.TabIndex = 38;
+            CopyToClipboardButton.Text = "Copy to Clipboard";
+            CopyToClipboardButton.UseVisualStyleBackColor = true;
+            CopyToClipboardButton.Click += CopyToClipboardButton_Click;
+            // 
             // BlueprintBrowser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -4324,5 +4348,7 @@
         private Label InventionCostLabelLabel;
         private NumericUpDown AdditionalCostsNumeric;
         private Label label14;
+        private Label label29;
+        private Button CopyToClipboardButton;
     }
 }
