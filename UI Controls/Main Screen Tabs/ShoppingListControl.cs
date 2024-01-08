@@ -194,6 +194,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 SearchButton_Click(sender, e);
             }
         }
+
+        private void CopyToClipboard_Click(object sender, EventArgs e)
+        {
+            if (theShoppingList != null && theShoppingList.ShoppinglistItems.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (ShoppingListItem item in theShoppingList.ShoppinglistItems)
+                {
+                    sb.AppendLine(item.typeName + " " + item.Quantity);
+                }
+                Clipboard.SetText(sb.ToString());
+                MessageBox.Show("Copied items to clipboard!", "Items Copied");
+            }
+        }
         #endregion
 
         #region "Methods"

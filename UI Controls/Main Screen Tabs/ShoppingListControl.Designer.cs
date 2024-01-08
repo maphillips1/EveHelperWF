@@ -59,6 +59,8 @@
             ShoppingListItemsPanel = new Panel();
             ShowBoughtItemsCheckbox = new CheckBox();
             label3 = new Label();
+            CopyToClipboardButton = new Button();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).BeginInit();
             SuspendLayout();
             // 
@@ -359,11 +361,33 @@
             label3.TabIndex = 12;
             label3.Text = "Bought";
             // 
+            // CopyToClipboardButton
+            // 
+            CopyToClipboardButton.ForeColor = Color.Black;
+            CopyToClipboardButton.Location = new Point(223, 96);
+            CopyToClipboardButton.Name = "CopyToClipboardButton";
+            CopyToClipboardButton.Size = new Size(138, 23);
+            CopyToClipboardButton.TabIndex = 13;
+            CopyToClipboardButton.Text = "Copy to Clipboard";
+            CopyToClipboardButton.UseVisualStyleBackColor = true;
+            CopyToClipboardButton.Click += CopyToClipboard_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(220, 73);
+            label4.Name = "label4";
+            label4.Size = new Size(151, 15);
+            label4.TabIndex = 14;
+            label4.Text = "Works with Multibuy in Eve";
+            // 
             // ShoppingListControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1022, 519);
+            Controls.Add(label4);
+            Controls.Add(CopyToClipboardButton);
             Controls.Add(label3);
             Controls.Add(ShowBoughtItemsCheckbox);
             Controls.Add(ShoppingListItemsPanel);
@@ -418,5 +442,7 @@
         private Panel ShoppingListItemsPanel;
         private CheckBox ShowBoughtItemsCheckbox;
         private Label label3;
+        private Button CopyToClipboardButton;
+        private Label label4;
     }
 }

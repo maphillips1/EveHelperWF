@@ -527,6 +527,11 @@ namespace EveHelperWF
                 numericUpDown.Value = 0;
             }
         }
+
+        private void CopyToClipboardButton_Click(object sender, EventArgs e)
+        {
+            CopyMatsToClipboard();
+        }
         #endregion
 
         #region "Item Selected Methods"
@@ -1979,6 +1984,50 @@ namespace EveHelperWF
         }
         #endregion
 
+        #endregion
+
+        #region "Methods"
+        private void CopyMatsToClipboard()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (ActivityTabPanel.SelectedTab == ManufacturingPage)
+            {
+                foreach (MaterialsWithMarketData item in ManuMats)
+                {
+                    sb.AppendLine(item.materialName + " " + item.quantityTotal);
+                }
+            }
+            else if (ActivityTabPanel.SelectedTab == ReactionPage)
+            {
+                foreach (MaterialsWithMarketData item in ReactionMats)
+                {
+                    sb.AppendLine(item.materialName + " " + item.quantityTotal);
+                }
+            }
+            else if (ActivityTabPanel.SelectedTab == InventionPage)
+            {
+                foreach (MaterialsWithMarketData item in InventionMats)
+                {
+                    sb.AppendLine(item.materialName + " " + item.quantityTotal);
+                }
+            }
+            else if (ActivityTabPanel.SelectedTab == TEResearchPage)
+            {
+                foreach (MaterialsWithMarketData item in ResTEMats)
+                {
+                    sb.AppendLine(item.materialName + " " + item.quantityTotal);
+                }
+            }
+            else if (ActivityTabPanel.SelectedTab == MEResearchPage)
+            {
+                foreach (MaterialsWithMarketData item in ResMEMats)
+                {
+                    sb.AppendLine(item.materialName + " " + item.quantityTotal);
+                }
+            }
+            Clipboard.SetText(sb.ToString());
+            MessageBox.Show("Copied items to clipboard!", "Items Copied");
+        }
         #endregion
 
         #region "Background Workers"
