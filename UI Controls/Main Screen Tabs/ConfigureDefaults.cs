@@ -298,8 +298,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.InventBlueprintCheckboxValue = InventBlueprintCheckbox.Checked;
 
             //Manufacturing
-            DefaultFormValues.ManufacturingMEValue = Convert.ToDecimal(MEUpDown.Value);
-            DefaultFormValues.ManufacturingTEValue = Convert.ToDecimal(TEUpDown.Value);
+            DefaultFormValues.ManufacturingMEValue = Convert.ToInt32(MEUpDown.Value);
+            DefaultFormValues.ManufacturingTEValue = Convert.ToInt32(TEUpDown.Value);
             DefaultFormValues.ManufacturingSystemValue = Convert.ToInt32(SystemCombo.SelectedValue);
             DefaultFormValues.ManufacturingStructureValue = Convert.ToInt32(StructureCombo.SelectedValue);
             DefaultFormValues.ManufacturingStructureMERigValue = Convert.ToInt32(StructureMERigCombo.SelectedValue);
@@ -307,8 +307,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.ManufacturingTaxValue = Convert.ToDecimal(TaxUpDown.Value);
             DefaultFormValues.ManufacturingImplantValue = Convert.ToInt32(ImplantCombo.SelectedValue);
             DefaultFormValues.BuildComponentsValue = BuildComponentCheckbox.Checked;
-            DefaultFormValues.CompMEValue = Convert.ToDecimal(CompMEUpDown.Value);
-            DefaultFormValues.CompTEValue = Convert.ToDecimal(CompTEUpDown.Value);
+            DefaultFormValues.CompMEValue = Convert.ToInt32(CompMEUpDown.Value);
+            DefaultFormValues.CompTEValue = Convert.ToInt32(CompTEUpDown.Value);
 
             //Invention
             DefaultFormValues.InventionSystemValue = Convert.ToInt32(InventionSolarSystemCombo.SelectedValue);

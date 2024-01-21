@@ -57,6 +57,8 @@
             InitLongLoadingWorker = new System.ComponentModel.BackgroundWorker();
             label12 = new Label();
             ShoppingListButton = new Button();
+            label13 = new Label();
+            BuildPlansButton = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -389,11 +391,40 @@
             ShoppingListButton.UseVisualStyleBackColor = true;
             ShoppingListButton.Click += ShoppingListButton_Click;
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.Location = new Point(250, 457);
+            label13.Name = "label13";
+            label13.Size = new Size(86, 20);
+            label13.TabIndex = 25;
+            label13.Text = "Build Plans";
+            // 
+            // BuildPlansButton
+            // 
+            BuildPlansButton.Cursor = Cursors.Hand;
+            BuildPlansButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            BuildPlansButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            BuildPlansButton.ForeColor = Color.Black;
+            BuildPlansButton.Image = (Image)resources.GetObject("BuildPlansButton.Image");
+            BuildPlansButton.Location = new Point(233, 335);
+            BuildPlansButton.Margin = new Padding(3, 2, 3, 2);
+            BuildPlansButton.MaximumSize = new Size(120, 120);
+            BuildPlansButton.Name = "BuildPlansButton";
+            BuildPlansButton.Size = new Size(120, 120);
+            BuildPlansButton.TabIndex = 24;
+            BuildPlansButton.Text = "'";
+            BuildPlansButton.UseVisualStyleBackColor = true;
+            BuildPlansButton.Click += BuildPlansButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(770, 601);
+            Controls.Add(label13);
+            Controls.Add(BuildPlansButton);
             Controls.Add(label12);
             Controls.Add(ShoppingListButton);
             Controls.Add(label11);
@@ -461,5 +492,7 @@
         private System.ComponentModel.BackgroundWorker InitLongLoadingWorker;
         private Label label12;
         private Button ShoppingListButton;
+        private Label label13;
+        private Button BuildPlansButton;
     }
 }

@@ -128,6 +128,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("FROM mapDenormalize md");
             sb.AppendLine("    INNER JOIN invTypes IT");
             sb.AppendLine("        ON IT.typeID = MD.typeID");
+            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("    INNER JOIN invGroups IG");
             sb.AppendLine("        ON IG.groupID = IT.groupID");
             sb.AppendLine("WHERE solarSystemID = " + solarSystemID.ToString());
@@ -142,6 +143,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("SELECT typeID, typeName");
             sb.AppendLine("FROM invTypes");
             sb.AppendLine("WHERE UPPER(typeName) LIKE '%' || " + searchText.ToUpperInvariant());
+            sb.AppendLine("AND published = 1");
             sb.AppendLine("order by length(typeName)");
 
             return sb.ToString();
@@ -155,6 +157,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("FROM invTypes");
             sb.AppendLine("WHERE UPPER(typeName) LIKE '%' || " + searchText.ToUpperInvariant());
             sb.AppendLine("AND marketGroupID > 0");
+            sb.AppendLine("AND published = 1");
             sb.AppendLine("order by length(typeName)");
 
             return sb.ToString();
@@ -197,6 +200,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("        and isInput = 0");
             sb.AppendLine("inner join invTypes IT");
             sb.AppendLine("    on IT.typeID = PSTM.typeID");
+            sb.AppendLine("        AND IT.published = 1");
             sb.AppendLine("where IT.typeID = " + typeID.ToString());
             sb.AppendLine("order by PSOut.schematicName, IT.typeName");
 
@@ -223,6 +227,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("        and isInput = 1");
             sb.AppendLine("inner join invTypes IT");
             sb.AppendLine("    on IT.typeID = PSTM.typeID");
+            sb.AppendLine("        AND IT.published = 1");
             sb.AppendLine("inner join invGroups IG");
             sb.AppendLine("    on IG.groupID = IT.groupID");
             sb.AppendLine("where PSOut.schematicID = " + schematicID.ToString());
@@ -251,6 +256,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("        and isInput = 0");
             sb.AppendLine("inner join invTypes IT");
             sb.AppendLine("    on IT.typeID = PSTM.typeID");
+            sb.AppendLine("        AND IT.published = 1");
             sb.AppendLine("inner join invGroups IG");
             sb.AppendLine("    on IG.groupID = IT.groupID");
             sb.AppendLine("order by PSOut.schematicName, IT.typeName");
@@ -309,6 +315,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("        and IAP.activityID = IA.activityID");
             sb.AppendLine("LEFT OUTER join invTypes pIT");
             sb.AppendLine("    on pIT.typeID = IAP.productTypeID");
+            sb.AppendLine("            AND pIT.published = 1");
             sb.AppendLine("where ia.typeID = " + type_id.ToString());
             sb.AppendLine("and Ra.published = 1");
 
@@ -336,6 +343,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("from industryActivityMaterials IAM");
             sb.AppendLine("Inner join invTypes IT");
             sb.AppendLine("    on IT.typeID = IAM.materialTypeID");
+            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("Inner join ramActivities RA");
             sb.AppendLine("    on RA.activityID = IAM.activityID");
             sb.AppendLine("LEFT OUTER JOIN industryActivityProducts IAP");
@@ -373,6 +381,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("from industryActivitySkills IAS");
             sb.AppendLine("Inner join invTypes IT");
             sb.AppendLine("    on IT.typeID = IAS.skillID");
+            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("Inner join ramActivities RA");
             sb.AppendLine("    on RA.activityID = IAS.activityID");
             sb.AppendLine("where IAS.typeID = " + type_id.ToString());
@@ -394,7 +403,8 @@ namespace EveHelperWF.Database
 	        sb.AppendLine("from industryActivityProducts IAP");
 	        sb.AppendLine("Inner join invTypes IT");
 		    sb.AppendLine("    on IT.typeID = IAP.productTypeID");
-	        sb.AppendLine("Inner join ramActivities RA");
+            sb.AppendLine("            AND IT.published = 1");
+            sb.AppendLine("Inner join ramActivities RA");
 		    sb.AppendLine("    on RA.activityID = IAP.activityID");
 	        sb.AppendLine("where IAP.typeID = " + type_id);
 	        sb.AppendLine("and IAP.activityID = " + activity_id);
@@ -440,9 +450,12 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select typeID");
-            sb.AppendLine("from industryActivityProducts ");
-	        sb.AppendLine("where productTypeID = " + typeID.ToString());
+            sb.AppendLine("select IAP.typeID");
+            sb.AppendLine("from industryActivityProducts IAP");
+            sb.AppendLine("INNER JOIN invTypes IT ");
+            sb.AppendLine("    ON IT.typeID = IAP.typeID ");
+            sb.AppendLine("        AND IT.published = 1");
+            sb.AppendLine("where productTypeID = " + typeID.ToString());
 
             return sb.ToString();
         }
@@ -455,6 +468,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("from industryActivityProbabilities IAP");
             sb.AppendLine("Inner join invTypes IT	");
             sb.AppendLine("    on IT.typeID = IAP.productTypeID");
+            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("where IAP.typeID = " + typeID.ToString());
             sb.AppendLine("and IAP.activityID = " + activityID.ToString());
 
@@ -480,6 +494,7 @@ namespace EveHelperWF.Database
             sb.AppendLine("select Coalesce(IT.marketGroupID, 0) as marketGroupID from industryActivityProducts IAP");
             sb.AppendLine("Inner join invTypes IT");
             sb.AppendLine("on IT.typeID = IAP.productTypeID");
+            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("where IAP.typeID = " + typeID.ToString());
             sb.AppendLine("and (IAP.activityID = 1 or IAP.activityID = 11)");
 
@@ -515,18 +530,23 @@ namespace EveHelperWF.Database
 
             sb.AppendLine("select typeID, typeName from invTypes");
             sb.AppendLine("where groupID = 1979");
+            sb.AppendLine("            AND published = 1");
             sb.AppendLine("order by typeName");
 
             return sb.ToString();
         }
 
-        private static string BlueprintSearchCommand()
+        private static string LoadIndustryProductsCommand()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select typeID, typeName from invTypes");
-            sb.AppendLine("where groupID = 1979");
-            sb.AppendLine("order by typeName");
+            sb.AppendLine("select it.typeID, it.typeName");
+            sb.AppendLine("from invTypes IT");
+            sb.AppendLine("inner join industryActivityProducts IAP");
+            sb.AppendLine("on IAP.productTypeID = it.typeID");
+            sb.AppendLine("where IAP.activityID in (1, 7, 11)");
+            sb.AppendLine("            AND IT.published = 1");
+            sb.AppendLine("order by it.typeName");
 
             return sb.ToString();
         }
@@ -704,9 +724,9 @@ namespace EveHelperWF.Database
             return planets;
         }
 
-        public static Objects.InventoryTypes InventoryTypeSearch(string searchText)
+        public static Objects.InventoryType InventoryTypeSearch(string searchText)
         {
-            Objects.InventoryTypes foundType = null;
+            Objects.InventoryType foundType = null;
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -720,7 +740,7 @@ namespace EveHelperWF.Database
 
                 while (query.Read())
                 {
-                    foundType = new InventoryTypes();
+                    foundType = new InventoryType();
                     foundType.typeId = Convert.ToInt32(query.GetString(0));
                     foundType.typeName = query.GetString(1);
                     break;
@@ -730,9 +750,9 @@ namespace EveHelperWF.Database
             return foundType;
         }
 
-        public static List<InventoryTypes> InventoryTypeSearchLoadAll(string searchText)
+        public static List<InventoryType> InventoryTypeSearchLoadAll(string searchText)
         {
-            List<InventoryTypes> inventoryTypes = new List<InventoryTypes>();
+            List<InventoryType> inventoryTypes = new List<InventoryType>();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -743,10 +763,10 @@ namespace EveHelperWF.Database
 
                 SqliteDataReader query = command.ExecuteReader();
 
-                InventoryTypes type = null;
+                InventoryType type = null;
                 while (query.Read())
                 {
-                    type = new InventoryTypes();
+                    type = new InventoryType();
                     type.typeId = Convert.ToInt32(query.GetString(0));
                     type.typeName = query.GetString(1);
                     inventoryTypes.Add(type);
@@ -1085,9 +1105,9 @@ namespace EveHelperWF.Database
             return planetOutputTypes;
         }
 
-        public static List<Objects.InventoryTypes> GetInventoryTypes()
+        public static List<Objects.InventoryType> GetInventoryTypes()
         {
-            List<Objects.InventoryTypes> inventoryTypes = new List<Objects.InventoryTypes>();
+            List<Objects.InventoryType> inventoryTypes = new List<Objects.InventoryType>();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1098,20 +1118,15 @@ namespace EveHelperWF.Database
 
                 SqliteDataReader query = command.ExecuteReader();
 
-                InventoryTypes invType;
+                InventoryType invType;
                 while (query.Read())
                 {
-                    invType = new InventoryTypes();
+                    invType = new InventoryType();
                     if (query[0] != DBNull.Value) { invType.typeId = query.GetInt32(0); }
                     if (query[1] != DBNull.Value) { invType.typeName = query.GetString(1); }
-                    if (query[2] != DBNull.Value) { invType.description = query.GetString(2); }
                     if (query[3] != DBNull.Value) { invType.volume = query.GetDecimal(3); }
-                    if (query[4] != DBNull.Value) { invType.portionSize = query.GetInt32(4); }
-                    if (query[5] != DBNull.Value) { invType.raceId = query.GetInt32(5); }
                     if (query[6] != DBNull.Value) { invType.basePrice = query.GetDecimal(6); }
                     if (query[7] != DBNull.Value) { invType.marketGroupId = query.GetInt32(7); }
-                    if (query[8] != DBNull.Value) { invType.iconId = query.GetInt32(8); }
-                    if (query[9] != DBNull.Value) { invType.soundId = query.GetInt32(9); }
                     if (query[10] != DBNull.Value) { invType.groupId = query.GetInt32(10); }
                     if (query[11] != DBNull.Value) { invType.groupName = query.GetString(11); }
                     if (query[12] != DBNull.Value) { invType.categoryID = query.GetInt32(12); }
@@ -1474,10 +1489,10 @@ namespace EveHelperWF.Database
             return stationName;
         }
 
-        public static List<InventoryTypes> GetFilamentTypesForDropDown()
+        public static List<InventoryType> GetFilamentTypesForDropDown()
         {
-            List<InventoryTypes> filamentTypes = new List<InventoryTypes>();
-            filamentTypes.Add(new InventoryTypes());
+            List<InventoryType> filamentTypes = new List<InventoryType>();
+            filamentTypes.Add(new InventoryType());
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1488,10 +1503,10 @@ namespace EveHelperWF.Database
 
                 SqliteDataReader query = command.ExecuteReader();
 
-                InventoryTypes filamentType = null;
+                InventoryType filamentType = null;
                 while (query.Read())
                 {
-                    filamentType = new InventoryTypes();
+                    filamentType = new InventoryType();
                     filamentType.typeId = query.GetInt32(0);
                     filamentType.typeName = query.GetString(1);
                     filamentTypes.Add(filamentType);
@@ -1501,9 +1516,9 @@ namespace EveHelperWF.Database
             return filamentTypes;
         }
 
-        public static List<InventoryTypes> InventoryTypeSearchForMarket(string searchText)
+        public static List<InventoryType> InventoryTypeSearchForMarket(string searchText)
         {
-            List<InventoryTypes> inventoryTypes = new List<InventoryTypes>();
+            List<InventoryType> inventoryTypes = new List<InventoryType>();
 
             searchText = searchText.Trim().Replace(" ", "%");
 
@@ -1516,10 +1531,10 @@ namespace EveHelperWF.Database
 
                 SqliteDataReader query = command.ExecuteReader();
 
-                InventoryTypes type = null;
+                InventoryType type = null;
                 while (query.Read())
                 {
-                    type = new InventoryTypes();
+                    type = new InventoryType();
                     type.typeId = Convert.ToInt32(query.GetString(0));
                     type.typeName = query.GetString(1);
                     inventoryTypes.Add(type);
@@ -1527,6 +1542,32 @@ namespace EveHelperWF.Database
             }
 
             return inventoryTypes;
+        }
+
+        public static List<ComboListItem> LoadProductsCombo()
+        {
+            List<ComboListItem> comboItems = new List<ComboListItem>();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(LoadIndustryProductsCommand(), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                ComboListItem comboItem = null;
+                while (query.Read())
+                {
+                    comboItem = new ComboListItem();
+                    comboItem.key = Convert.ToInt32(query.GetString(0));
+                    comboItem.value = query.GetString(1);
+                    comboItems.Add(comboItem);
+                }
+            }
+
+            return comboItems;
         }
         #endregion
 

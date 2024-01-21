@@ -8,7 +8,7 @@ namespace EveHelperWF.Objects
 {
     public class PriceHistoryBackgroundWorkerClass
     {
-        public List<InventoryTypes> InventoryTypes { get; set; }
+        public List<InventoryType> InventoryTypes { get; set; }
         public int RegionID { get; set; }
     }
 }

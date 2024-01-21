@@ -12,7 +12,7 @@ namespace EveHelperWF.Objects
         public int groupID { get; set; }
         public int categoryID { get; set; }
         public List<TreeViewGroup> children { get; set; }
-        public List<InventoryTypes> items { get; set; }
+        public List<InventoryType> items { get; set; }
 
     }
 }

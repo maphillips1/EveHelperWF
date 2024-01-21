@@ -22,8 +22,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         List<ComboListItem> ComboItems = new List<ComboListItem>();
         Objects.ShoppingList theShoppingList = null;
         string ShoppingListFileName;
-        InventoryTypes selectedType;
-        BindingList<InventoryTypes> foundTypes = null;
+        InventoryType selectedType;
+        BindingList<InventoryType> foundTypes = null;
 
         #region "Init"
         public ShoppingListControl()
@@ -167,14 +167,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (!string.IsNullOrWhiteSpace(ItemSearchTextBox.Text))
             {
-                foundTypes = new BindingList<InventoryTypes>();
+                foundTypes = new BindingList<InventoryType>();
                 string searchText = "'" + ItemSearchTextBox.Text + "%'";
-                List<InventoryTypes> searchResults = Database.SQLiteCalls.InventoryTypeSearchForMarket(searchText);
-                foreach (InventoryTypes invType in searchResults)
+                List<InventoryType> searchResults = Database.SQLiteCalls.InventoryTypeSearchForMarket(searchText);
+                foreach (InventoryType invType in searchResults)
                 {
                     foundTypes.Add(invType);
                 }
-                DatabindGridView<BindingList<InventoryTypes>>(ItemSearchResultsGrid, foundTypes);
+                DatabindGridView<BindingList<InventoryType>>(ItemSearchResultsGrid, foundTypes);
 
                 if (foundTypes.Count <= 0)
                 {
@@ -239,7 +239,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadShoppingList()
         {
-            ShoppingListItemsPanel.Controls.Clear();
+            ClearShoppingListControls();
             theShoppingList = null;
             string selectedFileName = GetSelectedFileName();
             if (!String.IsNullOrWhiteSpace(selectedFileName))
@@ -251,6 +251,25 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
                 LoadShoppingItemsPanel();
             }
+        }
+
+        private void ClearShoppingListControls()
+        {
+            System.Windows.Forms.Control.ControlCollection controls = ShoppingListItemsPanel.Controls;
+            EventHandlerList eventHandlerList = null;
+            foreach (Control item in controls)
+            {
+                eventHandlerList =
+                        (EventHandlerList)typeof(Control).GetProperty(
+                            "Events",
+                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(item, null);
+                if (eventHandlerList != null)
+                {
+                    typeof(EventHandlerList).GetMethod("Dispose").Invoke(eventHandlerList, null);
+                }
+                item.Dispose();
+            }
+            System.GC.Collect();
         }
 
         private string GetSelectedFileName()
@@ -276,7 +295,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadShoppingItemsPanel()
         {
-            ShoppingListItemsPanel.Controls.Clear();
+            ClearShoppingListControls();
             if (theShoppingList != null && theShoppingList.ShoppinglistItems.Count > 0)
             {
                 int currentY = 5;
@@ -411,7 +430,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 item.typeName = selectedType.typeName;
                 item.groupName = selectedType.groupName;
                 item.volume = selectedType.volume;
-                item.graphicId = selectedType.graphicId;
                 item.basePrice = selectedType.basePrice;
                 theShoppingList.ShoppinglistItems.Add(item);
             }

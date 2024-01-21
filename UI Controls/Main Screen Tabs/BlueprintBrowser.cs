@@ -14,7 +14,7 @@ namespace EveHelperWF
         private const string CachedFormValuesFileName = "form_values.json";
         private static Objects.DefaultFormValue DefaultFormValues = new Objects.DefaultFormValue();
 
-        private static Objects.InventoryTypes SelectedType = null;
+        private static Objects.InventoryType SelectedType = null;
         private static List<Objects.IndustryActivityTypes> IndustryActivityTypes = null;
 
         private static List<Objects.IndustryActivitySkill> ManuSkills = null;
@@ -451,7 +451,7 @@ namespace EveHelperWF
                     {
                         int typeID = 0;
                         typeID = Convert.ToInt32(selectedNode.Tag.ToString().Split("_")[1]);
-                        Objects.InventoryTypes invType = CommonHelper.InventoryTypes.Find(x => x.typeId == typeID);
+                        Objects.InventoryType invType = CommonHelper.InventoryTypes.Find(x => x.typeId == typeID);
                         if (invType != null)
                         {
                             SelectedType = invType;
@@ -951,10 +951,16 @@ namespace EveHelperWF
             {
                 ManufacturingTotalComponentTime = ScreenHelper.BlueprintBrowserHelper.GetComponentManufacturingTime(ManuMats, calculationHelperClass);
             }
-            TotalManufacturingJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass);
+            TotalManufacturingJobCost = ScreenHelper.CommonHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass, calculationHelperClass.Runs);
             TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass);
             TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-            TotalManufacturingTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, ManuMats);
+            TotalManufacturingTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
+            decimal TotalMatPrice = 0;
+            foreach (MaterialsWithMarketData mat in ManuMats)
+            {
+                TotalMatPrice += mat.priceTotal;
+            }
+            TotalManufacturingTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
 
@@ -999,10 +1005,16 @@ namespace EveHelperWF
             ScreenHelper.BlueprintBrowserHelper.CalculateReactionInputQuantAndPrice(ref ReactionMats, calculationHelperClass);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats);
             ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
-            TotalReactionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass);
+            TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
             TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass);
             TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-            TotalReactionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, ReactionMats);
+            TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass,calculationHelperClass.OutputOrderType);
+            decimal TotalMatPrice = 0;
+            foreach (MaterialsWithMarketData mat in ReactionMats)
+            {
+                TotalMatPrice += mat.priceTotal;
+            }
+            TotalReactionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             TotalReactionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
             TotalReactionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
 
@@ -1021,7 +1033,13 @@ namespace EveHelperWF
             InventionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateInventionTime(IndustryActivityTypes, calculationHelperClass);
             TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, calculationHelperClass);
             TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass);
-            TotalInventionTaxesAndFees = ScreenHelper.BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, InventionMats);
+            TotalInventionTaxesAndFees = 0;
+            decimal TotalMatPrice = 0;
+            foreach (MaterialsWithMarketData mat in InventionMats)
+            {
+                TotalMatPrice += mat.priceTotal;
+            }
+            TotalInventionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             TotalInventionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
             TotalInventionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
             FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(calculationHelperClass);
@@ -1045,7 +1063,13 @@ namespace EveHelperWF
             ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
             TotalMEJobCost = BlueprintBrowserHelper.GetMEJobCost(calculationHelperClass, ManuMats);
             TotalMEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResMEMats, calculationHelperClass);
-            TotalMETaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, ResMEMats);
+            TotalMETaxesAndFees = 0;
+            decimal TotalMatPrice = 0;
+            foreach (MaterialsWithMarketData mat in ResMEMats)
+            {
+                TotalMatPrice += mat.priceTotal;
+            }
+            TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             METotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ResMEMats)
             {
@@ -1063,7 +1087,13 @@ namespace EveHelperWF
             ResTETime = BlueprintBrowserHelper.GetTEResearchTime(baseTime, calculationHelperClass);
             TotalTEJobCost = BlueprintBrowserHelper.GetTEJobCost(calculationHelperClass, ManuMats);
             TotalTEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResTEMats, calculationHelperClass);
-            TotalTETaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, ResTEMats);
+            TotalTETaxesAndFees = 0;
+            decimal TotalMatPrice = 0;
+            foreach (MaterialsWithMarketData mat in ResTEMats)
+            {
+                TotalMatPrice += mat.priceTotal;
+            }
+            TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             TETotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ResTEMats)
             {
@@ -1079,7 +1109,7 @@ namespace EveHelperWF
             ResCopyTime = BlueprintBrowserHelper.GetCopyingTime(baseTime, calculationHelperClass);
             TotalCopyJobCost = BlueprintBrowserHelper.GetCopyJobCost(calculationHelperClass, ManuMats);
             TotalCopyInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(CopyMats, calculationHelperClass);
-            TotalCopyTaxesAndFees = BlueprintBrowserHelper.CalculateTaxAndFees(0, calculationHelperClass, CopyMats);
+            TotalCopyTaxesAndFees = 0;
             CopyingTotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in CopyMats)
             {
@@ -1390,7 +1420,7 @@ namespace EveHelperWF
                 int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
                 if (solarSystemId > 0)
                 {
-                    decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityManufacturing);
+                    decimal costIndex = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityManufacturing);
                     ManufacturingSCILabel.Text = String.Format("{0:P2}.", costIndex);
                 }
             }
@@ -1434,7 +1464,7 @@ namespace EveHelperWF
             int solarSystemId = (Int32)ReactionSolarSystemCombo.SelectedValue;
             if (solarSystemId > 0)
             {
-                decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ACtivityReaction);
+                decimal costIndex = CommonHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ACtivityReaction);
                 ReactionsSCILabel.Text = String.Format("{0:P2}.", costIndex);
             }
         }
@@ -1500,7 +1530,7 @@ namespace EveHelperWF
             int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
             if (solarSystemId > 0)
             {
-                decimal costIndex = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ActivityInvention);
+                decimal costIndex = CommonHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ActivityInvention);
                 InventionSCILabel.Text = String.Format("{0:P2}.", costIndex);
             }
 
@@ -1827,7 +1857,7 @@ namespace EveHelperWF
             int solarSystemId = (int)MESystemCombo.SelectedValue;
             if (solarSystemId > 0)
             {
-                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityME);
+                decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityME);
                 MESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
             }
 
@@ -1882,7 +1912,7 @@ namespace EveHelperWF
             int solarSystemId = (int)TESystemCombo.SelectedValue;
             if (solarSystemId > 0)
             {
-                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityTE);
+                decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityTE);
                 TESystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
             }
 
@@ -1937,7 +1967,7 @@ namespace EveHelperWF
             int solarSystemId = (int)CopySystemCombo.SelectedValue;
             if (solarSystemId > 0)
             {
-                decimal costIndice = BlueprintBrowserHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityCOPY);
+                decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityCOPY);
                 CopySystemCostIndexLabel.Text = String.Format("{0:P2}.", costIndice);
             }
 
