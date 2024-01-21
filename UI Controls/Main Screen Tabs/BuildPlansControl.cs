@@ -1244,11 +1244,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)(e.Result);
             BuildPlanHelper.SetPricePerRecursive(this.currentBuildPlan.InputMaterials, mats);
+            mats = new List<MaterialsWithMarketData>();
+            CombineMats(ref mats, this.currentBuildPlan.InputMaterials);
             BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds, mats, FinalProductType.typeId, this.currentBuildPlan.additionalCosts);
             SaveBuildPlan();
             this.PriceInfoSet = true;
             ProgressLabel.Text = "";
-            SetSummaryInformation();
+            LoadUIAfterCalcs();
         }
 
         private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
