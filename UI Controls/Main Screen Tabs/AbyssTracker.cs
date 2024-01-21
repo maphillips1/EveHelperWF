@@ -16,7 +16,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
     public partial class AbyssTracker : Objects.FormBase
     {
-        private List<InventoryTypes> filamentTypes = new List<InventoryTypes>();
+        private List<InventoryType> filamentTypes = new List<InventoryType>();
         private List<AbyssRunShipType> shipTypes = new List<AbyssRunShipType>();
         private static string AbyssRunFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, "AbyssRuns.json");
         private BindingList<AbyssRun> AbyssRuns = new BindingList<AbyssRun>();

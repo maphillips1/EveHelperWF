@@ -17,8 +17,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     {
         List<Objects.Region> regions = new List<Objects.Region>();
         private List<Objects.SolarSystem> solarSystems = new List<Objects.SolarSystem>();
-        BindingList<InventoryTypes> foundTypes = null;
-        BindingList<InventoryTypes> TrackedTypes = new BindingList<InventoryTypes>();
+        BindingList<InventoryType> foundTypes = null;
+        BindingList<InventoryType> TrackedTypes = new BindingList<InventoryType>();
 
         private static string TrackedTypeFileName = Path.Combine(Enums.Enums.TrackedTypeDirectory, "TrackedTypes.json");
 
@@ -47,9 +47,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (!string.IsNullOrEmpty(fileContent))
             {
-                TrackedTypes = Newtonsoft.Json.JsonConvert.DeserializeObject<BindingList<InventoryTypes>>(fileContent);
+                TrackedTypes = Newtonsoft.Json.JsonConvert.DeserializeObject<BindingList<InventoryType>>(fileContent);
 
-                DatabindGridView<BindingList<InventoryTypes>>(TrackedTypesGrid, TrackedTypes);
+                DatabindGridView<BindingList<InventoryType>>(TrackedTypesGrid, TrackedTypes);
             }
         }
         #endregion
@@ -59,14 +59,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (!string.IsNullOrWhiteSpace(ItemSearchTextBox.Text))
             {
-                foundTypes = new BindingList<InventoryTypes>();
+                foundTypes = new BindingList<InventoryType>();
                 string searchText = "'" + ItemSearchTextBox.Text + "%'";
-                List<InventoryTypes> searchResults = Database.SQLiteCalls.InventoryTypeSearchLoadAll(searchText);
-                foreach (InventoryTypes invType in searchResults)
+                List<InventoryType> searchResults = Database.SQLiteCalls.InventoryTypeSearchLoadAll(searchText);
+                foreach (InventoryType invType in searchResults)
                 {
                     foundTypes.Add(invType);
                 }
-                DatabindGridView<BindingList<InventoryTypes>>(ItemSearchResultsGrid, foundTypes);
+                DatabindGridView<BindingList<InventoryType>>(ItemSearchResultsGrid, foundTypes);
             }
         }
 
@@ -87,7 +87,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (TrackedTypes != null && TrackedTypes.Count > 0)
             {
                 SaveTrackedTypes();
-                DatabindGridView<BindingList<InventoryTypes>>(TrackedTypesGrid, TrackedTypes);
+                DatabindGridView<BindingList<InventoryType>>(TrackedTypesGrid, TrackedTypes);
             }
         }
 
@@ -146,7 +146,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 if (typeId > 0)
                 {
 
-                    InventoryTypes trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
+                    InventoryType trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
 
                     if (trackedType != null)
                     {
@@ -175,7 +175,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     int regionID = (int)RegionCombo.SelectedValue;
 
-                    InventoryTypes trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
+                    InventoryType trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
 
                     if (typeId > 0 && regionID > 0)
                     {
@@ -194,7 +194,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             PriceHistoryBackgroundWorkerClass typesToUpdate = (PriceHistoryBackgroundWorkerClass)(e.Argument);
 
             int i = 1;
-            foreach (InventoryTypes type in typesToUpdate.InventoryTypes)
+            foreach (InventoryType type in typesToUpdate.InventoryTypes)
             {
                 if (!UpdatePriceHistoryWorker.CancellationPending)
                 {

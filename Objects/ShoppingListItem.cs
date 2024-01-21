@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EveHelperWF.Objects
 {
-    public class ShoppingListItem : InventoryTypes
+    public class ShoppingListItem : InventoryType
     {
         public int Quantity { get; set; }
         public double BoughtAtPrice { get; set; }

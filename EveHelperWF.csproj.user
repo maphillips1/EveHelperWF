@@ -16,6 +16,9 @@
     <Compile Update="UI Controls\Main Screen Tabs\BlueprintBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\BuildPlansControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\ConfigureDefaults.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -40,13 +43,22 @@
     <Compile Update="UI Controls\MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\AddBuildPlanScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Support Screens\BackupFiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\DetailedMaterialsFlowPanelControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\FIleLocations.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\FileNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\OptimizedBuildDetailsControl.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\PriceHistoryViewer.cs">

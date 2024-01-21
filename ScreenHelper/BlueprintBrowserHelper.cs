@@ -12,10 +12,10 @@ namespace EveHelperWF.ScreenHelper
     public static class BlueprintBrowserHelper
     {
         #region "Static Variables"
+        private static bool Loaded = false;
         public static List<Objects.ComboListItem> InputPriceTypeItems = null;
         public static List<Objects.ComboListItem> ManufacturingSolarSystemComboItems = null;
         public static List<Objects.ComboListItem> ReactionSolarSystemComboItems = null;
-        public static List<Objects.EngineerngComplex> EngineerngComplices = null;
         public static List<Objects.RefineryComplex> RefinerComplices = null;
         public static List<Objects.ComboListItem> EngineeringComboItems = null;
         public static List<Objects.ComboListItem> RefineryComboItems = null;
@@ -35,41 +35,12 @@ namespace EveHelperWF.ScreenHelper
         #region "Init Functions"
         public static void Init()
         {
-            LoadEngineeringComplexes();
-            LoadRefineryComplices();
-            LoadImplants();
-        }
-
-        public static void LoadEngineeringComplexes()
-        {
-            EngineerngComplices = new List<Objects.EngineerngComplex>();
-
-            Objects.EngineerngComplex raitaru = new Objects.EngineerngComplex();
-            raitaru.StructureName = "Raitaru";
-            raitaru.StructureTypeId = 35825;
-            raitaru.MatBonus = 1;
-            raitaru.TimeRequirementBonus = 15;
-            raitaru.IskRequirementBonus = 3;
-            raitaru.StructureSize = 1;
-            EngineerngComplices.Add(raitaru);
-
-            Objects.EngineerngComplex azbel = new Objects.EngineerngComplex();
-            azbel.StructureName = "Azbel";
-            azbel.StructureTypeId = 35826;
-            azbel.MatBonus = 1;
-            azbel.TimeRequirementBonus = 20;
-            azbel.IskRequirementBonus = 4;
-            azbel.StructureSize = 2;
-            EngineerngComplices.Add(azbel);
-
-            Objects.EngineerngComplex sotiyo = new Objects.EngineerngComplex();
-            sotiyo.StructureName = "Sotiyo";
-            sotiyo.StructureTypeId = 35827;
-            sotiyo.MatBonus = 1;
-            sotiyo.TimeRequirementBonus = 30;
-            sotiyo.IskRequirementBonus = 5;
-            sotiyo.StructureSize = 3;
-            EngineerngComplices.Add(sotiyo);
+            if (!Loaded)
+            {
+                LoadRefineryComplices();
+                LoadImplants();
+            }
+            Loaded = true;
         }
 
         public static void LoadRefineryComplices()
@@ -212,12 +183,12 @@ namespace EveHelperWF.ScreenHelper
             {
                 InputPriceTypeItems = new List<Objects.ComboListItem>();
                 Objects.ComboListItem SellItem = new Objects.ComboListItem();
-                SellItem.key = 1;
+                SellItem.key = (int)(Enums.Enums.OrderType.Sell);
                 SellItem.value = "Sell";
                 InputPriceTypeItems.Add(SellItem);
 
                 Objects.ComboListItem BuyItem = new Objects.ComboListItem();
-                BuyItem.key = 2;
+                BuyItem.key = (int)(Enums.Enums.OrderType.Buy);
                 BuyItem.value = "Buy";
                 InputPriceTypeItems.Add(BuyItem);
             }
@@ -271,7 +242,7 @@ namespace EveHelperWF.ScreenHelper
                 npcStation.key = 0;
                 EngineeringComboItems.Add(npcStation);
 
-                foreach (Objects.EngineerngComplex complex in EngineerngComplices)
+                foreach (Objects.EngineerngComplex complex in CommonHelper.EngineerngComplices)
                 {
                     Objects.ComboListItem comboListItem = new Objects.ComboListItem();
                     comboListItem.key = complex.StructureTypeId;
@@ -421,7 +392,7 @@ namespace EveHelperWF.ScreenHelper
             noneDecryptor.typeName = "None";
             Decryptors.Add(noneDecryptor);
 
-            foreach (Objects.InventoryTypes inventoryType in CommonHelper.InventoryTypes.FindAll(x => x.groupId == 1304))
+            foreach (Objects.InventoryType inventoryType in CommonHelper.InventoryTypes.FindAll(x => x.groupId == 1304))
             {
                 Objects.Decryptor decryptor = new Objects.Decryptor();
                 decryptor.typeID = inventoryType.typeId;
@@ -491,7 +462,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 foreach (Objects.IndustryActivityProduct product in invProducts)
                 {
-                    Objects.InventoryTypes invType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
+                    Objects.InventoryType invType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
                     if (invType != null)
                     {
                         Objects.ComboListItem item = new Objects.ComboListItem();
@@ -508,7 +479,7 @@ namespace EveHelperWF.ScreenHelper
 
         public static List<TreeNode> SearchBlueprints(string searchText)
         {
-            List<Objects.InventoryTypes> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
+            List<Objects.InventoryType> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<TreeNode> foundTypes = new List<TreeNode>();
 
             invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
@@ -517,7 +488,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 invTypes = invTypes.OrderBy(x => x.typeName).ToList();
 
-                foreach (InventoryTypes type in invTypes)
+                foreach (InventoryType type in invTypes)
                 {
                     TreeNode treeNode = new TreeNode();
                     treeNode.Text = type.typeName;
@@ -534,7 +505,7 @@ namespace EveHelperWF.ScreenHelper
         {
             List<TreeNode> treeViewGroups = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
+            List<Objects.InventoryType> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
 
 
@@ -543,13 +514,13 @@ namespace EveHelperWF.ScreenHelper
             return treeViewGroups;
         }
 
-        public static List<TreeNode> GetTreeViewGroups(ref List<Objects.InventoryTypes> invTypes, List<Objects.InventoryMarketGroups> marketGroups)
+        public static List<TreeNode> GetTreeViewGroups(ref List<Objects.InventoryType> invTypes, List<Objects.InventoryMarketGroups> marketGroups)
         {
             List<TreeNode> groups = new List<TreeNode>();
 
             List<Int32> MarketGroups = new List<Int32>();
             //Change the market group ID first
-            foreach (Objects.InventoryTypes inventoryType in invTypes)
+            foreach (Objects.InventoryType inventoryType in invTypes)
             {
                 inventoryType.marketGroupId = Database.SQLiteCalls.GetMarketGroupForBlueprintTypeID(inventoryType.typeId);
                 if (inventoryType.marketGroupId > 0)
@@ -592,14 +563,14 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static List<TreeNode> BuildTreeForMarketGroup(List<Objects.InventoryTypes> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
+        private static List<TreeNode> BuildTreeForMarketGroup(List<Objects.InventoryType> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
         {
             List<TreeNode> treeNodes = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId > 0 && x.marketGroupId == startingMarketGroupID);
+            List<Objects.InventoryType> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId > 0 && x.marketGroupId == startingMarketGroupID);
             List<Objects.InventoryMarketGroups> filteredMakretGroups = marketGroups.FindAll(x => x.parentGroupID == startingMarketGroupID);
 
-            foreach (Objects.InventoryTypes inventoryType in filteredTypes)
+            foreach (Objects.InventoryType inventoryType in filteredTypes)
             {
                 TreeNode treeNode = new TreeNode();
                 treeNode.Text = inventoryType.typeName;
@@ -622,10 +593,10 @@ namespace EveHelperWF.ScreenHelper
             return treeNodes;
         }
 
-        private static bool GroupHasBlueprint(List<Objects.InventoryTypes> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
+        private static bool GroupHasBlueprint(List<Objects.InventoryType> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
         {
             bool hasBlueprint = false;
-            List<Objects.InventoryTypes> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId == startingMarketGroupID);
+            List<Objects.InventoryType> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId == startingMarketGroupID);
 
             if (filteredTypes.Count > 0)
             {
@@ -664,7 +635,7 @@ namespace EveHelperWF.ScreenHelper
                     newMat.materialName = mat.materialName;
                     newMat.quantity = mat.quantity;
                     newMat.materialTypeID = mat.materialTypeID;
-                    newMat.Manufacturable = mat.isManufacturable;
+                    newMat.Buildable = mat.isManufacturable;
                     newMat.Reactable = mat.isReactable;
                     mats.Add(newMat);
                 }
@@ -786,7 +757,7 @@ namespace EveHelperWF.ScreenHelper
                 {
                     if (mat.ParentMaterialTypeID > 0 || !mat.Build)
                     {
-                        Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                        Objects.InventoryType matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                         totalVolume += mat.quantityTotal * matType.volume;
                         mat.volumeTotal = mat.quantityTotal * matType.volume;
                     }
@@ -797,7 +768,7 @@ namespace EveHelperWF.ScreenHelper
                 }
                 else
                 {
-                    Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                    Objects.InventoryType matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                     totalVolume += mat.quantityTotal * matType.volume;
                     mat.volumeTotal = mat.quantityTotal * matType.volume;
                 }
@@ -814,7 +785,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 if (product.activityID == activityID)
                 {
-                    Objects.InventoryTypes prodType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
+                    Objects.InventoryType prodType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
                     if (prodType != null)
                     {
                         totalVolume += (runs * prodType.volume * product.quantity);
@@ -853,40 +824,6 @@ namespace EveHelperWF.ScreenHelper
             return totalQuantity;
         }
 
-        public static decimal CalculateTaxAndFees(decimal totalOutcomeIsk, Objects.CalculationHelperClass helperClass, List<Objects.MaterialsWithMarketData> InputMats)
-        {
-            decimal taxAndFees = 0;
-            decimal baseSalesTax = Convert.ToDecimal(0.08);
-            decimal baseBrokersFee = Convert.ToDecimal(0.03);
-            int accountingSkillLevel = helperClass.AccountingSkill;
-            decimal accountingSkillBonus = (Convert.ToDecimal(.0088) * Convert.ToDecimal(accountingSkillLevel));
-            int brokerRelationsSKillLevel = helperClass.BrokersSkill;
-            decimal brokerRelationsSkillBonus = Convert.ToDecimal(.003) * Convert.ToDecimal(brokerRelationsSKillLevel);
-            bool isBuyOrder = (helperClass.OutputOrderType == 2);
-            decimal totalSalesTax = baseSalesTax - accountingSkillBonus;
-            decimal totalBrokerFee = baseBrokersFee - brokerRelationsSkillBonus;
-
-            if (isBuyOrder)
-            {
-                taxAndFees += (totalOutcomeIsk * totalSalesTax);
-            }
-            else
-            {
-                taxAndFees += (totalOutcomeIsk * totalSalesTax);
-                taxAndFees += (totalOutcomeIsk * totalBrokerFee);
-            }
-
-            if (InputMats != null && InputMats.Count > 0 && helperClass.InputOrderType == 2)
-            {
-                foreach (Objects.MaterialsWithMarketData mat in InputMats)
-                {
-                    taxAndFees += (mat.priceTotal * totalBrokerFee);
-                }
-            }
-
-            return taxAndFees;
-        }
-
         public static List<Objects.MaterialsWithMarketData> CombinedInputMats(List<Objects.MaterialsWithMarketData> inputMats)
         {
             List<Objects.MaterialsWithMarketData> combinedMats = new List<Objects.MaterialsWithMarketData>();
@@ -913,55 +850,6 @@ namespace EveHelperWF.ScreenHelper
 
             return combinedMats;
         }
-
-        private static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats, bool useQuantityTotal, CalculationHelperClass helperClass)
-        {
-            decimal baseCost = 0;
-            AdjustedCost adjustedCost = null;
-            long quantity = 0;
-            foreach (MaterialsWithMarketData mat in manuMats)
-            {
-                if (useQuantityTotal)
-                {
-                    quantity = mat.quantity * helperClass.Runs;
-                }
-                else
-                {
-                    quantity = mat.quantity;
-                }
-                adjustedCost = CommonHelper.AdjustedCosts.Find(x => x.type_id == mat.materialTypeID);
-                if (adjustedCost != null)
-                {
-                    if (adjustedCost.adjusted_price > 0)
-                    {
-                        
-                        baseCost += Math.Round(adjustedCost.adjusted_price * quantity);
-                    }
-                    else
-                    {
-                        baseCost += Math.Round(adjustedCost.average_price * quantity);
-                    }
-                }
-            }
-
-            return baseCost;
-        }
-
-        public static decimal GetCostIndexForSystemID(int solarSystemID, string activityName)
-        {
-            decimal costIndex = 0;
-
-            if (CommonHelper.CostIndicies.Count > 0)
-            {
-                CostIndice costIndice = CommonHelper.CostIndicies.Find(x => x.solar_system_id == solarSystemID);
-                if (costIndice != null)
-                {
-                    costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;
-                }
-            }
-
-            return costIndex;
-        }
         #endregion
 
         #region "Manufacturing Methods"
@@ -973,7 +861,7 @@ namespace EveHelperWF.ScreenHelper
             decimal quantityTotal = 0;
             if (calculationHelperClass.ManufacturingStructureTypeID > 0)
             {
-                totalStructureMEBonus = GetManufacturingStructureMEBonus(calculationHelperClass);
+                totalStructureMEBonus = CommonHelper.GetManufacturingStructureMEBonus(calculationHelperClass);
             }
             foreach (Objects.MaterialsWithMarketData mat in inputMats)
             {
@@ -1002,7 +890,7 @@ namespace EveHelperWF.ScreenHelper
                 //Set Price Total. 
                 mat.priceTotal = mat.pricePer * mat.quantityTotal;
 
-                if (calculationHelperClass.BuildComponents && mat.Manufacturable)
+                if (calculationHelperClass.BuildComponents && mat.Buildable)
                 {
                     mat.Build = true;
                     mat.priceTotal = 0;
@@ -1024,56 +912,6 @@ namespace EveHelperWF.ScreenHelper
                     inputMats.AddRange(childMats);
                 }
             }
-        }
-
-        private static decimal GetManufacturingStructureMEBonus(Objects.CalculationHelperClass calculationHelperClass)
-        {
-            decimal bonus = 1;
-            bool isLowSec = false;
-            bool isNullSec = false;
-
-            if (calculationHelperClass.ManufacturingSolarSystemID > 0)
-            {
-                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ManufacturingSolarSystemID);
-                isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
-                isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
-            }
-
-            if (calculationHelperClass.ManufacturingStructureTypeID > 0)
-            {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == calculationHelperClass.ManufacturingStructureTypeID);
-
-                if (complex != null)
-                {
-                    bonus -= (Convert.ToDecimal(complex.MatBonus) / 100);
-                }
-
-                if (calculationHelperClass.ManufacturingStructureRigBonus != null)
-                {
-                    decimal rigBonus = 0;
-                    if (calculationHelperClass.ManufacturingStructureRigBonus.RigMEBonus == 1)
-                    {
-                        rigBonus = Convert.ToDecimal(0.02);
-                    }
-                    else if (calculationHelperClass.ManufacturingStructureRigBonus.RigMEBonus == 2)
-                    {
-                        rigBonus = Convert.ToDecimal(0.024);
-                    }
-                    if (isLowSec)
-                    {
-                        rigBonus *= Convert.ToDecimal(1.19);
-                    }
-                    else if (isNullSec)
-                    {
-                        rigBonus *= Convert.ToDecimal(1.21);
-                    }
-                    rigBonus = 1 - (rigBonus);
-
-                    bonus *= rigBonus;
-                }
-            }
-
-            return bonus;
         }
 
         public static Int64 CalculateManufacturingTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
@@ -1118,7 +956,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ManufacturingStructureTypeID > 0)
             {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.ManufacturingStructureTypeID);
+                Objects.EngineerngComplex complex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == helperClass.ManufacturingStructureTypeID);
 
                 if (complex != null)
                 {
@@ -1180,49 +1018,6 @@ namespace EveHelperWF.ScreenHelper
             teBonus = (teBonus * IndySkillBonus * advancedIndySkillBonus * implantBonus);
 
             return teBonus;
-        }
-
-        public static decimal CalculateManufacturingJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass)
-        {
-            decimal baseCost = GetBaseCost(Mats, true, helperClass);
-            decimal jobCost = 0;
-            decimal costIndice = 0;
-            double sccSurcharge = 0.015;
-            decimal structureBonus = GetManufacturingStructureCostBonus(helperClass);
-            decimal jobGrossCost = 0;
-
-            if (helperClass.ReactionSolarSystemID > 0)
-            {
-                costIndice = GetCostIndexForSystemID(helperClass.ManufacturingSolarSystemID, CostIndiceActivity.ActivityManufacturing);
-            }
-
-            jobGrossCost = Math.Round(baseCost * costIndice);
-
-            jobGrossCost = Math.Round(jobGrossCost * structureBonus);
-
-            jobCost = jobGrossCost;
-
-            jobCost += Math.Round(jobGrossCost * (Convert.ToDecimal(helperClass.ManufacturingFacilityTax) / 100));
-
-            jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
-
-            return jobCost;
-        }
-
-        private static decimal GetManufacturingStructureCostBonus(Objects.CalculationHelperClass helperClass)
-        {
-            decimal costBonus = 1;
-
-            if (helperClass.ManufacturingStructureTypeID > 0)
-            {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.ManufacturingStructureTypeID);
-                if (complex != null)
-                {
-                    costBonus -= (Convert.ToDecimal(complex.IskRequirementBonus) / 100);
-                }
-            }
-
-            return costBonus;
         }
 
         #region "Build Components Methods"
@@ -1322,7 +1117,7 @@ namespace EveHelperWF.ScreenHelper
             decimal totalStructureMEBonus = 1;
             if (calculationHelperClass.ReactionsStructureTypeID > 0)
             {
-                totalStructureMEBonus = GetReactionStructureMEBonus(calculationHelperClass);
+                totalStructureMEBonus = CommonHelper.GetReactionStructureMEBonus(calculationHelperClass);
             }
             foreach (Objects.MaterialsWithMarketData mat in inputMats)
             {
@@ -1345,49 +1140,6 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static decimal GetReactionStructureMEBonus(Objects.CalculationHelperClass calculationHelperClass)
-        {
-            decimal bonus = 1;
-            bool isLowSec = false;
-            bool isNullSec = false;
-
-            if (calculationHelperClass.ReactionSolarSystemID > 0)
-            {
-                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == calculationHelperClass.ReactionSolarSystemID);
-                isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
-                isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
-            }
-
-            if (calculationHelperClass.ReactionsStructureTypeID > 0)
-            {
-
-                if (calculationHelperClass.ReactionStructureRigBonus != null)
-                {
-                    decimal rigBonus = 0;
-                    if (calculationHelperClass.ReactionStructureRigBonus.RigMEBonus == 1)
-                    {
-                        rigBonus = Convert.ToDecimal(0.02);
-                    }
-                    else if (calculationHelperClass.ReactionStructureRigBonus.RigMEBonus == 2)
-                    {
-                        rigBonus = Convert.ToDecimal(0.024);
-                    }
-                    //if (isLowSec)
-                    //{
-                    //    rigBonus *= Convert.ToDecimal(1.19);
-                    //}
-                    if (isNullSec)
-                    {
-                        rigBonus *= Convert.ToDecimal(1.21);
-                    }
-                    rigBonus = 1 - (rigBonus);
-
-                    bonus *= rigBonus;
-                }
-            }
-
-            return bonus;
-        }
 
         public static Int64 CalculateReactionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
@@ -1472,30 +1224,6 @@ namespace EveHelperWF.ScreenHelper
 
             return teBonus;
         }
-
-        public static decimal CalculateReactionJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass)
-        {
-            decimal baseCost = GetBaseCost(Mats, true, helperClass);
-            decimal jobCost = 0;
-            decimal costIndice = 0;
-            double sccSurcharge = 0.015;
-            decimal jobGrossCost = 0;
-
-            if (helperClass.ReactionSolarSystemID > 0)
-            {
-                costIndice = GetCostIndexForSystemID(helperClass.ReactionSolarSystemID, CostIndiceActivity.ACtivityReaction);
-            }
-
-            jobGrossCost = Math.Round(baseCost * costIndice);
-
-            jobCost = jobGrossCost;
-
-            jobCost += Math.Round(baseCost * (Convert.ToDecimal(helperClass.ReactionsFacilityTax) / 100));
-
-            jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
-
-            return jobCost;
-        }
         #endregion
 
         #region "Invention Methods"
@@ -1505,7 +1233,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.ManufacturingStructureTypeID > 0)
             {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
+                Objects.EngineerngComplex complex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
                 if (complex != null)
                 {
                     costBonus -= (Convert.ToDecimal(complex.IskRequirementBonus) / 100);
@@ -1537,7 +1265,7 @@ namespace EveHelperWF.ScreenHelper
                     Objects.MaterialsWithMarketData materialsWithMarketData = new Objects.MaterialsWithMarketData();
                     materialsWithMarketData.materialTypeID = decryptor.typeID;
                     materialsWithMarketData.materialName = decryptor.typeName;
-                    materialsWithMarketData.Manufacturable = false;
+                    materialsWithMarketData.Buildable = false;
                     materialsWithMarketData.Reactable = false;
                     materialsWithMarketData.quantity = 1;
                     materialsWithMarketData.quantityTotal = calculationHelperClass.Runs;
@@ -1585,7 +1313,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionStructureTypeID > 0)
             {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
+                Objects.EngineerngComplex complex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
 
                 if (complex != null)
                 {
@@ -1631,7 +1359,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionSolarSystemID > 0)
             {
-                costIndice = GetCostIndexForSystemID(helperClass.InventionSolarSystemID, CostIndiceActivity.ActivityInvention);
+                costIndice = CommonHelper.GetCostIndexForSystemID(helperClass.InventionSolarSystemID, CostIndiceActivity.ActivityInvention);
             }
 
             baseJobCost = Math.Round(estimatedItemValue * Convert.ToDecimal(0.02));
@@ -1693,7 +1421,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (helperClass.InventionStructureTypeID > 0)
             {
-                Objects.EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
+                Objects.EngineerngComplex complex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == helperClass.InventionStructureTypeID);
 
                 if (complex != null)
                 {
@@ -1916,9 +1644,9 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetMEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
+            decimal baseCost = CommonHelper.GetBaseCost(manuMats, false, calculationHelperClass.METoLevel - calculationHelperClass.MEFromLevel);
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
-            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
+            decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
             decimal facilityTax = calculationHelperClass.MEFacilityTax / 100;
             decimal sccSurcharge = (decimal).015;
             baseCost = processTimeValue;
@@ -1934,9 +1662,9 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetTEJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
+            decimal baseCost = CommonHelper.GetBaseCost(manuMats, false, calculationHelperClass.METoLevel - calculationHelperClass.MEFromLevel);
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.TEFromLevel / 2, calculationHelperClass.TEToLevel / 2);
-            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.TESolarSystemID, Objects.CostIndiceActivity.ActivityTE);
+            decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.TESolarSystemID, Objects.CostIndiceActivity.ActivityTE);
             decimal facilityTax = calculationHelperClass.TEFacilityTax / 100;
             decimal sccSurcharge = (decimal).015;
             baseCost = processTimeValue;
@@ -2014,7 +1742,7 @@ namespace EveHelperWF.ScreenHelper
             foreach (MaterialsWithMarketData mat in  inputMats)
             {
                 mat.quantityTotal = (mat.quantity * (toLevel - fromLevel));
-                Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                Objects.InventoryType matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                 totalVolume += mat.quantityTotal * matType.volume;
                 mat.volumeTotal = mat.quantityTotal * matType.volume;
             }
@@ -2031,7 +1759,7 @@ namespace EveHelperWF.ScreenHelper
             foreach (MaterialsWithMarketData mat in inputMats)
             {
                 mat.quantityTotal = (long)(mat.quantity * multipler);
-                Objects.InventoryTypes matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                Objects.InventoryType matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                 totalVolume += mat.quantityTotal * matType.volume;
                 mat.volumeTotal = mat.quantityTotal * matType.volume;
             }
@@ -2060,9 +1788,9 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetCopyJobCost(CalculationHelperClass calculationHelperClass, List<MaterialsWithMarketData> manuMats)
         {
             decimal cost = 0;
-            decimal baseCost = GetBaseCost(manuMats, false, calculationHelperClass);
+            decimal baseCost = CommonHelper.GetBaseCost(manuMats, false, calculationHelperClass.RunsPerCopy);
             decimal jobCostBase = Math.Round(baseCost * (decimal).02 * calculationHelperClass.NumCopies * calculationHelperClass.RunsPerCopy);
-            decimal costIndex = GetCostIndexForSystemID(calculationHelperClass.CopyingSolarSystemID, Objects.CostIndiceActivity.ActivityCOPY);
+            decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.CopyingSolarSystemID, Objects.CostIndiceActivity.ActivityCOPY);
             decimal facilityTax = calculationHelperClass.CopyingFacilityTax / 100;
             decimal sccSurcharge = (decimal).015;
 

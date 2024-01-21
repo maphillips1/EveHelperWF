@@ -148,8 +148,21 @@ namespace EveHelperWF
         {
             int hoorizontalMiddle = (int)Math.Floor((decimal)(BubbleTreePanel.Width / 2));
             int verticalMiddle = (int)Math.Floor((decimal)(BubbleTreePanel.Height / 2));
-
-            BubbleTreePanel.Controls.Clear();
+            System.Windows.Forms.Control.ControlCollection controls = BubbleTreePanel.Controls;
+            EventHandlerList eventHandlerList = null;
+            foreach (Control item in controls)
+            {
+                eventHandlerList =
+                        (EventHandlerList)typeof(Control).GetProperty(
+                            "Events",
+                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(item, null);
+                if (eventHandlerList != null)
+                {
+                    typeof(EventHandlerList).GetMethod("Dispose").Invoke(eventHandlerList, null);
+                }
+                item.Dispose();
+            }
+            System.GC.Collect();
             Label outputTextBox = BuildPlanetItemTextbox(selectedType);
             outputTextBox.Location = new Point(10, verticalMiddle);
             BubbleTreePanel.Controls.Add(outputTextBox);

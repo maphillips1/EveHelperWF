@@ -31,6 +31,8 @@ namespace Enums
         public const int TheraRegion = 11000031;
         public const int TheraSystem = 31000005;
 
+        public const int OldManStarSystem = 30005000;
+
         public static int ResLevel1Modifier = 105;
         public static int ResLevel2Modifier = 250;
         public static int ResLevel3Modifier = 595;
@@ -74,6 +76,8 @@ namespace Enums
                                          "EveHelper\\TrackedTypes\\");
         public static string ShoppingListsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\ShoppingLists\\");
+        public static string BuildPlanDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\BuildPlans\\");
         public enum PlanetMatTierGroupId
         {
             T0_Organic = 1035,
@@ -133,6 +137,31 @@ namespace Enums
             SixMonths = 4,
             OneYear = 5,
             AllTime = 6
+        }
+
+        public enum EngineeringStructureType
+        {
+            Raitaru = 35825,
+            Azbel = 35826,
+            Sotiyo = 35827
+        }
+
+        public enum InvTypeCategory
+        {
+            Material = 4,
+            Ship = 6,
+            Commodity = 17,
+            Reaction = 24,
+            Asteroid = 25,
+            PlanetIndustry = 41,
+            PlanetResource = 42,
+            PlanetCommodity = 43
+        }
+
+        public enum OrderType
+        {
+            Sell = 1,
+            Buy = 2
         }
     }
 }

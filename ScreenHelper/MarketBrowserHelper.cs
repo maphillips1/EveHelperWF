@@ -10,7 +10,7 @@ namespace EveHelperWF.ScreenHelper
 {
     public static class MarketBrowserHelper
     {
-        public static List<InventoryTypes> InventoryTypes = new List<InventoryTypes>();
+        public static List<InventoryType> InventoryTypes = new List<InventoryType>();
 
         public static void Init()
         {
@@ -21,7 +21,7 @@ namespace EveHelperWF.ScreenHelper
         public static void FillInventoryTypeInformation(ref InventoryTypeWIthMarketOrders invType)
         {
             int selectedType = invType.typeId;
-            InventoryTypes baseType = InventoryTypes.Find(x => x.typeId == selectedType);
+            InventoryType baseType = InventoryTypes.Find(x => x.typeId == selectedType);
             invType.typeName = baseType.typeName;
             foreach (MarketOrder order in invType.BuyOrders)
             {
@@ -67,7 +67,7 @@ namespace EveHelperWF.ScreenHelper
         {
             List<TreeNode> treeViewGroups = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> invTypes = Database.SQLiteCalls.GetInventoryTypes();
+            List<Objects.InventoryType> invTypes = Database.SQLiteCalls.GetInventoryTypes();
             List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
 
             treeViewGroups = GetTreeViewGroups(ref invTypes, marketGroups);
@@ -75,13 +75,13 @@ namespace EveHelperWF.ScreenHelper
             return treeViewGroups;
         }
 
-        public static List<TreeNode> GetTreeViewGroups(ref List<Objects.InventoryTypes> invTypes, List<Objects.InventoryMarketGroups> marketGroups)
+        public static List<TreeNode> GetTreeViewGroups(ref List<Objects.InventoryType> invTypes, List<Objects.InventoryMarketGroups> marketGroups)
         {
             List<TreeNode> groups = new List<TreeNode>();
 
             List<Int32> MarketGroups = new List<Int32>();
             //Change the market group ID first
-            foreach (Objects.InventoryTypes inventoryType in invTypes)
+            foreach (Objects.InventoryType inventoryType in invTypes)
             {
                 inventoryType.marketGroupId = inventoryType.marketGroupId;
                 if (inventoryType.marketGroupId > 0)
@@ -124,14 +124,14 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static List<TreeNode> BuildTreeForMarketGroup(List<Objects.InventoryTypes> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
+        private static List<TreeNode> BuildTreeForMarketGroup(List<Objects.InventoryType> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
         {
             List<TreeNode> treeNodes = new List<TreeNode>();
 
-            List<Objects.InventoryTypes> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId > 0 && x.marketGroupId == startingMarketGroupID);
+            List<Objects.InventoryType> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId > 0 && x.marketGroupId == startingMarketGroupID);
             List<Objects.InventoryMarketGroups> filteredMakretGroups = marketGroups.FindAll(x => x.parentGroupID == startingMarketGroupID);
 
-            foreach (Objects.InventoryTypes inventoryType in filteredTypes)
+            foreach (Objects.InventoryType inventoryType in filteredTypes)
             {
                 TreeNode treeNode = new TreeNode();
                 treeNode.Text = inventoryType.typeName;
@@ -154,10 +154,10 @@ namespace EveHelperWF.ScreenHelper
             return treeNodes;
         }
 
-        private static bool GroupHasItems(List<Objects.InventoryTypes> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
+        private static bool GroupHasItems(List<Objects.InventoryType> inventoryTypes, List<Objects.InventoryMarketGroups> marketGroups, int startingMarketGroupID)
         {
             bool hasItems = false;
-            List<Objects.InventoryTypes> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId == startingMarketGroupID);
+            List<Objects.InventoryType> filteredTypes = inventoryTypes.FindAll(x => x.marketGroupId == startingMarketGroupID);
 
             if (filteredTypes.Count > 0)
             {
@@ -261,14 +261,14 @@ namespace EveHelperWF.ScreenHelper
 
         public static List<TreeNode> SearchBlueprints(string searchText)
         {
-            List<Objects.InventoryTypes> invTypes = InventoryTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
+            List<Objects.InventoryType> invTypes = InventoryTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
             List<TreeNode> foundTypes = new List<TreeNode>();
 
             if (invTypes.Count > 0)
             {
                 invTypes = invTypes.OrderBy(x => x.typeName).ToList();
 
-                foreach (InventoryTypes type in invTypes)
+                foreach (InventoryType type in invTypes)
                 {
                     TreeNode treeNode = new TreeNode();
                     treeNode.Text = type.typeName;

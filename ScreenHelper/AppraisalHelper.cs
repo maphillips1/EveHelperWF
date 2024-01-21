@@ -156,7 +156,7 @@ namespace EveHelperWF.ScreenHelper
 
             string searchString = input;
             bool found = false;
-            InventoryTypes foundType;
+            InventoryType foundType;
             while (tries > 0 && !found)
             {
                 searchString = String.Join(" ", parts);

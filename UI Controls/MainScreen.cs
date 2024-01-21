@@ -25,6 +25,7 @@ namespace EveHelperWF.UI_Controls
         PriceHistoryUtility priceHistoryUtility;
         LootAppraisal lootAppraisal;
         ShoppingListControl shoppingList;
+        BuildPlansControl buildPlans;
         System.Threading.Mutex objMutex;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
@@ -194,6 +195,14 @@ namespace EveHelperWF.UI_Controls
             shoppingList.StartPosition = FormStartPosition.CenterScreen;
             shoppingList.Show();
             shoppingList.BringToFront();
+        }
+
+        private void BuildPlansButton_Click(object sender, EventArgs e)
+        {
+            if (buildPlans == null || buildPlans.IsDisposed) { buildPlans = new BuildPlansControl(); }
+            buildPlans.StartPosition = FormStartPosition.CenterScreen;
+            buildPlans.Show();
+            buildPlans.BringToFront();
         }
     }
 }
