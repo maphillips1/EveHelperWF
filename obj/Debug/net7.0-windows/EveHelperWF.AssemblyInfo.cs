@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.9.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.9+76fb1032ae30fb17ad627769585f836ae7eeb588")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.9+fa791cbd626aa80687f7c34ab48ec3328802da88")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EveHelperWF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.1.9.0")]
