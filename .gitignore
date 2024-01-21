@@ -3,3 +3,5 @@ obj/
 **.sqlite
 **.pubxml
 obj/Debug/net7.0-windows/EveHelperWF.AssemblyInfoInputs.cache
+obj/Debug/net7.0-windows/EveHelperWF.AssemblyInfoInputs.cache
+obj/Debug/net7.0-windows/EveHelperWF.AssemblyInfo.cs
