@@ -77,6 +77,9 @@
             Label label48;
             Label label44;
             Label label51;
+            Label label5;
+            Label label52;
+            Label label53;
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -84,7 +87,6 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            Label label5;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             InventionTaxUpDown = new NumericUpDown();
             InventionDecryptorCombo = new ComboBox();
@@ -97,6 +99,8 @@
             DeleteBuildPlanButton = new Button();
             tabControl1 = new TabControl();
             SummaryPage = new TabPage();
+            OutputSellTaxes = new Label();
+            OutputBuyTaxes = new Label();
             InputTaxLabel = new Label();
             SaveNotesButton = new Button();
             NotesTextBox = new TextBox();
@@ -117,8 +121,9 @@
             ProductLabel = new Label();
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
+            MaterialsPriceTreeView = new TreeView();
+            UpdatePricesJitaButton = new Button();
             CopyToClipboardButton = new Button();
-            ShoppingListItemsPanel = new Panel();
             IndustrySettingsTabPage = new TabPage();
             DefaultsTabContainer = new TabControl();
             ManufacturingDefaultsTabPage = new TabPage();
@@ -161,8 +166,7 @@
             AdditionalCostsNumeric = new NumericUpDown();
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
-            OutputBuyTaxes = new Label();
-            OutputSellTaxes = new Label();
+            HeaderCostUnitLabel = new Label();
             label15 = new Label();
             label1 = new Label();
             label9 = new Label();
@@ -213,6 +217,8 @@
             label44 = new Label();
             label51 = new Label();
             label5 = new Label();
+            label52 = new Label();
+            label53 = new Label();
             InventionDefaultsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
             tabControl1.SuspendLayout();
@@ -830,11 +836,42 @@
             // 
             label51.AutoSize = true;
             label51.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label51.Location = new Point(38, 202);
+            label51.Location = new Point(52, 202);
             label51.Name = "label51";
-            label51.Size = new Size(125, 17);
+            label51.Size = new Size(111, 17);
             label51.TabIndex = 16;
-            label51.Text = "Input Material Taxes";
+            label51.Text = "Input Taxes / Item";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(40, 232);
+            label5.Name = "label5";
+            label5.Size = new Size(123, 17);
+            label5.TabIndex = 18;
+            label5.Text = "Output Tax Per Item";
+            // 
+            // label52
+            // 
+            label52.AutoSize = true;
+            label52.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label52.Location = new Point(9, 84);
+            label52.Name = "label52";
+            label52.Size = new Size(692, 17);
+            label52.TabIndex = 21;
+            label52.Text = "You can change the price by clicking on the item, Setting the price, and clicking save. All costs are updated afterwards";
+            // 
+            // label53
+            // 
+            label53.AutoSize = true;
+            label53.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label53.Location = new Point(1062, 49);
+            label53.Margin = new Padding(2, 0, 2, 0);
+            label53.Name = "label53";
+            label53.Size = new Size(145, 21);
+            label53.TabIndex = 48;
+            label53.Text = "Total Cost Per Item: ";
             // 
             // BuildPlanCombo
             // 
@@ -909,6 +946,26 @@
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
+            // OutputSellTaxes
+            // 
+            OutputSellTaxes.AutoSize = true;
+            OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutputSellTaxes.Location = new Point(188, 232);
+            OutputSellTaxes.Name = "OutputSellTaxes";
+            OutputSellTaxes.Size = new Size(116, 17);
+            OutputSellTaxes.TabIndex = 20;
+            OutputSellTaxes.Text = "[Output Sell Taxes]";
+            // 
+            // OutputBuyTaxes
+            // 
+            OutputBuyTaxes.AutoSize = true;
+            OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutputBuyTaxes.Location = new Point(188, 262);
+            OutputBuyTaxes.Name = "OutputBuyTaxes";
+            OutputBuyTaxes.Size = new Size(116, 17);
+            OutputBuyTaxes.TabIndex = 19;
+            OutputBuyTaxes.Text = "[Output Buy Taxes]";
+            // 
             // InputTaxLabel
             // 
             InputTaxLabel.AutoSize = true;
@@ -933,6 +990,7 @@
             // 
             // NotesTextBox
             // 
+            NotesTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             NotesTextBox.Location = new Point(6, 319);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
@@ -1126,14 +1184,39 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialPricePage.Controls.Add(MaterialsPriceTreeView);
+            MaterialPricePage.Controls.Add(UpdatePricesJitaButton);
+            MaterialPricePage.Controls.Add(label52);
             MaterialPricePage.Controls.Add(label11);
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
-            MaterialPricePage.Controls.Add(ShoppingListItemsPanel);
             MaterialPricePage.Location = new Point(4, 24);
             MaterialPricePage.Name = "MaterialPricePage";
             MaterialPricePage.Size = new Size(1532, 537);
             MaterialPricePage.TabIndex = 2;
-            MaterialPricePage.Text = "Material Prices";
+            MaterialPricePage.Text = "Materials & Prices";
+            // 
+            // MaterialsPriceTreeView
+            // 
+            MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            MaterialsPriceTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialsPriceTreeView.HotTracking = true;
+            MaterialsPriceTreeView.Location = new Point(9, 104);
+            MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
+            MaterialsPriceTreeView.ShowLines = false;
+            MaterialsPriceTreeView.Size = new Size(599, 425);
+            MaterialsPriceTreeView.TabIndex = 23;
+            MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
+            // 
+            // UpdatePricesJitaButton
+            // 
+            UpdatePricesJitaButton.ForeColor = Color.Black;
+            UpdatePricesJitaButton.Location = new Point(9, 58);
+            UpdatePricesJitaButton.Name = "UpdatePricesJitaButton";
+            UpdatePricesJitaButton.Size = new Size(162, 23);
+            UpdatePricesJitaButton.TabIndex = 22;
+            UpdatePricesJitaButton.Text = "Update Prices From Jita";
+            UpdatePricesJitaButton.UseVisualStyleBackColor = true;
+            UpdatePricesJitaButton.Click += UpdatePricesJitaButton_Click;
             // 
             // CopyToClipboardButton
             // 
@@ -1145,15 +1228,6 @@
             CopyToClipboardButton.Text = "Copy to Clipboard";
             CopyToClipboardButton.UseVisualStyleBackColor = true;
             CopyToClipboardButton.Click += CopyToClipboardButton_Click;
-            // 
-            // ShoppingListItemsPanel
-            // 
-            ShoppingListItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ShoppingListItemsPanel.AutoScroll = true;
-            ShoppingListItemsPanel.Location = new Point(9, 56);
-            ShoppingListItemsPanel.Name = "ShoppingListItemsPanel";
-            ShoppingListItemsPanel.Size = new Size(599, 473);
-            ShoppingListItemsPanel.TabIndex = 15;
             // 
             // IndustrySettingsTabPage
             // 
@@ -1450,6 +1524,7 @@
             OutputOrderTypeCombo.Name = "OutputOrderTypeCombo";
             OutputOrderTypeCombo.Size = new Size(128, 23);
             OutputOrderTypeCombo.TabIndex = 14;
+            OutputOrderTypeCombo.SelectedIndexChanged += OutputOrderTypeCombo_SelectedIndexChanged;
             // 
             // InputOrderTypeCombo
             // 
@@ -1459,6 +1534,7 @@
             InputOrderTypeCombo.Name = "InputOrderTypeCombo";
             InputOrderTypeCombo.Size = new Size(128, 23);
             InputOrderTypeCombo.TabIndex = 15;
+            InputOrderTypeCombo.SelectedIndexChanged += InputOrderTypeCombo_SelectedIndexChanged;
             // 
             // label49
             // 
@@ -1667,41 +1743,24 @@
             EnsurePriceWorker.ProgressChanged += EnsurePriceWorker_ProgressChanged;
             EnsurePriceWorker.RunWorkerCompleted += EnsurePriceWorker_RunWorkerCompleted;
             // 
-            // label5
+            // HeaderCostUnitLabel
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(40, 232);
-            label5.Name = "label5";
-            label5.Size = new Size(123, 17);
-            label5.TabIndex = 18;
-            label5.Text = "Output Tax Per Item";
-            // 
-            // OutputBuyTaxes
-            // 
-            OutputBuyTaxes.AutoSize = true;
-            OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputBuyTaxes.Location = new Point(188, 262);
-            OutputBuyTaxes.Name = "OutputBuyTaxes";
-            OutputBuyTaxes.Size = new Size(116, 17);
-            OutputBuyTaxes.TabIndex = 19;
-            OutputBuyTaxes.Text = "[Output Buy Taxes]";
-            // 
-            // OutputSellTaxes
-            // 
-            OutputSellTaxes.AutoSize = true;
-            OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputSellTaxes.Location = new Point(188, 232);
-            OutputSellTaxes.Name = "OutputSellTaxes";
-            OutputSellTaxes.Size = new Size(116, 17);
-            OutputSellTaxes.TabIndex = 20;
-            OutputSellTaxes.Text = "[Output Sell Taxes]";
+            HeaderCostUnitLabel.AutoSize = true;
+            HeaderCostUnitLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HeaderCostUnitLabel.Location = new Point(1211, 49);
+            HeaderCostUnitLabel.Margin = new Padding(2, 0, 2, 0);
+            HeaderCostUnitLabel.Name = "HeaderCostUnitLabel";
+            HeaderCostUnitLabel.Size = new Size(110, 21);
+            HeaderCostUnitLabel.TabIndex = 51;
+            HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1540, 634);
+            Controls.Add(HeaderCostUnitLabel);
+            Controls.Add(label53);
             Controls.Add(NumberCopiesUpDown);
             Controls.Add(label13);
             Controls.Add(AdditionalCostsNumeric);
@@ -1800,7 +1859,6 @@
         private TabPage MaterialPricePage;
         private Label label11;
         private Button CopyToClipboardButton;
-        private Panel ShoppingListItemsPanel;
         private NumericUpDown AdditionalCostsNumeric;
         private Label label14;
         private TabPage IndustrySettingsTabPage;
@@ -1875,5 +1933,8 @@
         private Label InputTaxLabel;
         private Label OutputSellTaxes;
         private Label OutputBuyTaxes;
+        private Button UpdatePricesJitaButton;
+        private TreeView MaterialsPriceTreeView;
+        private Label HeaderCostUnitLabel;
     }
 }

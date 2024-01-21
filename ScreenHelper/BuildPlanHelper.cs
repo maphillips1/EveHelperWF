@@ -159,13 +159,15 @@ namespace EveHelperWF.ScreenHelper
                 SetBaseInputValues(buildPlan.RunsPerCopy, ref outputMaterials, baseMaterials);
                 //ME Calculations
                 PerformManufacturingMECalculations(ref outputMaterials, buildPlan, buildPlan.RunsPerCopy, buildPlan.IndustrySettings.ME);
-                //handle any child Materials calculations here. 
-                //So if a child is built or reacted, we need to do the child logic BEFORE we multiply all materials by num of copies.
-                CalculateChildMaterialCosts(ref outputMaterials, buildPlan);
-                //Finally, recurisvel multiply all inputs times the number of copies. 
-                //The idea is that ME calcs are done on Runs per Copy and then 
-                //Final quantity we need is total after ME * number of copies. 
+                //Next, Set the total quantity needed = QuantityFor Runs * Num of Copies
+                //Basically, once we set the blueprints ME values, we now need to know the total of all 
+                //inputs needed BEFORE we do any child costs. 
+                //Child costs should be calculated AFTER this. 
                 MultiplyAllMaterialsByNumCopies(ref outputMaterials, buildPlan);
+                //handle any child Materials calculations here. 
+                //So if a child is built or reacted, we need to do the child logic AFTER we multiply all materials by num of copies.
+                CalculateChildMaterialCosts(ref outputMaterials, buildPlan);
+                //Finally, recurisvel multiply all inputs times the number of copies.
                 //Reset the Build and React values from the current build plan
                 ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials);
 
@@ -393,13 +395,6 @@ namespace EveHelperWF.ScreenHelper
                     products = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintOrReactionTypeId, activityID);
                     mat.RunsNeeded = (int)Math.Ceiling((decimal)mat.quantityTotal / (decimal)products[0].quantity);
                 }
-
-                if (mat.ChildMaterials.Count > 0)
-                {
-                    childMaterials = mat.ChildMaterials;
-                    MultiplyAllMaterialsByNumCopies(ref childMaterials, buildPlan);
-                    mat.ChildMaterials = childMaterials;
-                }
             }
         }
 
@@ -407,11 +402,38 @@ namespace EveHelperWF.ScreenHelper
         {
             IndustryActivityProduct baseProductInformation =
                     Database.SQLiteCalls.GetIndustryActivityProducts(buildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityReactions)[0];
-
+            List<IndustryActivityMaterials> baseMaterials =
+                    Database.SQLiteCalls.GetIndustryActivityMaterials(buildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityReactions);
 
             if (baseProductInformation != null)
             {
                 buildPlan.TotalOutcome = baseProductInformation.quantity * buildPlan.RunsPerCopy * buildPlan.NumOfCopies;
+
+                //This sets the base materials that we need. for each copy of the BP. 
+                //So if Runs Per Copy is 5 and Num of Copies is 10, this will set the value of base quantity * 5
+                //We then run ME calculations on that number. 
+                //Once we have ME calcs done, we then multiple final numbers after ME * number of copies. 
+                //This becomes our quantity total. 
+                //We also set quantity per run to the adjusted ME value.
+                List<MaterialsWithMarketData> outputMaterials = new List<MaterialsWithMarketData>();
+                //Base Calcs
+                SetBaseInputValues(buildPlan.RunsPerCopy, ref outputMaterials, baseMaterials);
+                //ME Calculations
+                PerformReactionMECalculations(ref outputMaterials, buildPlan, buildPlan.RunsPerCopy);
+                //Next, Set the total quantity needed = QuantityFor Runs * Num of Copies
+                //Basically, once we set the blueprints ME values, we now need to know the total of all 
+                //inputs needed BEFORE we do any child costs. 
+                //Child costs should be calculated AFTER this. 
+                MultiplyAllMaterialsByNumCopies(ref outputMaterials, buildPlan);
+                //handle any child Materials calculations here. 
+                //So if a child is built or reacted, we need to do the child logic AFTER we multiply all materials by num of copies.
+                CalculateChildMaterialCosts(ref outputMaterials, buildPlan);
+                //Finally, recurisvel multiply all inputs times the number of copies.
+                //Reset the Build and React values from the current build plan
+                ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials);
+
+                //Set this at the end with all the updated info.
+                buildPlan.InputMaterials = outputMaterials;
             }
         }
 
@@ -467,29 +489,6 @@ namespace EveHelperWF.ScreenHelper
             optimumBuilds.Add(GetOptimumBuildInformation(finalProductMat, buildPlan, true));
 
             return optimumBuilds;
-        }
-
-        private static Dictionary<int, List<MaterialsWithMarketData>> GetMaterialsByBuildOrder(List<MaterialsWithMarketData> materialsWithMarketDatas)
-        {
-            Dictionary<int, List<MaterialsWithMarketData>> outPutDictionary = new Dictionary<int, List<MaterialsWithMarketData>>();
-            List<MaterialsWithMarketData> copyOfMats = new List<MaterialsWithMarketData>();
-            copyOfMats.AddRange(materialsWithMarketDatas);
-
-            int batchCount = 1;
-            List<MaterialsWithMarketData> itemsToremove;
-            while (copyOfMats.Count > 0)
-            {
-                itemsToremove = new List<MaterialsWithMarketData>();
-                itemsToremove.AddRange(AddIndepentsToOutput(ref outPutDictionary, materialsWithMarketDatas, batchCount));
-                foreach (MaterialsWithMarketData itemToRemove in itemsToremove)
-                {
-                    RemoveChildRecursive(itemToRemove, ref materialsWithMarketDatas);
-                }
-                batchCount++;
-            }
-
-
-            return outPutDictionary;
         }
 
         private static List<MaterialsWithMarketData> AddIndepentsToOutput(ref Dictionary<int, List<MaterialsWithMarketData>> output, List<MaterialsWithMarketData> inputs, int batchCount)
@@ -978,6 +977,50 @@ namespace EveHelperWF.ScreenHelper
                 }
             }
             return totalPrice;
+        }
+
+        public static void SetPriceForMaterialRecursive(decimal price, int typeID, List<MaterialsWithMarketData> materialList)
+        {
+            foreach (MaterialsWithMarketData mat in materialList)
+            {
+                if (!mat.Build && !mat.React)
+                {
+                    if (mat.materialTypeID == typeID)
+                    {
+                        mat.pricePer = price;
+                    }
+                }
+                else
+                {
+                    SetPriceForMaterialRecursive(price, typeID, mat.ChildMaterials);
+                }
+            }
+        }
+
+        public static bool SetBuildOrReactRecurisve(string controlName, bool value, List<MaterialsWithMarketData> mats)
+        {
+            if (!string.IsNullOrEmpty(controlName))
+            {
+                foreach (MaterialsWithMarketData mat in mats)
+                {
+                    if (mat.controlName.ToLowerInvariant().Equals(controlName.ToLowerInvariant()))
+                    {
+                        if (mat.Buildable) { mat.Build = value; return true; }
+                        if (mat.Reactable) { mat.React = value; return true; }
+                    }
+                    else
+                    {
+                        if (mat.ChildMaterials.Count > 0)
+                        {
+                            if (SetBuildOrReactRecurisve(controlName, value, mat.ChildMaterials))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }
