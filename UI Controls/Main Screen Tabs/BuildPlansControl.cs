@@ -24,6 +24,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private List<Control> DetailFlowsControls = new List<Control>();
         private OptimizedBuildDetailsControl DetailsControl;
         private bool PriceInfoSet = true;
+        private List<PlanetMaterial> UniquePlanetMaterials;
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -824,6 +825,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DetailsProductLabel.Text = "";
             DetailsImagePanel.BackgroundImage = null;
             HeaderCostUnitLabel.Text = "";
+            PlanetMaterialsTreeView.Nodes.Clear();
             this.ResumeLayout();
         }
 
@@ -1075,6 +1077,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         copyMat.materialName = mat.materialName;
                         copyMat.quantityTotal = mat.quantityTotal;
                         copyMat.pricePer = mat.pricePer;
+                        copyMat.Buildable = mat.Buildable;
+                        copyMat.Reactable = mat.Reactable;
+                        copyMat.Build = mat.Build;
+                        copyMat.React = mat.React;
                         outputList.Add(copyMat);
                     }
                     else
@@ -1083,7 +1089,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     copyMat.priceTotal = copyMat.pricePer * copyMat.quantityTotal;
                 }
-                CombineMats(ref outputList, mat.ChildMaterials);
+                else
+                {
+                    CombineMats(ref outputList, mat.ChildMaterials);
+                }
             }
         }
 
@@ -1178,6 +1187,57 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                  this.currentBuildPlan.additionalCosts);
         }
 
+        private void LoadPlanetaryMaterialsPage()
+        {
+            LoadUniquePlanetMaterials();
+            if (UniquePlanetMaterials != null && UniquePlanetMaterials.Count > 0)
+            {
+                LoadPlanetaryTreeView();
+            }
+            else
+            {
+                if (PlanetMaterialsTreeView.Nodes.Count > 0)
+                {
+                    PlanetMaterialsTreeView.Nodes.Clear();
+                }
+            }
+        }
+
+        private void LoadUniquePlanetMaterials()
+        {
+            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
+            CombineMats(ref combinedMats, this.currentBuildPlan.InputMaterials);
+            UniquePlanetMaterials = new List<PlanetMaterial>();
+            InventoryType invType;
+            PlanetMaterial existingMat;
+            foreach (MaterialsWithMarketData mat in combinedMats)
+            {
+                invType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
+                switch (invType.categoryID)
+                {
+                    case (int)Enums.Enums.InvTypeCategory.PlanetResource:
+                    case (int)Enums.Enums.InvTypeCategory.PlanetIndustry:
+                    case (int)Enums.Enums.InvTypeCategory.PlanetCommodity:
+                        existingMat = UniquePlanetMaterials.Find(x => x.typeID == mat.materialTypeID);
+                        if (existingMat != null)
+                        {
+                            existingMat.quantity += (int)mat.quantityTotal;
+                        }
+                        else
+                        {
+                            existingMat = new PlanetMaterial();
+                            existingMat.typeID = mat.materialTypeID;
+                            existingMat.typeName = mat.materialName;
+                            existingMat.quantity = (int)mat.quantityTotal;
+                            existingMat.groupName = invType.groupName;
+                            existingMat.groupID = invType.groupId;
+                            UniquePlanetMaterials.Add(existingMat);
+                        }
+                        break;
+                }
+            }
+        }
+
         private void LoadUIAfterCalcs()
         {
             LoadProductImage();
@@ -1188,6 +1248,40 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadDetailsPage(true);
             LoadOptimumBuildSchedule();
             SetSummaryInformation();
+            LoadPlanetaryMaterialsPage();
+        }
+
+        private void LoadPlanetaryTreeView()
+        {
+            PlanetMaterialsTreeView.Nodes.Clear();
+            TreeNode tn;
+            foreach (PlanetMaterial planetMaterial in UniquePlanetMaterials)
+            {
+                PlanetSchematicsHelper.GetInputsForSchematicRecurseive(planetMaterial);
+                tn = BuildTreeViewForPIMatRecursive(planetMaterial);
+                PlanetMaterialsTreeView.Nodes.Add(tn);
+            }
+        }
+
+        private TreeNode BuildTreeViewForPIMatRecursive(PlanetMaterial planetMaterial)
+        {
+            TreeNode treeNode = new TreeNode();
+
+            treeNode.Text = planetMaterial.typeName;
+            if (planetMaterial.quantity > 0)
+            {
+                treeNode.Text += " x " + planetMaterial.quantity.ToString("N0");
+            }
+            
+            if (planetMaterial.Inputs != null && planetMaterial.Inputs.Count > 0)
+            {
+                foreach (PlanetMaterial piInput in planetMaterial.Inputs)
+                {
+                    treeNode.Nodes.Add(BuildTreeViewForPIMatRecursive(piInput));
+                }
+            }
+
+            return treeNode;
         }
         #endregion
 

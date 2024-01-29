@@ -97,7 +97,7 @@
             BuildPlanCombo = new ComboBox();
             NewBuildPlanButton = new Button();
             DeleteBuildPlanButton = new Button();
-            tabControl1 = new TabControl();
+            BuildPlanTabControl = new TabControl();
             SummaryPage = new TabPage();
             OutputSellTaxes = new Label();
             OutputBuyTaxes = new Label();
@@ -160,6 +160,8 @@
             BuildRectAllCheckbox = new CheckBox();
             DetailsProductLabel = new Label();
             DetailsImagePanel = new Panel();
+            PlanetaryMaterialsTabPage = new TabPage();
+            PlanetMaterialsTreeView = new TreeView();
             LoadProductImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             RunsPerCopyUpDown = new NumericUpDown();
             ProgressLabel = new Label();
@@ -221,7 +223,7 @@
             label53 = new Label();
             InventionDefaultsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
-            tabControl1.SuspendLayout();
+            BuildPlanTabControl.SuspendLayout();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -241,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).BeginInit();
             OrderTypePage.SuspendLayout();
             DetailsPage.SuspendLayout();
+            PlanetaryMaterialsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
@@ -904,18 +907,19 @@
             DeleteBuildPlanButton.UseVisualStyleBackColor = true;
             DeleteBuildPlanButton.Click += DeleteBuildPlanButton_Click;
             // 
-            // tabControl1
+            // BuildPlanTabControl
             // 
-            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl1.Controls.Add(SummaryPage);
-            tabControl1.Controls.Add(MaterialPricePage);
-            tabControl1.Controls.Add(IndustrySettingsTabPage);
-            tabControl1.Controls.Add(DetailsPage);
-            tabControl1.Location = new Point(-1, 69);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1540, 565);
-            tabControl1.TabIndex = 4;
+            BuildPlanTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BuildPlanTabControl.Controls.Add(SummaryPage);
+            BuildPlanTabControl.Controls.Add(MaterialPricePage);
+            BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
+            BuildPlanTabControl.Controls.Add(DetailsPage);
+            BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
+            BuildPlanTabControl.Location = new Point(-1, 69);
+            BuildPlanTabControl.Name = "BuildPlanTabControl";
+            BuildPlanTabControl.SelectedIndex = 0;
+            BuildPlanTabControl.Size = new Size(1540, 565);
+            BuildPlanTabControl.TabIndex = 4;
             // 
             // SummaryPage
             // 
@@ -1199,6 +1203,7 @@
             // 
             MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MaterialsPriceTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MaterialsPriceTreeView.HotTracking = true;
             MaterialsPriceTreeView.Location = new Point(9, 104);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
@@ -1682,6 +1687,27 @@
             DetailsImagePanel.Size = new Size(64, 64);
             DetailsImagePanel.TabIndex = 2;
             // 
+            // PlanetaryMaterialsTabPage
+            // 
+            PlanetaryMaterialsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
+            PlanetaryMaterialsTabPage.Location = new Point(4, 24);
+            PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
+            PlanetaryMaterialsTabPage.Size = new Size(1532, 537);
+            PlanetaryMaterialsTabPage.TabIndex = 4;
+            PlanetaryMaterialsTabPage.Text = "Planetary Materials";
+            // 
+            // PlanetMaterialsTreeView
+            // 
+            PlanetMaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PlanetMaterialsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            PlanetMaterialsTreeView.ForeColor = Color.White;
+            PlanetMaterialsTreeView.Location = new Point(3, 3);
+            PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
+            PlanetMaterialsTreeView.Size = new Size(677, 526);
+            PlanetMaterialsTreeView.TabIndex = 0;
+            // 
             // LoadProductImageBackgroundWorker
             // 
             LoadProductImageBackgroundWorker.DoWork += LoadProductImageBackgroundWorker_DoWork;
@@ -1768,7 +1794,7 @@
             Controls.Add(ProgressLabel);
             Controls.Add(RunsPerCopyUpDown);
             Controls.Add(label10);
-            Controls.Add(tabControl1);
+            Controls.Add(BuildPlanTabControl);
             Controls.Add(DeleteBuildPlanButton);
             Controls.Add(NewBuildPlanButton);
             Controls.Add(label1);
@@ -1783,7 +1809,7 @@
             InventionDefaultsTabPage.ResumeLayout(false);
             InventionDefaultsTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
-            tabControl1.ResumeLayout(false);
+            BuildPlanTabControl.ResumeLayout(false);
             SummaryPage.ResumeLayout(false);
             SummaryPage.PerformLayout();
             SummaryMarketData.ResumeLayout(false);
@@ -1811,6 +1837,7 @@
             OrderTypePage.PerformLayout();
             DetailsPage.ResumeLayout(false);
             DetailsPage.PerformLayout();
+            PlanetaryMaterialsTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).EndInit();
@@ -1824,7 +1851,7 @@
         private Label label1;
         private Button NewBuildPlanButton;
         private Button DeleteBuildPlanButton;
-        private TabControl tabControl1;
+        private TabControl BuildPlanTabControl;
         private TabPage SummaryPage;
         private TabPage DetailsPage;
         private Label ProductLabel;
@@ -1936,5 +1963,7 @@
         private Button UpdatePricesJitaButton;
         private TreeView MaterialsPriceTreeView;
         private Label HeaderCostUnitLabel;
+        private TabPage PlanetaryMaterialsTabPage;
+        private TreeView PlanetMaterialsTreeView;
     }
 }

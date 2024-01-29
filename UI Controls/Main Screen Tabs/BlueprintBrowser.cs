@@ -1008,7 +1008,7 @@ namespace EveHelperWF
             TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
             TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass);
             TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-            TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass,calculationHelperClass.OutputOrderType);
+            TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ReactionMats)
             {
@@ -2205,5 +2205,10 @@ namespace EveHelperWF
             }
         }
         #endregion
+
+        private void CopyRigLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
