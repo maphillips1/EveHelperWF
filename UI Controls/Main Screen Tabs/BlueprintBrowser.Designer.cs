@@ -49,7 +49,6 @@
             Label label6;
             Label label5;
             Label label14;
-            Label ManuInventDecryptorLabel;
             Label label25;
             Label label57;
             Label label48;
@@ -157,6 +156,7 @@
             ProfitLabel = new Label();
             TotalOutcomeIskLabel = new Label();
             TotalJobCostLabel = new Label();
+            ManuInventDecryptorLabel = new Label();
             InventionStructTERigLabel = new Label();
             InventionStructMERigLabel = new Label();
             ManufacturingPage = new TabPage();
@@ -381,7 +381,6 @@
             label6 = new Label();
             label5 = new Label();
             label14 = new Label();
-            ManuInventDecryptorLabel = new Label();
             label25 = new Label();
             label57 = new Label();
             label48 = new Label();
