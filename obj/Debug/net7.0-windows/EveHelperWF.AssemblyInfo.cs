@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.2.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2.2+438813349ca22de2b5628072f5c0d8a91bf377ab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2.2+21193971fffe575043dc5df3dda0958d3de7160d")]
 [assembly: System.Reflection.AssemblyProductAttribute("EveHelper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EveHelperWF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.2.2.0")]
