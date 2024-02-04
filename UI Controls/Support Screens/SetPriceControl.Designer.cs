@@ -56,7 +56,9 @@
             PricePerItem.Name = "PricePerItem";
             PricePerItem.Size = new Size(120, 23);
             PricePerItem.TabIndex = 1;
+            PricePerItem.ThousandsSeparator = true;
             PricePerItem.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            PricePerItem.KeyDown += PricePerItem_KeyDown;
             // 
             // SaveButton
             // 

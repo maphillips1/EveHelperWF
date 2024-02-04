@@ -344,7 +344,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 ProgressLabel.Text = "Done.";
                 SetPriceInformationOnOptimizedBuilds();
                 SetSummaryInformation();
-                LoadMaterialsPricePanel();
+                LoadMaterialsPriceTreeView();
                 ProgressLabel.Text = "";
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -369,6 +369,81 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     SaveBuildPlan();
                     SetPriceInformationOnOptimizedBuilds();
                     SetSummaryInformation();
+                    LoadMaterialsPriceTreeView();
+                }
+            }
+        }
+
+        private void BPTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                if (e.Node.Tag != null)
+                {
+                    int bpTypeId = (int)e.Node.Tag;
+                    BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == bpTypeId);
+
+                    BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                    BVC.StartPosition = FormStartPosition.CenterScreen;
+                    if (BVC.ShowDialog() == DialogResult.OK)
+                    {
+                        bpInfo.ME = (int)BVC.MEUpDown.Value;
+                        bpInfo.TE = (int)BVC.TEUpDown.Value;
+                        bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                        SaveBuildPlan();
+                        isLoading = true;
+                        e.Node.Nodes.Clear();
+                        TreeNode parentNode = e.Node;
+                        BuildChildNodes(bpInfo, ref parentNode);
+                        RunCalcs();
+                        isLoading = false;
+                    }
+                }
+            }
+        }
+
+        private void SetBlueprintButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                BlueprintInfo bpInfo = new BlueprintInfo();
+                bpInfo.IsManufactured = true;
+
+                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                BVC.StartPosition = FormStartPosition.CenterScreen;
+                if (BVC.ShowDialog() == DialogResult.OK)
+                {
+                    bpInfo.ME = (int)BVC.MEUpDown.Value;
+                    bpInfo.TE = (int)BVC.TEUpDown.Value;
+                    bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns);
+                    SaveBuildPlan();
+                    LoadBlueprintStoreTreeView();
+                    isLoading = true;
+                    RunCalcs();
+                    isLoading = false;
+                }
+            }
+        }
+
+        private void SetReactionsButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                BlueprintInfo bpInfo = new BlueprintInfo();
+                bpInfo.IsReacted = true;
+
+                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                BVC.StartPosition = FormStartPosition.CenterScreen;
+                if (BVC.ShowDialog() == DialogResult.OK)
+                {
+                    bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                    SetAllReactionValues(bpInfo.MaxRuns);
+                    SaveBuildPlan();
+                    LoadBlueprintStoreTreeView();
+                    isLoading = true;
+                    RunCalcs();
+                    isLoading = false;
                 }
             }
         }
@@ -554,10 +629,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 EnsureInputMaterials();
                 EnsureCalculationHelperClass();
                 EnsureMinimumRunsAndCopies();
+                EnsureBlueprintStore();
+
+                //Load Blueprint Store
+                LoadBlueprintStoreTreeView();
 
                 //Run the calcs
                 RunCalcs();
-                LoadUIAfterCalcs();
 
                 //Load All the info on the screen
                 this.ResumeLayout();
@@ -582,6 +660,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 this.currentBuildPlan.NumOfCopies = (Int32)NumberCopiesUpDown.Minimum;
                 this.currentBuildPlan.IndustrySettings.NumCopies = this.currentBuildPlan.NumOfCopies;
+                SaveBuildPlan();
+            }
+        }
+
+        private void EnsureBlueprintStore()
+        {
+            if (this.currentBuildPlan.BlueprintStore == null)
+            {
+                this.currentBuildPlan.BlueprintStore = new List<BlueprintInfo>();
+            }
+            List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
+            if (BuildPlanHelper.BuildBlueprintStore(this.currentBuildPlan.InputMaterials,
+                                                ref bpInfos))
+            {
                 SaveBuildPlan();
             }
         }
@@ -826,6 +918,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DetailsImagePanel.BackgroundImage = null;
             HeaderCostUnitLabel.Text = "";
             PlanetMaterialsTreeView.Nodes.Clear();
+            BPTreeView.Nodes.Clear();
             this.ResumeLayout();
         }
 
@@ -937,7 +1030,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 if (this.currentBuildPlan.InputMaterials != null && this.currentBuildPlan.InputMaterials.Count > 0)
                 {
-                    BuildIndustryGraph();
+                    BuildIndustryTreeView();
                 }
                 if (!fromBuildReactAllChecked)
                 {
@@ -947,7 +1040,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DetailsPage.ResumeLayout();
         }
 
-        private void BuildIndustryGraph()
+        private void BuildIndustryTreeView()
         {
             BuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
             MaterialsTreeView.Nodes.Clear();
@@ -1151,7 +1244,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             foreach (MaterialsWithMarketData material in materials)
             {
                 inventoryType = CommonHelper.InventoryTypes.Find(x => x.typeId == material.materialTypeID);
-                if ( inventoryType != null)
+                if (inventoryType != null)
                 {
                     totalVolume += inventoryType.volume * material.quantityTotal;
                 }
@@ -1160,7 +1253,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             return totalVolume;
         }
 
-        private void LoadMaterialsPricePanel()
+        private void LoadMaterialsPriceTreeView()
         {
             MaterialsPriceTreeView.Nodes.Clear();
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
@@ -1244,8 +1337,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadBasicInfo();
             LoadIndySettings();
             LoadFinalProductMarketInfo();
-            LoadMaterialsPricePanel();
-            LoadDetailsPage(true);
+            LoadMaterialsPriceTreeView();
+            LoadDetailsPage(false);
             LoadOptimumBuildSchedule();
             SetSummaryInformation();
             LoadPlanetaryMaterialsPage();
@@ -1272,7 +1365,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 treeNode.Text += " x " + planetMaterial.quantity.ToString("N0");
             }
-            
+
             if (planetMaterial.Inputs != null && planetMaterial.Inputs.Count > 0)
             {
                 foreach (PlanetMaterial piInput in planetMaterial.Inputs)
@@ -1282,6 +1375,103 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
 
             return treeNode;
+        }
+
+        private void LoadBlueprintStoreTreeView()
+        {
+            TreeNode[] copyOfNodes = new TreeNode[BPTreeView.Nodes.Count];
+            BPTreeView.Nodes.CopyTo(copyOfNodes, 0);
+            BPTreeView.Nodes.Clear();
+            LoadManufcaturingNodes();
+            LoadReactionNodes();
+
+        }
+
+        private void LoadManufcaturingNodes()
+        {
+            List<BlueprintInfo> manufacturingBPs = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsManufactured);
+
+            if (manufacturingBPs.Count > 0)
+            {
+                manufacturingBPs = manufacturingBPs.OrderBy(x => x.BlueprintName).ToList();
+                TreeNode manufactureNode = new TreeNode();
+                manufactureNode.Text = "Blueprints";
+                TreeNode manuNode;
+                TreeNode MENode;
+                TreeNode TENode;
+                TreeNode MaxRunNude;
+                foreach (BlueprintInfo bp in manufacturingBPs)
+                {
+                    manuNode = new TreeNode();
+                    manuNode.Tag = bp.BlueprintTypeId;
+                    manuNode.Text = bp.BlueprintName;
+                    manuNode.Name = bp.BlueprintTypeId.ToString();
+
+                    BuildChildNodes(bp, ref manuNode);
+                    manufactureNode.Nodes.Add(manuNode);
+                }
+                BPTreeView.Nodes.Add(manufactureNode);
+            }
+        }
+
+        private void BuildChildNodes(BlueprintInfo bpInfo, ref TreeNode parentNode)
+        {
+            if (bpInfo.IsManufactured)
+            {
+                parentNode.Nodes.Add("ME: " + bpInfo.ME);
+                parentNode.Nodes.Add("TE: " + bpInfo.TE);
+            }
+            parentNode.Nodes.Add("Max Runs: " + bpInfo.MaxRuns);
+        }
+
+        private void LoadReactionNodes()
+        {
+            List<BlueprintInfo> reactions = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsReacted);
+
+            if (reactions.Count > 0)
+            {
+                reactions = reactions.OrderBy(x => x.BlueprintName).ToList();
+                TreeNode ReactionsNode = new TreeNode();
+                ReactionsNode.Text = "Reactions";
+                TreeNode reactionNode;
+                TreeNode MaxRunNude;
+                foreach (BlueprintInfo bp in reactions)
+                {
+                    reactionNode = new TreeNode();
+                    reactionNode.Tag = bp.BlueprintTypeId;
+                    reactionNode.Text = bp.BlueprintName;
+                    reactionNode.Name = bp.BlueprintTypeId.ToString();
+
+                    BuildChildNodes(bp, ref reactionNode);
+
+                    ReactionsNode.Nodes.Add(reactionNode);
+                }
+                BPTreeView.Nodes.Add(ReactionsNode);
+            }
+        }
+
+        private void SetAllBlueprintValues(int me, int te, int maxRuns)
+        {
+            foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
+            {
+                if (bpInfo.IsManufactured)
+                {
+                    bpInfo.ME = me;
+                    bpInfo.TE = te;
+                    bpInfo.MaxRuns = maxRuns;
+                }
+            }
+        }
+
+        private void SetAllReactionValues(int maxRuns)
+        {
+            foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
+            {
+                if (bpInfo.IsReacted)
+                {
+                    bpInfo.MaxRuns = maxRuns;
+                }
+            }
         }
         #endregion
 

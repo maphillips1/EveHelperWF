@@ -639,7 +639,7 @@ namespace EveHelperWF.ScreenHelper
                 meValue = buildPlan.IndustrySettings.CompME;
                 teValue = buildPlan.IndustrySettings.CompTE;
             }
-
+            int blueprintOrReactionTypeID = optimizedBuild.BlueprintOrReactionTypeID;
             List<MaterialsWithMarketData> inputMaterials = new List<MaterialsWithMarketData>();
             List<IndustryActivityProduct> manufacturingProducts =
                     Database.SQLiteCalls.GetIndustryActivityProducts(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
@@ -647,9 +647,10 @@ namespace EveHelperWF.ScreenHelper
             {
                 IndustryActivityProduct manuProd = manufacturingProducts[0];
                 optimizedBuild.RunsNeeded = (int)Math.Ceiling((decimal)optimizedBuild.TotalQuantityNeeded / (decimal)manuProd.quantity);
+                BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintOrReactionTypeID);
                 if (optimizedBuild.RunsNeeded > 0)
                 {
-                    SetBatchRunInformation(ref optimizedBuild, teValue, Enums.Enums.ActivityManufacturing);
+                    SetBatchRunInformation(ref optimizedBuild, teValue, Enums.Enums.ActivityManufacturing, bpInfo);
                     List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
                     if (optimizedBuild.BatchesNeeded > 1)
                     {
@@ -691,7 +692,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, int activityID)
+        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, int activityID, BlueprintInfo bpInfo)
         {
             List<IndustryActivityTypes> activities =
                     Database.SQLiteCalls.GetIndustryActivityTypes(optimizedBuild.BlueprintOrReactionTypeID);
@@ -704,9 +705,14 @@ namespace EveHelperWF.ScreenHelper
             int batchesNeeded;
             int maxRunsPerBatch;
             maxRunsPerBatch = (int)Math.Floor((decimal)maxTime / (decimal)(timePerRun));
-            if (totalTime > maxTime)
+            if (maxRunsPerBatch <= 0) { maxRunsPerBatch = 1; }
+            if (bpInfo != null && bpInfo.MaxRuns > 0 && bpInfo.MaxRuns < maxRunsPerBatch)
             {
-                batchesNeeded = (int)Math.Ceiling((decimal)totalTime / (decimal)maxTime);
+                maxRunsPerBatch = bpInfo.MaxRuns;
+            }
+            if (optimizedBuild.RunsNeeded > maxRunsPerBatch)
+            {
+                batchesNeeded = (int)Math.Ceiling((decimal)optimizedBuild.RunsNeeded / (decimal)maxRunsPerBatch);
             }
             else
             {
@@ -748,15 +754,17 @@ namespace EveHelperWF.ScreenHelper
 
             if (optimizedBuild.BlueprintOrReactionTypeID > 0)
             {
+                int blueprintOrReactionTypeID = optimizedBuild.BlueprintOrReactionTypeID;
                 List<IndustryActivityProduct> reactionProducts =
                     Database.SQLiteCalls.GetIndustryActivityProducts(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityReactions);
                 if (reactionProducts.Count > 0)
                 {
                     IndustryActivityProduct reactionProd = reactionProducts[0];
                     optimizedBuild.RunsNeeded = (int)Math.Ceiling((decimal)optimizedBuild.TotalQuantityNeeded / (decimal)reactionProd.quantity);
+                    BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintOrReactionTypeID);
                     if (optimizedBuild.RunsNeeded > 0)
                     {
-                        SetBatchRunInformation(ref optimizedBuild, 0, Enums.Enums.ActivityReactions);
+                        SetBatchRunInformation(ref optimizedBuild, 0, Enums.Enums.ActivityReactions, bpInfo);
                         List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityReactions);
 
                         if (optimizedBuild.BatchesNeeded > 1)
@@ -1021,6 +1029,73 @@ namespace EveHelperWF.ScreenHelper
                 }
             }
             return false;
+        }
+
+        public static MaterialsWithMarketData GetMaterialByControlName(string controlName, List<MaterialsWithMarketData> matList)
+        {
+            MaterialsWithMarketData foundMat = null;
+            foreach (MaterialsWithMarketData mat in matList)
+            {
+                if(mat.controlName.ToLowerInvariant() == controlName.ToLowerInvariant())
+                {
+                    foundMat = mat;
+                    break;
+                }
+                else
+                {
+                    if (mat.Build || mat.React)
+                    {
+                        foundMat = GetMaterialByControlName(controlName, mat.ChildMaterials);
+                        if (foundMat != null)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            return foundMat;
+        }
+
+        public static bool BuildBlueprintStore(List<MaterialsWithMarketData> childMats, ref List<BlueprintInfo> blueprintStore)
+        {
+            bool addedBlueprint = false;
+            int blueprintTypeId = 0;
+            BlueprintInfo bpInfo;
+            InventoryType invType;
+            foreach (MaterialsWithMarketData mat in childMats)
+            {
+                if (mat.Buildable ||mat.Reactable)
+                {
+                    blueprintTypeId = Database.SQLiteCalls.GetBlueprintByProductTypeID(mat.materialTypeID);
+                    if (blueprintTypeId > 0)
+                    {
+                        bpInfo = blueprintStore.Find(x => x.BlueprintTypeId == blueprintTypeId);
+                        if (bpInfo == null)
+                        {
+                            bpInfo = new BlueprintInfo();
+                            invType = CommonHelper.InventoryTypes.Find(x => x.typeId == blueprintTypeId);
+                            bpInfo.BlueprintTypeId = blueprintTypeId;
+                            bpInfo.ProductTypeId = mat.materialTypeID;
+                            bpInfo.BlueprintName = invType.typeName;
+                            bpInfo.IsManufactured = mat.Buildable;
+                            bpInfo.IsReacted = mat.Reactable;
+                            bpInfo.MaxRuns = 9999;
+                            if (mat.Buildable)
+                            {
+                                bpInfo.ME = 10;
+                                bpInfo.TE = 20;
+                            }
+                            blueprintStore.Add(bpInfo);
+                            addedBlueprint = true;
+                        }
+                    }
+                    if (BuildBlueprintStore(mat.ChildMaterials, ref blueprintStore))
+                    {
+                        addedBlueprint = true;
+                    }
+                }
+            }
+            return addedBlueprint;
         }
     }
 }
