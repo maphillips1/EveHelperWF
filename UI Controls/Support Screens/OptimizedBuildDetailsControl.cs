@@ -53,7 +53,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             TreeNode tn;
             TreeNode pricePerNode;
             TreeNode priceTotalNode;
-            foreach (MaterialsWithMarketData mat in OptimizedBuild.InputMaterials)
+            foreach (MaterialsWithMarketData mat in OptimizedBuild.InputMaterials.OrderBy(x => x.materialName))
             {
                 tn = new TreeNode();
                 tn.Text = "  " + mat.quantityTotal.ToString("N0") + " x " + mat.materialName;

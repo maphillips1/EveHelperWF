@@ -25,7 +25,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult= DialogResult.Cancel;
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void PricePerItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SaveButton_Click(sender, e);
+            }
         }
     }
 }

@@ -49,6 +49,7 @@ namespace EveHelperWF.UI_Controls
             {
                 InitLongLoadingWorker.RunWorkerAsync();
             }
+            this.BringToFront();
         }
 
         //Ensures that we only ever have one instance of EveHelper open at a given time. 
@@ -82,6 +83,7 @@ namespace EveHelperWF.UI_Controls
                 UpdateMessageBox newReleaseScreen = new UpdateMessageBox(ShouldUpdate.Item2);
                 newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
                 newReleaseScreen.ShowDialog();
+                newReleaseScreen.BringToFront();
             }
         }
 

@@ -294,7 +294,7 @@ namespace EveHelperWF.ScreenHelper
             decimal baseCost = GetBaseCost(Mats, true, runsNeeded);
             decimal jobCost = 0;
             decimal costIndice = 0;
-            double sccSurcharge = 0.015;
+            double sccSurcharge = Enums.Enums.SCCSurcharge;
             decimal structureBonus = GetManufacturingStructureCostBonus(helperClass);
             decimal jobGrossCost = 0;
 
@@ -321,7 +321,7 @@ namespace EveHelperWF.ScreenHelper
             decimal baseCost = GetBaseCost(Mats, true, runsNeeded);
             decimal jobCost = 0;
             decimal costIndice = 0;
-            double sccSurcharge = 0.015;
+            double sccSurcharge = Enums.Enums.SCCSurcharge;
             decimal jobGrossCost = 0;
 
             if (helperClass.ReactionSolarSystemID > 0)

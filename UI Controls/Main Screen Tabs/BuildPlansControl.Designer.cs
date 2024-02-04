@@ -80,6 +80,7 @@
             Label label5;
             Label label52;
             Label label53;
+            Label label54;
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -94,10 +95,6 @@
             InventionStructureCostRigCombo = new ComboBox();
             InventionStructureCombo = new ComboBox();
             InventionSolarSystemCombo = new ComboBox();
-            BuildPlanCombo = new ComboBox();
-            NewBuildPlanButton = new Button();
-            DeleteBuildPlanButton = new Button();
-            BuildPlanTabControl = new TabControl();
             SummaryPage = new TabPage();
             OutputSellTaxes = new Label();
             OutputBuyTaxes = new Label();
@@ -162,6 +159,12 @@
             DetailsImagePanel = new Panel();
             PlanetaryMaterialsTabPage = new TabPage();
             PlanetMaterialsTreeView = new TreeView();
+            BPReactionTabPage = new TabPage();
+            BPTreeView = new TreeView();
+            BuildPlanCombo = new ComboBox();
+            NewBuildPlanButton = new Button();
+            DeleteBuildPlanButton = new Button();
+            BuildPlanTabControl = new TabControl();
             LoadProductImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             RunsPerCopyUpDown = new NumericUpDown();
             ProgressLabel = new Label();
@@ -169,6 +172,8 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
+            SetBlueprintButton = new Button();
+            SetReactionsButton = new Button();
             label15 = new Label();
             label1 = new Label();
             label9 = new Label();
@@ -221,9 +226,9 @@
             label5 = new Label();
             label52 = new Label();
             label53 = new Label();
+            label54 = new Label();
             InventionDefaultsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
-            BuildPlanTabControl.SuspendLayout();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -244,6 +249,8 @@
             OrderTypePage.SuspendLayout();
             DetailsPage.SuspendLayout();
             PlanetaryMaterialsTabPage.SuspendLayout();
+            BPReactionTabPage.SuspendLayout();
+            BuildPlanTabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
@@ -876,50 +883,15 @@
             label53.TabIndex = 48;
             label53.Text = "Total Cost Per Item: ";
             // 
-            // BuildPlanCombo
+            // label54
             // 
-            BuildPlanCombo.FormattingEnabled = true;
-            BuildPlanCombo.Location = new Point(104, 11);
-            BuildPlanCombo.Name = "BuildPlanCombo";
-            BuildPlanCombo.Size = new Size(228, 23);
-            BuildPlanCombo.TabIndex = 0;
-            BuildPlanCombo.SelectedIndexChanged += BuildPlanCombo_SelectedIndexChanged;
-            // 
-            // NewBuildPlanButton
-            // 
-            NewBuildPlanButton.ForeColor = Color.Black;
-            NewBuildPlanButton.Location = new Point(104, 40);
-            NewBuildPlanButton.Name = "NewBuildPlanButton";
-            NewBuildPlanButton.Size = new Size(103, 23);
-            NewBuildPlanButton.TabIndex = 2;
-            NewBuildPlanButton.Text = "New Build Plan";
-            NewBuildPlanButton.UseVisualStyleBackColor = true;
-            NewBuildPlanButton.Click += NewBuildPlanButton_Click;
-            // 
-            // DeleteBuildPlanButton
-            // 
-            DeleteBuildPlanButton.ForeColor = Color.Black;
-            DeleteBuildPlanButton.Location = new Point(223, 40);
-            DeleteBuildPlanButton.Name = "DeleteBuildPlanButton";
-            DeleteBuildPlanButton.Size = new Size(109, 23);
-            DeleteBuildPlanButton.TabIndex = 3;
-            DeleteBuildPlanButton.Text = "Delete Build Plan";
-            DeleteBuildPlanButton.UseVisualStyleBackColor = true;
-            DeleteBuildPlanButton.Click += DeleteBuildPlanButton_Click;
-            // 
-            // BuildPlanTabControl
-            // 
-            BuildPlanTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BuildPlanTabControl.Controls.Add(SummaryPage);
-            BuildPlanTabControl.Controls.Add(MaterialPricePage);
-            BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
-            BuildPlanTabControl.Controls.Add(DetailsPage);
-            BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
-            BuildPlanTabControl.Location = new Point(-1, 69);
-            BuildPlanTabControl.Name = "BuildPlanTabControl";
-            BuildPlanTabControl.SelectedIndex = 0;
-            BuildPlanTabControl.Size = new Size(1540, 565);
-            BuildPlanTabControl.TabIndex = 4;
+            label54.AutoSize = true;
+            label54.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label54.Location = new Point(9, 18);
+            label54.Name = "label54";
+            label54.Size = new Size(508, 21);
+            label54.TabIndex = 8;
+            label54.Text = "Click on the blueprint or reaction name to edit the ME, TE, and Max Runs";
             // 
             // SummaryPage
             // 
@@ -1708,6 +1680,80 @@
             PlanetMaterialsTreeView.Size = new Size(677, 526);
             PlanetMaterialsTreeView.TabIndex = 0;
             // 
+            // BPReactionTabPage
+            // 
+            BPReactionTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            BPReactionTabPage.Controls.Add(SetReactionsButton);
+            BPReactionTabPage.Controls.Add(SetBlueprintButton);
+            BPReactionTabPage.Controls.Add(label54);
+            BPReactionTabPage.Controls.Add(BPTreeView);
+            BPReactionTabPage.Location = new Point(4, 24);
+            BPReactionTabPage.Name = "BPReactionTabPage";
+            BPReactionTabPage.Size = new Size(1532, 526);
+            BPReactionTabPage.TabIndex = 5;
+            BPReactionTabPage.Text = "BP & Reaction Settings";
+            // 
+            // BPTreeView
+            // 
+            BPTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BPTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            BPTreeView.CausesValidation = false;
+            BPTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            BPTreeView.ForeColor = Color.White;
+            BPTreeView.HotTracking = true;
+            BPTreeView.ItemHeight = 30;
+            BPTreeView.Location = new Point(9, 81);
+            BPTreeView.Name = "BPTreeView";
+            BPTreeView.Size = new Size(671, 437);
+            BPTreeView.TabIndex = 7;
+            BPTreeView.AfterSelect += BPTreeView_AfterSelect;
+            // 
+            // BuildPlanCombo
+            // 
+            BuildPlanCombo.FormattingEnabled = true;
+            BuildPlanCombo.Location = new Point(104, 11);
+            BuildPlanCombo.Name = "BuildPlanCombo";
+            BuildPlanCombo.Size = new Size(228, 23);
+            BuildPlanCombo.TabIndex = 0;
+            BuildPlanCombo.SelectedIndexChanged += BuildPlanCombo_SelectedIndexChanged;
+            // 
+            // NewBuildPlanButton
+            // 
+            NewBuildPlanButton.ForeColor = Color.Black;
+            NewBuildPlanButton.Location = new Point(104, 40);
+            NewBuildPlanButton.Name = "NewBuildPlanButton";
+            NewBuildPlanButton.Size = new Size(103, 23);
+            NewBuildPlanButton.TabIndex = 2;
+            NewBuildPlanButton.Text = "New Build Plan";
+            NewBuildPlanButton.UseVisualStyleBackColor = true;
+            NewBuildPlanButton.Click += NewBuildPlanButton_Click;
+            // 
+            // DeleteBuildPlanButton
+            // 
+            DeleteBuildPlanButton.ForeColor = Color.Black;
+            DeleteBuildPlanButton.Location = new Point(223, 40);
+            DeleteBuildPlanButton.Name = "DeleteBuildPlanButton";
+            DeleteBuildPlanButton.Size = new Size(109, 23);
+            DeleteBuildPlanButton.TabIndex = 3;
+            DeleteBuildPlanButton.Text = "Delete Build Plan";
+            DeleteBuildPlanButton.UseVisualStyleBackColor = true;
+            DeleteBuildPlanButton.Click += DeleteBuildPlanButton_Click;
+            // 
+            // BuildPlanTabControl
+            // 
+            BuildPlanTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BuildPlanTabControl.Controls.Add(SummaryPage);
+            BuildPlanTabControl.Controls.Add(MaterialPricePage);
+            BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
+            BuildPlanTabControl.Controls.Add(BPReactionTabPage);
+            BuildPlanTabControl.Controls.Add(DetailsPage);
+            BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
+            BuildPlanTabControl.Location = new Point(-1, 80);
+            BuildPlanTabControl.Name = "BuildPlanTabControl";
+            BuildPlanTabControl.SelectedIndex = 0;
+            BuildPlanTabControl.Size = new Size(1540, 554);
+            BuildPlanTabControl.TabIndex = 4;
+            // 
             // LoadProductImageBackgroundWorker
             // 
             LoadProductImageBackgroundWorker.DoWork += LoadProductImageBackgroundWorker_DoWork;
@@ -1780,6 +1826,28 @@
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
+            // SetBlueprintButton
+            // 
+            SetBlueprintButton.ForeColor = Color.Black;
+            SetBlueprintButton.Location = new Point(9, 52);
+            SetBlueprintButton.Name = "SetBlueprintButton";
+            SetBlueprintButton.Size = new Size(150, 23);
+            SetBlueprintButton.TabIndex = 9;
+            SetBlueprintButton.Text = "Set all Blueprint Info";
+            SetBlueprintButton.UseVisualStyleBackColor = true;
+            SetBlueprintButton.Click += SetBlueprintButton_Click;
+            // 
+            // SetReactionsButton
+            // 
+            SetReactionsButton.ForeColor = Color.Black;
+            SetReactionsButton.Location = new Point(165, 52);
+            SetReactionsButton.Name = "SetReactionsButton";
+            SetReactionsButton.Size = new Size(150, 23);
+            SetReactionsButton.TabIndex = 10;
+            SetReactionsButton.Text = "Set all Reaction Info";
+            SetReactionsButton.UseVisualStyleBackColor = true;
+            SetReactionsButton.Click += SetReactionsButton_Click;
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1809,7 +1877,6 @@
             InventionDefaultsTabPage.ResumeLayout(false);
             InventionDefaultsTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
-            BuildPlanTabControl.ResumeLayout(false);
             SummaryPage.ResumeLayout(false);
             SummaryPage.PerformLayout();
             SummaryMarketData.ResumeLayout(false);
@@ -1838,6 +1905,9 @@
             DetailsPage.ResumeLayout(false);
             DetailsPage.PerformLayout();
             PlanetaryMaterialsTabPage.ResumeLayout(false);
+            BPReactionTabPage.ResumeLayout(false);
+            BPReactionTabPage.PerformLayout();
+            BuildPlanTabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).EndInit();
@@ -1965,5 +2035,9 @@
         private Label HeaderCostUnitLabel;
         private TabPage PlanetaryMaterialsTabPage;
         private TreeView PlanetMaterialsTreeView;
+        private TreeView BPTreeView;
+        private TabPage BPReactionTabPage;
+        private Button SetReactionsButton;
+        private Button SetBlueprintButton;
     }
 }

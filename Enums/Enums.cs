@@ -55,6 +55,8 @@ namespace Enums
         public static decimal ResLevel9CostModifier = (4163 / 7);
         public static decimal ResLevel10CostModifier = (29660 / 21);
 
+        public static double SCCSurcharge = 0.04;
+
         //Directories
         public static string ImagesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\Images\\");

@@ -8,6 +8,7 @@ namespace EveHelperWF.Objects
         public CalculationHelperClass IndustrySettings { get; set; }
         public List<MaterialsWithMarketData> InputMaterials { get; set; }
         public List<MaterialsWithMarketData> AllItems { get; set; }
+        public List<BlueprintInfo> BlueprintStore { get; set; }
         public string BuildPlanName {  get; set; }
         public string BuildPlanNotes { get; set;}
         public decimal additionalCosts { get; set; }

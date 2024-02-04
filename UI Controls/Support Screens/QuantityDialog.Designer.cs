@@ -76,6 +76,7 @@
             QuantityUpDown.Name = "QuantityUpDown";
             QuantityUpDown.Size = new Size(120, 23);
             QuantityUpDown.TabIndex = 3;
+            QuantityUpDown.ThousandsSeparator = true;
             QuantityUpDown.KeyDown += QuantityUpDown_KeyDown;
             QuantityUpDown.KeyUp += Numeric_KeyUp;
             // 

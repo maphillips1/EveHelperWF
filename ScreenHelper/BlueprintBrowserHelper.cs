@@ -1355,7 +1355,7 @@ namespace EveHelperWF.ScreenHelper
             decimal costIndice = 0;
             decimal estimatedItemValue = GetEstimatedItemValueForBlueprintInvention(helperClass);
             decimal structureBonus = GetInventionStructureCostBonus(helperClass);
-            double sccSurcharge = 0.015;
+            double sccSurcharge = Enums.Enums.SCCSurcharge;
 
             if (helperClass.InventionSolarSystemID > 0)
             {
@@ -1648,7 +1648,7 @@ namespace EveHelperWF.ScreenHelper
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
             decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.MESolarSystemID, Objects.CostIndiceActivity.ActivityME);
             decimal facilityTax = calculationHelperClass.MEFacilityTax / 100;
-            decimal sccSurcharge = (decimal).015;
+            decimal sccSurcharge = (decimal)Enums.Enums.SCCSurcharge;
             baseCost = processTimeValue;
 
             cost = Math.Ceiling(baseCost * costIndex);
@@ -1666,7 +1666,7 @@ namespace EveHelperWF.ScreenHelper
             decimal processTimeValue = GetProcessTimeValue(baseCost, calculationHelperClass.TEFromLevel / 2, calculationHelperClass.TEToLevel / 2);
             decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.TESolarSystemID, Objects.CostIndiceActivity.ActivityTE);
             decimal facilityTax = calculationHelperClass.TEFacilityTax / 100;
-            decimal sccSurcharge = (decimal).015;
+            decimal sccSurcharge = (decimal)Enums.Enums.SCCSurcharge;
             baseCost = processTimeValue;
 
             cost = Math.Ceiling(baseCost * costIndex);
@@ -1792,7 +1792,7 @@ namespace EveHelperWF.ScreenHelper
             decimal jobCostBase = Math.Round(baseCost * (decimal).02 * calculationHelperClass.NumCopies * calculationHelperClass.RunsPerCopy);
             decimal costIndex = CommonHelper.GetCostIndexForSystemID(calculationHelperClass.CopyingSolarSystemID, Objects.CostIndiceActivity.ActivityCOPY);
             decimal facilityTax = calculationHelperClass.CopyingFacilityTax / 100;
-            decimal sccSurcharge = (decimal).015;
+            decimal sccSurcharge = (decimal)Enums.Enums.SCCSurcharge;
 
             cost = Math.Ceiling(jobCostBase * costIndex);
             cost += Math.Ceiling(jobCostBase * facilityTax);
