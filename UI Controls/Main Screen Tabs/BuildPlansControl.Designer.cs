@@ -38,8 +38,6 @@
             Label label3;
             Label label2;
             Label label11;
-            Label label18;
-            Label label19;
             Label label21;
             Label label22;
             Label label23;
@@ -48,13 +46,6 @@
             Label label26;
             Label label27;
             Label label28;
-            TabPage InventionDefaultsTabPage;
-            Label label32;
-            Label label31;
-            Label label30;
-            Label label29;
-            Label label33;
-            Label label34;
             Label label35;
             Label label36;
             Label label37;
@@ -89,12 +80,6 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            InventionTaxUpDown = new NumericUpDown();
-            InventionDecryptorCombo = new ComboBox();
-            InventionStructureTimeRigCombo = new ComboBox();
-            InventionStructureCostRigCombo = new ComboBox();
-            InventionStructureCombo = new ComboBox();
-            InventionSolarSystemCombo = new ComboBox();
             SummaryPage = new TabPage();
             OutputSellTaxes = new Label();
             OutputBuyTaxes = new Label();
@@ -130,8 +115,6 @@
             ImplantCombo = new ComboBox();
             ManufacturingSystemCombo = new ComboBox();
             TEUpDown = new NumericUpDown();
-            CompTEUpDown = new NumericUpDown();
-            CompMEUpDown = new NumericUpDown();
             ManufacturingTaxUpDown = new NumericUpDown();
             MEUpDown = new NumericUpDown();
             ReactionsDefaultTabPage = new TabPage();
@@ -160,6 +143,8 @@
             PlanetaryMaterialsTabPage = new TabPage();
             PlanetMaterialsTreeView = new TreeView();
             BPReactionTabPage = new TabPage();
+            SetReactionsButton = new Button();
+            SetBlueprintButton = new Button();
             BPTreeView = new TreeView();
             BuildPlanCombo = new ComboBox();
             NewBuildPlanButton = new Button();
@@ -172,8 +157,6 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
-            SetBlueprintButton = new Button();
-            SetReactionsButton = new Button();
             label15 = new Label();
             label1 = new Label();
             label9 = new Label();
@@ -184,8 +167,6 @@
             label3 = new Label();
             label2 = new Label();
             label11 = new Label();
-            label18 = new Label();
-            label19 = new Label();
             label21 = new Label();
             label22 = new Label();
             label23 = new Label();
@@ -194,13 +175,6 @@
             label26 = new Label();
             label27 = new Label();
             label28 = new Label();
-            InventionDefaultsTabPage = new TabPage();
-            label32 = new Label();
-            label31 = new Label();
-            label30 = new Label();
-            label29 = new Label();
-            label33 = new Label();
-            label34 = new Label();
             label35 = new Label();
             label36 = new Label();
             label37 = new Label();
@@ -227,8 +201,6 @@
             label52 = new Label();
             label53 = new Label();
             label54 = new Label();
-            InventionDefaultsTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -237,8 +209,6 @@
             DefaultsTabContainer.SuspendLayout();
             ManufacturingDefaultsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)CompTEUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)CompMEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ManufacturingTaxUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             ReactionsDefaultTabPage.SuspendLayout();
@@ -354,33 +324,11 @@
             label11.TabIndex = 19;
             label11.Text = "Works with Multibuy in Eve";
             // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label18.Location = new Point(354, 120);
-            label18.Margin = new Padding(2, 0, 2, 0);
-            label18.Name = "label18";
-            label18.Size = new Size(68, 19);
-            label18.TabIndex = 13;
-            label18.Text = "Comp TE";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label19.Location = new Point(348, 87);
-            label19.Margin = new Padding(2, 0, 2, 0);
-            label19.Name = "label19";
-            label19.Size = new Size(73, 19);
-            label19.TabIndex = 12;
-            label19.Text = "Comp ME";
-            // 
             // label21
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(362, 49);
+            label21.Location = new Point(72, 250);
             label21.Margin = new Padding(2, 0, 2, 0);
             label21.Name = "label21";
             label21.Size = new Size(60, 19);
@@ -391,7 +339,7 @@
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.Location = new Point(390, 16);
+            label22.Location = new Point(100, 217);
             label22.Margin = new Padding(2, 0, 2, 0);
             label22.Name = "label22";
             label22.Size = new Size(32, 19);
@@ -464,159 +412,6 @@
             label28.Size = new Size(29, 19);
             label28.TabIndex = 4;
             label28.Text = "ME";
-            // 
-            // InventionDefaultsTabPage
-            // 
-            InventionDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
-            InventionDefaultsTabPage.Controls.Add(InventionTaxUpDown);
-            InventionDefaultsTabPage.Controls.Add(InventionDecryptorCombo);
-            InventionDefaultsTabPage.Controls.Add(InventionStructureTimeRigCombo);
-            InventionDefaultsTabPage.Controls.Add(InventionStructureCostRigCombo);
-            InventionDefaultsTabPage.Controls.Add(InventionStructureCombo);
-            InventionDefaultsTabPage.Controls.Add(InventionSolarSystemCombo);
-            InventionDefaultsTabPage.Controls.Add(label32);
-            InventionDefaultsTabPage.Controls.Add(label31);
-            InventionDefaultsTabPage.Controls.Add(label30);
-            InventionDefaultsTabPage.Controls.Add(label29);
-            InventionDefaultsTabPage.Controls.Add(label33);
-            InventionDefaultsTabPage.Controls.Add(label34);
-            InventionDefaultsTabPage.Location = new Point(4, 24);
-            InventionDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
-            InventionDefaultsTabPage.Name = "InventionDefaultsTabPage";
-            InventionDefaultsTabPage.Size = new Size(1524, 480);
-            InventionDefaultsTabPage.TabIndex = 2;
-            InventionDefaultsTabPage.Text = "Invention";
-            // 
-            // InventionTaxUpDown
-            // 
-            InventionTaxUpDown.DecimalPlaces = 2;
-            InventionTaxUpDown.Location = new Point(131, 168);
-            InventionTaxUpDown.Margin = new Padding(2);
-            InventionTaxUpDown.Name = "InventionTaxUpDown";
-            InventionTaxUpDown.Size = new Size(126, 23);
-            InventionTaxUpDown.TabIndex = 27;
-            InventionTaxUpDown.ValueChanged += IndustrySettings_ValueChanged;
-            // 
-            // InventionDecryptorCombo
-            // 
-            InventionDecryptorCombo.FormattingEnabled = true;
-            InventionDecryptorCombo.Location = new Point(131, 135);
-            InventionDecryptorCombo.Margin = new Padding(2);
-            InventionDecryptorCombo.Name = "InventionDecryptorCombo";
-            InventionDecryptorCombo.Size = new Size(128, 23);
-            InventionDecryptorCombo.TabIndex = 22;
-            InventionDecryptorCombo.SelectedIndexChanged += IndustrySettings_ValueChanged;
-            // 
-            // InventionStructureTimeRigCombo
-            // 
-            InventionStructureTimeRigCombo.FormattingEnabled = true;
-            InventionStructureTimeRigCombo.Location = new Point(131, 105);
-            InventionStructureTimeRigCombo.Margin = new Padding(2);
-            InventionStructureTimeRigCombo.Name = "InventionStructureTimeRigCombo";
-            InventionStructureTimeRigCombo.Size = new Size(128, 23);
-            InventionStructureTimeRigCombo.TabIndex = 23;
-            InventionStructureTimeRigCombo.SelectedIndexChanged += IndustrySettings_ValueChanged;
-            // 
-            // InventionStructureCostRigCombo
-            // 
-            InventionStructureCostRigCombo.FormattingEnabled = true;
-            InventionStructureCostRigCombo.Location = new Point(131, 73);
-            InventionStructureCostRigCombo.Margin = new Padding(2);
-            InventionStructureCostRigCombo.Name = "InventionStructureCostRigCombo";
-            InventionStructureCostRigCombo.Size = new Size(128, 23);
-            InventionStructureCostRigCombo.TabIndex = 24;
-            InventionStructureCostRigCombo.SelectedIndexChanged += IndustrySettings_ValueChanged;
-            // 
-            // InventionStructureCombo
-            // 
-            InventionStructureCombo.FormattingEnabled = true;
-            InventionStructureCombo.Location = new Point(131, 40);
-            InventionStructureCombo.Margin = new Padding(2);
-            InventionStructureCombo.Name = "InventionStructureCombo";
-            InventionStructureCombo.Size = new Size(128, 23);
-            InventionStructureCombo.TabIndex = 25;
-            InventionStructureCombo.SelectedIndexChanged += IndustrySettings_ValueChanged;
-            // 
-            // InventionSolarSystemCombo
-            // 
-            InventionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            InventionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionSolarSystemCombo.DropDownHeight = 150;
-            InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
-            InventionSolarSystemCombo.FormattingEnabled = true;
-            InventionSolarSystemCombo.IntegralHeight = false;
-            InventionSolarSystemCombo.Location = new Point(131, 12);
-            InventionSolarSystemCombo.Margin = new Padding(2);
-            InventionSolarSystemCombo.Name = "InventionSolarSystemCombo";
-            InventionSolarSystemCombo.Size = new Size(128, 23);
-            InventionSolarSystemCombo.TabIndex = 26;
-            InventionSolarSystemCombo.SelectedIndexChanged += IndustrySettings_ValueChanged;
-            // 
-            // label32
-            // 
-            label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label32.Location = new Point(99, 168);
-            label32.Margin = new Padding(2, 0, 2, 0);
-            label32.Name = "label32";
-            label32.Size = new Size(26, 15);
-            label32.TabIndex = 16;
-            label32.Text = "Tax";
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label31.Location = new Point(59, 136);
-            label31.Margin = new Padding(2, 0, 2, 0);
-            label31.Name = "label31";
-            label31.Size = new Size(64, 15);
-            label31.TabIndex = 17;
-            label31.Text = "Decryptor";
-            // 
-            // label30
-            // 
-            label30.AutoSize = true;
-            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label30.Location = new Point(8, 106);
-            label30.Margin = new Padding(2, 0, 2, 0);
-            label30.Name = "label30";
-            label30.Size = new Size(113, 15);
-            label30.TabIndex = 18;
-            label30.Text = "Structure Time Rig";
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label29.Location = new Point(11, 74);
-            label29.Margin = new Padding(2, 0, 2, 0);
-            label29.Name = "label29";
-            label29.Size = new Size(109, 15);
-            label29.TabIndex = 19;
-            label29.Text = "Structure Cost Rig";
-            // 
-            // label33
-            // 
-            label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label33.Location = new Point(64, 46);
-            label33.Margin = new Padding(2, 0, 2, 0);
-            label33.Name = "label33";
-            label33.Size = new Size(61, 15);
-            label33.TabIndex = 20;
-            label33.Text = "Structure";
-            // 
-            // label34
-            // 
-            label34.AutoSize = true;
-            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label34.Location = new Point(43, 14);
-            label34.Margin = new Padding(2, 0, 2, 0);
-            label34.Name = "label34";
-            label34.Size = new Size(79, 15);
-            label34.TabIndex = 21;
-            label34.Text = "Solar System";
             // 
             // label35
             // 
@@ -918,7 +713,7 @@
             SummaryPage.Location = new Point(4, 24);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1532, 537);
+            SummaryPage.Size = new Size(1532, 526);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
@@ -970,7 +765,7 @@
             NotesTextBox.Location = new Point(6, 319);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 210);
+            NotesTextBox.Size = new Size(382, 199);
             NotesTextBox.TabIndex = 13;
             // 
             // InputVolumeLabel
@@ -1023,7 +818,7 @@
             SummaryMarketData.Dock = DockStyle.Right;
             SummaryMarketData.Location = new Point(394, 3);
             SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(1135, 531);
+            SummaryMarketData.Size = new Size(1135, 520);
             SummaryMarketData.TabIndex = 7;
             // 
             // JitaBuyLabel
@@ -1067,7 +862,7 @@
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1117, 448);
+            PriceHistoryGridView.Size = new Size(1117, 437);
             PriceHistoryGridView.TabIndex = 5;
             // 
             // date
@@ -1167,7 +962,7 @@
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
             MaterialPricePage.Location = new Point(4, 24);
             MaterialPricePage.Name = "MaterialPricePage";
-            MaterialPricePage.Size = new Size(1532, 537);
+            MaterialPricePage.Size = new Size(1532, 526);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "Materials & Prices";
             // 
@@ -1180,7 +975,7 @@
             MaterialsPriceTreeView.Location = new Point(9, 104);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(599, 425);
+            MaterialsPriceTreeView.Size = new Size(599, 414);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
             // 
@@ -1212,7 +1007,7 @@
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 24);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
-            IndustrySettingsTabPage.Size = new Size(1532, 537);
+            IndustrySettingsTabPage.Size = new Size(1532, 526);
             IndustrySettingsTabPage.TabIndex = 3;
             IndustrySettingsTabPage.Text = "Indy Settings";
             // 
@@ -1220,7 +1015,6 @@
             // 
             DefaultsTabContainer.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DefaultsTabContainer.Controls.Add(ManufacturingDefaultsTabPage);
-            DefaultsTabContainer.Controls.Add(InventionDefaultsTabPage);
             DefaultsTabContainer.Controls.Add(ReactionsDefaultTabPage);
             DefaultsTabContainer.Controls.Add(SkillsPage);
             DefaultsTabContainer.Controls.Add(OrderTypePage);
@@ -1228,7 +1022,7 @@
             DefaultsTabContainer.Margin = new Padding(3, 2, 3, 2);
             DefaultsTabContainer.Name = "DefaultsTabContainer";
             DefaultsTabContainer.SelectedIndex = 0;
-            DefaultsTabContainer.Size = new Size(1532, 508);
+            DefaultsTabContainer.Size = new Size(1532, 497);
             DefaultsTabContainer.TabIndex = 1;
             // 
             // ManufacturingDefaultsTabPage
@@ -1240,12 +1034,8 @@
             ManufacturingDefaultsTabPage.Controls.Add(ImplantCombo);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingSystemCombo);
             ManufacturingDefaultsTabPage.Controls.Add(TEUpDown);
-            ManufacturingDefaultsTabPage.Controls.Add(CompTEUpDown);
-            ManufacturingDefaultsTabPage.Controls.Add(CompMEUpDown);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingTaxUpDown);
             ManufacturingDefaultsTabPage.Controls.Add(MEUpDown);
-            ManufacturingDefaultsTabPage.Controls.Add(label18);
-            ManufacturingDefaultsTabPage.Controls.Add(label19);
             ManufacturingDefaultsTabPage.Controls.Add(label21);
             ManufacturingDefaultsTabPage.Controls.Add(label22);
             ManufacturingDefaultsTabPage.Controls.Add(label23);
@@ -1258,7 +1048,7 @@
             ManufacturingDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             ManufacturingDefaultsTabPage.Name = "ManufacturingDefaultsTabPage";
             ManufacturingDefaultsTabPage.Padding = new Padding(3, 2, 3, 2);
-            ManufacturingDefaultsTabPage.Size = new Size(1524, 480);
+            ManufacturingDefaultsTabPage.Size = new Size(1524, 469);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
             // 
@@ -1295,7 +1085,7 @@
             // ImplantCombo
             // 
             ImplantCombo.FormattingEnabled = true;
-            ImplantCombo.Location = new Point(429, 48);
+            ImplantCombo.Location = new Point(140, 250);
             ImplantCombo.Margin = new Padding(2);
             ImplantCombo.Name = "ImplantCombo";
             ImplantCombo.Size = new Size(128, 23);
@@ -1329,31 +1119,10 @@
             TEUpDown.TabIndex = 18;
             TEUpDown.ValueChanged += IndustrySettings_ValueChanged;
             // 
-            // CompTEUpDown
-            // 
-            CompTEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            CompTEUpDown.Location = new Point(429, 118);
-            CompTEUpDown.Margin = new Padding(2);
-            CompTEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
-            CompTEUpDown.Name = "CompTEUpDown";
-            CompTEUpDown.Size = new Size(126, 23);
-            CompTEUpDown.TabIndex = 17;
-            CompTEUpDown.ValueChanged += IndustrySettings_ValueChanged;
-            // 
-            // CompMEUpDown
-            // 
-            CompMEUpDown.Location = new Point(429, 85);
-            CompMEUpDown.Margin = new Padding(2);
-            CompMEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
-            CompMEUpDown.Name = "CompMEUpDown";
-            CompMEUpDown.Size = new Size(126, 23);
-            CompMEUpDown.TabIndex = 16;
-            CompMEUpDown.ValueChanged += IndustrySettings_ValueChanged;
-            // 
             // ManufacturingTaxUpDown
             // 
             ManufacturingTaxUpDown.DecimalPlaces = 2;
-            ManufacturingTaxUpDown.Location = new Point(429, 14);
+            ManufacturingTaxUpDown.Location = new Point(140, 217);
             ManufacturingTaxUpDown.Margin = new Padding(2);
             ManufacturingTaxUpDown.Name = "ManufacturingTaxUpDown";
             ManufacturingTaxUpDown.Size = new Size(126, 23);
@@ -1561,7 +1330,7 @@
             DetailsPage.Location = new Point(4, 24);
             DetailsPage.Name = "DetailsPage";
             DetailsPage.Padding = new Padding(3);
-            DetailsPage.Size = new Size(1532, 537);
+            DetailsPage.Size = new Size(1532, 526);
             DetailsPage.TabIndex = 1;
             DetailsPage.Text = "DetailsPage";
             // 
@@ -1598,7 +1367,7 @@
             OptimizedBuildTreeView.ItemHeight = 30;
             OptimizedBuildTreeView.Location = new Point(854, 104);
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
-            OptimizedBuildTreeView.Size = new Size(662, 422);
+            OptimizedBuildTreeView.Size = new Size(662, 414);
             OptimizedBuildTreeView.TabIndex = 16;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
             // 
@@ -1625,7 +1394,7 @@
             MaterialsTreeView.ItemHeight = 30;
             MaterialsTreeView.Location = new Point(9, 107);
             MaterialsTreeView.Name = "MaterialsTreeView";
-            MaterialsTreeView.Size = new Size(671, 422);
+            MaterialsTreeView.Size = new Size(671, 411);
             MaterialsTreeView.TabIndex = 6;
             MaterialsTreeView.AfterCheck += MaterialsTreeView_AfterCheck;
             // 
@@ -1665,7 +1434,7 @@
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
             PlanetaryMaterialsTabPage.Location = new Point(4, 24);
             PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
-            PlanetaryMaterialsTabPage.Size = new Size(1532, 537);
+            PlanetaryMaterialsTabPage.Size = new Size(1532, 526);
             PlanetaryMaterialsTabPage.TabIndex = 4;
             PlanetaryMaterialsTabPage.Text = "Planetary Materials";
             // 
@@ -1677,7 +1446,7 @@
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
             PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
-            PlanetMaterialsTreeView.Size = new Size(677, 526);
+            PlanetMaterialsTreeView.Size = new Size(677, 515);
             PlanetMaterialsTreeView.TabIndex = 0;
             // 
             // BPReactionTabPage
@@ -1692,6 +1461,28 @@
             BPReactionTabPage.Size = new Size(1532, 526);
             BPReactionTabPage.TabIndex = 5;
             BPReactionTabPage.Text = "BP & Reaction Settings";
+            // 
+            // SetReactionsButton
+            // 
+            SetReactionsButton.ForeColor = Color.Black;
+            SetReactionsButton.Location = new Point(165, 52);
+            SetReactionsButton.Name = "SetReactionsButton";
+            SetReactionsButton.Size = new Size(150, 23);
+            SetReactionsButton.TabIndex = 10;
+            SetReactionsButton.Text = "Set all Reaction Info";
+            SetReactionsButton.UseVisualStyleBackColor = true;
+            SetReactionsButton.Click += SetReactionsButton_Click;
+            // 
+            // SetBlueprintButton
+            // 
+            SetBlueprintButton.ForeColor = Color.Black;
+            SetBlueprintButton.Location = new Point(9, 52);
+            SetBlueprintButton.Name = "SetBlueprintButton";
+            SetBlueprintButton.Size = new Size(150, 23);
+            SetBlueprintButton.TabIndex = 9;
+            SetBlueprintButton.Text = "Set all Blueprint Info";
+            SetBlueprintButton.UseVisualStyleBackColor = true;
+            SetBlueprintButton.Click += SetBlueprintButton_Click;
             // 
             // BPTreeView
             // 
@@ -1826,28 +1617,6 @@
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
-            // SetBlueprintButton
-            // 
-            SetBlueprintButton.ForeColor = Color.Black;
-            SetBlueprintButton.Location = new Point(9, 52);
-            SetBlueprintButton.Name = "SetBlueprintButton";
-            SetBlueprintButton.Size = new Size(150, 23);
-            SetBlueprintButton.TabIndex = 9;
-            SetBlueprintButton.Text = "Set all Blueprint Info";
-            SetBlueprintButton.UseVisualStyleBackColor = true;
-            SetBlueprintButton.Click += SetBlueprintButton_Click;
-            // 
-            // SetReactionsButton
-            // 
-            SetReactionsButton.ForeColor = Color.Black;
-            SetReactionsButton.Location = new Point(165, 52);
-            SetReactionsButton.Name = "SetReactionsButton";
-            SetReactionsButton.Size = new Size(150, 23);
-            SetReactionsButton.TabIndex = 10;
-            SetReactionsButton.Text = "Set all Reaction Info";
-            SetReactionsButton.UseVisualStyleBackColor = true;
-            SetReactionsButton.Click += SetReactionsButton_Click;
-            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1874,9 +1643,6 @@
             Name = "BuildPlansControl";
             Text = "Build Plan";
             FormClosing += BuildPlansControl_FormClosing;
-            InventionDefaultsTabPage.ResumeLayout(false);
-            InventionDefaultsTabPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
             SummaryPage.ResumeLayout(false);
             SummaryPage.PerformLayout();
             SummaryMarketData.ResumeLayout(false);
@@ -1889,8 +1655,6 @@
             ManufacturingDefaultsTabPage.ResumeLayout(false);
             ManufacturingDefaultsTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)CompTEUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)CompMEUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)ManufacturingTaxUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).EndInit();
             ReactionsDefaultTabPage.ResumeLayout(false);
@@ -1967,12 +1731,8 @@
         private ComboBox ImplantCombo;
         private ComboBox ManufacturingSystemCombo;
         private NumericUpDown TEUpDown;
-        private NumericUpDown CompTEUpDown;
-        private NumericUpDown CompMEUpDown;
         private NumericUpDown ManufacturingTaxUpDown;
         private NumericUpDown MEUpDown;
-        private Label label18;
-        private Label label19;
         private Label label21;
         private Label label22;
         private Label label23;
@@ -1981,19 +1741,6 @@
         private Label label26;
         private Label label27;
         private Label label28;
-        private TabPage InventionDefaultsTabPage;
-        private NumericUpDown InventionTaxUpDown;
-        private ComboBox InventionDecryptorCombo;
-        private ComboBox InventionStructureTimeRigCombo;
-        private ComboBox InventionStructureCostRigCombo;
-        private ComboBox InventionStructureCombo;
-        private ComboBox InventionSolarSystemCombo;
-        private Label label32;
-        private Label label31;
-        private Label label30;
-        private Label label29;
-        private Label label33;
-        private Label label34;
         private TabPage ReactionsDefaultTabPage;
         private Label label35;
         private NumericUpDown ReactionTaxUpDown;

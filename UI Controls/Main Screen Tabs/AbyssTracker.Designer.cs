@@ -28,30 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Label label5;
+            Label label4;
+            Label label3;
+            Label label2;
+            Label label10;
+            Label label8;
+            Label label7;
+            Label label6;
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbyssTracker));
             splitContainer1 = new SplitContainer();
             AddRunButton = new Button();
-            label5 = new Label();
             LootTextBox = new TextBox();
             SuccessCheckbox = new CheckBox();
             ShipTypeCombo = new ComboBox();
             FilamentTypeCombo = new ComboBox();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
             label1 = new Label();
             ProfitLabel = new Label();
-            label10 = new Label();
             DeleteRunButton = new Button();
             AverageLootLabel = new Label();
             TotalFilamentCostLabel = new Label();
             TotalLootValueLabel = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
             AbyssTrackerGridView = new DataGridView();
             abyssRunID = new DataGridViewTextBoxColumn();
             FilamentName = new DataGridViewTextBoxColumn();
@@ -61,6 +60,14 @@
             ShipType = new DataGridViewTextBoxColumn();
             loot = new DataGridViewTextBoxColumn();
             FilamentType = new DataGridViewTextBoxColumn();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            label10 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -101,11 +108,12 @@
             splitContainer1.Panel2.Controls.Add(label6);
             splitContainer1.Panel2.Controls.Add(AbyssTrackerGridView);
             splitContainer1.Size = new Size(1238, 563);
-            splitContainer1.SplitterDistance = 429;
+            splitContainer1.SplitterDistance = 428;
             splitContainer1.TabIndex = 0;
             // 
             // AddRunButton
             // 
+            AddRunButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             AddRunButton.ForeColor = Color.Black;
             AddRunButton.Location = new Point(332, 144);
             AddRunButton.Margin = new Padding(3, 2, 3, 2);
@@ -132,7 +140,7 @@
             LootTextBox.Margin = new Padding(3, 2, 3, 2);
             LootTextBox.Multiline = true;
             LootTextBox.Name = "LootTextBox";
-            LootTextBox.Size = new Size(404, 384);
+            LootTextBox.Size = new Size(403, 384);
             LootTextBox.TabIndex = 8;
             LootTextBox.TextChanged += LootTextBox_TextChanged;
             // 
@@ -310,14 +318,14 @@
             AbyssTrackerGridView.BackgroundColor = Color.Black;
             AbyssTrackerGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AbyssTrackerGridView.Columns.AddRange(new DataGridViewColumn[] { abyssRunID, FilamentName, FilamentCost, LootValue, Success, ShipType, loot, FilamentType });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle2;
             AbyssTrackerGridView.GridColor = Color.Black;
             AbyssTrackerGridView.Location = new Point(19, 172);
             AbyssTrackerGridView.Margin = new Padding(3, 2, 3, 2);
@@ -327,7 +335,7 @@
             AbyssTrackerGridView.RowHeadersWidth = 51;
             AbyssTrackerGridView.RowTemplate.Height = 29;
             AbyssTrackerGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            AbyssTrackerGridView.Size = new Size(775, 382);
+            AbyssTrackerGridView.Size = new Size(776, 382);
             AbyssTrackerGridView.TabIndex = 0;
             // 
             // abyssRunID
@@ -351,9 +359,9 @@
             // FilamentCost
             // 
             FilamentCost.DataPropertyName = "FilamentCost";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            FilamentCost.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            FilamentCost.DefaultCellStyle = dataGridViewCellStyle1;
             FilamentCost.HeaderText = "FilamentCost";
             FilamentCost.MinimumWidth = 6;
             FilamentCost.Name = "FilamentCost";
