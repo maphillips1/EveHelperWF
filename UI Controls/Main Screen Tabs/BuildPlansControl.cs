@@ -466,11 +466,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ManufacturingSystemCombo.ValueMember = "solarSystemID";
             ManufacturingSystemCombo.DataSource = CommonHelper.SolarSystemList;
 
-            InventionSolarSystemCombo.BindingContext = new BindingContext();
-            InventionSolarSystemCombo.DisplayMember = "solarSystemName";
-            InventionSolarSystemCombo.ValueMember = "solarSystemID";
-            InventionSolarSystemCombo.DataSource = CommonHelper.SolarSystemList;
-
             List<Objects.SolarSystem> lowAndNullSystems = CommonHelper.SolarSystemList.FindAll(x => Math.Round(x.security, 1) < Convert.ToDecimal(0.5));
             ReactionSolarSystemCombo.BindingContext = new BindingContext();
             ReactionSolarSystemCombo.DisplayMember = "solarSystemName";
@@ -482,11 +477,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ManufacturingStructureCombo.DisplayMember = "value";
             ManufacturingStructureCombo.ValueMember = "key";
             ManufacturingStructureCombo.DataSource = BlueprintBrowserHelper.GetEngineeringStructureItems();
-
-            InventionStructureCombo.BindingContext = new BindingContext();
-            InventionStructureCombo.DisplayMember = "value";
-            InventionStructureCombo.ValueMember = "key";
-            InventionStructureCombo.DataSource = BlueprintBrowserHelper.GetEngineeringStructureItems();
 
             ReactionStructureCombo.BindingContext = new BindingContext();
             ReactionStructureCombo.DisplayMember = "Value";
@@ -514,27 +504,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ReactionStructureTERig.ValueMember = "Key";
             ReactionStructureTERig.DataSource = CommonHelper.GetStructureBonusComboItems();
 
-            InventionStructureCostRigCombo.BindingContext = new BindingContext();
-            InventionStructureCostRigCombo.DisplayMember = "Value";
-            InventionStructureCostRigCombo.ValueMember = "Key";
-            InventionStructureCostRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
-
-            InventionStructureTimeRigCombo.BindingContext = new BindingContext();
-            InventionStructureTimeRigCombo.DisplayMember = "Value";
-            InventionStructureTimeRigCombo.ValueMember = "Key";
-            InventionStructureTimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
-
             //Implants
             ImplantCombo.BindingContext = new BindingContext();
             ImplantCombo.DisplayMember = "Value";
             ImplantCombo.ValueMember = "Key";
             ImplantCombo.DataSource = BlueprintBrowserHelper.GetManufacturingImplantItems();
-
-            //Decryptor
-            InventionDecryptorCombo.BindingContext = new BindingContext();
-            InventionDecryptorCombo.ValueMember = "typeID";
-            InventionDecryptorCombo.DisplayMember = "typeName";
-            InventionDecryptorCombo.DataSource = BlueprintBrowserHelper.GetDecryptors();
 
             //Orders
             InputOrderTypeCombo.BindingContext = new BindingContext();
@@ -951,23 +925,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.ManufacturingStructureTERigCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus;
                 this.ManufacturingTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.ManufacturingFacilityTax;
                 this.ImplantCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID;
-                this.CompMEUpDown.Value = this.currentBuildPlan.IndustrySettings.CompME;
-                this.CompTEUpDown.Value = this.currentBuildPlan.IndustrySettings.CompTE;
-
+                
                 //Reactions
                 this.ReactionSolarSystemCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID;
                 this.ReactionStructureCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionsStructureTypeID;
                 this.ReactionTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.ReactionsFacilityTax;
                 this.ReactionStructureMERig.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigMEBonus;
                 this.ReactionStructureTERig.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus;
-
-                //Inventions
-                this.InventionSolarSystemCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InventionSolarSystemID;
-                this.InventionStructureCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InventionStructureTypeID;
-                this.InventionStructureCostRigCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigMEBonus;
-                this.InventionStructureTimeRigCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigTEBonus;
-                this.InventionTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.InventionFacilityTax;
-                this.InventionDecryptorCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InventionDecryptorId;
 
                 //Skills
                 this.AccountingLevelUpDown.Value = this.currentBuildPlan.IndustrySettings.AccountingSkill;
@@ -992,20 +956,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus = (Int32)(this.ManufacturingStructureTERigCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus);
                     this.currentBuildPlan.IndustrySettings.ManufacturingFacilityTax = (decimal)(this.ManufacturingTaxUpDown.Value);
                     this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID = (Int32)(this.ImplantCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID);
-                    this.currentBuildPlan.IndustrySettings.CompME = (Int32)this.CompMEUpDown.Value;
-                    this.currentBuildPlan.IndustrySettings.CompTE = (Int32)this.CompTEUpDown.Value;
 
                     break;
                 case 1:
-                    this.currentBuildPlan.IndustrySettings.InventionSolarSystemID = (Int32)(this.InventionSolarSystemCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InventionSolarSystemID);
-                    this.currentBuildPlan.IndustrySettings.InventionStructureTypeID = (Int32)(this.InventionStructureCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InventionStructureTypeID);
-                    this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigMEBonus = (Int32)(this.InventionStructureCostRigCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigMEBonus);
-                    this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigTEBonus = (Int32)(this.InventionStructureTimeRigCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InventionStructureRigBonus.RigTEBonus);
-                    this.currentBuildPlan.IndustrySettings.InventionFacilityTax = (decimal)(this.InventionTaxUpDown.Value);
-                    this.currentBuildPlan.IndustrySettings.InventionDecryptorId = (Int32)(InventionDecryptorCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InventionDecryptorId);
-
-                    break;
-                case 2:
                     this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID = (Int32)(this.ReactionSolarSystemCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID);
                     this.currentBuildPlan.IndustrySettings.ReactionsStructureTypeID = (Int32)(this.ReactionStructureCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionsStructureTypeID);
                     this.currentBuildPlan.IndustrySettings.ReactionsFacilityTax = (decimal)this.ReactionTaxUpDown.Value;
@@ -1013,10 +966,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus = (Int32)(this.ReactionStructureTERig.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus);
 
                     break;
-                case 3:
+                case 2:
                     this.currentBuildPlan.IndustrySettings.AccountingSkill = (Int32)(this.AccountingLevelUpDown.Value);
                     this.currentBuildPlan.IndustrySettings.BrokersSkill = (Int32)(this.BrokerRelationsLevelUpDown.Value);
-
+                    break;
+                case 3:
+                    this.currentBuildPlan.IndustrySettings.InputOrderType = (Int32)(this.InputOrderTypeCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InputOrderType);
+                    this.currentBuildPlan.IndustrySettings.OutputOrderType = (Int32)(this.InputOrderTypeCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.OutputOrderType);
                     break;
                 default:
                     break;
@@ -1189,6 +1145,39 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void CombineMatsFromOptimizedBuilds(ref List<MaterialsWithMarketData> outputList, List<OptimizedBuild> optimizedBuilds)
+        {
+            MaterialsWithMarketData existingMat;
+            OptimizedBuild buildPlan;
+            foreach (OptimizedBuild build in optimizedBuilds)
+            {
+                foreach (MaterialsWithMarketData input in build.InputMaterials)
+                {
+                    buildPlan = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == input.materialTypeID);
+                    if (buildPlan == null)
+                    {
+                        existingMat = outputList.Find(x => x.materialTypeID == input.materialTypeID);
+                        if (existingMat == null)
+                        {
+                            existingMat = new MaterialsWithMarketData();
+                            existingMat.materialTypeID = input.materialTypeID;
+                            existingMat.quantityTotal = input.quantityTotal;
+                            existingMat.materialName = input.materialName;
+                            existingMat.pricePer = input.pricePer;
+                            existingMat.Buildable = input.Buildable;
+                            existingMat.Reactable = input.Reactable;
+                            
+                            outputList.Add(existingMat);
+                        }
+                        else
+                        {
+                            existingMat.quantityTotal += input.quantityTotal;
+                        }
+                    }
+                }
+            }
+        }
+
         private void SetSummaryInformation()
         {
             if (this.currentBuildPlan != null)
@@ -1257,7 +1246,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             MaterialsPriceTreeView.Nodes.Clear();
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMats(ref combinedMats, this.currentBuildPlan.InputMaterials);
+            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
+            AddMatsToBuyThatCanBeBuiltOrReactedButIsnt(ref combinedMats, this.currentBuildPlan.InputMaterials);
             combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
             TreeNode tn;
             foreach (var mat in combinedMats)
@@ -1267,6 +1257,37 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName + " | Price: " + CommonHelper.FormatIsk(mat.pricePer);
                 tn.Tag = mat.materialTypeID;
                 MaterialsPriceTreeView.Nodes.Add(tn);
+            }
+        }
+
+        private void AddMatsToBuyThatCanBeBuiltOrReactedButIsnt(ref List<MaterialsWithMarketData> output, List<MaterialsWithMarketData> inputMaterials)
+        {
+            MaterialsWithMarketData existingMat;
+            foreach (MaterialsWithMarketData mat in inputMaterials)
+            {
+                if ((mat.Buildable || mat.Reactable) && (!mat.Build && !mat.React))
+                {
+                    existingMat = output.Find(x => x.materialTypeID == mat.materialTypeID);
+                    if (existingMat == null)
+                    {
+                        existingMat = new MaterialsWithMarketData();
+                        existingMat.materialTypeID = mat.materialTypeID;
+                        existingMat.materialName = mat.materialName;
+                        existingMat.quantityTotal = mat.quantityTotal;
+                        existingMat.pricePer = mat.pricePer;
+                        existingMat.Buildable = mat.Buildable;
+                        existingMat.Reactable = mat.Reactable;
+                        output.Add(existingMat);
+                    }
+                    else
+                    {
+                        existingMat.quantityTotal += mat.quantityTotal;
+                    }
+                }
+                else if (mat.Build || mat.React)
+                {
+                    AddMatsToBuyThatCanBeBuiltOrReactedButIsnt(ref output, mat.ChildMaterials);
+                }
             }
         }
 

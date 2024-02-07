@@ -287,6 +287,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 List<IndustryActivityProduct> manufacturingProducts =
                     Database.SQLiteCalls.GetIndustryActivityProducts(blueprintTypeId, Enums.Enums.ActivityManufacturing);
+                BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintTypeId);
                 if (manufacturingProducts.Count > 0)
                 {
                     IndustryActivityProduct manuProd = manufacturingProducts[0];
@@ -297,7 +298,7 @@ namespace EveHelperWF.ScreenHelper
                         //Base Calcs
                         SetBaseInputValues(runsNeeded, ref childMats, baseMaterials);
                         //ME Calculations
-                        PerformManufacturingMECalculations(ref childMats, buildPlan, runsNeeded, buildPlan.IndustrySettings.CompME);
+                        PerformManufacturingMECalculations(ref childMats, buildPlan, runsNeeded, bpInfo.ME);
                         //Recursively call CalculateChildMaterialCosts
                         CalculateChildMaterialCosts(ref childMats, buildPlan);
                         //set child materials on object. 
@@ -627,18 +628,7 @@ namespace EveHelperWF.ScreenHelper
         private static void PerformOptimumManufacturingCalcs(ref OptimizedBuild optimizedBuild, BuildPlan buildPlan, bool isFinalProduct)
         {
 
-            int meValue;
-            int teValue;
-            if (isFinalProduct)
-            {
-                meValue = buildPlan.IndustrySettings.ME;
-                teValue = buildPlan.IndustrySettings.TE;
-            }
-            else
-            {
-                meValue = buildPlan.IndustrySettings.CompME;
-                teValue = buildPlan.IndustrySettings.CompTE;
-            }
+            
             int blueprintOrReactionTypeID = optimizedBuild.BlueprintOrReactionTypeID;
             List<MaterialsWithMarketData> inputMaterials = new List<MaterialsWithMarketData>();
             List<IndustryActivityProduct> manufacturingProducts =
@@ -648,9 +638,30 @@ namespace EveHelperWF.ScreenHelper
                 IndustryActivityProduct manuProd = manufacturingProducts[0];
                 optimizedBuild.RunsNeeded = (int)Math.Ceiling((decimal)optimizedBuild.TotalQuantityNeeded / (decimal)manuProd.quantity);
                 BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintOrReactionTypeID);
+
+                int ME;
+                int TE;
+                if (bpInfo == null)
+                {
+                    if (isFinalProduct)
+                    {
+                        ME = buildPlan.IndustrySettings.ME;
+                        TE = buildPlan.IndustrySettings.TE;
+                    }
+                    else
+                    {
+                        ME = buildPlan.IndustrySettings.CompME;
+                        TE = buildPlan.IndustrySettings.CompTE;
+                    }
+                }
+                else
+                {
+                    ME = bpInfo.ME;
+                    TE = bpInfo.TE;
+                }
                 if (optimizedBuild.RunsNeeded > 0)
                 {
-                    SetBatchRunInformation(ref optimizedBuild, teValue, Enums.Enums.ActivityManufacturing, bpInfo);
+                    SetBatchRunInformation(ref optimizedBuild, TE, Enums.Enums.ActivityManufacturing, bpInfo);
                     List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
                     if (optimizedBuild.BatchesNeeded > 1)
                     {
@@ -670,7 +681,7 @@ namespace EveHelperWF.ScreenHelper
                             //Base Calcs
                             SetBaseInputValues(currentRuns, ref inputMaterials, baseMaterials);
                             //ME Calculations
-                            PerformManufacturingMECalculations(ref inputMaterials, buildPlan, currentRuns, meValue);
+                            PerformManufacturingMECalculations(ref inputMaterials, buildPlan, currentRuns, ME);
                             optimizedBuild.JobCost = CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, currentRuns);
                             totalRuns -= optimizedBuild.MaxRunsPerBatch;
                         }
@@ -681,7 +692,7 @@ namespace EveHelperWF.ScreenHelper
                         //Base Calcs
                         SetBaseInputValues(optimizedBuild.RunsNeeded, ref inputMaterials, baseMaterials);
                         //ME Calculations
-                        PerformManufacturingMECalculations(ref inputMaterials, buildPlan, optimizedBuild.RunsNeeded, meValue);
+                        PerformManufacturingMECalculations(ref inputMaterials, buildPlan, optimizedBuild.RunsNeeded, ME);
                         optimizedBuild.JobCost = CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, optimizedBuild.RunsNeeded);
                         optimizedBuild.InputMaterials = inputMaterials;
                     }

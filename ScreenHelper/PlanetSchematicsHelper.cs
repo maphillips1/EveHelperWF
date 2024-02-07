@@ -45,7 +45,7 @@ namespace EveHelperWF.ScreenHelper
             if (!material.groupName.ToLower().Contains("Raw"))
             {
                 int schematicID = Database.SQLiteCalls.GetSchematicIDByTypeID(material.typeID);
-
+                
                 material.Inputs = Database.SQLiteCalls.GetPlanetSchematicInput(schematicID);
 
                 foreach (PlanetMaterial input in material.Inputs)
