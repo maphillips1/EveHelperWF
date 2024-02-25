@@ -9,18 +9,6 @@ namespace EveHelperWF.Objects
     public class PlanetMaterial
     {
         public PlanetMaterial() { }
-        public PlanetMaterial(System.Data.DataRow row) {
-            schematicID = Convert.ToInt32(row["schematicID"]);
-            schematicName = Convert.ToString(row["schematicName"]);
-            quantity = Convert.ToInt32(row["quantity"]);
-            isInput = Convert.ToBoolean(row["isInput"]);
-            typeID = Convert.ToInt32(row["typeID"]);
-            typeName = Convert.ToString(row["typeName"]);
-            volume = Convert.ToDecimal(row["volume"]);
-            groupID = Convert.ToInt32(row["groupID"]);
-            groupName = Convert.ToString(row["groupName"]);
-            cycleTime = Convert.ToInt32(row["cycleTime"]);
-        }
 
         public int schematicID {  get; set; }
         public string schematicName { get; set; }

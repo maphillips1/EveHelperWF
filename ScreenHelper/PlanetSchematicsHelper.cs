@@ -42,14 +42,18 @@ namespace EveHelperWF.ScreenHelper
 
         public static void GetInputsForSchematicRecurseive(PlanetMaterial material)
         {
-            if (!material.groupName.ToLower().Contains("Raw"))
+            if (!material.groupName.ToLower().Contains("raw"))
             {
                 int schematicID = Database.SQLiteCalls.GetSchematicIDByTypeID(material.typeID);
                 
+                PlanetMaterial output = Database.SQLiteCalls.GetPlanetOutputBySchematicId(schematicID);
+                int runsNeeded = (int)Math.Ceiling((decimal)material.quantity / (decimal)output.quantity);
+
                 material.Inputs = Database.SQLiteCalls.GetPlanetSchematicInput(schematicID);
 
                 foreach (PlanetMaterial input in material.Inputs)
                 {
+                    input.quantity *= runsNeeded;
                     GetInputsForSchematicRecurseive(input);
                 }
             }

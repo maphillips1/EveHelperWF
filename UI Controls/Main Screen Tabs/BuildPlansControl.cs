@@ -600,8 +600,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.SuspendLayout();
                 FinalProductType = CommonHelper.InventoryTypes.Find(x => x.typeId == this.currentBuildPlan.finalProductTypeID);
                 //Ensure we have the minimum information to run the calcs
-                EnsureInputMaterials();
                 EnsureCalculationHelperClass();
+                EnsureInputMaterials();
                 EnsureMinimumRunsAndCopies();
                 EnsureBlueprintStore();
 
@@ -713,6 +713,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 SaveBuildPlan();
             }
         }
+
+
 
         private void EnsureCalculationHelperClass()
         {
@@ -861,7 +863,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void RunOptimumBuildCalc()
         {
-            this.currentBuildPlan.OptimizedBuilds = BuildPlanHelper.DetermineOptimumBuild(this.currentBuildPlan.InputMaterials, this.currentBuildPlan);
+            BuildPlanHelper.DetermineOptimumBuild(this.currentBuildPlan.InputMaterials, this.currentBuildPlan);
             SaveBuildPlan();
         }
 
@@ -893,6 +895,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             HeaderCostUnitLabel.Text = "";
             PlanetMaterialsTreeView.Nodes.Clear();
             BPTreeView.Nodes.Clear();
+            IskNeededForPlanLabel.Text = "";
             this.ResumeLayout();
         }
 
@@ -1037,7 +1040,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadOptimumBuildSchedule()
         {
-            Dictionary<int, List<OptimizedBuild>> optimumBuildGroups = BuildPlanHelper.GetOptimumBuildGroups(this.currentBuildPlan.OptimizedBuilds);
+            Dictionary<int, List<OptimizedBuild>> optimumBuildGroups = this.currentBuildPlan.OptimumBuildGroups;
             BuildOptimumBuildTreeView(optimumBuildGroups);
             int manufacturingCount = this.currentBuildPlan.OptimizedBuilds.FindAll(x => x.isBuilt).Sum(x => x.BatchesNeeded);
             int reactionCount = this.currentBuildPlan.OptimizedBuilds.FindAll(x => x.isReacted).Sum(x => x.BatchesNeeded);
@@ -1188,12 +1191,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 OptimizedBuild optimumBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == FinalProductType.typeId);
                 if (optimumBuild != null)
                 {
+                    decimal totalJobCost = 0;
+                    this.currentBuildPlan.OptimizedBuilds.ForEach(x => totalJobCost += x.JobCost);
                     List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
                     CombineMats(ref combinedMats, this.currentBuildPlan.InputMaterials);
                     decimal totalInputPrice = BuildPlanHelper.GetTotalInputPrice(combinedMats);
                     decimal totalInputTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
                                                                                this.currentBuildPlan.IndustrySettings,
                                                                                this.currentBuildPlan.IndustrySettings.InputOrderType);
+                    IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost);
                     totalInputTaxes = totalInputTaxes / optimumBuild.TotalQuantityNeeded;
                     InputTaxLabel.Text = CommonHelper.FormatIsk(totalInputTaxes);
                     decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(optimumBuild.PricePerItem,
@@ -1221,6 +1227,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                     decimal totalVolume = GetTotalVolumeForMaterials(combinedMats);
                     InputVolumeLabel.Text = totalVolume.ToString("N2") + " m3";
+
+
                 }
             }
         }
@@ -1247,7 +1255,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             MaterialsPriceTreeView.Nodes.Clear();
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
             CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
-            AddMatsToBuyThatCanBeBuiltOrReactedButIsnt(ref combinedMats, this.currentBuildPlan.InputMaterials);
+            //AddMatsToBuyThatCanBeBuiltOrReactedButIsnt(ref combinedMats, this.currentBuildPlan.InputMaterials);
             combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
             TreeNode tn;
             foreach (var mat in combinedMats)
@@ -1298,7 +1306,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                  combinedMats,
                                                                  FinalProductType.typeId,
-                                                                 this.currentBuildPlan.additionalCosts);
+                                                                 this.currentBuildPlan.additionalCosts,
+                                                                 this.currentBuildPlan);
         }
 
         private void LoadPlanetaryMaterialsPage()
@@ -1551,7 +1560,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BuildPlanHelper.SetPricePerRecursive(this.currentBuildPlan.InputMaterials, mats);
             mats = new List<MaterialsWithMarketData>();
             CombineMats(ref mats, this.currentBuildPlan.InputMaterials);
-            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds, mats, FinalProductType.typeId, this.currentBuildPlan.additionalCosts);
+            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds, mats, FinalProductType.typeId, this.currentBuildPlan.additionalCosts, this.currentBuildPlan);
             SaveBuildPlan();
             this.PriceInfoSet = true;
             ProgressLabel.Text = "";
@@ -1561,7 +1570,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             decimal currentProgress = (decimal)e.ProgressPercentage / (decimal)100;
-            ProgressLabel.Text = "Current Market Progress: " + currentProgress.ToString("P");
+            ProgressLabel.Text = "Ensuring Market Prices Progress: " + currentProgress.ToString("P");
         }
         #endregion
     }

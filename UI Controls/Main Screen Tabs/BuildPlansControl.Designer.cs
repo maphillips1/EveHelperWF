@@ -72,6 +72,7 @@
             Label label52;
             Label label53;
             Label label54;
+            Label label19;
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -81,6 +82,7 @@
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
+            IskNeededForPlanLabel = new Label();
             OutputSellTaxes = new Label();
             OutputBuyTaxes = new Label();
             InputTaxLabel = new Label();
@@ -201,6 +203,7 @@
             label52 = new Label();
             label53 = new Label();
             label54 = new Label();
+            label19 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -249,7 +252,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(6, 297);
+            label9.Location = new Point(6, 343);
             label9.Name = "label9";
             label9.Size = new Size(38, 15);
             label9.TabIndex = 14;
@@ -279,7 +282,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(47, 142);
+            label6.Location = new Point(43, 210);
             label6.Name = "label6";
             label6.Size = new Size(116, 17);
             label6.TabIndex = 6;
@@ -289,7 +292,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(26, 172);
+            label4.Location = new Point(22, 240);
             label4.Name = "label4";
             label4.Size = new Size(137, 17);
             label4.TabIndex = 4;
@@ -299,7 +302,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(12, 112);
+            label3.Location = new Point(8, 180);
             label3.Name = "label3";
             label3.Size = new Size(151, 17);
             label3.TabIndex = 3;
@@ -309,7 +312,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(18, 82);
+            label2.Location = new Point(14, 150);
             label2.Name = "label2";
             label2.Size = new Size(145, 17);
             label2.TabIndex = 2;
@@ -641,7 +644,7 @@
             // 
             label51.AutoSize = true;
             label51.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label51.Location = new Point(52, 202);
+            label51.Location = new Point(48, 270);
             label51.Name = "label51";
             label51.Size = new Size(111, 17);
             label51.TabIndex = 16;
@@ -651,7 +654,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(40, 232);
+            label5.Location = new Point(36, 300);
             label5.Name = "label5";
             label5.Size = new Size(123, 17);
             label5.TabIndex = 18;
@@ -688,9 +691,21 @@
             label54.TabIndex = 8;
             label54.Text = "Click on the blueprint or reaction name to edit the ME, TE, and Max Runs";
             // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label19.Location = new Point(35, 120);
+            label19.Name = "label19";
+            label19.Size = new Size(124, 17);
+            label19.TabIndex = 21;
+            label19.Text = "Isk Needed for plan";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
+            SummaryPage.Controls.Add(IskNeededForPlanLabel);
+            SummaryPage.Controls.Add(label19);
             SummaryPage.Controls.Add(OutputSellTaxes);
             SummaryPage.Controls.Add(OutputBuyTaxes);
             SummaryPage.Controls.Add(label5);
@@ -717,11 +732,21 @@
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
+            // IskNeededForPlanLabel
+            // 
+            IskNeededForPlanLabel.AutoSize = true;
+            IskNeededForPlanLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            IskNeededForPlanLabel.Location = new Point(184, 120);
+            IskNeededForPlanLabel.Name = "IskNeededForPlanLabel";
+            IskNeededForPlanLabel.Size = new Size(132, 17);
+            IskNeededForPlanLabel.TabIndex = 22;
+            IskNeededForPlanLabel.Text = "[Isk Needed for plan]";
+            // 
             // OutputSellTaxes
             // 
             OutputSellTaxes.AutoSize = true;
             OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputSellTaxes.Location = new Point(188, 232);
+            OutputSellTaxes.Location = new Point(184, 300);
             OutputSellTaxes.Name = "OutputSellTaxes";
             OutputSellTaxes.Size = new Size(116, 17);
             OutputSellTaxes.TabIndex = 20;
@@ -731,7 +756,7 @@
             // 
             OutputBuyTaxes.AutoSize = true;
             OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputBuyTaxes.Location = new Point(188, 262);
+            OutputBuyTaxes.Location = new Point(184, 330);
             OutputBuyTaxes.Name = "OutputBuyTaxes";
             OutputBuyTaxes.Size = new Size(116, 17);
             OutputBuyTaxes.TabIndex = 19;
@@ -741,7 +766,7 @@
             // 
             InputTaxLabel.AutoSize = true;
             InputTaxLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            InputTaxLabel.Location = new Point(188, 202);
+            InputTaxLabel.Location = new Point(184, 270);
             InputTaxLabel.Name = "InputTaxLabel";
             InputTaxLabel.Size = new Size(81, 17);
             InputTaxLabel.TabIndex = 17;
@@ -751,7 +776,7 @@
             // 
             SaveNotesButton.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             SaveNotesButton.ForeColor = Color.Black;
-            SaveNotesButton.Location = new Point(50, 292);
+            SaveNotesButton.Location = new Point(50, 338);
             SaveNotesButton.Name = "SaveNotesButton";
             SaveNotesButton.Size = new Size(75, 24);
             SaveNotesButton.TabIndex = 15;
@@ -762,17 +787,17 @@
             // NotesTextBox
             // 
             NotesTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            NotesTextBox.Location = new Point(6, 319);
+            NotesTextBox.Location = new Point(6, 371);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 199);
+            NotesTextBox.Size = new Size(382, 147);
             NotesTextBox.TabIndex = 13;
             // 
             // InputVolumeLabel
             // 
             InputVolumeLabel.AutoSize = true;
             InputVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            InputVolumeLabel.Location = new Point(188, 142);
+            InputVolumeLabel.Location = new Point(184, 210);
             InputVolumeLabel.Name = "InputVolumeLabel";
             InputVolumeLabel.Size = new Size(92, 17);
             InputVolumeLabel.TabIndex = 12;
@@ -782,7 +807,7 @@
             // 
             OutcomeVolumeLabel.AutoSize = true;
             OutcomeVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutcomeVolumeLabel.Location = new Point(188, 172);
+            OutcomeVolumeLabel.Location = new Point(184, 240);
             OutcomeVolumeLabel.Name = "OutcomeVolumeLabel";
             OutcomeVolumeLabel.Size = new Size(116, 17);
             OutcomeVolumeLabel.TabIndex = 10;
@@ -792,7 +817,7 @@
             // 
             ProductionCostUnitLabel.AutoSize = true;
             ProductionCostUnitLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            ProductionCostUnitLabel.Location = new Point(188, 112);
+            ProductionCostUnitLabel.Location = new Point(184, 180);
             ProductionCostUnitLabel.Name = "ProductionCostUnitLabel";
             ProductionCostUnitLabel.Size = new Size(109, 17);
             ProductionCostUnitLabel.TabIndex = 9;
@@ -802,7 +827,7 @@
             // 
             OutcomeQuantityLabel.AutoSize = true;
             OutcomeQuantityLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutcomeQuantityLabel.Location = new Point(188, 82);
+            OutcomeQuantityLabel.Location = new Point(184, 150);
             OutcomeQuantityLabel.Name = "OutcomeQuantityLabel";
             OutcomeQuantityLabel.Size = new Size(156, 17);
             OutcomeQuantityLabel.TabIndex = 8;
@@ -1156,7 +1181,7 @@
             ReactionsDefaultTabPage.Location = new Point(4, 24);
             ReactionsDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             ReactionsDefaultTabPage.Name = "ReactionsDefaultTabPage";
-            ReactionsDefaultTabPage.Size = new Size(1524, 480);
+            ReactionsDefaultTabPage.Size = new Size(1524, 469);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
             // 
@@ -1224,7 +1249,7 @@
             SkillsPage.Controls.Add(label41);
             SkillsPage.Location = new Point(4, 24);
             SkillsPage.Name = "SkillsPage";
-            SkillsPage.Size = new Size(1524, 480);
+            SkillsPage.Size = new Size(1524, 469);
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
             // 
@@ -1258,7 +1283,7 @@
             OrderTypePage.ForeColor = Color.White;
             OrderTypePage.Location = new Point(4, 24);
             OrderTypePage.Name = "OrderTypePage";
-            OrderTypePage.Size = new Size(1524, 480);
+            OrderTypePage.Size = new Size(1524, 469);
             OrderTypePage.TabIndex = 8;
             OrderTypePage.Text = "Order Types";
             // 
@@ -1786,5 +1811,6 @@
         private TabPage BPReactionTabPage;
         private Button SetReactionsButton;
         private Button SetBlueprintButton;
+        private Label IskNeededForPlanLabel;
     }
 }

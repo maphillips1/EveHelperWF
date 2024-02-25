@@ -6,7 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Security;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -241,12 +243,7 @@ namespace EveHelperWF.ScreenHelper
                 quantityTotal = mat.quantity * runsNeeded;
 
                 //Step 1 = Set quantity Total to Base Blueprint * ME.
-                quantityTotal = (long)(quantityTotal * MEBonus);
-
-                //If the blueprint requires 1 of each item the next ME calc does not apply because
-                //it will always require 1 item per run.
-                //Step 3 = Apply the structure ME Bonuses
-                quantityTotal = (long)(Math.Ceiling(quantityTotal * totalStructureMEBonus));
+                quantityTotal = (long)Math.Ceiling(quantityTotal * MEBonus * totalStructureMEBonus);
 
                 //You always need at least 1 item per run
                 if (quantityTotal < runsNeeded) { quantityTotal = runsNeeded; }
@@ -475,21 +472,77 @@ namespace EveHelperWF.ScreenHelper
             return allBuildReact;
         }
 
-        public static List<OptimizedBuild> DetermineOptimumBuild(List<MaterialsWithMarketData> materials, BuildPlan buildPlan)
+        public static void DetermineOptimumBuild(List<MaterialsWithMarketData> materials, BuildPlan buildPlan)
+        {
+            List<OptimizedBuild> optimumBuilds = GetOptimumBuildList(materials, buildPlan);
+
+            buildPlan.OptimumBuildGroups = GetOptimumBuildGroups(optimumBuilds);
+            CalcForOptimumBuildGroups(buildPlan);
+            OptimizedBuild currentBuild;
+            foreach (int key in buildPlan.OptimumBuildGroups.Keys)
+            {
+                foreach (OptimizedBuild build in buildPlan.OptimumBuildGroups[key])
+                {
+                    currentBuild = optimumBuilds.Find(x => x.BuiltOrReactedTypeId == build.BuiltOrReactedTypeId);
+                    currentBuild.TotalQuantityNeeded = build.TotalQuantityNeeded;
+                }
+            }
+            buildPlan.OptimizedBuilds = optimumBuilds;
+        }
+
+        private static List<OptimizedBuild> GetOptimumBuildList(List<MaterialsWithMarketData> materials, BuildPlan buildPlan)
         {
             List<OptimizedBuild> optimumBuilds = new List<OptimizedBuild>();
             List<MaterialsWithMarketData> allItemsBuiltReactedLumpedTogether = new List<MaterialsWithMarketData>();
             GetAllItemsBuiltReacted(materials, ref allItemsBuiltReactedLumpedTogether);
 
+            MaterialsWithMarketData finalProductMat = BuildFinalProductMat(buildPlan);
+            optimumBuilds.Add(ConvertMatToOptimumBuild(finalProductMat, buildPlan, true));
+
             foreach (MaterialsWithMarketData mat in allItemsBuiltReactedLumpedTogether)
             {
-                optimumBuilds.Add(GetOptimumBuildInformation(mat, buildPlan, false));
+                optimumBuilds.Add(ConvertMatToOptimumBuild(mat, buildPlan, false));
             }
-
-            MaterialsWithMarketData finalProductMat = BuildFinalProductMat(buildPlan);
-            optimumBuilds.Add(GetOptimumBuildInformation(finalProductMat, buildPlan, true));
-
             return optimumBuilds;
+        }
+
+        private static void CalcForOptimumBuildGroups(BuildPlan buildPlan)
+        {
+
+            bool isFinal = true;
+            OptimizedBuild currentBuild;
+            foreach (int key in buildPlan.OptimumBuildGroups.Keys.OrderByDescending(x => x))
+            {
+                for (int i = 0; i < buildPlan.OptimumBuildGroups[key].Count(); i++)
+                {
+                    currentBuild = buildPlan.OptimumBuildGroups[key][i];
+                    if (buildPlan.OptimumBuildGroups[key][i].isBuilt)
+                    {
+                        PerformOptimumManufacturingCalcs(ref currentBuild, buildPlan, isFinal);
+                    }
+                    else
+                    {
+                        PerformOptimumReactionCalcs(ref currentBuild, buildPlan, isFinal);
+                    }
+                    foreach (MaterialsWithMarketData inputMat in currentBuild.InputMaterials)
+                    {
+                        foreach (int matKey in buildPlan.OptimumBuildGroups.Keys)
+                        {
+                            if (matKey < key)
+                            {
+                                foreach (OptimizedBuild dependentBuild in buildPlan.OptimumBuildGroups[matKey])
+                                {
+                                    if (dependentBuild.BuiltOrReactedTypeId == inputMat.materialTypeID)
+                                    {
+                                        dependentBuild.TotalQuantityNeeded += inputMat.quantityTotal;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                isFinal = false;
+            }
         }
 
         private static List<MaterialsWithMarketData> AddIndepentsToOutput(ref Dictionary<int, List<MaterialsWithMarketData>> output, List<MaterialsWithMarketData> inputs, int batchCount)
@@ -602,33 +655,49 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static OptimizedBuild GetOptimumBuildInformation(MaterialsWithMarketData matToBuildReact, BuildPlan buildPlan, bool isFinalProduct)
+        private static OptimizedBuild ConvertMatToOptimumBuild(MaterialsWithMarketData matToBuildReact, BuildPlan buildPlan, bool isFinalProduct)
         {
             OptimizedBuild optimizedBuild = new OptimizedBuild();
             optimizedBuild.BuiltOrReactedTypeId = matToBuildReact.materialTypeID;
             optimizedBuild.BuiltOrReactedName = matToBuildReact.materialName;
-            optimizedBuild.TotalQuantityNeeded = matToBuildReact.quantityTotal;
             optimizedBuild.BlueprintOrReactionTypeID = Database.SQLiteCalls.GetBlueprintByProductTypeID(matToBuildReact.materialTypeID);
             optimizedBuild.isBuilt = matToBuildReact.Buildable;
             optimizedBuild.isReacted = matToBuildReact.Reactable;
             optimizedBuild.isFinalProduct = isFinalProduct;
-
+            optimizedBuild.InputMaterials = new List<MaterialsWithMarketData>();
+            if (isFinalProduct)
+            {
+                optimizedBuild.TotalQuantityNeeded = matToBuildReact.quantityTotal;
+            }
+            int activityId = 0;
             if (matToBuildReact.Buildable)
             {
-                PerformOptimumManufacturingCalcs(ref optimizedBuild, buildPlan, isFinalProduct);
+                activityId = Enums.Enums.ActivityManufacturing;
             }
             else
             {
-                PerformOptimumReactionCalcs(ref optimizedBuild, buildPlan);
+                activityId = Enums.Enums.ActivityReactions;
             }
-
+            List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, activityId);
+            MaterialsWithMarketData outputMat;
+            foreach (IndustryActivityMaterials baseMat in baseMaterials)
+            {
+                outputMat = new MaterialsWithMarketData();
+                outputMat.materialTypeID = baseMat.materialTypeID;
+                outputMat.materialName = baseMat.materialName;
+                optimizedBuild.InputMaterials.Add(outputMat);
+                outputMat.quantity = baseMat.quantity;
+                outputMat.Buildable = baseMat.isManufacturable;
+                outputMat.Reactable = baseMat.isReactable;
+                outputMat.quantityPerRun = baseMat.quantity;
+            }
             return optimizedBuild;
         }
 
         private static void PerformOptimumManufacturingCalcs(ref OptimizedBuild optimizedBuild, BuildPlan buildPlan, bool isFinalProduct)
         {
 
-            
+
             int blueprintOrReactionTypeID = optimizedBuild.BlueprintOrReactionTypeID;
             List<MaterialsWithMarketData> inputMaterials = new List<MaterialsWithMarketData>();
             List<IndustryActivityProduct> manufacturingProducts =
@@ -661,7 +730,7 @@ namespace EveHelperWF.ScreenHelper
                 }
                 if (optimizedBuild.RunsNeeded > 0)
                 {
-                    SetBatchRunInformation(ref optimizedBuild, TE, Enums.Enums.ActivityManufacturing, bpInfo);
+                    SetBatchRunInformation(ref optimizedBuild, TE, Enums.Enums.ActivityManufacturing, bpInfo, isFinalProduct, buildPlan);
                     List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
                     if (optimizedBuild.BatchesNeeded > 1)
                     {
@@ -703,7 +772,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, int activityID, BlueprintInfo bpInfo)
+        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, int activityID, BlueprintInfo bpInfo, bool isFinalProduct, BuildPlan buildPlan)
         {
             List<IndustryActivityTypes> activities =
                     Database.SQLiteCalls.GetIndustryActivityTypes(optimizedBuild.BlueprintOrReactionTypeID);
@@ -716,6 +785,10 @@ namespace EveHelperWF.ScreenHelper
             int batchesNeeded;
             int maxRunsPerBatch;
             maxRunsPerBatch = (int)Math.Floor((decimal)maxTime / (decimal)(timePerRun));
+            if (isFinalProduct)
+            {
+                maxRunsPerBatch = buildPlan.RunsPerCopy;
+            }
             if (maxRunsPerBatch <= 0) { maxRunsPerBatch = 1; }
             if (bpInfo != null && bpInfo.MaxRuns > 0 && bpInfo.MaxRuns < maxRunsPerBatch)
             {
@@ -757,7 +830,7 @@ namespace EveHelperWF.ScreenHelper
             return time;
         }
 
-        private static void PerformOptimumReactionCalcs(ref OptimizedBuild optimizedBuild, BuildPlan buildPlan)
+        private static void PerformOptimumReactionCalcs(ref OptimizedBuild optimizedBuild, BuildPlan buildPlan, bool isFinalProduct)
         {
             List<MaterialsWithMarketData> childMats = optimizedBuild.InputMaterials;
 
@@ -775,7 +848,7 @@ namespace EveHelperWF.ScreenHelper
                     BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintOrReactionTypeID);
                     if (optimizedBuild.RunsNeeded > 0)
                     {
-                        SetBatchRunInformation(ref optimizedBuild, 0, Enums.Enums.ActivityReactions, bpInfo);
+                        SetBatchRunInformation(ref optimizedBuild, 0, Enums.Enums.ActivityReactions, bpInfo, isFinalProduct, buildPlan);
                         List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, Enums.Enums.ActivityReactions);
 
                         if (optimizedBuild.BatchesNeeded > 1)
@@ -889,10 +962,9 @@ namespace EveHelperWF.ScreenHelper
             return isDependentOn;
         }
 
-        public static void SetPriceInformationOnOptimizedBuilds(List<OptimizedBuild> optimizedBuilds, List<MaterialsWithMarketData> pricedMats, int finalProductTypeId, decimal additionalCost)
+        public static void SetPriceInformationOnOptimizedBuilds(List<OptimizedBuild> optimizedBuilds, List<MaterialsWithMarketData> pricedMats, int finalProductTypeId, decimal additionalCost, BuildPlan buildPlan)
         {
-            Dictionary<int, List<OptimizedBuild>> buildGroups = GetOptimumBuildGroups(optimizedBuilds);
-
+            Dictionary<int, List<OptimizedBuild>> buildGroups = buildPlan.OptimumBuildGroups;
             MaterialsWithMarketData pricedMat;
             decimal matCost;
             OptimizedBuild previousSetBuild;
@@ -1047,7 +1119,7 @@ namespace EveHelperWF.ScreenHelper
             MaterialsWithMarketData foundMat = null;
             foreach (MaterialsWithMarketData mat in matList)
             {
-                if(mat.controlName.ToLowerInvariant() == controlName.ToLowerInvariant())
+                if (mat.controlName.ToLowerInvariant() == controlName.ToLowerInvariant())
                 {
                     foundMat = mat;
                     break;
@@ -1075,7 +1147,7 @@ namespace EveHelperWF.ScreenHelper
             InventoryType invType;
             foreach (MaterialsWithMarketData mat in childMats)
             {
-                if (mat.Buildable ||mat.Reactable)
+                if (mat.Buildable || mat.Reactable)
                 {
                     blueprintTypeId = Database.SQLiteCalls.GetBlueprintByProductTypeID(mat.materialTypeID);
                     if (blueprintTypeId > 0)
@@ -1100,7 +1172,35 @@ namespace EveHelperWF.ScreenHelper
                             addedBlueprint = true;
                         }
                     }
-                    if (BuildBlueprintStore(mat.ChildMaterials, ref blueprintStore))
+                    List<MaterialsWithMarketData> inputMats = new List<MaterialsWithMarketData>();
+                    List<IndustryActivityMaterials> baseMaterials;
+                    if (mat.Buildable)
+                    {
+                        baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintTypeId, Enums.Enums.ActivityManufacturing);
+                    }
+                    else
+                    {
+                        baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintTypeId, Enums.Enums.ActivityReactions);
+                    }
+
+                    MaterialsWithMarketData outputMat;
+                    foreach (IndustryActivityMaterials baseMat in baseMaterials)
+                    {
+                        outputMat = inputMats.Find(x => x.materialTypeID == baseMat.materialTypeID);
+                        if (outputMat == null)
+                        {
+                            outputMat = new MaterialsWithMarketData();
+                            outputMat.materialTypeID = baseMat.materialTypeID;
+                            outputMat.materialName = baseMat.materialName;
+                            inputMats.Add(outputMat);
+                        }
+                        outputMat.quantity = baseMat.quantity;
+                        outputMat.Buildable = baseMat.isManufacturable;
+                        outputMat.Reactable = baseMat.isReactable;
+                        outputMat.quantityPerRun = baseMat.quantity; //This will be adjusted later by the ME calculations. For now, set it to base mat quantity
+                    }
+
+                    if (BuildBlueprintStore(inputMats, ref blueprintStore))
                     {
                         addedBlueprint = true;
                     }
