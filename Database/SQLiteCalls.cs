@@ -264,6 +264,35 @@ namespace EveHelperWF.Database
             return sb.ToString();
         }
 
+        private static string GetPlanetOutputBySchematicIdCommand(int schematicID)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select PSOut.schematicID,");
+            sb.AppendLine("        PSOut.schematicName,");
+            sb.AppendLine("        PSOut.cycleTime,");
+            sb.AppendLine("        PSTM.quantity,");
+            sb.AppendLine("        PSTM.isInput,");
+            sb.AppendLine("        IT.typeName,");
+            sb.AppendLine("        IT.typeID,");
+            sb.AppendLine("        IT.volume,");
+            sb.AppendLine("        IG.groupID,");
+            sb.AppendLine("        IG.groupName");
+            sb.AppendLine("from planetSchematics PSOut");
+            sb.AppendLine("inner join planetSchematicsTypeMap PSTM");
+            sb.AppendLine("    on PSTM.schematicID = PSOut.schematicID");
+            sb.AppendLine("        and isInput = 0");
+            sb.AppendLine("inner join invTypes IT");
+            sb.AppendLine("    on IT.typeID = PSTM.typeID");
+            sb.AppendLine("        AND IT.published = 1");
+            sb.AppendLine("inner join invGroups IG");
+            sb.AppendLine("    on IG.groupID = IT.groupID");
+            sb.AppendLine("where PSOut.schematicID = " + schematicID.ToString());
+            sb.AppendLine("order by PSOut.schematicName, IT.typeName");
+
+            return sb.ToString();
+        }
+
         private static string GetInventoryTypesCommand()
         {
             StringBuilder sb = new StringBuilder();
@@ -1103,6 +1132,39 @@ namespace EveHelperWF.Database
             }
 
             return planetOutputTypes;
+        }
+
+        public static PlanetMaterial GetPlanetOutputBySchematicId(int schematicID)
+        {
+            PlanetMaterial output = new PlanetMaterial();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(GetPlanetOutputBySchematicIdCommand(schematicID), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                while (query.Read())
+                {
+                    output = new PlanetMaterial();
+                    output.schematicID = query.GetInt32(0);
+                    output.schematicName = query.GetString(1);
+                    output.cycleTime = query.GetInt32(2);
+                    output.quantity = query.GetInt32(3);
+                    output.isInput = query.GetBoolean(4);
+                    output.typeName = query.GetString(5);
+                    output.typeID = query.GetInt32(6);
+                    output.volume = query.GetDecimal(7);
+                    output.groupID = query.GetInt32(8);
+                    output.groupName = query.GetString(9);
+                    break;
+                }
+            }
+
+            return output;
         }
 
         public static List<Objects.InventoryType> GetInventoryTypes()

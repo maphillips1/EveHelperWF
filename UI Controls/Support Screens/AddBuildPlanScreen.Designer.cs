@@ -56,6 +56,7 @@
             // 
             // ProductCombo
             // 
+            ProductCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ProductCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ProductCombo.DropDownHeight = 150;
             ProductCombo.FormattingEnabled = true;

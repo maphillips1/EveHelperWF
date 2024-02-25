@@ -17,6 +17,7 @@ namespace EveHelperWF.Objects
         public int RunsPerCopy {  get; set; }
         public int NumOfCopies {  get; set; }
         public List<OptimizedBuild> OptimizedBuilds { get; set; }
+        public Dictionary<int, List<OptimizedBuild>> OptimumBuildGroups { get; set; } 
         public int TotalRuns
         {
             get
