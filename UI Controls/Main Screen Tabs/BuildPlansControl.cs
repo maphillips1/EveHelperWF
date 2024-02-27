@@ -25,6 +25,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private OptimizedBuildDetailsControl DetailsControl;
         private bool PriceInfoSet = true;
         private List<PlanetMaterial> UniquePlanetMaterials;
+        private decimal FinalProductSellOrderPrice;
+        private decimal FinalProductBuyOrderPrice;
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -311,6 +313,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan != null && !isLoading)
             {
                 this.currentBuildPlan.IndustrySettings.InputOrderType = (int)InputOrderTypeCombo.SelectedValue;
+                RunCalcs();
             }
         }
 
@@ -319,6 +322,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan != null && !isLoading)
             {
                 this.currentBuildPlan.IndustrySettings.OutputOrderType = (int)OutputOrderTypeCombo.SelectedValue;
+                RunCalcs();
             }
         }
 
@@ -685,6 +689,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             decimal buyOrderPrice = ESIMarketData.GetBuyOrderPrice(FinalProductType.typeId, Enums.Enums.TheForgeRegionId);
             JitaSellLabel.Text = CommonHelper.FormatIsk(sellOrderPrice);
             JitaBuyLabel.Text = CommonHelper.FormatIsk(buyOrderPrice);
+            FinalProductSellOrderPrice = sellOrderPrice;
+            FinalProductBuyOrderPrice = buyOrderPrice;
         }
 
         private void EnsureInputMaterials()
@@ -896,6 +902,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             PlanetMaterialsTreeView.Nodes.Clear();
             BPTreeView.Nodes.Clear();
             IskNeededForPlanLabel.Text = "";
+            ProfitLabel.Text = "";
             this.ResumeLayout();
         }
 
@@ -928,7 +935,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.ManufacturingStructureTERigCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus;
                 this.ManufacturingTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.ManufacturingFacilityTax;
                 this.ImplantCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID;
-                
+
                 //Reactions
                 this.ReactionSolarSystemCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID;
                 this.ReactionStructureCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionsStructureTypeID;
@@ -1169,7 +1176,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             existingMat.pricePer = input.pricePer;
                             existingMat.Buildable = input.Buildable;
                             existingMat.Reactable = input.Reactable;
-                            
+
                             outputList.Add(existingMat);
                         }
                         else
@@ -1215,20 +1222,23 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                     decimal totalCostPerItem = optimumBuild.PricePerItem;
                     totalCostPerItem += totalInputTaxes;
+                    decimal profit = 0;
                     if (this.currentBuildPlan.IndustrySettings.OutputOrderType == (int)(Enums.Enums.OrderType.Sell))
                     {
                         totalCostPerItem += outcomeSellTaxes;
+                        profit = (FinalProductSellOrderPrice * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
                     }
                     else
                     {
                         totalCostPerItem += outcomeBuyTaxes;
+                        profit = (FinalProductBuyOrderPrice * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
                     }
                     HeaderCostUnitLabel.Text = CommonHelper.FormatIsk(totalCostPerItem);
 
                     decimal totalVolume = GetTotalVolumeForMaterials(combinedMats);
                     InputVolumeLabel.Text = totalVolume.ToString("N2") + " m3";
 
-
+                    ProfitLabel.Text = CommonHelper.FormatIsk(profit);
                 }
             }
         }

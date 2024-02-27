@@ -80,6 +80,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            Label label29;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
             IskNeededForPlanLabel = new Label();
@@ -159,6 +160,7 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
+            ProfitLabel = new Label();
             label15 = new Label();
             label1 = new Label();
             label9 = new Label();
@@ -204,6 +206,7 @@
             label53 = new Label();
             label54 = new Label();
             label19 = new Label();
+            label29 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -695,7 +698,7 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label19.Location = new Point(35, 120);
+            label19.Location = new Point(35, 90);
             label19.Name = "label19";
             label19.Size = new Size(124, 17);
             label19.TabIndex = 21;
@@ -704,6 +707,8 @@
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
+            SummaryPage.Controls.Add(ProfitLabel);
+            SummaryPage.Controls.Add(label29);
             SummaryPage.Controls.Add(IskNeededForPlanLabel);
             SummaryPage.Controls.Add(label19);
             SummaryPage.Controls.Add(OutputSellTaxes);
@@ -736,7 +741,7 @@
             // 
             IskNeededForPlanLabel.AutoSize = true;
             IskNeededForPlanLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            IskNeededForPlanLabel.Location = new Point(184, 120);
+            IskNeededForPlanLabel.Location = new Point(185, 90);
             IskNeededForPlanLabel.Name = "IskNeededForPlanLabel";
             IskNeededForPlanLabel.Size = new Size(132, 17);
             IskNeededForPlanLabel.TabIndex = 22;
@@ -1642,6 +1647,26 @@
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
+            // ProfitLabel
+            // 
+            ProfitLabel.AutoSize = true;
+            ProfitLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            ProfitLabel.Location = new Point(185, 120);
+            ProfitLabel.Name = "ProfitLabel";
+            ProfitLabel.Size = new Size(96, 17);
+            ProfitLabel.TabIndex = 24;
+            ProfitLabel.Text = "[Profit for Plan]";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label29.Location = new Point(120, 120);
+            label29.Name = "label29";
+            label29.Size = new Size(39, 17);
+            label29.TabIndex = 23;
+            label29.Text = "Profit";
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1812,5 +1837,6 @@
         private Button SetReactionsButton;
         private Button SetBlueprintButton;
         private Label IskNeededForPlanLabel;
+        private Label ProfitLabel;
     }
 }
