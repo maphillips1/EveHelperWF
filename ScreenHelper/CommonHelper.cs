@@ -94,6 +94,12 @@ namespace EveHelperWF.ScreenHelper
                 formattedIsk = formattedIsk.Replace(NumberFormatInfo.CurrentInfo.CurrencySymbol, "");
                 formattedIsk = formattedIsk.Trim() + " isk";
             }
+            else
+            {
+                formattedIsk = iskAmount.ToString("C");
+                formattedIsk = formattedIsk.Replace(NumberFormatInfo.CurrentInfo.CurrencySymbol, "");
+                formattedIsk = formattedIsk.Trim() + " isk";
+            }
 
             return formattedIsk;
         }
