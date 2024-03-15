@@ -315,7 +315,7 @@ namespace EveHelperWF.ScreenHelper
 
             jobCost = jobGrossCost;
 
-            jobCost += Math.Round(jobGrossCost * (Convert.ToDecimal(helperClass.ManufacturingFacilityTax) / 100));
+            jobCost += Math.Round(baseCost * (Convert.ToDecimal(helperClass.ManufacturingFacilityTax) / 100));
 
             jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
 

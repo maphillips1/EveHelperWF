@@ -37,6 +37,8 @@
             MaxRunsUpDown = new NumericUpDown();
             SaveButton = new Button();
             CancelButton = new Button();
+            label1 = new Label();
+            MakeItemCheckbox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxRunsUpDown).BeginInit();
@@ -104,7 +106,7 @@
             // 
             SaveButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.ForeColor = Color.Black;
-            SaveButton.Location = new Point(32, 134);
+            SaveButton.Location = new Point(32, 182);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(75, 23);
             SaveButton.TabIndex = 6;
@@ -116,7 +118,7 @@
             // 
             CancelButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             CancelButton.ForeColor = Color.Black;
-            CancelButton.Location = new Point(141, 134);
+            CancelButton.Location = new Point(141, 182);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 23);
             CancelButton.TabIndex = 7;
@@ -124,11 +126,32 @@
             CancelButton.UseVisualStyleBackColor = true;
             CancelButton.Click += CancelButton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(-1, 134);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 21);
+            label1.TabIndex = 8;
+            label1.Text = "Make Item";
+            // 
+            // MakeItemCheckbox
+            // 
+            MakeItemCheckbox.AutoSize = true;
+            MakeItemCheckbox.Location = new Point(88, 138);
+            MakeItemCheckbox.Name = "MakeItemCheckbox";
+            MakeItemCheckbox.Size = new Size(15, 14);
+            MakeItemCheckbox.TabIndex = 9;
+            MakeItemCheckbox.UseVisualStyleBackColor = true;
+            // 
             // BlueprintValueControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(248, 196);
+            ClientSize = new Size(248, 259);
+            Controls.Add(MakeItemCheckbox);
+            Controls.Add(label1);
             Controls.Add(CancelButton);
             Controls.Add(SaveButton);
             Controls.Add(MaxRunsUpDown);
@@ -160,5 +183,7 @@
         public NumericUpDown MaxRunsUpDown;
         private Button SaveButton;
         private Button CancelButton;
+        private Label label1;
+        public CheckBox MakeItemCheckbox;
     }
 }

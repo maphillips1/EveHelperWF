@@ -25,5 +25,6 @@ namespace EveHelperWF.Objects
                 return (RunsPerCopy * NumOfCopies);
             }
         }
+        public decimal finalSellPrice { get; set; }
     }
 }

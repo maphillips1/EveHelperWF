@@ -1,18 +1,5 @@
 ﻿using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
-using EveHelperWF.UI_Controls.Support_Screens;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace EveHelperWF.ScreenHelper
 {
@@ -141,11 +128,12 @@ namespace EveHelperWF.ScreenHelper
 
         private static void CalculateManufacturingTotals(ref BuildPlan buildPlan)
         {
+            int parentBPTypeId = buildPlan.parentBlueprintOrReactionTypeID;
             IndustryActivityProduct baseProductInformation =
-                    Database.SQLiteCalls.GetIndustryActivityProducts(buildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing)[0];
+                    Database.SQLiteCalls.GetIndustryActivityProducts(parentBPTypeId, Enums.Enums.ActivityManufacturing)[0];
             List<IndustryActivityMaterials> baseMaterials =
-                    Database.SQLiteCalls.GetIndustryActivityMaterials(buildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
-
+                    Database.SQLiteCalls.GetIndustryActivityMaterials(parentBPTypeId, Enums.Enums.ActivityManufacturing);
+            BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == parentBPTypeId);
             if (baseProductInformation != null)
             {
                 buildPlan.TotalOutcome = baseProductInformation.quantity * buildPlan.RunsPerCopy * buildPlan.NumOfCopies;
@@ -160,7 +148,7 @@ namespace EveHelperWF.ScreenHelper
                 //Base Calcs
                 SetBaseInputValues(buildPlan.RunsPerCopy, ref outputMaterials, baseMaterials);
                 //ME Calculations
-                PerformManufacturingMECalculations(ref outputMaterials, buildPlan, buildPlan.RunsPerCopy, buildPlan.IndustrySettings.ME);
+                PerformManufacturingMECalculations(ref outputMaterials, buildPlan, buildPlan.RunsPerCopy, bpInfo.ME);
                 //Next, Set the total quantity needed = QuantityFor Runs * Num of Copies
                 //Basically, once we set the blueprints ME values, we now need to know the total of all 
                 //inputs needed BEFORE we do any child costs. 
@@ -171,14 +159,25 @@ namespace EveHelperWF.ScreenHelper
                 CalculateChildMaterialCosts(ref outputMaterials, buildPlan);
                 //Finally, recurisvel multiply all inputs times the number of copies.
                 //Reset the Build and React values from the current build plan
-                ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials);
+                ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials, buildPlan.BlueprintStore);
 
                 //Set this at the end with all the updated info.
                 buildPlan.InputMaterials = outputMaterials;
             }
         }
 
-        private static void ResetBuildReactPricePer(List<MaterialsWithMarketData> originalItems, List<MaterialsWithMarketData> newItems)
+        public static bool IsItemMade(List<BlueprintInfo> blueprints, int materialTypeId)
+        {
+            bool isMade = false;
+            BlueprintInfo bpInfo = blueprints.Find(x => x.ProductTypeId == materialTypeId);
+            if (bpInfo != null)
+            {
+                isMade = bpInfo.Manufacture || bpInfo.React;
+            }
+            return isMade;
+        }
+
+        private static void ResetBuildReactPricePer(List<MaterialsWithMarketData> originalItems, List<MaterialsWithMarketData> newItems, List<BlueprintInfo> blueprints)
         {
             MaterialsWithMarketData newMat;
             foreach (MaterialsWithMarketData originalMat in originalItems)
@@ -186,17 +185,14 @@ namespace EveHelperWF.ScreenHelper
                 newMat = newItems.Find(x => x.materialTypeID == originalMat.materialTypeID);
                 if (newMat != null)
                 {
-                    newMat.Build = originalMat.Build;
-                    newMat.React = originalMat.React;
-
-                    if (!newMat.Build && !newMat.React)
+                    if (IsItemMade(blueprints, newMat.materialTypeID))
+                    {
+                        ResetBuildReactPricePer(originalMat.ChildMaterials, newMat.ChildMaterials, blueprints);
+                    }
+                    else
                     {
                         newMat.pricePer = originalMat.pricePer;
                         newMat.priceTotal = newMat.pricePer * newMat.quantityTotal;
-                    }
-                    if (originalMat.ChildMaterials.Count > 0)
-                    {
-                        ResetBuildReactPricePer(originalMat.ChildMaterials, newMat.ChildMaterials);
                     }
                 }
                 //else: Nothing to do. Move on
@@ -428,48 +424,21 @@ namespace EveHelperWF.ScreenHelper
                 CalculateChildMaterialCosts(ref outputMaterials, buildPlan);
                 //Finally, recurisvel multiply all inputs times the number of copies.
                 //Reset the Build and React values from the current build plan
-                ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials);
+                ResetBuildReactPricePer(buildPlan.InputMaterials, outputMaterials, buildPlan.BlueprintStore);
 
                 //Set this at the end with all the updated info.
                 buildPlan.InputMaterials = outputMaterials;
             }
         }
 
-        public static void SetBuildReactAllRecursive(List<MaterialsWithMarketData> materials, bool value)
+        public static void SetBuildReactAll(List<BlueprintInfo> blueprints, bool value)
         {
-            if (materials == null) { return; }
-            foreach (MaterialsWithMarketData mat in materials)
+            if (blueprints == null) { return; }
+            foreach (BlueprintInfo bp in blueprints)
             {
-                if (mat.Buildable) { mat.Build = value; }
-                if (mat.Reactable) { mat.React = value; }
-                SetBuildReactAllRecursive(mat.ChildMaterials, value);
+                if (bp.IsManufactured) { bp.Manufacture = value; }
+                if (bp.IsReacted) { bp.React = value; }
             }
-        }
-
-        public static bool IsAllMaterialsBuildOrReacted(List<MaterialsWithMarketData> materials)
-        {
-            bool allBuildReact = true;
-
-            foreach (MaterialsWithMarketData mat in materials)
-            {
-                if ((mat.Buildable || mat.Reactable) &&
-                    (!mat.Build && !mat.React))
-                {
-                    allBuildReact = false;
-                    break;
-                }
-
-                if (mat.ChildMaterials != null)
-                {
-                    if (!IsAllMaterialsBuildOrReacted(mat.ChildMaterials))
-                    {
-                        allBuildReact = false;
-                        break;
-                    }
-                }
-            }
-
-            return allBuildReact;
         }
 
         public static void DetermineOptimumBuild(List<MaterialsWithMarketData> materials, BuildPlan buildPlan)
@@ -494,7 +463,7 @@ namespace EveHelperWF.ScreenHelper
         {
             List<OptimizedBuild> optimumBuilds = new List<OptimizedBuild>();
             List<MaterialsWithMarketData> allItemsBuiltReactedLumpedTogether = new List<MaterialsWithMarketData>();
-            GetAllItemsBuiltReacted(materials, ref allItemsBuiltReactedLumpedTogether);
+            GetAllItemsBuiltReacted(materials,buildPlan.BlueprintStore, ref allItemsBuiltReactedLumpedTogether);
 
             MaterialsWithMarketData finalProductMat = BuildFinalProductMat(buildPlan);
             optimumBuilds.Add(ConvertMatToOptimumBuild(finalProductMat, buildPlan, true));
@@ -545,7 +514,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static List<MaterialsWithMarketData> AddIndepentsToOutput(ref Dictionary<int, List<MaterialsWithMarketData>> output, List<MaterialsWithMarketData> inputs, int batchCount)
+        private static List<MaterialsWithMarketData> AddIndepentsToOutput(ref Dictionary<int, List<MaterialsWithMarketData>> output, List<MaterialsWithMarketData> inputs, int batchCount, List<BlueprintInfo> blueprints)
         {
             List<MaterialsWithMarketData> itemsToRemove = new List<MaterialsWithMarketData>();
             if (!output.Keys.Contains(batchCount))
@@ -557,11 +526,11 @@ namespace EveHelperWF.ScreenHelper
             {
                 if (inputMat.Buildable || inputMat.Reactable)
                 {
-                    if (inputMat.Build || inputMat.React)
+                    if (IsItemMade(blueprints, inputMat.materialTypeID))
                     {
                         if (inputMat.ChildMaterials.Count > 0)
                         {
-                            itemsToRemove.AddRange(AddIndepentsToOutput(ref output, inputMat.ChildMaterials, batchCount));
+                            itemsToRemove.AddRange(AddIndepentsToOutput(ref output, inputMat.ChildMaterials, batchCount, blueprints));
                         }
                         else
                         {
@@ -615,42 +584,39 @@ namespace EveHelperWF.ScreenHelper
             finalProductMat.quantityTotal = buildPlan.TotalOutcome;
             finalProductMat.Buildable = IsMaterialManufactured(buildPlan.parentBlueprintOrReactionTypeID);
             finalProductMat.Reactable = IsMaterialReacted(buildPlan.parentBlueprintOrReactionTypeID);
-            finalProductMat.Build = finalProductMat.Buildable;
-            finalProductMat.React = finalProductMat.Reactable;
             return finalProductMat;
         }
 
-        private static void GetAllItemsBuiltReacted(List<MaterialsWithMarketData> inputMaterials, ref List<MaterialsWithMarketData> outputAllItems)
+        private static void GetAllItemsBuiltReacted(List<MaterialsWithMarketData> inputMaterials, List<BlueprintInfo> blueprints, ref List<MaterialsWithMarketData> outputAllItems)
         {
             MaterialsWithMarketData existingMat = null;
             foreach (MaterialsWithMarketData mat in inputMaterials)
             {
-                if (
-                    (mat.Buildable || mat.Reactable) &&
-                    (mat.Build || mat.React)
-                    )
+                if (mat.Buildable || mat.Reactable)
                 {
-                    existingMat = outputAllItems.Find(x => x.materialTypeID == mat.materialTypeID);
-                    if (existingMat == null)
+                    BlueprintInfo bpInfo = blueprints.Find(x => x.ProductTypeId == mat.materialTypeID);
+                    if (bpInfo.Manufacture || bpInfo.React)
                     {
-                        existingMat = new MaterialsWithMarketData();
-                        existingMat.materialTypeID = mat.materialTypeID;
-                        existingMat.quantity = mat.quantity;
-                        existingMat.quantityTotal = mat.quantityTotal;
-                        existingMat.Build = mat.Build;
-                        existingMat.React = mat.React;
-                        existingMat.Buildable = mat.Buildable;
-                        existingMat.Reactable = mat.Reactable;
-                        existingMat.materialName = mat.materialName;
-                        existingMat.ParentMaterialTypeID = mat.ParentMaterialTypeID;
-                        existingMat.quantityPerRun = mat.quantityPerRun;
-                        outputAllItems.Add(existingMat);
+                        existingMat = outputAllItems.Find(x => x.materialTypeID == mat.materialTypeID);
+                        if (existingMat == null)
+                        {
+                            existingMat = new MaterialsWithMarketData();
+                            existingMat.materialTypeID = mat.materialTypeID;
+                            existingMat.quantity = mat.quantity;
+                            existingMat.quantityTotal = mat.quantityTotal;
+                            existingMat.Buildable = mat.Buildable;
+                            existingMat.Reactable = mat.Reactable;
+                            existingMat.materialName = mat.materialName;
+                            existingMat.ParentMaterialTypeID = mat.ParentMaterialTypeID;
+                            existingMat.quantityPerRun = mat.quantityPerRun;
+                            outputAllItems.Add(existingMat);
+                        }
+                        else
+                        {
+                            existingMat.quantityTotal += mat.quantityTotal;
+                        }
+                        GetAllItemsBuiltReacted(mat.ChildMaterials, blueprints, ref outputAllItems);
                     }
-                    else
-                    {
-                        existingMat.quantityTotal += mat.quantityTotal;
-                    }
-                    GetAllItemsBuiltReacted(mat.ChildMaterials, ref outputAllItems);
                 }
             }
         }
@@ -708,26 +674,9 @@ namespace EveHelperWF.ScreenHelper
                 optimizedBuild.RunsNeeded = (int)Math.Ceiling((decimal)optimizedBuild.TotalQuantityNeeded / (decimal)manuProd.quantity);
                 BlueprintInfo bpInfo = buildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintOrReactionTypeID);
 
-                int ME;
-                int TE;
-                if (bpInfo == null)
-                {
-                    if (isFinalProduct)
-                    {
-                        ME = buildPlan.IndustrySettings.ME;
-                        TE = buildPlan.IndustrySettings.TE;
-                    }
-                    else
-                    {
-                        ME = buildPlan.IndustrySettings.CompME;
-                        TE = buildPlan.IndustrySettings.CompTE;
-                    }
-                }
-                else
-                {
-                    ME = bpInfo.ME;
-                    TE = bpInfo.TE;
-                }
+                int ME = bpInfo.ME;
+                int TE = bpInfo.TE;
+
                 if (optimizedBuild.RunsNeeded > 0)
                 {
                     SetBatchRunInformation(ref optimizedBuild, TE, Enums.Enums.ActivityManufacturing, bpInfo, isFinalProduct, buildPlan);
@@ -751,7 +700,7 @@ namespace EveHelperWF.ScreenHelper
                             SetBaseInputValues(currentRuns, ref inputMaterials, baseMaterials);
                             //ME Calculations
                             PerformManufacturingMECalculations(ref inputMaterials, buildPlan, currentRuns, ME);
-                            optimizedBuild.JobCost = CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, currentRuns);
+                            optimizedBuild.JobCost += CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, currentRuns);
                             totalRuns -= optimizedBuild.MaxRunsPerBatch;
                         }
                         optimizedBuild.InputMaterials = inputMaterials;
@@ -991,17 +940,9 @@ namespace EveHelperWF.ScreenHelper
                         {
                             //we should have previously set this earlier in the loop unless I'm crazy. 
                             previousSetBuild = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == mat.materialTypeID);
-                            if (previousSetBuild != null)
-                            {
-                                mat.pricePer = previousSetBuild.PricePerItem;
-                                mat.priceTotal = previousSetBuild.PricePerItem * mat.quantityTotal;
-                                matCost += mat.priceTotal;
-                            }
-                            else
-                            {
-                                //We should never end up here. if you hit this break point, something went wrong.
-                                matCost += 0;
-                            }
+                            mat.pricePer = previousSetBuild.PricePerItem;
+                            mat.priceTotal = mat.pricePer * mat.quantityTotal;
+                            matCost += mat.priceTotal;
                         }
                     }
                     currentBuild.MaterialCost = matCost;
@@ -1015,12 +956,12 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static void SetPricePerRecursive(List<MaterialsWithMarketData> matsToSet, List<MaterialsWithMarketData> matPrices)
+        public static void SetPricePerRecursive(List<MaterialsWithMarketData> matsToSet, List<MaterialsWithMarketData> matPrices, List<BlueprintInfo> blueprints)
         {
             MaterialsWithMarketData pricedMat;
             foreach (MaterialsWithMarketData mat in matsToSet)
             {
-                if (!mat.Build && !mat.React)
+                if (!IsItemMade(blueprints, mat.materialTypeID))
                 {
                     pricedMat = matPrices.Find(x => x.materialTypeID == mat.materialTypeID);
                     if (pricedMat != null)
@@ -1030,14 +971,14 @@ namespace EveHelperWF.ScreenHelper
                 }
                 if (mat.ChildMaterials.Count > 0)
                 {
-                    SetPricePerRecursive(mat.ChildMaterials, matPrices);
+                    SetPricePerRecursive(mat.ChildMaterials, matPrices, blueprints);
                 }
             }
         }
 
-        public static void EnsurePricePer(MaterialsWithMarketData mat, CalculationHelperClass industrySettings)
+        public static void EnsurePricePer(MaterialsWithMarketData mat, CalculationHelperClass industrySettings, List<BlueprintInfo> blueprints)
         {
-            if (!mat.Build && !mat.React)
+            if (!IsItemMade(blueprints, mat.materialTypeID))
             {
                 if (mat.pricePer <= 0)
                 {
@@ -1053,106 +994,43 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static decimal GetTotalInputPrice(List<MaterialsWithMarketData> inputs)
-        {
-            decimal totalPrice = 0;
-            foreach (MaterialsWithMarketData mat in inputs)
-            {
-                if (mat.Build || mat.React)
-                {
-                    totalPrice += (GetTotalInputPrice(mat.ChildMaterials));
-                }
-                else
-                {
-                    totalPrice += mat.priceTotal;
-                }
-            }
-            return totalPrice;
-        }
-
-        public static void SetPriceForMaterialRecursive(decimal price, int typeID, List<MaterialsWithMarketData> materialList)
+        public static void SetPriceForMaterialRecursive(decimal price, int typeID, List<MaterialsWithMarketData> materialList, List<BlueprintInfo> blueprints)
         {
             foreach (MaterialsWithMarketData mat in materialList)
             {
-                if (!mat.Build && !mat.React)
+                if (mat.Buildable || mat.Reactable)
                 {
-                    if (mat.materialTypeID == typeID)
+                    BlueprintInfo bpInfo = blueprints.Find(x => x.ProductTypeId == mat.materialTypeID);
+                    if (bpInfo.Manufacture || bpInfo.React)
+                    {
+                        SetPriceForMaterialRecursive(price, typeID, mat.ChildMaterials, blueprints);
+                    }
+                    else
                     {
                         mat.pricePer = price;
                     }
                 }
                 else
                 {
-                    SetPriceForMaterialRecursive(price, typeID, mat.ChildMaterials);
+                    mat.pricePer = price;
                 }
             }
         }
 
-        public static bool SetBuildOrReactRecurisve(string controlName, bool value, List<MaterialsWithMarketData> mats)
-        {
-            if (!string.IsNullOrEmpty(controlName))
-            {
-                foreach (MaterialsWithMarketData mat in mats)
-                {
-                    if (mat.controlName.ToLowerInvariant().Equals(controlName.ToLowerInvariant()))
-                    {
-                        if (mat.Buildable) { mat.Build = value; return true; }
-                        if (mat.Reactable) { mat.React = value; return true; }
-                    }
-                    else
-                    {
-                        if (mat.ChildMaterials.Count > 0)
-                        {
-                            if (SetBuildOrReactRecurisve(controlName, value, mat.ChildMaterials))
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        public static MaterialsWithMarketData GetMaterialByControlName(string controlName, List<MaterialsWithMarketData> matList)
-        {
-            MaterialsWithMarketData foundMat = null;
-            foreach (MaterialsWithMarketData mat in matList)
-            {
-                if (mat.controlName.ToLowerInvariant() == controlName.ToLowerInvariant())
-                {
-                    foundMat = mat;
-                    break;
-                }
-                else
-                {
-                    if (mat.Build || mat.React)
-                    {
-                        foundMat = GetMaterialByControlName(controlName, mat.ChildMaterials);
-                        if (foundMat != null)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-            return foundMat;
-        }
-
-        public static bool BuildBlueprintStore(List<MaterialsWithMarketData> childMats, ref List<BlueprintInfo> blueprintStore)
+        public static bool BuildBlueprintStore(ref BuildPlan currentBuildPlan, List<MaterialsWithMarketData> currentMats)
         {
             bool addedBlueprint = false;
             int blueprintTypeId = 0;
             BlueprintInfo bpInfo;
             InventoryType invType;
-            foreach (MaterialsWithMarketData mat in childMats)
+            foreach (MaterialsWithMarketData mat in currentMats)
             {
                 if (mat.Buildable || mat.Reactable)
                 {
                     blueprintTypeId = Database.SQLiteCalls.GetBlueprintByProductTypeID(mat.materialTypeID);
                     if (blueprintTypeId > 0)
                     {
-                        bpInfo = blueprintStore.Find(x => x.BlueprintTypeId == blueprintTypeId);
+                        bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintTypeId);
                         if (bpInfo == null)
                         {
                             bpInfo = new BlueprintInfo();
@@ -1168,7 +1046,7 @@ namespace EveHelperWF.ScreenHelper
                                 bpInfo.ME = 10;
                                 bpInfo.TE = 20;
                             }
-                            blueprintStore.Add(bpInfo);
+                            currentBuildPlan.BlueprintStore.Add(bpInfo);
                             addedBlueprint = true;
                         }
                     }
@@ -1192,7 +1070,7 @@ namespace EveHelperWF.ScreenHelper
                             outputMat = new MaterialsWithMarketData();
                             outputMat.materialTypeID = baseMat.materialTypeID;
                             outputMat.materialName = baseMat.materialName;
-                            inputMats.Add(outputMat);
+                            mat.ChildMaterials.Add(outputMat);
                         }
                         outputMat.quantity = baseMat.quantity;
                         outputMat.Buildable = baseMat.isManufacturable;
@@ -1200,11 +1078,34 @@ namespace EveHelperWF.ScreenHelper
                         outputMat.quantityPerRun = baseMat.quantity; //This will be adjusted later by the ME calculations. For now, set it to base mat quantity
                     }
 
-                    if (BuildBlueprintStore(inputMats, ref blueprintStore))
+                    if (BuildBlueprintStore(ref currentBuildPlan, mat.ChildMaterials))
                     {
                         addedBlueprint = true;
                     }
                 }
+            }
+            int finalProdBPId = currentBuildPlan.parentBlueprintOrReactionTypeID;
+            int finalProdId = currentBuildPlan.finalProductTypeID;
+            bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == finalProdBPId);
+            if (bpInfo == null)
+            {
+                invType = CommonHelper.InventoryTypes.Find(x => x.typeId == finalProdId);
+                bpInfo = new BlueprintInfo();
+                bpInfo.BlueprintTypeId = finalProdBPId;
+                bpInfo.ProductTypeId = finalProdId;
+                bpInfo.BlueprintName = invType.typeName;
+                bpInfo.IsManufactured = IsMaterialManufactured(finalProdBPId);
+                bpInfo.IsReacted = IsMaterialReacted(finalProdBPId);
+                bpInfo.MaxRuns = 9999;
+                bpInfo.Manufacture = true;
+                bpInfo.React = true;
+                if (bpInfo.IsManufactured)
+                {
+                    bpInfo.ME = 10;
+                    bpInfo.TE = 20;
+                }
+                currentBuildPlan.BlueprintStore.Add(bpInfo);
+                addedBlueprint = true;
             }
             return addedBlueprint;
         }

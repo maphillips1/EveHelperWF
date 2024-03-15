@@ -19,8 +19,6 @@ namespace EveHelperWF.Objects
         public decimal priceTotal { get; set; }
         public bool Buildable { get; set; }
         public bool Reactable { get; set; }
-        public bool Build { get; set; }
-        public bool React { get; set; }
         public int ParentMaterialTypeID { get; set; }
         public string controlName { get; set; }
         public int RunsNeeded { get; set; }

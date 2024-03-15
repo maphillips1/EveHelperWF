@@ -17,5 +17,7 @@ namespace EveHelperWF.Objects
         public int MaxRuns { get; set; }
         public bool IsManufactured { get; set; }
         public bool IsReacted { get; set; }
+        public bool Manufacture { get; set; }
+        public bool React { get; set; }
     }
 }
