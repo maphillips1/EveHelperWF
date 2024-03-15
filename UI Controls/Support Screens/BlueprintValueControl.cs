@@ -34,6 +34,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             MEUpDown.Value = BPInfo.ME;
             TEUpDown.Value = BPInfo.TE;
             MaxRunsUpDown.Value = BPInfo.MaxRuns;
+            MakeItemCheckbox.Checked = BPInfo.Manufacture || BPInfo.React;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

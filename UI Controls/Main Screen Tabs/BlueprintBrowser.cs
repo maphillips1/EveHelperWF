@@ -945,14 +945,14 @@ namespace EveHelperWF
         private void CalculateManufacturingTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
             ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingInputQuantAndPrice(ref ManuMats, calculationHelperClass);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ManuMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ManuMats, calculationHelperClass.BuildComponents);
             ManufacturingTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateManufacturingTime(IndustryActivityTypes, calculationHelperClass);
             if (calculationHelperClass.BuildComponents)
             {
                 ManufacturingTotalComponentTime = ScreenHelper.BlueprintBrowserHelper.GetComponentManufacturingTime(ManuMats, calculationHelperClass);
             }
             TotalManufacturingJobCost = ScreenHelper.CommonHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass, calculationHelperClass.Runs);
-            TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass);
+            TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             TotalManufacturingTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
             decimal TotalMatPrice = 0;
@@ -982,7 +982,7 @@ namespace EveHelperWF
                 Objects.CalculationHelperClass defaultInventionHelperClass = BuildDefaultInventionHelperClass(tech1BlueprintId);
 
                 ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref inventionMats, defaultInventionHelperClass);
-                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(defaultInventionHelperClass.InputOrderType, ref inventionMats);
+                ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(defaultInventionHelperClass.InputOrderType, ref inventionMats, calculationHelperClass.BuildComponents);
                 TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, defaultInventionHelperClass);
                 FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(defaultInventionHelperClass);
                 int avgTriesForSuccess = Convert.ToInt32(Math.Ceiling(1 / FinalInventionProbability));
@@ -1003,10 +1003,10 @@ namespace EveHelperWF
         private void CalculateReactionsTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
             ScreenHelper.BlueprintBrowserHelper.CalculateReactionInputQuantAndPrice(ref ReactionMats, calculationHelperClass);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats, calculationHelperClass.BuildComponents);
             ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
             TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
-            TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass);
+            TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
             TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
             decimal TotalMatPrice = 0;
@@ -1029,10 +1029,10 @@ namespace EveHelperWF
         private void CalculateInventionTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
             ScreenHelper.BlueprintBrowserHelper.CalculateInventionInputQuantAndPrice(ref InventionMats, calculationHelperClass);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref InventionMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref InventionMats, calculationHelperClass.BuildComponents);
             InventionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateInventionTime(IndustryActivityTypes, calculationHelperClass);
             TotalInventionJobCost = ScreenHelper.BlueprintBrowserHelper.CalculateInventionJobCost(ManuMats, calculationHelperClass);
-            TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass);
+            TotalInventionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(InventionMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalInventionTaxesAndFees = 0;
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in InventionMats)
@@ -1059,10 +1059,10 @@ namespace EveHelperWF
         {
             long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)).time;
             ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResMEMats, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResMEMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResMEMats, calculationHelperClass.BuildComponents);
             ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
             TotalMEJobCost = BlueprintBrowserHelper.GetMEJobCost(calculationHelperClass, ManuMats);
-            TotalMEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResMEMats, calculationHelperClass);
+            TotalMEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResMEMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalMETaxesAndFees = 0;
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ResMEMats)
@@ -1083,10 +1083,10 @@ namespace EveHelperWF
             int teFromLevel = calculationHelperClass.TEFromLevel / 2;
             int teToLevel = calculationHelperClass.TEToLevel / 2;
             ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResTEMats, teFromLevel, teToLevel);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResTEMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResTEMats, calculationHelperClass.BuildComponents);
             ResTETime = BlueprintBrowserHelper.GetTEResearchTime(baseTime, calculationHelperClass);
             TotalTEJobCost = BlueprintBrowserHelper.GetTEJobCost(calculationHelperClass, ManuMats);
-            TotalTEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResTEMats, calculationHelperClass);
+            TotalTEInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(ResTEMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalTETaxesAndFees = 0;
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ResTEMats)
@@ -1105,10 +1105,10 @@ namespace EveHelperWF
         {
             long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityCopying)).time;
             ScreenHelper.BlueprintBrowserHelper.GetCopyingTotalMats(ref CopyMats, calculationHelperClass);
-            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref CopyMats);
+            ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref CopyMats, calculationHelperClass.BuildComponents);
             ResCopyTime = BlueprintBrowserHelper.GetCopyingTime(baseTime, calculationHelperClass);
             TotalCopyJobCost = BlueprintBrowserHelper.GetCopyJobCost(calculationHelperClass, ManuMats);
-            TotalCopyInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(CopyMats, calculationHelperClass);
+            TotalCopyInputVolume = BlueprintBrowserHelper.CalculateTotalVolume(CopyMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalCopyTaxesAndFees = 0;
             CopyingTotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in CopyMats)

@@ -664,14 +664,14 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static void GetMatPriceForActivity(int inputPriceType, ref List<Objects.MaterialsWithMarketData> mats)
+        public static void GetMatPriceForActivity(int inputPriceType, ref List<Objects.MaterialsWithMarketData> mats, bool buildComponetns)
         {
             if (mats != null)
             {
                 bool isBuyOrder = (inputPriceType == 2);
                 foreach (Objects.MaterialsWithMarketData mat in mats)
                 {
-                    if (mat.Build)
+                    if ( (mat.Buildable ||mat.Reactable) && buildComponetns)
                     {
                         mat.priceTotal = 0;
                         continue;
@@ -747,7 +747,7 @@ namespace EveHelperWF.ScreenHelper
             return text;
         }
 
-        public static decimal CalculateTotalVolume(List<Objects.MaterialsWithMarketData> mats, Objects.CalculationHelperClass helperClass)
+        public static decimal CalculateTotalVolume(List<Objects.MaterialsWithMarketData> mats, Objects.CalculationHelperClass helperClass, bool buildComponents)
         {
             decimal totalVolume = 0;
 
@@ -755,7 +755,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 if (helperClass.BuildComponents)
                 {
-                    if (mat.ParentMaterialTypeID > 0 || !mat.Build)
+                    if (mat.ParentMaterialTypeID > 0 || !buildComponents)
                     {
                         Objects.InventoryType matType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                         totalVolume += mat.quantityTotal * matType.volume;
@@ -892,13 +892,8 @@ namespace EveHelperWF.ScreenHelper
 
                 if (calculationHelperClass.BuildComponents && mat.Buildable)
                 {
-                    mat.Build = true;
                     mat.priceTotal = 0;
                     buildableMats.Add(mat.materialTypeID);
-                }
-                else
-                {
-                    mat.Build = false;
                 }
             }
 
