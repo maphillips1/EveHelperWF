@@ -71,6 +71,8 @@
             Label label19;
             Label label29;
             Label label18;
+            Label label5;
+            Label label51;
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -78,12 +80,13 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            Label label5;
-            Label label51;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
             ProfitLabel = new Label();
             IskNeededForPlanLabel = new Label();
+            OutputSellTaxes = new Label();
+            OutputBuyTaxes = new Label();
+            InputTaxLabel = new Label();
             SaveNotesButton = new Button();
             NotesTextBox = new TextBox();
             InputVolumeLabel = new Label();
@@ -157,9 +160,6 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
-            OutputBuyTaxes = new Label();
-            OutputSellTaxes = new Label();
-            InputTaxLabel = new Label();
             label15 = new Label();
             label1 = new Label();
             label9 = new Label();
@@ -681,6 +681,26 @@
             label18.TabIndex = 24;
             label18.Text = "Final Product Sell Price";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Location = new Point(36, 300);
+            label5.Name = "label5";
+            label5.Size = new Size(123, 17);
+            label5.TabIndex = 18;
+            label5.Text = "Output Tax Per Item";
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label51.Location = new Point(48, 270);
+            label51.Name = "label51";
+            label51.Size = new Size(111, 17);
+            label51.TabIndex = 16;
+            label51.Text = "Input Taxes / Item";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
@@ -733,6 +753,36 @@
             IskNeededForPlanLabel.Size = new Size(132, 17);
             IskNeededForPlanLabel.TabIndex = 22;
             IskNeededForPlanLabel.Text = "[Isk Needed for plan]";
+            // 
+            // OutputSellTaxes
+            // 
+            OutputSellTaxes.AutoSize = true;
+            OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutputSellTaxes.Location = new Point(184, 300);
+            OutputSellTaxes.Name = "OutputSellTaxes";
+            OutputSellTaxes.Size = new Size(116, 17);
+            OutputSellTaxes.TabIndex = 20;
+            OutputSellTaxes.Text = "[Output Sell Taxes]";
+            // 
+            // OutputBuyTaxes
+            // 
+            OutputBuyTaxes.AutoSize = true;
+            OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutputBuyTaxes.Location = new Point(184, 330);
+            OutputBuyTaxes.Name = "OutputBuyTaxes";
+            OutputBuyTaxes.Size = new Size(116, 17);
+            OutputBuyTaxes.TabIndex = 19;
+            OutputBuyTaxes.Text = "[Output Buy Taxes]";
+            // 
+            // InputTaxLabel
+            // 
+            InputTaxLabel.AutoSize = true;
+            InputTaxLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            InputTaxLabel.Location = new Point(184, 270);
+            InputTaxLabel.Name = "InputTaxLabel";
+            InputTaxLabel.Size = new Size(81, 17);
+            InputTaxLabel.TabIndex = 17;
+            InputTaxLabel.Text = "[Input Taxes]";
             // 
             // SaveNotesButton
             // 
@@ -1546,7 +1596,6 @@
             RunsPerCopyUpDown.Size = new Size(184, 23);
             RunsPerCopyUpDown.TabIndex = 6;
             RunsPerCopyUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            RunsPerCopyUpDown.ValueChanged += RunsPerCopy_ValueChanged;
             RunsPerCopyUpDown.KeyUp += Numeric_KeyUp;
             RunsPerCopyUpDown.Leave += RunsPerCopy_Leave;
             // 
@@ -1582,7 +1631,6 @@
             NumberCopiesUpDown.Size = new Size(184, 23);
             NumberCopiesUpDown.TabIndex = 50;
             NumberCopiesUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            NumberCopiesUpDown.ValueChanged += NumCopies_ValueChanged;
             NumberCopiesUpDown.KeyUp += Numeric_KeyUp;
             NumberCopiesUpDown.Leave += NumCopies_Leave;
             // 
@@ -1603,56 +1651,6 @@
             HeaderCostUnitLabel.Size = new Size(110, 21);
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
-            // 
-            // OutputBuyTaxes
-            // 
-            OutputBuyTaxes.AutoSize = true;
-            OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputBuyTaxes.Location = new Point(184, 330);
-            OutputBuyTaxes.Name = "OutputBuyTaxes";
-            OutputBuyTaxes.Size = new Size(116, 17);
-            OutputBuyTaxes.TabIndex = 19;
-            OutputBuyTaxes.Text = "[Output Buy Taxes]";
-            // 
-            // OutputSellTaxes
-            // 
-            OutputSellTaxes.AutoSize = true;
-            OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputSellTaxes.Location = new Point(184, 300);
-            OutputSellTaxes.Name = "OutputSellTaxes";
-            OutputSellTaxes.Size = new Size(116, 17);
-            OutputSellTaxes.TabIndex = 20;
-            OutputSellTaxes.Text = "[Output Sell Taxes]";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(36, 300);
-            label5.Name = "label5";
-            label5.Size = new Size(123, 17);
-            label5.TabIndex = 18;
-            label5.Text = "Output Tax Per Item";
-            // 
-            // InputTaxLabel
-            // 
-            InputTaxLabel.AutoSize = true;
-            InputTaxLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            InputTaxLabel.Location = new Point(184, 270);
-            InputTaxLabel.Name = "InputTaxLabel";
-            InputTaxLabel.Size = new Size(81, 17);
-            InputTaxLabel.TabIndex = 17;
-            InputTaxLabel.Text = "[Input Taxes]";
-            // 
-            // label51
-            // 
-            label51.AutoSize = true;
-            label51.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label51.Location = new Point(48, 270);
-            label51.Name = "label51";
-            label51.Size = new Size(111, 17);
-            label51.TabIndex = 16;
-            label51.Text = "Input Taxes / Item";
             // 
             // BuildPlansControl
             // 

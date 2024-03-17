@@ -929,17 +929,17 @@ namespace EveHelperWF.ScreenHelper
                     matCost = 0;
                     foreach (MaterialsWithMarketData mat in currentBuild.InputMaterials)
                     {
-                        pricedMat = pricedMats.Find(x => x.materialTypeID == mat.materialTypeID);
-                        if (pricedMat != null)
+                        //we should have previously set this earlier in the loop unless I'm crazy. 
+                        previousSetBuild = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == mat.materialTypeID);
+                        if (previousSetBuild == null)
                         {
+                            pricedMat = pricedMats.Find(x => x.materialTypeID == mat.materialTypeID);
                             mat.pricePer = pricedMat.pricePer;
                             mat.priceTotal = mat.pricePer * mat.quantityTotal;
                             matCost += mat.priceTotal;
                         }
                         else
                         {
-                            //we should have previously set this earlier in the loop unless I'm crazy. 
-                            previousSetBuild = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == mat.materialTypeID);
                             mat.pricePer = previousSetBuild.PricePerItem;
                             mat.priceTotal = mat.pricePer * mat.quantityTotal;
                             matCost += mat.priceTotal;
@@ -1108,6 +1108,22 @@ namespace EveHelperWF.ScreenHelper
                 addedBlueprint = true;
             }
             return addedBlueprint;
+        }
+
+        public static void BuildAllItems(List<MaterialsWithMarketData> inputMaterialsInTreeform, ref List<MaterialsWithMarketData> allItems)
+        {
+            if (allItems == null) { allItems = new List<MaterialsWithMarketData>(); }
+            foreach (MaterialsWithMarketData inputMaterial in inputMaterialsInTreeform)
+            {
+                if (allItems.Find(x => x.materialTypeID == inputMaterial.materialTypeID) == null)
+                {
+                    allItems.Add(inputMaterial);
+                }
+                if (inputMaterial.ChildMaterials.Count > 0)
+                {
+                    BuildAllItems(inputMaterial.ChildMaterials, ref allItems);
+                }
+            }
         }
     }
 }
