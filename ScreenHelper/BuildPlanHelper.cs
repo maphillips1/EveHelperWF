@@ -734,7 +734,7 @@ namespace EveHelperWF.ScreenHelper
             int batchesNeeded;
             int maxRunsPerBatch;
             maxRunsPerBatch = (int)Math.Floor((decimal)maxTime / (decimal)(timePerRun));
-            if (isFinalProduct)
+            if (isFinalProduct && buildPlan.RunsPerCopy <= maxRunsPerBatch)
             {
                 maxRunsPerBatch = buildPlan.RunsPerCopy;
             }
@@ -951,7 +951,10 @@ namespace EveHelperWF.ScreenHelper
                         currentBuild.AdditionalCost = additionalCost;
                     }
                     currentBuild.TotalBuildCost = currentBuild.MaterialCost + currentBuild.JobCost + currentBuild.AdditionalCost;
-                    currentBuild.PricePerItem = currentBuild.TotalBuildCost / currentBuild.TotalQuantityNeeded;
+                    if (currentBuild.TotalQuantityNeeded > 0)
+                    {
+                        currentBuild.PricePerItem = currentBuild.TotalBuildCost / currentBuild.TotalQuantityNeeded;
+                    }
                 }
             }
         }
@@ -1124,6 +1127,22 @@ namespace EveHelperWF.ScreenHelper
                     BuildAllItems(inputMaterial.ChildMaterials, ref allItems);
                 }
             }
+        }
+
+        public static decimal GetValueofWaste(BuildPlan buildPlan)
+        {
+            decimal value = 0;
+
+            foreach (OptimizedBuild optimizedBuild in buildPlan.OptimizedBuilds)
+            {
+                if (optimizedBuild.ExtraOutput > 0)
+                {
+                    decimal buyOrderPrice = ESI_Calls.ESIMarketData.GetBuyOrderPrice(optimizedBuild.BuiltOrReactedTypeId, Enums.Enums.TheForgeRegionId);
+                    value += optimizedBuild.ExtraOutput * buyOrderPrice;
+                }
+            }
+
+            return value;
         }
     }
 }

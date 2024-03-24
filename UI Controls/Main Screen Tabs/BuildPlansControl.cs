@@ -52,10 +52,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         public BuildPlansControl(BuildPlan buildPlan)
         {
             isLoading = true;
+            InitializeComponent();
             this.currentBuildPlan = buildPlan;
+            SaveBuildPlan();
             BlueprintBrowserHelper.Init();
             LoadIndySettingCombos();
             LoadControl();
+            ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.value.Contains(buildPlan.BuildPlanName.Replace(".json", "")));
+            if (comboListItem != null)
+            {
+                BuildPlanCombo.SelectedValue = comboListItem.key;
+            }
             isLoading = false;
         }
         #endregion
@@ -64,12 +71,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void BuildPlanCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            isLoading = true;
-            this.Cursor = Cursors.WaitCursor;
-            LoadBuildPlanFromFile();
-            LoadUIForBuildPlan();
-            this.Cursor = Cursors.Default;
-            isLoading = false;
+            if (!isLoading)
+            {
+                isLoading = true;
+                this.Cursor = Cursors.WaitCursor;
+                LoadBuildPlanFromFile();
+                LoadUIForBuildPlan();
+                this.Cursor = Cursors.Default;
+                isLoading = false;
+            }
         }
 
         private void SaveNotesButton_Click(object sender, EventArgs e)
@@ -301,8 +311,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void MaterialsPriceTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (!isLoading)
+            if (!isLoading && e.Node.Tag != null)
             {
+                this.isLoading = true;
                 int typeID = (int)(e.Node.Tag);
                 List<MaterialsWithMarketData> mats = this.currentBuildPlan.AllItems;
                 MaterialsWithMarketData currentMat = mats.Find(x => x.materialTypeID == typeID);
@@ -319,6 +330,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     LoadMaterialsPriceTreeView();
                 }
                 MaterialsPriceTreeView.SelectedNode = null;
+                this.isLoading = false;
             }
         }
 
@@ -365,6 +377,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 BVC.StartPosition = FormStartPosition.CenterScreen;
                 if (BVC.ShowDialog() == DialogResult.OK)
                 {
+                    isLoading = true;
                     bpInfo.ME = (int)BVC.MEUpDown.Value;
                     bpInfo.TE = (int)BVC.TEUpDown.Value;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
@@ -372,7 +385,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, bpInfo.Manufacture);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
-                    isLoading = true;
                     RunCalcs();
                     isLoading = false;
                 }
@@ -391,11 +403,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 BVC.StartPosition = FormStartPosition.CenterScreen;
                 if (BVC.ShowDialog() == DialogResult.OK)
                 {
+                    isLoading = true;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     SetAllReactionValues(bpInfo.MaxRuns, BVC.MakeItemCheckbox.Checked);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
-                    isLoading = true;
                     RunCalcs();
                     isLoading = false;
                 }
@@ -850,9 +862,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ProductionCostUnitLabel.Text = "";
             InputVolumeLabel.Text = "";
             OutcomeVolumeLabel.Text = "";
-            InputTaxLabel.Text = "";
-            OutputBuyTaxes.Text = "";
-            OutputSellTaxes.Text = "";
             DetailsProductLabel.Text = "";
             DetailsImagePanel.BackgroundImage = null;
             HeaderCostUnitLabel.Text = "";
@@ -862,6 +871,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ProfitLabel.Text = "";
             FinalSellPriceNumeric.Value = FinalSellPriceNumeric.Minimum;
             CostBreakdownTextBox.Text = "";
+            leftoverMatsValueLabel.Text = "";
             this.ResumeLayout();
         }
 
@@ -1154,18 +1164,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                                this.currentBuildPlan.IndustrySettings.InputOrderType);
                     IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
                     decimal inputTaxPerItem = totalInputTaxes / optimumBuild.TotalQuantityNeeded;
-                    InputTaxLabel.Text = CommonHelper.FormatIsk(inputTaxPerItem) + " Per Item";
-
+                    
                     decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
                                                                                 (int)Enums.Enums.OrderType.Sell);
-                    OutputSellTaxes.Text = "Sell Order: " + CommonHelper.FormatIsk(outcomeSellTaxes);
-
+                    
                     decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
                                                                                 (int)Enums.Enums.OrderType.Buy);
-                    OutputBuyTaxes.Text = "Buy order: " + CommonHelper.FormatIsk(outcomeBuyTaxes);
-
+                    
                     ProductionCostUnitLabel.Text = CommonHelper.FormatIsk(optimumBuild.PricePerItem);
 
                     //decimal totalCostPerItem = (totalInputPrice / optimumBuild.TotalQuantityNeeded) + (totalJobCost / optimumBuild.TotalQuantityNeeded) + (currentBuildPlan.additionalCosts / optimumBuild.TotalQuantityNeeded);
@@ -1208,8 +1215,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                     ProfitLabel.Text = CommonHelper.FormatIsk(profit);
 
-
-
                     SetCostBreakdownTextBox(inputMaterialCostBeforeTax,
                                             totalInputTaxes,
                                             totalJobCost,
@@ -1218,7 +1223,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                             totalOutComeTaxes,
                                             totalOutcomeIskBeforeTax,
                                             outcomePricePer);
-
+                    decimal wasteValue = BuildPlanHelper.GetValueofWaste(currentBuildPlan);
+                    leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
                 }
             }
         }
@@ -1314,14 +1320,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
             CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
             TreeNode tn;
+            combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
+            TreeNode pricePer;
+            TreeNode priceTotal;
             foreach (var mat in combinedMats)
             {
                 pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
                 tn = new TreeNode();
                 tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName + " | Price: " + CommonHelper.FormatIsk(pricedMat.pricePer);
+                tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName;
                 tn.Tag = mat.materialTypeID;
+
+                pricePer = new TreeNode();
+                pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
+                pricePer.ForeColor = Color.White;
+                tn.Nodes.Add(pricePer);
+
+                priceTotal = new TreeNode();
+                priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(mat.quantityTotal * pricedMat.pricePer);
+                priceTotal.ForeColor = Color.White;
+                tn.Nodes.Add(priceTotal);
+
                 MaterialsPriceTreeView.Nodes.Add(tn);
             }
         }
@@ -1613,13 +1633,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             decimal currentProgress = (decimal)e.ProgressPercentage / (decimal)100;
-            ProgressLabel.Text = "Ensuring Market Prices Progress: " + currentProgress.ToString("P");
+            ProgressLabel.Text = "Getting Market Data Progress: " + currentProgress.ToString("P");
         }
         #endregion
 
         private void FinalSellPriceNumeric_ValueChanged(object sender, EventArgs e)
         {
-            if (FinalSellPriceNumeric.Validate())
+            if (currentBuildPlan != null && !isLoading && FinalSellPriceNumeric.Validate())
             {
                 currentBuildPlan.finalSellPrice = FinalSellPriceNumeric.Value;
                 SetSummaryInformation();

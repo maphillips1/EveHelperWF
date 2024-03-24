@@ -15,6 +15,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     public partial class LootAppraisal : Objects.FormBase
     {
         private List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
+        private bool IgnoreTextChangedEvent = false;
 
         #region "Init"
         public LootAppraisal()
@@ -26,20 +27,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         #region "Events"
         private void AppraiseButton_Click(object sender, EventArgs e)
         {
+            IgnoreTextChangedEvent = true;
             string rawText = InputTextMultiLine.Text;
 
             if (!string.IsNullOrEmpty(rawText))
             {
                 string rawInput = InputTextMultiLine.Text;
-                string[] inputItems = null;
-                if (rawInput.Contains("\r\n"))
-                {
-                    inputItems = InputTextMultiLine.Text.Replace("\t", " ").Split("\r\n");
-                }
-                else if (rawInput.Contains("\n"))
-                {
-                    inputItems = InputTextMultiLine.Text.Replace("\t", " ").Split("\n");
-                }
+                string[] inputItems = InputTextMultiLine.Text.Split("\r\n");
                 if (inputItems != null)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -55,26 +49,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         }
                     }
                 }
-
             }
+            IgnoreTextChangedEvent = false;
         }
 
         private void InputTextMultiLine_TextChanged(object sender, EventArgs e)
         {
-            string text = InputTextMultiLine.Text;
+            if (!IgnoreTextChangedEvent)
+            {
+                IgnoreTextChangedEvent = true;
+                string text = InputTextMultiLine.Text;
 
-            if (text.Contains("\n"))
-            {
-                if (!text.Contains("\r"))
+                string[] inputItems = text.Replace("\r\n", "\n").Replace("\n", "\r\n").Replace("\t", " ").Split("\r\n");
+                if (inputItems != null)
                 {
-                    text = text.Replace("\n", "\r\n");
-                    InputTextMultiLine.Text = text;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (string item in inputItems)
+                    {
+                        stringBuilder.AppendLine(item);
+                    }
+                    InputTextMultiLine.Text = stringBuilder.ToString();
                 }
-            }
-            else
-            {
-                text = text + "\r\n";
-                InputTextMultiLine.Text = text;
+                IgnoreTextChangedEvent = false;
             }
         }
         #endregion

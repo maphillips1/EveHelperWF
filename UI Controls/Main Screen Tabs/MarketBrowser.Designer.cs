@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
             SelectedItemImageWorker = new System.ComponentModel.BackgroundWorker();
             TheraButton = new Button();
@@ -103,6 +103,10 @@
             RegionCombo = new ComboBox();
             SearchResultsTreeView = new TreeView();
             ClearSystemButton = new Button();
+            ClearRegionButton = new Button();
+            HighSecCheckbox = new CheckBox();
+            LowsecCheckbox = new CheckBox();
+            NullSechCheckbox = new CheckBox();
             SelectedItemTabPanel.SuspendLayout();
             OrdersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).BeginInit();
@@ -120,7 +124,7 @@
             // TheraButton
             // 
             TheraButton.ForeColor = Color.Black;
-            TheraButton.Location = new Point(723, 48);
+            TheraButton.Location = new Point(760, 50);
             TheraButton.Margin = new Padding(3, 2, 3, 2);
             TheraButton.Name = "TheraButton";
             TheraButton.Size = new Size(82, 22);
@@ -137,7 +141,7 @@
             SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
-            SystemCombo.Location = new Point(391, 76);
+            SystemCombo.Location = new Point(433, 76);
             SystemCombo.Margin = new Padding(3, 2, 3, 2);
             SystemCombo.Name = "SystemCombo";
             SystemCombo.Size = new Size(133, 23);
@@ -186,6 +190,7 @@
             SelectedItemTabPanel.Location = new Point(256, 138);
             SelectedItemTabPanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemTabPanel.Name = "SelectedItemTabPanel";
+            SelectedItemTabPanel.Padding = new Point(10, 5);
             SelectedItemTabPanel.SelectedIndex = 0;
             SelectedItemTabPanel.Size = new Size(723, 494);
             SelectedItemTabPanel.TabIndex = 27;
@@ -197,11 +202,11 @@
             OrdersTabPage.Controls.Add(SellOrdersGridView);
             OrdersTabPage.Controls.Add(BuyOrdersGridView);
             OrdersTabPage.Controls.Add(label4);
-            OrdersTabPage.Location = new Point(4, 24);
+            OrdersTabPage.Location = new Point(4, 28);
             OrdersTabPage.Margin = new Padding(3, 2, 3, 2);
             OrdersTabPage.Name = "OrdersTabPage";
             OrdersTabPage.Padding = new Padding(3, 2, 3, 2);
-            OrdersTabPage.Size = new Size(715, 466);
+            OrdersTabPage.Size = new Size(715, 462);
             OrdersTabPage.TabIndex = 0;
             OrdersTabPage.Text = "Orders";
             // 
@@ -224,14 +229,14 @@
             SellOrdersGridView.BackgroundColor = Color.Black;
             SellOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SellOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { range, volumeRemaining, minVolume, formattedPrice, locationName, duration, issued, isBuyOrder, locationID, orderID, price, systemID, typeID, volumeTotal });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = Color.Black;
+            dataGridViewCellStyle16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle16.ForeColor = Color.White;
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
+            SellOrdersGridView.DefaultCellStyle = dataGridViewCellStyle16;
             SellOrdersGridView.GridColor = Color.Black;
             SellOrdersGridView.Location = new Point(9, 25);
             SellOrdersGridView.Margin = new Padding(3, 2, 3, 2);
@@ -252,9 +257,9 @@
             // volumeRemaining
             // 
             volumeRemaining.DataPropertyName = "volume_remain";
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = "0";
-            volumeRemaining.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle14.Format = "N0";
+            dataGridViewCellStyle14.NullValue = "0";
+            volumeRemaining.DefaultCellStyle = dataGridViewCellStyle14;
             volumeRemaining.HeaderText = "Remaining";
             volumeRemaining.MinimumWidth = 6;
             volumeRemaining.Name = "volumeRemaining";
@@ -271,9 +276,9 @@
             // formattedPrice
             // 
             formattedPrice.DataPropertyName = "FormattedPriceString";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            formattedPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle15.Format = "C2";
+            dataGridViewCellStyle15.NullValue = null;
+            formattedPrice.DefaultCellStyle = dataGridViewCellStyle15;
             formattedPrice.HeaderText = "Price";
             formattedPrice.MinimumWidth = 6;
             formattedPrice.Name = "formattedPrice";
@@ -374,21 +379,21 @@
             BuyOrdersGridView.BackgroundColor = Color.Black;
             BuyOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             BuyOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, formattedPriceColumn, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.Black;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = Color.Black;
+            dataGridViewCellStyle19.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle19.ForeColor = Color.White;
+            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.False;
+            BuyOrdersGridView.DefaultCellStyle = dataGridViewCellStyle19;
             BuyOrdersGridView.GridColor = Color.Black;
             BuyOrdersGridView.Location = new Point(9, 253);
             BuyOrdersGridView.Margin = new Padding(3, 2, 3, 2);
             BuyOrdersGridView.Name = "BuyOrdersGridView";
             BuyOrdersGridView.RowHeadersWidth = 51;
             BuyOrdersGridView.RowTemplate.Height = 29;
-            BuyOrdersGridView.Size = new Size(700, 208);
+            BuyOrdersGridView.Size = new Size(700, 204);
             BuyOrdersGridView.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn1
@@ -402,9 +407,9 @@
             // dataGridViewTextBoxColumn2
             // 
             dataGridViewTextBoxColumn2.DataPropertyName = "volume_remain";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle17.Format = "N0";
+            dataGridViewCellStyle17.NullValue = "0";
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle17;
             dataGridViewTextBoxColumn2.HeaderText = "Remaining";
             dataGridViewTextBoxColumn2.MinimumWidth = 6;
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -421,9 +426,9 @@
             // formattedPriceColumn
             // 
             formattedPriceColumn.DataPropertyName = "FormattedPriceString";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            formattedPriceColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle18.Format = "C2";
+            dataGridViewCellStyle18.NullValue = null;
+            formattedPriceColumn.DefaultCellStyle = dataGridViewCellStyle18;
             formattedPriceColumn.HeaderText = "Price";
             formattedPriceColumn.MinimumWidth = 6;
             formattedPriceColumn.Name = "formattedPriceColumn";
@@ -530,11 +535,11 @@
             // 
             PriceHistoryTabPage.BackColor = Color.FromArgb(54, 57, 53);
             PriceHistoryTabPage.Controls.Add(PriceHistoryGridView);
-            PriceHistoryTabPage.Location = new Point(4, 24);
+            PriceHistoryTabPage.Location = new Point(4, 28);
             PriceHistoryTabPage.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryTabPage.Name = "PriceHistoryTabPage";
             PriceHistoryTabPage.Padding = new Padding(3, 2, 3, 2);
-            PriceHistoryTabPage.Size = new Size(715, 466);
+            PriceHistoryTabPage.Size = new Size(715, 462);
             PriceHistoryTabPage.TabIndex = 1;
             PriceHistoryTabPage.Text = "Price History";
             // 
@@ -544,14 +549,14 @@
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = Color.Black;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle26.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = Color.Black;
+            dataGridViewCellStyle26.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle26.ForeColor = Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle26;
             PriceHistoryGridView.Dock = DockStyle.Fill;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(3, 2);
@@ -559,14 +564,14 @@
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(709, 462);
+            PriceHistoryGridView.Size = new Size(709, 458);
             PriceHistoryGridView.TabIndex = 0;
             // 
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle7.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle20.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle20;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -575,10 +580,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle8.Format = "N0";
-            dataGridViewCellStyle8.NullValue = "0";
-            dataGridViewCellStyle8.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle21.Format = "N0";
+            dataGridViewCellStyle21.NullValue = "0";
+            dataGridViewCellStyle21.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle21;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -587,10 +592,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle9.Format = "N0";
-            dataGridViewCellStyle9.NullValue = "0";
-            dataGridViewCellStyle9.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle22.Format = "N0";
+            dataGridViewCellStyle22.NullValue = "0";
+            dataGridViewCellStyle22.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle22;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -599,10 +604,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "0";
-            dataGridViewCellStyle10.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle23.Format = "N0";
+            dataGridViewCellStyle23.NullValue = "0";
+            dataGridViewCellStyle23.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle23;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -611,10 +616,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = "0";
-            dataGridViewCellStyle11.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle24.Format = "N0";
+            dataGridViewCellStyle24.NullValue = "0";
+            dataGridViewCellStyle24.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle24;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -623,8 +628,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle12.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle25.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle25;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -634,10 +639,10 @@
             // 
             tabPage2.BackColor = Color.FromArgb(2, 23, 38);
             tabPage2.Controls.Add(priceHistoryGraph1);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 28);
             tabPage2.Margin = new Padding(3, 2, 3, 2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(715, 466);
+            tabPage2.Size = new Size(715, 462);
             tabPage2.TabIndex = 2;
             tabPage2.Text = "Price History Graph";
             // 
@@ -648,13 +653,13 @@
             priceHistoryGraph1.Location = new Point(0, 0);
             priceHistoryGraph1.Name = "priceHistoryGraph1";
             priceHistoryGraph1.SelectedTimePeriod = 0;
-            priceHistoryGraph1.Size = new Size(715, 466);
+            priceHistoryGraph1.Size = new Size(715, 462);
             priceHistoryGraph1.TabIndex = 0;
             // 
             // RensButton
             // 
             RensButton.ForeColor = Color.Black;
-            RensButton.Location = new Point(635, 48);
+            RensButton.Location = new Point(672, 50);
             RensButton.Margin = new Padding(3, 2, 3, 2);
             RensButton.Name = "RensButton";
             RensButton.Size = new Size(82, 22);
@@ -667,7 +672,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(328, 75);
+            label2.Location = new Point(370, 75);
             label2.Name = "label2";
             label2.Size = new Size(57, 19);
             label2.TabIndex = 18;
@@ -677,7 +682,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(328, 49);
+            label1.Location = new Point(370, 49);
             label1.Name = "label1";
             label1.Size = new Size(56, 19);
             label1.TabIndex = 17;
@@ -701,12 +706,12 @@
             SearchTextBox.Name = "SearchTextBox";
             SearchTextBox.Size = new Size(144, 23);
             SearchTextBox.TabIndex = 19;
-            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+            SearchTextBox.KeyUp += SearchTextBox_KeyDown;
             // 
             // AmarrButton
             // 
             AmarrButton.ForeColor = Color.Black;
-            AmarrButton.Location = new Point(548, 75);
+            AmarrButton.Location = new Point(585, 77);
             AmarrButton.Margin = new Padding(3, 2, 3, 2);
             AmarrButton.Name = "AmarrButton";
             AmarrButton.Size = new Size(82, 22);
@@ -718,7 +723,7 @@
             // DodixieButton
             // 
             DodixieButton.ForeColor = Color.Black;
-            DodixieButton.Location = new Point(635, 75);
+            DodixieButton.Location = new Point(672, 77);
             DodixieButton.Margin = new Padding(3, 2, 3, 2);
             DodixieButton.Name = "DodixieButton";
             DodixieButton.Size = new Size(82, 22);
@@ -730,7 +735,7 @@
             // JitaButton
             // 
             JitaButton.ForeColor = Color.Black;
-            JitaButton.Location = new Point(548, 48);
+            JitaButton.Location = new Point(585, 50);
             JitaButton.Margin = new Padding(3, 2, 3, 2);
             JitaButton.Name = "JitaButton";
             JitaButton.Size = new Size(82, 22);
@@ -747,7 +752,7 @@
             RegionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
-            RegionCombo.Location = new Point(391, 49);
+            RegionCombo.Location = new Point(433, 49);
             RegionCombo.Margin = new Padding(3, 2, 3, 2);
             RegionCombo.Name = "RegionCombo";
             RegionCombo.Size = new Size(133, 23);
@@ -771,20 +776,84 @@
             // ClearSystemButton
             // 
             ClearSystemButton.ForeColor = Color.Black;
-            ClearSystemButton.Location = new Point(400, 103);
+            ClearSystemButton.Location = new Point(388, 103);
             ClearSystemButton.Margin = new Padding(3, 2, 3, 2);
             ClearSystemButton.Name = "ClearSystemButton";
-            ClearSystemButton.Size = new Size(113, 22);
+            ClearSystemButton.Size = new Size(178, 22);
             ClearSystemButton.TabIndex = 31;
-            ClearSystemButton.Text = "Clear System";
+            ClearSystemButton.Text = "All Systems in Region";
             ClearSystemButton.UseVisualStyleBackColor = true;
             ClearSystemButton.Click += ClearSystemButton_Click;
+            // 
+            // ClearRegionButton
+            // 
+            ClearRegionButton.ForeColor = Color.Black;
+            ClearRegionButton.Location = new Point(266, 103);
+            ClearRegionButton.Margin = new Padding(3, 2, 3, 2);
+            ClearRegionButton.Name = "ClearRegionButton";
+            ClearRegionButton.Size = new Size(113, 22);
+            ClearRegionButton.TabIndex = 32;
+            ClearRegionButton.Text = "All Regions";
+            ClearRegionButton.UseVisualStyleBackColor = true;
+            ClearRegionButton.Click += ClearRegionButton_Click;
+            // 
+            // HighSecCheckbox
+            // 
+            HighSecCheckbox.AutoSize = true;
+            HighSecCheckbox.Checked = true;
+            HighSecCheckbox.CheckState = CheckState.Checked;
+            HighSecCheckbox.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            HighSecCheckbox.ForeColor = Color.FromArgb(128, 255, 128);
+            HighSecCheckbox.Location = new Point(861, 50);
+            HighSecCheckbox.Margin = new Padding(2);
+            HighSecCheckbox.Name = "HighSecCheckbox";
+            HighSecCheckbox.Size = new Size(87, 23);
+            HighSecCheckbox.TabIndex = 37;
+            HighSecCheckbox.Text = "High Sec";
+            HighSecCheckbox.UseVisualStyleBackColor = true;
+            HighSecCheckbox.CheckedChanged += HisecCheckbox_CheckedChanged;
+            // 
+            // LowsecCheckbox
+            // 
+            LowsecCheckbox.AutoSize = true;
+            LowsecCheckbox.Checked = true;
+            LowsecCheckbox.CheckState = CheckState.Checked;
+            LowsecCheckbox.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            LowsecCheckbox.ForeColor = Color.FromArgb(255, 192, 128);
+            LowsecCheckbox.Location = new Point(861, 80);
+            LowsecCheckbox.Margin = new Padding(2);
+            LowsecCheckbox.Name = "LowsecCheckbox";
+            LowsecCheckbox.Size = new Size(82, 23);
+            LowsecCheckbox.TabIndex = 38;
+            LowsecCheckbox.Text = "Low Sec";
+            LowsecCheckbox.UseVisualStyleBackColor = true;
+            LowsecCheckbox.CheckedChanged += LowsecCheckbox_CheckedChanged;
+            // 
+            // NullSechCheckbox
+            // 
+            NullSechCheckbox.AutoSize = true;
+            NullSechCheckbox.Checked = true;
+            NullSechCheckbox.CheckState = CheckState.Checked;
+            NullSechCheckbox.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            NullSechCheckbox.ForeColor = Color.FromArgb(255, 128, 128);
+            NullSechCheckbox.Location = new Point(861, 110);
+            NullSechCheckbox.Margin = new Padding(2);
+            NullSechCheckbox.Name = "NullSechCheckbox";
+            NullSechCheckbox.Size = new Size(48, 23);
+            NullSechCheckbox.TabIndex = 39;
+            NullSechCheckbox.Text = "0.0";
+            NullSechCheckbox.UseVisualStyleBackColor = true;
+            NullSechCheckbox.CheckedChanged += NullSechCheckbox_CheckedChanged;
             // 
             // MarketBrowser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(991, 634);
+            Controls.Add(NullSechCheckbox);
+            Controls.Add(LowsecCheckbox);
+            Controls.Add(HighSecCheckbox);
+            Controls.Add(ClearRegionButton);
             Controls.Add(ClearSystemButton);
             Controls.Add(TheraButton);
             Controls.Add(SystemCombo);
@@ -883,5 +952,9 @@
         private DataGridViewTextBoxColumn High;
         private DataGridViewTextBoxColumn volume;
         private DataGridViewTextBoxColumn orderCount;
+        private Button ClearRegionButton;
+        private CheckBox HighSecCheckbox;
+        private CheckBox LowsecCheckbox;
+        private CheckBox NullSechCheckbox;
     }
 }

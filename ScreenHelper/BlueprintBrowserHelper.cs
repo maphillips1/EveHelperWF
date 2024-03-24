@@ -359,30 +359,6 @@ namespace EveHelperWF.ScreenHelper
             return CopyImplantItems;
         }
 
-        public static List<Objects.ComboListItem> GetStructureRigComboItems()
-        {
-            if (StructureManufacturingMERigs == null)
-            {
-                StructureManufacturingMERigs = new List<Objects.ComboListItem>();
-
-                Objects.ComboListItem noneItem = new Objects.ComboListItem();
-                noneItem.value = "None";
-                noneItem.key = 0;
-                StructureManufacturingMERigs.Add(noneItem);
-
-                Objects.ComboListItem tech1Item = new Objects.ComboListItem();
-                tech1Item.value = "Tech 1";
-                tech1Item.key = 1;
-                StructureManufacturingMERigs.Add(tech1Item);
-
-                Objects.ComboListItem tech2Item = new Objects.ComboListItem();
-                tech2Item.value = "Tech 2";
-                tech2Item.key = 2;
-                StructureManufacturingMERigs.Add(tech2Item);
-            }
-            return StructureManufacturingMERigs;
-        }
-
         public static List<Objects.Decryptor> GetDecryptors()
         {
             Decryptors = new List<Objects.Decryptor>();
@@ -482,7 +458,12 @@ namespace EveHelperWF.ScreenHelper
             List<Objects.InventoryType> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<TreeNode> foundTypes = new List<TreeNode>();
 
-            invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
+            string[] splitstring = searchText.Trim().Split(' ');
+
+            foreach (string searchPart in splitstring)
+            {
+                invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchPart.ToLowerInvariant()));
+            }
 
             if (invTypes.Count > 0)
             {
@@ -671,7 +652,7 @@ namespace EveHelperWF.ScreenHelper
                 bool isBuyOrder = (inputPriceType == 2);
                 foreach (Objects.MaterialsWithMarketData mat in mats)
                 {
-                    if ( (mat.Buildable ||mat.Reactable) && buildComponetns)
+                    if ( (mat.Buildable) && buildComponetns)
                     {
                         mat.priceTotal = 0;
                         continue;
@@ -876,7 +857,7 @@ namespace EveHelperWF.ScreenHelper
                 quantityTotal *= calculationHelperClass.Runs;
 
                 //If the blueprint requires 1 of each item the next ME calc does not apply because
-                //it will always require 1 item per run.
+                //it will always require 1 item per run./
                 if (quantityTotal > calculationHelperClass.Runs)
                 {
                     //Step 3 = Apply the structure ME Bonuses

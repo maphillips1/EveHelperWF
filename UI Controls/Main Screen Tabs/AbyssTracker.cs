@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
@@ -134,15 +135,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 if (!String.IsNullOrWhiteSpace(LootTextBox.Text))
                 {
-                    string[] splitItems = null;
-                    if (LootTextBox.Text.Contains("\r\n"))
-                    {
-                        splitItems = LootTextBox.Text.Replace("\t", " ").Split("\r\n");
-                    }
-                    else if (LootTextBox.Text.Contains("\n"))
-                    {
-                        splitItems = LootTextBox.Text.Replace("\t", " ").Split("\n");
-                    }
+                    string[] splitItems = LootTextBox.Text.Split("\r\n");
 
                     List<AppraisedItem> appraisedItems = AppraisalHelper.ParseTypeIds(splitItems);
 
@@ -173,34 +166,33 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Reset Loot TextBox
                 LootTextBox.Text = string.Empty;
                 MessageBox.Show("Added Run!");
-                ignoreChangedEvent = false;
                 this.Cursor = Cursors.Default;
             }
             else
             {
                 MessageBox.Show("Enter the Filament Type and Ship Type");
             }
+            ignoreChangedEvent = false;
         }
 
         private void LootTextBox_TextChanged(object sender, EventArgs e)
         {
             if (!ignoreChangedEvent)
             {
+                ignoreChangedEvent = true;
                 string text = LootTextBox.Text;
 
-                if (text.Contains("\n"))
+                string[] inputItems = text.Replace("\r\n", "\n").Replace("\n", "\r\n").Replace("\t", " ").Split("\r\n");
+                if (inputItems != null)
                 {
-                    if (!text.Contains("\r"))
+                    StringBuilder stringBuilder = new StringBuilder();
+                    foreach (string item in inputItems)
                     {
-                        text = text.Replace("\n", "\r\n");
-                        LootTextBox.Text = text;
+                        stringBuilder.AppendLine(item);
                     }
+                    LootTextBox.Text = stringBuilder.ToString();
                 }
-                else
-                {
-                    text = text + "\r\n";
-                    LootTextBox.Text = text;
-                }
+                ignoreChangedEvent = false;
             }
         }
         #endregion
