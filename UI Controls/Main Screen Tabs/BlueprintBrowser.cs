@@ -1,6 +1,8 @@
 using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
+using EveHelperWF.UI_Controls.Main_Screen_Tabs;
+using EveHelperWF.UI_Controls.Support_Screens;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -353,47 +355,47 @@ namespace EveHelperWF
         private void LoadStructureRigCombos()
         {
             ManuRigMEBonusCombo.BindingContext = new BindingContext();
-            ManuRigMEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ManuRigMEBonusCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             ManuRigMEBonusCombo.DisplayMember = "Value";
             ManuRigMEBonusCombo.ValueMember = "Key";
 
             ManuRigTEBonusCombo.BindingContext = new BindingContext();
-            ManuRigTEBonusCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ManuRigTEBonusCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             ManuRigTEBonusCombo.DisplayMember = "Value";
             ManuRigTEBonusCombo.ValueMember = "Key";
 
             ReactionStructureMERig.BindingContext = new BindingContext();
-            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ReactionStructureMERig.DataSource = CommonHelper.GetStructureBonusComboItems();
             ReactionStructureMERig.DisplayMember = "Value";
             ReactionStructureMERig.ValueMember = "Key";
 
             ReactionStructureTERig.BindingContext = new BindingContext();
-            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ReactionStructureTERig.DataSource = CommonHelper.GetStructureBonusComboItems();
             ReactionStructureTERig.DisplayMember = "Value";
             ReactionStructureTERig.ValueMember = "Key";
 
             InventionStructureCostRigCombo.BindingContext = new BindingContext();
-            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            InventionStructureCostRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             InventionStructureCostRigCombo.DisplayMember = "Value";
             InventionStructureCostRigCombo.ValueMember = "Key";
 
             InventionStructureTimeRigCombo.BindingContext = new BindingContext();
-            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            InventionStructureTimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
 
             METimeRigCombo.BindingContext = new BindingContext();
-            METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            METimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             METimeRigCombo.DisplayMember = "Value";
             METimeRigCombo.ValueMember = "Key";
 
             TEStructRigCombo.BindingContext = new BindingContext();
-            TEStructRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            TEStructRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             TEStructRigCombo.DisplayMember = "Value";
             TEStructRigCombo.ValueMember = "Key";
 
             CopyTimeRigCombo.BindingContext = new BindingContext();
-            CopyTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            CopyTimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             CopyTimeRigCombo.DisplayMember = "Value";
             CopyTimeRigCombo.ValueMember = "Key";
 
@@ -433,12 +435,20 @@ namespace EveHelperWF
         #region "Form Events"
         private void TreeViewList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeViewSelectionChanged(TreeViewList.SelectedNode);
+            if (TreeViewList.SelectedNode != null)
+            {
+                TreeViewSelectionChanged(TreeViewList.SelectedNode);
+                TreeViewList.SelectedNode = null;
+            }
         }
 
         private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeViewSelectionChanged(SearchResultsTreeView.SelectedNode);
+            if (SearchResultsTreeView.SelectedNode != null)
+            {
+                TreeViewSelectionChanged(SearchResultsTreeView.SelectedNode);
+                SearchResultsTreeView.SelectedNode = null;
+            }
         }
 
         private void TreeViewSelectionChanged(TreeNode selectedNode)
@@ -497,14 +507,6 @@ namespace EveHelperWF
             }
         }
 
-        private void SearchTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)(Keys.Enter))
-            {
-                SearchButton_Click(sender, new EventArgs());
-            }
-        }
-
         private void SearchButton_Click(object sender, EventArgs e)
         {
             SearchResultsTreeView.Nodes.Clear();
@@ -531,6 +533,26 @@ namespace EveHelperWF
         private void CopyToClipboardButton_Click(object sender, EventArgs e)
         {
             CopyMatsToClipboard();
+        }
+
+        private void CreateBuildPlanButton_Click(object sender, EventArgs e)
+        {
+            FileNameDialog fnd = new FileNameDialog("Name for Build Plan");
+            if (fnd.ShowDialog() == DialogResult.OK)
+            {
+                BuildPlan newBuildPlan = new BuildPlan();
+                newBuildPlan.BuildPlanName = fnd.FileNameTextBox.Text + ".json";
+                newBuildPlan.finalProductTypeID = ManuProds[0].productTypeID;
+                newBuildPlan.RunsPerCopy = Convert.ToInt32(RunsUpDown.Value);
+                newBuildPlan.NumOfCopies = 1;
+                BuildPlansControl buildPlansControl = new BuildPlansControl(newBuildPlan);
+                buildPlansControl.Show(this.Owner);
+            }
+        }
+
+        private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            SearchButton_Click(sender, new EventArgs());
         }
         #endregion
 

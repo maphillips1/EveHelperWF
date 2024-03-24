@@ -70,6 +70,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void JitaButton_Click(object sender, EventArgs e)
         {
+            HighSecCheckbox.Checked = true;
             RegionCombo.SelectedValue = Enums.Enums.TheForgeRegionId;
             LoadSystems(Enums.Enums.TheForgeRegionId);
             SystemCombo.SelectedValue = Enums.Enums.JitaSystemId;
@@ -82,6 +83,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AmarrButton_Click(object sender, EventArgs e)
         {
+            HighSecCheckbox.Checked = true;
             RegionCombo.SelectedValue = Enums.Enums.DomainRegionID;
             LoadSystems(Enums.Enums.DomainRegionID);
             SystemCombo.SelectedValue = Enums.Enums.AmarrSystemID;
@@ -94,6 +96,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void RensButton_Click(object sender, EventArgs e)
         {
+            HighSecCheckbox.Checked = true;
             RegionCombo.SelectedValue = Enums.Enums.HeimatarRegionID;
             LoadSystems(Enums.Enums.HeimatarRegionID);
             SystemCombo.SelectedValue = Enums.Enums.RensSystemID;
@@ -106,6 +109,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void DodixieButton_Click(object sender, EventArgs e)
         {
+            HighSecCheckbox.Checked = true;
             RegionCombo.SelectedValue = Enums.Enums.SinqLiason;
             LoadSystems(Enums.Enums.SinqLiason);
             SystemCombo.SelectedValue = Enums.Enums.DodixieSystemID;
@@ -141,7 +145,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             else
             {
-                MessageBox.Show("You must select a region", "Enter Region");
+                if (SelectedTypeID > 0)
+                {
+                    LoadDataForSelectedType();
+                }
             }
         }
 
@@ -171,7 +178,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             string searchText = SearchTextBox.Text.ToLowerInvariant();
             if (!string.IsNullOrWhiteSpace(searchText))
             {
-                List<TreeNode> foundNodes = MarketBrowserHelper.SearchBlueprints(searchText);
+                List<TreeNode> foundNodes = MarketBrowserHelper.SearchInventoryTypes(searchText);
                 if (foundNodes.Count > 0)
                 {
                     SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
@@ -181,16 +188,21 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchButton_Click(sender, new EventArgs());
-            }
+            SearchButton_Click(sender, new EventArgs());
         }
 
         private void ClearSystemButton_Click(object sender, EventArgs e)
         {
-            SystemCombo.SelectedValue = 0;
-            SystemCombo_SelectedIndexChanged(sender, e);
+            int regionId = Convert.ToInt32(RegionCombo.SelectedValue);
+            if (regionId > 0)
+            {
+                SystemCombo.SelectedValue = 0;
+                SystemCombo_SelectedIndexChanged(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Select a region", "Error");
+            }
         }
         #endregion
 
@@ -198,9 +210,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadMarketData(int selectedTypeId)
         {
-            int regionID = (int)RegionCombo.SelectedValue;
-            int systemID = (int)SystemCombo.SelectedValue;
-            selectedTypeMarketOrders = ScreenHelper.MarketBrowserHelper.GetMarketOrders(selectedTypeId, regionID, systemID);
+            int regionID = Convert.ToInt32(RegionCombo.SelectedValue);
+            int systemID = Convert.ToInt32(SystemCombo.SelectedValue);
+            if (regionID > 0)
+            {
+                selectedTypeMarketOrders = ScreenHelper.MarketBrowserHelper.GetMarketOrders(selectedTypeId, regionID, systemID, HighSecCheckbox.Checked, LowsecCheckbox.Checked, NullSechCheckbox.Checked);
+            }
+            else
+            {
+                selectedTypeMarketOrders = MarketBrowserHelper.GetOrdersForAllRegions(selectedTypeId, regions, HighSecCheckbox.Checked, LowsecCheckbox.Checked, NullSechCheckbox.Checked);
+            }
         }
 
         private void DatabindGrids()
@@ -218,7 +237,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadDataForSelectedType()
         {
-            int regionID = (int)RegionCombo.SelectedValue;
+            int regionID = Convert.ToInt32(RegionCombo.SelectedValue);
             LoadMarketData(SelectedTypeID);
             MarketBrowserHelper.FillInventoryTypeInformation(ref selectedTypeMarketOrders);
             SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
@@ -287,5 +306,53 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
         #endregion
+
+        private void ClearRegionButton_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmResult = MessageBox.Show("This will take a while. Are you sure you want to load data from all regions?",
+                                     "Confirm All Regions!!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                RegionCombo.SelectedValue = -1;
+                SystemCombo.SelectedValue = -1;
+                if (SelectedTypeID > 0)
+                {
+                    LoadDataForSelectedType();
+                }
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void NullSechCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void LowsecCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+            this.Cursor = Cursors.Default;
+        }
+
+        private void HisecCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (SelectedTypeID > 0)
+            {
+                LoadDataForSelectedType();
+            }
+            this.Cursor = Cursors.Default;
+        }
     }
 }

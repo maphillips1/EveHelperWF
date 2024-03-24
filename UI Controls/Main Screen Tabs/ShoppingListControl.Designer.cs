@@ -77,8 +77,6 @@
             // 
             // ShoppingListCombo
             // 
-            ShoppingListCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
-            ShoppingListCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ShoppingListCombo.DropDownHeight = 150;
             ShoppingListCombo.FormattingEnabled = true;
             ShoppingListCombo.IntegralHeight = false;

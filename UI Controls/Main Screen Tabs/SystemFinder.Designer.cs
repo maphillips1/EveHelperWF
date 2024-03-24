@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemFinder));
             SolarSystemResultsGrid = new DataGridView();
             regionName = new DataGridViewTextBoxColumn();
@@ -74,14 +73,14 @@
             SolarSystemResultsGrid.BackgroundColor = Color.Black;
             SolarSystemResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SolarSystemResultsGrid.Columns.AddRange(new DataGridViewColumn[] { regionName, constellationName, systemName, security, regionID, constellationID, solarSystemID });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
             SolarSystemResultsGrid.Dock = DockStyle.Bottom;
             SolarSystemResultsGrid.GridColor = Color.Black;
             SolarSystemResultsGrid.Location = new Point(0, 231);
@@ -356,6 +355,9 @@
             // 
             // RegionCombobox
             // 
+            RegionCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            RegionCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            RegionCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
             RegionCombobox.FormattingEnabled = true;
             RegionCombobox.Location = new Point(70, 151);
             RegionCombobox.Margin = new Padding(3, 2, 3, 2);
@@ -403,6 +405,9 @@
             // 
             // StationComboBox
             // 
+            StationComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            StationComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            StationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             StationComboBox.FormattingEnabled = true;
             StationComboBox.Location = new Point(399, 81);
             StationComboBox.Margin = new Padding(3, 2, 3, 2);

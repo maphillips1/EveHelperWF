@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EveHelperWF.ScreenHelper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,12 +63,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             StructureCombo.ValueMember = "Key";
 
             StructureMERigCombo.BindingContext = new BindingContext();
-            StructureMERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            StructureMERigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             StructureMERigCombo.DisplayMember = "Value";
             StructureMERigCombo.ValueMember = "Key";
 
             StructureTERigCombo.BindingContext = new BindingContext();
-            StructureTERigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            StructureTERigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             StructureTERigCombo.DisplayMember = "Value";
             StructureTERigCombo.ValueMember = "Key";
 
@@ -88,12 +89,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             InventionStructureCombo.ValueMember = "Key";
 
             InventionStructureCostRigCombo.BindingContext = new BindingContext();
-            InventionStructureCostRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            InventionStructureCostRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             InventionStructureCostRigCombo.DisplayMember = "Value";
             InventionStructureCostRigCombo.ValueMember = "Key";
 
             InventionStructureTimeRigCombo.BindingContext = new BindingContext();
-            InventionStructureTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            InventionStructureTimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             InventionStructureTimeRigCombo.DisplayMember = "Value";
             InventionStructureTimeRigCombo.ValueMember = "Key";
 
@@ -114,12 +115,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ReactionStructureCombo.ValueMember = "Key";
 
             ReactionStructureMERig.BindingContext = new BindingContext();
-            ReactionStructureMERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ReactionStructureMERig.DataSource = CommonHelper.GetStructureBonusComboItems();
             ReactionStructureMERig.DisplayMember = "Value";
             ReactionStructureMERig.ValueMember = "Key";
 
             ReactionStructureTERig.BindingContext = new BindingContext();
-            ReactionStructureTERig.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            ReactionStructureTERig.DataSource = CommonHelper.GetStructureBonusComboItems();
             ReactionStructureTERig.DisplayMember = "Value";
             ReactionStructureTERig.ValueMember = "Key";
 
@@ -139,7 +140,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             CopyImplantCombo.ValueMember = "Key";
 
             CopyTimeRigCombo.BindingContext = new BindingContext();
-            CopyTimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            CopyTimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             CopyTimeRigCombo.DisplayMember = "Value";
             CopyTimeRigCombo.ValueMember = "Key";
 
@@ -159,7 +160,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             MEImplantCombo.ValueMember = "Key";
 
             METimeRigCombo.BindingContext = new BindingContext();
-            METimeRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            METimeRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             METimeRigCombo.DisplayMember = "Value";
             METimeRigCombo.ValueMember = "Key";
 
@@ -179,7 +180,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             TEImplantCombo.ValueMember = "Key";
 
             TEStructRigCombo.BindingContext = new BindingContext();
-            TEStructRigCombo.DataSource = ScreenHelper.BlueprintBrowserHelper.GetStructureRigComboItems();
+            TEStructRigCombo.DataSource = CommonHelper.GetStructureBonusComboItems();
             TEStructRigCombo.DisplayMember = "Value";
             TEStructRigCombo.ValueMember = "Key";
 
@@ -330,7 +331,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.CopyRunsCopy = (int)CopyRunsCopyUpDown.Value;
             DefaultFormValues.CopySystemID = (int)CopySystemCombo.SelectedValue;
             DefaultFormValues.CopyStructureTypeId = (int)CopyStructureCombo.SelectedValue;
-            DefaultFormValues.CopyStructureRig = (int)CopyTimeRigCombo.SelectedValue;
+            DefaultFormValues.CopyStructureRig = Convert.ToInt32(CopyTimeRigCombo.SelectedValue);
             DefaultFormValues.CopyTax = (decimal)CopyTaxUpDown.Value;
             DefaultFormValues.CopyImplantTypeID = (int)CopyImplantCombo.SelectedValue;
 
@@ -339,7 +340,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.METoLevel = (int)METoLevelUpDown.Value;
             DefaultFormValues.MESystemID = (int)MESystemCombo.SelectedValue;
             DefaultFormValues.MEStructureTypeID = (int)MEStructureCombo.SelectedValue;
-            DefaultFormValues.MEStructureRIg = (int)METimeRigCombo.SelectedValue;
+            DefaultFormValues.MEStructureRIg = Convert.ToInt32(METimeRigCombo.SelectedValue);
             DefaultFormValues.METax = (decimal)METaxUpDown.Value;
             DefaultFormValues.MEImplantTypeID = (int)MEImplantCombo.SelectedValue;
 
@@ -348,7 +349,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.TEToLevel = (int)TEToLevelUpDown.Value;
             DefaultFormValues.TESystemID = (int)TESystemCombo.SelectedValue;
             DefaultFormValues.TEStructureTypeID = (int)TEStructureCombo.SelectedValue;
-            DefaultFormValues.TEStructureRIg = (int)TEStructRigCombo.SelectedValue;
+            DefaultFormValues.TEStructureRIg = Convert.ToInt32(TEStructRigCombo.SelectedValue);
             DefaultFormValues.TETax = (decimal)TETaxUpDown.Value;
             DefaultFormValues.TEImplantTypeID = (int)TEImplantCombo.SelectedValue;
 

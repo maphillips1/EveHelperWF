@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Label label15;
             Label label1;
             Label label9;
             Label label8;
@@ -71,8 +70,7 @@
             Label label19;
             Label label29;
             Label label18;
-            Label label5;
-            Label label51;
+            Label label27;
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -82,11 +80,9 @@
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
+            leftoverMatsValueLabel = new Label();
             ProfitLabel = new Label();
             IskNeededForPlanLabel = new Label();
-            OutputSellTaxes = new Label();
-            OutputBuyTaxes = new Label();
-            InputTaxLabel = new Label();
             SaveNotesButton = new Button();
             NotesTextBox = new TextBox();
             InputVolumeLabel = new Label();
@@ -160,7 +156,6 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
-            label15 = new Label();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -203,8 +198,7 @@
             label19 = new Label();
             label29 = new Label();
             label18 = new Label();
-            label5 = new Label();
-            label51 = new Label();
+            label27 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -229,15 +223,6 @@
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
             SuspendLayout();
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(109, 82);
-            label15.Name = "label15";
-            label15.Size = new Size(489, 15);
-            label15.TabIndex = 7;
-            label15.Text = "If an item can be built, Selecting the checkbox will show the required materials for that item";
             // 
             // label1
             // 
@@ -283,7 +268,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(43, 210);
+            label6.Location = new Point(43, 240);
             label6.Name = "label6";
             label6.Size = new Size(116, 17);
             label6.TabIndex = 6;
@@ -293,7 +278,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(19, 240);
+            label4.Location = new Point(19, 270);
             label4.Name = "label4";
             label4.Size = new Size(140, 17);
             label4.TabIndex = 4;
@@ -303,7 +288,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(8, 180);
+            label3.Location = new Point(8, 210);
             label3.Name = "label3";
             label3.Size = new Size(151, 17);
             label3.TabIndex = 3;
@@ -313,7 +298,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(14, 150);
+            label2.Location = new Point(14, 180);
             label2.Name = "label2";
             label2.Size = new Size(145, 17);
             label2.TabIndex = 2;
@@ -681,38 +666,25 @@
             label18.TabIndex = 24;
             label18.Text = "Final Product Sell Price";
             // 
-            // label5
+            // label27
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(36, 300);
-            label5.Name = "label5";
-            label5.Size = new Size(123, 17);
-            label5.TabIndex = 18;
-            label5.Text = "Output Tax Per Item";
-            // 
-            // label51
-            // 
-            label51.AutoSize = true;
-            label51.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label51.Location = new Point(48, 270);
-            label51.Name = "label51";
-            label51.Size = new Size(111, 17);
-            label51.TabIndex = 16;
-            label51.Text = "Input Taxes / Item";
+            label27.AutoSize = true;
+            label27.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label27.Location = new Point(20, 150);
+            label27.Name = "label27";
+            label27.Size = new Size(139, 17);
+            label27.TabIndex = 25;
+            label27.Text = "Value of Leftover Mats";
             // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
+            SummaryPage.Controls.Add(leftoverMatsValueLabel);
+            SummaryPage.Controls.Add(label27);
             SummaryPage.Controls.Add(ProfitLabel);
             SummaryPage.Controls.Add(label29);
             SummaryPage.Controls.Add(IskNeededForPlanLabel);
             SummaryPage.Controls.Add(label19);
-            SummaryPage.Controls.Add(OutputSellTaxes);
-            SummaryPage.Controls.Add(OutputBuyTaxes);
-            SummaryPage.Controls.Add(label5);
-            SummaryPage.Controls.Add(InputTaxLabel);
-            SummaryPage.Controls.Add(label51);
             SummaryPage.Controls.Add(SaveNotesButton);
             SummaryPage.Controls.Add(label9);
             SummaryPage.Controls.Add(NotesTextBox);
@@ -727,12 +699,22 @@
             SummaryPage.Controls.Add(label2);
             SummaryPage.Controls.Add(ProductLabel);
             SummaryPage.Controls.Add(FinalProductImagePanel);
-            SummaryPage.Location = new Point(4, 24);
+            SummaryPage.Location = new Point(4, 31);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1532, 526);
+            SummaryPage.Size = new Size(1532, 519);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
+            // 
+            // leftoverMatsValueLabel
+            // 
+            leftoverMatsValueLabel.AutoSize = true;
+            leftoverMatsValueLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            leftoverMatsValueLabel.Location = new Point(184, 150);
+            leftoverMatsValueLabel.Name = "leftoverMatsValueLabel";
+            leftoverMatsValueLabel.Size = new Size(127, 17);
+            leftoverMatsValueLabel.TabIndex = 26;
+            leftoverMatsValueLabel.Text = "[Leftover Mats Value";
             // 
             // ProfitLabel
             // 
@@ -754,36 +736,6 @@
             IskNeededForPlanLabel.TabIndex = 22;
             IskNeededForPlanLabel.Text = "[Isk Needed for plan]";
             // 
-            // OutputSellTaxes
-            // 
-            OutputSellTaxes.AutoSize = true;
-            OutputSellTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputSellTaxes.Location = new Point(184, 300);
-            OutputSellTaxes.Name = "OutputSellTaxes";
-            OutputSellTaxes.Size = new Size(116, 17);
-            OutputSellTaxes.TabIndex = 20;
-            OutputSellTaxes.Text = "[Output Sell Taxes]";
-            // 
-            // OutputBuyTaxes
-            // 
-            OutputBuyTaxes.AutoSize = true;
-            OutputBuyTaxes.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutputBuyTaxes.Location = new Point(184, 330);
-            OutputBuyTaxes.Name = "OutputBuyTaxes";
-            OutputBuyTaxes.Size = new Size(116, 17);
-            OutputBuyTaxes.TabIndex = 19;
-            OutputBuyTaxes.Text = "[Output Buy Taxes]";
-            // 
-            // InputTaxLabel
-            // 
-            InputTaxLabel.AutoSize = true;
-            InputTaxLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            InputTaxLabel.Location = new Point(184, 270);
-            InputTaxLabel.Name = "InputTaxLabel";
-            InputTaxLabel.Size = new Size(81, 17);
-            InputTaxLabel.TabIndex = 17;
-            InputTaxLabel.Text = "[Input Taxes]";
-            // 
             // SaveNotesButton
             // 
             SaveNotesButton.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
@@ -802,14 +754,14 @@
             NotesTextBox.Location = new Point(6, 371);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 147);
+            NotesTextBox.Size = new Size(382, 140);
             NotesTextBox.TabIndex = 13;
             // 
             // InputVolumeLabel
             // 
             InputVolumeLabel.AutoSize = true;
             InputVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            InputVolumeLabel.Location = new Point(184, 210);
+            InputVolumeLabel.Location = new Point(184, 240);
             InputVolumeLabel.Name = "InputVolumeLabel";
             InputVolumeLabel.Size = new Size(92, 17);
             InputVolumeLabel.TabIndex = 12;
@@ -819,7 +771,7 @@
             // 
             OutcomeVolumeLabel.AutoSize = true;
             OutcomeVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutcomeVolumeLabel.Location = new Point(184, 240);
+            OutcomeVolumeLabel.Location = new Point(184, 270);
             OutcomeVolumeLabel.Name = "OutcomeVolumeLabel";
             OutcomeVolumeLabel.Size = new Size(116, 17);
             OutcomeVolumeLabel.TabIndex = 10;
@@ -829,7 +781,7 @@
             // 
             ProductionCostUnitLabel.AutoSize = true;
             ProductionCostUnitLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            ProductionCostUnitLabel.Location = new Point(184, 180);
+            ProductionCostUnitLabel.Location = new Point(184, 210);
             ProductionCostUnitLabel.Name = "ProductionCostUnitLabel";
             ProductionCostUnitLabel.Size = new Size(109, 17);
             ProductionCostUnitLabel.TabIndex = 9;
@@ -839,7 +791,7 @@
             // 
             OutcomeQuantityLabel.AutoSize = true;
             OutcomeQuantityLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            OutcomeQuantityLabel.Location = new Point(184, 150);
+            OutcomeQuantityLabel.Location = new Point(184, 180);
             OutcomeQuantityLabel.Name = "OutcomeQuantityLabel";
             OutcomeQuantityLabel.Size = new Size(156, 17);
             OutcomeQuantityLabel.TabIndex = 8;
@@ -855,7 +807,7 @@
             SummaryMarketData.Dock = DockStyle.Right;
             SummaryMarketData.Location = new Point(394, 3);
             SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(1135, 520);
+            SummaryMarketData.Size = new Size(1135, 513);
             SummaryMarketData.TabIndex = 7;
             // 
             // JitaBuyLabel
@@ -899,7 +851,7 @@
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1117, 437);
+            PriceHistoryGridView.Size = new Size(1117, 430);
             PriceHistoryGridView.TabIndex = 5;
             // 
             // date
@@ -999,11 +951,11 @@
             MaterialPricePage.Controls.Add(label52);
             MaterialPricePage.Controls.Add(label11);
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
-            MaterialPricePage.Location = new Point(4, 24);
+            MaterialPricePage.Location = new Point(4, 31);
             MaterialPricePage.Name = "MaterialPricePage";
-            MaterialPricePage.Size = new Size(1532, 526);
+            MaterialPricePage.Size = new Size(1532, 519);
             MaterialPricePage.TabIndex = 2;
-            MaterialPricePage.Text = "Materials & Prices";
+            MaterialPricePage.Text = "3.) Materials & Prices";
             // 
             // FinalSellPriceNumeric
             // 
@@ -1026,7 +978,7 @@
             MaterialsPriceTreeView.Location = new Point(9, 104);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(599, 414);
+            MaterialsPriceTreeView.Size = new Size(599, 407);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
             // 
@@ -1058,11 +1010,11 @@
             IndustrySettingsTabPage.BackColor = Color.FromArgb(2, 23, 38);
             IndustrySettingsTabPage.BorderStyle = BorderStyle.FixedSingle;
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
-            IndustrySettingsTabPage.Location = new Point(4, 24);
+            IndustrySettingsTabPage.Location = new Point(4, 31);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
-            IndustrySettingsTabPage.Size = new Size(1532, 526);
+            IndustrySettingsTabPage.Size = new Size(1532, 519);
             IndustrySettingsTabPage.TabIndex = 3;
-            IndustrySettingsTabPage.Text = "System/Structure/Order Type Info";
+            IndustrySettingsTabPage.Text = "2.) System/Structure/Order Type";
             // 
             // DefaultsTabContainer
             // 
@@ -1074,8 +1026,9 @@
             DefaultsTabContainer.Location = new Point(0, 22);
             DefaultsTabContainer.Margin = new Padding(3, 2, 3, 2);
             DefaultsTabContainer.Name = "DefaultsTabContainer";
+            DefaultsTabContainer.Padding = new Point(10, 5);
             DefaultsTabContainer.SelectedIndex = 0;
-            DefaultsTabContainer.Size = new Size(1530, 495);
+            DefaultsTabContainer.Size = new Size(1530, 488);
             DefaultsTabContainer.TabIndex = 1;
             // 
             // ManufacturingDefaultsTabPage
@@ -1093,11 +1046,11 @@
             ManufacturingDefaultsTabPage.Controls.Add(label24);
             ManufacturingDefaultsTabPage.Controls.Add(label25);
             ManufacturingDefaultsTabPage.Controls.Add(label26);
-            ManufacturingDefaultsTabPage.Location = new Point(4, 24);
+            ManufacturingDefaultsTabPage.Location = new Point(4, 28);
             ManufacturingDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             ManufacturingDefaultsTabPage.Name = "ManufacturingDefaultsTabPage";
             ManufacturingDefaultsTabPage.Padding = new Padding(3, 2, 3, 2);
-            ManufacturingDefaultsTabPage.Size = new Size(1522, 467);
+            ManufacturingDefaultsTabPage.Size = new Size(1522, 456);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
             // 
@@ -1179,10 +1132,10 @@
             ReactionsDefaultTabPage.Controls.Add(label38);
             ReactionsDefaultTabPage.Controls.Add(label39);
             ReactionsDefaultTabPage.Controls.Add(ReactionSolarSystemCombo);
-            ReactionsDefaultTabPage.Location = new Point(4, 24);
+            ReactionsDefaultTabPage.Location = new Point(4, 28);
             ReactionsDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             ReactionsDefaultTabPage.Name = "ReactionsDefaultTabPage";
-            ReactionsDefaultTabPage.Size = new Size(1522, 467);
+            ReactionsDefaultTabPage.Size = new Size(1522, 456);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
             // 
@@ -1248,9 +1201,9 @@
             SkillsPage.Controls.Add(AccountingLevelUpDown);
             SkillsPage.Controls.Add(label40);
             SkillsPage.Controls.Add(label41);
-            SkillsPage.Location = new Point(4, 24);
+            SkillsPage.Location = new Point(4, 28);
             SkillsPage.Name = "SkillsPage";
-            SkillsPage.Size = new Size(1522, 467);
+            SkillsPage.Size = new Size(1522, 456);
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
             // 
@@ -1282,9 +1235,9 @@
             OrderTypePage.Controls.Add(label49);
             OrderTypePage.Controls.Add(label50);
             OrderTypePage.ForeColor = Color.White;
-            OrderTypePage.Location = new Point(4, 24);
+            OrderTypePage.Location = new Point(4, 28);
             OrderTypePage.Name = "OrderTypePage";
-            OrderTypePage.Size = new Size(1522, 467);
+            OrderTypePage.Size = new Size(1522, 456);
             OrderTypePage.TabIndex = 8;
             OrderTypePage.Text = "Order Types";
             // 
@@ -1348,14 +1301,13 @@
             DetailsPage.Controls.Add(label16);
             DetailsPage.Controls.Add(label12);
             DetailsPage.Controls.Add(CollapseAllButton);
-            DetailsPage.Controls.Add(label15);
             DetailsPage.Controls.Add(MaterialsTreeView);
             DetailsPage.Controls.Add(DetailsProductLabel);
             DetailsPage.Controls.Add(DetailsImagePanel);
-            DetailsPage.Location = new Point(4, 24);
+            DetailsPage.Location = new Point(4, 31);
             DetailsPage.Name = "DetailsPage";
             DetailsPage.Padding = new Padding(3);
-            DetailsPage.Size = new Size(1532, 526);
+            DetailsPage.Size = new Size(1532, 519);
             DetailsPage.TabIndex = 1;
             DetailsPage.Text = "Build Details";
             // 
@@ -1392,7 +1344,7 @@
             OptimizedBuildTreeView.ItemHeight = 30;
             OptimizedBuildTreeView.Location = new Point(854, 104);
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
-            OptimizedBuildTreeView.Size = new Size(662, 414);
+            OptimizedBuildTreeView.Size = new Size(662, 407);
             OptimizedBuildTreeView.TabIndex = 16;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
             // 
@@ -1418,7 +1370,7 @@
             MaterialsTreeView.ItemHeight = 30;
             MaterialsTreeView.Location = new Point(9, 107);
             MaterialsTreeView.Name = "MaterialsTreeView";
-            MaterialsTreeView.Size = new Size(671, 411);
+            MaterialsTreeView.Size = new Size(671, 404);
             MaterialsTreeView.TabIndex = 6;
             // 
             // DetailsProductLabel
@@ -1444,9 +1396,9 @@
             // 
             PlanetaryMaterialsTabPage.BackColor = Color.FromArgb(2, 23, 38);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
-            PlanetaryMaterialsTabPage.Location = new Point(4, 24);
+            PlanetaryMaterialsTabPage.Location = new Point(4, 31);
             PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
-            PlanetaryMaterialsTabPage.Size = new Size(1532, 526);
+            PlanetaryMaterialsTabPage.Size = new Size(1532, 519);
             PlanetaryMaterialsTabPage.TabIndex = 4;
             PlanetaryMaterialsTabPage.Text = "Planetary Materials";
             // 
@@ -1458,7 +1410,7 @@
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
             PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
-            PlanetMaterialsTreeView.Size = new Size(677, 515);
+            PlanetMaterialsTreeView.Size = new Size(677, 508);
             PlanetMaterialsTreeView.TabIndex = 0;
             // 
             // BPReactionTabPage
@@ -1468,11 +1420,11 @@
             BPReactionTabPage.Controls.Add(SetBlueprintButton);
             BPReactionTabPage.Controls.Add(label54);
             BPReactionTabPage.Controls.Add(BPTreeView);
-            BPReactionTabPage.Location = new Point(4, 24);
+            BPReactionTabPage.Location = new Point(4, 31);
             BPReactionTabPage.Name = "BPReactionTabPage";
-            BPReactionTabPage.Size = new Size(1532, 526);
+            BPReactionTabPage.Size = new Size(1532, 519);
             BPReactionTabPage.TabIndex = 5;
-            BPReactionTabPage.Text = "BP & Reaction Settings";
+            BPReactionTabPage.Text = "1.) BP & Reaction Settings";
             // 
             // SetReactionsButton
             // 
@@ -1507,7 +1459,7 @@
             BPTreeView.ItemHeight = 30;
             BPTreeView.Location = new Point(9, 81);
             BPTreeView.Name = "BPTreeView";
-            BPTreeView.Size = new Size(671, 437);
+            BPTreeView.Size = new Size(671, 430);
             BPTreeView.TabIndex = 7;
             BPTreeView.AfterSelect += BPTreeView_AfterSelect;
             // 
@@ -1545,15 +1497,18 @@
             // BuildPlanTabControl
             // 
             BuildPlanTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BuildPlanTabControl.Appearance = TabAppearance.Buttons;
             BuildPlanTabControl.Controls.Add(SummaryPage);
-            BuildPlanTabControl.Controls.Add(MaterialPricePage);
-            BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
             BuildPlanTabControl.Controls.Add(BPReactionTabPage);
+            BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
+            BuildPlanTabControl.Controls.Add(MaterialPricePage);
             BuildPlanTabControl.Controls.Add(DetailsPage);
             BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
             BuildPlanTabControl.Controls.Add(CostBreakdownPage);
+            BuildPlanTabControl.HotTrack = true;
             BuildPlanTabControl.Location = new Point(-1, 80);
             BuildPlanTabControl.Name = "BuildPlanTabControl";
+            BuildPlanTabControl.Padding = new Point(10, 5);
             BuildPlanTabControl.SelectedIndex = 0;
             BuildPlanTabControl.Size = new Size(1540, 554);
             BuildPlanTabControl.TabIndex = 4;
@@ -1562,9 +1517,9 @@
             // 
             CostBreakdownPage.BackColor = Color.FromArgb(2, 23, 38);
             CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
-            CostBreakdownPage.Location = new Point(4, 24);
+            CostBreakdownPage.Location = new Point(4, 31);
             CostBreakdownPage.Name = "CostBreakdownPage";
-            CostBreakdownPage.Size = new Size(1532, 526);
+            CostBreakdownPage.Size = new Size(1532, 519);
             CostBreakdownPage.TabIndex = 6;
             CostBreakdownPage.Text = "Cost Breakdown";
             // 
@@ -1579,7 +1534,7 @@
             CostBreakdownTextBox.Name = "CostBreakdownTextBox";
             CostBreakdownTextBox.ReadOnly = true;
             CostBreakdownTextBox.ScrollBars = ScrollBars.Both;
-            CostBreakdownTextBox.Size = new Size(603, 515);
+            CostBreakdownTextBox.Size = new Size(603, 508);
             CostBreakdownTextBox.TabIndex = 0;
             // 
             // LoadProductImageBackgroundWorker
@@ -1596,6 +1551,7 @@
             RunsPerCopyUpDown.Size = new Size(184, 23);
             RunsPerCopyUpDown.TabIndex = 6;
             RunsPerCopyUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            RunsPerCopyUpDown.ValueChanged += RunsPerCopy_Leave;
             RunsPerCopyUpDown.KeyUp += Numeric_KeyUp;
             RunsPerCopyUpDown.Leave += RunsPerCopy_Leave;
             // 
@@ -1631,6 +1587,7 @@
             NumberCopiesUpDown.Size = new Size(184, 23);
             NumberCopiesUpDown.TabIndex = 50;
             NumberCopiesUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            NumberCopiesUpDown.ValueChanged += NumCopies_Leave;
             NumberCopiesUpDown.KeyUp += Numeric_KeyUp;
             NumberCopiesUpDown.Leave += NumCopies_Leave;
             // 
@@ -1819,8 +1776,6 @@
         private TabPage CostBreakdownPage;
         private TextBox CostBreakdownTextBox;
         private NumericUpDown FinalSellPriceNumeric;
-        private Label OutputSellTaxes;
-        private Label OutputBuyTaxes;
-        private Label InputTaxLabel;
+        private Label leftoverMatsValueLabel;
     }
 }

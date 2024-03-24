@@ -33,7 +33,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static InventoryTypeWIthMarketOrders GetMarketOrders(int selectedTypeID, int regionID, int systemID)
+        public static InventoryTypeWIthMarketOrders GetMarketOrders(int selectedTypeID, int regionID, int systemID, bool highSec, bool lowSec, bool nullSec)
         {
             InventoryTypeWIthMarketOrders inventoryTypeWIthMarketOrders = new InventoryTypeWIthMarketOrders();
 
@@ -41,23 +41,84 @@ namespace EveHelperWF.ScreenHelper
             inventoryTypeWIthMarketOrders.BuyOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(selectedTypeID, regionID, true);
             inventoryTypeWIthMarketOrders.SellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(selectedTypeID, regionID, false);
 
-            if (inventoryTypeWIthMarketOrders.BuyOrders.Count > 0)
+            List<long> systemsToCheck = new List<long>();
+            if (inventoryTypeWIthMarketOrders.BuyOrders != null && inventoryTypeWIthMarketOrders.BuyOrders.Count > 0)
             {
                 if (systemID > 0)
                 {
                     inventoryTypeWIthMarketOrders.BuyOrders = inventoryTypeWIthMarketOrders.BuyOrders.FindAll(x => x.system_id == systemID).ToList();
                 }
                 inventoryTypeWIthMarketOrders.BuyOrders = inventoryTypeWIthMarketOrders.BuyOrders.OrderByDescending(x => x.price).ToList();
+                foreach (MarketOrder order in inventoryTypeWIthMarketOrders.BuyOrders)
+                {
+                    if (!systemsToCheck.Contains(order.system_id))
+                    {
+                        systemsToCheck.Add(order.system_id);
+                    }
+                }
             }
 
-            if (inventoryTypeWIthMarketOrders.SellOrders.Count > 0)
+            if (inventoryTypeWIthMarketOrders.SellOrders != null && inventoryTypeWIthMarketOrders.SellOrders.Count > 0)
             {
                 if (systemID > 0)
                 {
                     inventoryTypeWIthMarketOrders.SellOrders = inventoryTypeWIthMarketOrders.SellOrders.FindAll(x => x.system_id == systemID).ToList();
                 }
                 inventoryTypeWIthMarketOrders.SellOrders = inventoryTypeWIthMarketOrders.SellOrders.OrderBy(x => x.price).ToList();
+                foreach (MarketOrder order in inventoryTypeWIthMarketOrders.SellOrders)
+                {
+                    if (!systemsToCheck.Contains(order.system_id))
+                    {
+                        systemsToCheck.Add(order.system_id);
+                    }
+                }
             }
+
+            if (!highSec || !lowSec || !nullSec)
+            {
+                SolarSystem solarSystem;
+                foreach (long systemId in systemsToCheck)
+                {
+                    solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == systemId);
+                    if (solarSystem != null)
+                    {
+                        if (!highSec && solarSystem.security > (decimal)0.4)
+                        {
+                            if (inventoryTypeWIthMarketOrders.BuyOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.BuyOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                            if (inventoryTypeWIthMarketOrders.SellOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.SellOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                        }
+                        else if (!lowSec && solarSystem.security > (decimal)0.0 && solarSystem.security < (decimal)0.5)
+                        {
+                            if (inventoryTypeWIthMarketOrders.BuyOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.BuyOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                            if (inventoryTypeWIthMarketOrders.SellOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.SellOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                        }
+                        else if (!nullSec && solarSystem.security < (decimal)0.1)
+                        {
+                            if (inventoryTypeWIthMarketOrders.BuyOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.BuyOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                            if (inventoryTypeWIthMarketOrders.SellOrders != null)
+                            {
+                                inventoryTypeWIthMarketOrders.SellOrders.RemoveAll(x => x.system_id == systemId);
+                            }
+                        }
+                    }
+                }
+            }
+
 
             return inventoryTypeWIthMarketOrders;
         }
@@ -259,9 +320,15 @@ namespace EveHelperWF.ScreenHelper
             return priceHistory;
         }
 
-        public static List<TreeNode> SearchBlueprints(string searchText)
+        public static List<TreeNode> SearchInventoryTypes(string searchText)
         {
-            List<Objects.InventoryType> invTypes = InventoryTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchText));
+            string[] splitString = searchText.Split(' ');
+
+            List<Objects.InventoryType> invTypes = CommonHelper.InventoryTypes;
+            foreach (string searchPart in splitString)
+            {
+                invTypes = invTypes.FindAll(x => x.typeName.ToLowerInvariant().Contains(searchPart.ToLowerInvariant()));
+            }
             List<TreeNode> foundTypes = new List<TreeNode>();
 
             if (invTypes.Count > 0)
@@ -278,6 +345,35 @@ namespace EveHelperWF.ScreenHelper
             }
 
             return foundTypes;
+        }
+
+        public static InventoryTypeWIthMarketOrders GetOrdersForAllRegions(int selectedTypeId, List<Objects.Region> regions, bool highSec, bool lowSec, bool nullSec)
+        {
+            InventoryTypeWIthMarketOrders allRegionType = new InventoryTypeWIthMarketOrders();
+            allRegionType.typeId = selectedTypeId;
+            allRegionType.BuyOrders = new List<MarketOrder>();
+            allRegionType.SellOrders = new List<MarketOrder>();
+            InventoryTypeWIthMarketOrders currentOrderType;
+            foreach (Objects.Region region in regions)
+            {
+                currentOrderType = GetMarketOrders(selectedTypeId, region.regionID, 0, highSec, lowSec, nullSec);
+                if (currentOrderType != null)
+                {
+                    if (currentOrderType.BuyOrders != null && currentOrderType.BuyOrders.Count > 0)
+                    {
+                        allRegionType.BuyOrders.AddRange(currentOrderType.BuyOrders);
+                    }
+                    if (currentOrderType.SellOrders != null && currentOrderType.SellOrders.Count > 0)
+                    {
+                        allRegionType.SellOrders.AddRange(currentOrderType.SellOrders);
+                    }
+                }
+            }
+            
+            allRegionType.BuyOrders = allRegionType.BuyOrders.OrderByDescending(x => x.price).ToList();
+            allRegionType.SellOrders = allRegionType.SellOrders.OrderBy(x => x.price).ToList();
+
+            return allRegionType;
         }
     }
 }

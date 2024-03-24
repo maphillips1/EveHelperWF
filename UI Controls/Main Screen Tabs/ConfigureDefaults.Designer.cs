@@ -131,12 +131,12 @@
             label64 = new Label();
             label66 = new Label();
             label67 = new Label();
-            SaveButton = new Button();
             SkillsPage = new TabPage();
             BrokerRelationsLevelUpDown = new NumericUpDown();
             AccountingLevelUpDown = new NumericUpDown();
             label16 = new Label();
             label21 = new Label();
+            SaveButton = new Button();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -181,6 +181,7 @@
             DefaultsTabContainer.Location = new Point(0, 54);
             DefaultsTabContainer.Margin = new Padding(3, 2, 3, 2);
             DefaultsTabContainer.Name = "DefaultsTabContainer";
+            DefaultsTabContainer.Padding = new Point(10, 5);
             DefaultsTabContainer.SelectedIndex = 0;
             DefaultsTabContainer.Size = new Size(612, 268);
             DefaultsTabContainer.TabIndex = 0;
@@ -196,11 +197,11 @@
             MainDefaultTabPage.Controls.Add(label3);
             MainDefaultTabPage.Controls.Add(label2);
             MainDefaultTabPage.Controls.Add(label1);
-            MainDefaultTabPage.Location = new Point(4, 24);
+            MainDefaultTabPage.Location = new Point(4, 28);
             MainDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             MainDefaultTabPage.Name = "MainDefaultTabPage";
             MainDefaultTabPage.Padding = new Padding(3, 2, 3, 2);
-            MainDefaultTabPage.Size = new Size(604, 240);
+            MainDefaultTabPage.Size = new Size(604, 236);
             MainDefaultTabPage.TabIndex = 0;
             MainDefaultTabPage.Text = "Main";
             // 
@@ -216,6 +217,9 @@
             // 
             // OutputOrderTypeCombo
             // 
+            OutputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            OutputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            OutputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             OutputOrderTypeCombo.FormattingEnabled = true;
             OutputOrderTypeCombo.Location = new Point(167, 82);
             OutputOrderTypeCombo.Margin = new Padding(2);
@@ -225,6 +229,9 @@
             // 
             // InputOrderTypeCombo
             // 
+            InputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InputOrderTypeCombo.FormattingEnabled = true;
             InputOrderTypeCombo.Location = new Point(167, 45);
             InputOrderTypeCombo.Margin = new Padding(2);
@@ -312,11 +319,11 @@
             ManufacturingDefaultsTabPage.Controls.Add(label13);
             ManufacturingDefaultsTabPage.Controls.Add(label14);
             ManufacturingDefaultsTabPage.Controls.Add(label15);
-            ManufacturingDefaultsTabPage.Location = new Point(4, 24);
+            ManufacturingDefaultsTabPage.Location = new Point(4, 28);
             ManufacturingDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             ManufacturingDefaultsTabPage.Name = "ManufacturingDefaultsTabPage";
             ManufacturingDefaultsTabPage.Padding = new Padding(3, 2, 3, 2);
-            ManufacturingDefaultsTabPage.Size = new Size(604, 240);
+            ManufacturingDefaultsTabPage.Size = new Size(604, 236);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
             // 
@@ -332,6 +339,9 @@
             // 
             // StructureTERigCombo
             // 
+            StructureTERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            StructureTERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            StructureTERigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             StructureTERigCombo.FormattingEnabled = true;
             StructureTERigCombo.Location = new Point(140, 184);
             StructureTERigCombo.Margin = new Padding(2);
@@ -341,6 +351,9 @@
             // 
             // StructureMERigCombo
             // 
+            StructureMERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            StructureMERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            StructureMERigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             StructureMERigCombo.FormattingEnabled = true;
             StructureMERigCombo.Location = new Point(140, 149);
             StructureMERigCombo.Margin = new Padding(2);
@@ -350,6 +363,9 @@
             // 
             // StructureCombo
             // 
+            StructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            StructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            StructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             StructureCombo.FormattingEnabled = true;
             StructureCombo.Location = new Point(140, 116);
             StructureCombo.Margin = new Padding(2);
@@ -359,6 +375,9 @@
             // 
             // ImplantCombo
             // 
+            ImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ImplantCombo.FormattingEnabled = true;
             ImplantCombo.Location = new Point(429, 48);
             ImplantCombo.Margin = new Padding(2);
@@ -566,10 +585,10 @@
             InventionDefaultsTabPage.Controls.Add(label29);
             InventionDefaultsTabPage.Controls.Add(label28);
             InventionDefaultsTabPage.Controls.Add(label27);
-            InventionDefaultsTabPage.Location = new Point(4, 24);
+            InventionDefaultsTabPage.Location = new Point(4, 28);
             InventionDefaultsTabPage.Margin = new Padding(3, 2, 3, 2);
             InventionDefaultsTabPage.Name = "InventionDefaultsTabPage";
-            InventionDefaultsTabPage.Size = new Size(604, 240);
+            InventionDefaultsTabPage.Size = new Size(604, 236);
             InventionDefaultsTabPage.TabIndex = 2;
             InventionDefaultsTabPage.Text = "Invention";
             // 
@@ -584,6 +603,9 @@
             // 
             // InventionDecryptorCombo
             // 
+            InventionDecryptorCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InventionDecryptorCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InventionDecryptorCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionDecryptorCombo.FormattingEnabled = true;
             InventionDecryptorCombo.Location = new Point(131, 135);
             InventionDecryptorCombo.Margin = new Padding(2);
@@ -593,6 +615,9 @@
             // 
             // InventionStructureTimeRigCombo
             // 
+            InventionStructureTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InventionStructureTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InventionStructureTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionStructureTimeRigCombo.FormattingEnabled = true;
             InventionStructureTimeRigCombo.Location = new Point(131, 105);
             InventionStructureTimeRigCombo.Margin = new Padding(2);
@@ -602,6 +627,9 @@
             // 
             // InventionStructureCostRigCombo
             // 
+            InventionStructureCostRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InventionStructureCostRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InventionStructureCostRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionStructureCostRigCombo.FormattingEnabled = true;
             InventionStructureCostRigCombo.Location = new Point(131, 73);
             InventionStructureCostRigCombo.Margin = new Padding(2);
@@ -611,6 +639,9 @@
             // 
             // InventionStructureCombo
             // 
+            InventionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            InventionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            InventionStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             InventionStructureCombo.FormattingEnabled = true;
             InventionStructureCombo.Location = new Point(131, 40);
             InventionStructureCombo.Margin = new Padding(2);
@@ -711,10 +742,10 @@
             ReactionsDefaultTabPage.Controls.Add(label18);
             ReactionsDefaultTabPage.Controls.Add(label17);
             ReactionsDefaultTabPage.Controls.Add(ReactionSolarSystemCombo);
-            ReactionsDefaultTabPage.Location = new Point(4, 24);
+            ReactionsDefaultTabPage.Location = new Point(4, 28);
             ReactionsDefaultTabPage.Margin = new Padding(3, 2, 3, 2);
             ReactionsDefaultTabPage.Name = "ReactionsDefaultTabPage";
-            ReactionsDefaultTabPage.Size = new Size(604, 240);
+            ReactionsDefaultTabPage.Size = new Size(604, 236);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
             // 
@@ -740,6 +771,9 @@
             // 
             // ReactionStructureTERig
             // 
+            ReactionStructureTERig.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ReactionStructureTERig.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ReactionStructureTERig.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionStructureTERig.FormattingEnabled = true;
             ReactionStructureTERig.Location = new Point(122, 122);
             ReactionStructureTERig.Margin = new Padding(2);
@@ -760,6 +794,9 @@
             // 
             // ReactionStructureMERig
             // 
+            ReactionStructureMERig.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ReactionStructureMERig.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ReactionStructureMERig.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionStructureMERig.FormattingEnabled = true;
             ReactionStructureMERig.Location = new Point(122, 86);
             ReactionStructureMERig.Margin = new Padding(2);
@@ -780,6 +817,9 @@
             // 
             // ReactionStructureCombo
             // 
+            ReactionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            ReactionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            ReactionStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionStructureCombo.FormattingEnabled = true;
             ReactionStructureCombo.Location = new Point(122, 52);
             ReactionStructureCombo.Margin = new Padding(2);
@@ -841,10 +881,10 @@
             CopyPage.Controls.Add(label75);
             CopyPage.Controls.Add(label76);
             CopyPage.Controls.Add(label77);
-            CopyPage.Location = new Point(4, 24);
+            CopyPage.Location = new Point(4, 28);
             CopyPage.Margin = new Padding(3, 2, 3, 2);
             CopyPage.Name = "CopyPage";
-            CopyPage.Size = new Size(604, 240);
+            CopyPage.Size = new Size(604, 236);
             CopyPage.TabIndex = 4;
             CopyPage.Text = "Copying";
             // 
@@ -917,6 +957,9 @@
             // 
             // CopyImplantCombo
             // 
+            CopyImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CopyImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            CopyImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             CopyImplantCombo.FormattingEnabled = true;
             CopyImplantCombo.Location = new Point(102, 195);
             CopyImplantCombo.Margin = new Padding(2);
@@ -938,6 +981,9 @@
             // 
             // CopyTimeRigCombo
             // 
+            CopyTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CopyTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            CopyTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             CopyTimeRigCombo.FormattingEnabled = true;
             CopyTimeRigCombo.Location = new Point(103, 129);
             CopyTimeRigCombo.Margin = new Padding(2);
@@ -958,6 +1004,9 @@
             // 
             // CopyStructureCombo
             // 
+            CopyStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            CopyStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            CopyStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             CopyStructureCombo.FormattingEnabled = true;
             CopyStructureCombo.Location = new Point(103, 97);
             CopyStructureCombo.Margin = new Padding(2);
@@ -1015,10 +1064,10 @@
             MEPage.Controls.Add(label60);
             MEPage.Controls.Add(label61);
             MEPage.Controls.Add(label62);
-            MEPage.Location = new Point(4, 24);
+            MEPage.Location = new Point(4, 28);
             MEPage.Margin = new Padding(3, 2, 3, 2);
             MEPage.Name = "MEPage";
-            MEPage.Size = new Size(604, 240);
+            MEPage.Size = new Size(604, 236);
             MEPage.TabIndex = 5;
             MEPage.Text = "ME Research";
             // 
@@ -1090,6 +1139,9 @@
             // 
             // MEImplantCombo
             // 
+            MEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            MEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            MEImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             MEImplantCombo.FormattingEnabled = true;
             MEImplantCombo.Location = new Point(110, 190);
             MEImplantCombo.Margin = new Padding(2);
@@ -1111,6 +1163,9 @@
             // 
             // METimeRigCombo
             // 
+            METimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            METimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            METimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             METimeRigCombo.FormattingEnabled = true;
             METimeRigCombo.Location = new Point(111, 124);
             METimeRigCombo.Margin = new Padding(2);
@@ -1131,6 +1186,9 @@
             // 
             // MEStructureCombo
             // 
+            MEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            MEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            MEStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             MEStructureCombo.FormattingEnabled = true;
             MEStructureCombo.Location = new Point(111, 92);
             MEStructureCombo.Margin = new Padding(2);
@@ -1188,10 +1246,10 @@
             TEPage.Controls.Add(label64);
             TEPage.Controls.Add(label66);
             TEPage.Controls.Add(label67);
-            TEPage.Location = new Point(4, 24);
+            TEPage.Location = new Point(4, 28);
             TEPage.Margin = new Padding(3, 2, 3, 2);
             TEPage.Name = "TEPage";
-            TEPage.Size = new Size(604, 240);
+            TEPage.Size = new Size(604, 236);
             TEPage.TabIndex = 6;
             TEPage.Text = "TE Research";
             // 
@@ -1264,6 +1322,9 @@
             // 
             // TEImplantCombo
             // 
+            TEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            TEImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             TEImplantCombo.FormattingEnabled = true;
             TEImplantCombo.Location = new Point(96, 193);
             TEImplantCombo.Margin = new Padding(2);
@@ -1285,6 +1346,9 @@
             // 
             // TEStructRigCombo
             // 
+            TEStructRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TEStructRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            TEStructRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             TEStructRigCombo.FormattingEnabled = true;
             TEStructRigCombo.Location = new Point(97, 127);
             TEStructRigCombo.Margin = new Padding(2);
@@ -1305,6 +1369,9 @@
             // 
             // TEStructureCombo
             // 
+            TEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            TEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
+            TEStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             TEStructureCombo.FormattingEnabled = true;
             TEStructureCombo.Location = new Point(97, 94);
             TEStructureCombo.Margin = new Padding(2);
@@ -1345,18 +1412,6 @@
             label67.TabIndex = 80;
             label67.Text = "From Level";
             // 
-            // SaveButton
-            // 
-            SaveButton.ForeColor = Color.Black;
-            SaveButton.Location = new Point(10, 9);
-            SaveButton.Margin = new Padding(3, 2, 3, 2);
-            SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(82, 22);
-            SaveButton.TabIndex = 1;
-            SaveButton.Text = "Save";
-            SaveButton.UseVisualStyleBackColor = true;
-            SaveButton.Click += SaveButton_Click;
-            // 
             // SkillsPage
             // 
             SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
@@ -1364,9 +1419,9 @@
             SkillsPage.Controls.Add(AccountingLevelUpDown);
             SkillsPage.Controls.Add(label16);
             SkillsPage.Controls.Add(label21);
-            SkillsPage.Location = new Point(4, 24);
+            SkillsPage.Location = new Point(4, 28);
             SkillsPage.Name = "SkillsPage";
-            SkillsPage.Size = new Size(604, 240);
+            SkillsPage.Size = new Size(604, 236);
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
             // 
@@ -1410,6 +1465,18 @@
             label21.Size = new Size(70, 15);
             label21.TabIndex = 94;
             label21.Text = "Accounting";
+            // 
+            // SaveButton
+            // 
+            SaveButton.ForeColor = Color.Black;
+            SaveButton.Location = new Point(10, 9);
+            SaveButton.Margin = new Padding(3, 2, 3, 2);
+            SaveButton.Name = "SaveButton";
+            SaveButton.Size = new Size(82, 22);
+            SaveButton.TabIndex = 1;
+            SaveButton.Text = "Save";
+            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButton_Click;
             // 
             // ConfigureDefaults
             // 
