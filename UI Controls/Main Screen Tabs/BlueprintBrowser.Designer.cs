@@ -1838,7 +1838,7 @@
             // 
             // ManuTaxUpDown
             // 
-            ManuTaxUpDown.DecimalPlaces = 1;
+            ManuTaxUpDown.DecimalPlaces = 2;
             ManuTaxUpDown.Location = new Point(116, 168);
             ManuTaxUpDown.Margin = new Padding(2);
             ManuTaxUpDown.Name = "ManuTaxUpDown";
@@ -2265,6 +2265,7 @@
             TreeViewList.Name = "TreeViewList";
             TreeViewList.Size = new Size(219, 605);
             TreeViewList.TabIndex = 1;
+            TreeViewList.TabStop = false;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
             // 
             // ManufacturingPanel
@@ -2634,7 +2635,7 @@
             // 
             // CopyTaxUpDown
             // 
-            CopyTaxUpDown.DecimalPlaces = 1;
+            CopyTaxUpDown.DecimalPlaces = 2;
             CopyTaxUpDown.Location = new Point(88, 197);
             CopyTaxUpDown.Margin = new Padding(2);
             CopyTaxUpDown.Name = "CopyTaxUpDown";
@@ -2783,7 +2784,7 @@
             // 
             // METaxUpDown
             // 
-            METaxUpDown.DecimalPlaces = 1;
+            METaxUpDown.DecimalPlaces = 2;
             METaxUpDown.Location = new Point(89, 208);
             METaxUpDown.Margin = new Padding(2);
             METaxUpDown.Name = "METaxUpDown";
@@ -3087,7 +3088,7 @@
             // 
             // TETaxUpDown
             // 
-            TETaxUpDown.DecimalPlaces = 1;
+            TETaxUpDown.DecimalPlaces = 2;
             TETaxUpDown.Location = new Point(90, 199);
             TETaxUpDown.Margin = new Padding(2);
             TETaxUpDown.Name = "TETaxUpDown";
@@ -4143,6 +4144,7 @@
             SearchResultsTreeView.Name = "SearchResultsTreeView";
             SearchResultsTreeView.Size = new Size(219, 157);
             SearchResultsTreeView.TabIndex = 4;
+            SearchResultsTreeView.TabStop = false;
             SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;
             // 
             // BlueprintBrowser

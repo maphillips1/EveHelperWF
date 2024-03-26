@@ -122,14 +122,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
-            AfterSelectHandler(selectedNode);
+            if ( e.Action != TreeViewAction.Unknown)
+            {
+                TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
+                AfterSelectHandler(selectedNode);
+            }
         }
 
         private void MarketListTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = MarketListTreeView.SelectedNode;
-            AfterSelectHandler(selectedNode);
+            if (e.Action != TreeViewAction.Unknown)
+            {
+                TreeNode selectedNode = MarketListTreeView.SelectedNode;
+                AfterSelectHandler(selectedNode);
+            }
         }
 
         private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)

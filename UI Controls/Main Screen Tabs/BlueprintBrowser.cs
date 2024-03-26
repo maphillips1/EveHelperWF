@@ -435,7 +435,7 @@ namespace EveHelperWF
         #region "Form Events"
         private void TreeViewList_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (TreeViewList.SelectedNode != null)
+            if (TreeViewList.SelectedNode != null && e.Action != TreeViewAction.Unknown)
             {
                 TreeViewSelectionChanged(TreeViewList.SelectedNode);
                 TreeViewList.SelectedNode = null;
@@ -444,7 +444,7 @@ namespace EveHelperWF
 
         private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (SearchResultsTreeView.SelectedNode != null)
+            if (SearchResultsTreeView.SelectedNode != null && e.Action != TreeViewAction.Unknown)
             {
                 TreeViewSelectionChanged(SearchResultsTreeView.SelectedNode);
                 SearchResultsTreeView.SelectedNode = null;
@@ -572,7 +572,10 @@ namespace EveHelperWF
                 //Run Numbers
                 RunNumbers(true);
 
-                BlueprintImageBackgroundWorker.RunWorkerAsync();
+                if (!BlueprintImageBackgroundWorker.IsBusy)
+                {
+                    BlueprintImageBackgroundWorker.RunWorkerAsync();
+                }
             }
         }
 

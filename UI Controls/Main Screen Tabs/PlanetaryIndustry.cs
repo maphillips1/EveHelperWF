@@ -82,7 +82,7 @@ namespace EveHelperWF
         #region "Events"
         private void OutputTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (OutputTreeView.SelectedNode != null)
+            if (OutputTreeView.SelectedNode != null && e.Action != TreeViewAction.Unknown)
             {
                 TreeNode selectedNode = OutputTreeView.SelectedNode;
                 if (selectedNode.Tag.ToString().StartsWith("typeID"))
