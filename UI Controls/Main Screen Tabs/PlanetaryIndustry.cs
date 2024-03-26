@@ -146,8 +146,6 @@ namespace EveHelperWF
 
         private void BuildInputScreen(PlanetMaterial selectedType)
         {
-            int hoorizontalMiddle = (int)Math.Floor((decimal)(BubbleTreePanel.Width / 2));
-            int verticalMiddle = (int)Math.Floor((decimal)(BubbleTreePanel.Height / 2));
             System.Windows.Forms.Control.ControlCollection controls = BubbleTreePanel.Controls;
             EventHandlerList eventHandlerList = null;
             foreach (Control item in controls)
@@ -163,6 +161,8 @@ namespace EveHelperWF
                 item.Dispose();
             }
             System.GC.Collect();
+            BubbleTreePanel.Controls.Clear();
+            int verticalMiddle = (int)Math.Floor((decimal)(BubbleTreePanel.Height / 2));
             Label outputTextBox = BuildPlanetItemTextbox(selectedType);
             outputTextBox.Location = new Point(10, verticalMiddle);
             BubbleTreePanel.Controls.Add(outputTextBox);

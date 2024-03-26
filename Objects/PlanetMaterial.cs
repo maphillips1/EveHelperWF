@@ -37,6 +37,21 @@ namespace EveHelperWF.Objects
         }
         public int cycleTime { get; set; }
 
-        public List<PlanetMaterial> Inputs { get; set; }
+        public List<PlanetMaterial> Inputs
+        {
+            get
+            {
+                if(m_Inputs== null)
+                {
+                    m_Inputs = new List<PlanetMaterial>();
+                }
+                return m_Inputs;
+            }
+            set
+            {
+                m_Inputs = value;
+            }
+        }
+        private List<PlanetMaterial> m_Inputs { get; set; }
     }
 }
