@@ -65,6 +65,7 @@
             OutputTreeView.Name = "OutputTreeView";
             OutputTreeView.Size = new Size(237, 762);
             OutputTreeView.TabIndex = 0;
+            OutputTreeView.TabStop = false;
             OutputTreeView.AfterSelect += OutputTreeView_AfterSelect;
             // 
             // SchematicNameLabel

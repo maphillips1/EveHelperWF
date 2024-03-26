@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Label label8;
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemFinder));
             SolarSystemResultsGrid = new DataGridView();
@@ -63,10 +64,21 @@
             SystemNameTextBox = new TextBox();
             label7 = new Label();
             StationComboBox = new ComboBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)SolarSystemResultsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MinSecurityUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxSecurityUpDown).BeginInit();
             SuspendLayout();
+            // 
+            // label8
+            // 
+            label8.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label8.AutoSize = true;
+            label8.Location = new Point(390, 214);
+            label8.Name = "label8";
+            label8.Size = new Size(157, 15);
+            label8.TabIndex = 26;
+            label8.Text = "Double-Click to view system";
             // 
             // SolarSystemResultsGrid
             // 
@@ -420,6 +432,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(559, 573);
+            Controls.Add(label8);
             Controls.Add(StationComboBox);
             Controls.Add(label7);
             Controls.Add(SystemNameTextBox);

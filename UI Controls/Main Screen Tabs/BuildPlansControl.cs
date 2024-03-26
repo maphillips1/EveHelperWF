@@ -231,7 +231,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void OptimizedBuildTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Tag != null)
+            if (e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
             {
                 int optimizedTypeId = (int)(e.Node.Tag);
                 if (optimizedTypeId > 0)
@@ -311,7 +311,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void MaterialsPriceTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (!isLoading && e.Node.Tag != null)
+            if (!isLoading && e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
             {
                 this.isLoading = true;
                 int typeID = (int)(e.Node.Tag);
@@ -336,7 +336,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void BPTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (this.currentBuildPlan != null && !isLoading)
+            if (this.currentBuildPlan != null && !isLoading && e.Action != TreeViewAction.Unknown)
             {
                 if (e.Node.Tag != null)
                 {
@@ -787,12 +787,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             calculationHelperClass.TE = (int)defaultFormValues.ManufacturingTEValue;
             calculationHelperClass.CompME = (int)defaultFormValues.CompMEValue;
             calculationHelperClass.CompTE = (int)defaultFormValues.CompTEValue;
+            calculationHelperClass.ManufacturingStructureRigBonus.RigMEBonus = defaultFormValues.ManufacturingStructureMERigValue;
+            calculationHelperClass.ManufacturingStructureRigBonus.RigTEBonus = defaultFormValues.ManufacturingStructureTERigValue;
 
             //Reactions Values
             calculationHelperClass.ReactionSolarSystemID = defaultFormValues.ReactionsSystemValue;
             calculationHelperClass.ReactionsStructureTypeID = defaultFormValues.ReactionStructureValue;
             calculationHelperClass.ReactionsFacilityTax = defaultFormValues.ReactionTaxValue;
             calculationHelperClass.ReactionStructureRigBonus = new StructureRigBonus();
+            calculationHelperClass.ReactionStructureRigBonus.RigMEBonus = defaultFormValues.ReactionStructureMERigValue;
+            calculationHelperClass.ReactionStructureRigBonus.RigTEBonus = defaultFormValues.ReactionStructureTERigValue;
 
             //Invention Values
             calculationHelperClass.InventBlueprint = defaultFormValues.InventBlueprintValue;
@@ -800,6 +804,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             calculationHelperClass.InventionFacilityTax = defaultFormValues.InventionTaxValue;
             calculationHelperClass.InventionDecryptorId = defaultFormValues.InventionDecryptorValue;
             calculationHelperClass.InventionStructureRigBonus = new StructureRigBonus();
+            calculationHelperClass.InventionStructureRigBonus.RigMEBonus = defaultFormValues.InventionStructureCostRigValue;
+            calculationHelperClass.InventionStructureRigBonus.RigTEBonus = defaultFormValues.InventionStructureTimeRigValue;
 
             //Skills
             calculationHelperClass.AccountingSkill = defaultFormValues.AccountingSKill;
@@ -1082,17 +1088,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         this.ProgressLabel.Text = "Price Information is Loading. This may take some time.";
                         EnsurePriceWorker.RunWorkerAsync(matsForPriceSetting);
                     }
-                }
-                else
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    while (EnsurePriceWorker.IsBusy)
-                    {
-                        //do nothing just wait for the thread to finish. 
-                    }
-                    this.Cursor = Cursors.Default;
-                    EnsurePriceData();
-
                 }
             }
             return needToSetData;

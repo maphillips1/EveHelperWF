@@ -980,6 +980,7 @@
             MaterialsPriceTreeView.ShowLines = false;
             MaterialsPriceTreeView.Size = new Size(599, 407);
             MaterialsPriceTreeView.TabIndex = 23;
+            MaterialsPriceTreeView.TabStop = false;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
             // 
             // UpdatePricesJitaButton
@@ -1346,6 +1347,7 @@
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
             OptimizedBuildTreeView.Size = new Size(662, 407);
             OptimizedBuildTreeView.TabIndex = 16;
+            OptimizedBuildTreeView.TabStop = false;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
             // 
             // CollapseAllButton
@@ -1372,6 +1374,7 @@
             MaterialsTreeView.Name = "MaterialsTreeView";
             MaterialsTreeView.Size = new Size(671, 404);
             MaterialsTreeView.TabIndex = 6;
+            MaterialsTreeView.TabStop = false;
             // 
             // DetailsProductLabel
             // 
@@ -1412,6 +1415,7 @@
             PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
             PlanetMaterialsTreeView.Size = new Size(677, 508);
             PlanetMaterialsTreeView.TabIndex = 0;
+            PlanetMaterialsTreeView.TabStop = false;
             // 
             // BPReactionTabPage
             // 
@@ -1461,6 +1465,7 @@
             BPTreeView.Name = "BPTreeView";
             BPTreeView.Size = new Size(671, 430);
             BPTreeView.TabIndex = 7;
+            BPTreeView.TabStop = false;
             BPTreeView.AfterSelect += BPTreeView_AfterSelect;
             // 
             // BuildPlanCombo

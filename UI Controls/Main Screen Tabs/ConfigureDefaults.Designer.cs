@@ -912,7 +912,7 @@
             // 
             // CopyTaxUpDown
             // 
-            CopyTaxUpDown.DecimalPlaces = 1;
+            CopyTaxUpDown.DecimalPlaces = 2;
             CopyTaxUpDown.Location = new Point(102, 161);
             CopyTaxUpDown.Margin = new Padding(2);
             CopyTaxUpDown.Name = "CopyTaxUpDown";
@@ -1094,7 +1094,7 @@
             // 
             // METaxUpDown
             // 
-            METaxUpDown.DecimalPlaces = 1;
+            METaxUpDown.DecimalPlaces = 2;
             METaxUpDown.Location = new Point(110, 157);
             METaxUpDown.Margin = new Padding(2);
             METaxUpDown.Name = "METaxUpDown";
@@ -1277,7 +1277,7 @@
             // 
             // TETaxUpDown
             // 
-            TETaxUpDown.DecimalPlaces = 1;
+            TETaxUpDown.DecimalPlaces = 2;
             TETaxUpDown.Location = new Point(96, 159);
             TETaxUpDown.Margin = new Padding(2);
             TETaxUpDown.Name = "TETaxUpDown";
