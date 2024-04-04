@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     {
         private List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
         private bool IgnoreTextChangedEvent = false;
+        private bool ctrlPressed = false;
+        private bool vPressed = false;
 
         #region "Init"
         public LootAppraisal()
@@ -33,7 +36,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!string.IsNullOrEmpty(rawText))
             {
                 string rawInput = InputTextMultiLine.Text;
-                string[] inputItems = InputTextMultiLine.Text.Split("\r\n");
+                string[] inputItems = rawInput.Replace("\r\n", "\n").Replace("\n", "\r\n").Split("\r\n");
                 if (inputItems != null)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -60,16 +63,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 IgnoreTextChangedEvent = true;
                 string text = InputTextMultiLine.Text;
 
-                string[] inputItems = text.Replace("\r\n", "\n").Replace("\n", "\r\n").Replace("\t", " ").Split("\r\n");
-                if (inputItems != null)
-                {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    foreach (string item in inputItems)
-                    {
-                        stringBuilder.AppendLine(item);
-                    }
-                    InputTextMultiLine.Text = stringBuilder.ToString();
-                }
+                InputTextMultiLine.Text = text.Replace("\r\n", "\n").Replace("\n", "\r\n");
                 IgnoreTextChangedEvent = false;
             }
         }
@@ -123,5 +117,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.Cursor = Cursors.Default;
         }
         #endregion
+
     }
 }

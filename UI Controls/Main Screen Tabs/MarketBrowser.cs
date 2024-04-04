@@ -140,7 +140,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void RegionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int regionID = (int)RegionCombo.SelectedValue;
+            int regionID = Convert.ToInt32(RegionCombo.SelectedValue);
             if (regionID > 0)
             {
                 LoadSystems(regionID);
@@ -180,14 +180,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            SearchResultsTreeView.Nodes.Clear();
-            string searchText = SearchTextBox.Text.ToLowerInvariant();
-            if (!string.IsNullOrWhiteSpace(searchText))
+            if (SearchTextBox.Text.Length > 2)
             {
-                List<TreeNode> foundNodes = MarketBrowserHelper.SearchInventoryTypes(searchText);
-                if (foundNodes.Count > 0)
+                SearchResultsTreeView.Nodes.Clear();
+                string searchText = SearchTextBox.Text.ToLowerInvariant();
+                if (!string.IsNullOrWhiteSpace(searchText))
                 {
-                    SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                    List<TreeNode> foundNodes = MarketBrowserHelper.SearchInventoryTypes(searchText);
+                    if (foundNodes.Count > 0)
+                    {
+                        SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                    }
                 }
             }
         }
@@ -280,8 +283,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void SelectedItemImageWorker_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            byte[] iamge = null;
-            int selectedTypeID = (int)(e.Argument);
+            byte[]? iamge = null;
+            int selectedTypeID = Convert.ToInt32(e.Argument);
 
             if (selectedTypeID > 0)
             {

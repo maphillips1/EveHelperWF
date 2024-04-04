@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FileIO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
@@ -34,16 +35,23 @@ namespace EveHelperWF.GitHub_Calls
 
         public static Tuple<bool, Objects.GitHub_Objects.Release> CheckForUpdate()
         {
-            List<Objects.GitHub_Objects.Release> releases = GetReleases();
-
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-
-            foreach(Objects.GitHub_Objects.Release release in releases)
+            try
             {
-                if (IsVersionNewer(release, version))
+                List<Objects.GitHub_Objects.Release> releases = GetReleases();
+
+                Version version = Assembly.GetExecutingAssembly().GetName().Version;
+
+                foreach (Objects.GitHub_Objects.Release release in releases)
                 {
-                    return Tuple.Create(true, release);
+                    if (IsVersionNewer(release, version))
+                    {
+                        return Tuple.Create(true, release);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                FileHelper.LogError(ex.Message, ex.StackTrace);
             }
 
             return Tuple.Create<bool, Objects.GitHub_Objects.Release>(false, new Objects.GitHub_Objects.Release());

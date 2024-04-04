@@ -50,10 +50,10 @@
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             backupFilesToolStripMenuItem = new ToolStripMenuItem();
+            importFIlesToolStripMenuItem = new ToolStripMenuItem();
             updateEveDataToolStripMenuItem = new ToolStripMenuItem();
             FreyaLinkLabel = new LinkLabel();
             label10 = new Label();
-            label11 = new Label();
             InitLongLoadingWorker = new System.ComponentModel.BackgroundWorker();
             label12 = new Label();
             ShoppingListButton = new Button();
@@ -253,15 +253,15 @@
             label8.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label8.Location = new Point(49, 505);
             label8.Name = "label8";
-            label8.Size = new Size(584, 20);
+            label8.Size = new Size(141, 20);
             label8.TabIndex = 14;
-            label8.Text = "Special thank you to Fuzzworks who provides the static data dump in SQLite format. ";
+            label8.Text = "Support FuzzWorks";
             // 
             // FuzzworksLinkLabel
             // 
             FuzzworksLinkLabel.AutoSize = true;
             FuzzworksLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FuzzworksLinkLabel.Location = new Point(639, 508);
+            FuzzworksLinkLabel.Location = new Point(196, 508);
             FuzzworksLinkLabel.Name = "FuzzworksLinkLabel";
             FuzzworksLinkLabel.Size = new Size(106, 15);
             FuzzworksLinkLabel.TabIndex = 15;
@@ -298,7 +298,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, updateEveDataToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, importFIlesToolStripMenuItem, updateEveDataToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -321,6 +321,14 @@
             backupFilesToolStripMenuItem.Text = "Backup Files";
             backupFilesToolStripMenuItem.Click += backupFilesToolStripMenuItem_Click;
             // 
+            // importFIlesToolStripMenuItem
+            // 
+            importFIlesToolStripMenuItem.ForeColor = Color.Black;
+            importFIlesToolStripMenuItem.Name = "importFIlesToolStripMenuItem";
+            importFIlesToolStripMenuItem.Size = new Size(81, 20);
+            importFIlesToolStripMenuItem.Text = "Import FIles";
+            importFIlesToolStripMenuItem.Click += importFIlesToolStripMenuItem_Click;
+            // 
             // updateEveDataToolStripMenuItem
             // 
             updateEveDataToolStripMenuItem.Name = "updateEveDataToolStripMenuItem";
@@ -332,7 +340,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(453, 555);
+            FreyaLinkLabel.Location = new Point(135, 535);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -346,19 +354,9 @@
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label10.Location = new Point(49, 532);
             label10.Name = "label10";
-            label10.Size = new Size(381, 20);
+            label10.Size = new Size(80, 20);
             label10.TabIndex = 19;
-            label10.Text = "To donate to this project, send isk to \"Freya Partanen\".";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label11.Location = new Point(49, 551);
-            label11.Name = "label11";
-            label11.Size = new Size(393, 20);
-            label11.TabIndex = 21;
-            label11.Text = "All donations are voluntary and very much appreciated.";
+            label10.Text = "Donat ISK ";
             // 
             // InitLongLoadingWorker
             // 
@@ -427,7 +425,6 @@
             Controls.Add(BuildPlansButton);
             Controls.Add(label12);
             Controls.Add(ShoppingListButton);
-            Controls.Add(label11);
             Controls.Add(FreyaLinkLabel);
             Controls.Add(label10);
             Controls.Add(label9);
@@ -486,7 +483,6 @@
         private ToolStripMenuItem fileToolStripMenuItem;
         private LinkLabel FreyaLinkLabel;
         private Label label10;
-        private Label label11;
         private ToolStripMenuItem backupFilesToolStripMenuItem;
         private ToolStripMenuItem updateEveDataToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker InitLongLoadingWorker;
@@ -494,5 +490,6 @@
         private Button ShoppingListButton;
         private Label label13;
         private Button BuildPlansButton;
+        private ToolStripMenuItem importFIlesToolStripMenuItem;
     }
 }

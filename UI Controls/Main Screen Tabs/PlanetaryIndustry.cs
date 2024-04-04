@@ -23,7 +23,7 @@ namespace EveHelperWF
         private List<PlanetMaterial> planetOutputTypes = new List<PlanetMaterial>();
         private AutoResetEvent _resetEvent = new AutoResetEvent(false);
         private PlanetMaterial SelectedType;
-
+        private List<PlanetMaterial> RawResources = new List<PlanetMaterial>();
         #region "Init"
         public PlanetaryIndustry()
         {
@@ -166,8 +166,17 @@ namespace EveHelperWF
             Label outputTextBox = BuildPlanetItemTextbox(selectedType);
             outputTextBox.Location = new Point(10, verticalMiddle);
             BubbleTreePanel.Controls.Add(outputTextBox);
+            UniqueResourcesLabel.Text = "";
+            RawResources.Clear();
 
             BuildInputScreenRecursive(selectedType, 220, 0, BubbleTreePanel.Height);
+
+            StringBuilder uniqueRSSSB = new StringBuilder();
+            foreach (PlanetMaterial rawRSS in RawResources)
+            {
+                uniqueRSSSB.AppendLine(rawRSS.typeName);
+            }
+            UniqueResourcesLabel.Text = uniqueRSSSB.ToString();
         }
 
         private void BuildInputScreenRecursive(PlanetMaterial selectedType, int currentXAxisPoint, int minY, int maxY)
@@ -193,6 +202,10 @@ namespace EveHelperWF
                     inputTextBox = BuildT0PlanetType(input);
                     inputTextBox.Location = new Point(currentXAxisPoint + 210, currentY + (heightPerInput / 2));
                     BubbleTreePanel.Controls.Add(inputTextBox);
+                    if (RawResources.Find(x => x.typeID == input.typeID) == null)
+                    {
+                        RawResources.Add(input);
+                    }
                 }
                 currentY += heightPerInput;
             }
@@ -357,7 +370,7 @@ namespace EveHelperWF
 
         private void PIOutputImageWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] image = null;
+            byte[]? image = null;
 
             int typeID = (int)(e.Argument);
 

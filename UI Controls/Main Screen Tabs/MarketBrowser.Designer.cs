@@ -29,11 +29,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
@@ -42,6 +38,10 @@
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarketBrowser));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             SelectedItemImageWorker = new System.ComponentModel.BackgroundWorker();
             TheraButton = new Button();
             SystemCombo = new ComboBox();
@@ -52,35 +52,7 @@
             OrdersTabPage = new TabPage();
             label3 = new Label();
             SellOrdersGridView = new DataGridView();
-            range = new DataGridViewTextBoxColumn();
-            volumeRemaining = new DataGridViewTextBoxColumn();
-            minVolume = new DataGridViewTextBoxColumn();
-            formattedPrice = new DataGridViewTextBoxColumn();
-            locationName = new DataGridViewTextBoxColumn();
-            duration = new DataGridViewTextBoxColumn();
-            issued = new DataGridViewTextBoxColumn();
-            isBuyOrder = new DataGridViewTextBoxColumn();
-            locationID = new DataGridViewTextBoxColumn();
-            orderID = new DataGridViewTextBoxColumn();
-            price = new DataGridViewTextBoxColumn();
-            systemID = new DataGridViewTextBoxColumn();
-            typeID = new DataGridViewTextBoxColumn();
-            volumeTotal = new DataGridViewTextBoxColumn();
             BuyOrdersGridView = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            formattedPriceColumn = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
             label4 = new Label();
             PriceHistoryTabPage = new TabPage();
             PriceHistoryGridView = new DataGridView();
@@ -107,6 +79,34 @@
             HighSecCheckbox = new CheckBox();
             LowsecCheckbox = new CheckBox();
             NullSechCheckbox = new CheckBox();
+            range = new DataGridViewTextBoxColumn();
+            volumeRemaining = new DataGridViewTextBoxColumn();
+            formattedPrice = new DataGridViewTextBoxColumn();
+            locationName = new DataGridViewTextBoxColumn();
+            minVolume = new DataGridViewTextBoxColumn();
+            duration = new DataGridViewTextBoxColumn();
+            issued = new DataGridViewTextBoxColumn();
+            isBuyOrder = new DataGridViewTextBoxColumn();
+            locationID = new DataGridViewTextBoxColumn();
+            orderID = new DataGridViewTextBoxColumn();
+            price = new DataGridViewTextBoxColumn();
+            systemID = new DataGridViewTextBoxColumn();
+            typeID = new DataGridViewTextBoxColumn();
+            volumeTotal = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            formattedPriceColumn = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn7 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn9 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn10 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn11 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn12 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
             SelectedItemTabPanel.SuspendLayout();
             OrdersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SellOrdersGridView).BeginInit();
@@ -229,7 +229,7 @@
             SellOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             SellOrdersGridView.BackgroundColor = Color.Black;
             SellOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            SellOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { range, volumeRemaining, minVolume, formattedPrice, locationName, duration, issued, isBuyOrder, locationID, orderID, price, systemID, typeID, volumeTotal });
+            SellOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { range, volumeRemaining, formattedPrice, locationName, minVolume, duration, issued, isBuyOrder, locationID, orderID, price, systemID, typeID, volumeTotal });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.Black;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -247,131 +247,6 @@
             SellOrdersGridView.Size = new Size(700, 191);
             SellOrdersGridView.TabIndex = 4;
             // 
-            // range
-            // 
-            range.DataPropertyName = "range";
-            range.HeaderText = "Range";
-            range.MinimumWidth = 6;
-            range.Name = "range";
-            range.Width = 65;
-            // 
-            // volumeRemaining
-            // 
-            volumeRemaining.DataPropertyName = "volume_remain";
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = "0";
-            volumeRemaining.DefaultCellStyle = dataGridViewCellStyle1;
-            volumeRemaining.HeaderText = "Remaining";
-            volumeRemaining.MinimumWidth = 6;
-            volumeRemaining.Name = "volumeRemaining";
-            volumeRemaining.Width = 89;
-            // 
-            // minVolume
-            // 
-            minVolume.DataPropertyName = "min_volume";
-            minVolume.HeaderText = "Min Volume";
-            minVolume.MinimumWidth = 6;
-            minVolume.Name = "minVolume";
-            minVolume.Width = 96;
-            // 
-            // formattedPrice
-            // 
-            formattedPrice.DataPropertyName = "FormattedPriceString";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            formattedPrice.DefaultCellStyle = dataGridViewCellStyle2;
-            formattedPrice.HeaderText = "Price";
-            formattedPrice.MinimumWidth = 6;
-            formattedPrice.Name = "formattedPrice";
-            formattedPrice.Width = 58;
-            // 
-            // locationName
-            // 
-            locationName.DataPropertyName = "LocationName";
-            locationName.HeaderText = "Location";
-            locationName.MinimumWidth = 6;
-            locationName.Name = "locationName";
-            locationName.Width = 78;
-            // 
-            // duration
-            // 
-            duration.DataPropertyName = "duration";
-            duration.HeaderText = "Duration";
-            duration.MinimumWidth = 6;
-            duration.Name = "duration";
-            duration.Width = 78;
-            // 
-            // issued
-            // 
-            issued.DataPropertyName = "issued";
-            issued.HeaderText = "Issued";
-            issued.MinimumWidth = 6;
-            issued.Name = "issued";
-            issued.Width = 65;
-            // 
-            // isBuyOrder
-            // 
-            isBuyOrder.DataPropertyName = "is_buy_order";
-            isBuyOrder.HeaderText = "Is Buy Order";
-            isBuyOrder.MinimumWidth = 6;
-            isBuyOrder.Name = "isBuyOrder";
-            isBuyOrder.Visible = false;
-            isBuyOrder.Width = 96;
-            // 
-            // locationID
-            // 
-            locationID.DataPropertyName = "location_id";
-            locationID.HeaderText = "Location ID";
-            locationID.MinimumWidth = 6;
-            locationID.Name = "locationID";
-            locationID.Visible = false;
-            locationID.Width = 92;
-            // 
-            // orderID
-            // 
-            orderID.DataPropertyName = "order_id";
-            orderID.HeaderText = "OrderID";
-            orderID.MinimumWidth = 6;
-            orderID.Name = "orderID";
-            orderID.Visible = false;
-            orderID.Width = 73;
-            // 
-            // price
-            // 
-            price.DataPropertyName = "price";
-            price.HeaderText = "Price";
-            price.MinimumWidth = 6;
-            price.Name = "price";
-            price.Visible = false;
-            price.Width = 58;
-            // 
-            // systemID
-            // 
-            systemID.DataPropertyName = "system_id";
-            systemID.HeaderText = "System ID";
-            systemID.MinimumWidth = 6;
-            systemID.Name = "systemID";
-            systemID.Visible = false;
-            systemID.Width = 84;
-            // 
-            // typeID
-            // 
-            typeID.DataPropertyName = "type_id";
-            typeID.HeaderText = "Type ID";
-            typeID.MinimumWidth = 6;
-            typeID.Name = "typeID";
-            typeID.Visible = false;
-            typeID.Width = 70;
-            // 
-            // volumeTotal
-            // 
-            volumeTotal.DataPropertyName = "volume_total";
-            volumeTotal.HeaderText = "Volume Total";
-            volumeTotal.MinimumWidth = 6;
-            volumeTotal.Name = "volumeTotal";
-            volumeTotal.Visible = false;
-            volumeTotal.Width = 125;
-            // 
             // BuyOrdersGridView
             // 
             BuyOrdersGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -379,7 +254,7 @@
             BuyOrdersGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             BuyOrdersGridView.BackgroundColor = Color.Black;
             BuyOrdersGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            BuyOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, formattedPriceColumn, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
+            BuyOrdersGridView.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, formattedPriceColumn, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13 });
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.Black;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
@@ -396,131 +271,6 @@
             BuyOrdersGridView.RowTemplate.Height = 29;
             BuyOrdersGridView.Size = new Size(700, 204);
             BuyOrdersGridView.TabIndex = 7;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "range";
-            dataGridViewTextBoxColumn1.HeaderText = "Range";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "volume_remain";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewTextBoxColumn2.HeaderText = "Remaining";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 89;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "min_volume";
-            dataGridViewTextBoxColumn3.HeaderText = "Min Volume";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 96;
-            // 
-            // formattedPriceColumn
-            // 
-            formattedPriceColumn.DataPropertyName = "FormattedPriceString";
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            formattedPriceColumn.DefaultCellStyle = dataGridViewCellStyle5;
-            formattedPriceColumn.HeaderText = "Price";
-            formattedPriceColumn.MinimumWidth = 6;
-            formattedPriceColumn.Name = "formattedPriceColumn";
-            formattedPriceColumn.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.DataPropertyName = "LocationName";
-            dataGridViewTextBoxColumn5.HeaderText = "Location";
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            dataGridViewTextBoxColumn5.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.DataPropertyName = "duration";
-            dataGridViewTextBoxColumn6.HeaderText = "Duration";
-            dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 78;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewTextBoxColumn7.DataPropertyName = "issued";
-            dataGridViewTextBoxColumn7.HeaderText = "Issued";
-            dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            dataGridViewTextBoxColumn7.Width = 65;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            dataGridViewTextBoxColumn8.DataPropertyName = "is_buy_order";
-            dataGridViewTextBoxColumn8.HeaderText = "Is Buy Order";
-            dataGridViewTextBoxColumn8.MinimumWidth = 6;
-            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            dataGridViewTextBoxColumn8.Visible = false;
-            dataGridViewTextBoxColumn8.Width = 96;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            dataGridViewTextBoxColumn9.DataPropertyName = "location_id";
-            dataGridViewTextBoxColumn9.HeaderText = "Location ID";
-            dataGridViewTextBoxColumn9.MinimumWidth = 6;
-            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            dataGridViewTextBoxColumn9.Visible = false;
-            dataGridViewTextBoxColumn9.Width = 92;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            dataGridViewTextBoxColumn10.DataPropertyName = "order_id";
-            dataGridViewTextBoxColumn10.HeaderText = "OrderID";
-            dataGridViewTextBoxColumn10.MinimumWidth = 6;
-            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            dataGridViewTextBoxColumn10.Visible = false;
-            dataGridViewTextBoxColumn10.Width = 73;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.DataPropertyName = "price";
-            dataGridViewTextBoxColumn4.HeaderText = "Price";
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            dataGridViewTextBoxColumn4.Visible = false;
-            dataGridViewTextBoxColumn4.Width = 58;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            dataGridViewTextBoxColumn11.DataPropertyName = "system_id";
-            dataGridViewTextBoxColumn11.HeaderText = "System ID";
-            dataGridViewTextBoxColumn11.MinimumWidth = 6;
-            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            dataGridViewTextBoxColumn11.Visible = false;
-            dataGridViewTextBoxColumn11.Width = 84;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            dataGridViewTextBoxColumn12.DataPropertyName = "type_id";
-            dataGridViewTextBoxColumn12.HeaderText = "Type ID";
-            dataGridViewTextBoxColumn12.MinimumWidth = 6;
-            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            dataGridViewTextBoxColumn12.Visible = false;
-            dataGridViewTextBoxColumn12.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            dataGridViewTextBoxColumn13.DataPropertyName = "volume_total";
-            dataGridViewTextBoxColumn13.HeaderText = "Volume Total";
-            dataGridViewTextBoxColumn13.MinimumWidth = 6;
-            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            dataGridViewTextBoxColumn13.Visible = false;
-            dataGridViewTextBoxColumn13.Width = 125;
             // 
             // label4
             // 
@@ -847,6 +597,254 @@
             NullSechCheckbox.UseVisualStyleBackColor = true;
             NullSechCheckbox.CheckedChanged += NullSechCheckbox_CheckedChanged;
             // 
+            // range
+            // 
+            range.DataPropertyName = "range";
+            range.HeaderText = "Range";
+            range.MinimumWidth = 6;
+            range.Name = "range";
+            range.Width = 65;
+            // 
+            // volumeRemaining
+            // 
+            volumeRemaining.DataPropertyName = "volume_remain";
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = "0";
+            volumeRemaining.DefaultCellStyle = dataGridViewCellStyle1;
+            volumeRemaining.HeaderText = "Remaining";
+            volumeRemaining.MinimumWidth = 6;
+            volumeRemaining.Name = "volumeRemaining";
+            volumeRemaining.Width = 89;
+            // 
+            // formattedPrice
+            // 
+            formattedPrice.DataPropertyName = "FormattedPriceString";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            formattedPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            formattedPrice.HeaderText = "Price";
+            formattedPrice.MinimumWidth = 6;
+            formattedPrice.Name = "formattedPrice";
+            formattedPrice.Width = 58;
+            // 
+            // locationName
+            // 
+            locationName.DataPropertyName = "LocationName";
+            locationName.HeaderText = "Location";
+            locationName.MinimumWidth = 6;
+            locationName.Name = "locationName";
+            locationName.Width = 78;
+            // 
+            // minVolume
+            // 
+            minVolume.DataPropertyName = "min_volume";
+            minVolume.HeaderText = "Min Volume";
+            minVolume.MinimumWidth = 6;
+            minVolume.Name = "minVolume";
+            minVolume.Width = 96;
+            // 
+            // duration
+            // 
+            duration.DataPropertyName = "duration";
+            duration.HeaderText = "Duration";
+            duration.MinimumWidth = 6;
+            duration.Name = "duration";
+            duration.Width = 78;
+            // 
+            // issued
+            // 
+            issued.DataPropertyName = "issued";
+            issued.HeaderText = "Issued";
+            issued.MinimumWidth = 6;
+            issued.Name = "issued";
+            issued.Width = 65;
+            // 
+            // isBuyOrder
+            // 
+            isBuyOrder.DataPropertyName = "is_buy_order";
+            isBuyOrder.HeaderText = "Is Buy Order";
+            isBuyOrder.MinimumWidth = 6;
+            isBuyOrder.Name = "isBuyOrder";
+            isBuyOrder.Visible = false;
+            isBuyOrder.Width = 96;
+            // 
+            // locationID
+            // 
+            locationID.DataPropertyName = "location_id";
+            locationID.HeaderText = "Location ID";
+            locationID.MinimumWidth = 6;
+            locationID.Name = "locationID";
+            locationID.Visible = false;
+            locationID.Width = 92;
+            // 
+            // orderID
+            // 
+            orderID.DataPropertyName = "order_id";
+            orderID.HeaderText = "OrderID";
+            orderID.MinimumWidth = 6;
+            orderID.Name = "orderID";
+            orderID.Visible = false;
+            orderID.Width = 73;
+            // 
+            // price
+            // 
+            price.DataPropertyName = "price";
+            price.HeaderText = "Price";
+            price.MinimumWidth = 6;
+            price.Name = "price";
+            price.Visible = false;
+            price.Width = 58;
+            // 
+            // systemID
+            // 
+            systemID.DataPropertyName = "system_id";
+            systemID.HeaderText = "System ID";
+            systemID.MinimumWidth = 6;
+            systemID.Name = "systemID";
+            systemID.Visible = false;
+            systemID.Width = 84;
+            // 
+            // typeID
+            // 
+            typeID.DataPropertyName = "type_id";
+            typeID.HeaderText = "Type ID";
+            typeID.MinimumWidth = 6;
+            typeID.Name = "typeID";
+            typeID.Visible = false;
+            typeID.Width = 70;
+            // 
+            // volumeTotal
+            // 
+            volumeTotal.DataPropertyName = "volume_total";
+            volumeTotal.HeaderText = "Volume Total";
+            volumeTotal.MinimumWidth = 6;
+            volumeTotal.Name = "volumeTotal";
+            volumeTotal.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "range";
+            dataGridViewTextBoxColumn1.HeaderText = "Range";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "volume_remain";
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewTextBoxColumn2.HeaderText = "Remaining";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Width = 89;
+            // 
+            // formattedPriceColumn
+            // 
+            formattedPriceColumn.DataPropertyName = "FormattedPriceString";
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            formattedPriceColumn.DefaultCellStyle = dataGridViewCellStyle5;
+            formattedPriceColumn.HeaderText = "Price";
+            formattedPriceColumn.MinimumWidth = 6;
+            formattedPriceColumn.Name = "formattedPriceColumn";
+            formattedPriceColumn.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "LocationName";
+            dataGridViewTextBoxColumn5.HeaderText = "Location";
+            dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "min_volume";
+            dataGridViewTextBoxColumn3.HeaderText = "Min Volume";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "duration";
+            dataGridViewTextBoxColumn6.HeaderText = "Duration";
+            dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewTextBoxColumn7.DataPropertyName = "issued";
+            dataGridViewTextBoxColumn7.HeaderText = "Issued";
+            dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            dataGridViewTextBoxColumn7.Width = 65;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            dataGridViewTextBoxColumn8.DataPropertyName = "is_buy_order";
+            dataGridViewTextBoxColumn8.HeaderText = "Is Buy Order";
+            dataGridViewTextBoxColumn8.MinimumWidth = 6;
+            dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            dataGridViewTextBoxColumn8.Visible = false;
+            dataGridViewTextBoxColumn8.Width = 96;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            dataGridViewTextBoxColumn9.DataPropertyName = "location_id";
+            dataGridViewTextBoxColumn9.HeaderText = "Location ID";
+            dataGridViewTextBoxColumn9.MinimumWidth = 6;
+            dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            dataGridViewTextBoxColumn9.Visible = false;
+            dataGridViewTextBoxColumn9.Width = 92;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            dataGridViewTextBoxColumn10.DataPropertyName = "order_id";
+            dataGridViewTextBoxColumn10.HeaderText = "OrderID";
+            dataGridViewTextBoxColumn10.MinimumWidth = 6;
+            dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            dataGridViewTextBoxColumn10.Visible = false;
+            dataGridViewTextBoxColumn10.Width = 73;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "price";
+            dataGridViewTextBoxColumn4.HeaderText = "Price";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.Visible = false;
+            dataGridViewTextBoxColumn4.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            dataGridViewTextBoxColumn11.DataPropertyName = "system_id";
+            dataGridViewTextBoxColumn11.HeaderText = "System ID";
+            dataGridViewTextBoxColumn11.MinimumWidth = 6;
+            dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            dataGridViewTextBoxColumn11.Visible = false;
+            dataGridViewTextBoxColumn11.Width = 84;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            dataGridViewTextBoxColumn12.DataPropertyName = "type_id";
+            dataGridViewTextBoxColumn12.HeaderText = "Type ID";
+            dataGridViewTextBoxColumn12.MinimumWidth = 6;
+            dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            dataGridViewTextBoxColumn12.Visible = false;
+            dataGridViewTextBoxColumn12.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            dataGridViewTextBoxColumn13.DataPropertyName = "volume_total";
+            dataGridViewTextBoxColumn13.HeaderText = "Volume Total";
+            dataGridViewTextBoxColumn13.MinimumWidth = 6;
+            dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            dataGridViewTextBoxColumn13.Visible = false;
+            // 
             // MarketBrowser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -918,34 +916,6 @@
         private DataGridView BuyOrdersGridView;
         private Label label4;
         private Button ClearSystemButton;
-        private DataGridViewTextBoxColumn range;
-        private DataGridViewTextBoxColumn volumeRemaining;
-        private DataGridViewTextBoxColumn minVolume;
-        private DataGridViewTextBoxColumn formattedPrice;
-        private DataGridViewTextBoxColumn locationName;
-        private DataGridViewTextBoxColumn duration;
-        private DataGridViewTextBoxColumn issued;
-        private DataGridViewTextBoxColumn isBuyOrder;
-        private DataGridViewTextBoxColumn locationID;
-        private DataGridViewTextBoxColumn orderID;
-        private DataGridViewTextBoxColumn price;
-        private DataGridViewTextBoxColumn systemID;
-        private DataGridViewTextBoxColumn typeID;
-        private DataGridViewTextBoxColumn volumeTotal;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn formattedPriceColumn;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private TabPage tabPage2;
         private Objects.Custom_Controls.PriceHistoryGraph priceHistoryGraph1;
         private DataGridViewTextBoxColumn date;
@@ -958,5 +928,33 @@
         private CheckBox HighSecCheckbox;
         private CheckBox LowsecCheckbox;
         private CheckBox NullSechCheckbox;
+        private DataGridViewTextBoxColumn range;
+        private DataGridViewTextBoxColumn volumeRemaining;
+        private DataGridViewTextBoxColumn formattedPrice;
+        private DataGridViewTextBoxColumn locationName;
+        private DataGridViewTextBoxColumn minVolume;
+        private DataGridViewTextBoxColumn duration;
+        private DataGridViewTextBoxColumn issued;
+        private DataGridViewTextBoxColumn isBuyOrder;
+        private DataGridViewTextBoxColumn locationID;
+        private DataGridViewTextBoxColumn orderID;
+        private DataGridViewTextBoxColumn price;
+        private DataGridViewTextBoxColumn systemID;
+        private DataGridViewTextBoxColumn typeID;
+        private DataGridViewTextBoxColumn volumeTotal;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn formattedPriceColumn;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
     }
 }

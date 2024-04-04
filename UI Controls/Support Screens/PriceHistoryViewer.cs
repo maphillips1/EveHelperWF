@@ -53,8 +53,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         #region "Background Worker"
         private void GetImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] iamge = null;
-            int selectedTypeID = (int)(e.Argument);
+            byte[]? iamge = null;
+            int selectedTypeID = Convert.ToInt32(e.Argument);
 
             if (selectedTypeID > 0)
             {

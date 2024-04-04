@@ -509,14 +509,17 @@ namespace EveHelperWF
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            SearchResultsTreeView.Nodes.Clear();
-            string searchText = SearchTextBox.Text.ToLowerInvariant();
-            if (!string.IsNullOrWhiteSpace(searchText))
+            if (SearchTextBox.Text.Length > 2)
             {
-                List<TreeNode> foundNodes = BlueprintBrowserHelper.SearchBlueprints(searchText);
-                if (foundNodes.Count > 0)
+                SearchResultsTreeView.Nodes.Clear();
+                string searchText = SearchTextBox.Text.ToLowerInvariant();
+                if (!string.IsNullOrWhiteSpace(searchText))
                 {
-                    SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                    List<TreeNode> foundNodes = BlueprintBrowserHelper.SearchBlueprints(searchText);
+                    if (foundNodes.Count > 0)
+                    {
+                        SearchResultsTreeView.Nodes.AddRange(foundNodes.ToArray());
+                    }
                 }
             }
         }
@@ -611,9 +614,9 @@ namespace EveHelperWF
                 int defaultME = 2;
                 int defaultTE = 4;
 
-                if (ManuInventDecryptorCombo.SelectedValue != null && (int)ManuInventDecryptorCombo.SelectedValue > 0)
+                if (ManuInventDecryptorCombo.SelectedValue != null && Convert.ToInt32(ManuInventDecryptorCombo.SelectedValue) > 0)
                 {
-                    Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == (int)ManuInventDecryptorCombo.SelectedValue);
+                    Objects.Decryptor decryptor = BlueprintBrowserHelper.Decryptors.Find(x => x.typeID == Convert.ToInt32(ManuInventDecryptorCombo.SelectedValue));
                     if (decryptor != null)
                     {
                         defaultME += decryptor.meModifier;
@@ -636,7 +639,7 @@ namespace EveHelperWF
         {
             IgnoreChangedEvent = true;
             //Manufacturing
-            if (ManuStructCombo.SelectedValue != null && (int)ManuStructCombo.SelectedValue <= 0)
+            if (ManuStructCombo.SelectedValue != null && Convert.ToInt32(ManuStructCombo.SelectedValue) <= 0)
             {
                 StructureMERigLabel.Visible = false;
                 ManuRigMEBonusCombo.Visible = false;
@@ -659,7 +662,7 @@ namespace EveHelperWF
                 ManuTaxUpDown.Visible = true;
             }
             //Reactions
-            if (ReactionStructureCombo.SelectedValue != null && (int)ReactionStructureCombo.SelectedValue <= 0)
+            if (ReactionStructureCombo.SelectedValue != null && Convert.ToInt32(ReactionStructureCombo.SelectedValue) <= 0)
             {
                 ReactionStructMERigLabel.Visible = false;
                 ReactionStructureMERig.Visible = false;
@@ -683,7 +686,7 @@ namespace EveHelperWF
             }
 
             //Invention
-            if (InventionStructureCombo.SelectedValue != null && (int)InventionStructureCombo.SelectedValue <= 0)
+            if (InventionStructureCombo.SelectedValue != null && Convert.ToInt32(InventionStructureCombo.SelectedValue) <= 0)
             {
                 InventionStructMERigLabel.Visible = false;
                 InventionStructureCostRigCombo.Visible = false;
@@ -707,7 +710,7 @@ namespace EveHelperWF
             }
 
             //ME Research
-            if (MEStructureCombo.SelectedValue != null && (int)MEStructureCombo.SelectedValue <= 0)
+            if (MEStructureCombo.SelectedValue != null && Convert.ToInt32(MEStructureCombo.SelectedValue) <= 0)
             {
                 MEStructRigLabel.Visible = false;
                 METimeRigCombo.Visible = false;
@@ -725,7 +728,7 @@ namespace EveHelperWF
             }
 
             //TE Research
-            if (TEStructureCombo.SelectedValue != null && (int)TEStructureCombo.SelectedValue <= 0)
+            if (TEStructureCombo.SelectedValue != null && Convert.ToInt32(TEStructureCombo.SelectedValue) <= 0)
             {
                 TEStructureRigLabel.Visible = false;
                 TEStructRigCombo.Visible = false;
@@ -743,7 +746,7 @@ namespace EveHelperWF
             }
 
             //Copying
-            if (CopyStructureCombo.SelectedValue != null && (int)CopyStructureCombo.SelectedValue <= 0)
+            if (CopyStructureCombo.SelectedValue != null && Convert.ToInt32(CopyStructureCombo.SelectedValue) <= 0)
             {
                 CopyRigLabel.Visible = false;
                 CopyTimeRigCombo.Visible = false;
@@ -1404,10 +1407,7 @@ namespace EveHelperWF
             }
 
             //Decryptor
-            if (ManuInventDecryptorCombo.SelectedValue != null)
-            {
-                helperClass.InventionDecryptorId = (int)ManuInventDecryptorCombo.SelectedValue;
-            }
+            helperClass.InventionDecryptorId = Convert.ToInt32(ManuInventDecryptorCombo.SelectedValue);
 
             //Invention Outcome BP
             helperClass.InventionProductTypeId = SelectedType.typeId;
@@ -1442,7 +1442,7 @@ namespace EveHelperWF
                 //Total Volume Label
                 ManuInputVolLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatNumber(TotalManufacturingInputVolume);
 
-                int solarSystemId = (Int32)ManuSystemCombo.SelectedValue;
+                int solarSystemId = Convert.ToInt32(ManuSystemCombo.SelectedValue);
                 if (solarSystemId > 0)
                 {
                     decimal costIndex = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityManufacturing);
@@ -1486,7 +1486,7 @@ namespace EveHelperWF
             ReactionTotalInputCostLabel.Text = ReactionTotalInputPrice.ToString("C");
             ReactionTotalOutcomeIskLabel.Text = TotalReactionOutputPrice.ToString("C");
 
-            int solarSystemId = (Int32)ReactionSolarSystemCombo.SelectedValue;
+            int solarSystemId = Convert.ToInt32(ReactionSolarSystemCombo.SelectedValue);
             if (solarSystemId > 0)
             {
                 decimal costIndex = CommonHelper.GetCostIndexForSystemID(solarSystemId, Objects.CostIndiceActivity.ACtivityReaction);
@@ -1635,7 +1635,7 @@ namespace EveHelperWF
                 int productTypeId = 0;
                 if (InventionOutcomeBPCombo.SelectedValue != null)
                 {
-                    productTypeId = (int)InventionOutcomeBPCombo.SelectedValue;
+                    productTypeId = Convert.ToInt32(InventionOutcomeBPCombo.SelectedValue);
                 }
                 if (productTypeId <= 0)
                 {
@@ -1879,7 +1879,7 @@ namespace EveHelperWF
             MEResearchTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResMETime);
 
             //Cost Index Label
-            int solarSystemId = (int)MESystemCombo.SelectedValue;
+            int solarSystemId = Convert.ToInt32(MESystemCombo.SelectedValue);
             if (solarSystemId > 0)
             {
                 decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityME);
@@ -1934,7 +1934,7 @@ namespace EveHelperWF
             TETimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
 
             //Cost Index Label
-            int solarSystemId = (int)TESystemCombo.SelectedValue;
+            int solarSystemId = Convert.ToInt32(TESystemCombo.SelectedValue);
             if (solarSystemId > 0)
             {
                 decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityTE);
@@ -1989,7 +1989,7 @@ namespace EveHelperWF
             CopyTimeLabel.Text = BlueprintBrowserHelper.FormatTimeAsString(ResTETime);
 
             //Cost Index Label
-            int solarSystemId = (int)CopySystemCombo.SelectedValue;
+            int solarSystemId = Convert.ToInt32(CopySystemCombo.SelectedValue);
             if (solarSystemId > 0)
             {
                 decimal costIndice = CommonHelper.GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityCOPY);
@@ -2089,7 +2089,7 @@ namespace EveHelperWF
 
         private void BlueprintImageBackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            byte[] bpImage = null;
+            byte[]? bpImage = null;
             if (SelectedType != null && SelectedType.typeId > 0)
             {
                 bpImage = ESIImageServer.GetImageForType(SelectedType.typeId, "bp");
@@ -2120,7 +2120,7 @@ namespace EveHelperWF
 
         private void ManuImageWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            byte[] bpImage = null;
+            byte[]? bpImage = null;
             if (HasManufacturingActivity())
             {
                 IndustryActivityProduct activityProduct = ManuProds[0];
@@ -2156,7 +2156,7 @@ namespace EveHelperWF
 
         private void ReactionImageWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            byte[] iamge = null;
+            byte[]? iamge = null;
             if (HasReactionActivity())
             {
                 IndustryActivityProduct activityProduct = ReactionProds[0];
@@ -2194,10 +2194,10 @@ namespace EveHelperWF
 
         private void InventionImageWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            byte[] iamge = null;
+            byte[]? iamge = null;
             if (HasInventionActivity())
             {
-                int outputTypeId = (int)(e.Argument);
+                int outputTypeId = Convert.ToInt32(e.Argument);
 
                 if (outputTypeId > 0)
                 {

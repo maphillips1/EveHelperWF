@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,15 +20,14 @@ namespace EveHelperWF.UI_Controls
 {
     public partial class MainScreen : Objects.FormBase
     {
-        ConfigureDefaults configureDefaults;
-        AbyssTracker abyssTracker;
-        BackupFiles backupFiles;
-        FIleLocations fIleLocations;
-        PriceHistoryUtility priceHistoryUtility;
-        LootAppraisal lootAppraisal;
-        ShoppingListControl shoppingList;
-        BuildPlansControl buildPlans;
-        System.Threading.Mutex objMutex;
+        ConfigureDefaults? configureDefaults;
+        AbyssTracker? abyssTracker;
+        BackupFiles? backupFiles;
+        FIleLocations? fIleLocations;
+        PriceHistoryUtility? priceHistoryUtility;
+        LootAppraisal? lootAppraisal;
+        ShoppingListControl? shoppingList;
+        BuildPlansControl? buildPlans;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
@@ -38,6 +39,12 @@ namespace EveHelperWF.UI_Controls
 
         public MainScreen()
         {
+
+            if (!CheckForInternetConnection())
+            {
+                MessageBox.Show("Your internet connection may be down. Real time market data may not load. I'll still try to get it in case your internet comes back.", "Internet's Fucked.");
+            }
+
             CheckForOtherInstance();
             CheckForUpdates();
             InitializeComponent();
@@ -84,6 +91,32 @@ namespace EveHelperWF.UI_Controls
                 newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
                 newReleaseScreen.ShowDialog();
                 newReleaseScreen.BringToFront();
+            }
+        }
+
+        private bool CheckForInternetConnection(int timeoutMs = 10000, string url = null)
+        {
+            try
+            {
+                url ??= CultureInfo.InstalledUICulture switch
+                {
+                    { Name: var n } when n.StartsWith("fa") => // Iran
+                        "http://www.aparat.com",
+                    { Name: var n } when n.StartsWith("zh") => // China
+                        "http://www.baidu.com",
+                    _ =>
+                        "http://www.gstatic.com/generate_204",
+                };
+
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = timeoutMs;
+                using (var response = (HttpWebResponse)request.GetResponse())
+                    return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -205,6 +238,13 @@ namespace EveHelperWF.UI_Controls
             buildPlans.StartPosition = FormStartPosition.CenterScreen;
             buildPlans.Show();
             buildPlans.BringToFront();
+        }
+
+        private void importFIlesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportFiles importFiles = new ImportFiles();
+            importFiles.StartPosition = FormStartPosition.CenterParent;
+            importFiles.ShowDialog();
         }
     }
 }

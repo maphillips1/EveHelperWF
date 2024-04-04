@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FileIO;
 using Newtonsoft.Json;
 
 namespace EveHelperWF.ESI_Calls
@@ -25,20 +26,27 @@ namespace EveHelperWF.ESI_Calls
         {
             if (costIndices == null)
             {
-                costIndices = GetCachedCostIndicies();
-
-                if (costIndices == null || costIndices.Count == 0)
+                try
                 {
-                    string uri = "https://esi.evetech.net/latest/industry/systems/?datasource=tranquility";
-                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                    System.Net.Http.HttpResponseMessage response = client.GetAsync(uri).Result;
+                    costIndices = GetCachedCostIndicies();
 
-                    if (response != null && response.IsSuccessStatusCode)
+                    if (costIndices == null || costIndices.Count == 0)
                     {
-                        string indices = response.Content.ReadAsStringAsync().Result;
-                        costIndices = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.CostIndice>>(indices);
-                        CacheCostIndicies(costIndices);
+                        string uri = "https://esi.evetech.net/latest/industry/systems/?datasource=tranquility";
+                        System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                        System.Net.Http.HttpResponseMessage response = client.GetAsync(uri).Result;
+
+                        if (response != null && response.IsSuccessStatusCode)
+                        {
+                            string indices = response.Content.ReadAsStringAsync().Result;
+                            costIndices = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.CostIndice>>(indices);
+                            CacheCostIndicies(costIndices);
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    FileHelper.LogError(ex.Message, ex.StackTrace);
                 }
             }
 

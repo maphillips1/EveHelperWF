@@ -14,8 +14,38 @@ namespace EveHelperWF.ScreenHelper
     {
         public static List<Objects.InventoryType> InventoryTypes = null;
         public static List<Objects.SolarSystem> SolarSystemList = null;
-        public static List<Objects.AdjustedCost> AdjustedCosts = null;
-        public static List<Objects.CostIndice> CostIndicies = null;
+        public static List<Objects.AdjustedCost> AdjustedCosts
+        {
+            get
+            {
+                if (m_AdjustedCosts == null)
+                {
+                    m_AdjustedCosts = new List<Objects.AdjustedCost>();
+                }
+                return m_AdjustedCosts;
+            }
+            set
+            {
+                m_AdjustedCosts = value;
+            }
+        }
+        private static List<Objects.AdjustedCost> m_AdjustedCosts = null;
+        public static List<Objects.CostIndice> CostIndicies
+        {
+            get
+            {
+                if (m_CostIndicies == null)
+                {
+                    m_CostIndicies = new List<Objects.CostIndice>();
+                }
+                return m_CostIndicies;
+            }
+            set
+            {
+                m_CostIndicies = value;
+            }
+        }
+        private static List<Objects.CostIndice> m_CostIndicies = null;
         public static List<Objects.EngineerngComplex> EngineerngComplices = null;
 
 
@@ -91,6 +121,42 @@ namespace EveHelperWF.ScreenHelper
             if (iskAmount > 0)
             {
                 formattedIsk = iskAmount.ToString("C");
+                formattedIsk = formattedIsk.Replace(NumberFormatInfo.CurrentInfo.CurrencySymbol, "");
+                formattedIsk = formattedIsk.Trim() + " isk";
+            }
+            else
+            {
+                formattedIsk = iskAmount.ToString("C");
+                formattedIsk = formattedIsk.Replace(NumberFormatInfo.CurrentInfo.CurrencySymbol, "");
+                formattedIsk = formattedIsk.Trim() + " isk";
+            }
+
+            return formattedIsk;
+        }
+
+        public static string FormatIskShortened(decimal iskAmount)
+        {
+            string formattedIsk = "";
+
+            if (iskAmount > 0)
+            {
+                decimal shortenedAmount;
+                switch (iskAmount)
+                {
+                    case > 1000000000:
+                        shortenedAmount = Math.Round(iskAmount / (decimal)1000000000, 3);
+                        formattedIsk = shortenedAmount.ToString("C") + " B";
+                        break;
+                    case > 100000000:
+                        shortenedAmount = Math.Round(iskAmount / (decimal)1000000, 3);
+                        formattedIsk = shortenedAmount.ToString("C") + " M";
+                        break;
+                    default:
+                        formattedIsk = iskAmount.ToString("C");
+                        break;
+
+                }
+
                 formattedIsk = formattedIsk.Replace(NumberFormatInfo.CurrentInfo.CurrencySymbol, "");
                 formattedIsk = formattedIsk.Trim() + " isk";
             }
@@ -249,7 +315,7 @@ namespace EveHelperWF.ScreenHelper
         public static decimal GetBaseCost(List<MaterialsWithMarketData> manuMats, bool useQuantityTotal, int runsNeeded)
         {
             decimal baseCost = 0;
-            AdjustedCost adjustedCost = null;
+            AdjustedCost? adjustedCost;
             long quantity = 0;
             foreach (MaterialsWithMarketData mat in manuMats)
             {
@@ -285,7 +351,7 @@ namespace EveHelperWF.ScreenHelper
 
             if (CommonHelper.CostIndicies.Count > 0)
             {
-                CostIndice costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
+                CostIndice? costIndice = CostIndicies.Find(x => x.solar_system_id == solarSystemID);
                 if (costIndice != null)
                 {
                     costIndex = costIndice.cost_indices.Find(x => x.activity == activityName).cost_index;

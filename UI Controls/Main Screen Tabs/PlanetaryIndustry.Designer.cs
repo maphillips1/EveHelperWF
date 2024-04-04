@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Label label7;
+            Label label3;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanetaryIndustry));
             OutputTreeView = new TreeView();
             SchematicNameLabel = new Label();
@@ -49,11 +51,35 @@
             CycleTimeLabel = new Label();
             GetPricesBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             PerfectPlanetsListLabel = new Label();
-            label7 = new Label();
             SolarSystemSearchButton = new Button();
             PIOutputImageWorker = new System.ComponentModel.BackgroundWorker();
+            UniqueResourcesLabel = new Label();
+            label7 = new Label();
+            label3 = new Label();
             SchematicSummaryPanel.SuspendLayout();
             SuspendLayout();
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(1385, 94);
+            label7.Name = "label7";
+            label7.Size = new Size(132, 21);
+            label7.TabIndex = 6;
+            label7.Text = "Minimum Planets";
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(1385, 369);
+            label3.Name = "label3";
+            label3.Size = new Size(115, 21);
+            label3.TabIndex = 9;
+            label3.Text = "Raw Resources";
             // 
             // OutputTreeView
             // 
@@ -268,17 +294,6 @@
             PerfectPlanetsListLabel.TabIndex = 5;
             PerfectPlanetsListLabel.Text = "List";
             // 
-            // label7
-            // 
-            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(1385, 94);
-            label7.Name = "label7";
-            label7.Size = new Size(132, 21);
-            label7.TabIndex = 6;
-            label7.Text = "Minimum Planets";
-            // 
             // SolarSystemSearchButton
             // 
             SolarSystemSearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -298,11 +313,24 @@
             PIOutputImageWorker.DoWork += PIOutputImageWorker_DoWork;
             PIOutputImageWorker.RunWorkerCompleted += PIOutputImageWorker_RunWorkerCompleted;
             // 
+            // UniqueResourcesLabel
+            // 
+            UniqueResourcesLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UniqueResourcesLabel.AutoSize = true;
+            UniqueResourcesLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            UniqueResourcesLabel.Location = new Point(1385, 399);
+            UniqueResourcesLabel.Name = "UniqueResourcesLabel";
+            UniqueResourcesLabel.Size = new Size(34, 21);
+            UniqueResourcesLabel.TabIndex = 8;
+            UniqueResourcesLabel.Text = "List";
+            // 
             // PlanetaryIndustry
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1540, 634);
+            Controls.Add(label3);
+            Controls.Add(UniqueResourcesLabel);
             Controls.Add(SolarSystemSearchButton);
             Controls.Add(label7);
             Controls.Add(PerfectPlanetsListLabel);
@@ -349,5 +377,6 @@
         private Button SolarSystemSearchButton;
         private Panel PIOutputImagePanel;
         private System.ComponentModel.BackgroundWorker PIOutputImageWorker;
+        private Label UniqueResourcesLabel;
     }
 }

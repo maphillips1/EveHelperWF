@@ -80,6 +80,8 @@ namespace Enums
                                          "EveHelper\\ShoppingLists\\");
         public static string BuildPlanDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\BuildPlans\\");
+        public static string ErrorLogDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\ErrorLogs\\");
         public enum PlanetMatTierGroupId
         {
             T0_Organic = 1035,
