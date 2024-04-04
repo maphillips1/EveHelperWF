@@ -94,7 +94,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void UpdatePriceHistoryButton_Click(object sender, EventArgs e)
         {
 
-            if ((int)RegionCombo.SelectedValue > 0 && TrackedTypes.Count > 0 && !UpdatePriceHistoryWorker.IsBusy)
+            if (Convert.ToInt32(RegionCombo.SelectedValue) > 0 && TrackedTypes.Count > 0 && !UpdatePriceHistoryWorker.IsBusy)
             {
                 UpdatePriceHistoryButton.Enabled = false;
                 RegionCombo.Enabled = false;
@@ -102,7 +102,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 UpdateHistoryProgressBar.Visible = true;
                 CancelButton.Visible = true;
                 PriceHistoryBackgroundWorkerClass utilityClass = new PriceHistoryBackgroundWorkerClass();
-                utilityClass.RegionID = (int)RegionCombo.SelectedValue;
+                utilityClass.RegionID = Convert.ToInt32(RegionCombo.SelectedValue);
                 utilityClass.InventoryTypes = TrackedTypes.ToList();
                 UpdateHistoryProgressBar.Minimum = 0;
                 UpdateHistoryProgressBar.Maximum = TrackedTypes.Count();
@@ -173,7 +173,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 typeId = Convert.ToInt32(TrackedTypesGrid.SelectedRows[0].Cells["trackedTypeId"].Value);
                 if (typeId > 0)
                 {
-                    int regionID = (int)RegionCombo.SelectedValue;
+                    int regionID = Convert.ToInt32(RegionCombo.SelectedValue);
 
                     InventoryType trackedType = TrackedTypes.ToList().Find(x => x.typeId == typeId);
 

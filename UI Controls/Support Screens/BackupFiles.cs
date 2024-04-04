@@ -14,9 +14,9 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 {
     public partial class BackupFiles : Objects.FormBase
     {
-        private string AbyssRunFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, "AbyssRuns.json");
+        private string AbyssRunFileName = "AbyssRuns.json";
 
-        private string TrackedTypeFileName = Path.Combine(Enums.Enums.TrackedTypeDirectory, "TrackedTypes.json");
+        private string TrackedTypeFileName = "TrackedTypes.json";
 
         private static string CachedFormValuesFileName = "form_values.json";
 
@@ -55,6 +55,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 {
                     BackupDefaultValues(SelectedPath);
                 }
+
+                if (BuildPlansCheckbox.Checked)
+                {
+                    BackupBuildPlans(SelectedPath);
+                }
+
+                if (ShoppingListCheckbox.Checked)
+                {
+                    BackupShoppingPlans(SelectedPath);
+                }
                 MessageBox.Show("Backup Complete");
             }
         }
@@ -63,11 +73,12 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         #region "Methods"
         private void BackupAbyssRuns(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
+            string fullAbyssFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, AbyssRunFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.AbyssRunDirectory, fullAbyssFileName);
             if (fileContent != null)
             {
-                AbyssRunFileName = Path.Combine(selectedPath, AbyssRunFileName);
-                FileIO.FileHelper.SaveFileContent(selectedPath, AbyssRunFileName, fileContent);
+                string newFileName = Path.Combine(selectedPath, AbyssRunFileName);
+                FileIO.FileHelper.SaveFileContent(selectedPath, newFileName, fileContent);
             }
         }
 
@@ -76,6 +87,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             string[] priceHistoryFiles = Directory.GetFiles(Enums.Enums.CachedPriceHistory);
             if (priceHistoryFiles != null && priceHistoryFiles.Count() > 0)
             {
+                string selectedPathWithSubFolder = Path.Combine(selectedPath, "PriceHistories");
                 string fileContent = null;
                 string actualFileName;
                 string newFileName;
@@ -85,8 +97,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                     if (fileContent != null)
                     {
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
-                        newFileName = Path.Combine(selectedPath, actualFileName);
-                        FileHelper.SaveFileContent(selectedPath, newFileName, fileContent);
+                        newFileName = Path.Combine(selectedPathWithSubFolder, actualFileName);
+                        FileHelper.SaveFileContent(selectedPathWithSubFolder, newFileName, fileContent);
                     }
                 }
             }
@@ -94,11 +106,12 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void BackupTrackedItems(string selectedPath)
         {
-            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
+            string fullTrackedItemsFileName = Path.Combine(Enums.Enums.TrackedTypeDirectory, TrackedTypeFileName);
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.TrackedTypeDirectory, fullTrackedItemsFileName);
             if (fileContent != null)
             {
-                TrackedTypeFileName = Path.Combine(selectedPath, TrackedTypeFileName);
-                FileIO.FileHelper.SaveFileContent(selectedPath, TrackedTypeFileName, fileContent);
+                string newFileName = Path.Combine(selectedPath, TrackedTypeFileName);
+                FileIO.FileHelper.SaveFileContent(selectedPath, newFileName, fileContent);
             }
         }
 
@@ -108,8 +121,52 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, fileName);
             if (fileContent != null)
             {
-                CachedFormValuesFileName = Path.Combine(selectedPath, CachedFormValuesFileName);
-                FileIO.FileHelper.SaveFileContent(selectedPath, CachedFormValuesFileName, fileContent);
+                string newFileName = Path.Combine(selectedPath, CachedFormValuesFileName);
+                FileIO.FileHelper.SaveFileContent(selectedPath, newFileName, fileContent);
+            }
+        }
+
+        private void BackupBuildPlans(string selectedPath)
+        {
+            string[] BuildPlanFiles = Directory.GetFiles(Enums.Enums.BuildPlanDirectory);
+            if (BuildPlanFiles != null && BuildPlanFiles.Count() > 0)
+            {
+                string selectedPathWithSubFolder = Path.Combine(selectedPath, "BuildPlans");
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                foreach (string fileName in BuildPlanFiles)
+                {
+                    fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.BuildPlanDirectory, fileName);
+                    if (fileContent != null)
+                    {
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(selectedPathWithSubFolder, actualFileName);
+                        FileHelper.SaveFileContent(selectedPathWithSubFolder, newFileName, fileContent);
+                    }
+                }
+            }
+        }
+
+        private void BackupShoppingPlans(string selectedPath)
+        {
+            string[] ShoppingPlanFiles = Directory.GetFiles(Enums.Enums.ShoppingListsDirectory);
+            if (ShoppingPlanFiles != null && ShoppingPlanFiles.Count() > 0)
+            {
+                string selectedPathWithSubFolder = Path.Combine(selectedPath, "ShoppingLists");
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                foreach (string fileName in ShoppingPlanFiles)
+                {
+                    fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.ShoppingListsDirectory, fileName);
+                    if (fileContent != null)
+                    {
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(selectedPathWithSubFolder, actualFileName);
+                        FileHelper.SaveFileContent(selectedPathWithSubFolder, newFileName, fileContent);
+                    }
+                }
             }
         }
         #endregion

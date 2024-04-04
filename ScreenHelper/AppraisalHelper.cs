@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.Database;
 using EveHelperWF.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,45 +49,60 @@ namespace EveHelperWF.ScreenHelper
             AppraisedItem appraisedItem = null;
 
             string typeName = rawInput;
-            typeName = typeName.Trim();
-            typeName = typeName.ToLower().Replace(" x ", "").Replace("'", "''");
-            Tuple<int, string> foundType = FindTypeInDB(typeName);
-
-            if (foundType != null && foundType.Item1 > 0 && !string.IsNullOrWhiteSpace(foundType.Item2))
+            if (typeName.Contains("\t"))
             {
-                appraisedItem = new AppraisedItem();
-                appraisedItem.typeID = foundType.Item1;
-                appraisedItem.typeName = foundType.Item2;
+                //if it contains the tab character, this is likely copy/pasted from an Eve window. 
+                //try to parse it by splitting on the t and then finding a match that way
+                string[] splitString = typeName.Split("\t");
 
-                string remainingString = rawInput.Replace(appraisedItem.typeName, string.Empty);
-                remainingString = RemoveExtraSpaces(remainingString).Trim().Replace(",", "");
-                decimal quant = 0;
-                if (string.IsNullOrWhiteSpace(remainingString))
+                Tuple<int, string> foundType = FindTypeInDB(splitString[0]);
+                appraisedItem = new AppraisedItem();
+                if (foundType != null && foundType.Item1 > 0 && !string.IsNullOrWhiteSpace(foundType.Item2))
                 {
-                    appraisedItem.quantity = 1;
-                } 
+                    appraisedItem.typeID = foundType.Item1;
+                    appraisedItem.typeName = foundType.Item2;
+                    if (splitString.Length > 1)
+                    {
+                        int itemCount = 0;
+                        if (int.TryParse(splitString[1], out itemCount))
+                        {
+                            appraisedItem.quantity = itemCount;
+                        }
+                    }
+                }
                 else
                 {
-                    List<string> stringParts = remainingString.Split(" ").ToList();
-                    if (stringParts.Count > 1)
-                    {
+                    appraisedItem.typeName = "Could not parse : " + rawInput.Trim();
+                }
+            }
+            else
+            {
+                //manually typed in or other
+                typeName = typeName.Trim();
+                typeName = typeName.ToLower().Replace(" x ", "").Replace("'", "''");
+                Tuple<int, string> foundType = FindTypeInDB(typeName);
+                if (foundType != null && foundType.Item1 > 0 && !string.IsNullOrWhiteSpace(foundType.Item2))
+                {
+                    appraisedItem = new AppraisedItem();
+                    appraisedItem.typeID = foundType.Item1;
+                    appraisedItem.typeName = foundType.Item2;
 
-                        if (Decimal.TryParse(stringParts[0], out quant))
+                    string remainingString = rawInput.Replace(appraisedItem.typeName, string.Empty);
+                    remainingString = RemoveExtraSpaces(remainingString).Trim().Replace(",", "");
+                    decimal quant = 0;
+                    if (string.IsNullOrWhiteSpace(remainingString))
+                    {
+                        appraisedItem.quantity = 1;
+                    }
+                    else
+                    {
+                        List<string> stringParts = remainingString.Split(" ").ToList();
+                        if (stringParts.Count > 1)
                         {
-                            if (stringParts[1].ToLower().Contains("m3"))
+
+                            if (Decimal.TryParse(stringParts[0], out quant))
                             {
-                                quant = 1;
-                            }
-                            else
-                            {
-                                appraisedItem.quantity = (int)quant;
-                            }
-                        }
-                        else if (Decimal.TryParse(stringParts[1], out quant))
-                        {
-                            if (stringParts.Count > 2)
-                            {
-                                if (stringParts[2].ToLower().Contains("m3"))
+                                if (stringParts[1].ToLower().Contains("m3"))
                                 {
                                     quant = 1;
                                 }
@@ -95,23 +111,37 @@ namespace EveHelperWF.ScreenHelper
                                     appraisedItem.quantity = (int)quant;
                                 }
                             }
-                            else
+                            else if (Decimal.TryParse(stringParts[1], out quant))
                             {
-                                appraisedItem.quantity = (int)quant;
+                                if (stringParts.Count > 2)
+                                {
+                                    if (stringParts[2].ToLower().Contains("m3"))
+                                    {
+                                        quant = 1;
+                                    }
+                                    else
+                                    {
+                                        appraisedItem.quantity = (int)quant;
+                                    }
+                                }
+                                else
+                                {
+                                    appraisedItem.quantity = (int)quant;
+                                }
                             }
+                            if (appraisedItem.quantity <= 0) { appraisedItem.quantity = 1; }
                         }
-                        if (appraisedItem.quantity <= 0) { appraisedItem.quantity = 1; }
-                    }
-                    else if (Decimal.TryParse(remainingString, out quant))
-                    {
-                        appraisedItem.quantity = (int)quant;
+                        else if (Decimal.TryParse(remainingString, out quant))
+                        {
+                            appraisedItem.quantity = (int)quant;
+                        }
                     }
                 }
-            }
-            else
-            {
-                appraisedItem = new AppraisedItem();
-                appraisedItem.typeName = "Could not parse : " + rawInput.Trim();
+                else
+                {
+                    appraisedItem = new AppraisedItem();
+                    appraisedItem.typeName = "Could not parse : " + rawInput.Trim();
+                }
             }
             return appraisedItem;
         }
@@ -151,10 +181,11 @@ namespace EveHelperWF.ScreenHelper
         {
             Tuple<int, string> result = null;
 
-            List<string> parts = input.Split(" ").ToList();
+
+            List<string> parts = input.Replace("'", "''").Split(" ").ToList();
             int tries = parts.Count;
 
-            string searchString = input;
+            string searchString = input.Replace("'", "''");
             bool found = false;
             InventoryType foundType;
             while (tries > 0 && !found)

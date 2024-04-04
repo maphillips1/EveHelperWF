@@ -43,6 +43,9 @@
     <Compile Update="UI Controls\MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\AbyssalStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Support Screens\AddBuildPlanScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +62,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\FileNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\ImportFiles.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\OptimizedBuildDetailsControl.cs">

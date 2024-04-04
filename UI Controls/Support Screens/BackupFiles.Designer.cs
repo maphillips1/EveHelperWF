@@ -35,7 +35,8 @@
             TrackedItemsCheckbox = new CheckBox();
             BackupFilesButton = new Button();
             BackupFilesDialog = new FolderBrowserDialog();
-            textBox1 = new TextBox();
+            BuildPlansCheckbox = new CheckBox();
+            ShoppingListCheckbox = new CheckBox();
             SuspendLayout();
             // 
             // PriceHistoryCheckbox
@@ -90,7 +91,7 @@
             // 
             BackupFilesButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             BackupFilesButton.ForeColor = Color.Black;
-            BackupFilesButton.Location = new Point(7, 123);
+            BackupFilesButton.Location = new Point(10, 186);
             BackupFilesButton.Margin = new Padding(3, 2, 3, 2);
             BackupFilesButton.Name = "BackupFilesButton";
             BackupFilesButton.Size = new Size(124, 25);
@@ -105,27 +106,37 @@
             BackupFilesDialog.RootFolder = Environment.SpecialFolder.MyDocuments;
             BackupFilesDialog.UseDescriptionForTitle = true;
             // 
-            // textBox1
+            // BuildPlansCheckbox
             // 
-            textBox1.BackColor = Color.FromArgb(2, 23, 38);
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Enabled = false;
-            textBox1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox1.ForeColor = Color.White;
-            textBox1.Location = new Point(200, 9);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(243, 152);
-            textBox1.TabIndex = 5;
-            textBox1.Text = resources.GetString("textBox1.Text");
+            BuildPlansCheckbox.AutoSize = true;
+            BuildPlansCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            BuildPlansCheckbox.Location = new Point(10, 110);
+            BuildPlansCheckbox.Margin = new Padding(3, 2, 3, 2);
+            BuildPlansCheckbox.Name = "BuildPlansCheckbox";
+            BuildPlansCheckbox.Size = new Size(97, 23);
+            BuildPlansCheckbox.TabIndex = 6;
+            BuildPlansCheckbox.Text = "Build Plans";
+            BuildPlansCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // ShoppingListCheckbox
+            // 
+            ShoppingListCheckbox.AutoSize = true;
+            ShoppingListCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ShoppingListCheckbox.Location = new Point(10, 138);
+            ShoppingListCheckbox.Margin = new Padding(3, 2, 3, 2);
+            ShoppingListCheckbox.Name = "ShoppingListCheckbox";
+            ShoppingListCheckbox.Size = new Size(120, 23);
+            ShoppingListCheckbox.TabIndex = 7;
+            ShoppingListCheckbox.Text = "Shopping Lists";
+            ShoppingListCheckbox.UseVisualStyleBackColor = true;
             // 
             // BackupFiles
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(486, 170);
-            Controls.Add(textBox1);
+            ClientSize = new Size(176, 244);
+            Controls.Add(ShoppingListCheckbox);
+            Controls.Add(BuildPlansCheckbox);
             Controls.Add(BackupFilesButton);
             Controls.Add(TrackedItemsCheckbox);
             Controls.Add(AbyssRunsCheckbox);
@@ -149,6 +160,7 @@
         private CheckBox TrackedItemsCheckbox;
         private Button BackupFilesButton;
         private FolderBrowserDialog BackupFilesDialog;
-        private TextBox textBox1;
+        private CheckBox BuildPlansCheckbox;
+        private CheckBox ShoppingListCheckbox;
     }
 }

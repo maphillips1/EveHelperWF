@@ -95,5 +95,26 @@ namespace FileIO
         {
             return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
+
+        public static void LogError(string errorMessage, string? fullCallstack)
+        {
+            string fileName = Enums.Enums.ErrorLogDirectory + "ErrorLog.txt";
+
+            string currentLogs = GetFileContent(Enums.Enums.ErrorLogDirectory, fileName);
+
+            StringBuilder logBuilder = new StringBuilder(currentLogs);
+
+            logBuilder.AppendLine("----------------------");
+            logBuilder.AppendLine("New Error Encountered at : " + System.DateTime.Now.ToString());
+            logBuilder.AppendLine("");
+            logBuilder.AppendLine(errorMessage);
+            logBuilder.AppendLine("");
+            if (fullCallstack != null)
+            {
+                logBuilder.AppendLine(fullCallstack);
+            }
+
+            SaveFileContent(Enums.Enums.ErrorLogDirectory, fileName, logBuilder.ToString());
+        }
     }
 }

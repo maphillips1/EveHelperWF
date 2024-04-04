@@ -1,4 +1,5 @@
 ﻿using EveHelperWF.Objects;
+using FileIO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace EveHelperWF.ESI_Calls
 {
     public static class ESIImageServer
     {
-        
+
         private static byte[] GetImageFromLocal(int typeId, string modifier)
         {
             byte[] imageBytes = null;
@@ -31,7 +32,7 @@ namespace EveHelperWF.ESI_Calls
 
         private static void StoreImageLocally(byte[] imageBytes, int typeId, string modifier)
         {
-            if (imageBytes != null) 
+            if (imageBytes != null)
             {
                 //Images are given to us as PNG
 
@@ -52,22 +53,29 @@ namespace EveHelperWF.ESI_Calls
             }
         }
 
-        public static byte[] GetImageForType(int typeId, string modifier)
+        public static byte[]? GetImageForType(int typeId, string modifier)
         {
-            byte[] imageBytes = GetImageFromLocal(typeId, modifier);
-
-            //We have not gotten this image before. Get it from Eve Image Server
-            if (imageBytes == null && modifier != null)
+            byte[]? imageBytes = null;
+            try
             {
-                string url = "https://images.evetech.net/types/" + typeId.ToString() + "/" + modifier;
-                System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                System.Net.Http.HttpResponseMessage response = client.GetAsync(url).Result;
-
-                if (response != null && response.IsSuccessStatusCode)
+                imageBytes = GetImageFromLocal(typeId, modifier);
+                //We have not gotten this image before. Get it from Eve Image Server
+                if (imageBytes == null && modifier != null)
                 {
-                     imageBytes = response.Content.ReadAsByteArrayAsync().Result;
-                    StoreImageLocally (imageBytes, typeId, modifier);
+                    string url = "https://images.evetech.net/types/" + typeId.ToString() + "/" + modifier;
+                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                    System.Net.Http.HttpResponseMessage response = client.GetAsync(url).Result;
+
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        imageBytes = response.Content.ReadAsByteArrayAsync().Result;
+                        StoreImageLocally(imageBytes, typeId, modifier);
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                FileHelper.LogError(ex.Message, ex.StackTrace);
             }
 
 

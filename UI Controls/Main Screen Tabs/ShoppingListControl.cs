@@ -274,7 +274,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private string GetSelectedFileName()
         {
-            int selectedFile = (int)ShoppingListCombo.SelectedValue;
+            int selectedFile = Convert.ToInt32(ShoppingListCombo.SelectedValue);
 
             if (selectedFile > 0)
             {

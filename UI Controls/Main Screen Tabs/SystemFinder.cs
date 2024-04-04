@@ -56,7 +56,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             if (RegionCombobox.SelectedValue != null)
             {
-                selectedRegion = (int)RegionCombobox.SelectedValue;
+                selectedRegion = Convert.ToInt32(RegionCombobox.SelectedValue);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
             if (StationComboBox.SelectedValue != null)
             {
-                stationFilter = (int)StationComboBox.SelectedValue;
+                stationFilter = Convert.ToInt32(StationComboBox.SelectedValue);
             }
             else
             {

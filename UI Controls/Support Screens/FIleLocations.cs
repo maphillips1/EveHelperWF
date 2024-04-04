@@ -27,6 +27,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             PriceHistoryLabel.Text = Enums.Enums.CachedPriceHistory;
             TrackedItemsLabel.Text = Enums.Enums.TrackedTypeDirectory;
             DefaultFormValuesLabel.Text = Enums.Enums.CachedFormValuesDirectory;
+            BuildPlansLinkLabel.Text = Enums.Enums.BuildPlanDirectory;
+            ShoppingListsLinkLabel.Text = Enums.Enums.ShoppingListsDirectory;
         }
 
         private void SQLiteLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -60,6 +62,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             psi.Arguments = path;
             psi.FileName = "explorer.exe";
             Process.Start(psi);
+        }
+
+        private void BuildPlansLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.BuildPlanDirectory);
+        }
+
+        private void ShoppingListsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.ShoppingListsDirectory);
         }
     }
 }

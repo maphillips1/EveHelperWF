@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
+using EveHelperWF.UI_Controls.Support_Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private static string AbyssRunFileName = Path.Combine(Enums.Enums.AbyssRunDirectory, "AbyssRuns.json");
         private BindingList<AbyssRun> AbyssRuns = new BindingList<AbyssRun>();
 
-        private bool ignoreChangedEvent = false;
+        private bool IgnoreChangedEvent = false;
 
         #region "Load"
 
@@ -75,7 +76,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (AbyssTrackerGridView.SelectedRows.Count > 0)
             {
-                int selectedAbyssRunID = (int)AbyssTrackerGridView.SelectedRows[0].Cells["abyssRunID"].Value;
+                int selectedAbyssRunID = Convert.ToInt32(AbyssTrackerGridView.SelectedRows[0].Cells["abyssRunID"].Value);
 
                 if (selectedAbyssRunID > 0)
                 {
@@ -92,10 +93,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AddRunButton_Click(object sender, EventArgs e)
         {
-            ignoreChangedEvent = true;
+            IgnoreChangedEvent = true;
             this.Cursor = Cursors.WaitCursor;
-            int selectedFilamentId = (int)FilamentTypeCombo.SelectedValue;
-            int selectedShipType = (int)(ShipTypeCombo.SelectedValue);
+            int selectedFilamentId = Convert.ToInt32(FilamentTypeCombo.SelectedValue);
+            int selectedShipType = Convert.ToInt32(ShipTypeCombo.SelectedValue);
             bool success = SuccessCheckbox.Checked;
             if (selectedFilamentId > 0 && selectedShipType > 0)
             {
@@ -135,7 +136,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 if (!String.IsNullOrWhiteSpace(LootTextBox.Text))
                 {
-                    string[] splitItems = LootTextBox.Text.Split("\r\n");
+                    string[] splitItems = LootTextBox.Text.Replace("\r\n", "\n").Replace("\n", "\r\n").Split("\r\n");
 
                     List<AppraisedItem> appraisedItems = AppraisalHelper.ParseTypeIds(splitItems);
 
@@ -172,27 +173,18 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 MessageBox.Show("Enter the Filament Type and Ship Type");
             }
-            ignoreChangedEvent = false;
+            IgnoreChangedEvent = false;
         }
 
         private void LootTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!ignoreChangedEvent)
+            if (!IgnoreChangedEvent)
             {
-                ignoreChangedEvent = true;
+                IgnoreChangedEvent = true;
                 string text = LootTextBox.Text;
 
-                string[] inputItems = text.Replace("\r\n", "\n").Replace("\n", "\r\n").Replace("\t", " ").Split("\r\n");
-                if (inputItems != null)
-                {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    foreach (string item in inputItems)
-                    {
-                        stringBuilder.AppendLine(item);
-                    }
-                    LootTextBox.Text = stringBuilder.ToString();
-                }
-                ignoreChangedEvent = false;
+                LootTextBox.Text = text.Replace("\r\n", "\n").Replace("\n", "\r\n");
+                IgnoreChangedEvent = false;
             }
         }
         #endregion
@@ -241,10 +233,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void DataBindTrackerGrid()
         {
             DatabindGridView<List<AbyssRun>>(AbyssTrackerGridView, AbyssRuns.OrderByDescending(x => x.AbyssRunID).ToList());
-            
+
             DatabindSummaryInfo();
             this.Refresh();
         }
         #endregion
+
+        private void StatisticsButton_Click(object sender, EventArgs e)
+        {
+            AbyssalStatistics abyssalStatistics = new AbyssalStatistics(AbyssRuns.ToList());
+            abyssalStatistics.ShowDialog();
+        }
     }
 }

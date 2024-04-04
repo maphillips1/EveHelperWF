@@ -233,7 +233,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
             {
-                int optimizedTypeId = (int)(e.Node.Tag);
+                int optimizedTypeId = Convert.ToInt32(e.Node.Tag);
                 if (optimizedTypeId > 0)
                 {
                     this.Cursor = Cursors.WaitCursor;
@@ -263,7 +263,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null && !isLoading)
             {
-                this.currentBuildPlan.IndustrySettings.InputOrderType = (int)InputOrderTypeCombo.SelectedValue;
+                this.currentBuildPlan.IndustrySettings.InputOrderType = Convert.ToInt32(InputOrderTypeCombo.SelectedValue);
                 RunCalcs();
             }
         }
@@ -272,7 +272,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null && !isLoading)
             {
-                this.currentBuildPlan.IndustrySettings.OutputOrderType = (int)OutputOrderTypeCombo.SelectedValue;
+                this.currentBuildPlan.IndustrySettings.OutputOrderType = Convert.ToInt32(OutputOrderTypeCombo.SelectedValue);
                 RunCalcs();
             }
         }
@@ -314,7 +314,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!isLoading && e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
             {
                 this.isLoading = true;
-                int typeID = (int)(e.Node.Tag);
+                int typeID = Convert.ToInt32(e.Node.Tag);
                 List<MaterialsWithMarketData> mats = this.currentBuildPlan.AllItems;
                 MaterialsWithMarketData currentMat = mats.Find(x => x.materialTypeID == typeID);
 
@@ -340,7 +340,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 if (e.Node.Tag != null)
                 {
-                    int bpTypeId = (int)e.Node.Tag;
+                    int bpTypeId = Convert.ToInt32(e.Node.Tag);
                     BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == bpTypeId);
 
                     BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
@@ -539,7 +539,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (BuildPlanCombo.SelectedIndex > 0)
             {
-                int selectedFile = (int)BuildPlanCombo.SelectedValue;
+                int selectedFile = Convert.ToInt32(BuildPlanCombo.SelectedValue);
 
                 if (selectedFile > 0)
                 {
@@ -1561,7 +1561,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         #region "Background Workers"
         private void LoadProductImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] bpImage = null;
+            byte[]? bpImage = null;
             if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
             {
                 bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");

@@ -327,35 +327,35 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.ReactionTaxValue = Convert.ToDecimal(ReactionTaxUpDown.Value);
 
             //Copy
-            DefaultFormValues.CopyNumCopies = (int)CopyNumCopiesUpDown.Value;
-            DefaultFormValues.CopyRunsCopy = (int)CopyRunsCopyUpDown.Value;
-            DefaultFormValues.CopySystemID = (int)CopySystemCombo.SelectedValue;
-            DefaultFormValues.CopyStructureTypeId = (int)CopyStructureCombo.SelectedValue;
+            DefaultFormValues.CopyNumCopies = Convert.ToInt32(CopyNumCopiesUpDown.Value);
+            DefaultFormValues.CopyRunsCopy = Convert.ToInt32(CopyRunsCopyUpDown.Value);
+            DefaultFormValues.CopySystemID = Convert.ToInt32(CopySystemCombo.SelectedValue);
+            DefaultFormValues.CopyStructureTypeId = Convert.ToInt32(CopyStructureCombo.SelectedValue);
             DefaultFormValues.CopyStructureRig = Convert.ToInt32(CopyTimeRigCombo.SelectedValue);
-            DefaultFormValues.CopyTax = (decimal)CopyTaxUpDown.Value;
-            DefaultFormValues.CopyImplantTypeID = (int)CopyImplantCombo.SelectedValue;
+            DefaultFormValues.CopyTax = Convert.ToDecimal(CopyTaxUpDown.Value);
+            DefaultFormValues.CopyImplantTypeID = Convert.ToInt32(CopyImplantCombo.SelectedValue);
 
             //ME
-            DefaultFormValues.MEFromLevel = (int)MEFromLevelUpDown.Value;
-            DefaultFormValues.METoLevel = (int)METoLevelUpDown.Value;
-            DefaultFormValues.MESystemID = (int)MESystemCombo.SelectedValue;
-            DefaultFormValues.MEStructureTypeID = (int)MEStructureCombo.SelectedValue;
+            DefaultFormValues.MEFromLevel = Convert.ToInt32(MEFromLevelUpDown.Value);
+            DefaultFormValues.METoLevel = Convert.ToInt32(METoLevelUpDown.Value);
+            DefaultFormValues.MESystemID = Convert.ToInt32(MESystemCombo.SelectedValue);
+            DefaultFormValues.MEStructureTypeID = Convert.ToInt32(MEStructureCombo.SelectedValue);
             DefaultFormValues.MEStructureRIg = Convert.ToInt32(METimeRigCombo.SelectedValue);
-            DefaultFormValues.METax = (decimal)METaxUpDown.Value;
-            DefaultFormValues.MEImplantTypeID = (int)MEImplantCombo.SelectedValue;
+            DefaultFormValues.METax = Convert.ToDecimal(METaxUpDown.Value);
+            DefaultFormValues.MEImplantTypeID = Convert.ToInt32(MEImplantCombo.SelectedValue);
 
             //TE
-            DefaultFormValues.TEFromLevel = (int)TEFromLevelUpDown.Value;
-            DefaultFormValues.TEToLevel = (int)TEToLevelUpDown.Value;
-            DefaultFormValues.TESystemID = (int)TESystemCombo.SelectedValue;
-            DefaultFormValues.TEStructureTypeID = (int)TEStructureCombo.SelectedValue;
+            DefaultFormValues.TEFromLevel = Convert.ToInt32(TEFromLevelUpDown.Value);
+            DefaultFormValues.TEToLevel = Convert.ToInt32(TEToLevelUpDown.Value);
+            DefaultFormValues.TESystemID = Convert.ToInt32(TESystemCombo.SelectedValue);
+            DefaultFormValues.TEStructureTypeID = Convert.ToInt32(TEStructureCombo.SelectedValue);
             DefaultFormValues.TEStructureRIg = Convert.ToInt32(TEStructRigCombo.SelectedValue);
-            DefaultFormValues.TETax = (decimal)TETaxUpDown.Value;
-            DefaultFormValues.TEImplantTypeID = (int)TEImplantCombo.SelectedValue;
+            DefaultFormValues.TETax = Convert.ToDecimal(TETaxUpDown.Value);
+            DefaultFormValues.TEImplantTypeID = Convert.ToInt32(TEImplantCombo.SelectedValue);
 
             //Skills
-            DefaultFormValues.AccountingSKill = (int)AccountingLevelUpDown.Value;
-            DefaultFormValues.BrokersSkill = (int)BrokerRelationsLevelUpDown.Value;
+            DefaultFormValues.AccountingSKill = Convert.ToInt32(AccountingLevelUpDown.Value);
+            DefaultFormValues.BrokersSkill = Convert.ToInt32(BrokerRelationsLevelUpDown.Value);
         }
         #endregion
     }
