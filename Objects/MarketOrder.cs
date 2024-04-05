@@ -25,7 +25,7 @@ namespace EveHelperWF.Objects
         {
             get
             {
-                return price.ToString("#.##");
+                return price.ToString("#,##0.##");
             }
         }
     }
