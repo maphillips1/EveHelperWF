@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing.Imaging;
 using System.Linq;
@@ -87,6 +88,47 @@ namespace EveHelperWF.GitHub_Calls
                 }
             }
             return false;
+        }
+
+        public static string CreateIssue(string title, string body)
+        {
+            string returnURL = "";
+
+            try
+            {
+                Objects.GitHub_Objects.CreateIssueResponse issueResponse = new Objects.GitHub_Objects.CreateIssueResponse();
+                string? githubToken = "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";
+                if (githubToken != null)
+                {
+                    Objects.GitHub_Objects.CreateIssueRequest issueRequest = new Objects.GitHub_Objects.CreateIssueRequest();
+                    issueRequest.title = title;
+                    issueRequest.body = body;
+                    StringContent messageBody = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(issueRequest));
+                    string releasesURL = "https://api.github.com/repos/maphillips1/EveHelperWF/issues";
+                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                    client.DefaultRequestHeaders.Add("Accept", "application/vnd.github+json");
+                    client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
+                    client.DefaultRequestHeaders.Add("User-Agent", "request");
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + githubToken);
+                    
+
+                    System.Net.Http.HttpResponseMessage response = client.PostAsync(releasesURL, messageBody).Result;
+
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        string issueResponseContent = response.Content.ReadAsStringAsync().Result;
+                        issueResponse = JsonConvert.DeserializeObject<Objects.GitHub_Objects.CreateIssueResponse>(issueResponseContent);
+                        returnURL = issueResponse.url;
+                        returnURL = returnURL.Replace("api.", "").Replace("repos/", "");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                FileHelper.LogError(ex.Message, ex.StackTrace);
+            }
+
+            return returnURL;
         }
     }
 }

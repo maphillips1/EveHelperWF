@@ -73,6 +73,9 @@
     <Compile Update="UI Controls\Support Screens\PriceHistoryViewer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\ReportBugScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Support Screens\SetPriceControl.cs">
       <SubType>Form</SubType>
     </Compile>
