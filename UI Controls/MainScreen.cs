@@ -246,5 +246,12 @@ namespace EveHelperWF.UI_Controls
             importFiles.StartPosition = FormStartPosition.CenterParent;
             importFiles.ShowDialog();
         }
+
+        private void reportIssueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReportBugScreen reportBugScreen = new ReportBugScreen();
+            reportBugScreen.StartPosition = FormStartPosition.CenterParent;
+            reportBugScreen.ShowDialog();
+        }
     }
 }

@@ -59,6 +59,7 @@
             ShoppingListButton = new Button();
             label13 = new Label();
             BuildPlansButton = new Button();
+            reportIssueToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -298,7 +299,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, importFIlesToolStripMenuItem, updateEveDataToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, importFIlesToolStripMenuItem, updateEveDataToolStripMenuItem, reportIssueToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -416,6 +417,14 @@
             BuildPlansButton.UseVisualStyleBackColor = true;
             BuildPlansButton.Click += BuildPlansButton_Click;
             // 
+            // reportIssueToolStripMenuItem
+            // 
+            reportIssueToolStripMenuItem.ForeColor = Color.Black;
+            reportIssueToolStripMenuItem.Name = "reportIssueToolStripMenuItem";
+            reportIssueToolStripMenuItem.Size = new Size(83, 20);
+            reportIssueToolStripMenuItem.Text = "Report Issue";
+            reportIssueToolStripMenuItem.Click += reportIssueToolStripMenuItem_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -491,5 +500,6 @@
         private Label label13;
         private Button BuildPlansButton;
         private ToolStripMenuItem importFIlesToolStripMenuItem;
+        private ToolStripMenuItem reportIssueToolStripMenuItem;
     }
 }
