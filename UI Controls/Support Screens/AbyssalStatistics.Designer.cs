@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Label label1;
             Label label2;
             Label label3;
@@ -49,6 +50,7 @@
             SuccessRateLabel = new Label();
             ShipClassCombo = new ComboBox();
             FilamentCombo = new ComboBox();
+            ToolTipControl = new ToolTip(components);
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -311,5 +313,6 @@
         private Label AverageLootRunLabel;
         private Label NumRunsLabel;
         private FlowLayoutPanel LootFlowPanel;
+        private ToolTip ToolTipControl;
     }
 }

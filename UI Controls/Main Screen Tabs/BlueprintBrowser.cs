@@ -1404,6 +1404,16 @@ namespace EveHelperWF
             //Skills
             helperClass.AccountingSkill = DefaultFormValues.AccountingSKill;
             helperClass.BrokersSkill = DefaultFormValues.BrokersSkill;
+            helperClass.ResearchSkill = DefaultFormValues.ResearchSkill;
+            helperClass.ReactionsSkill = DefaultFormValues.ReactionsSkill;
+            helperClass.IndustrySkill = DefaultFormValues.IndustrySkill;
+            helperClass.AdvancedIndustrySkill = DefaultFormValues.AdvancedIndustrySkill;
+            helperClass.CapitalShipConstructionSkill = DefaultFormValues.CapitalShipConstructionSkill;
+            helperClass.AdvacnedSmallConstructionSkill = DefaultFormValues.AdvacnedSmallConstructionSkill;
+            helperClass.AdvacnedMediumConstructionSkill = DefaultFormValues.AdvacnedMediumConstructionSkill;
+            helperClass.AdvacnedLargeConstructionSkill = DefaultFormValues.AdvacnedLargeConstructionSkill;
+            helperClass.AdvancedCapitalConstructionSkill = DefaultFormValues.AdvancedCapitalConstructionSkill;
+            helperClass.AdvancedIndustrialConstructionSkill = DefaultFormValues.AdvancedIndustrialConstructionSkill;
 
             return helperClass;
         }
@@ -1816,6 +1826,7 @@ namespace EveHelperWF
                 IskHourLabel.ForeColor = Color.YellowGreen;
                 ROILabel.ForeColor = Color.YellowGreen;
             }
+            BlueprintToolTip.SetToolTip(ProfitLabel, "Total Output Price - Input Price - Job Cost - Taxes and fees - Invention Cost - Additional Costs");
 
             TaxFeesLabel.Text = string.Concat("-", TotalManufacturingTaxesAndFees.ToString("C"));
 
@@ -1879,6 +1890,8 @@ namespace EveHelperWF
                 IskHourLabel.ForeColor = Color.YellowGreen;
                 ROILabel.ForeColor = Color.YellowGreen;
             }
+
+            BlueprintToolTip.SetToolTip(ProfitLabel, "TotalReactionOutputPrice - ReactionTotalInputPrice - TotalReactionJobCost - TotalReactionTaxesAndFees");
 
             TaxFeesLabel.Text = string.Concat("-", TotalReactionTaxesAndFees.ToString("C"));
 

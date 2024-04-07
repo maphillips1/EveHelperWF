@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -446,6 +447,178 @@ namespace EveHelperWF.ScreenHelper
             }
 
             return taxAndFees;
+        }
+
+        public static long CalculateManufacturingReactionJobTime(int bpReactionTypeID, long baseTime, CalculationHelperClass helperClass, int TEValue, bool isReaction)
+        {
+            //The base time passed in should be the numruns * time per run
+            decimal totalTime = (decimal)baseTime;
+            if (isReaction)
+            {
+                decimal ReactionSkillBonus = 1 - (((decimal)helperClass.ReactionsSkill * 4) / 100);
+                decimal reactionStructureBonus = ReactionStructureTimeBonus(helperClass.ReactionsStructureTypeID);
+                decimal reactionRigBonus = StructurerigFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID);
+
+                totalTime = totalTime * ReactionSkillBonus;
+                totalTime *= reactionStructureBonus;
+                totalTime *= reactionRigBonus;
+                totalTime = Math.Ceiling(totalTime);
+            }
+            else
+            {
+                decimal TEDecimal = 1 - (decimal)TEValue / 100;
+                decimal industryFactor = 1 - ((decimal)(helperClass.IndustrySkill * 4) / 100);
+                decimal advIndyFactor = 1 - ((decimal)(helperClass.AdvancedIndustrySkill * 3) / 100);
+                decimal skillFactor = BPSpecificSkillFactor(bpReactionTypeID, helperClass);
+                decimal structureBonus = GetManufacturingStructureTimeBonus(helperClass.ManufacturingStructureTypeID);
+                decimal structureRigFactor = StructurerigFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID);
+                decimal implantBonus = ManufacturingImplantBonus(helperClass.ManufacturingImplantTypeID);
+
+                totalTime *= TEDecimal;
+                totalTime *= industryFactor;
+                totalTime *= advIndyFactor;
+                totalTime *= skillFactor;
+                totalTime *= structureBonus;
+                totalTime *= structureRigFactor;
+                totalTime *= implantBonus;
+                totalTime = Math.Ceiling(totalTime);
+            }
+            return Convert.ToInt64(totalTime);
+        }
+
+        private static decimal BPSpecificSkillFactor(int bpReactionTypeId, CalculationHelperClass helperClass)
+        {
+            decimal factor = 1;
+            decimal singleFactor = 1;
+
+            if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedSmallShipConstruction))
+            {
+                singleFactor = 1 - ((decimal)(helperClass.AdvacnedSmallConstructionSkill * 1) / 100);
+                factor *= singleFactor;
+            }
+            if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedMediumShipConstruction))
+            {
+                singleFactor = 1 - ((decimal)(helperClass.AdvacnedMediumConstructionSkill * 1) / 100);
+                factor *= singleFactor;
+            }
+            if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedLargeShipConstruction))
+            {
+                singleFactor = 1 - ((decimal)(helperClass.AdvacnedLargeConstructionSkill * 1) / 100);
+                factor *= singleFactor;
+            }
+            if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedCapitalShipConstruction))
+            {
+                singleFactor = 1 - ((decimal)(helperClass.AdvancedCapitalConstructionSkill * 1) / 100);
+                factor *= singleFactor;
+            }
+            if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedIndustrialShipConstruction))
+            {
+                singleFactor = 1 - ((decimal)(helperClass.IndustrySkill * 1) / 100);
+                factor *= singleFactor;
+            }
+
+            return factor;
+        }
+
+        private static bool BPRequiresSkill(int bpReactionTypeId, int skillID)
+        {
+            bool skillRequired = false;
+
+            List<IndustryActivitySkill> skills = Database.SQLiteCalls.GetINdustryActivitySkills(bpReactionTypeId, Enums.Enums.ActivityManufacturing);
+
+            if (skills != null && skills.Find(x => x.skillID == skillID) != null)
+            {
+                skillRequired = true;
+            }
+
+            return skillRequired;
+        }
+
+        private static decimal GetManufacturingStructureTimeBonus(int manuComplexId)
+        {
+            decimal Factor = 1;
+
+            if (manuComplexId > 0)
+            {
+                EngineerngComplex engineerngComplex = EngineerngComplices.Find(x => x.StructureTypeId == manuComplexId);
+                if (engineerngComplex != null)
+                {
+                    Factor = 1 - (decimal)engineerngComplex.TimeRequirementBonus / 100;
+                }
+            }
+
+            return Factor;
+        }
+
+        private static decimal StructurerigFactor(int TERigType, long systemID)
+        {
+            decimal factor = 1;
+            decimal systemFactor = 1;
+
+            if (systemID > 0)
+            {
+                SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == systemID);
+                if (solarSystem != null)
+                {
+                    if (solarSystem.security > (decimal)0.0 && solarSystem.security < (decimal)0.5)
+                    {
+                        systemFactor = (decimal)0.94;
+                    }
+                    else if (solarSystem.security < (decimal)0.1)
+                    {
+                        systemFactor = (decimal)(0.88);
+                    }
+                }
+            }
+
+            if (TERigType == 1)
+            {
+                factor = (decimal)0.8 * systemFactor;
+            }
+            else if (TERigType == 2)
+            {
+                factor = (decimal)0.76 * systemFactor;
+            }
+
+            return factor;
+        }
+
+        private static decimal ManufacturingImplantBonus(int implantTypeId)
+        {
+            decimal factor = 1;
+
+            InventoryType inventoryType = InventoryTypes.Find(x => x.typeId == implantTypeId);
+            if (inventoryType != null)
+            {
+                if (inventoryType.typeName.Contains("05"))
+                {
+                    factor = (decimal)0.95;
+                }
+                else if (inventoryType.typeName.Contains("03"))
+                {
+                    factor = (decimal)0.97;
+                }
+                else if (inventoryType.typeName.Contains("01"))
+                {
+                    factor = (decimal)0.99;
+                }
+            }
+
+            return factor;
+        }
+
+        private static decimal ReactionStructureTimeBonus(int reactionStructureTypeId)
+        {
+            decimal factor = 1;
+            BlueprintBrowserHelper.Init();
+
+            RefineryComplex refineryComplex = BlueprintBrowserHelper.RefinerComplices.Find(x => x.StructureTypeID == reactionStructureTypeId);  
+            if (refineryComplex != null)
+            {
+                factor -= (decimal)refineryComplex.ReactionTimeBonus / 100;
+            }
+
+            return factor;
         }
     }
 }
