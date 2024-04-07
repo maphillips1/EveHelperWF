@@ -128,7 +128,6 @@ namespace EveHelperWF.Database
             sb.AppendLine("FROM mapDenormalize md");
             sb.AppendLine("    INNER JOIN invTypes IT");
             sb.AppendLine("        ON IT.typeID = MD.typeID");
-            sb.AppendLine("            AND IT.published = 1");
             sb.AppendLine("    INNER JOIN invGroups IG");
             sb.AppendLine("        ON IG.groupID = IT.groupID");
             sb.AppendLine("WHERE solarSystemID = " + solarSystemID.ToString());

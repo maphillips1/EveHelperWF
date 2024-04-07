@@ -71,13 +71,13 @@
             Label label29;
             Label label18;
             Label label27;
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
             leftoverMatsValueLabel = new Label();
@@ -102,6 +102,8 @@
             ProductLabel = new Label();
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
+            TaxFinalProductCheckbox = new CheckBox();
+            TaxInputCheckbox = new CheckBox();
             FinalSellPriceNumeric = new NumericUpDown();
             MaterialsPriceTreeView = new TreeView();
             UpdatePricesJitaButton = new Button();
@@ -837,14 +839,14 @@
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.Black;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle14;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
@@ -857,8 +859,8 @@
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle1.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle8;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -867,10 +869,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            dataGridViewCellStyle2.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "N0";
+            dataGridViewCellStyle9.NullValue = "0";
+            dataGridViewCellStyle9.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle9;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -879,10 +881,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "0";
-            dataGridViewCellStyle3.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle10;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -891,10 +893,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewCellStyle4.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
+            dataGridViewCellStyle11.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle11;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -903,10 +905,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            dataGridViewCellStyle5.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "N0";
+            dataGridViewCellStyle12.NullValue = "0";
+            dataGridViewCellStyle12.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle12;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -915,8 +917,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle6.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle13;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -944,6 +946,8 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
+            MaterialPricePage.Controls.Add(TaxInputCheckbox);
             MaterialPricePage.Controls.Add(FinalSellPriceNumeric);
             MaterialPricePage.Controls.Add(label18);
             MaterialPricePage.Controls.Add(MaterialsPriceTreeView);
@@ -956,6 +960,34 @@
             MaterialPricePage.Size = new Size(1532, 519);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
+            // 
+            // TaxFinalProductCheckbox
+            // 
+            TaxFinalProductCheckbox.AutoSize = true;
+            TaxFinalProductCheckbox.Checked = true;
+            TaxFinalProductCheckbox.CheckState = CheckState.Checked;
+            TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TaxFinalProductCheckbox.Location = new Point(614, 152);
+            TaxFinalProductCheckbox.Name = "TaxFinalProductCheckbox";
+            TaxFinalProductCheckbox.Size = new Size(226, 24);
+            TaxFinalProductCheckbox.TabIndex = 27;
+            TaxFinalProductCheckbox.Text = "Include Taxes on Final Product";
+            TaxFinalProductCheckbox.UseVisualStyleBackColor = true;
+            TaxFinalProductCheckbox.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // TaxInputCheckbox
+            // 
+            TaxInputCheckbox.AutoSize = true;
+            TaxInputCheckbox.Checked = true;
+            TaxInputCheckbox.CheckState = CheckState.Checked;
+            TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TaxInputCheckbox.Location = new Point(614, 122);
+            TaxInputCheckbox.Name = "TaxInputCheckbox";
+            TaxInputCheckbox.Size = new Size(180, 24);
+            TaxInputCheckbox.TabIndex = 26;
+            TaxInputCheckbox.Text = "Include Taxes on Inputs";
+            TaxInputCheckbox.UseVisualStyleBackColor = true;
+            TaxInputCheckbox.CheckedChanged += TaxInputCheckbox_CheckedChanged;
             // 
             // FinalSellPriceNumeric
             // 
@@ -1782,5 +1814,7 @@
         private TextBox CostBreakdownTextBox;
         private NumericUpDown FinalSellPriceNumeric;
         private Label leftoverMatsValueLabel;
+        private CheckBox TaxFinalProductCheckbox;
+        private CheckBox TaxInputCheckbox;
     }
 }
