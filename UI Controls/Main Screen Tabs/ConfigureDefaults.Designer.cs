@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Label label37;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigureDefaults));
             DefaultsTabContainer = new TabControl();
             MainDefaultTabPage = new TabPage();
@@ -132,11 +133,31 @@
             label66 = new Label();
             label67 = new Label();
             SkillsPage = new TabPage();
+            ReactionsSkillUpDown = new NumericUpDown();
+            ResearchSkillsUpDown = new NumericUpDown();
+            label36 = new Label();
+            IndustrySkillUpDown = new NumericUpDown();
+            label35 = new Label();
+            AdvIndustryUpDown = new NumericUpDown();
+            label34 = new Label();
+            CapConSkillUpDown = new NumericUpDown();
+            label33 = new Label();
+            AdvSmallSkillUpDown = new NumericUpDown();
+            label25 = new Label();
+            AdvMedUpDown = new NumericUpDown();
+            label24 = new Label();
+            AdvCapSkillUpDown = new NumericUpDown();
+            label23 = new Label();
+            AdvLargeUpDown = new NumericUpDown();
+            label22 = new Label();
             BrokerRelationsLevelUpDown = new NumericUpDown();
             AccountingLevelUpDown = new NumericUpDown();
             label16 = new Label();
             label21 = new Label();
             SaveButton = new Button();
+            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
+            label55 = new Label();
+            label37 = new Label();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -163,9 +184,30 @@
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).BeginInit();
             SkillsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvIndustryUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvMedUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvCapSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             SuspendLayout();
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label37.Location = new Point(41, 74);
+            label37.Margin = new Padding(2, 0, 2, 0);
+            label37.Name = "label37";
+            label37.Size = new Size(61, 15);
+            label37.TabIndex = 114;
+            label37.Text = "Reactions";
             // 
             // DefaultsTabContainer
             // 
@@ -1415,6 +1457,26 @@
             // SkillsPage
             // 
             SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
+            SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
+            SkillsPage.Controls.Add(label55);
+            SkillsPage.Controls.Add(ReactionsSkillUpDown);
+            SkillsPage.Controls.Add(label37);
+            SkillsPage.Controls.Add(ResearchSkillsUpDown);
+            SkillsPage.Controls.Add(label36);
+            SkillsPage.Controls.Add(IndustrySkillUpDown);
+            SkillsPage.Controls.Add(label35);
+            SkillsPage.Controls.Add(AdvIndustryUpDown);
+            SkillsPage.Controls.Add(label34);
+            SkillsPage.Controls.Add(CapConSkillUpDown);
+            SkillsPage.Controls.Add(label33);
+            SkillsPage.Controls.Add(AdvSmallSkillUpDown);
+            SkillsPage.Controls.Add(label25);
+            SkillsPage.Controls.Add(AdvMedUpDown);
+            SkillsPage.Controls.Add(label24);
+            SkillsPage.Controls.Add(AdvCapSkillUpDown);
+            SkillsPage.Controls.Add(label23);
+            SkillsPage.Controls.Add(AdvLargeUpDown);
+            SkillsPage.Controls.Add(label22);
             SkillsPage.Controls.Add(BrokerRelationsLevelUpDown);
             SkillsPage.Controls.Add(AccountingLevelUpDown);
             SkillsPage.Controls.Add(label16);
@@ -1425,6 +1487,175 @@
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
             // 
+            // ReactionsSkillUpDown
+            // 
+            ReactionsSkillUpDown.Location = new Point(118, 72);
+            ReactionsSkillUpDown.Margin = new Padding(2);
+            ReactionsSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            ReactionsSkillUpDown.Name = "ReactionsSkillUpDown";
+            ReactionsSkillUpDown.Size = new Size(131, 23);
+            ReactionsSkillUpDown.TabIndex = 115;
+            // 
+            // ResearchSkillsUpDown
+            // 
+            ResearchSkillsUpDown.Location = new Point(118, 105);
+            ResearchSkillsUpDown.Margin = new Padding(2);
+            ResearchSkillsUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            ResearchSkillsUpDown.Name = "ResearchSkillsUpDown";
+            ResearchSkillsUpDown.Size = new Size(131, 23);
+            ResearchSkillsUpDown.TabIndex = 113;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label36.Location = new Point(44, 107);
+            label36.Margin = new Padding(2, 0, 2, 0);
+            label36.Name = "label36";
+            label36.Size = new Size(58, 15);
+            label36.TabIndex = 112;
+            label36.Text = "Research";
+            // 
+            // IndustrySkillUpDown
+            // 
+            IndustrySkillUpDown.Location = new Point(118, 141);
+            IndustrySkillUpDown.Margin = new Padding(2);
+            IndustrySkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            IndustrySkillUpDown.Name = "IndustrySkillUpDown";
+            IndustrySkillUpDown.Size = new Size(131, 23);
+            IndustrySkillUpDown.TabIndex = 111;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label35.Location = new Point(44, 143);
+            label35.Margin = new Padding(2, 0, 2, 0);
+            label35.Name = "label35";
+            label35.Size = new Size(58, 15);
+            label35.TabIndex = 110;
+            label35.Text = "Indusrtry";
+            // 
+            // AdvIndustryUpDown
+            // 
+            AdvIndustryUpDown.Location = new Point(118, 175);
+            AdvIndustryUpDown.Margin = new Padding(2);
+            AdvIndustryUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvIndustryUpDown.Name = "AdvIndustryUpDown";
+            AdvIndustryUpDown.Size = new Size(131, 23);
+            AdvIndustryUpDown.TabIndex = 109;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label34.Location = new Point(22, 177);
+            label34.Margin = new Padding(2, 0, 2, 0);
+            label34.Name = "label34";
+            label34.Size = new Size(80, 15);
+            label34.TabIndex = 108;
+            label34.Text = "Adv. Industry";
+            // 
+            // CapConSkillUpDown
+            // 
+            CapConSkillUpDown.Location = new Point(395, 12);
+            CapConSkillUpDown.Margin = new Padding(2);
+            CapConSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            CapConSkillUpDown.Name = "CapConSkillUpDown";
+            CapConSkillUpDown.Size = new Size(131, 23);
+            CapConSkillUpDown.TabIndex = 107;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label33.Location = new Point(279, 14);
+            label33.Margin = new Padding(2, 0, 2, 0);
+            label33.Name = "label33";
+            label33.Size = new Size(108, 15);
+            label33.TabIndex = 106;
+            label33.Text = "Capital Ship Const.";
+            // 
+            // AdvSmallSkillUpDown
+            // 
+            AdvSmallSkillUpDown.Location = new Point(395, 42);
+            AdvSmallSkillUpDown.Margin = new Padding(2);
+            AdvSmallSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvSmallSkillUpDown.Name = "AdvSmallSkillUpDown";
+            AdvSmallSkillUpDown.Size = new Size(131, 23);
+            AdvSmallSkillUpDown.TabIndex = 105;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label25.Location = new Point(286, 44);
+            label25.Margin = new Padding(2, 0, 2, 0);
+            label25.Name = "label25";
+            label25.Size = new Size(101, 15);
+            label25.TabIndex = 104;
+            label25.Text = "Adv. Small Const.";
+            // 
+            // AdvMedUpDown
+            // 
+            AdvMedUpDown.Location = new Point(395, 72);
+            AdvMedUpDown.Margin = new Padding(2);
+            AdvMedUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvMedUpDown.Name = "AdvMedUpDown";
+            AdvMedUpDown.Size = new Size(131, 23);
+            AdvMedUpDown.TabIndex = 103;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label24.Location = new Point(285, 74);
+            label24.Margin = new Padding(2, 0, 2, 0);
+            label24.Name = "label24";
+            label24.Size = new Size(99, 15);
+            label24.TabIndex = 102;
+            label24.Text = "Adv. Med. Const.";
+            // 
+            // AdvCapSkillUpDown
+            // 
+            AdvCapSkillUpDown.Location = new Point(395, 141);
+            AdvCapSkillUpDown.Margin = new Padding(2);
+            AdvCapSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvCapSkillUpDown.Name = "AdvCapSkillUpDown";
+            AdvCapSkillUpDown.Size = new Size(131, 23);
+            AdvCapSkillUpDown.TabIndex = 101;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.Location = new Point(296, 141);
+            label23.Margin = new Padding(2, 0, 2, 0);
+            label23.Name = "label23";
+            label23.Size = new Size(91, 15);
+            label23.TabIndex = 100;
+            label23.Text = "Adv. Cap Const.";
+            // 
+            // AdvLargeUpDown
+            // 
+            AdvLargeUpDown.Location = new Point(395, 105);
+            AdvLargeUpDown.Margin = new Padding(2);
+            AdvLargeUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvLargeUpDown.Name = "AdvLargeUpDown";
+            AdvLargeUpDown.Size = new Size(131, 23);
+            AdvLargeUpDown.TabIndex = 99;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.Location = new Point(285, 107);
+            label22.Margin = new Padding(2, 0, 2, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(102, 15);
+            label22.TabIndex = 98;
+            label22.Text = "Adv. Large Const.";
+            // 
             // BrokerRelationsLevelUpDown
             // 
             BrokerRelationsLevelUpDown.Location = new Point(118, 42);
@@ -1433,7 +1664,6 @@
             BrokerRelationsLevelUpDown.Name = "BrokerRelationsLevelUpDown";
             BrokerRelationsLevelUpDown.Size = new Size(131, 23);
             BrokerRelationsLevelUpDown.TabIndex = 97;
-            BrokerRelationsLevelUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
             // 
             // AccountingLevelUpDown
             // 
@@ -1459,7 +1689,7 @@
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.Location = new Point(6, 14);
+            label21.Location = new Point(32, 14);
             label21.Margin = new Padding(2, 0, 2, 0);
             label21.Name = "label21";
             label21.Size = new Size(70, 15);
@@ -1477,6 +1707,26 @@
             SaveButton.Text = "Save";
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButton_Click;
+            // 
+            // AdvancedIndustrialConsSkillUpDoan
+            // 
+            AdvancedIndustrialConsSkillUpDoan.Location = new Point(395, 175);
+            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
+            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
+            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
+            AdvancedIndustrialConsSkillUpDoan.TabIndex = 127;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Location = new Point(283, 177);
+            label55.Margin = new Padding(2, 0, 2, 0);
+            label55.Name = "label55";
+            label55.Size = new Size(104, 15);
+            label55.TabIndex = 126;
+            label55.Text = "Adv. Indus. Const.";
             // 
             // ConfigureDefaults
             // 
@@ -1525,8 +1775,18 @@
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).EndInit();
             SkillsPage.ResumeLayout(false);
             SkillsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvIndustryUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvMedUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvCapSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ResumeLayout(false);
         }
 
@@ -1640,5 +1900,25 @@
         private NumericUpDown AccountingLevelUpDown;
         private Label label16;
         private Label label21;
+        private NumericUpDown ReactionsSkillUpDown;
+        private Label label37;
+        private NumericUpDown ResearchSkillsUpDown;
+        private Label label36;
+        private NumericUpDown IndustrySkillUpDown;
+        private Label label35;
+        private NumericUpDown AdvIndustryUpDown;
+        private Label label34;
+        private NumericUpDown CapConSkillUpDown;
+        private Label label33;
+        private NumericUpDown AdvSmallSkillUpDown;
+        private Label label25;
+        private NumericUpDown AdvMedUpDown;
+        private Label label24;
+        private NumericUpDown AdvCapSkillUpDown;
+        private Label label23;
+        private NumericUpDown AdvLargeUpDown;
+        private Label label22;
+        private NumericUpDown AdvancedIndustrialConsSkillUpDoan;
+        private Label label55;
     }
 }

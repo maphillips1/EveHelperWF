@@ -893,107 +893,16 @@ namespace EveHelperWF.ScreenHelper
         public static Int64 CalculateManufacturingTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
             Int64 time = 0;
-            decimal structureTEBonus = GetManufacturingStructureTEBonus(helperClass);
-            decimal implantsSkillsTEBonus = GetManufacturingImplantAndSkillBonus(helperClass);
 
             Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityManufacturing);
             if (industryActivity != null)
             {
-                time = industryActivity.time;
+                time = industryActivity.time * helperClass.Runs;
 
-                //Step 1 Manufacturing TE Base.
-                time = Convert.ToInt64(time * (1 - Convert.ToDecimal(helperClass.TE) / Convert.ToDecimal(100)));
-
-                //Runs
-                time *= helperClass.Runs;
-
-                //Step 2 SKills & Implants
-                time = Convert.ToInt64(time * implantsSkillsTEBonus);
-
-                //Step 3 Structure
-                time = Convert.ToInt64(time * structureTEBonus);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, helperClass.TE, false);
             }
 
             return time;
-        }
-
-        public static decimal GetManufacturingStructureTEBonus(Objects.CalculationHelperClass helperClass)
-        {
-            Decimal teBonus = 1;
-            bool isLowSec = false;
-            bool isNullSec = false;
-
-            if (helperClass.ManufacturingSolarSystemID > 0)
-            {
-                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.ManufacturingSolarSystemID);
-                isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
-                isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
-            }
-
-            if (helperClass.ManufacturingStructureTypeID > 0)
-            {
-                Objects.EngineerngComplex complex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == helperClass.ManufacturingStructureTypeID);
-
-                if (complex != null)
-                {
-                    teBonus -= Convert.ToDecimal(complex.TimeRequirementBonus) / 100;
-
-                    if (helperClass.ManufacturingStructureRigBonus != null)
-                    {
-                        decimal rigTEBonus = 0;
-                        if (helperClass.ManufacturingStructureRigBonus.RigTEBonus == 1)
-                        {
-                            rigTEBonus = Convert.ToDecimal(0.2);
-                        }
-                        else if (helperClass.ManufacturingStructureRigBonus.RigTEBonus == 2)
-                        {
-                            rigTEBonus = Convert.ToDecimal(0.24);
-                        }
-                        if (isLowSec)
-                        {
-                            rigTEBonus *= Convert.ToDecimal(1.19);
-                        }
-                        else if (isNullSec)
-                        {
-                            rigTEBonus *= Convert.ToDecimal(1.21);
-                        }
-                        rigTEBonus = 1 - (rigTEBonus);
-
-                        teBonus *= rigTEBonus;
-                    }
-                }
-            }
-
-            return teBonus;
-        }
-
-        public static decimal GetManufacturingImplantAndSkillBonus(Objects.CalculationHelperClass helperClass)
-        {
-            decimal teBonus = 1;
-
-            decimal indySkillLevel = 5; //Change to get skill level
-            decimal IndySkillBonus = 1;
-
-            decimal advancedIndySkillLevel = 5; //change to get skill level
-            decimal advancedIndySkillBonus = 1;
-
-            decimal implantBonus = 1;
-
-            if (helperClass.ManufacturingImplantTypeID > 0)
-            {
-                Objects.IndustryImplant industryImplant = ManufacturingImplants.Find(x => x.ImplantTypeID == helperClass.ManufacturingImplantTypeID);
-
-                implantBonus -= (Convert.ToDecimal(industryImplant.ImplantBonus) / 100);
-            }
-
-            IndySkillBonus -= ((indySkillLevel * 4) / 100);
-
-            advancedIndySkillBonus -= ((advancedIndySkillLevel * 3) / 100);
-
-
-            teBonus = (teBonus * IndySkillBonus * advancedIndySkillBonus * implantBonus);
-
-            return teBonus;
         }
 
         #region "Build Components Methods"
@@ -1120,8 +1029,6 @@ namespace EveHelperWF.ScreenHelper
         public static Int64 CalculateReactionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
             Int64 time = 0;
-            decimal structureTEBonus = GetReactionStructureTEBonus(helperClass);
-            decimal skillsBonus = GetReactionSkillBonus(helperClass);
 
             Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityReactions);
             if (industryActivity != null)
@@ -1130,75 +1037,10 @@ namespace EveHelperWF.ScreenHelper
                 //Runs
                 time *= helperClass.Runs;
 
-                //Step 2 SKills
-                time = Convert.ToInt64(time * skillsBonus);
-
-                //Step 3 Structure
-                time = Convert.ToInt64(time * structureTEBonus);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, 0, true);
             }
 
             return time;
-        }
-
-        public static decimal GetReactionStructureTEBonus(Objects.CalculationHelperClass helperClass)
-        {
-            Decimal teBonus = 1;
-            bool isLowSec = false;
-            bool isNullSec = false;
-
-            if (helperClass.ReactionSolarSystemID > 0)
-            {
-                Objects.SolarSystem solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == helperClass.ReactionSolarSystemID);
-                isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
-                isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
-            }
-
-            if (helperClass.ReactionsStructureTypeID > 0)
-            {
-                Objects.RefineryComplex complex = RefinerComplices.Find(x => x.StructureTypeID == helperClass.ReactionsStructureTypeID);
-
-                if (complex != null)
-                {
-                    teBonus -= Convert.ToDecimal(complex.ReactionTimeBonus) / 100;
-
-                    if (helperClass.ReactionStructureRigBonus != null)
-                    {
-                        decimal rigTEBonus = 0;
-                        if (helperClass.ReactionStructureRigBonus.RigTEBonus == 1)
-                        {
-                            rigTEBonus = Convert.ToDecimal(0.2);
-                        }
-                        else if (helperClass.ReactionStructureRigBonus.RigTEBonus == 2)
-                        {
-                            rigTEBonus = Convert.ToDecimal(0.24);
-                        }
-                        if (isNullSec)
-                        {
-                            rigTEBonus *= Convert.ToDecimal(1.21);
-                        }
-                        rigTEBonus = 1 - (rigTEBonus);
-
-                        teBonus *= rigTEBonus;
-                    }
-                }
-            }
-
-            return teBonus;
-        }
-
-        public static decimal GetReactionSkillBonus(Objects.CalculationHelperClass helperClass)
-        {
-            decimal teBonus = 1;
-
-            decimal reactions = 5; //Change to get skill level
-            decimal reactionsSkillBonus = 1;
-
-            reactionsSkillBonus -= ((reactions * 4) / 100);
-
-
-            teBonus = (teBonus * reactionsSkillBonus);
-
-            return teBonus;
         }
         #endregion
 

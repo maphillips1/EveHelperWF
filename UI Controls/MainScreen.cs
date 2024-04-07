@@ -57,6 +57,8 @@ namespace EveHelperWF.UI_Controls
                 InitLongLoadingWorker.RunWorkerAsync();
             }
             this.BringToFront();
+
+            CheckForDefaultValues();
         }
 
         //Ensures that we only ever have one instance of EveHelper open at a given time. 
@@ -117,6 +119,16 @@ namespace EveHelperWF.UI_Controls
             catch
             {
                 return false;
+            }
+        }
+
+        private void CheckForDefaultValues()
+        {
+            string fullFileName = Path.Combine(Enums.Enums.CachedFormValuesDirectory, "form_values.json");
+            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, fullFileName);
+            if (string.IsNullOrWhiteSpace(fileContent))
+            {
+                DefaultsButtonClick_Click(this, new EventArgs());
             }
         }
 

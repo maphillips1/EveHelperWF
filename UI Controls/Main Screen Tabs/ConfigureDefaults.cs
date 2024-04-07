@@ -272,6 +272,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Skills
                 AccountingLevelUpDown.Value = DefaultFormValues.AccountingSKill;
                 BrokerRelationsLevelUpDown.Value = DefaultFormValues.BrokersSkill;
+                ResearchSkillsUpDown.Value = DefaultFormValues.ResearchSkill;
+                ReactionsSkillUpDown.Value = DefaultFormValues.ReactionsSkill;
+                IndustrySkillUpDown.Value = DefaultFormValues.IndustrySkill;
+                AdvIndustryUpDown.Value = DefaultFormValues.AdvancedIndustrySkill;
+                CapConSkillUpDown.Value = DefaultFormValues.CapitalShipConstructionSkill;
+                AdvSmallSkillUpDown.Value = DefaultFormValues.AdvacnedSmallConstructionSkill;
+                AdvMedUpDown.Value = DefaultFormValues.AdvacnedMediumConstructionSkill;
+                AdvLargeUpDown.Value = DefaultFormValues.AdvacnedLargeConstructionSkill;
+                AdvCapSkillUpDown.Value = DefaultFormValues.AdvancedCapitalConstructionSkill;
+                AdvancedIndustrialConsSkillUpDoan.Value = DefaultFormValues.AdvancedIndustrialConstructionSkill;
             }
         }
         #endregion
@@ -356,6 +366,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             //Skills
             DefaultFormValues.AccountingSKill = Convert.ToInt32(AccountingLevelUpDown.Value);
             DefaultFormValues.BrokersSkill = Convert.ToInt32(BrokerRelationsLevelUpDown.Value);
+            DefaultFormValues.ResearchSkill = Convert.ToInt32(ResearchSkillsUpDown.Value);
+            DefaultFormValues.ReactionsSkill = Convert.ToInt32(ReactionsSkillUpDown.Value);
+            DefaultFormValues.IndustrySkill = Convert.ToInt32(IndustrySkillUpDown.Value);
+            DefaultFormValues.AdvancedIndustrySkill = Convert.ToInt32(AdvIndustryUpDown.Value);
+            DefaultFormValues.CapitalShipConstructionSkill = Convert.ToInt32(CapConSkillUpDown.Value);
+            DefaultFormValues.AdvacnedSmallConstructionSkill = Convert.ToInt32(AdvSmallSkillUpDown.Value);
+            DefaultFormValues.AdvacnedMediumConstructionSkill = Convert.ToInt32(AdvMedUpDown.Value);
+            DefaultFormValues.AdvacnedLargeConstructionSkill = Convert.ToInt32(AdvLargeUpDown.Value);
+            DefaultFormValues.AdvancedCapitalConstructionSkill = Convert.ToInt32(AdvCapSkillUpDown.Value);
+            DefaultFormValues.AdvancedIndustrialConstructionSkill = Convert.ToInt32(AdvancedIndustrialConsSkillUpDoan.Value);
         }
         #endregion
     }

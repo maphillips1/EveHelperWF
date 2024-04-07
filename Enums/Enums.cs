@@ -167,5 +167,17 @@ namespace Enums
             Sell = 1,
             Buy = 2
         }
+
+        public enum SkillID
+        {
+            Industry = 3380,
+            AdvancedIndustry = 3388,
+            CapitalShipConstruction = 22242,
+            AdvancedSmallShipConstruction = 3395,
+            AdvancedMediumShipConstruction = 3397,
+            AdvancedLargeShipConstruction = 3398,
+            AdvancedCapitalShipConstruction = 77725,
+            AdvancedIndustrialShipConstruction = 3396
+        }
     }
 }

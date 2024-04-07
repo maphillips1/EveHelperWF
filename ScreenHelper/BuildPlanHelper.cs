@@ -728,9 +728,10 @@ namespace EveHelperWF.ScreenHelper
 
             IndustryActivityTypes manuActivity = activities.Find(x => x.activityID == activityID);
 
-            long timePerRun = GetTimePerRun(manuActivity, teValue);
+            long timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, manuActivity.time, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted);
             long maxTime = (30 * 24 * 60 * 60);
-            long totalTime = timePerRun * optimizedBuild.RunsNeeded;
+            long totalTime = manuActivity.time * optimizedBuild.RunsNeeded;
+            totalTime = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, totalTime, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted);
             int batchesNeeded;
             int maxRunsPerBatch;
             maxRunsPerBatch = (int)Math.Floor((decimal)maxTime / (decimal)(timePerRun));
@@ -766,17 +767,6 @@ namespace EveHelperWF.ScreenHelper
             optimizedBuild.MaxRunsPerBatch = maxRunsPerBatch;
             optimizedBuild.BatchesNeeded = batchesNeeded;
             optimizedBuild.TimePerRun = timePerRun;
-        }
-
-        private static long GetTimePerRun(IndustryActivityTypes activity, int TE)
-        {
-            long time = 0;
-            if (activity != null)
-            {
-                time = activity.time;
-                time *= (long)Math.Ceiling((decimal)(100 - TE) / (decimal)100);
-            }
-            return time;
         }
 
         private static void PerformOptimumReactionCalcs(ref OptimizedBuild optimizedBuild, BuildPlan buildPlan, bool isFinalProduct)

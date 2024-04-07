@@ -46,6 +46,7 @@
             ShipTypeCombo = new ComboBox();
             FilamentTypeCombo = new ComboBox();
             label1 = new Label();
+            StatisticsButton = new Button();
             ProfitLabel = new Label();
             DeleteRunButton = new Button();
             AverageLootLabel = new Label();
@@ -60,7 +61,6 @@
             ShipType = new DataGridViewTextBoxColumn();
             loot = new DataGridViewTextBoxColumn();
             FilamentType = new DataGridViewTextBoxColumn();
-            StatisticsButton = new Button();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -217,6 +217,8 @@
             // SuccessCheckbox
             // 
             SuccessCheckbox.AutoSize = true;
+            SuccessCheckbox.Checked = true;
+            SuccessCheckbox.CheckState = CheckState.Checked;
             SuccessCheckbox.Location = new Point(116, 107);
             SuccessCheckbox.Margin = new Padding(3, 2, 3, 2);
             SuccessCheckbox.Name = "SuccessCheckbox";
@@ -259,6 +261,19 @@
             label1.Size = new Size(123, 21);
             label1.TabIndex = 0;
             label1.Text = "Add Abyss Run";
+            // 
+            // StatisticsButton
+            // 
+            StatisticsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            StatisticsButton.ForeColor = Color.Black;
+            StatisticsButton.Location = new Point(672, 136);
+            StatisticsButton.Margin = new Padding(3, 2, 3, 2);
+            StatisticsButton.Name = "StatisticsButton";
+            StatisticsButton.Size = new Size(122, 26);
+            StatisticsButton.TabIndex = 10;
+            StatisticsButton.Text = "Statistics";
+            StatisticsButton.UseVisualStyleBackColor = true;
+            StatisticsButton.Click += StatisticsButton_Click;
             // 
             // ProfitLabel
             // 
@@ -416,19 +431,6 @@
             FilamentType.ReadOnly = true;
             FilamentType.Visible = false;
             FilamentType.Width = 130;
-            // 
-            // StatisticsButton
-            // 
-            StatisticsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            StatisticsButton.ForeColor = Color.Black;
-            StatisticsButton.Location = new Point(672, 136);
-            StatisticsButton.Margin = new Padding(3, 2, 3, 2);
-            StatisticsButton.Name = "StatisticsButton";
-            StatisticsButton.Size = new Size(122, 26);
-            StatisticsButton.TabIndex = 10;
-            StatisticsButton.Text = "Statistics";
-            StatisticsButton.UseVisualStyleBackColor = true;
-            StatisticsButton.Click += StatisticsButton_Click;
             // 
             // AbyssTracker
             // 

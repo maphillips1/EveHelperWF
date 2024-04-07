@@ -71,6 +71,8 @@
             Label label29;
             Label label18;
             Label label27;
+            Label label5;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
@@ -78,8 +80,8 @@
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             SummaryPage = new TabPage();
+            SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
             ProfitLabel = new Label();
             IskNeededForPlanLabel = new Label();
@@ -124,6 +126,23 @@
             ReactionStructureCombo = new ComboBox();
             ReactionSolarSystemCombo = new ComboBox();
             SkillsPage = new TabPage();
+            CapConSkillUpDown = new NumericUpDown();
+            ReactionsSkillUpDown = new NumericUpDown();
+            label33 = new Label();
+            AdvSmallSkillUpDown = new NumericUpDown();
+            label30 = new Label();
+            ResearchSkillsUpDown = new NumericUpDown();
+            AdvMedUpDown = new NumericUpDown();
+            label15 = new Label();
+            label31 = new Label();
+            IndustrySkillUpDown = new NumericUpDown();
+            AdvCapSkillUpDown = new NumericUpDown();
+            label28 = new Label();
+            label32 = new Label();
+            AdvIndustryUpDown = new NumericUpDown();
+            AdvLargeUpDown = new NumericUpDown();
+            label34 = new Label();
+            label51 = new Label();
             BrokerRelationsLevelUpDown = new NumericUpDown();
             AccountingLevelUpDown = new NumericUpDown();
             OrderTypePage = new TabPage();
@@ -158,6 +177,8 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
+            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
+            label55 = new Label();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -201,6 +222,7 @@
             label29 = new Label();
             label18 = new Label();
             label27 = new Label();
+            label5 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -213,6 +235,15 @@
             ReactionsDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
             SkillsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvMedUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvCapSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvIndustryUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).BeginInit();
             OrderTypePage.SuspendLayout();
@@ -224,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -678,9 +710,21 @@
             label27.TabIndex = 25;
             label27.Text = "Value of Leftover Mats";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(41, 76);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(61, 15);
+            label5.TabIndex = 122;
+            label5.Text = "Reactions";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
+            SummaryPage.Controls.Add(SummaryHelpPanel);
             SummaryPage.Controls.Add(leftoverMatsValueLabel);
             SummaryPage.Controls.Add(label27);
             SummaryPage.Controls.Add(ProfitLabel);
@@ -707,6 +751,17 @@
             SummaryPage.Size = new Size(1532, 519);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
+            // 
+            // SummaryHelpPanel
+            // 
+            SummaryHelpPanel.BackgroundImage = (Image)resources.GetObject("SummaryHelpPanel.BackgroundImage");
+            SummaryHelpPanel.BackgroundImageLayout = ImageLayout.Stretch;
+            SummaryHelpPanel.Cursor = Cursors.Hand;
+            SummaryHelpPanel.Location = new Point(120, 53);
+            SummaryHelpPanel.Name = "SummaryHelpPanel";
+            SummaryHelpPanel.Size = new Size(32, 32);
+            SummaryHelpPanel.TabIndex = 27;
+            SummaryHelpPanel.Click += SummaryHelpPanel_Click;
             // 
             // leftoverMatsValueLabel
             // 
@@ -1230,6 +1285,26 @@
             // SkillsPage
             // 
             SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
+            SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
+            SkillsPage.Controls.Add(label55);
+            SkillsPage.Controls.Add(CapConSkillUpDown);
+            SkillsPage.Controls.Add(ReactionsSkillUpDown);
+            SkillsPage.Controls.Add(label33);
+            SkillsPage.Controls.Add(AdvSmallSkillUpDown);
+            SkillsPage.Controls.Add(label5);
+            SkillsPage.Controls.Add(label30);
+            SkillsPage.Controls.Add(ResearchSkillsUpDown);
+            SkillsPage.Controls.Add(AdvMedUpDown);
+            SkillsPage.Controls.Add(label15);
+            SkillsPage.Controls.Add(label31);
+            SkillsPage.Controls.Add(IndustrySkillUpDown);
+            SkillsPage.Controls.Add(AdvCapSkillUpDown);
+            SkillsPage.Controls.Add(label28);
+            SkillsPage.Controls.Add(label32);
+            SkillsPage.Controls.Add(AdvIndustryUpDown);
+            SkillsPage.Controls.Add(AdvLargeUpDown);
+            SkillsPage.Controls.Add(label34);
+            SkillsPage.Controls.Add(label51);
             SkillsPage.Controls.Add(BrokerRelationsLevelUpDown);
             SkillsPage.Controls.Add(AccountingLevelUpDown);
             SkillsPage.Controls.Add(label40);
@@ -1239,6 +1314,184 @@
             SkillsPage.Size = new Size(1522, 456);
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
+            // 
+            // CapConSkillUpDown
+            // 
+            CapConSkillUpDown.Location = new Point(387, 12);
+            CapConSkillUpDown.Margin = new Padding(2);
+            CapConSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            CapConSkillUpDown.Name = "CapConSkillUpDown";
+            CapConSkillUpDown.Size = new Size(131, 23);
+            CapConSkillUpDown.TabIndex = 117;
+            CapConSkillUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // ReactionsSkillUpDown
+            // 
+            ReactionsSkillUpDown.Location = new Point(118, 74);
+            ReactionsSkillUpDown.Margin = new Padding(2);
+            ReactionsSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            ReactionsSkillUpDown.Name = "ReactionsSkillUpDown";
+            ReactionsSkillUpDown.Size = new Size(131, 23);
+            ReactionsSkillUpDown.TabIndex = 123;
+            ReactionsSkillUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // label33
+            // 
+            label33.AutoSize = true;
+            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label33.Location = new Point(271, 14);
+            label33.Margin = new Padding(2, 0, 2, 0);
+            label33.Name = "label33";
+            label33.Size = new Size(108, 15);
+            label33.TabIndex = 116;
+            label33.Text = "Capital Ship Const.";
+            // 
+            // AdvSmallSkillUpDown
+            // 
+            AdvSmallSkillUpDown.Location = new Point(387, 42);
+            AdvSmallSkillUpDown.Margin = new Padding(2);
+            AdvSmallSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvSmallSkillUpDown.Name = "AdvSmallSkillUpDown";
+            AdvSmallSkillUpDown.Size = new Size(131, 23);
+            AdvSmallSkillUpDown.TabIndex = 115;
+            AdvSmallSkillUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label30.Location = new Point(278, 44);
+            label30.Margin = new Padding(2, 0, 2, 0);
+            label30.Name = "label30";
+            label30.Size = new Size(101, 15);
+            label30.TabIndex = 114;
+            label30.Text = "Adv. Small Const.";
+            // 
+            // ResearchSkillsUpDown
+            // 
+            ResearchSkillsUpDown.Location = new Point(118, 107);
+            ResearchSkillsUpDown.Margin = new Padding(2);
+            ResearchSkillsUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            ResearchSkillsUpDown.Name = "ResearchSkillsUpDown";
+            ResearchSkillsUpDown.Size = new Size(131, 23);
+            ResearchSkillsUpDown.TabIndex = 121;
+            ResearchSkillsUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // AdvMedUpDown
+            // 
+            AdvMedUpDown.Location = new Point(387, 72);
+            AdvMedUpDown.Margin = new Padding(2);
+            AdvMedUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvMedUpDown.Name = "AdvMedUpDown";
+            AdvMedUpDown.Size = new Size(131, 23);
+            AdvMedUpDown.TabIndex = 113;
+            AdvMedUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Location = new Point(44, 109);
+            label15.Margin = new Padding(2, 0, 2, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(58, 15);
+            label15.TabIndex = 120;
+            label15.Text = "Research";
+            // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label31.Location = new Point(277, 74);
+            label31.Margin = new Padding(2, 0, 2, 0);
+            label31.Name = "label31";
+            label31.Size = new Size(99, 15);
+            label31.TabIndex = 112;
+            label31.Text = "Adv. Med. Const.";
+            // 
+            // IndustrySkillUpDown
+            // 
+            IndustrySkillUpDown.Location = new Point(118, 143);
+            IndustrySkillUpDown.Margin = new Padding(2);
+            IndustrySkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            IndustrySkillUpDown.Name = "IndustrySkillUpDown";
+            IndustrySkillUpDown.Size = new Size(131, 23);
+            IndustrySkillUpDown.TabIndex = 119;
+            IndustrySkillUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // AdvCapSkillUpDown
+            // 
+            AdvCapSkillUpDown.Location = new Point(387, 141);
+            AdvCapSkillUpDown.Margin = new Padding(2);
+            AdvCapSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvCapSkillUpDown.Name = "AdvCapSkillUpDown";
+            AdvCapSkillUpDown.Size = new Size(131, 23);
+            AdvCapSkillUpDown.TabIndex = 111;
+            AdvCapSkillUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label28.Location = new Point(44, 145);
+            label28.Margin = new Padding(2, 0, 2, 0);
+            label28.Name = "label28";
+            label28.Size = new Size(58, 15);
+            label28.TabIndex = 118;
+            label28.Text = "Indusrtry";
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label32.Location = new Point(288, 141);
+            label32.Margin = new Padding(2, 0, 2, 0);
+            label32.Name = "label32";
+            label32.Size = new Size(91, 15);
+            label32.TabIndex = 110;
+            label32.Text = "Adv. Cap Const.";
+            // 
+            // AdvIndustryUpDown
+            // 
+            AdvIndustryUpDown.Location = new Point(118, 177);
+            AdvIndustryUpDown.Margin = new Padding(2);
+            AdvIndustryUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvIndustryUpDown.Name = "AdvIndustryUpDown";
+            AdvIndustryUpDown.Size = new Size(131, 23);
+            AdvIndustryUpDown.TabIndex = 117;
+            AdvIndustryUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // AdvLargeUpDown
+            // 
+            AdvLargeUpDown.Location = new Point(387, 105);
+            AdvLargeUpDown.Margin = new Padding(2);
+            AdvLargeUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvLargeUpDown.Name = "AdvLargeUpDown";
+            AdvLargeUpDown.Size = new Size(131, 23);
+            AdvLargeUpDown.TabIndex = 109;
+            AdvLargeUpDown.ValueChanged += IndustrySettings_ValueChanged;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label34.Location = new Point(22, 179);
+            label34.Margin = new Padding(2, 0, 2, 0);
+            label34.Name = "label34";
+            label34.Size = new Size(80, 15);
+            label34.TabIndex = 116;
+            label34.Text = "Adv. Industry";
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label51.Location = new Point(277, 107);
+            label51.Margin = new Padding(2, 0, 2, 0);
+            label51.Name = "label51";
+            label51.Size = new Size(102, 15);
+            label51.TabIndex = 108;
+            label51.Text = "Adv. Large Const.";
             // 
             // BrokerRelationsLevelUpDown
             // 
@@ -1646,6 +1899,26 @@
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
+            // AdvancedIndustrialConsSkillUpDoan
+            // 
+            AdvancedIndustrialConsSkillUpDoan.Location = new Point(387, 179);
+            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
+            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
+            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
+            AdvancedIndustrialConsSkillUpDoan.TabIndex = 125;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Location = new Point(275, 181);
+            label55.Margin = new Padding(2, 0, 2, 0);
+            label55.Name = "label55";
+            label55.Size = new Size(104, 15);
+            label55.TabIndex = 124;
+            label55.Text = "Adv. Indus. Const.";
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1690,6 +1963,15 @@
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             SkillsPage.ResumeLayout(false);
             SkillsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvMedUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvCapSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvIndustryUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).EndInit();
             OrderTypePage.ResumeLayout(false);
@@ -1705,6 +1987,7 @@
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1816,5 +2099,25 @@
         private Label leftoverMatsValueLabel;
         private CheckBox TaxFinalProductCheckbox;
         private CheckBox TaxInputCheckbox;
+        private Panel SummaryHelpPanel;
+        private NumericUpDown ReactionsSkillUpDown;
+        private NumericUpDown ResearchSkillsUpDown;
+        private Label label15;
+        private NumericUpDown IndustrySkillUpDown;
+        private Label label28;
+        private NumericUpDown AdvIndustryUpDown;
+        private Label label34;
+        private NumericUpDown CapConSkillUpDown;
+        private Label label33;
+        private NumericUpDown AdvSmallSkillUpDown;
+        private Label label30;
+        private NumericUpDown AdvMedUpDown;
+        private Label label31;
+        private NumericUpDown AdvCapSkillUpDown;
+        private Label label32;
+        private NumericUpDown AdvLargeUpDown;
+        private Label label51;
+        private NumericUpDown AdvancedIndustrialConsSkillUpDoan;
+        private Label label55;
     }
 }

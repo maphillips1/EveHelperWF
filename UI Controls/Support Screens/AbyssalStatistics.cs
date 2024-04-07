@@ -120,10 +120,18 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
             NumRunsLabel.Text = filteredList.Count().ToString("N0");
             SuccessRateLabel.Text = successPercent.ToString("P2");
+
             LootValueLabel.Text = CommonHelper.FormatIskShortened(totalLootValue);
+            ToolTipControl.SetToolTip(LootValueLabel, CommonHelper.FormatIsk(totalLootValue));
+
             FilamentCostLabel.Text = CommonHelper.FormatIskShortened(totalFilamentCost);
+            ToolTipControl.SetToolTip(FilamentCostLabel, CommonHelper.FormatIsk(totalFilamentCost));
+
             AverageLootRunLabel.Text = CommonHelper.FormatIskShortened(averageLootValue);
+            ToolTipControl.SetToolTip(AverageLootRunLabel, CommonHelper.FormatIsk(averageLootValue));
+
             ProfitLabel.Text = CommonHelper.FormatIskShortened(totalLootValue - totalFilamentCost);
+            ToolTipControl.SetToolTip(ProfitLabel, CommonHelper.FormatIsk(totalLootValue - totalFilamentCost));
         }
 
         private void LoadLootTable(List<AbyssRun> filteredList)

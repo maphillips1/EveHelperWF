@@ -70,5 +70,15 @@ namespace EveHelperWF.Objects
         // Skills
         public int AccountingSKill { get; set; }
         public int BrokersSkill { get; set; }
+        public int IndustrySkill { get; set; }
+        public int AdvancedIndustrySkill { get; set; }
+        public int CapitalShipConstructionSkill { get; set; }
+        public int AdvacnedSmallConstructionSkill { get; set; }
+        public int AdvacnedMediumConstructionSkill { get;set; }
+        public int AdvacnedLargeConstructionSkill { get; set; }
+        public int AdvancedCapitalConstructionSkill { get; set; }
+        public int AdvancedIndustrialConstructionSkill { get; set; }
+        public int ReactionsSkill { get; set; }
+        public int ResearchSkill { get; set; }
     }
 }

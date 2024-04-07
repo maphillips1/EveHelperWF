@@ -827,6 +827,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             //Skills
             calculationHelperClass.AccountingSkill = defaultFormValues.AccountingSKill;
             calculationHelperClass.BrokersSkill = defaultFormValues.BrokersSkill;
+            calculationHelperClass.ResearchSkill = defaultFormValues.ResearchSkill;
+            calculationHelperClass.ReactionsSkill = defaultFormValues.ReactionsSkill;
+            calculationHelperClass.IndustrySkill = defaultFormValues.IndustrySkill;
+            calculationHelperClass.AdvancedIndustrySkill = defaultFormValues.AdvancedIndustrySkill;
+            calculationHelperClass.AdvacnedSmallConstructionSkill = defaultFormValues.AdvacnedSmallConstructionSkill;
+            calculationHelperClass.AdvacnedMediumConstructionSkill = defaultFormValues.AdvacnedMediumConstructionSkill;
+            calculationHelperClass.AdvacnedLargeConstructionSkill = defaultFormValues.AdvacnedLargeConstructionSkill;
+            calculationHelperClass.AdvancedCapitalConstructionSkill = defaultFormValues.AdvancedCapitalConstructionSkill;
+            calculationHelperClass.CapitalShipConstructionSkill = defaultFormValues.CapitalShipConstructionSkill;
+            calculationHelperClass.AdvancedIndustrialConstructionSkill = defaultFormValues.AdvancedIndustrialConstructionSkill;
             return calculationHelperClass;
         }
 
@@ -937,6 +947,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Skills
                 this.AccountingLevelUpDown.Value = this.currentBuildPlan.IndustrySettings.AccountingSkill;
                 this.BrokerRelationsLevelUpDown.Value = this.currentBuildPlan.IndustrySettings.BrokersSkill;
+                this.ReactionsSkillUpDown.Value = this.currentBuildPlan.IndustrySettings.ReactionsSkill;
+                this.ResearchSkillsUpDown.Value = this.currentBuildPlan.IndustrySettings.ResearchSkill;
+                this.IndustrySkillUpDown.Value = this.currentBuildPlan.IndustrySettings.IndustrySkill;
+                this.AdvIndustryUpDown.Value = this.currentBuildPlan.IndustrySettings.AdvancedIndustrySkill;
+                this.CapConSkillUpDown.Value = this.currentBuildPlan.IndustrySettings.CapitalShipConstructionSkill;
+                this.AdvSmallSkillUpDown.Value = this.currentBuildPlan.IndustrySettings.AdvacnedSmallConstructionSkill;
+                this.AdvMedUpDown.Value = this.currentBuildPlan.IndustrySettings.AdvacnedMediumConstructionSkill;
+                this.AdvLargeUpDown.Value = this.currentBuildPlan.IndustrySettings.AdvacnedLargeConstructionSkill;
+                this.AdvCapSkillUpDown.Value = this.currentBuildPlan.IndustrySettings.AdvancedCapitalConstructionSkill;
+                this.AdvancedIndustrialConsSkillUpDoan.Value = this.currentBuildPlan.IndustrySettings.AdvancedIndustrialConstructionSkill;
 
                 //Order Types
                 this.InputOrderTypeCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.InputOrderType;
@@ -968,6 +988,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 case 2:
                     this.currentBuildPlan.IndustrySettings.AccountingSkill = (Int32)(this.AccountingLevelUpDown.Value);
                     this.currentBuildPlan.IndustrySettings.BrokersSkill = (Int32)(this.BrokerRelationsLevelUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.ReactionsSkill = (Int32)(this.ReactionsSkillUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.ResearchSkill = (Int32)(this.ResearchSkillsUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.IndustrySkill = (Int32)(this.IndustrySkillUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvancedIndustrySkill = (Int32)(this.AdvIndustryUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.CapitalShipConstructionSkill = (Int32)(this.CapConSkillUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvacnedSmallConstructionSkill = (Int32)(this.AdvSmallSkillUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvacnedMediumConstructionSkill = (Int32)(this.AdvMedUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvacnedLargeConstructionSkill = (Int32)(this.AdvLargeUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvancedCapitalConstructionSkill = (Int32)(this.AdvCapSkillUpDown.Value);
+                    this.currentBuildPlan.IndustrySettings.AdvancedIndustrialConstructionSkill = (Int32)(this.AdvancedIndustrialConsSkillUpDoan.Value);
                     break;
                 case 3:
                     this.currentBuildPlan.IndustrySettings.InputOrderType = (Int32)(this.InputOrderTypeCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.InputOrderType);
@@ -1182,7 +1212,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         inputTaxPerItem = 0;
                     }
                     IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
-                    
+
 
                     decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
@@ -1668,6 +1698,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 currentBuildPlan.finalSellPrice = FinalSellPriceNumeric.Value;
                 SetSummaryInformation();
             }
+        }
+
+        private void SummaryHelpPanel_Click(object sender, EventArgs e)
+        {
+            BuildPlanSummaryHelp buildPlanSummaryHelp = new BuildPlanSummaryHelp();
+            buildPlanSummaryHelp.StartPosition = FormStartPosition.CenterParent;
+            buildPlanSummaryHelp.ShowDialog();
         }
     }
 }
