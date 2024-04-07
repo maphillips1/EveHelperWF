@@ -28,8 +28,26 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             MarketBrowserHelper.Init();
             InitializeComponent();
+            LoadCombos();
             LoadRegions();
             LoadTreeView();
+        }
+
+        private void LoadCombos()
+        {
+            List<ComboListItem> comboListItems = new List<ComboListItem>();
+            comboListItems.Add(new ComboListItem(0, "Week"));
+            comboListItems.Add(new ComboListItem(1, "30 Days"));
+            comboListItems.Add(new ComboListItem(2, "60 Days"));
+            comboListItems.Add(new ComboListItem(3, "90 Days"));
+            comboListItems.Add(new ComboListItem(4, "6 Months"));
+            comboListItems.Add(new ComboListItem(5, "1 Year"));
+            comboListItems.Add(new ComboListItem(6, "All Time"));
+
+            //TimePeriodCombo.DisplayMember = "value";
+            //TimePeriodCombo.ValueMember = "key";
+            //TimePeriodCombo.DataSource = comboListItems;
+            //TimePeriodCombo.SelectedValue = 0;
         }
 
         private void LoadRegions()
@@ -122,7 +140,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchResultsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if ( e.Action != TreeViewAction.Unknown)
+            if (e.Action != TreeViewAction.Unknown)
             {
                 TreeNode selectedNode = SearchResultsTreeView.SelectedNode;
                 AfterSelectHandler(selectedNode);
@@ -251,6 +269,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             MarketBrowserHelper.FillInventoryTypeInformation(ref selectedTypeMarketOrders);
             SelectedItemLabel.Text = selectedTypeMarketOrders.typeName;
             priceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(regionID, SelectedTypeID);
+            //priceHistoryGraph1.PriceHistoryDataSource = priceHistory;
             DatabindGrids();
         }
 
@@ -362,6 +381,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 LoadDataForSelectedType();
             }
             this.Cursor = Cursors.Default;
+        }
+
+        private void TimePeriodCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //priceHistoryGraph1.SelectedTimePeriod = Convert.ToInt32(TimePeriodCombo.SelectedValue);
         }
     }
 }
