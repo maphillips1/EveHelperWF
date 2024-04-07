@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace EveHelperWF.Objects.Custom_Controls
             MinPriceLabel.ForeColor = Color.White;
             MaxPriceLabel.ForeColor = Color.White;
             MiddleValueLabel.ForeColor = Color.White;
-            Mid1PriceLabel.ForeColor = Color.White;
-            Mid2PriceLabel.ForeColor = Color.White;
+            LowerMidPriceLabel.ForeColor = Color.White;
+            UpperMidPriceLabel.ForeColor = Color.White;
         }
 
         static float[] dashValues = { 5, 2 };
@@ -38,13 +39,27 @@ namespace EveHelperWF.Objects.Custom_Controls
         private DateTime MaxDate { get; set; }
         private int LabelWidth = 75;
         private int LabelHeight = 20;
+        private int dateStep;
 
         private Label MinPriceLabel = new Label();
         private Label MaxPriceLabel = new Label();
         private Label MiddleValueLabel = new Label();
-        private Label Mid1PriceLabel = new Label();
-        private Label Mid2PriceLabel = new Label();
+        private Label LowerMidPriceLabel = new Label();
+        private Label UpperMidPriceLabel = new Label();
+        private bool controlsAdded = false;
 
+        private List<DateTime> m_Days = new List<DateTime>();
+        private List<DateTime> Days
+        {
+            get
+            {
+                return m_Days;
+            }
+            set
+            {
+                m_Days = value;
+            }
+        }
 
         private int m_SelectedTimePeriod = 0;
         public int SelectedTimePeriod
@@ -85,6 +100,7 @@ namespace EveHelperWF.Objects.Custom_Controls
                 if (FilterDataSource())
                 {
                     SetPriceValues();
+                    SetDays();
                     DrawGraph();
                 }
             }
@@ -103,7 +119,7 @@ namespace EveHelperWF.Objects.Custom_Controls
             MaxPrice = FilteredPriceHistoryDataSource.OrderByDescending(x => x.highest).ToList()[0].highest;
             MiddleValue = MaxPrice - ((MaxPrice - MinPrice) / 2);
             Mid1Price = (MiddleValue - ((MiddleValue - MinPrice) / 2));
-            Mid2Price = MaxPrice - ((MaxPrice + MinPrice) / 2);
+            Mid2Price = MaxPrice - ((MaxPrice - MiddleValue) / 2);
         }
 
         private DateTime GetDateForTimePeriod()
@@ -137,16 +153,53 @@ namespace EveHelperWF.Objects.Custom_Controls
 
         private void DrawGraph()
         {
-            setPriceLabelText();
+            this.Padding = new Padding(10);
+            SetAndDrawPriceLabels();
+            controlsAdded = true;
         }
 
-        private void setPriceLabelText()
+        private void SetAndDrawPriceLabels()
         {
             MinPriceLabel.Text = GetShortPriceLabelFromPrice(MinPrice);
             MaxPriceLabel.Text = GetShortPriceLabelFromPrice(MaxPrice);
             MiddleValueLabel.Text = GetShortPriceLabelFromPrice(MiddleValue);
-            Mid1PriceLabel.Text = GetShortPriceLabelFromPrice(Mid1Price);
-            Mid2PriceLabel.Text = GetShortPriceLabelFromPrice(Mid2Price);
+            LowerMidPriceLabel.Text = GetShortPriceLabelFromPrice(Mid1Price);
+            UpperMidPriceLabel.Text = GetShortPriceLabelFromPrice(Mid2Price);
+
+            int minStartingHeight = 0 + this.Padding.All;
+            int minStartingWidth = 0 + this.Padding.All;
+            MinPriceLabel.Padding = new Padding( this.Padding.All);
+            MaxPriceLabel.Padding = new Padding(this.Padding.All);
+            MiddleValueLabel.Padding = new Padding(this.Padding.All);
+            LowerMidPriceLabel.Padding = new Padding(this.Padding.All);
+            UpperMidPriceLabel.Padding = new Padding( this.Padding.All);
+
+            int usableHeight = this.Height - (this.Padding.All * 2);
+
+            int totalLabelHeight = MinPriceLabel.Bounds.Height;
+            totalLabelHeight += MaxPriceLabel.Bounds.Height;
+            totalLabelHeight += MiddleValueLabel.Bounds.Height;
+            totalLabelHeight += LowerMidPriceLabel.Bounds.Height;
+            totalLabelHeight += UpperMidPriceLabel.Bounds.Height;
+
+            usableHeight -= totalLabelHeight;
+
+            int labelStep =(int)Math.Floor((decimal)usableHeight / 4);
+
+            MinPriceLabel.Location = new Point(this.Padding.All, this.Height - this.Padding.All);
+            LowerMidPriceLabel.Location = new Point(this.Padding.All, this.Height - this.Padding.All - labelStep);
+            MiddleValueLabel.Location = new Point(this.Padding.All, this.Height - this.Padding.All - labelStep * 2);
+            UpperMidPriceLabel.Location = new Point(this.Padding.All, this.Height - this.Padding.All - labelStep * 3);
+            MaxPriceLabel.Location = new Point(this.Padding.All, this.Height - this.Padding.All - labelStep * 4);
+
+            if (!controlsAdded)
+            {
+                this.Controls.Add(MinPriceLabel);
+                this.Controls.Add(LowerMidPriceLabel);
+                this.Controls.Add(MiddleValueLabel);
+                this.Controls.Add(UpperMidPriceLabel);
+                this.Controls.Add(MaxPriceLabel);
+            }
         }
 
         private string GetShortPriceLabelFromPrice(double price)
@@ -172,6 +225,35 @@ namespace EveHelperWF.Objects.Custom_Controls
 
 
             return formattedLabel;
+        }
+
+        private void SetDays()
+        {
+            Days.Clear();
+            FilteredPriceHistoryDataSource = FilteredPriceHistoryDataSource.OrderBy(x => x.date).ToList();
+            if (FilteredPriceHistoryDataSource.Count < 10)
+            {
+                foreach (ESIPriceHistory item in FilteredPriceHistoryDataSource)
+                {
+                    Days.Add(Convert.ToDateTime(item.date));
+                }
+            }
+            else
+            {
+                Days.Add(Convert.ToDateTime(FilteredPriceHistoryDataSource[0].date));
+
+                DateTime maxDate = Convert.ToDateTime(FilteredPriceHistoryDataSource[FilteredPriceHistoryDataSource.Count - 1].date);
+                Days.Add(maxDate.Date);
+
+                int countStep = (int)Math.Floor((decimal)FilteredPriceHistoryDataSource.Count / 10);
+
+                while (Days.Count < 10)
+                {
+                    Days.Add(Convert.ToDateTime(FilteredPriceHistoryDataSource[countStep].date));
+                    countStep += countStep;
+                }
+                Days = Days.Order().ToList();
+            }
         }
     }
 }
