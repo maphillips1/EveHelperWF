@@ -557,6 +557,22 @@ namespace EveHelperWF
         {
             SearchButton_Click(sender, new EventArgs());
         }
+
+        private void TaxInputCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SelectedType != null)
+            {
+                RunNumbers();
+            }
+        }
+
+        private void TaxOutputsCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SelectedType != null)
+            {
+                RunNumbers();
+            }
+        }
         #endregion
 
         #region "Item Selected Methods"
@@ -982,13 +998,23 @@ namespace EveHelperWF
             TotalManufacturingJobCost = ScreenHelper.CommonHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass, calculationHelperClass.Runs);
             TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-            TotalManufacturingTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
+            if (TaxOutputsCheckbox.Checked)
+            {
+                TotalManufacturingTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalManufacturingOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
+            }
+            else
+            {
+                TotalManufacturingTaxesAndFees = 0;
+            }
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ManuMats)
             {
                 TotalMatPrice += mat.priceTotal;
             }
-            TotalManufacturingTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalManufacturingTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            }
             TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
 
@@ -1036,13 +1062,24 @@ namespace EveHelperWF
             TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
             TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
-            TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
+            if (TaxOutputsCheckbox.Checked)
+            {
+                TotalReactionTaxesAndFees = CommonHelper.CalculateTaxAndFees(TotalReactionOutputPrice, calculationHelperClass, calculationHelperClass.OutputOrderType);
+            }
+            else
+            {
+                TotalReactionTaxesAndFees = 0;
+            }
+            
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ReactionMats)
             {
                 TotalMatPrice += mat.priceTotal;
             }
-            TotalReactionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalReactionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            }
             TotalReactionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
             TotalReactionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
 
@@ -1067,7 +1104,10 @@ namespace EveHelperWF
             {
                 TotalMatPrice += mat.priceTotal;
             }
-            TotalInventionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalInventionTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            }
             TotalInventionOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
             TotalInventionOutcomeQuantity = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(InventionProds, calculationHelperClass.Runs, Enums.Enums.ActivityInvention);
             FinalInventionProbability = ScreenHelper.BlueprintBrowserHelper.CalculateInventionProbability(calculationHelperClass);
@@ -1097,7 +1137,10 @@ namespace EveHelperWF
             {
                 TotalMatPrice += mat.priceTotal;
             }
-            TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            }
             METotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ResMEMats)
             {
@@ -1121,7 +1164,10 @@ namespace EveHelperWF
             {
                 TotalMatPrice += mat.priceTotal;
             }
-            TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalMETaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+            }
             TETotalInputPrice = 0;
             foreach (Objects.MaterialsWithMarketData mat in ResTEMats)
             {
@@ -1142,6 +1188,10 @@ namespace EveHelperWF
             foreach (Objects.MaterialsWithMarketData mat in CopyMats)
             {
                 CopyingTotalInputPrice += mat.priceTotal;
+            }
+            if (TaxInputCheckbox.Checked)
+            {
+                TotalCopyTaxesAndFees += CommonHelper.CalculateTaxAndFees(CopyingTotalInputPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             }
         }
 
@@ -2230,10 +2280,5 @@ namespace EveHelperWF
             }
         }
         #endregion
-
-        private void CopyRigLabel_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

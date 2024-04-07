@@ -291,7 +291,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     progress = (decimal)currentMat / (decimal)totalMats;
                     ProgressLabel.Text = "Getting Market Data... " + progress.ToString("P");
-                    mat.pricePer = ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
+                    if (currentBuildPlan.IndustrySettings.InputOrderType == (int)(Enums.Enums.OrderType.Buy))
+                    {
+                        mat.pricePer = ESIMarketData.GetBuyOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
+                    }
+                    else
+                    {
+                        mat.pricePer = ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
+                    }
                     currentMat++;
 
                 }
@@ -412,6 +419,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     isLoading = false;
                 }
             }
+        }
+
+        private void TaxInputCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSummaryInformation();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSummaryInformation();
         }
         #endregion
 
@@ -832,7 +849,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BuildPlanHelper.BuildAllItems(this.currentBuildPlan.InputMaterials, ref allItems);
             this.currentBuildPlan.AllItems = allItems;
             RunOptimumBuildCalc();
-            if (!EnsurePriceData()){
+            if (!EnsurePriceData())
+            {
                 BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                      this.currentBuildPlan.AllItems,
                                                                      this.currentBuildPlan.finalProductTypeID,
@@ -1157,17 +1175,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     decimal totalInputTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
                                                                                this.currentBuildPlan.IndustrySettings,
                                                                                this.currentBuildPlan.IndustrySettings.InputOrderType);
-                    IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
                     decimal inputTaxPerItem = totalInputTaxes / optimumBuild.TotalQuantityNeeded;
+                    if (!TaxInputCheckbox.Checked)
+                    {
+                        totalInputTaxes = 0;
+                        inputTaxPerItem = 0;
+                    }
+                    IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
                     
+
                     decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
                                                                                 (int)Enums.Enums.OrderType.Sell);
-                    
+
                     decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
                                                                                 (int)Enums.Enums.OrderType.Buy);
-                    
+                    if (!TaxFinalProductCheckbox.Checked)
+                    {
+                        outcomeSellTaxes = 0;
+                        outcomeBuyTaxes = 0;
+                    }
+
                     ProductionCostUnitLabel.Text = CommonHelper.FormatIsk(optimumBuild.PricePerItem);
 
                     //decimal totalCostPerItem = (totalInputPrice / optimumBuild.TotalQuantityNeeded) + (totalJobCost / optimumBuild.TotalQuantityNeeded) + (currentBuildPlan.additionalCosts / optimumBuild.TotalQuantityNeeded);
@@ -1614,10 +1643,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
             }
-            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds, 
-                                                                 this.currentBuildPlan.AllItems, 
-                                                                 FinalProductType.typeId, 
-                                                                 this.currentBuildPlan.additionalCosts, 
+            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                                                                 this.currentBuildPlan.AllItems,
+                                                                 FinalProductType.typeId,
+                                                                 this.currentBuildPlan.additionalCosts,
                                                                  this.currentBuildPlan);
             SaveBuildPlan();
             this.PriceInfoSet = true;

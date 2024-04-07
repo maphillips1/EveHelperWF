@@ -211,6 +211,8 @@
             ReactionStructureCombo = new ComboBox();
             TreeViewList = new TreeView();
             ManufacturingPanel = new Panel();
+            TaxOutputsCheckbox = new CheckBox();
+            TaxInputCheckbox = new CheckBox();
             CreateBuildPlanButton = new Button();
             CopyToClipboardButton = new Button();
             BlueprintImagePanel = new Panel();
@@ -2138,7 +2140,6 @@
             CopyRigLabel.Size = new Size(82, 15);
             CopyRigLabel.TabIndex = 90;
             CopyRigLabel.Text = "Structure Rig";
-            CopyRigLabel.Click += CopyRigLabel_Click;
             // 
             // METaxLabel
             // 
@@ -2272,6 +2273,8 @@
             // 
             ManufacturingPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPanel.Controls.Add(TaxOutputsCheckbox);
+            ManufacturingPanel.Controls.Add(TaxInputCheckbox);
             ManufacturingPanel.Controls.Add(CreateBuildPlanButton);
             ManufacturingPanel.Controls.Add(label29);
             ManufacturingPanel.Controls.Add(CopyToClipboardButton);
@@ -2291,6 +2294,32 @@
             ManufacturingPanel.Name = "ManufacturingPanel";
             ManufacturingPanel.Size = new Size(1126, 793);
             ManufacturingPanel.TabIndex = 0;
+            // 
+            // TaxOutputsCheckbox
+            // 
+            TaxOutputsCheckbox.AutoSize = true;
+            TaxOutputsCheckbox.Checked = true;
+            TaxOutputsCheckbox.CheckState = CheckState.Checked;
+            TaxOutputsCheckbox.Location = new Point(112, 145);
+            TaxOutputsCheckbox.Name = "TaxOutputsCheckbox";
+            TaxOutputsCheckbox.Size = new Size(89, 19);
+            TaxOutputsCheckbox.TabIndex = 41;
+            TaxOutputsCheckbox.Text = "Tax Outputs";
+            TaxOutputsCheckbox.UseVisualStyleBackColor = true;
+            TaxOutputsCheckbox.CheckedChanged += TaxOutputsCheckbox_CheckedChanged;
+            // 
+            // TaxInputCheckbox
+            // 
+            TaxInputCheckbox.AutoSize = true;
+            TaxInputCheckbox.Checked = true;
+            TaxInputCheckbox.CheckState = CheckState.Checked;
+            TaxInputCheckbox.Location = new Point(16, 145);
+            TaxInputCheckbox.Name = "TaxInputCheckbox";
+            TaxInputCheckbox.Size = new Size(79, 19);
+            TaxInputCheckbox.TabIndex = 5;
+            TaxInputCheckbox.Text = "Tax Inputs";
+            TaxInputCheckbox.UseVisualStyleBackColor = true;
+            TaxInputCheckbox.CheckedChanged += TaxInputCheckbox_CheckedChanged;
             // 
             // CreateBuildPlanButton
             // 
@@ -2329,7 +2358,7 @@
             StatusLabel.AutoSize = true;
             StatusLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             StatusLabel.ForeColor = SystemColors.ControlLightLight;
-            StatusLabel.Location = new Point(130, 145);
+            StatusLabel.Location = new Point(181, 170);
             StatusLabel.Margin = new Padding(2, 0, 2, 0);
             StatusLabel.Name = "StatusLabel";
             StatusLabel.Size = new Size(0, 20);
@@ -4514,5 +4543,7 @@
         private Label label29;
         private Button CopyToClipboardButton;
         private Button CreateBuildPlanButton;
+        private CheckBox TaxInputCheckbox;
+        private CheckBox TaxOutputsCheckbox;
     }
 }
