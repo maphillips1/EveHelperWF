@@ -350,7 +350,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     int bpTypeId = Convert.ToInt32(e.Node.Tag);
                     BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == bpTypeId);
 
-                    BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                    BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, false);
                     BVC.StartPosition = FormStartPosition.CenterScreen;
                     if (BVC.ShowDialog() == DialogResult.OK)
                     {
@@ -380,7 +380,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 bpInfo.IsManufactured = true;
                 bpInfo.MaxRuns = 99999;
 
-                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, true);
                 BVC.StartPosition = FormStartPosition.CenterScreen;
                 if (BVC.ShowDialog() == DialogResult.OK)
                 {
@@ -389,7 +389,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.TE = (int)BVC.TEUpDown.Value;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     bpInfo.Manufacture = BVC.MakeItemCheckbox.Checked;
-                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, bpInfo.Manufacture);
+                    bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
+                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, bpInfo.Manufacture, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -406,13 +407,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 bpInfo.IsReacted = true;
                 bpInfo.MaxRuns = 99999;
 
-                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo);
+                BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, true);
                 BVC.StartPosition = FormStartPosition.CenterScreen;
                 if (BVC.ShowDialog() == DialogResult.OK)
                 {
                     isLoading = true;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
-                    SetAllReactionValues(bpInfo.MaxRuns, BVC.MakeItemCheckbox.Checked);
+                    bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
+                    SetAllReactionValues(bpInfo.MaxRuns, BVC.MakeItemCheckbox.Checked, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -1590,12 +1592,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllBlueprintValues(int me, int te, int maxRuns, bool makeItem)
+        private void SetAllBlueprintValues(int me, int te, int maxRuns, bool makeItem, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 if (bpInfo.IsManufactured)
                 {
+                    if (excludeFP && bpInfo.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID)
+                    {
+                        continue;
+                    }
                     bpInfo.ME = me;
                     bpInfo.TE = te;
                     bpInfo.MaxRuns = maxRuns;
@@ -1604,12 +1610,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllReactionValues(int maxRuns, bool makeItem)
+        private void SetAllReactionValues(int maxRuns, bool makeItem, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 if (bpInfo.IsReacted)
                 {
+                    if (excludeFP && bpInfo.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID)
+                    {
+                        continue;
+                    }
                     bpInfo.MaxRuns = maxRuns;
                     bpInfo.React = makeItem;
                 }
