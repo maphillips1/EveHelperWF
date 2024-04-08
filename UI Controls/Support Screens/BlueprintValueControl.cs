@@ -14,11 +14,13 @@ namespace EveHelperWF.UI_Controls.Support_Screens
     public partial class BlueprintValueControl : Objects.FormBase
     {
         BlueprintInfo BPInfo;
-        public BlueprintValueControl(BlueprintInfo bpInfo)
+        public BlueprintValueControl(BlueprintInfo bpInfo, bool showExcludeFP)
         {
             InitializeComponent();
             this.BPInfo = bpInfo;
             LoadControl();
+            ExcludeFPCheckbox.Visible = showExcludeFP;
+            ExcludeFPLabel.Visible = showExcludeFP;
         }
 
         private void LoadControl()

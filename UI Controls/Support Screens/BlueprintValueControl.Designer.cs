@@ -39,6 +39,8 @@
             CancelButton = new Button();
             label1 = new Label();
             MakeItemCheckbox = new CheckBox();
+            ExcludeFPCheckbox = new CheckBox();
+            ExcludeFPLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxRunsUpDown).BeginInit();
@@ -106,7 +108,7 @@
             // 
             SaveButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             SaveButton.ForeColor = Color.Black;
-            SaveButton.Location = new Point(32, 182);
+            SaveButton.Location = new Point(28, 208);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(75, 23);
             SaveButton.TabIndex = 6;
@@ -118,7 +120,7 @@
             // 
             CancelButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             CancelButton.ForeColor = Color.Black;
-            CancelButton.Location = new Point(141, 182);
+            CancelButton.Location = new Point(137, 208);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 23);
             CancelButton.TabIndex = 7;
@@ -145,11 +147,34 @@
             MakeItemCheckbox.TabIndex = 9;
             MakeItemCheckbox.UseVisualStyleBackColor = true;
             // 
+            // ExcludeFPCheckbox
+            // 
+            ExcludeFPCheckbox.AutoSize = true;
+            ExcludeFPCheckbox.Checked = true;
+            ExcludeFPCheckbox.CheckState = CheckState.Checked;
+            ExcludeFPCheckbox.Location = new Point(162, 173);
+            ExcludeFPCheckbox.Name = "ExcludeFPCheckbox";
+            ExcludeFPCheckbox.Size = new Size(15, 14);
+            ExcludeFPCheckbox.TabIndex = 11;
+            ExcludeFPCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // ExcludeFPLabel
+            // 
+            ExcludeFPLabel.AutoSize = true;
+            ExcludeFPLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ExcludeFPLabel.Location = new Point(-1, 167);
+            ExcludeFPLabel.Name = "ExcludeFPLabel";
+            ExcludeFPLabel.Size = new Size(157, 21);
+            ExcludeFPLabel.TabIndex = 10;
+            ExcludeFPLabel.Text = "Exclude Final Product";
+            // 
             // BlueprintValueControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(248, 259);
+            Controls.Add(ExcludeFPCheckbox);
+            Controls.Add(ExcludeFPLabel);
             Controls.Add(MakeItemCheckbox);
             Controls.Add(label1);
             Controls.Add(CancelButton);
@@ -185,5 +210,7 @@
         private Button CancelButton;
         private Label label1;
         public CheckBox MakeItemCheckbox;
+        public CheckBox ExcludeFPCheckbox;
+        private Label ExcludeFPLabel;
     }
 }

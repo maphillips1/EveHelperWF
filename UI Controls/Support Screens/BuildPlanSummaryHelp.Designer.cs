@@ -46,6 +46,7 @@
             HelpTextbox.ScrollBars = ScrollBars.Vertical;
             HelpTextbox.Size = new Size(776, 388);
             HelpTextbox.TabIndex = 0;
+            HelpTextbox.TabStop = false;
             // 
             // label1
             // 
