@@ -39,6 +39,9 @@ namespace EveHelperWF.Objects
         public int InventionStructureTimeRigValue { get; set; }
         public int InventionDecryptorValue { get; set; }
         public decimal InventionTaxValue { get; set; }
+        public int Datacore1SkillLevel { get; set; }
+        public int Datacore2SkillLevel { get; set; }
+        public int EncryptionStarshipSkillLevel { get; set; }
 
         //Copying
         public int CopyNumCopies { get; set; }

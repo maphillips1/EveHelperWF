@@ -2,10 +2,12 @@
 using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
+using FileIO;
 using System.ComponentModel;
 using System.Data;
 using System.IO.Pipes;
 using System.Text;
+using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
@@ -75,6 +77,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
+                if (this.currentBuildPlan != null)
+                {
+                    SaveBuildPlan();
+                }
                 LoadBuildPlanFromFile();
                 LoadUIForBuildPlan();
                 this.Cursor = Cursors.Default;
@@ -1033,10 +1039,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private List<TreeNode> AddMaterialsToTreeView(List<MaterialsWithMarketData> materialsToBind)
         {
             List<TreeNode> nodes = new List<TreeNode>();
-            List<MaterialsWithMarketData> orderedList = materialsToBind.OrderBy(x => x.materialName).ToList();
+            List<MaterialsWithMarketData> orderedList;
             TreeNode node;
             StringBuilder sb = new StringBuilder();
-            foreach (MaterialsWithMarketData inputMaterial in orderedList)
+
+            foreach (MaterialsWithMarketData inputMaterial in materialsToBind)
             {
                 sb = new StringBuilder();
 
@@ -1063,6 +1070,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
                 node.Text = sb.ToString();
                 node.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(inputMaterial);
+
                 nodes.Add(node);
             }
             return nodes;
@@ -1231,7 +1239,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                     ProductionCostUnitLabel.Text = CommonHelper.FormatIsk(optimumBuild.PricePerItem);
 
-                    //decimal totalCostPerItem = (totalInputPrice / optimumBuild.TotalQuantityNeeded) + (totalJobCost / optimumBuild.TotalQuantityNeeded) + (currentBuildPlan.additionalCosts / optimumBuild.TotalQuantityNeeded);
                     decimal totalCostPerItem = optimumBuild.PricePerItem;
                     totalCostPerItem += inputTaxPerItem;
                     decimal profit = 0;
@@ -1378,27 +1385,39 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             TreeNode tn;
             combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
+            TreeNode marketGroupNode;
             TreeNode pricePer;
             TreeNode priceTotal;
-            foreach (var mat in combinedMats)
+
+            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = BuildPlanHelper.GroupInputMaterials(combinedMats);
+
+            List<KeyValuePair<string, List<MaterialsWithMarketData>>> orderedMats = groupedMaterials.OrderBy(x => x.Key).ToList();
+            foreach (KeyValuePair<string, List<MaterialsWithMarketData>> inputGroup in orderedMats)
             {
-                pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
-                tn = new TreeNode();
-                tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName;
-                tn.Tag = mat.materialTypeID;
+                marketGroupNode = new TreeNode();
+                marketGroupNode.Text = inputGroup.Key;
+                marketGroupNode.ForeColor = Color.White;
 
-                pricePer = new TreeNode();
-                pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
-                pricePer.ForeColor = Color.White;
-                tn.Nodes.Add(pricePer);
+                foreach (MaterialsWithMarketData mat in inputGroup.Value.OrderBy(x => x.materialName))
+                {
+                    pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
+                    tn = new TreeNode();
+                    tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
+                    tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName;
+                    tn.Tag = mat.materialTypeID;
 
-                priceTotal = new TreeNode();
-                priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(mat.quantityTotal * pricedMat.pricePer);
-                priceTotal.ForeColor = Color.White;
-                tn.Nodes.Add(priceTotal);
+                    pricePer = new TreeNode();
+                    pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
+                    pricePer.ForeColor = Color.White;
+                    tn.Nodes.Add(pricePer);
 
-                MaterialsPriceTreeView.Nodes.Add(tn);
+                    priceTotal = new TreeNode();
+                    priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(mat.quantityTotal * pricedMat.pricePer);
+                    priceTotal.ForeColor = Color.White;
+                    tn.Nodes.Add(priceTotal);
+                    marketGroupNode.Nodes.Add(tn);
+                }
+                MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
             }
         }
 
@@ -1715,6 +1734,157 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BuildPlanSummaryHelp buildPlanSummaryHelp = new BuildPlanSummaryHelp();
             buildPlanSummaryHelp.StartPosition = FormStartPosition.CenterParent;
             buildPlanSummaryHelp.ShowDialog();
+        }
+
+        private void NotesTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                this.currentBuildPlan.BuildPlanNotes = NotesTextBox.Text;
+            }
+        }
+
+        private void ImportPricesButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = OpenFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = OpenFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            ImportPrices(fileName);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during import: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void ExportPricesButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = SaveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = SaveFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            ExportPrices(fileName);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during export: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void ExportPrices(string fileName)
+        {
+
+            StringBuilder exportBuilder = new StringBuilder();
+            exportBuilder.AppendLine("Type ID, Type Name, Price Per Item");
+            foreach (MaterialsWithMarketData item in this.currentBuildPlan.AllItems.OrderBy(x => x.materialName).ToList())
+            {
+                exportBuilder.AppendLine(String.Format("{0}, {1}, {2}",
+                                                        item.materialTypeID,
+                                                        item.materialName,
+                                                        item.pricePer));
+            }
+            FileHelper.SaveFileContent(fileName, exportBuilder.ToString());
+        }
+
+        private void ImportPrices(string fileName)
+        {
+            string fileContent = FileIO.FileHelper.GetFileContent(fileName);
+            if (!string.IsNullOrWhiteSpace(fileContent))
+            {
+                StringReader sr = new StringReader(fileContent);
+                string headerRow = sr.ReadLine();
+                string[] splitString = headerRow.Split(",");
+                if (splitString.Length != 3)
+                {
+                    MessageBox.Show("Something ain't right. The first row is not 3 columns. I exported it with three column. Export the prices, change what you need and import again.");
+                }
+                else
+                {
+                    StringBuilder errorBuilder = new StringBuilder();
+                    string line;
+                    int typeID;
+                    decimal pricePerItem;
+                    MaterialsWithMarketData currentMat;
+                    bool priceSet = false;
+                    while ((line = sr.ReadLine()) != null){
+                        splitString = line.Split(",");
+                        if (splitString.Length == 3)
+                        {
+
+                            if (Int32.TryParse(splitString[0], out typeID)){
+                                if (decimal.TryParse(splitString[2], out pricePerItem))
+                                {
+                                    currentMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == typeID); ;
+                                    if (currentMat != null)
+                                    {
+                                        currentMat.pricePer = pricePerItem;
+                                        priceSet = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            errorBuilder.AppendLine("Skipping " + line);
+                        }
+                    }
+                    if (priceSet)
+                    {
+                        BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                                                                     this.currentBuildPlan.AllItems,
+                                                                     this.currentBuildPlan.finalProductTypeID,
+                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan);
+                        LoadMaterialsPriceTreeView();
+                        SetSummaryInformation();
+                        SaveBuildPlan();
+                        if (errorBuilder.Length > 0)
+                        {
+                            MessageBox.Show("Price Import Completed, but errors were encounters." + Environment.NewLine + errorBuilder.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Price Import Completed.");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("File is empty. WTF dude.");
+            }
+            
         }
     }
 }

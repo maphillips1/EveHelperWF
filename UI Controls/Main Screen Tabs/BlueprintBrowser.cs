@@ -215,6 +215,9 @@ namespace EveHelperWF
             InventionStructureTimeRigCombo.SelectedValue = DefaultFormValues.InventionStructureTimeRigValue;
             InventionTaxUpDown.Value = DefaultFormValues.InventionTaxValue;
             InventionDecryptorCombo.SelectedValue = DefaultFormValues.InventionDecryptorValue;
+            DataCore1SkillUpDown.Value = DefaultFormValues.Datacore1SkillLevel;
+            Datacore2SkillUpDown.Value = DefaultFormValues.Datacore2SkillLevel;
+            EncryptionStarshipSkillUpDown.Value = DefaultFormValues.EncryptionStarshipSkillLevel;
         }
 
         private void SetDefaultCopyValues()
@@ -605,6 +608,8 @@ namespace EveHelperWF
                 InventBlueprintCheckbox.Visible = true;
                 ManuInventDecryptorLabel.Visible = true;
                 ManuInventDecryptorCombo.Visible = true;
+                InventedFromLabel.Visible = true;
+                InventedFromLabelLabel.Visible = true;
 
                 SetDefaultManufacturingMETEValuesForBP();
             }
@@ -613,6 +618,9 @@ namespace EveHelperWF
                 InventBlueprintCheckbox.Visible = false;
                 ManuInventDecryptorLabel.Visible = false;
                 ManuInventDecryptorCombo.Visible = false;
+                InventedFromLabel.Visible = false;
+                InventedFromLabelLabel.Visible = false;
+                InventedFromLabel.Text = "";
 
                 ManuMEUpDown.Enabled = true;
                 ManuTEUpDown.Enabled = true;
@@ -1028,6 +1036,11 @@ namespace EveHelperWF
             if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
             {
                 int tech1BlueprintId = Database.SQLiteCalls.GetTech1BlueprintTypeId(SelectedType.typeId);
+                InventoryType tech1BlueprintType = CommonHelper.InventoryTypes.Find(x => x.typeId == tech1BlueprintId);
+                if (tech1BlueprintType != null)
+                {
+                    InventedFromLabel.Text = tech1BlueprintType.typeName;
+                }
                 List<Objects.IndustryActivityTypes> inventionIndustryActivityTypes = Database.SQLiteCalls.GetIndustryActivityTypes(tech1BlueprintId);
                 List<Objects.MaterialsWithMarketData> inventionMats = new List<Objects.MaterialsWithMarketData>();
 
@@ -1414,7 +1427,9 @@ namespace EveHelperWF
             helperClass.AdvacnedLargeConstructionSkill = DefaultFormValues.AdvacnedLargeConstructionSkill;
             helperClass.AdvancedCapitalConstructionSkill = DefaultFormValues.AdvancedCapitalConstructionSkill;
             helperClass.AdvancedIndustrialConstructionSkill = DefaultFormValues.AdvancedIndustrialConstructionSkill;
-
+            helperClass.Datacore1SkillLevel = Convert.ToInt32(DataCore1SkillUpDown.Value);
+            helperClass.Datacore2SkillLevel = Convert.ToInt32(Datacore2SkillUpDown.Value);
+            helperClass.EncryptionStarshipSkillLevel = Convert.ToInt32(EncryptionStarshipSkillUpDown.Value);
             return helperClass;
         }
 
@@ -1471,6 +1486,10 @@ namespace EveHelperWF
 
             //Invention Outcome BP
             helperClass.InventionProductTypeId = SelectedType.typeId;
+
+            helperClass.Datacore1SkillLevel = DefaultFormValues.Datacore1SkillLevel;
+            helperClass.Datacore2SkillLevel = DefaultFormValues.Datacore2SkillLevel;
+            helperClass.EncryptionStarshipSkillLevel = DefaultFormValues.EncryptionStarshipSkillLevel;
 
             return helperClass;
         }

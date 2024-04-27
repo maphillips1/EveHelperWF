@@ -98,6 +98,9 @@ namespace EveHelperWF.Objects
         public int AdvancedIndustrialConstructionSkill { get; set; }
         public int ReactionsSkill { get; set; }
         public int ResearchSkill { get; set; }
+        public int Datacore1SkillLevel { get; set; }
+        public int Datacore2SkillLevel { get; set; }
+        public int EncryptionStarshipSkillLevel { get; set; }
     }
 
     public class StructureRigBonus

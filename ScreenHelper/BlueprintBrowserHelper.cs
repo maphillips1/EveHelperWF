@@ -1276,9 +1276,9 @@ namespace EveHelperWF.ScreenHelper
         public static decimal CalculateInventionProbability(Objects.CalculationHelperClass helperClass)
         {
             decimal probability = 0;
-            decimal encryptionSkillLevel = 5;
-            decimal dataCoreSkill1Level = 5;
-            decimal dataCoreSkillLevel2 = 5;
+            decimal encryptionSkillLevel = helperClass.EncryptionStarshipSkillLevel;
+            decimal dataCoreSkill1Level = helperClass.Datacore1SkillLevel;
+            decimal dataCoreSkillLevel2 = helperClass.Datacore2SkillLevel;
 
             decimal baseChance = 0;
             decimal skillBonus = 1 + Convert.ToDecimal(encryptionSkillLevel / Convert.ToDecimal(40)) + ((dataCoreSkill1Level + dataCoreSkillLevel2) / 30);
