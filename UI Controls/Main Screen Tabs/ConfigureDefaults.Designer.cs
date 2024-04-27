@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             Label label37;
+            Label label78;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigureDefaults));
             DefaultsTabContainer = new TabControl();
             MainDefaultTabPage = new TabPage();
@@ -64,6 +65,11 @@
             label14 = new Label();
             label15 = new Label();
             InventionDefaultsTabPage = new TabPage();
+            EncryptionStarshipSkillUpDown = new NumericUpDown();
+            Datacore2SkillUpDown = new NumericUpDown();
+            DataCore1SkillUpDown = new NumericUpDown();
+            label63 = new Label();
+            label74 = new Label();
             InventionTaxUpDown = new NumericUpDown();
             InventionDecryptorCombo = new ComboBox();
             InventionStructureTimeRigCombo = new ComboBox();
@@ -133,6 +139,8 @@
             label66 = new Label();
             label67 = new Label();
             SkillsPage = new TabPage();
+            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
+            label55 = new Label();
             ReactionsSkillUpDown = new NumericUpDown();
             ResearchSkillsUpDown = new NumericUpDown();
             label36 = new Label();
@@ -155,9 +163,8 @@
             label16 = new Label();
             label21 = new Label();
             SaveButton = new Button();
-            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
-            label55 = new Label();
             label37 = new Label();
+            label78 = new Label();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
@@ -168,6 +175,9 @@
             ((System.ComponentModel.ISupportInitialize)TaxUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             InventionDefaultsTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)EncryptionStarshipSkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Datacore2SkillUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataCore1SkillUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
             ReactionsDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
@@ -184,6 +194,7 @@
             ((System.ComponentModel.ISupportInitialize)TEFromLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).BeginInit();
             SkillsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).BeginInit();
@@ -195,7 +206,6 @@
             ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             SuspendLayout();
             // 
             // label37
@@ -208,6 +218,17 @@
             label37.Size = new Size(61, 15);
             label37.TabIndex = 114;
             label37.Text = "Reactions";
+            // 
+            // label78
+            // 
+            label78.AutoSize = true;
+            label78.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label78.Location = new Point(291, 19);
+            label78.Margin = new Padding(2, 0, 2, 0);
+            label78.Name = "label78";
+            label78.Size = new Size(94, 15);
+            label78.TabIndex = 30;
+            label78.Text = "Datacore 1 Skill";
             // 
             // DefaultsTabContainer
             // 
@@ -615,6 +636,12 @@
             // InventionDefaultsTabPage
             // 
             InventionDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            InventionDefaultsTabPage.Controls.Add(EncryptionStarshipSkillUpDown);
+            InventionDefaultsTabPage.Controls.Add(Datacore2SkillUpDown);
+            InventionDefaultsTabPage.Controls.Add(DataCore1SkillUpDown);
+            InventionDefaultsTabPage.Controls.Add(label63);
+            InventionDefaultsTabPage.Controls.Add(label74);
+            InventionDefaultsTabPage.Controls.Add(label78);
             InventionDefaultsTabPage.Controls.Add(InventionTaxUpDown);
             InventionDefaultsTabPage.Controls.Add(InventionDecryptorCombo);
             InventionDefaultsTabPage.Controls.Add(InventionStructureTimeRigCombo);
@@ -633,6 +660,52 @@
             InventionDefaultsTabPage.Size = new Size(604, 236);
             InventionDefaultsTabPage.TabIndex = 2;
             InventionDefaultsTabPage.Text = "Invention";
+            // 
+            // EncryptionStarshipSkillUpDown
+            // 
+            EncryptionStarshipSkillUpDown.Location = new Point(418, 90);
+            EncryptionStarshipSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            EncryptionStarshipSkillUpDown.Name = "EncryptionStarshipSkillUpDown";
+            EncryptionStarshipSkillUpDown.Size = new Size(120, 23);
+            EncryptionStarshipSkillUpDown.TabIndex = 36;
+            // 
+            // Datacore2SkillUpDown
+            // 
+            Datacore2SkillUpDown.Location = new Point(390, 54);
+            Datacore2SkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            Datacore2SkillUpDown.Name = "Datacore2SkillUpDown";
+            Datacore2SkillUpDown.Size = new Size(120, 23);
+            Datacore2SkillUpDown.TabIndex = 35;
+            // 
+            // DataCore1SkillUpDown
+            // 
+            DataCore1SkillUpDown.Location = new Point(390, 17);
+            DataCore1SkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            DataCore1SkillUpDown.Name = "DataCore1SkillUpDown";
+            DataCore1SkillUpDown.Size = new Size(120, 23);
+            DataCore1SkillUpDown.TabIndex = 34;
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label63.Location = new Point(273, 92);
+            label63.Margin = new Padding(2, 0, 2, 0);
+            label63.Name = "label63";
+            label63.Size = new Size(140, 15);
+            label63.TabIndex = 28;
+            label63.Text = "Encryption/Starship skill";
+            // 
+            // label74
+            // 
+            label74.AutoSize = true;
+            label74.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label74.Location = new Point(290, 56);
+            label74.Margin = new Padding(2, 0, 2, 0);
+            label74.Name = "label74";
+            label74.Size = new Size(92, 15);
+            label74.TabIndex = 29;
+            label74.Text = "Datacore 2 skill";
             // 
             // InventionTaxUpDown
             // 
@@ -1487,6 +1560,26 @@
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
             // 
+            // AdvancedIndustrialConsSkillUpDoan
+            // 
+            AdvancedIndustrialConsSkillUpDoan.Location = new Point(395, 175);
+            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
+            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
+            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
+            AdvancedIndustrialConsSkillUpDoan.TabIndex = 127;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Location = new Point(283, 177);
+            label55.Margin = new Padding(2, 0, 2, 0);
+            label55.Name = "label55";
+            label55.Size = new Size(104, 15);
+            label55.TabIndex = 126;
+            label55.Text = "Adv. Indus. Const.";
+            // 
             // ReactionsSkillUpDown
             // 
             ReactionsSkillUpDown.Location = new Point(118, 72);
@@ -1708,26 +1801,6 @@
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButton_Click;
             // 
-            // AdvancedIndustrialConsSkillUpDoan
-            // 
-            AdvancedIndustrialConsSkillUpDoan.Location = new Point(395, 175);
-            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
-            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
-            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
-            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
-            AdvancedIndustrialConsSkillUpDoan.TabIndex = 127;
-            // 
-            // label55
-            // 
-            label55.AutoSize = true;
-            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label55.Location = new Point(283, 177);
-            label55.Margin = new Padding(2, 0, 2, 0);
-            label55.Name = "label55";
-            label55.Size = new Size(104, 15);
-            label55.TabIndex = 126;
-            label55.Text = "Adv. Indus. Const.";
-            // 
             // ConfigureDefaults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1754,6 +1827,9 @@
             ((System.ComponentModel.ISupportInitialize)MEUpDown).EndInit();
             InventionDefaultsTabPage.ResumeLayout(false);
             InventionDefaultsTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)EncryptionStarshipSkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Datacore2SkillUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataCore1SkillUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
             ReactionsDefaultTabPage.ResumeLayout(false);
             ReactionsDefaultTabPage.PerformLayout();
@@ -1775,6 +1851,7 @@
             ((System.ComponentModel.ISupportInitialize)TETaxUpDown).EndInit();
             SkillsPage.ResumeLayout(false);
             SkillsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)ResearchSkillsUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)IndustrySkillUpDown).EndInit();
@@ -1786,7 +1863,6 @@
             ((System.ComponentModel.ISupportInitialize)AdvLargeUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)BrokerRelationsLevelUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AccountingLevelUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ResumeLayout(false);
         }
 
@@ -1920,5 +1996,10 @@
         private Label label22;
         private NumericUpDown AdvancedIndustrialConsSkillUpDoan;
         private Label label55;
+        private Label label63;
+        private Label label74;
+        private NumericUpDown EncryptionStarshipSkillUpDown;
+        private NumericUpDown Datacore2SkillUpDown;
+        private NumericUpDown DataCore1SkillUpDown;
     }
 }

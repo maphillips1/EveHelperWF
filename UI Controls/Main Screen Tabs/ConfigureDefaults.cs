@@ -282,6 +282,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 AdvLargeUpDown.Value = DefaultFormValues.AdvacnedLargeConstructionSkill;
                 AdvCapSkillUpDown.Value = DefaultFormValues.AdvancedCapitalConstructionSkill;
                 AdvancedIndustrialConsSkillUpDoan.Value = DefaultFormValues.AdvancedIndustrialConstructionSkill;
+                DataCore1SkillUpDown.Value = DefaultFormValues.Datacore1SkillLevel;
+                Datacore2SkillUpDown.Value = DefaultFormValues.Datacore2SkillLevel;
+                EncryptionStarshipSkillUpDown.Value = DefaultFormValues.EncryptionStarshipSkillLevel;
             }
         }
         #endregion
@@ -376,6 +379,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.AdvacnedLargeConstructionSkill = Convert.ToInt32(AdvLargeUpDown.Value);
             DefaultFormValues.AdvancedCapitalConstructionSkill = Convert.ToInt32(AdvCapSkillUpDown.Value);
             DefaultFormValues.AdvancedIndustrialConstructionSkill = Convert.ToInt32(AdvancedIndustrialConsSkillUpDoan.Value);
+            DefaultFormValues.Datacore1SkillLevel = Convert.ToInt32(DataCore1SkillUpDown.Value);
+            DefaultFormValues.Datacore2SkillLevel = Convert.ToInt32(Datacore2SkillUpDown.Value);
+            DefaultFormValues.EncryptionStarshipSkillLevel = Convert.ToInt32(EncryptionStarshipSkillUpDown.Value);
         }
         #endregion
     }

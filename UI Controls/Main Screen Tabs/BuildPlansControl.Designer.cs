@@ -73,19 +73,18 @@
             Label label27;
             Label label5;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
             ProfitLabel = new Label();
             IskNeededForPlanLabel = new Label();
-            SaveNotesButton = new Button();
             NotesTextBox = new TextBox();
             InputVolumeLabel = new Label();
             OutcomeVolumeLabel = new Label();
@@ -104,6 +103,8 @@
             ProductLabel = new Label();
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
+            ImportPricesButton = new Button();
+            ExportPricesButton = new Button();
             TaxFinalProductCheckbox = new CheckBox();
             TaxInputCheckbox = new CheckBox();
             FinalSellPriceNumeric = new NumericUpDown();
@@ -126,6 +127,8 @@
             ReactionStructureCombo = new ComboBox();
             ReactionSolarSystemCombo = new ComboBox();
             SkillsPage = new TabPage();
+            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
+            label55 = new Label();
             CapConSkillUpDown = new NumericUpDown();
             ReactionsSkillUpDown = new NumericUpDown();
             label33 = new Label();
@@ -177,8 +180,8 @@
             NumberCopiesUpDown = new NumericUpDown();
             EnsurePriceWorker = new System.ComponentModel.BackgroundWorker();
             HeaderCostUnitLabel = new Label();
-            AdvancedIndustrialConsSkillUpDoan = new NumericUpDown();
-            label55 = new Label();
+            SaveFileDialog = new SaveFileDialog();
+            OpenFileDialog = new OpenFileDialog();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -235,6 +238,7 @@
             ReactionsDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
             SkillsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).BeginInit();
@@ -255,7 +259,6 @@
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -731,7 +734,6 @@
             SummaryPage.Controls.Add(label29);
             SummaryPage.Controls.Add(IskNeededForPlanLabel);
             SummaryPage.Controls.Add(label19);
-            SummaryPage.Controls.Add(SaveNotesButton);
             SummaryPage.Controls.Add(label9);
             SummaryPage.Controls.Add(NotesTextBox);
             SummaryPage.Controls.Add(InputVolumeLabel);
@@ -793,18 +795,6 @@
             IskNeededForPlanLabel.TabIndex = 22;
             IskNeededForPlanLabel.Text = "[Isk Needed for plan]";
             // 
-            // SaveNotesButton
-            // 
-            SaveNotesButton.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            SaveNotesButton.ForeColor = Color.Black;
-            SaveNotesButton.Location = new Point(50, 338);
-            SaveNotesButton.Name = "SaveNotesButton";
-            SaveNotesButton.Size = new Size(75, 24);
-            SaveNotesButton.TabIndex = 15;
-            SaveNotesButton.Text = "Save Notes";
-            SaveNotesButton.UseVisualStyleBackColor = true;
-            SaveNotesButton.Click += SaveNotesButton_Click;
-            // 
             // NotesTextBox
             // 
             NotesTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
@@ -813,6 +803,7 @@
             NotesTextBox.Name = "NotesTextBox";
             NotesTextBox.Size = new Size(382, 140);
             NotesTextBox.TabIndex = 13;
+            NotesTextBox.TextChanged += NotesTextBox_TextChanged;
             // 
             // InputVolumeLabel
             // 
@@ -894,14 +885,14 @@
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.Black;
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle14.ForeColor = Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle7;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
@@ -914,8 +905,8 @@
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle8.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle1;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -924,10 +915,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle9.Format = "N0";
-            dataGridViewCellStyle9.NullValue = "0";
-            dataGridViewCellStyle9.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            dataGridViewCellStyle2.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle2;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -936,10 +927,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "0";
-            dataGridViewCellStyle10.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "0";
+            dataGridViewCellStyle3.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle3;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -948,10 +939,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle11.Format = "N0";
-            dataGridViewCellStyle11.NullValue = "0";
-            dataGridViewCellStyle11.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewCellStyle4.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle4;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -960,10 +951,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle12.Format = "N0";
-            dataGridViewCellStyle12.NullValue = "0";
-            dataGridViewCellStyle12.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            dataGridViewCellStyle5.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle5;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -972,8 +963,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle13.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle6;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1001,6 +992,8 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialPricePage.Controls.Add(ImportPricesButton);
+            MaterialPricePage.Controls.Add(ExportPricesButton);
             MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
             MaterialPricePage.Controls.Add(TaxInputCheckbox);
             MaterialPricePage.Controls.Add(FinalSellPriceNumeric);
@@ -1016,13 +1009,36 @@
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
+            // ImportPricesButton
+            // 
+            ImportPricesButton.ForeColor = Color.Black;
+            ImportPricesButton.Location = new Point(1069, 58);
+            ImportPricesButton.Name = "ImportPricesButton";
+            ImportPricesButton.Size = new Size(135, 23);
+            ImportPricesButton.TabIndex = 29;
+            ImportPricesButton.Text = "Import Prices";
+            ImportPricesButton.UseVisualStyleBackColor = true;
+            ImportPricesButton.Click += ImportPricesButton_Click;
+            // 
+            // ExportPricesButton
+            // 
+            ExportPricesButton.ForeColor = Color.Black;
+            ExportPricesButton.Location = new Point(1069, 27);
+            ExportPricesButton.Name = "ExportPricesButton";
+            ExportPricesButton.Size = new Size(135, 23);
+            ExportPricesButton.TabIndex = 28;
+            ExportPricesButton.Text = "Export Prices";
+            ExportPricesButton.UseVisualStyleBackColor = true;
+            ExportPricesButton.Click += ExportPricesButton_Click;
+            // 
             // TaxFinalProductCheckbox
             // 
+            TaxFinalProductCheckbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             TaxFinalProductCheckbox.AutoSize = true;
             TaxFinalProductCheckbox.Checked = true;
             TaxFinalProductCheckbox.CheckState = CheckState.Checked;
             TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TaxFinalProductCheckbox.Location = new Point(614, 152);
+            TaxFinalProductCheckbox.Location = new Point(700, 56);
             TaxFinalProductCheckbox.Name = "TaxFinalProductCheckbox";
             TaxFinalProductCheckbox.Size = new Size(226, 24);
             TaxFinalProductCheckbox.TabIndex = 27;
@@ -1032,11 +1048,12 @@
             // 
             // TaxInputCheckbox
             // 
+            TaxInputCheckbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             TaxInputCheckbox.AutoSize = true;
             TaxInputCheckbox.Checked = true;
             TaxInputCheckbox.CheckState = CheckState.Checked;
             TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TaxInputCheckbox.Location = new Point(614, 122);
+            TaxInputCheckbox.Location = new Point(700, 26);
             TaxInputCheckbox.Name = "TaxInputCheckbox";
             TaxInputCheckbox.Size = new Size(180, 24);
             TaxInputCheckbox.TabIndex = 26;
@@ -1065,7 +1082,7 @@
             MaterialsPriceTreeView.Location = new Point(9, 104);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(599, 407);
+            MaterialsPriceTreeView.Size = new Size(1516, 407);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.TabStop = false;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
@@ -1084,10 +1101,12 @@
             // CopyToClipboardButton
             // 
             CopyToClipboardButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CopyToClipboardButton.AutoSize = true;
+            CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             CopyToClipboardButton.ForeColor = Color.Black;
-            CopyToClipboardButton.Location = new Point(464, 26);
+            CopyToClipboardButton.Location = new Point(494, 26);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
-            CopyToClipboardButton.Size = new Size(144, 27);
+            CopyToClipboardButton.Size = new Size(114, 25);
             CopyToClipboardButton.TabIndex = 18;
             CopyToClipboardButton.Text = "Copy to Clipboard";
             CopyToClipboardButton.UseVisualStyleBackColor = true;
@@ -1314,6 +1333,26 @@
             SkillsPage.Size = new Size(1522, 456);
             SkillsPage.TabIndex = 7;
             SkillsPage.Text = "Skills";
+            // 
+            // AdvancedIndustrialConsSkillUpDoan
+            // 
+            AdvancedIndustrialConsSkillUpDoan.Location = new Point(387, 179);
+            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
+            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
+            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
+            AdvancedIndustrialConsSkillUpDoan.TabIndex = 125;
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Location = new Point(275, 181);
+            label55.Margin = new Padding(2, 0, 2, 0);
+            label55.Name = "label55";
+            label55.Size = new Size(104, 15);
+            label55.TabIndex = 124;
+            label55.Text = "Adv. Indus. Const.";
             // 
             // CapConSkillUpDown
             // 
@@ -1899,25 +1938,15 @@
             HeaderCostUnitLabel.TabIndex = 51;
             HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
-            // AdvancedIndustrialConsSkillUpDoan
+            // SaveFileDialog
             // 
-            AdvancedIndustrialConsSkillUpDoan.Location = new Point(387, 179);
-            AdvancedIndustrialConsSkillUpDoan.Margin = new Padding(2);
-            AdvancedIndustrialConsSkillUpDoan.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
-            AdvancedIndustrialConsSkillUpDoan.Name = "AdvancedIndustrialConsSkillUpDoan";
-            AdvancedIndustrialConsSkillUpDoan.Size = new Size(131, 23);
-            AdvancedIndustrialConsSkillUpDoan.TabIndex = 125;
+            SaveFileDialog.DefaultExt = "csv";
+            SaveFileDialog.Filter = "CSV | *.csv";
             // 
-            // label55
+            // OpenFileDialog
             // 
-            label55.AutoSize = true;
-            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label55.Location = new Point(275, 181);
-            label55.Margin = new Padding(2, 0, 2, 0);
-            label55.Name = "label55";
-            label55.Size = new Size(104, 15);
-            label55.TabIndex = 124;
-            label55.Text = "Adv. Indus. Const.";
+            OpenFileDialog.FileName = "openFileDialog1";
+            OpenFileDialog.Filter = "All Files | *.*";
             // 
             // BuildPlansControl
             // 
@@ -1963,6 +1992,7 @@
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             SkillsPage.ResumeLayout(false);
             SkillsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ((System.ComponentModel.ISupportInitialize)CapConSkillUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)ReactionsSkillUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdvSmallSkillUpDown).EndInit();
@@ -1987,7 +2017,6 @@
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AdvancedIndustrialConsSkillUpDoan).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2021,7 +2050,6 @@
         private Label OutcomeVolumeLabel;
         private Label ProductionCostUnitLabel;
         private Label OutcomeQuantityLabel;
-        private Button SaveNotesButton;
         private Label label9;
         private TextBox NotesTextBox;
         private System.ComponentModel.BackgroundWorker LoadProductImageBackgroundWorker;
@@ -2119,5 +2147,9 @@
         private Label label51;
         private NumericUpDown AdvancedIndustrialConsSkillUpDoan;
         private Label label55;
+        private Button ExportPricesButton;
+        private Button ImportPricesButton;
+        private SaveFileDialog SaveFileDialog;
+        private OpenFileDialog OpenFileDialog;
     }
 }

@@ -1134,5 +1134,26 @@ namespace EveHelperWF.ScreenHelper
 
             return value;
         }
+
+        public static Dictionary<string, List<MaterialsWithMarketData>> GroupInputMaterials(List<MaterialsWithMarketData> itemsToGroup)
+        {
+            Dictionary<string, List<MaterialsWithMarketData>> groupedOutPut = new Dictionary<string, List<MaterialsWithMarketData>>();
+            List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
+            foreach (MaterialsWithMarketData item in itemsToGroup)
+            {
+                string groupName = CommonHelper.InventoryTypes.Find(x => x.typeId == item.materialTypeID).groupName;
+                
+
+                if (groupedOutPut.Keys.Contains(groupName))
+                {
+                    groupedOutPut[groupName].Add(item);
+                }
+                else
+                {
+                    groupedOutPut.Add(groupName, new List<MaterialsWithMarketData>() { item });
+                }
+            }
+            return groupedOutPut;
+        }
     }
 }
