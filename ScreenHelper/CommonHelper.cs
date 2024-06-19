@@ -217,11 +217,11 @@ namespace EveHelperWF.ScreenHelper
                     }
                     if (isLowSec)
                     {
-                        rigBonus *= Convert.ToDecimal(1.19);
+                        rigBonus *= Convert.ToDecimal(1.9);
                     }
                     else if (isNullSec)
                     {
-                        rigBonus *= Convert.ToDecimal(1.21);
+                        rigBonus *= Convert.ToDecimal(2.1);
                     }
                     rigBonus = 1 - (rigBonus);
 
@@ -261,11 +261,11 @@ namespace EveHelperWF.ScreenHelper
                     }
                     //if (isLowSec)
                     //{
-                    //    rigBonus *= Convert.ToDecimal(1.19);
+                    //    rigBonus *= Convert.ToDecimal(1.9);
                     //}
                     if (isNullSec)
                     {
-                        rigBonus *= Convert.ToDecimal(1.21);
+                        rigBonus *= Convert.ToDecimal(2.1);
                     }
                     rigBonus = 1 - (rigBonus);
 
