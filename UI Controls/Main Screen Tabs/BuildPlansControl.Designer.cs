@@ -72,6 +72,7 @@
             Label label18;
             Label label27;
             Label label5;
+            Label label56;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -103,6 +104,7 @@
             ProductLabel = new Label();
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
+            MostExpensiveTree = new TreeView();
             ImportPricesButton = new Button();
             ExportPricesButton = new Button();
             TaxFinalProductCheckbox = new CheckBox();
@@ -226,6 +228,7 @@
             label18 = new Label();
             label27 = new Label();
             label5 = new Label();
+            label56 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -724,6 +727,17 @@
             label5.TabIndex = 122;
             label5.Text = "Reactions";
             // 
+            // label56
+            // 
+            label56.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label56.AutoSize = true;
+            label56.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label56.Location = new Point(943, 84);
+            label56.Name = "label56";
+            label56.Size = new Size(210, 17);
+            label56.TabIndex = 31;
+            label56.Text = "List of Items - Most Expensive First";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
@@ -992,6 +1006,8 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialPricePage.Controls.Add(label56);
+            MaterialPricePage.Controls.Add(MostExpensiveTree);
             MaterialPricePage.Controls.Add(ImportPricesButton);
             MaterialPricePage.Controls.Add(ExportPricesButton);
             MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
@@ -1009,10 +1025,18 @@
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
+            // MostExpensiveTree
+            // 
+            MostExpensiveTree.BackColor = Color.FromArgb(2, 23, 38);
+            MostExpensiveTree.Location = new Point(943, 104);
+            MostExpensiveTree.Name = "MostExpensiveTree";
+            MostExpensiveTree.Size = new Size(582, 412);
+            MostExpensiveTree.TabIndex = 30;
+            // 
             // ImportPricesButton
             // 
             ImportPricesButton.ForeColor = Color.Black;
-            ImportPricesButton.Location = new Point(1069, 58);
+            ImportPricesButton.Location = new Point(1069, 41);
             ImportPricesButton.Name = "ImportPricesButton";
             ImportPricesButton.Size = new Size(135, 23);
             ImportPricesButton.TabIndex = 29;
@@ -1023,7 +1047,7 @@
             // ExportPricesButton
             // 
             ExportPricesButton.ForeColor = Color.Black;
-            ExportPricesButton.Location = new Point(1069, 27);
+            ExportPricesButton.Location = new Point(1069, 12);
             ExportPricesButton.Name = "ExportPricesButton";
             ExportPricesButton.Size = new Size(135, 23);
             ExportPricesButton.TabIndex = 28;
@@ -1082,7 +1106,7 @@
             MaterialsPriceTreeView.Location = new Point(9, 104);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(1516, 407);
+            MaterialsPriceTreeView.Size = new Size(917, 407);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.TabStop = false;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
@@ -1206,7 +1230,6 @@
             ManufacturingSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ManufacturingSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ManufacturingSystemCombo.DropDownHeight = 150;
-            ManufacturingSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ManufacturingSystemCombo.FormattingEnabled = true;
             ManufacturingSystemCombo.IntegralHeight = false;
             ManufacturingSystemCombo.Location = new Point(133, 14);
@@ -1291,7 +1314,6 @@
             ReactionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionSolarSystemCombo.DropDownHeight = 150;
-            ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
             ReactionSolarSystemCombo.FormattingEnabled = true;
             ReactionSolarSystemCombo.IntegralHeight = false;
             ReactionSolarSystemCombo.Location = new Point(122, 14);
@@ -1794,6 +1816,8 @@
             // 
             // BuildPlanCombo
             // 
+            BuildPlanCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
+            BuildPlanCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             BuildPlanCombo.FormattingEnabled = true;
             BuildPlanCombo.Location = new Point(104, 11);
             BuildPlanCombo.Name = "BuildPlanCombo";
@@ -2151,5 +2175,6 @@
         private Button ImportPricesButton;
         private SaveFileDialog SaveFileDialog;
         private OpenFileDialog OpenFileDialog;
+        private TreeView MostExpensiveTree;
     }
 }

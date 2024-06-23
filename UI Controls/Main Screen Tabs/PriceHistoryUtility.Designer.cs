@@ -581,7 +581,7 @@
             RegionCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             RegionCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             RegionCombo.DropDownHeight = 150;
-            RegionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            RegionCombo.DropDownStyle = ComboBoxStyle.DropDown;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
             RegionCombo.Location = new Point(353, 40);

@@ -3,6 +3,7 @@ using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
 using FileIO;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.IO.Pipes;
@@ -316,6 +317,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan);
                 SetSummaryInformation();
                 LoadMaterialsPriceTreeView();
+                LoadMostExpensiveTreeView();
                 ProgressLabel.Text = "";
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -341,6 +343,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     SaveBuildPlan();
                     SetSummaryInformation();
                     LoadMaterialsPriceTreeView();
+                    LoadMostExpensiveTreeView();
                 }
                 MaterialsPriceTreeView.SelectedNode = null;
                 this.isLoading = false;
@@ -896,6 +899,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             FinalProductImagePanel.BackgroundImage = null;
             AdditionalCostsNumeric.Value = AdditionalCostsNumeric.Minimum;
             MaterialsTreeView.Nodes.Clear();
+            MostExpensiveTree.Nodes.Clear();
             OptimizedBuildTreeView.Nodes.Clear();
             TotalManufacturingSlotsLabel.Text = string.Empty;
             TotalReactionSlotsLabel.Text = string.Empty;
@@ -1421,6 +1425,27 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void LoadMostExpensiveTreeView()
+        {
+
+            MostExpensiveTree.Nodes.Clear();
+            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
+            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
+            combinedMats = combinedMats.OrderByDescending(x => x.priceTotal).ToList();
+            TreeNode itemNode;
+            MaterialsWithMarketData pricedMat;
+            foreach (MaterialsWithMarketData inputMaterial in combinedMats)
+            {
+                pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == inputMaterial.materialTypeID);
+                itemNode = new TreeNode();
+                itemNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(inputMaterial);
+                itemNode.Text = string.Format(inputMaterial.materialName + " - " + CommonHelper.FormatIskShortened(inputMaterial.quantityTotal * pricedMat.pricePer));
+                itemNode.ForeColor = Color.White;
+
+                MostExpensiveTree.Nodes.Add(itemNode);
+            }
+        }
+
         private void LoadPlanetaryMaterialsPage()
         {
             LoadUniquePlanetMaterials();
@@ -1479,6 +1504,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadIndySettings();
             LoadFinalProductMarketInfo();
             LoadMaterialsPriceTreeView();
+            LoadMostExpensiveTreeView();
             LoadDetailsPage(false);
             LoadOptimumBuildSchedule();
             SetSummaryInformation();
@@ -1806,13 +1832,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
 
             StringBuilder exportBuilder = new StringBuilder();
-            exportBuilder.AppendLine("Type ID, Type Name, Price Per Item");
-            foreach (MaterialsWithMarketData item in this.currentBuildPlan.AllItems.OrderBy(x => x.materialName).ToList())
+            exportBuilder.AppendLine("Type ID, Type Name, Price Per Item, Total Needed");
+            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
+            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
+            combinedMats = combinedMats.OrderByDescending(x => x.priceTotal).ToList();
+            combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
+            MaterialsWithMarketData pricedMat;
+            foreach (MaterialsWithMarketData item in combinedMats)
             {
-                exportBuilder.AppendLine(String.Format("{0}, {1}, {2}",
+                pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == item.materialTypeID);
+                exportBuilder.AppendLine(String.Format("{0}, {1}, {2}, {3}",
                                                         item.materialTypeID,
                                                         item.materialName,
-                                                        item.pricePer));
+                                                        pricedMat.pricePer,
+                                                        item.quantityTotal));
             }
             FileHelper.SaveFileContent(fileName, exportBuilder.ToString());
         }
@@ -1825,9 +1858,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 StringReader sr = new StringReader(fileContent);
                 string headerRow = sr.ReadLine();
                 string[] splitString = headerRow.Split(",");
-                if (splitString.Length != 3)
+                if (splitString.Length != 4)
                 {
-                    MessageBox.Show("Something ain't right. The first row is not 3 columns. I exported it with three column. Export the prices, change what you need and import again.");
+                    MessageBox.Show("Something ain't right. The first row is not 4 columns. I exported it with three column. Export the prices, change what you need and import again.");
                 }
                 else
                 {
@@ -1839,7 +1872,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bool priceSet = false;
                     while ((line = sr.ReadLine()) != null){
                         splitString = line.Split(",");
-                        if (splitString.Length == 3)
+                        if (splitString.Length == 4)
                         {
 
                             if (Int32.TryParse(splitString[0], out typeID)){
@@ -1867,6 +1900,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan.additionalCosts,
                                                                      this.currentBuildPlan);
                         LoadMaterialsPriceTreeView();
+                        LoadMostExpensiveTreeView();
                         SetSummaryInformation();
                         SaveBuildPlan();
                         if (errorBuilder.Length > 0)

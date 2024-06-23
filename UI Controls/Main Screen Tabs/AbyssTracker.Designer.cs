@@ -230,7 +230,7 @@
             // 
             ShipTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ShipTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ShipTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            ShipTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ShipTypeCombo.FormattingEnabled = true;
             ShipTypeCombo.Location = new Point(116, 82);
             ShipTypeCombo.Margin = new Padding(3, 2, 3, 2);
@@ -243,7 +243,7 @@
             FilamentTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             FilamentTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             FilamentTypeCombo.DropDownHeight = 150;
-            FilamentTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            FilamentTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             FilamentTypeCombo.FormattingEnabled = true;
             FilamentTypeCombo.IntegralHeight = false;
             FilamentTypeCombo.Location = new Point(116, 56);

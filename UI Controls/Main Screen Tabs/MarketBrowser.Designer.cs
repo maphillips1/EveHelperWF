@@ -135,7 +135,7 @@
             SystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             SystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             SystemCombo.DropDownHeight = 150;
-            SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            SystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
             SystemCombo.Location = new Point(433, 76);
@@ -723,7 +723,7 @@
             RegionCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             RegionCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             RegionCombo.DropDownHeight = 150;
-            RegionCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            RegionCombo.DropDownStyle = ComboBoxStyle.DropDown;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
             RegionCombo.Location = new Point(433, 49);
