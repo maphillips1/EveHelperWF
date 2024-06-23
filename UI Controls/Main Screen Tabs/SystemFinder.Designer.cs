@@ -369,7 +369,7 @@
             // 
             RegionCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
             RegionCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            RegionCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
+            RegionCombobox.DropDownStyle = ComboBoxStyle.DropDown;
             RegionCombobox.FormattingEnabled = true;
             RegionCombobox.Location = new Point(70, 151);
             RegionCombobox.Margin = new Padding(3, 2, 3, 2);
@@ -419,7 +419,7 @@
             // 
             StationComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             StationComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StationComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            StationComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             StationComboBox.FormattingEnabled = true;
             StationComboBox.Location = new Point(399, 81);
             StationComboBox.Margin = new Padding(3, 2, 3, 2);

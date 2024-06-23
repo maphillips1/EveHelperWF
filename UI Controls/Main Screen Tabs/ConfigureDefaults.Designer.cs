@@ -282,7 +282,7 @@
             // 
             OutputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             OutputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            OutputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            OutputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             OutputOrderTypeCombo.FormattingEnabled = true;
             OutputOrderTypeCombo.Location = new Point(167, 82);
             OutputOrderTypeCombo.Margin = new Padding(2);
@@ -294,7 +294,7 @@
             // 
             InputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InputOrderTypeCombo.FormattingEnabled = true;
             InputOrderTypeCombo.Location = new Point(167, 45);
             InputOrderTypeCombo.Margin = new Padding(2);
@@ -404,7 +404,7 @@
             // 
             StructureTERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureTERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureTERigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            StructureTERigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureTERigCombo.FormattingEnabled = true;
             StructureTERigCombo.Location = new Point(140, 184);
             StructureTERigCombo.Margin = new Padding(2);
@@ -416,7 +416,7 @@
             // 
             StructureMERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureMERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureMERigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            StructureMERigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureMERigCombo.FormattingEnabled = true;
             StructureMERigCombo.Location = new Point(140, 149);
             StructureMERigCombo.Margin = new Padding(2);
@@ -428,7 +428,7 @@
             // 
             StructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            StructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureCombo.FormattingEnabled = true;
             StructureCombo.Location = new Point(140, 116);
             StructureCombo.Margin = new Padding(2);
@@ -440,7 +440,7 @@
             // 
             ImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            ImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ImplantCombo.FormattingEnabled = true;
             ImplantCombo.Location = new Point(429, 48);
             ImplantCombo.Margin = new Padding(2);
@@ -453,7 +453,7 @@
             SystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             SystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             SystemCombo.DropDownHeight = 150;
-            SystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            SystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
             SystemCombo.Location = new Point(140, 83);
@@ -720,7 +720,7 @@
             // 
             InventionDecryptorCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionDecryptorCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionDecryptorCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InventionDecryptorCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionDecryptorCombo.FormattingEnabled = true;
             InventionDecryptorCombo.Location = new Point(131, 135);
             InventionDecryptorCombo.Margin = new Padding(2);
@@ -732,7 +732,7 @@
             // 
             InventionStructureTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InventionStructureTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureTimeRigCombo.FormattingEnabled = true;
             InventionStructureTimeRigCombo.Location = new Point(131, 105);
             InventionStructureTimeRigCombo.Margin = new Padding(2);
@@ -744,7 +744,7 @@
             // 
             InventionStructureCostRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureCostRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureCostRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InventionStructureCostRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureCostRigCombo.FormattingEnabled = true;
             InventionStructureCostRigCombo.Location = new Point(131, 73);
             InventionStructureCostRigCombo.Margin = new Padding(2);
@@ -756,7 +756,7 @@
             // 
             InventionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InventionStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureCombo.FormattingEnabled = true;
             InventionStructureCombo.Location = new Point(131, 40);
             InventionStructureCombo.Margin = new Padding(2);
@@ -769,7 +769,7 @@
             InventionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             InventionSolarSystemCombo.DropDownHeight = 150;
-            InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionSolarSystemCombo.FormattingEnabled = true;
             InventionSolarSystemCombo.IntegralHeight = false;
             InventionSolarSystemCombo.Location = new Point(131, 12);
@@ -888,7 +888,7 @@
             // 
             ReactionStructureTERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureTERig.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureTERig.DropDownStyle = ComboBoxStyle.DropDownList;
+            ReactionStructureTERig.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureTERig.FormattingEnabled = true;
             ReactionStructureTERig.Location = new Point(122, 122);
             ReactionStructureTERig.Margin = new Padding(2);
@@ -911,7 +911,7 @@
             // 
             ReactionStructureMERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureMERig.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureMERig.DropDownStyle = ComboBoxStyle.DropDownList;
+            ReactionStructureMERig.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureMERig.FormattingEnabled = true;
             ReactionStructureMERig.Location = new Point(122, 86);
             ReactionStructureMERig.Margin = new Padding(2);
@@ -934,7 +934,7 @@
             // 
             ReactionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            ReactionStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureCombo.FormattingEnabled = true;
             ReactionStructureCombo.Location = new Point(122, 52);
             ReactionStructureCombo.Margin = new Padding(2);
@@ -970,7 +970,7 @@
             ReactionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionSolarSystemCombo.DropDownHeight = 150;
-            ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionSolarSystemCombo.FormattingEnabled = true;
             ReactionSolarSystemCombo.IntegralHeight = false;
             ReactionSolarSystemCombo.Location = new Point(122, 14);
@@ -1050,7 +1050,7 @@
             CopySystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopySystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             CopySystemCombo.DropDownHeight = 150;
-            CopySystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            CopySystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopySystemCombo.FormattingEnabled = true;
             CopySystemCombo.IntegralHeight = false;
             CopySystemCombo.Location = new Point(103, 66);
@@ -1074,7 +1074,7 @@
             // 
             CopyImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            CopyImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyImplantCombo.FormattingEnabled = true;
             CopyImplantCombo.Location = new Point(102, 195);
             CopyImplantCombo.Margin = new Padding(2);
@@ -1098,7 +1098,7 @@
             // 
             CopyTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            CopyTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyTimeRigCombo.FormattingEnabled = true;
             CopyTimeRigCombo.Location = new Point(103, 129);
             CopyTimeRigCombo.Margin = new Padding(2);
@@ -1121,7 +1121,7 @@
             // 
             CopyStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            CopyStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyStructureCombo.FormattingEnabled = true;
             CopyStructureCombo.Location = new Point(103, 97);
             CopyStructureCombo.Margin = new Padding(2);
@@ -1232,7 +1232,7 @@
             MESystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MESystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             MESystemCombo.DropDownHeight = 150;
-            MESystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            MESystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MESystemCombo.FormattingEnabled = true;
             MESystemCombo.IntegralHeight = false;
             MESystemCombo.Location = new Point(111, 62);
@@ -1256,7 +1256,7 @@
             // 
             MEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            MEImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            MEImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MEImplantCombo.FormattingEnabled = true;
             MEImplantCombo.Location = new Point(110, 190);
             MEImplantCombo.Margin = new Padding(2);
@@ -1280,7 +1280,7 @@
             // 
             METimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             METimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            METimeRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            METimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             METimeRigCombo.FormattingEnabled = true;
             METimeRigCombo.Location = new Point(111, 124);
             METimeRigCombo.Margin = new Padding(2);
@@ -1303,7 +1303,7 @@
             // 
             MEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            MEStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            MEStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MEStructureCombo.FormattingEnabled = true;
             MEStructureCombo.Location = new Point(111, 92);
             MEStructureCombo.Margin = new Padding(2);
@@ -1415,7 +1415,7 @@
             TESystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TESystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             TESystemCombo.DropDownHeight = 150;
-            TESystemCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            TESystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TESystemCombo.FormattingEnabled = true;
             TESystemCombo.IntegralHeight = false;
             TESystemCombo.Location = new Point(97, 64);
@@ -1439,7 +1439,7 @@
             // 
             TEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEImplantCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            TEImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEImplantCombo.FormattingEnabled = true;
             TEImplantCombo.Location = new Point(96, 193);
             TEImplantCombo.Margin = new Padding(2);
@@ -1463,7 +1463,7 @@
             // 
             TEStructRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEStructRigCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            TEStructRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEStructRigCombo.FormattingEnabled = true;
             TEStructRigCombo.Location = new Point(97, 127);
             TEStructRigCombo.Margin = new Padding(2);
@@ -1486,7 +1486,7 @@
             // 
             TEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEStructureCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            TEStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEStructureCombo.FormattingEnabled = true;
             TEStructureCombo.Location = new Point(97, 94);
             TEStructureCombo.Margin = new Padding(2);
