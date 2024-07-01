@@ -265,7 +265,7 @@ namespace EveHelperWF.ScreenHelper
                     //}
                     if (isNullSec)
                     {
-                        rigBonus *= Convert.ToDecimal(2.1);
+                        rigBonus *= Convert.ToDecimal(1.1);
                     }
                     rigBonus = 1 - (rigBonus);
 
