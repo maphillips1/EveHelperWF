@@ -388,6 +388,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 BlueprintInfo bpInfo = new BlueprintInfo();
                 bpInfo.IsManufactured = true;
                 bpInfo.MaxRuns = 99999;
+                bpInfo.ME = 10;
+                bpInfo.TE = 20;
 
                 BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, true);
                 BVC.StartPosition = FormStartPosition.CenterScreen;
@@ -650,6 +652,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!LoadProductImageBackgroundWorker.IsBusy)
             {
                 LoadProductImageBackgroundWorker.RunWorkerAsync();
+            }
+            while (LoadProductImageBackgroundWorker.IsBusy)
+            {
+                Application.DoEvents();
             }
         }
 
@@ -1149,6 +1155,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         this.PriceInfoSet = false;
                         this.ProgressLabel.Text = "Price Information is Loading. This may take some time.";
                         EnsurePriceWorker.RunWorkerAsync(matsForPriceSetting);
+
+                        while (EnsurePriceWorker.IsBusy)
+                        {
+                            Application.DoEvents();
+                        }
                     }
                 }
             }

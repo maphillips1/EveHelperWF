@@ -52,13 +52,18 @@ namespace EveHelperWF.UI_Controls
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
 
+            CheckForDefaultValues();
+
             if (!InitLongLoadingWorker.IsBusy)
             {
                 InitLongLoadingWorker.RunWorkerAsync();
             }
-            this.BringToFront();
 
-            CheckForDefaultValues();
+            while (InitLongLoadingWorker.IsBusy)
+            {
+                Application.DoEvents();
+            }
+            this.BringToFront();
         }
 
         //Ensures that we only ever have one instance of EveHelper open at a given time. 

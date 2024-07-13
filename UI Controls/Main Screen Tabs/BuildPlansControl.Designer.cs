@@ -1027,6 +1027,7 @@
             // 
             // MostExpensiveTree
             // 
+            MostExpensiveTree.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             MostExpensiveTree.BackColor = Color.FromArgb(2, 23, 38);
             MostExpensiveTree.Location = new Point(943, 104);
             MostExpensiveTree.Name = "MostExpensiveTree";

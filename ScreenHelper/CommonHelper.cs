@@ -457,7 +457,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 decimal ReactionSkillBonus = 1 - (((decimal)helperClass.ReactionsSkill * 4) / 100);
                 decimal reactionStructureBonus = ReactionStructureTimeBonus(helperClass.ReactionsStructureTypeID);
-                decimal reactionRigBonus = StructurerigFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID);
+                decimal reactionRigBonus = StructureRigTimeFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID);
 
                 totalTime = totalTime * ReactionSkillBonus;
                 totalTime *= reactionStructureBonus;
@@ -471,7 +471,7 @@ namespace EveHelperWF.ScreenHelper
                 decimal advIndyFactor = 1 - ((decimal)(helperClass.AdvancedIndustrySkill * 3) / 100);
                 decimal skillFactor = BPSpecificSkillFactor(bpReactionTypeID, helperClass);
                 decimal structureBonus = GetManufacturingStructureTimeBonus(helperClass.ManufacturingStructureTypeID);
-                decimal structureRigFactor = StructurerigFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID);
+                decimal structureRigFactor = StructureRigTimeFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID);
                 decimal implantBonus = ManufacturingImplantBonus(helperClass.ManufacturingImplantTypeID);
 
                 totalTime *= TEDecimal;
@@ -550,37 +550,45 @@ namespace EveHelperWF.ScreenHelper
             return Factor;
         }
 
-        private static decimal StructurerigFactor(int TERigType, long systemID)
+        private static decimal StructureRigTimeFactor(int TERigType, long systemID)
         {
-            decimal factor = 1;
-            decimal systemFactor = 1;
+            decimal bonus = 1;
+            bool isLowSec = false;
+            bool isNullSec = false;
 
             if (systemID > 0)
             {
-                SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == systemID);
-                if (solarSystem != null)
+                Objects.SolarSystem solarSystem = SolarSystemList.Find(x => x.solarSystemID == systemID);
+                isLowSec = (Math.Round(solarSystem.security, 1) < Convert.ToDecimal(0.5) && Math.Round(solarSystem.security, 1) > 0);
+                isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
+            }
+
+            if (TERigType > 0)
+            {
+
+                decimal rigBonus = 0;
+                if (TERigType == 1)
                 {
-                    if (solarSystem.security > (decimal)0.0 && solarSystem.security < (decimal)0.5)
-                    {
-                        systemFactor = (decimal)0.94;
-                    }
-                    else if (solarSystem.security < (decimal)0.1)
-                    {
-                        systemFactor = (decimal)(0.88);
-                    }
+                    rigBonus = Convert.ToDecimal(0.2);
                 }
+                else if (TERigType == 2)
+                {
+                    rigBonus = Convert.ToDecimal(0.24);
+                }
+                if (isLowSec)
+                {
+                    rigBonus *= Convert.ToDecimal(1.9);
+                }
+                if (isNullSec)
+                {
+                    rigBonus *= Convert.ToDecimal(2.1);
+                }
+                rigBonus = 1 - (rigBonus);
+
+                bonus *= rigBonus;
             }
 
-            if (TERigType == 1)
-            {
-                factor = (decimal)0.8 * systemFactor;
-            }
-            else if (TERigType == 2)
-            {
-                factor = (decimal)0.76 * systemFactor;
-            }
-
-            return factor;
+            return bonus;
         }
 
         private static decimal ManufacturingImplantBonus(int implantTypeId)
@@ -612,7 +620,7 @@ namespace EveHelperWF.ScreenHelper
             decimal factor = 1;
             BlueprintBrowserHelper.Init();
 
-            RefineryComplex refineryComplex = BlueprintBrowserHelper.RefinerComplices.Find(x => x.StructureTypeID == reactionStructureTypeId);  
+            RefineryComplex refineryComplex = BlueprintBrowserHelper.RefinerComplices.Find(x => x.StructureTypeID == reactionStructureTypeId);
             if (refineryComplex != null)
             {
                 factor -= (decimal)refineryComplex.ReactionTimeBonus / 100;
