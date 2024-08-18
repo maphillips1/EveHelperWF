@@ -52,6 +52,7 @@
             backupFilesToolStripMenuItem = new ToolStripMenuItem();
             importFIlesToolStripMenuItem = new ToolStripMenuItem();
             updateEveDataToolStripMenuItem = new ToolStripMenuItem();
+            reportIssueToolStripMenuItem = new ToolStripMenuItem();
             FreyaLinkLabel = new LinkLabel();
             label10 = new Label();
             InitLongLoadingWorker = new System.ComponentModel.BackgroundWorker();
@@ -59,7 +60,7 @@
             ShoppingListButton = new Button();
             label13 = new Label();
             BuildPlansButton = new Button();
-            reportIssueToolStripMenuItem = new ToolStripMenuItem();
+            UpdateWorker = new System.ComponentModel.BackgroundWorker();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -337,6 +338,14 @@
             updateEveDataToolStripMenuItem.Text = "Update Eve Data";
             updateEveDataToolStripMenuItem.Click += updateEveDataToolStripMenuItem_Click;
             // 
+            // reportIssueToolStripMenuItem
+            // 
+            reportIssueToolStripMenuItem.ForeColor = Color.Black;
+            reportIssueToolStripMenuItem.Name = "reportIssueToolStripMenuItem";
+            reportIssueToolStripMenuItem.Size = new Size(83, 20);
+            reportIssueToolStripMenuItem.Text = "Report Issue";
+            reportIssueToolStripMenuItem.Click += reportIssueToolStripMenuItem_Click;
+            // 
             // FreyaLinkLabel
             // 
             FreyaLinkLabel.AutoSize = true;
@@ -417,13 +426,10 @@
             BuildPlansButton.UseVisualStyleBackColor = true;
             BuildPlansButton.Click += BuildPlansButton_Click;
             // 
-            // reportIssueToolStripMenuItem
+            // UpdateWorker
             // 
-            reportIssueToolStripMenuItem.ForeColor = Color.Black;
-            reportIssueToolStripMenuItem.Name = "reportIssueToolStripMenuItem";
-            reportIssueToolStripMenuItem.Size = new Size(83, 20);
-            reportIssueToolStripMenuItem.Text = "Report Issue";
-            reportIssueToolStripMenuItem.Click += reportIssueToolStripMenuItem_Click;
+            UpdateWorker.DoWork += UpdateWorker_DoWork;
+            UpdateWorker.RunWorkerCompleted += UpdateWorker_RunWorkerCompleted;
             // 
             // MainScreen
             // 
@@ -501,5 +507,6 @@
         private Button BuildPlansButton;
         private ToolStripMenuItem importFIlesToolStripMenuItem;
         private ToolStripMenuItem reportIssueToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker UpdateWorker;
     }
 }

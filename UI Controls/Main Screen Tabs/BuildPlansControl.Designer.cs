@@ -74,13 +74,13 @@
             Label label5;
             Label label56;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
@@ -156,6 +156,7 @@
             label49 = new Label();
             label50 = new Label();
             DetailsPage = new TabPage();
+            ExportBuildList = new Button();
             TotalManufacturingSlotsLabel = new Label();
             TotalReactionSlotsLabel = new Label();
             OptimizedBuildTreeView = new TreeView();
@@ -184,6 +185,7 @@
             HeaderCostUnitLabel = new Label();
             SaveFileDialog = new SaveFileDialog();
             OpenFileDialog = new OpenFileDialog();
+            WasteValueWorker = new System.ComponentModel.BackgroundWorker();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -899,14 +901,14 @@
             PriceHistoryGridView.BackgroundColor = Color.Black;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.Black;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle14.ForeColor = Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle14;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
@@ -919,8 +921,8 @@
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle1.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle8;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -929,10 +931,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "0";
-            dataGridViewCellStyle2.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "N0";
+            dataGridViewCellStyle9.NullValue = "0";
+            dataGridViewCellStyle9.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle9;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -941,10 +943,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "0";
-            dataGridViewCellStyle3.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle10;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -953,10 +955,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewCellStyle4.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "N0";
+            dataGridViewCellStyle11.NullValue = "0";
+            dataGridViewCellStyle11.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle11;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -965,10 +967,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            dataGridViewCellStyle5.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "N0";
+            dataGridViewCellStyle12.NullValue = "0";
+            dataGridViewCellStyle12.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle12;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -977,8 +979,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle6.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle13;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1634,6 +1636,7 @@
             // DetailsPage
             // 
             DetailsPage.BackColor = Color.FromArgb(2, 23, 38);
+            DetailsPage.Controls.Add(ExportBuildList);
             DetailsPage.Controls.Add(label44);
             DetailsPage.Controls.Add(TotalManufacturingSlotsLabel);
             DetailsPage.Controls.Add(TotalReactionSlotsLabel);
@@ -1658,6 +1661,17 @@
             DetailsPage.Size = new Size(1532, 519);
             DetailsPage.TabIndex = 1;
             DetailsPage.Text = "Build Details";
+            // 
+            // ExportBuildList
+            // 
+            ExportBuildList.ForeColor = Color.Black;
+            ExportBuildList.Location = new Point(854, 47);
+            ExportBuildList.Name = "ExportBuildList";
+            ExportBuildList.Size = new Size(124, 23);
+            ExportBuildList.TabIndex = 26;
+            ExportBuildList.Text = "Export Build List";
+            ExportBuildList.UseVisualStyleBackColor = true;
+            ExportBuildList.Click += ExportBuildListButton_Click;
             // 
             // TotalManufacturingSlotsLabel
             // 
@@ -1973,6 +1987,11 @@
             OpenFileDialog.FileName = "openFileDialog1";
             OpenFileDialog.Filter = "All Files | *.*";
             // 
+            // WasteValueWorker
+            // 
+            WasteValueWorker.DoWork += WasteValueWorker_DoWork;
+            WasteValueWorker.RunWorkerCompleted += WasteValueWorker_RunWorkerCompleted;
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2177,5 +2196,7 @@
         private SaveFileDialog SaveFileDialog;
         private OpenFileDialog OpenFileDialog;
         private TreeView MostExpensiveTree;
+        private System.ComponentModel.BackgroundWorker WasteValueWorker;
+        private Button ExportBuildList;
     }
 }

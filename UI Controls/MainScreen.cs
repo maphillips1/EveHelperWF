@@ -39,31 +39,33 @@ namespace EveHelperWF.UI_Controls
 
         public MainScreen()
         {
-
+            //Stopwatch sw = Stopwatch.StartNew();
             if (!CheckForInternetConnection())
             {
                 MessageBox.Show("Your internet connection may be down. Real time market data may not load. I'll still try to get it in case your internet comes back.", "Internet's Fucked.");
             }
-
-            CheckForOtherInstance();
-            CheckForUpdates();
+            
             InitializeComponent();
             CommonHelper.Init();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
 
-            CheckForDefaultValues();
+            CheckForOtherInstance();
+
+            this.BringToFront();
 
             if (!InitLongLoadingWorker.IsBusy)
             {
                 InitLongLoadingWorker.RunWorkerAsync();
             }
 
-            while (InitLongLoadingWorker.IsBusy)
+            if (!UpdateWorker.IsBusy)
             {
-                Application.DoEvents();
+                UpdateWorker.RunWorkerAsync();
             }
-            this.BringToFront();
+
+            //sw.Start();
+            //MessageBox.Show("Elapsed: " + sw.ElapsedMilliseconds);
         }
 
         //Ensures that we only ever have one instance of EveHelper open at a given time. 
@@ -89,16 +91,10 @@ namespace EveHelperWF.UI_Controls
             }
         }
 
-        private void CheckForUpdates()
+        private void CheckForUpdates(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             Tuple<bool, Objects.GitHub_Objects.Release> ShouldUpdate = GitHub_Calls.GitHubCalls.CheckForUpdate();
-            if (ShouldUpdate.Item1)
-            {
-                UpdateMessageBox newReleaseScreen = new UpdateMessageBox(ShouldUpdate.Item2);
-                newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
-                newReleaseScreen.ShowDialog();
-                newReleaseScreen.BringToFront();
-            }
+            e.Result = ShouldUpdate;
         }
 
         private bool CheckForInternetConnection(int timeoutMs = 10000, string url = null)
@@ -124,16 +120,6 @@ namespace EveHelperWF.UI_Controls
             catch
             {
                 return false;
-            }
-        }
-
-        private void CheckForDefaultValues()
-        {
-            string fullFileName = Path.Combine(Enums.Enums.CachedFormValuesDirectory, "form_values.json");
-            string fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.CachedFormValuesDirectory, fullFileName);
-            if (string.IsNullOrWhiteSpace(fileContent))
-            {
-                DefaultsButtonClick_Click(this, new EventArgs());
             }
         }
 
@@ -269,6 +255,24 @@ namespace EveHelperWF.UI_Controls
             ReportBugScreen reportBugScreen = new ReportBugScreen();
             reportBugScreen.StartPosition = FormStartPosition.CenterParent;
             reportBugScreen.ShowDialog();
+        }
+
+        private void UpdateWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            CheckForUpdates(sender, e);
+        }
+
+        private void UpdateWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Tuple<bool, Objects.GitHub_Objects.Release> ShouldUpdate = (Tuple<bool, Objects.GitHub_Objects.Release>)e.Result;
+
+            if (ShouldUpdate != null && ShouldUpdate.Item1)
+            {
+                UpdateMessageBox newReleaseScreen = new UpdateMessageBox(ShouldUpdate.Item2);
+                newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
+                newReleaseScreen.Show();
+                newReleaseScreen.BringToFront();
+            }
         }
     }
 }
