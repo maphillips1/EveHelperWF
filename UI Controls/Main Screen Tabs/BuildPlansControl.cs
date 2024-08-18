@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.IO.Pipes;
 using System.Text;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
@@ -74,7 +75,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void BuildPlanCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isLoading)
+            if (!isLoading && WaitForWorkers())
             {
                 isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
@@ -122,17 +123,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (addBuildPlanScreen.ShowDialog() == DialogResult.OK)
             {
-                this.currentBuildPlan = new BuildPlan();
-                this.currentBuildPlan.BuildPlanName = addBuildPlanScreen.PlanNameTextBox.Text + ".json";
-                this.currentBuildPlan.finalProductTypeID = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
-                this.currentBuildPlan.RunsPerCopy = 1;
-                this.currentBuildPlan.NumOfCopies = 1;
-                SaveBuildPlan();
-                LoadFileCombo();
-                ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.value.Contains(addBuildPlanScreen.PlanNameTextBox.Text));
-                if (comboListItem != null)
+                if (WaitForWorkers())
                 {
-                    BuildPlanCombo.SelectedValue = comboListItem.key;
+                    this.currentBuildPlan = new BuildPlan();
+                    this.currentBuildPlan.BuildPlanName = addBuildPlanScreen.PlanNameTextBox.Text + ".json";
+                    this.currentBuildPlan.finalProductTypeID = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
+                    this.currentBuildPlan.RunsPerCopy = 1;
+                    this.currentBuildPlan.NumOfCopies = 1;
+                    SaveBuildPlan();
+                    LoadFileCombo();
+                    ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.value.Contains(addBuildPlanScreen.PlanNameTextBox.Text));
+                    if (comboListItem != null)
+                    {
+                        BuildPlanCombo.SelectedValue = comboListItem.key;
+                    }
                 }
             }
         }
@@ -1301,8 +1305,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                             totalOutComeTaxes,
                                             totalOutcomeIskBeforeTax,
                                             outcomePricePer);
-                    decimal wasteValue = BuildPlanHelper.GetValueofWaste(currentBuildPlan);
-                    leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
+
+
+                    if (!WasteValueWorker.IsBusy)
+                    {
+                        WasteValueWorker.RunWorkerAsync(this.currentBuildPlan);
+                    }
+
                 }
             }
         }
@@ -1881,12 +1890,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     decimal pricePerItem;
                     MaterialsWithMarketData currentMat;
                     bool priceSet = false;
-                    while ((line = sr.ReadLine()) != null){
+                    while ((line = sr.ReadLine()) != null)
+                    {
                         splitString = line.Split(",");
                         if (splitString.Length == 4)
                         {
 
-                            if (Int32.TryParse(splitString[0], out typeID)){
+                            if (Int32.TryParse(splitString[0], out typeID))
+                            {
                                 if (decimal.TryParse(splitString[2], out pricePerItem))
                                 {
                                     currentMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == typeID); ;
@@ -1929,7 +1940,79 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 MessageBox.Show("File is empty. WTF dude.");
             }
-            
+
+        }
+
+        private void WasteValueWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            decimal wasteValue = 0;
+            BuildPlan wasteBP = (BuildPlan)(e.Argument);
+            if (wasteBP != null)
+            {
+                wasteValue = BuildPlanHelper.GetValueofWaste(wasteBP);
+            }
+            e.Result = wasteValue;
+        }
+
+        private void WasteValueWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            decimal wasteValue = (decimal)e.Result;
+            leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
+        }
+
+        private bool WaitForWorkers()
+        {
+            while (LoadProductImageBackgroundWorker.IsBusy || WasteValueWorker.IsBusy || EnsurePriceWorker.IsBusy)
+            {
+                Thread.Sleep(50);
+            }
+            return true;
+        }
+
+        private void ExportBuildListButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = SaveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = SaveFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            if (this.currentBuildPlan != null && this.currentBuildPlan.OptimumBuildGroups != null && this.currentBuildPlan.OptimumBuildGroups.Count > 0)
+                            {
+                                List<int> orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
+                                foreach (int key in orderedKeys)
+                                {
+                                    sb.AppendLine("Build Group: " + key.ToString());
+                                    sb.AppendLine("Material Name, Quantity Needed, Runs Needed, Is Complete");
+
+                                    foreach (OptimizedBuild build in this.currentBuildPlan.OptimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
+                                    {
+                                        sb.AppendLine(build.BuiltOrReactedName + "," + build.TotalQuantityNeeded + "," + build.RunsNeeded + ", False");
+                                    }
+                                    sb.AppendLine("");
+                                }
+                            }
+                            FileHelper.SaveFileContent(fileName, sb.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during export: " + ex.Message);
+                    }
+                }
+            }
+
         }
     }
 }
