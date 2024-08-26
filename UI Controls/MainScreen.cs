@@ -40,19 +40,11 @@ namespace EveHelperWF.UI_Controls
         public MainScreen()
         {
             //Stopwatch sw = Stopwatch.StartNew();
-            if (!CheckForInternetConnection())
-            {
-                MessageBox.Show("Your internet connection may be down. Real time market data may not load. I'll still try to get it in case your internet comes back.", "Internet's Fucked.");
-            }
-            
             InitializeComponent();
-            CommonHelper.Init();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
 
             CheckForOtherInstance();
-
-            this.BringToFront();
 
             if (!InitLongLoadingWorker.IsBusy)
             {
@@ -63,6 +55,13 @@ namespace EveHelperWF.UI_Controls
             {
                 UpdateWorker.RunWorkerAsync();
             }
+
+            if (!CheckInternetBGWorker.IsBusy)
+            {
+                CheckInternetBGWorker.RunWorkerAsync();
+            }
+
+            this.BringToFront();
 
             //sw.Start();
             //MessageBox.Show("Elapsed: " + sw.ElapsedMilliseconds);
@@ -224,6 +223,7 @@ namespace EveHelperWF.UI_Controls
 
         private void InitLongLoadingWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            CommonHelper.Init();
             CommonHelper.InitLongLoading();
         }
 
@@ -272,6 +272,22 @@ namespace EveHelperWF.UI_Controls
                 newReleaseScreen.StartPosition = FormStartPosition.CenterParent;
                 newReleaseScreen.Show();
                 newReleaseScreen.BringToFront();
+            }
+        }
+
+        private void CheckInternetBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            bool hasInternet = CheckForInternetConnection();
+
+            e.Result = hasInternet;
+        }
+
+        private void CheckInternetBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            bool hasInternet = (bool)e.Result;
+            if (!hasInternet)
+            {
+                MessageBox.Show("Unable to connect to the internet. Check your connection.");
             }
         }
     }

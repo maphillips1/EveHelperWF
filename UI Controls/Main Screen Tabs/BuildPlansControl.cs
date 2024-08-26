@@ -3,6 +3,7 @@ using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
 using FileIO;
+using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -77,6 +78,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (!isLoading && WaitForWorkers())
             {
+                ResetControls();
                 isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 if (this.currentBuildPlan != null)
@@ -418,6 +420,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null)
             {
+                this.Cursor = Cursors.WaitCursor;
                 BlueprintInfo bpInfo = new BlueprintInfo();
                 bpInfo.IsReacted = true;
                 bpInfo.MaxRuns = 99999;
@@ -435,6 +438,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     RunCalcs();
                     isLoading = false;
                 }
+                this.Cursor = Cursors.Default;
             }
         }
 
@@ -679,10 +683,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadFinalProductMarketInfo()
         {
-            List<ESIPriceHistory> priceHistory = ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(Enums.Enums.TheForgeRegionId, FinalProductType.typeId);
-            if (priceHistory != null)
+            if (!LoadPriceHistoryBGWorker.IsBusy)
             {
-                DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, priceHistory.OrderByDescending(x => x.date).ToList());
+                LoadPriceHistoryBGWorker.RunWorkerAsync(FinalProductType.typeId);
             }
             decimal sellOrderPrice = ESIMarketData.GetSellOrderPrice(FinalProductType.typeId, Enums.Enums.TheForgeRegionId);
             decimal buyOrderPrice = ESIMarketData.GetBuyOrderPrice(FinalProductType.typeId, Enums.Enums.TheForgeRegionId);
@@ -924,10 +927,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             PlanetMaterialsTreeView.Nodes.Clear();
             BPTreeView.Nodes.Clear();
             IskNeededForPlanLabel.Text = "";
-            ProfitLabel.Text = "";
             FinalSellPriceNumeric.Value = FinalSellPriceNumeric.Minimum;
             CostBreakdownTextBox.Text = "";
-            leftoverMatsValueLabel.Text = "";
+            IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(0);
+            ProfitLabel.Text = CommonHelper.FormatIsk(0);
+            leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(0);
             this.ResumeLayout();
         }
 
@@ -1296,6 +1300,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     InputVolumeLabel.Text = totalVolume.ToString("N2") + " m3";
 
                     ProfitLabel.Text = CommonHelper.FormatIsk(profit);
+                    if (profit < 0)
+                    {
+                        ProfitLabel.ForeColor = System.Drawing.Color.OrangeRed;
+                    }
+                    else
+                    {
+                        ProfitLabel.ForeColor = System.Drawing.Color.LightGreen;
+                    }
 
                     SetCostBreakdownTextBox(inputMaterialCostBeforeTax,
                                             totalInputTaxes,
@@ -1698,27 +1710,37 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             byte[]? bpImage = null;
             if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
             {
-                bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
+                if (LoadProductImageBackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
+                }
             }
             e.Result = bpImage;
         }
 
         private void LoadProductImageBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            bool imageSet = false;
-            byte[] productImage = (byte[])(e.Result);
-            if (productImage != null && productImage.Length > 0)
+            if (!e.Cancelled)
             {
-                MemoryStream memstream = new MemoryStream();
-                memstream.Write(productImage, 0, productImage.Length);
-                FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
-                DetailsImagePanel.BackgroundImage = Image.FromStream(memstream);
-                imageSet = true;
-            }
-            if (!imageSet)
-            {
-                FinalProductImagePanel.BackgroundImage = null;
-                DetailsImagePanel.BackgroundImage = null;
+                bool imageSet = false;
+                byte[] productImage = (byte[])(e.Result);
+                if (productImage != null && productImage.Length > 0)
+                {
+                    MemoryStream memstream = new MemoryStream();
+                    memstream.Write(productImage, 0, productImage.Length);
+                    FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
+                    DetailsImagePanel.BackgroundImage = Image.FromStream(memstream);
+                    imageSet = true;
+                }
+                if (!imageSet)
+                {
+                    FinalProductImagePanel.BackgroundImage = null;
+                    DetailsImagePanel.BackgroundImage = null;
+                }
             }
         }
 
@@ -1730,33 +1752,40 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             decimal progress = 0;
             foreach (MaterialsWithMarketData mat in mats)
             {
-                currentMatCount++;
-                BuildPlanHelper.EnsurePricePer(mat, this.currentBuildPlan.IndustrySettings, currentBuildPlan.BlueprintStore);
-                progress = Math.Ceiling(((decimal)currentMatCount / (decimal)totalMats) * 100);
-
+                if (EnsurePriceWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    currentMatCount++;
+                    BuildPlanHelper.EnsurePricePer(mat, this.currentBuildPlan.IndustrySettings, currentBuildPlan.BlueprintStore);
+                    progress = Math.Ceiling(((decimal)currentMatCount / (decimal)totalMats) * 100);
+                }
                 EnsurePriceWorker.ReportProgress((int)progress);
             }
             e.Result = mats;
-            //sleep for one seconds to give the main thread time to complete it's work.
-            Thread.Sleep(1000);
         }
 
         private void EnsurePriceWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)(e.Result);
-            foreach (MaterialsWithMarketData mat in mats)
+            if (!e.Cancelled)
             {
-                this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
+                List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)(e.Result);
+                foreach (MaterialsWithMarketData mat in mats)
+                {
+                    this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
+                }
+                BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                                                                     this.currentBuildPlan.AllItems,
+                                                                     FinalProductType.typeId,
+                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan);
+                SaveBuildPlan();
+                this.PriceInfoSet = true;
+                ProgressLabel.Text = "";
+                LoadUIAfterCalcs();
             }
-            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
-                                                                 this.currentBuildPlan.AllItems,
-                                                                 FinalProductType.typeId,
-                                                                 this.currentBuildPlan.additionalCosts,
-                                                                 this.currentBuildPlan);
-            SaveBuildPlan();
-            this.PriceInfoSet = true;
-            ProgressLabel.Text = "";
-            LoadUIAfterCalcs();
         }
 
         private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1949,23 +1978,57 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BuildPlan wasteBP = (BuildPlan)(e.Argument);
             if (wasteBP != null)
             {
-                wasteValue = BuildPlanHelper.GetValueofWaste(wasteBP);
+                foreach (OptimizedBuild optimizedBuild in wasteBP.OptimizedBuilds)
+                {
+                    if (WasteValueWorker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        if (optimizedBuild.ExtraOutput > 0)
+                        {
+                            decimal buyOrderPrice = ESI_Calls.ESIMarketData.GetBuyOrderPrice(optimizedBuild.BuiltOrReactedTypeId, Enums.Enums.TheForgeRegionId);
+                            wasteValue += optimizedBuild.ExtraOutput * buyOrderPrice;
+                        }
+                    }
+                }
             }
             e.Result = wasteValue;
         }
 
         private void WasteValueWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            decimal wasteValue = (decimal)e.Result;
-            leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
+            if (!e.Cancelled)
+            {
+                decimal wasteValue = (decimal)e.Result;
+                leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
+            }
         }
 
         private bool WaitForWorkers()
         {
-            while (LoadProductImageBackgroundWorker.IsBusy || WasteValueWorker.IsBusy || EnsurePriceWorker.IsBusy)
+            if (LoadProductImageBackgroundWorker.IsBusy)
             {
-                Thread.Sleep(50);
+                LoadProductImageBackgroundWorker.CancelAsync();
             }
+            if (WasteValueWorker.IsBusy)
+            {
+                WasteValueWorker.CancelAsync();
+            }
+            if (EnsurePriceWorker.IsBusy)
+            {
+                EnsurePriceWorker.CancelAsync();
+            }
+            if (LoadPriceHistoryBGWorker.IsBusy)
+            {
+                LoadPriceHistoryBGWorker.CancelAsync();
+            }
+            {
+                
+            }
+            //give it 50ms to cancel the workers. 
+            Thread.Sleep(50);
             return true;
         }
 
@@ -2013,6 +2076,26 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
             }
 
+        }
+
+        private void LoadPriceHistoryBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int typeId = (int)(e.Argument);
+            List<ESIPriceHistory> priceHistory = ScreenHelper.MarketBrowserHelper.GetPriceHistoryForRegionAndType(Enums.Enums.TheForgeRegionId, typeId);
+            if (LoadPriceHistoryBGWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
+            e.Result = priceHistory;
+        }
+
+        private void LoadPriceHistoryBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled && e.Result != null)
+            {
+                List<ESIPriceHistory> history = (List<ESIPriceHistory>)(e.Result);
+                PriceHistoryGridView.DataSource = e.Result;
+            }
         }
     }
 }
