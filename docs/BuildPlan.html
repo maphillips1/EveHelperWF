@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Abyss Tracker</title>
+
+    <link rel="stylesheet" href="CSS/Main.css" />
+</head>
+<body>
+    <div class="MenuDiv">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
+            <li><a href="BuildPlan.html">Build Plans</a></li>
+            <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
+            <li><a href="PlanetaryInteraction.html">PI</a></li>
+            <li><a href="SystemFinder.html">System Finder</a></li>
+            <li><a href="MarketBrowser.html">Market Browser</a></li>
+            <li><a href="PriceHistoryUtility.html">Price History</a></li>
+            <li><a href="AbyssTracker.html">Abyss Tracker</a></li>
+            <li><a href="DefaultConfiguration.html">Default Config</a></li>
+            <li><a href="SelfUpdate.html">Self-Update</a></li>
+        </ul>
+    </div>
+    <div class="BodyDiv">
+        <h3>
+            Build Plan
+        </h3>
+        <img src="Images/Build Plans.png" />
+        <br />
+        <div class="InfoParagraph">
+            The Build Plan control is by far the msot complicated screen of the entire app. It is highly configurable, stores the plans as files
+            so that you can have different build plans with different settings, allows you to change everything about the build such as whether you're building
+            all of the materials you can, or only a selection, same with reactions, where you're building it, the rigs, the prices you're paying,
+            whether you're paying taxes, and how many runs/BP or reaction you want at a time. It then spits out an optimized build schedule that tells
+            you what parts to make, what order to make them in, how long it will tkae, and every cost associated with it. It then takes all these
+            numbers and tells you exactly how much profit you can expect. The whole point of industry is to be profitable and this tool is designed
+            to let you tweak your build plan to make the most profit possible.
+
+            <br />
+            <br />
+            On the left hand side of the screen, you can choose which tab to look at. there are 7 tabs.
+            <ul>
+                <li>Summary</li>
+                <li>BP &amp; Reaction Settings</li>
+                <li>System Structure and Order Type</li>
+                <li>Materials &amp; Prices</li>
+                <li>Build Details</li>
+                <li>Planet Materials</li>
+                <li>Cost Breakdown</li>
+            </ul>
+            <br /><br />
+            <h4>Top Panel</h4>
+            At the very top of the build plan control, you will see the drop down to select an existing build plan, buttons for starting
+            a new build plan or deleting one if you have it selected, the number of runs per copy and the number of copies, additional costs where
+            you can type in the shipping cost, invention cost, or BP cost if you have to purchase it, and a price per item label.
+
+            When you first load the screen, the drop down will contain nothing. Select "New Build Plan". Give it a name, select the item you
+            want to build (searchable by typing), and hit save. This creates a brand new build plan for the item and starts working.
+            <br /><br />
+            Starting a new build plan will import your settings that you've cnofigured in the Settings page. If you have not configured any settings
+            it will default a few things like the system of manufacturing to Jita, etc. If you want to save time on future plans, go to the <a href="DefaultConfiguration.html">Default Configuration</a>
+            screen and set these values before you start the new build plan.
+
+            <br /><br />
+            The number of runs and runs per copy will always have at least 1. If you are building a plan for an inventable item, set the
+            runs per copy to the outcome runs from the invention job. If you're unsure of this value, you can find this by visiting <a href="BlueprintBrowser.html">Blueprint Browser</a>
+            search for the T1 bp, going to the invention tab, select the decryptor you want to use or "None" and it will tell you the number of runs per copy.
+
+            <br /><br />
+            Additional Costs is solely there for adding in any costs associated with this build plan that is not accounted for. The build plan accounts for
+            <br />
+            <ul>
+                <li>Material Costs - based on order type selected</li>
+                <li>Manufacturing or Reaction Job Costs</li>
+                <li>Taxes - Both on buying the materials and selling the final product and the taxes from starting an indy job.</li>
+            </ul>
+            <br />
+            Additional costs could be
+            <ul>
+                <li>Blueprint Copy Cost - Especially useful for faction/pirate faction ships</li>
+                <li>Shipping Costs - The summary page does give you the volume of the inputs and outputs for reference</li>
+                <li>Invention Costs - In the future, this will be accounted for on an invention screen similar to the Blueprint Browser today.</li>
+            </ul>
+            <br /><br />
+            Cost Per item is the total price that it took <b>Per Item</b> that it took to build. This includes all costs input above in the 
+            additional costs field, the calculated costs from the build plan, and any taxes associated with selling the item. This is meant 
+            to show you theh "Floor" of what your item is worth. It's useful for quickly seeing what the cost per item you should look for 
+            on the market. 
+
+            <br /><br />
+            <h4>Summary</h4>
+
+            <br /><br />
+            <h4>BP &amp; Reaction Settings</h4>
+
+
+            <br /><br />
+            <h4>System Structure and Order Type</h4>
+
+            <br /><br />
+            <h4>Materials &amp; Prices</h4>
+
+            <br /><br />
+            <h4>Build Details</h4>
+
+            <br /><br />
+            <h4>Planet Materials</h4>
+
+            <br /><br />
+            <h4>Cost Breakdown</h4>
+</body>
+</html>
