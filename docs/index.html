@@ -22,6 +22,7 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
+            <li><a href="BuildPlan.html">Build Plans</a></li>
             <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
             <li><a href="PlanetaryInteraction.html">PI</a></li>
             <li><a href="SystemFinder.html">System Finder</a></li>
@@ -33,36 +34,68 @@
         </ul>
     </div>
     <div class="BodyDiv">
-
-
         <h1>Eve Helper</h1>
         <h4>Developer: Freya Partanen</h4>
 
+        <div class="InfoParagraph">
+            <b><a href="#DownloadDiv">Download</a></b>
+            <br />
+            <br />
+
+            <h4>What is EveHelperWF</h4>
+            <br />
+            EveHelperWF is a companion app that I've written for the game Eve Online by CCP Games.  It hosts a collection of tools that I've
+            found to be useful in my Eve Career.
+            <br />
+            <h4>What tools are there?</h4>
+            <br />
+            The current tools are
+            <ul>
+                <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
+                <li><a href="BuildPlan.html">Build Plans</a></li>
+                <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
+                <li><a href="PlanetaryInteraction.html">PI</a></li>
+                <li><a href="SystemFinder.html">System Finder</a></li>
+                <li><a href="MarketBrowser.html">Market Browser</a></li>
+                <li><a href="PriceHistoryUtility.html">Price History</a></li>
+                <li><a href="AbyssTracker.html">Abyss Tracker</a></li>
+                <li><a href="DefaultConfiguration.html">Default Config</a></li>
+                <li><a href="SelfUpdate.html">Self-Update</a></li>
+            </ul>
+            <br />
+            <h4>Why EveHelper? There are tools online or I have my own spreadsheets</h4>
+            <br />
+            There are tools online, but online tools disappear. There have been several Eve tools that were hosted and then had to shut down
+            due to costs. Making tools for Eve Online doesn't bring in any money in and of itself. A lot of revenue is due to ads and a lot
+            of Eve players have ad blockers. This resutls in a website running at a huge loss and just not being maintainable.
+            <br />
+            <br />
+            Sometimes developers also just go inactive and stop playing Eve. This means that someone else has to take over the code and maintenance
+            or the program just dies. More often than not, it's the latter. EveHelper limits this impact because you can udpate it yourself. See
+            details on the Self Update page.
+            <br />
+            <br />
+            <b>But my spreadsheets are better optimized!</b> They probably are. But not everyone is you. There are a ton of Eve Players who
+            want the benefits of a spreadsheet but don't have the knowledge or energy to make them. Specialized spreadsheets will always be better
+            than any app that anyone can write. The benefit of this app is that I get you 95% of the way there with minimal work on the users end.
+            How many times have CCP released a new ship or module, or have flat out changed Indy requirements? How many times has that royally fucked
+            your spreadsheet and you've spent hours fixing it? Since this app is fed by static data, I take that out of the equation. New ships, modules,
+            or changes in requirements? Update the app and it does all the hard work for you. The limiting factor is how long it takes to get the SDE converted
+            into the SQLite database that this app consumes. That depends on two things. 1.) how long CCP takes to release the new SDE and 2.) How
+            long it takes Fuzzworks to convert it. Eventually, I'll write my own conversion program and take that out of the equation.
+        </div>
+
         <img src="Images/Main Screen.png" />
-
         <br /> <br />
-
-               <div class="InfoParagraph">
+               <div id="DownloadDiv" class="InfoParagraph" name>
                    <h4>
-                       <a href="https://github.com/maphillips1/EveHelperWF/releases/tag/v1.3.8-Beta">Download Link</a>
+                       <a href="https://github.com/maphillips1/EveHelperWF/releases/tag/v1.3.9-Beta">Download Link</a>
                    </h4>
-                   Version Date: <b>2024-7-13</b>
+                   Version Date: <b>2024-9-2</b>
                    <br /><br />
-                   Current Version: <b>1.3.8-BETA</b>
-                   <br /> <br />
-                   Includes the static data for the new Equinox expansion.
-                   <h4>
-                       What's new in this version?
-                   </h4>
+                   Current Version: <b>1.3.9-BETA</b>
                    <br />
-                   Updated Equinox Static Data with the Vendetta parts update.
-                   <ul>
-                       <li>Performance Improvements on application startup and build plan load time.</li>
-                       <li>Added an Export Build List button on the Build Plan control.</li>
-                   </ul>
-                   <h4>
-                       Source Code Link
-                   </h4>
+                   Source Code Link
                    <a href="https://github.com/maphillips1/EveHelperWF">Github Link</a>
                </div>
 
@@ -86,98 +119,8 @@
                     When I do the full release after beta testing is complete, the app will get a certificiate.
                 </li>
                 <li>Once the app is installed, it will auto-run. You can access it anytime by searching for 'EveHelper' in the start menu.</li>
-                <li>Done. ENjoy the app.</li>
+                <li>Done. Enjoy the app.</li>
             </ol>
-        </div>
-
-        <br /> <br />
-
-        <div class="InfoParagraph">
-            <h4>
-                More detailed information about each tool.
-            </h4>
-
-            <ul>
-                <li><a href="BlueprintBrowser.html">Blueprint Browser</a></li>
-                <li><a href="LootAppraisal.html">Loot Appraisal</a></li>
-                <li><a href="PlanetaryInteraction.html">Planetary Interaction</a></li>
-                <li><a href="SystemFinder.html">System Finder</a></li>
-                <li><a href="MarketBrowser.html">Market Browser</a></li>
-                <li><a href="PriceHistoryUtility.html">Price History Utility</a></li>
-                <li><a href="AbyssTracker.html">Abyss Tracker</a></li>
-                <li><a href="DefaultConfiguration.html">Defaults Configuration</a></li>
-                <li><a href="SelfUpdate.html">Self-Update</a></li>
-            </ul>
-            <h4>
-                Upcoming Features
-            </h4>
-            <ul>
-                <li>
-                    Shopping List - A standalone window where you can add items from other utilities like the Blueprint Browser
-                    and then mark off the items as you buy them
-                </li>
-                <li>
-                    Blurpint and Reaction Build Plan - For more complicated builds like Tech II, Capitals, and advanced reactions, this utility will allow you to construct a
-                    step-by-step plan for building from bought resources to the final product.
-                </li>
-                <li>Self-Updating guide - A guide that walks you through how to update the app yourself from within the app.</li>
-                <li>A true installer instead of a click-once application</li>
-                <li>
-                    Separating the static data SQLite file from the installer so I can host the installer on github instead of dropbox. This
-                    would also allow for more seamless updating and even updating from within the app.
-                </li>
-                <li>Version checking for auto-updates. Similar to other apps, add a way to tell you you're missing an update.</li>
-                <li>Report Bug Screen</li>
-            </ul>
-        </div>
-
-        <br />
-        <br />
-
-        <div class="InfoParagraph">
-            <h4>
-                What is Eve Helper?
-            </h4>
-            Eve Helper is a companion app to Eve Online, developed by CCPGames. I created this app to replace a myriad of tools that used to be
-            hosted online by various third party developers which have since gone dark.
-
-            <br /><br />
-
-            <h4>
-                Why a Windows app and not a website?
-            </h4>
-            Websites cost money to maintain, apps deployed like this don't. I do this in my spare time for myself. I'm only deploying this because
-            other people showed interest. In addition, if I take a break from Eve and decide not to udpate the app, you can update it yourself. No
-            need for me. More on that later.
-
-            <br /><br />
-
-            <h4>
-                What does this app do?
-            </h4>
-            This app currently has the the below tools.
-
-            <ul>
-                <li>Blueprint Browser - Blueprint Cost Calculator. Includes Research, Manufacturing, and Reactions</li>
-                <li>Planetary Interaction Guid - Gives a list of items you can produce on planets and shows you the build tree for how to make it</li>
-                <li>System FInder - Helps you find systems with matching criteria.</li>
-                <li>Loot Appraisal - Copy and paste items from Eve and I give you the market value</li>
-                <li>Market Browser - Allows you to lookup items on the market. Also captures price history.</li>
-                <li>Price History Utility - Allows you to download price history data and view it for items.</li>
-                <li>Abyss Tracker Utility - Allows you to track the profit you're making in the Abyss</li>
-                <li>Default Configuration - Allows you to configure defaults used elsewhere in the app.</li>
-                <li>Self Update - Allows you to update the static data yourself with a step-by-step guide.</li>
-            </ul>
-
-            <br /><br />
-
-            <h4>
-                How do I update the app myself?
-            </h4>
-            The app is built to use the static data dump SQLite file that is provided by fuzzworks. This means that if you want to update the app
-            to use the new data from a new expansion, all you have to do is go and download the new static data SQLite file from Fuzzworks website
-            and then replace the current file the app is using. I will be adding a built-in method that allows you to do this without knowing where the apps
-            files are located. This way you can download the SDE dump and then select the file from your downloads folder.
         </div>
     </div>
 </body>
