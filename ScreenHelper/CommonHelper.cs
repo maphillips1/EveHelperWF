@@ -457,7 +457,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 decimal ReactionSkillBonus = 1 - (((decimal)helperClass.ReactionsSkill * 4) / 100);
                 decimal reactionStructureBonus = ReactionStructureTimeBonus(helperClass.ReactionsStructureTypeID);
-                decimal reactionRigBonus = StructureRigTimeFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID);
+                decimal reactionRigBonus = StructureRigTimeFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID, isReaction);
 
                 totalTime = totalTime * ReactionSkillBonus;
                 totalTime *= reactionStructureBonus;
@@ -471,7 +471,7 @@ namespace EveHelperWF.ScreenHelper
                 decimal advIndyFactor = 1 - ((decimal)(helperClass.AdvancedIndustrySkill * 3) / 100);
                 decimal skillFactor = BPSpecificSkillFactor(bpReactionTypeID, helperClass);
                 decimal structureBonus = GetManufacturingStructureTimeBonus(helperClass.ManufacturingStructureTypeID);
-                decimal structureRigFactor = StructureRigTimeFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID);
+                decimal structureRigFactor = StructureRigTimeFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID, isReaction);
                 decimal implantBonus = ManufacturingImplantBonus(helperClass.ManufacturingImplantTypeID);
 
                 totalTime *= TEDecimal;
@@ -550,7 +550,7 @@ namespace EveHelperWF.ScreenHelper
             return Factor;
         }
 
-        private static decimal StructureRigTimeFactor(int TERigType, long systemID)
+        private static decimal StructureRigTimeFactor(int TERigType, long systemID, bool isReaction)
         {
             decimal bonus = 1;
             bool isLowSec = false;
@@ -575,13 +575,20 @@ namespace EveHelperWF.ScreenHelper
                 {
                     rigBonus = Convert.ToDecimal(0.24);
                 }
-                if (isLowSec)
+                if (isLowSec && !isReaction)
                 {
                     rigBonus *= Convert.ToDecimal(1.9);
                 }
                 if (isNullSec)
                 {
-                    rigBonus *= Convert.ToDecimal(2.1);
+                    if (isReaction)
+                    {
+                        rigBonus *= Convert.ToDecimal(1.1);
+                    }
+                    else
+                    {
+                        rigBonus *= Convert.ToDecimal(2.1);
+                    }
                 }
                 rigBonus = 1 - (rigBonus);
 

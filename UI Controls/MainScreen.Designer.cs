@@ -52,6 +52,7 @@
             BuildPlansButton = new Button();
             UpdateWorker = new System.ComponentModel.BackgroundWorker();
             CheckInternetBGWorker = new System.ComponentModel.BackgroundWorker();
+            DocumentationLabel = new LinkLabel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -290,9 +291,9 @@
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label10.Location = new Point(12, 295);
             label10.Name = "label10";
-            label10.Size = new Size(80, 20);
+            label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
-            label10.Text = "Donat ISK ";
+            label10.Text = "Donate ISK ";
             // 
             // InitLongLoadingWorker
             // 
@@ -344,11 +345,25 @@
             CheckInternetBGWorker.DoWork += CheckInternetBGWorker_DoWork;
             CheckInternetBGWorker.RunWorkerCompleted += CheckInternetBGWorker_RunWorkerCompleted;
             // 
+            // DocumentationLabel
+            // 
+            DocumentationLabel.AutoSize = true;
+            DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
+            DocumentationLabel.Location = new Point(12, 327);
+            DocumentationLabel.Name = "DocumentationLabel";
+            DocumentationLabel.Size = new Size(118, 20);
+            DocumentationLabel.TabIndex = 25;
+            DocumentationLabel.TabStop = true;
+            DocumentationLabel.Text = "Documentation";
+            DocumentationLabel.LinkClicked += DocumentationLabel_LinkClicked;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(471, 354);
+            ClientSize = new Size(471, 381);
+            Controls.Add(DocumentationLabel);
             Controls.Add(BuildPlansButton);
             Controls.Add(ShoppingListButton);
             Controls.Add(FreyaLinkLabel);
@@ -402,5 +417,6 @@
         private ToolStripMenuItem reportIssueToolStripMenuItem;
         private System.ComponentModel.BackgroundWorker UpdateWorker;
         private System.ComponentModel.BackgroundWorker CheckInternetBGWorker;
+        private LinkLabel DocumentationLabel;
     }
 }

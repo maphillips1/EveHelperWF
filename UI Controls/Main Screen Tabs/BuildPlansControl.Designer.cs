@@ -63,7 +63,6 @@
             Label label47;
             Label label46;
             Label label48;
-            Label label44;
             Label label52;
             Label label53;
             Label label54;
@@ -73,15 +72,17 @@
             Label label27;
             Label label5;
             Label label56;
+            Label label44;
+            Label label57;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
@@ -166,6 +167,7 @@
             DetailsProductLabel = new Label();
             DetailsImagePanel = new Panel();
             PlanetaryMaterialsTabPage = new TabPage();
+            PlanetMatsTotalTreeview = new TreeView();
             PlanetMaterialsTreeView = new TreeView();
             BPReactionTabPage = new TabPage();
             SetReactionsButton = new Button();
@@ -188,6 +190,13 @@
             OpenFileDialog = new OpenFileDialog();
             WasteValueWorker = new System.ComponentModel.BackgroundWorker();
             LoadPriceHistoryBGWorker = new System.ComponentModel.BackgroundWorker();
+            SummaryButton = new Button();
+            BPSettingsButton = new Button();
+            CostBreakdownButton = new Button();
+            PlanetMaterialsButton = new Button();
+            BuildDetailsButton = new Button();
+            MaterialsButton = new Button();
+            SystemButton = new Button();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -223,7 +232,6 @@
             label47 = new Label();
             label46 = new Label();
             label48 = new Label();
-            label44 = new Label();
             label52 = new Label();
             label53 = new Label();
             label54 = new Label();
@@ -233,6 +241,8 @@
             label27 = new Label();
             label5 = new Label();
             label56 = new Label();
+            label44 = new Label();
+            label57 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -352,7 +362,7 @@
             // 
             label11.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label11.AutoSize = true;
-            label11.Location = new Point(461, 3);
+            label11.Location = new Point(280, 50);
             label11.Name = "label11";
             label11.Size = new Size(151, 15);
             label11.TabIndex = 19;
@@ -638,22 +648,11 @@
             label48.TabIndex = 22;
             label48.Text = "Total Industry Slots Needed";
             // 
-            // label44
-            // 
-            label44.AutoSize = true;
-            label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label44.ForeColor = Color.Tomato;
-            label44.Location = new Point(1093, 81);
-            label44.Name = "label44";
-            label44.Size = new Size(388, 17);
-            label44.TabIndex = 25;
-            label44.Text = "Each group is dependent on the prior group being completed";
-            // 
             // label52
             // 
             label52.AutoSize = true;
             label52.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label52.Location = new Point(9, 84);
+            label52.Location = new Point(9, 103);
             label52.Name = "label52";
             label52.Size = new Size(692, 17);
             label52.TabIndex = 21;
@@ -736,11 +735,33 @@
             label56.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label56.AutoSize = true;
             label56.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label56.Location = new Point(943, 84);
+            label56.Location = new Point(756, 103);
             label56.Name = "label56";
             label56.Size = new Size(210, 17);
             label56.TabIndex = 31;
             label56.Text = "List of Items - Most Expensive First";
+            // 
+            // label44
+            // 
+            label44.AutoSize = true;
+            label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label44.ForeColor = Color.Tomato;
+            label44.Location = new Point(1115, 82);
+            label44.Name = "label44";
+            label44.Size = new Size(160, 17);
+            label44.TabIndex = 25;
+            label44.Text = "This list is in build order";
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label57.ForeColor = Color.WhiteSmoke;
+            label57.Location = new Point(621, 15);
+            label57.Name = "label57";
+            label57.Size = new Size(134, 20);
+            label57.TabIndex = 2;
+            label57.Text = "Total of each type";
             // 
             // SummaryPage
             // 
@@ -768,7 +789,7 @@
             SummaryPage.Location = new Point(4, 34);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1533, 502);
+            SummaryPage.Size = new Size(1346, 502);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
@@ -819,7 +840,7 @@
             NotesTextBox.Location = new Point(6, 371);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 123);
+            NotesTextBox.Size = new Size(382, 88);
             NotesTextBox.TabIndex = 13;
             NotesTextBox.TextChanged += NotesTextBox_TextChanged;
             // 
@@ -871,9 +892,9 @@
             SummaryMarketData.Controls.Add(label8);
             SummaryMarketData.Controls.Add(label7);
             SummaryMarketData.Dock = DockStyle.Right;
-            SummaryMarketData.Location = new Point(395, 3);
+            SummaryMarketData.Location = new Point(394, 3);
             SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(1135, 496);
+            SummaryMarketData.Size = new Size(949, 496);
             SummaryMarketData.TabIndex = 7;
             // 
             // JitaBuyLabel
@@ -901,38 +922,38 @@
             PriceHistoryGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = Color.Black;
-            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle24.ForeColor = Color.White;
-            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.Black;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(1117, 413);
+            PriceHistoryGridView.Size = new Size(931, 413);
             PriceHistoryGridView.TabIndex = 5;
             // 
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle18.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle2.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle2;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -941,10 +962,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle19.Format = "N0";
-            dataGridViewCellStyle19.NullValue = "0";
-            dataGridViewCellStyle19.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "0";
+            dataGridViewCellStyle3.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle3;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -953,10 +974,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle20.Format = "N0";
-            dataGridViewCellStyle20.NullValue = "0";
-            dataGridViewCellStyle20.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewCellStyle4.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle4;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -965,10 +986,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle21.Format = "N0";
-            dataGridViewCellStyle21.NullValue = "0";
-            dataGridViewCellStyle21.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            dataGridViewCellStyle5.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle5;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -977,10 +998,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle22.Format = "N0";
-            dataGridViewCellStyle22.NullValue = "0";
-            dataGridViewCellStyle22.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = "0";
+            dataGridViewCellStyle6.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle6;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -989,8 +1010,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle23.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle7.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle7;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1033,7 +1054,7 @@
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
             MaterialPricePage.Location = new Point(4, 34);
             MaterialPricePage.Name = "MaterialPricePage";
-            MaterialPricePage.Size = new Size(1533, 502);
+            MaterialPricePage.Size = new Size(1346, 502);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
@@ -1041,10 +1062,10 @@
             // 
             MostExpensiveTree.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             MostExpensiveTree.BackColor = Color.FromArgb(2, 23, 38);
-            MostExpensiveTree.Location = new Point(943, 104);
-            MostExpensiveTree.MinimumSize = new Size(582, 414);
+            MostExpensiveTree.Location = new Point(756, 123);
+            MostExpensiveTree.MinimumSize = new Size(582, 317);
             MostExpensiveTree.Name = "MostExpensiveTree";
-            MostExpensiveTree.Size = new Size(582, 414);
+            MostExpensiveTree.Size = new Size(582, 317);
             MostExpensiveTree.TabIndex = 30;
             // 
             // ImportPricesButton
@@ -1076,7 +1097,7 @@
             TaxFinalProductCheckbox.Checked = true;
             TaxFinalProductCheckbox.CheckState = CheckState.Checked;
             TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TaxFinalProductCheckbox.Location = new Point(700, 56);
+            TaxFinalProductCheckbox.Location = new Point(513, 56);
             TaxFinalProductCheckbox.Name = "TaxFinalProductCheckbox";
             TaxFinalProductCheckbox.Size = new Size(226, 24);
             TaxFinalProductCheckbox.TabIndex = 27;
@@ -1091,7 +1112,7 @@
             TaxInputCheckbox.Checked = true;
             TaxInputCheckbox.CheckState = CheckState.Checked;
             TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            TaxInputCheckbox.Location = new Point(700, 26);
+            TaxInputCheckbox.Location = new Point(513, 26);
             TaxInputCheckbox.Name = "TaxInputCheckbox";
             TaxInputCheckbox.Size = new Size(180, 24);
             TaxInputCheckbox.TabIndex = 26;
@@ -1102,10 +1123,10 @@
             // FinalSellPriceNumeric
             // 
             FinalSellPriceNumeric.DecimalPlaces = 2;
-            FinalSellPriceNumeric.Location = new Point(199, 18);
+            FinalSellPriceNumeric.Location = new Point(174, 14);
             FinalSellPriceNumeric.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
             FinalSellPriceNumeric.Name = "FinalSellPriceNumeric";
-            FinalSellPriceNumeric.Size = new Size(195, 23);
+            FinalSellPriceNumeric.Size = new Size(113, 23);
             FinalSellPriceNumeric.TabIndex = 25;
             FinalSellPriceNumeric.ThousandsSeparator = true;
             FinalSellPriceNumeric.ValueChanged += FinalSellPriceNumeric_ValueChanged;
@@ -1117,11 +1138,11 @@
             MaterialsPriceTreeView.BackColor = Color.FromArgb(2, 23, 38);
             MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MaterialsPriceTreeView.HotTracking = true;
-            MaterialsPriceTreeView.Location = new Point(9, 104);
-            MaterialsPriceTreeView.MinimumSize = new Size(917, 409);
+            MaterialsPriceTreeView.Location = new Point(3, 123);
+            MaterialsPriceTreeView.MinimumSize = new Size(580, 320);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(917, 409);
+            MaterialsPriceTreeView.Size = new Size(580, 320);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.TabStop = false;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
@@ -1143,7 +1164,7 @@
             CopyToClipboardButton.AutoSize = true;
             CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             CopyToClipboardButton.ForeColor = Color.Black;
-            CopyToClipboardButton.Location = new Point(494, 26);
+            CopyToClipboardButton.Location = new Point(317, 74);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
             CopyToClipboardButton.Size = new Size(114, 25);
             CopyToClipboardButton.TabIndex = 18;
@@ -1158,7 +1179,7 @@
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 34);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
-            IndustrySettingsTabPage.Size = new Size(1533, 502);
+            IndustrySettingsTabPage.Size = new Size(1346, 502);
             IndustrySettingsTabPage.TabIndex = 3;
             IndustrySettingsTabPage.Text = "2.) System/Structure/Order Type";
             // 
@@ -1668,10 +1689,10 @@
             DetailsPage.Controls.Add(MaterialsTreeView);
             DetailsPage.Controls.Add(DetailsProductLabel);
             DetailsPage.Controls.Add(DetailsImagePanel);
-            DetailsPage.Location = new Point(4, 34);
+            DetailsPage.Location = new Point(4, 5);
             DetailsPage.Name = "DetailsPage";
             DetailsPage.Padding = new Padding(3);
-            DetailsPage.Size = new Size(1533, 502);
+            DetailsPage.Size = new Size(1346, 531);
             DetailsPage.TabIndex = 1;
             DetailsPage.Text = "Build Details";
             // 
@@ -1717,10 +1738,10 @@
             OptimizedBuildTreeView.ForeColor = Color.White;
             OptimizedBuildTreeView.HotTracking = true;
             OptimizedBuildTreeView.ItemHeight = 30;
-            OptimizedBuildTreeView.Location = new Point(854, 104);
-            OptimizedBuildTreeView.MinimumSize = new Size(662, 409);
+            OptimizedBuildTreeView.Location = new Point(854, 101);
+            OptimizedBuildTreeView.MinimumSize = new Size(483, 393);
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
-            OptimizedBuildTreeView.Size = new Size(662, 409);
+            OptimizedBuildTreeView.Size = new Size(483, 422);
             OptimizedBuildTreeView.TabIndex = 16;
             OptimizedBuildTreeView.TabStop = false;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
@@ -1748,7 +1769,7 @@
             MaterialsTreeView.Location = new Point(9, 107);
             MaterialsTreeView.MinimumSize = new Size(671, 406);
             MaterialsTreeView.Name = "MaterialsTreeView";
-            MaterialsTreeView.Size = new Size(671, 406);
+            MaterialsTreeView.Size = new Size(671, 435);
             MaterialsTreeView.TabIndex = 6;
             MaterialsTreeView.TabStop = false;
             // 
@@ -1774,12 +1795,24 @@
             // PlanetaryMaterialsTabPage
             // 
             PlanetaryMaterialsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetaryMaterialsTabPage.Controls.Add(label57);
+            PlanetaryMaterialsTabPage.Controls.Add(PlanetMatsTotalTreeview);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
             PlanetaryMaterialsTabPage.Location = new Point(4, 34);
             PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
-            PlanetaryMaterialsTabPage.Size = new Size(1533, 502);
+            PlanetaryMaterialsTabPage.Size = new Size(1346, 502);
             PlanetaryMaterialsTabPage.TabIndex = 4;
             PlanetaryMaterialsTabPage.Text = "Planetary Materials";
+            // 
+            // PlanetMatsTotalTreeview
+            // 
+            PlanetMatsTotalTreeview.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetMatsTotalTreeview.ForeColor = Color.White;
+            PlanetMatsTotalTreeview.Location = new Point(621, 43);
+            PlanetMatsTotalTreeview.MinimumSize = new Size(716, 456);
+            PlanetMatsTotalTreeview.Name = "PlanetMatsTotalTreeview";
+            PlanetMatsTotalTreeview.Size = new Size(716, 456);
+            PlanetMatsTotalTreeview.TabIndex = 1;
             // 
             // PlanetMaterialsTreeView
             // 
@@ -1788,9 +1821,9 @@
             PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
-            PlanetMaterialsTreeView.MinimumSize = new Size(677, 510);
+            PlanetMaterialsTreeView.MinimumSize = new Size(515, 515);
             PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
-            PlanetMaterialsTreeView.Size = new Size(677, 510);
+            PlanetMaterialsTreeView.Size = new Size(515, 515);
             PlanetMaterialsTreeView.TabIndex = 0;
             PlanetMaterialsTreeView.TabStop = false;
             // 
@@ -1803,7 +1836,7 @@
             BPReactionTabPage.Controls.Add(BPTreeView);
             BPReactionTabPage.Location = new Point(4, 34);
             BPReactionTabPage.Name = "BPReactionTabPage";
-            BPReactionTabPage.Size = new Size(1533, 502);
+            BPReactionTabPage.Size = new Size(1346, 502);
             BPReactionTabPage.TabIndex = 5;
             BPReactionTabPage.Text = "1.) BP & Reaction Settings";
             // 
@@ -1882,6 +1915,7 @@
             // BuildPlanTabControl
             // 
             BuildPlanTabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BuildPlanTabControl.Appearance = TabAppearance.FlatButtons;
             BuildPlanTabControl.CausesValidation = false;
             BuildPlanTabControl.Controls.Add(SummaryPage);
             BuildPlanTabControl.Controls.Add(BPReactionTabPage);
@@ -1891,14 +1925,14 @@
             BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
             BuildPlanTabControl.Controls.Add(CostBreakdownPage);
             BuildPlanTabControl.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            BuildPlanTabControl.HotTrack = true;
-            BuildPlanTabControl.ItemSize = new Size(71, 30);
-            BuildPlanTabControl.Location = new Point(0, 94);
+            BuildPlanTabControl.ItemSize = new Size(1, 1);
+            BuildPlanTabControl.Location = new Point(187, 94);
+            BuildPlanTabControl.MinimumSize = new Size(1354, 540);
             BuildPlanTabControl.Name = "BuildPlanTabControl";
-            BuildPlanTabControl.Padding = new Point(7, 7);
+            BuildPlanTabControl.Padding = new Point(0, 0);
             BuildPlanTabControl.SelectedIndex = 0;
             BuildPlanTabControl.ShowToolTips = true;
-            BuildPlanTabControl.Size = new Size(1541, 540);
+            BuildPlanTabControl.Size = new Size(1354, 540);
             BuildPlanTabControl.TabIndex = 4;
             // 
             // CostBreakdownPage
@@ -1907,7 +1941,7 @@
             CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
             CostBreakdownPage.Location = new Point(4, 34);
             CostBreakdownPage.Name = "CostBreakdownPage";
-            CostBreakdownPage.Size = new Size(1533, 502);
+            CostBreakdownPage.Size = new Size(1346, 502);
             CostBreakdownPage.TabIndex = 6;
             CostBreakdownPage.Text = "Cost Breakdown";
             // 
@@ -1917,13 +1951,13 @@
             CostBreakdownTextBox.BackColor = Color.FromArgb(2, 23, 38);
             CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             CostBreakdownTextBox.ForeColor = Color.White;
-            CostBreakdownTextBox.Location = new Point(9, 3);
+            CostBreakdownTextBox.Location = new Point(3, 3);
             CostBreakdownTextBox.MinimumSize = new Size(603, 510);
             CostBreakdownTextBox.Multiline = true;
             CostBreakdownTextBox.Name = "CostBreakdownTextBox";
             CostBreakdownTextBox.ReadOnly = true;
             CostBreakdownTextBox.ScrollBars = ScrollBars.Both;
-            CostBreakdownTextBox.Size = new Size(603, 510);
+            CostBreakdownTextBox.Size = new Size(609, 510);
             CostBreakdownTextBox.TabIndex = 0;
             // 
             // LoadProductImageBackgroundWorker
@@ -2022,11 +2056,109 @@
             LoadPriceHistoryBGWorker.DoWork += LoadPriceHistoryBGWorker_DoWork;
             LoadPriceHistoryBGWorker.RunWorkerCompleted += LoadPriceHistoryBGWorker_RunWorkerCompleted;
             // 
+            // SummaryButton
+            // 
+            SummaryButton.Cursor = Cursors.Hand;
+            SummaryButton.FlatStyle = FlatStyle.Flat;
+            SummaryButton.Location = new Point(12, 94);
+            SummaryButton.Name = "SummaryButton";
+            SummaryButton.Size = new Size(169, 30);
+            SummaryButton.TabIndex = 52;
+            SummaryButton.TabStop = false;
+            SummaryButton.Text = "Summary";
+            SummaryButton.UseVisualStyleBackColor = true;
+            SummaryButton.Click += SummaryButton_Click;
+            // 
+            // BPSettingsButton
+            // 
+            BPSettingsButton.Cursor = Cursors.Hand;
+            BPSettingsButton.FlatStyle = FlatStyle.Flat;
+            BPSettingsButton.Location = new Point(12, 130);
+            BPSettingsButton.Name = "BPSettingsButton";
+            BPSettingsButton.Size = new Size(169, 30);
+            BPSettingsButton.TabIndex = 53;
+            BPSettingsButton.TabStop = false;
+            BPSettingsButton.Text = "BP/ Reaction Settings";
+            BPSettingsButton.UseVisualStyleBackColor = true;
+            BPSettingsButton.Click += BPSettingsButton_Click;
+            // 
+            // CostBreakdownButton
+            // 
+            CostBreakdownButton.Cursor = Cursors.Hand;
+            CostBreakdownButton.FlatStyle = FlatStyle.Flat;
+            CostBreakdownButton.Location = new Point(12, 310);
+            CostBreakdownButton.Name = "CostBreakdownButton";
+            CostBreakdownButton.Size = new Size(169, 30);
+            CostBreakdownButton.TabIndex = 54;
+            CostBreakdownButton.TabStop = false;
+            CostBreakdownButton.Text = "Cost Breakdown";
+            CostBreakdownButton.UseVisualStyleBackColor = true;
+            CostBreakdownButton.Click += CostBreakdownButton_Click;
+            // 
+            // PlanetMaterialsButton
+            // 
+            PlanetMaterialsButton.Cursor = Cursors.Hand;
+            PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
+            PlanetMaterialsButton.Location = new Point(12, 274);
+            PlanetMaterialsButton.Name = "PlanetMaterialsButton";
+            PlanetMaterialsButton.Size = new Size(169, 30);
+            PlanetMaterialsButton.TabIndex = 55;
+            PlanetMaterialsButton.TabStop = false;
+            PlanetMaterialsButton.Text = "Planet Materials";
+            PlanetMaterialsButton.UseVisualStyleBackColor = true;
+            PlanetMaterialsButton.Click += PlanetMaterialsButton_Click;
+            // 
+            // BuildDetailsButton
+            // 
+            BuildDetailsButton.Cursor = Cursors.Hand;
+            BuildDetailsButton.FlatStyle = FlatStyle.Flat;
+            BuildDetailsButton.Location = new Point(12, 238);
+            BuildDetailsButton.Name = "BuildDetailsButton";
+            BuildDetailsButton.Size = new Size(169, 30);
+            BuildDetailsButton.TabIndex = 56;
+            BuildDetailsButton.TabStop = false;
+            BuildDetailsButton.Text = "Build Details";
+            BuildDetailsButton.UseVisualStyleBackColor = true;
+            BuildDetailsButton.Click += BuildDetailsButton_Click;
+            // 
+            // MaterialsButton
+            // 
+            MaterialsButton.Cursor = Cursors.Hand;
+            MaterialsButton.FlatStyle = FlatStyle.Flat;
+            MaterialsButton.Location = new Point(12, 202);
+            MaterialsButton.Name = "MaterialsButton";
+            MaterialsButton.Size = new Size(169, 30);
+            MaterialsButton.TabIndex = 57;
+            MaterialsButton.TabStop = false;
+            MaterialsButton.Text = "Materials and Prices";
+            MaterialsButton.UseVisualStyleBackColor = true;
+            MaterialsButton.Click += MaterialsButton_Click;
+            // 
+            // SystemButton
+            // 
+            SystemButton.Cursor = Cursors.Hand;
+            SystemButton.FlatStyle = FlatStyle.Flat;
+            SystemButton.Location = new Point(12, 166);
+            SystemButton.Name = "SystemButton";
+            SystemButton.Size = new Size(169, 30);
+            SystemButton.TabIndex = 58;
+            SystemButton.TabStop = false;
+            SystemButton.Text = "Sys/Struct/Order";
+            SystemButton.UseVisualStyleBackColor = true;
+            SystemButton.Click += SystemButton_Click;
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1540, 634);
+            Controls.Add(SystemButton);
+            Controls.Add(MaterialsButton);
+            Controls.Add(BuildDetailsButton);
+            Controls.Add(PlanetMaterialsButton);
+            Controls.Add(CostBreakdownButton);
+            Controls.Add(BPSettingsButton);
+            Controls.Add(SummaryButton);
             Controls.Add(HeaderCostUnitLabel);
             Controls.Add(label53);
             Controls.Add(NumberCopiesUpDown);
@@ -2083,6 +2215,7 @@
             DetailsPage.ResumeLayout(false);
             DetailsPage.PerformLayout();
             PlanetaryMaterialsTabPage.ResumeLayout(false);
+            PlanetaryMaterialsTabPage.PerformLayout();
             BPReactionTabPage.ResumeLayout(false);
             BPReactionTabPage.PerformLayout();
             BuildPlanTabControl.ResumeLayout(false);
@@ -2229,5 +2362,14 @@
         private System.ComponentModel.BackgroundWorker WasteValueWorker;
         private Button ExportBuildList;
         private System.ComponentModel.BackgroundWorker LoadPriceHistoryBGWorker;
+        private Button SummaryButton;
+        private Button BPSettingsButton;
+        private Button CostBreakdownButton;
+        private Button PlanetMaterialsButton;
+        private Button BuildDetailsButton;
+        private Button MaterialsButton;
+        private Button SystemButton;
+        private Label label57;
+        private TreeView PlanetMatsTotalTreeview;
     }
 }
