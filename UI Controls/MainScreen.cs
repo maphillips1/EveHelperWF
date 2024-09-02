@@ -290,5 +290,13 @@ namespace EveHelperWF.UI_Controls
                 MessageBox.Show("Unable to connect to the internet. Check your connection.");
             }
         }
+
+        private void DocumentationLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string docLabel = String.Format("https://maphillips1.github.io/EveHelperWF/");
+            ProcessStartInfo startInfo = new ProcessStartInfo(docLabel);
+            startInfo.UseShellExecute = true;
+            Process.Start(startInfo);
+        }
     }
 }

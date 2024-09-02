@@ -16,6 +16,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
     public partial class BuildPlansControl : Objects.FormBase
     {
+        enum TabPages
+        {
+            Summary = 0,
+            BPReaction = 1,
+            SystemStruct = 2,
+            MaterialPrices = 3,
+            BuildDetails = 4,
+            PlanetMats = 5,
+            CostBreakdown = 6
+        }
+
         private BuildPlan currentBuildPlan;
         private BindingList<ComboListItem> FileComboItems = new BindingList<ComboListItem>();
         string[] FileNames;
@@ -51,6 +62,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BlueprintBrowserHelper.Init();
             LoadIndySettingCombos();
             LoadControl();
+            ShowHideTabPage((int)TabPages.Summary);
             isLoading = false;
         }
 
@@ -1546,12 +1558,44 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadPlanetaryTreeView()
         {
             PlanetMaterialsTreeView.Nodes.Clear();
+            PlanetMatsTotalTreeview.Nodes.Clear();
             TreeNode tn;
+            List<PlanetMaterial> totalMats = new List<PlanetMaterial>();
             foreach (PlanetMaterial planetMaterial in UniquePlanetMaterials)
             {
                 PlanetSchematicsHelper.GetInputsForSchematicRecurseive(planetMaterial);
                 tn = BuildTreeViewForPIMatRecursive(planetMaterial);
                 PlanetMaterialsTreeView.Nodes.Add(tn);
+                AddTotalPlanetMats(planetMaterial, ref totalMats);
+            }
+
+            if (totalMats.Count > 0)
+            {
+                totalMats = totalMats.OrderBy(x => x.typeName).ToList();
+                foreach (PlanetMaterial material in totalMats)
+                {
+                    tn = BuildTreeViewForPI(material);
+                    PlanetMatsTotalTreeview.Nodes.Add(tn);
+                }
+            }
+        }
+
+        private void AddTotalPlanetMats(PlanetMaterial input, ref List<PlanetMaterial> totals)
+        {
+            if (totals.Find(x => x.typeID == input.typeID) == null)
+            {
+                totals.Add(input);
+            }
+            else
+            {
+                totals.Find(x => x.typeID == input.typeID).quantity += input.quantity;
+            }
+            if (input.Inputs.Count > 0)
+            {
+                foreach (PlanetMaterial child in  input.Inputs)
+                {
+                    AddTotalPlanetMats(child, ref totals);
+                }
             }
         }
 
@@ -1572,6 +1616,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     treeNode.Nodes.Add(BuildTreeViewForPIMatRecursive(piInput));
                 }
             }
+
+            return treeNode;
+        }
+
+        private TreeNode BuildTreeViewForPI(PlanetMaterial planetMaterial)
+        {
+            TreeNode treeNode = new TreeNode();
+
+            treeNode.Text = planetMaterial.typeName;
+            if (planetMaterial.quantity > 0)
+            {
+                treeNode.Text += " x " + planetMaterial.quantity.ToString("N0");
+            }
+
 
             return treeNode;
         }
@@ -2025,7 +2083,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 LoadPriceHistoryBGWorker.CancelAsync();
             }
             {
-                
+
             }
             //give it 50ms to cancel the workers. 
             Thread.Sleep(50);
@@ -2096,6 +2154,46 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 List<ESIPriceHistory> history = (List<ESIPriceHistory>)(e.Result);
                 PriceHistoryGridView.DataSource = e.Result;
             }
+        }
+
+        private void ShowHideTabPage(int visibleTabPage)
+        {
+            BuildPlanTabControl.SelectTab(visibleTabPage);
+        }
+
+        private void SummaryButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.Summary);
+        }
+
+        private void BPSettingsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.BPReaction);
+        }
+
+        private void SystemButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.SystemStruct);
+        }
+
+        private void MaterialsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.MaterialPrices);
+        }
+
+        private void BuildDetailsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.BuildDetails);
+        }
+
+        private void PlanetMaterialsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.PlanetMats);
+        }
+
+        private void CostBreakdownButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.CostBreakdown);
         }
     }
 }
