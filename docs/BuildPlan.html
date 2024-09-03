@@ -83,31 +83,189 @@
                 <li>Invention Costs - In the future, this will be accounted for on an invention screen similar to the Blueprint Browser today.</li>
             </ul>
             <br /><br />
-            Cost Per item is the total price that it took <b>Per Item</b> that it took to build. This includes all costs input above in the 
-            additional costs field, the calculated costs from the build plan, and any taxes associated with selling the item. This is meant 
-            to show you theh "Floor" of what your item is worth. It's useful for quickly seeing what the cost per item you should look for 
-            on the market. 
+            Cost Per item is the total price that it took <b>Per Item</b> that it took to build. This includes all costs input above in the
+            additional costs field, the calculated costs from the build plan, and any taxes associated with selling the item. This is meant
+            to show you theh "Floor" of what your item is worth. It's useful for quickly seeing what the cost per item you should look for
+            on the market.
 
             <br /><br />
             <h4>Summary</h4>
 
+            The summary screen is meant to be a quick look at the cost, profit, input m3, output m3, any notes you want to add, the current
+            jita buy and jita sell value, and the price history (Jita) of the item in the build plan.
+            <br />
+            The Total Isk Needed for Plan includes
+            <ul>
+                <li>Cost of input materials</li>
+                <li>Manufacturing and Reaction Job Costs</li>
+                <li>Taxes and Broker fees</li>
+                <li>Any additional costs entered</li>
+            </ul>
+            <br />
+            The idea is that this is the amount of isk you should have in your wallet before beginning the build plan. If you have this amount,
+            you will be able to run the plan from start to finish including putting it up on sell orders if that is your desired method of
+            selling.
+            <br />
+            The profit will show you either the profit (gree) or loss (red) of the build plan based on current settings. It's important to
+            note that there are so many settings and factors in industry that changing even just a few settings can turn a non-profitable
+            item into an item with a 10% margin. The settings that affect the profit are on the next three tabs.
             <br /><br />
             <h4>BP &amp; Reaction Settings</h4>
 
+            <img src="Images/Build Plan - BP Reaction Setting.png" />
+            These settings are extremely important as they determine the amount of inputs you need to make the BP or reaction. There are two groups
+            and the main BP/Reaction setting. If you click ont he name of the blueprint or reaction, a screen will popup allowing you to change the ME/TE
+            and number of runs for each item. For the main BP, I recommend just clicking on the name. For the rest, I would suggest first clicking "Set All Blurprint Info"
+            and "Set All Reaction Info" and then modifying the individual child BP's as needed. For blueprints, you have 4 options.
+            <br />
+            <ol>
+                <li>ME</li>
+                <li>TE</li>
+                <li>Max Runs</li>
+                <li>Make Item</li>
+            </ol>
+            <br />
+            Reactions does not contain ME/TE as that doesn't apply.
 
+            <br /><br />
+
+            These settings could vastly change the profit of each item. If you are making a child part, like reinforced carbon fiber, but you
+            are buying the inputs instead of reacting them, you will make less profit, but it will go quicker. You can tweak these settings
+            to best fit your needs. The number of runs is also important because of CCP math. Since the bonuses are applied after the number of runs
+            and not per run, the more runs you do, the bigger the bonus.
+
+            <span id="InputExample">For example, If you run the structure bonus math on a Tatara in Null Sec with T2 rigs, a single reaction will need 98 of each input for Fernite Carbide.</span>
+            <br /><br />
+            <img src="Images/Build Plan -Fernite 1 run.png" />
+            <br /><br />
+            If you change this to 10 runs though, instead of needing 980 of the input, you now only need 974
+            <br /><br />
+            <img src="Images/Build Plan -Fernite 10 run.png" />
+            <br /><br />
+            The settings that affect this number is
+            <ol>
+                <li>System Structure and Order type tab -> Reactions ->System, Structure Type, and ME Rig</li>
+                <li>Main Bar at top -> Number of runs per copy</li>
+            </ol>
+            <br />
+            By changing the settings above, you get different input requirements. Sometimes the difference is not noticeable. Blueprints that
+            require only 1 or 2 of a certain item per run will not always change with the higher number of runs. But if the numbers you are
+            seeing in the game don't match what you're seeing in the build plan, then check the Structure, Rig, System, and BP/Reaction ME/TE/Runs, and the number of runs per copy.
+            Generally, one of these numbers are wrong.
             <br /><br />
             <h4>System Structure and Order Type</h4>
+            <br />
+            <img src="Images/Build Plan - SysStructOrder.png" />
+            <br /><br />
+            This tab has a lot of information that directly affects the number of inputs, the cost of manufcaturing/reacting, and the time
+            it takes to complete a build. These values are pulled in from <a href="DefaultConfiguration.html">your default settings</a>
+            when you start the build plan. You can change these values without affecting your defaults. Useful if you need to build the item
+            in a different system than normal, common for super capitals.
+            <br /><br />
+            Each type of activity has it's own tab so check each of them as they will change the outcome.
+            <br />
+            Manufacturing settings affect anything that is made via a blueprint. Ships, modules, ammo, etc. You will set the system,
+            structure type, ME and TE Rig, and Tax. The tax should be entered the same as in game. If you hover over a structure in the
+            in game industry window, it should tell you the tax for that job type. Taxes can be different per job type so make sure the tax
+            is right.
 
             <br /><br />
+            The system that you build in affects a couple of things. Every job type and system has a CCP calculated value called "System Cost Index".
+            This is a rolling 30 day average and the numebr acts as another tax. Busier systems like Jita and Perimeter have very high SCI's while systems
+            that are not used often have basically none. No system has a 0% SCI. Moving your production 1 or two jumps out can VASTLY increase your profits
+            just because of this one number.
+            <br /><br />
+            The structure that you use is also important. If you're building in a player owned structure, you get reduced taxes (most of the time), lower
+            job cost via structure bonus, reduced manufacturing/reaction time, and rigs. The biggest benefit is rigs. A T1 rig for a job type reduced the
+            material cost by 2%. If you're installing a manufacturing job and you're in low sec or null sec, this benefit is increased dramatically. For
+            reactions, you have to be in low or null sec in a player owned structure (NPC stations can't do reactions) so the rig bonus is only applied in null
+            sec. A t1 rigged azbel in null can give you a bonus of 4.2% on material costs over NPC stations. If you're in high sec you only get the standard
+            2% bonus. So making sure these values (System, Structure, Rig, Taxes) will be some of the biggest affect on your profits.
+            <br /><br />
             <h4>Materials &amp; Prices</h4>
+            <img src="Images/Build Plan - Mat Prices.png" />
+            <br /><br />
+            This screen is where you can update the material prices from jita, set custom prices one item at a time, or export and import the whole thing to do a
+            mass price setting. The export/import is very useful if you're able to acquire most or all of your items from sources other than a single stations market.
+            <br /><br />
+            The copy to clipboard button will copy the entire list into a format that can be consumed by Eve's multi-buy functionality. To use it,
+            hit copy to clipboard, open up the market window in eve, click the clipboard icon in the top right, then click the import items from clipboard
+            icon on the left hand window of the multipbuy section, and it will import the entire list and their quantities. It makes buying everything at
+            once easy.
 
             <br /><br />
             <h4>Build Details</h4>
+            <br />
+            <img src="Images/Build Plan - Build Details.png" />
+            <br /><br />
 
+            Alright now that you have EVERY setting for the build plan configured, you have all your mats and everything is ready to go,
+            now you need to actually build the damn thing. For simple builds, it's easy; one, maybe two steps, but what if you're building T2
+            or capitals? Why is this build tool so different? That's where this screen comes in handy.
+            <br /><br />
+            On the left hand side of the screen, you see a classic tree view of the inputs you need, and if they require inputs, you can expand
+            it to see what each part is going to need. This is similar if you're just browsing the blueprint in Eve in the show info window. But on the
+            right hand side of the screen, you have this "Optimized Build Schedule"... What's that?
+            <br /><br />
+            <img src="Images/Build Plan - Details - Optimum.png" />
+            <br /><br />
+            This optimum build plan is the reason why I created this app. When you're building complex things like T2 ships and Capitals, there's
+            so many inputs and builds and reactions. To make the best profit, you really need to go from raw materials -> final product; no buying
+            the middle man parts. There's another factor though, and that's the multiple parts requiring the same input.
+
+            <br /><br />
+            Take the erebus for example. The Capital Power Generator and Capital Shield Emitter (as well as all other capital parts) requires the input of "PPD Fullerine Fibers".
+            Under each part, you can see that it takes 7 runs of PPD for the power generator and 4 runs of PPD for the Shield Emitter; however; this is only
+            true if you build the PPD Fullerines separately for each part, not if you do one massive run of PPD fullerines for all the parts that require it.
+
+            <br /><br />
+            <img src="Images/Build Plan - Erebus PPD.png" />
+            <br />
+            <br />
+            If you do one massive run of PPD Fullerines for all of the parts that require it as an input, instead of needing a total of 120 runs for every part,
+            you now only need 109 runs. This not only saves you time, but isk.
+            <br /><br />
+            <img src="Images/Build Plan - Erebus PPD - Total.png" />
+            <br /><br />
+            The total amount of each material on the materials and prices page is how much raw material you need based on this optimized build schedule.
+            It takes into account these "Batches" of each BP or reaction you need. The BP &amp; Reaction settings of ME, TE, and Max runs determines how many
+            batches of each part and runs per batch you need.
+            <br /><br />
+            For Example, MathanoFullerine is needed en masse for a large portion of the erebus. So much so that if you run that reaction for the maximum amount
+            of time, it will take 603 runs to make it; but that is longer than Eve will let you. With my structure, a Tatara with a T2 reaction rig, the maximum runs
+            I can do in Eve at once is 400 runs. anything above that, Eve won't let me start it, it's too long. So now, I need to break it up into batches.
+            <br /><br />
+            <img src="Images/Build Plan - Erebus Methano.png" />
+            <br /><br />
+            The optimum build schedule takes this cap into account. Please note that if you set your max runs at a lower amount, say 40 runs per batch, the
+            maximum number of runs is based on that number. So instead of two batch (400 and 203 in this case), it would do 16 batches at 40 runs per batch ( last one is 3 runs ).
+            <br /><br />
+            This directly affects the amount of mats you buy because of how Eve calculates the number of inputs. Going back to <a href="#InputExample">The reaction example from earlier</a>, the
+            calculation for inputs takes the bonuses of structure, system, rigs, and BP based on number of runs. Changing this value via the number of batches affects the input required.
+            <br /><br />
+            The optimum Build Schedule is designed to not only tell you the ORDER you need to build your parts in, but how many batches you need
+            if the amount your building exceeds the number of runs you've set or Eve has set for you. This complex interweaving of maximuiing the number
+            of runs per batch, telling you EXACTLY how much input you need based on current settings, and profit is the core of the build plan.
             <br /><br />
             <h4>Planet Materials</h4>
-
+            <img src="Images/Build Plan - Planet Materials.png" />
+            <br /><br />
+            This page is straight forward. If your plan needs any planetary interaction materials, this will tell you the inputs you need to build
+            all of the parts. If you need 124 broadcast nodes, it tells you exactly how many of each type of input you need, all the way down to P0. If
+            you need a lot of P0 and some of it requires the same inputs, you see a total, by type, on the right hand side.
             <br /><br />
             <h4>Cost Breakdown</h4>
-</body>
+            <img src="Images/Build Plan - Cost Breakdown.png" />
+            <br /><br />
+            If you want to see the full break down, step by step, of what your costs are at each stage, that's where the cost breakdown comes in. It will 
+            tell you how much your inputs cost, the total amount of manufcatruing and reaction job costs, the taxes your paying on inputs, the price of the output 
+            as set by you on the mat prices page, or if you didn't input a manual amount, the order type selected on the settings page. It then gives
+             you the same profit number from the summary screen. 
+
+            <br />
+            <br />
+            This screen is meant to go line by line. you should be able to take a calculator, add and subtract the numbers as required, and get to 
+            the same profit number you see on the summary screen. It's also useful for seeing where you can cut down on costs. 
+        </div>
+    </body>
 </html>
