@@ -75,14 +75,14 @@
             Label label44;
             Label label57;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
@@ -754,6 +754,7 @@
             // 
             // label57
             // 
+            label57.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label57.AutoSize = true;
             label57.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label57.ForeColor = Color.WhiteSmoke;
@@ -786,10 +787,10 @@
             SummaryPage.Controls.Add(label2);
             SummaryPage.Controls.Add(ProductLabel);
             SummaryPage.Controls.Add(FinalProductImagePanel);
-            SummaryPage.Location = new Point(4, 34);
+            SummaryPage.Location = new Point(4, 24);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1346, 502);
+            SummaryPage.Size = new Size(1346, 512);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
@@ -840,7 +841,7 @@
             NotesTextBox.Location = new Point(6, 371);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 88);
+            NotesTextBox.Size = new Size(382, 40);
             NotesTextBox.TabIndex = 13;
             NotesTextBox.TextChanged += NotesTextBox_TextChanged;
             // 
@@ -894,7 +895,7 @@
             SummaryMarketData.Dock = DockStyle.Right;
             SummaryMarketData.Location = new Point(394, 3);
             SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(949, 496);
+            SummaryMarketData.Size = new Size(949, 506);
             SummaryMarketData.TabIndex = 7;
             // 
             // JitaBuyLabel
@@ -922,38 +923,38 @@
             PriceHistoryGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = SystemColors.Control;
+            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
+            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.Black;
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = Color.Black;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle24.ForeColor = Color.White;
+            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle24;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(931, 413);
+            PriceHistoryGridView.Size = new Size(931, 423);
             PriceHistoryGridView.TabIndex = 5;
             // 
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle2.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle18;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -962,10 +963,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "0";
-            dataGridViewCellStyle3.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle19.Format = "N0";
+            dataGridViewCellStyle19.NullValue = "0";
+            dataGridViewCellStyle19.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle19;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -974,10 +975,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "0";
-            dataGridViewCellStyle4.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle20.Format = "N0";
+            dataGridViewCellStyle20.NullValue = "0";
+            dataGridViewCellStyle20.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle20;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -986,10 +987,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            dataGridViewCellStyle5.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle21.Format = "N0";
+            dataGridViewCellStyle21.NullValue = "0";
+            dataGridViewCellStyle21.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle21;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -998,10 +999,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle6.Format = "N0";
-            dataGridViewCellStyle6.NullValue = "0";
-            dataGridViewCellStyle6.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle22.Format = "N0";
+            dataGridViewCellStyle22.NullValue = "0";
+            dataGridViewCellStyle22.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle22;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -1010,8 +1011,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle7.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle23.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle23;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1052,9 +1053,9 @@
             MaterialPricePage.Controls.Add(label52);
             MaterialPricePage.Controls.Add(label11);
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
-            MaterialPricePage.Location = new Point(4, 34);
+            MaterialPricePage.Location = new Point(4, 5);
             MaterialPricePage.Name = "MaterialPricePage";
-            MaterialPricePage.Size = new Size(1346, 502);
+            MaterialPricePage.Size = new Size(1346, 531);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
@@ -1177,9 +1178,9 @@
             IndustrySettingsTabPage.BackColor = Color.FromArgb(2, 23, 38);
             IndustrySettingsTabPage.BorderStyle = BorderStyle.FixedSingle;
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
-            IndustrySettingsTabPage.Location = new Point(4, 34);
+            IndustrySettingsTabPage.Location = new Point(4, 5);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
-            IndustrySettingsTabPage.Size = new Size(1346, 502);
+            IndustrySettingsTabPage.Size = new Size(1346, 531);
             IndustrySettingsTabPage.TabIndex = 3;
             IndustrySettingsTabPage.Text = "2.) System/Structure/Order Type";
             // 
@@ -1798,20 +1799,21 @@
             PlanetaryMaterialsTabPage.Controls.Add(label57);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMatsTotalTreeview);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
-            PlanetaryMaterialsTabPage.Location = new Point(4, 34);
+            PlanetaryMaterialsTabPage.Location = new Point(4, 5);
             PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
-            PlanetaryMaterialsTabPage.Size = new Size(1346, 502);
+            PlanetaryMaterialsTabPage.Size = new Size(1346, 531);
             PlanetaryMaterialsTabPage.TabIndex = 4;
             PlanetaryMaterialsTabPage.Text = "Planetary Materials";
             // 
             // PlanetMatsTotalTreeview
             // 
+            PlanetMatsTotalTreeview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             PlanetMatsTotalTreeview.BackColor = Color.FromArgb(2, 23, 38);
             PlanetMatsTotalTreeview.ForeColor = Color.White;
             PlanetMatsTotalTreeview.Location = new Point(621, 43);
             PlanetMatsTotalTreeview.MinimumSize = new Size(716, 456);
             PlanetMatsTotalTreeview.Name = "PlanetMatsTotalTreeview";
-            PlanetMatsTotalTreeview.Size = new Size(716, 456);
+            PlanetMatsTotalTreeview.Size = new Size(716, 504);
             PlanetMatsTotalTreeview.TabIndex = 1;
             // 
             // PlanetMaterialsTreeView
@@ -1823,7 +1825,7 @@
             PlanetMaterialsTreeView.Location = new Point(3, 3);
             PlanetMaterialsTreeView.MinimumSize = new Size(515, 515);
             PlanetMaterialsTreeView.Name = "PlanetMaterialsTreeView";
-            PlanetMaterialsTreeView.Size = new Size(515, 515);
+            PlanetMaterialsTreeView.Size = new Size(515, 534);
             PlanetMaterialsTreeView.TabIndex = 0;
             PlanetMaterialsTreeView.TabStop = false;
             // 
@@ -1834,9 +1836,9 @@
             BPReactionTabPage.Controls.Add(SetBlueprintButton);
             BPReactionTabPage.Controls.Add(label54);
             BPReactionTabPage.Controls.Add(BPTreeView);
-            BPReactionTabPage.Location = new Point(4, 34);
+            BPReactionTabPage.Location = new Point(4, 5);
             BPReactionTabPage.Name = "BPReactionTabPage";
-            BPReactionTabPage.Size = new Size(1346, 502);
+            BPReactionTabPage.Size = new Size(1346, 531);
             BPReactionTabPage.TabIndex = 5;
             BPReactionTabPage.Text = "1.) BP & Reaction Settings";
             // 
@@ -1939,9 +1941,9 @@
             // 
             CostBreakdownPage.BackColor = Color.FromArgb(2, 23, 38);
             CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
-            CostBreakdownPage.Location = new Point(4, 34);
+            CostBreakdownPage.Location = new Point(4, 5);
             CostBreakdownPage.Name = "CostBreakdownPage";
-            CostBreakdownPage.Size = new Size(1346, 502);
+            CostBreakdownPage.Size = new Size(1346, 531);
             CostBreakdownPage.TabIndex = 6;
             CostBreakdownPage.Text = "Cost Breakdown";
             // 
