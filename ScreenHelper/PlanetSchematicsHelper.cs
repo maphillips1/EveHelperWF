@@ -62,8 +62,8 @@ namespace EveHelperWF.ScreenHelper
         public static void GetPrices(PlanetMaterial planetOutputType)
         {
 
-            List<Objects.MarketOrder> buyOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, Enums.Enums.TheForgeRegionId, true);
-            List<Objects.MarketOrder> sellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(planetOutputType.typeID, Enums.Enums.TheForgeRegionId, false);
+            List<Objects.MarketOrder> buyOrders = ESI_Calls.ESIMarketData.GetBuyOrderAsync(planetOutputType.typeID, Enums.Enums.TheForgeRegionId).Result;
+            List<Objects.MarketOrder> sellOrders = ESI_Calls.ESIMarketData.GetSellOrderAsync(planetOutputType.typeID, Enums.Enums.TheForgeRegionId).Result;
 
             if (buyOrders != null && buyOrders.Count > 0)
             {

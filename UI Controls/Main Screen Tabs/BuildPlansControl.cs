@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
 using FileIO;
@@ -308,24 +309,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 this.isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
-                List<MaterialsWithMarketData> mats = this.currentBuildPlan.AllItems;
-                int totalMats = mats.Count;
-                int currentMat = 1;
-                decimal progress;
-                foreach (MaterialsWithMarketData mat in mats)
-                {
-                    progress = (decimal)currentMat / (decimal)totalMats;
-                    ProgressLabel.Text = "Getting Market Data... " + progress.ToString("P");
-                    if (currentBuildPlan.IndustrySettings.InputOrderType == (int)(Enums.Enums.OrderType.Buy))
-                    {
-                        mat.pricePer = ESIMarketData.GetBuyOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                    }
-                    else
-                    {
-                        mat.pricePer = ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                    }
-                    currentMat++;
+                List<ESIMarketType> mats = new List<ESIMarketType>();
+                this.currentBuildPlan.AllItems.ForEach(x => mats.Add(new ESIMarketType { typeID = x.materialTypeID }));
+                List<ESIMarketType> pricedMats;
 
+                ProgressLabel.Text = "Getting Market Data";
+                pricedMats = ESIMarketData.GetPriceForItemListWithQuantityAsync(mats, currentBuildPlan.IndustrySettings.InputOrderType, (long)Enums.Enums.TheForgeRegionId).Result;
+
+                foreach (ESIMarketType mat in pricedMats)
+                {
+                    this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.typeID).pricePer = mat.pricePer;
                 }
                 ProgressLabel.Text = "Done.";
                 BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
@@ -699,8 +692,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 LoadPriceHistoryBGWorker.RunWorkerAsync(FinalProductType.typeId);
             }
-            decimal sellOrderPrice = ESIMarketData.GetSellOrderPrice(FinalProductType.typeId, Enums.Enums.TheForgeRegionId);
-            decimal buyOrderPrice = ESIMarketData.GetBuyOrderPrice(FinalProductType.typeId, Enums.Enums.TheForgeRegionId);
+            decimal sellOrderPrice = ESIMarketData.GetSellOrderPriceAsync(FinalProductType.typeId, Enums.Enums.TheForgeRegionId).Result;
+            decimal buyOrderPrice = ESIMarketData.GetBuyOrderPriceAsync(FinalProductType.typeId, Enums.Enums.TheForgeRegionId).Result;
             JitaSellLabel.Text = CommonHelper.FormatIsk(sellOrderPrice);
             JitaBuyLabel.Text = CommonHelper.FormatIsk(buyOrderPrice);
             FinalProductSellOrderPrice = sellOrderPrice;
@@ -1805,22 +1798,18 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void EnsurePriceWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)e.Argument;
-            int currentMatCount = 0;
-            int totalMats = mats.Count;
-            decimal progress = 0;
-            foreach (MaterialsWithMarketData mat in mats)
+            if (mats?.Count > 0)
             {
-                if (EnsurePriceWorker.CancellationPending)
+                List<ESIMarketType> marketTypes = new List<ESIMarketType>();
+                mats.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.materialTypeID }));
+                int currentMatCount = 0;
+                int totalMats = mats.Count;
+                decimal progress = 0;
+                marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, this.currentBuildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
+                foreach (ESIMarketType marketType in marketTypes)
                 {
-                    e.Cancel = true;
+                    mats.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
                 }
-                else
-                {
-                    currentMatCount++;
-                    BuildPlanHelper.EnsurePricePer(mat, this.currentBuildPlan.IndustrySettings, currentBuildPlan.BlueprintStore);
-                    progress = Math.Ceiling(((decimal)currentMatCount / (decimal)totalMats) * 100);
-                }
-                EnsurePriceWorker.ReportProgress((int)progress);
             }
             e.Result = mats;
         }
@@ -2046,7 +2035,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     {
                         if (optimizedBuild.ExtraOutput > 0)
                         {
-                            decimal buyOrderPrice = ESI_Calls.ESIMarketData.GetBuyOrderPrice(optimizedBuild.BuiltOrReactedTypeId, Enums.Enums.TheForgeRegionId);
+                            decimal buyOrderPrice = ESI_Calls.ESIMarketData.GetBuyOrderPriceAsync(optimizedBuild.BuiltOrReactedTypeId, Enums.Enums.TheForgeRegionId).Result;
                             wasteValue += optimizedBuild.ExtraOutput * buyOrderPrice;
                         }
                     }

@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 
 namespace EveHelperWF.ScreenHelper
 {
@@ -969,24 +970,6 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static void EnsurePricePer(MaterialsWithMarketData mat, CalculationHelperClass industrySettings, List<BlueprintInfo> blueprints)
-        {
-            if (!IsItemMade(blueprints, mat.materialTypeID))
-            {
-                if (mat.pricePer <= 0)
-                {
-                    if (industrySettings.InputOrderType == (int)Enums.Enums.OrderType.Sell)
-                    {
-                        mat.pricePer = ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                    }
-                    else
-                    {
-                        mat.pricePer = ESIMarketData.GetBuyOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                    }
-                }
-            }
-        }
-
         public static void SetPriceForMaterialRecursive(decimal price, int typeID, List<MaterialsWithMarketData> materialList, List<BlueprintInfo> blueprints)
         {
             foreach (MaterialsWithMarketData mat in materialList)
@@ -1117,22 +1100,6 @@ namespace EveHelperWF.ScreenHelper
                     BuildAllItems(inputMaterial.ChildMaterials, ref allItems);
                 }
             }
-        }
-
-        public static decimal GetValueofWaste(BuildPlan buildPlan)
-        {
-            decimal value = 0;
-
-            foreach (OptimizedBuild optimizedBuild in buildPlan.OptimizedBuilds)
-            {
-                if (optimizedBuild.ExtraOutput > 0)
-                {
-                    decimal buyOrderPrice = ESI_Calls.ESIMarketData.GetBuyOrderPrice(optimizedBuild.BuiltOrReactedTypeId, Enums.Enums.TheForgeRegionId);
-                    value += optimizedBuild.ExtraOutput * buyOrderPrice;
-                }
-            }
-
-            return value;
         }
 
         public static Dictionary<string, List<MaterialsWithMarketData>> GroupInputMaterials(List<MaterialsWithMarketData> itemsToGroup)

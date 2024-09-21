@@ -115,7 +115,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 run.Loot = new List<InventoryTypeWIthMarketOrders>();
                 run.AbyssRunID = runID;
 
-                List<MarketOrder> filamentCostSellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(selectedFilamentId, Enums.Enums.TheForgeRegionId, false);
+                List<MarketOrder> filamentCostSellOrders = ESI_Calls.ESIMarketData.GetSellOrderAsync(selectedFilamentId, Enums.Enums.TheForgeRegionId).Result;
 
                 if (filamentCostSellOrders.Count > 0)
                 {
@@ -152,7 +152,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                 newType.typeId = appraisedItem.typeID;
                                 newType.typeName = appraisedItem.typeName;
                                 newType.Quantity = appraisedItem.quantity;
-                                newType.BuyOrders = ESI_Calls.ESIMarketData.GetBuyOrder(newType.typeId, Enums.Enums.TheForgeRegionId);
+                                newType.BuyOrders = ESI_Calls.ESIMarketData.GetBuyOrderAsync(newType.typeId, Enums.Enums.TheForgeRegionId).Result;
                                 run.Loot.Add(newType);
                             }
                         }
