@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.Database;
 using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -150,15 +151,10 @@ namespace EveHelperWF.ScreenHelper
         {
             decimal price = 0;
 
-            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, Enums.Enums.TheForgeRegionId, true);
-
-            if (orders != null && orders.Count > 0)
-            {
-                orders = orders.OrderByDescending(x => x.price).ToList();
-                price = orders[0].price;
-            }
-
-            return price;
+            ESIMarketType marketType = new ESIMarketType() { typeID = typeId };
+            marketType = ESI_Calls.ESIMarketData.GetPriceForITemAndQuantityAsync(marketType, (int)Enums.Enums.OrderType.Buy, Enums.Enums.TheForgeRegionId).Result;
+           
+            return marketType.pricePer;
         }
 
         public static Decimal GetItemSellPrice(int typeId)
@@ -166,15 +162,11 @@ namespace EveHelperWF.ScreenHelper
 
             decimal price = 0;
 
-            List<MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(typeId, Enums.Enums.TheForgeRegionId, false);
+            ESIMarketType marketType = new ESIMarketType() { typeID = typeId };
+            marketType = ESI_Calls.ESIMarketData.GetPriceForITemAndQuantityAsync(marketType, (int)Enums.Enums.OrderType.Sell, Enums.Enums.TheForgeRegionId).Result;
 
-            if (orders != null && orders.Count > 0)
-            {
-                orders = orders.OrderBy(x => x.price).ToList();
-                price = orders[0].price;
-            }
 
-            return price;
+            return marketType.pricePer;
         }
 
         private static Tuple<int, string> FindTypeInDB(string input)

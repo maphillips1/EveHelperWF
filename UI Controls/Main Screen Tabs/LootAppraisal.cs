@@ -1,4 +1,6 @@
-﻿using EveHelperWF.Objects;
+﻿using EveHelperWF.ESI_Calls;
+using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using EveHelperWF.ScreenHelper;
 using System;
 using System.Collections.Generic;
@@ -72,17 +74,30 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         #region "Background Worker Processes"
         private void GetPricesWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            foreach (AppraisedItem appraisedItem in appraisedItems)
-            {
-                if (appraisedItem.typeID > 0)
-                {
-                    appraisedItem.buyPricePer = AppraisalHelper.GetItemBuyPrice(appraisedItem.typeID);
-                    appraisedItem.buyPriceTotal = appraisedItem.buyPricePer * appraisedItem.quantity;
+            List<ESIMarketType> marketTypes = new List<ESIMarketType>();
+            appraisedItems.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.typeID, quantity = x.quantity }));
 
-                    appraisedItem.sellPricePer = AppraisalHelper.GetItemSellPrice(appraisedItem.typeID);
-                    appraisedItem.sellPriceTotal = appraisedItem.sellPricePer * appraisedItem.quantity;
-                }
+            marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, (int)Enums.Enums.OrderType.Buy, Enums.Enums.TheForgeRegionId).Result;
+
+            AppraisedItem item = null;
+            foreach (var marketType in marketTypes)
+            {
+                item = appraisedItems.Find(x => x.typeID == marketType.typeID);
+                item.buyPricePer = marketType.pricePer;
+                item.buyPriceTotal = marketType.priceTotal;
             }
+
+            marketTypes.ForEach(x => x.priceTotal = 0);
+
+            marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, (int)Enums.Enums.OrderType.Sell, Enums.Enums.TheForgeRegionId).Result;
+
+            foreach (var marketType in marketTypes)
+            {
+                item = appraisedItems.Find(x => x.typeID == marketType.typeID);
+                item.sellPricePer = marketType.pricePer;
+                item.sellPriceTotal = marketType.priceTotal;
+            }
+
             e.Result = appraisedItems;
         }
 

@@ -798,19 +798,35 @@ namespace EveHelperWF
             {
                 this.Cursor = Cursors.WaitCursor;
 
+                Stopwatch sw = Stopwatch.StartNew();
                 StatusLabel.Text = "Loading Materials..";
                 GetIndustryActivityMaterials();
+                sw.Stop();
+                Debug.WriteLine(string.Format("Loading Activity Materials took {0} seconds and {1} milliseconds",
+                                                sw.Elapsed.Seconds, sw.Elapsed.Milliseconds));
 
+                sw.Restart();
                 StatusLabel.Text = "Loading Products..";
                 GetIndustryActivityProducts();
+                sw.Stop();
+                Debug.WriteLine(string.Format("Loading Activity Products took {0} seconds and {1} milliseconds",
+                                                sw.Elapsed.Seconds, sw.Elapsed.Milliseconds));
 
+                sw.Start();
                 StatusLabel.Text = "Running Calcs..";
                 CalculateTotals();
+                sw.Stop();
+                Debug.WriteLine(string.Format("Running Calcs took {0} seconds and {1} milliseconds",
+                                                sw.Elapsed.Seconds, sw.Elapsed.Milliseconds));
 
                 LoadInventionCombo(DBInventionCombo);
 
+                sw.Restart();
                 StatusLabel.Text = "Databinding Screens..";
                 DatabindScreen();
+                sw.Stop();
+                Debug.WriteLine(string.Format("Databind screen took {0} seconds and {1} milliseconds",
+                                                sw.Elapsed.Seconds, sw.Elapsed.Milliseconds));
 
                 StatusLabel.Text = "Done;";
                 this.Cursor = Cursors.Default;
@@ -1014,24 +1030,17 @@ namespace EveHelperWF
             {
                 TotalManufacturingTaxesAndFees = 0;
             }
-            decimal TotalMatPrice = 0;
+            decimal totalPrice = 0;
             foreach (MaterialsWithMarketData mat in ManuMats)
             {
-                TotalMatPrice += mat.priceTotal;
+                totalPrice += mat.priceTotal;
             }
             if (TaxInputCheckbox.Checked)
             {
-                TotalManufacturingTaxesAndFees += CommonHelper.CalculateTaxAndFees(TotalMatPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
+                TotalManufacturingTaxesAndFees += CommonHelper.CalculateTaxAndFees(totalPrice, calculationHelperClass, calculationHelperClass.InputOrderType);
             }
             TotalManufacturingOutputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateOutputTotalVolume(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             TotalOutcomeQuantityManufacturing = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputQuantity(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
-
-            decimal totalPrice = 0;
-            foreach (Objects.MaterialsWithMarketData mat in ManuMats)
-            {
-                totalPrice += mat.priceTotal;
-
-            }
 
             if (IsBlueprintInvented() && InventBlueprintCheckbox.Checked)
             {

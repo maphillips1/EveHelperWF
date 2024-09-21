@@ -1,4 +1,6 @@
-﻿using EveHelperWF.Objects;
+﻿using EveHelperWF.ESI_Calls;
+using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -631,15 +633,14 @@ namespace EveHelperWF.ScreenHelper
                 bool isBuyOrder = (outputPriceType == 2);
                 foreach (Objects.IndustryActivityProduct prod in products)
                 {
-                    if (isBuyOrder)
+                    ESIMarketType marketType = new ESIMarketType() { typeID = prod.productTypeID, quantity = prod.quantity };
+                    marketType = ESI_Calls.ESIMarketData.GetPriceForITemAndQuantityAsync(marketType, outputPriceType, Enums.Enums.TheForgeRegionId).Result;
+                    prod.pricePer = marketType.pricePer;
+                    prod.priceTotal = marketType.priceTotal;
+
+                    if (outputPriceType == (int)Enums.Enums.OrderType.Sell)
                     {
-                        prod.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(prod.productTypeID, Enums.Enums.TheForgeRegionId);
-                        prod.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(prod.productTypeID, Enums.Enums.TheForgeRegionId, prod.quantity);
-                    }
-                    else
-                    {
-                        prod.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(prod.productTypeID, Enums.Enums.TheForgeRegionId);
-                        prod.priceTotal = prod.pricePer * prod.quantity;
+                        prod.priceTotal = Math.Round(prod.pricePer * prod.quantity, 2);
                     }
                 }
             }
@@ -649,24 +650,28 @@ namespace EveHelperWF.ScreenHelper
         {
             if (mats != null)
             {
-                bool isBuyOrder = (inputPriceType == 2);
-                foreach (Objects.MaterialsWithMarketData mat in mats)
+                List<ESIMarketType> marketTypes = new List<ESIMarketType>();
+                foreach (MaterialsWithMarketData mat in mats)
                 {
-                    if ( (mat.Buildable) && buildComponetns)
+                    if (mat.Buildable && buildComponetns) { continue; }
+                    marketTypes.Add(
+                        new ESIMarketType()
+                        {
+                            typeID = mat.materialTypeID,
+                            quantity = mat.quantityTotal,
+                        });
+                }
+                marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, inputPriceType, Enums.Enums.TheForgeRegionId).Result;
+                
+                foreach (ESIMarketType mt in marketTypes)
+                {
+                    foreach (MaterialsWithMarketData mat in mats.FindAll(x => x.materialTypeID == mt.typeID))
                     {
-                        mat.priceTotal = 0;
-                        continue;
+                        if (mat.Buildable && buildComponetns) { continue; }
+                        mat.pricePer = mt.pricePer;
+                        mat.priceTotal = mt.pricePer * mat.quantityTotal;
                     }
-                    if (isBuyOrder)
-                    {
-                        mat.pricePer = ESI_Calls.ESIMarketData.GetBuyOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                        mat.priceTotal = ESI_Calls.ESIMarketData.GetBuyOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
-                    }
-                    else
-                    {
-                        mat.pricePer = ESI_Calls.ESIMarketData.GetSellOrderPrice(mat.materialTypeID, Enums.Enums.TheForgeRegionId);
-                        mat.priceTotal = ESI_Calls.ESIMarketData.GetSellOrderPriceForQuantity(mat.materialTypeID, Enums.Enums.TheForgeRegionId, mat.quantityTotal);
-                    }
+                    
                 }
             }
         }
@@ -877,7 +882,6 @@ namespace EveHelperWF.ScreenHelper
                     buildableMats.Add(mat.materialTypeID);
                 }
             }
-
 
             if (calculationHelperClass.BuildComponents)
             {

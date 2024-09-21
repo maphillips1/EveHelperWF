@@ -38,8 +38,8 @@ namespace EveHelperWF.ScreenHelper
             InventoryTypeWIthMarketOrders inventoryTypeWIthMarketOrders = new InventoryTypeWIthMarketOrders();
 
             inventoryTypeWIthMarketOrders.typeId = selectedTypeID;
-            inventoryTypeWIthMarketOrders.BuyOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(selectedTypeID, regionID, true);
-            inventoryTypeWIthMarketOrders.SellOrders = ESI_Calls.ESIMarketData.GetBuyOrSellOrder(selectedTypeID, regionID, false);
+            inventoryTypeWIthMarketOrders.BuyOrders = ESI_Calls.ESIMarketData.GetBuyOrderAsync(selectedTypeID, regionID).Result;
+            inventoryTypeWIthMarketOrders.SellOrders = ESI_Calls.ESIMarketData.GetSellOrderAsync(selectedTypeID, regionID).Result;
 
             List<long> systemsToCheck = new List<long>();
             if (inventoryTypeWIthMarketOrders.BuyOrders != null && inventoryTypeWIthMarketOrders.BuyOrders.Count > 0)

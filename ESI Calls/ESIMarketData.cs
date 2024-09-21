@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using EveHelperWF.Objects;
 using System.Diagnostics;
 using FileIO;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 
 namespace EveHelperWF.ESI_Calls
 {
@@ -17,7 +18,7 @@ namespace EveHelperWF.ESI_Calls
 
         #region "Cache Methods"
 
-        private static List<EveHelperWF.Objects.MarketOrder> GetCachedOrders(bool is_buy_order, int type_id, int region_id)
+        private static List<EveHelperWF.Objects.MarketOrder> GetCachedOrders(bool is_buy_order, int type_id, long region_id)
         {
             List<EveHelperWF.Objects.MarketOrder> marketOrders = null;
             string directory = "";
@@ -51,7 +52,7 @@ namespace EveHelperWF.ESI_Calls
             return marketOrders;
         }
 
-        private static void CacheMarketOrders(bool is_buy_order, int type_id, int region_id, List<EveHelperWF.Objects.MarketOrder> marketOrders)
+        private static void CacheMarketOrders(bool is_buy_order, int type_id, long region_id, List<EveHelperWF.Objects.MarketOrder> marketOrders)
         {
             string directory = "";
             string fileName = "";
@@ -117,139 +118,6 @@ namespace EveHelperWF.ESI_Calls
         }
         #endregion
 
-        public static List<EveHelperWF.Objects.MarketOrder> GetBuyOrSellOrder(int type_id, int region_id, bool isBuyOrder)
-        {
-            if (isBuyOrder)
-            {
-                return GetBuyOrder(type_id, region_id);
-            }
-            else
-            {
-                return GetSellOrder(type_id, region_id);
-            }
-        }
-
-        public static List<EveHelperWF.Objects.MarketOrder> GetBuyOrder(int type_id, int region_id)
-        {
-            List<EveHelperWF.Objects.MarketOrder> marketOrders = new List<EveHelperWF.Objects.MarketOrder>();
-
-            marketOrders = GetCachedOrders(true, type_id, region_id);
-
-            if (marketOrders == null || marketOrders.Count == 0)
-            {
-                try
-                {
-                    string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=buy&page=1&type_id={1}", region_id, type_id);
-                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                    System.Net.Http.HttpResponseMessage response = client.GetAsync(combinedURI).Result;
-
-                    if (response != null && response.IsSuccessStatusCode)
-                    {
-                        string orders = response.Content.ReadAsStringAsync().Result;
-                        marketOrders = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders);
-                        CacheMarketOrders(true, type_id, region_id, marketOrders);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    FileHelper.LogError(ex.Message, ex.StackTrace);
-                }
-            }
-
-            return marketOrders;
-        }
-
-        public static List<EveHelperWF.Objects.MarketOrder> GetSellOrder(int type_id, int region_id)
-        {
-            List<EveHelperWF.Objects.MarketOrder> marketOrders = new List<EveHelperWF.Objects.MarketOrder>();
-
-            marketOrders = GetCachedOrders(false, type_id, region_id);
-
-            if (marketOrders == null || marketOrders.Count == 0)
-            {
-                try
-                {
-                    string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=sell&page=1&type_id={1}", region_id, type_id);
-                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                    System.Net.Http.HttpResponseMessage response = client.GetAsync(combinedURI).Result;
-
-                    if (response != null && response.IsSuccessStatusCode)
-                    {
-                        string orders = response.Content.ReadAsStringAsync().Result;
-                        marketOrders = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders);
-                        CacheMarketOrders(false, type_id, region_id, marketOrders);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    FileHelper.LogError(ex.Message, ex.StackTrace);
-                }
-            }
-
-            return marketOrders;
-        }
-
-        public static decimal GetSellOrderPriceForQuantity(int type_id, int region_id, long quantity)
-        {
-            decimal price = 0;
-
-            List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetSellOrder(type_id, Enums.Enums.TheForgeRegionId);
-            if (orders != null && orders.Count > 0)
-            {
-                //order by price low to High
-                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();
-
-                long remainingQuantity = quantity;
-                int orderCount = 0;
-
-                if (filteredOrders.Count > 0)
-                {
-                    while (orderCount < filteredOrders.Count && remainingQuantity > 0)
-                    {
-                        if (filteredOrders[orderCount].volume_remain > remainingQuantity)
-                        {
-                            price += filteredOrders[orderCount].price * remainingQuantity;
-                            remainingQuantity = 0;
-                        }
-                        else
-                        {
-                            price += filteredOrders[orderCount].price * filteredOrders[orderCount].volume_remain;
-                            remainingQuantity -= filteredOrders[orderCount].volume_remain;
-                        }
-                        orderCount++;
-                    }
-                    if (remainingQuantity > 0)
-                    {
-                        price += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
-                        remainingQuantity = 0;
-                    }
-                }
-            }
-
-            return price;
-        }
-
-        public static decimal GetBuyOrderPriceForQuantity(int type_id, int region_id, long quantity)
-        {
-            decimal price = 0;
-
-
-            List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrder(type_id, Enums.Enums.TheForgeRegionId);
-
-            if (orders != null && orders.Count > 0)
-            {
-                //order by price High to Low
-                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
-
-                if (filteredOrders.Count > 0)
-                {
-                    price = filteredOrders[0].price * quantity;
-                }
-            }
-
-            return price;
-        }
-
         public static List<EveHelperWF.Objects.AdjustedCost> GetAdjustedCosts()
         {
             List<EveHelperWF.Objects.AdjustedCost> adjustedCosts = GetCachedAdjustedCosts();
@@ -276,46 +144,6 @@ namespace EveHelperWF.ESI_Calls
             }
 
             return adjustedCosts;
-        }
-
-        public static decimal GetBuyOrderPrice(int type_id, int region_id)
-        {
-            decimal price = 0;
-
-
-            List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetBuyOrder(type_id, Enums.Enums.TheForgeRegionId);
-
-            if (orders != null && orders.Count > 0)
-            {
-                //order by price High to Low
-                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
-
-                if (filteredOrders.Count > 0)
-                {
-                    price = filteredOrders[0].price;
-                }
-            }
-
-            return price;
-        }
-
-        public static decimal GetSellOrderPrice(int type_id, int region_id)
-        {
-            decimal price = 0;
-
-            List<Objects.MarketOrder> orders = ESI_Calls.ESIMarketData.GetSellOrder(type_id, Enums.Enums.TheForgeRegionId);
-            if (orders != null && orders.Count > 0)
-            {
-                //order by price low to High
-                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();
-
-                if (filteredOrders.Count > 0)
-                {
-                    price = filteredOrders[0].price;
-                }
-            }
-
-            return price;
         }
 
         private static List<ESIPriceHistory> GetCachedPriceHistory(int regionID, int typeID)
@@ -388,5 +216,232 @@ namespace EveHelperWF.ESI_Calls
 
             return priceHistory;
         }
+
+        #region "Async Methods"
+        public async static Task<List<ESIMarketType>> GetPriceForItemListWithQuantityAsync(List<ESIMarketType> materials, int orderType, long regionID)
+        {
+            List<ESIMarketType> returnList = new List<ESIMarketType>();
+            List<Task<ESIMarketType>> orderTasks = new List<Task<ESIMarketType>>();
+            foreach (ESIMarketType material in materials)
+            {
+                ESIMarketType copyMat = material;
+                orderTasks.Add(GetPriceForITemAndQuantityAsync(copyMat, orderType, regionID));
+            }
+
+            Debug.WriteLine("Waiting for all tasks to finish");
+            ESIMarketType[] results =  await Task.WhenAll(orderTasks).ConfigureAwait(false);
+            Debug.WriteLine("All tasks are finished");
+            foreach (ESIMarketType material in results)
+            {
+                returnList.Add(material);
+            }
+            Debug.WriteLine("Returning all materials");
+            return materials;
+        }
+
+        public static async Task<ESIMarketType> GetPriceForITemAndQuantityAsync(ESIMarketType material, int orderType, long regionID)
+        {
+            if (orderType == (int)Enums.Enums.OrderType.Buy)
+            {
+                Debug.WriteLine("Waiting for " + material.typeID.ToString());
+                material = await GetBuyOrderPriceForQuantityAsync(material, regionID).ConfigureAwait(false);
+                Debug.WriteLine("Got price for " + material.typeID.ToString());
+            }
+            else
+            {
+                Debug.WriteLine("Waiting for " + material.typeID.ToString());
+                material = await GetSellOrderPriceForQuantityAsync(material, regionID).ConfigureAwait(false);
+                Debug.WriteLine("Got price for " + material.typeID.ToString());
+            }
+            Debug.WriteLine("Calling Return material for " + material.typeID.ToString());
+            return material;
+        }
+
+        public async static Task<decimal> GetBuyOrderPriceAsync(int type_id, long region_id)
+        {
+            decimal price = 0;
+
+
+            List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetBuyOrderAsync(type_id, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
+
+            if (orders != null && orders.Count > 0)
+            {
+                //order by price High to Low
+                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
+
+                if (filteredOrders.Count > 0)
+                {
+                    price = filteredOrders[0].price;
+                }
+            }
+
+            return price;
+        }
+
+        public async static Task<List<EveHelperWF.Objects.MarketOrder>> GetBuyOrderAsync(int type_id, long region_id)
+        {
+            List<EveHelperWF.Objects.MarketOrder> marketOrders = new List<EveHelperWF.Objects.MarketOrder>();
+
+            marketOrders = GetCachedOrders(true, type_id, region_id);
+
+            if (marketOrders == null || marketOrders.Count == 0)
+            {
+                try
+                {
+                    string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=buy&page=1&type_id={1}", region_id, type_id);
+                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                    System.Net.Http.HttpResponseMessage response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        string orders = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        marketOrders = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders);
+                        CacheMarketOrders(true, type_id, region_id, marketOrders);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FileHelper.LogError(ex.Message, ex.StackTrace);
+                }
+            }
+
+            return marketOrders;
+        }
+
+        public async static Task<decimal> GetSellOrderPriceAsync(int type_id, long region_id)
+        {
+            decimal price = 0;
+
+
+            Debug.WriteLine("Callin Get Sell order Async for" + type_id.ToString());
+            List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetSellOrderAsync(type_id, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
+            Debug.WriteLine("Finished Sell order Async for" + type_id.ToString());
+            if (orders != null && orders.Count > 0)
+            {
+                Debug.WriteLine("Order count for" + type_id.ToString() + " is " + orders.Count);
+                //order by price low to High
+                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();
+
+                if (filteredOrders.Count > 0)
+                {
+                    price = filteredOrders[0].price;
+                }
+            }
+            Debug.WriteLine("Leaving Get Sell Order Price Async for " + type_id.ToString());
+
+            return price;
+        }
+
+        public async static Task<List<EveHelperWF.Objects.MarketOrder>> GetSellOrderAsync(int type_id, long region_id)
+        {
+            List<EveHelperWF.Objects.MarketOrder> marketOrders = new List<EveHelperWF.Objects.MarketOrder>();
+
+            marketOrders = GetCachedOrders(false, type_id, region_id);
+
+            if (marketOrders == null || marketOrders.Count == 0)
+            {
+                try
+                {
+                    string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=sell&page=1&type_id={1}", region_id, type_id);
+                    System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+                    Debug.WriteLine("Calling ESI For " + type_id + " with " + combinedURI);
+                    System.Net.Http.HttpResponseMessage response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                    Debug.WriteLine("ESI finished For " + type_id);
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        string orders = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        marketOrders = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders);
+                        CacheMarketOrders(false, type_id, region_id, marketOrders);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    FileHelper.LogError(ex.Message, ex.StackTrace);
+                }
+            }
+
+            return marketOrders;
+        }
+
+
+        public async static Task<ESIMarketType> GetSellOrderPriceForQuantityAsync(ESIMarketType marketType, long region_id)
+        {
+            List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetSellOrderAsync(marketType.typeID, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
+            if (orders != null && orders.Count > 0)
+            {
+                //order by price low to High
+                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderBy(x => x.price).ToList();
+
+                long remainingQuantity = marketType.quantity;
+                int orderCount = 0;
+
+                if (filteredOrders.Count > 0)
+                {
+                    marketType.pricePer = filteredOrders[0].price;
+                    while (orderCount < filteredOrders.Count && remainingQuantity > 0)
+                    {
+                        if (filteredOrders[orderCount].volume_remain > remainingQuantity)
+                        {
+                            marketType.priceTotal += filteredOrders[orderCount].price * remainingQuantity;
+                            remainingQuantity = 0;
+                        }
+                        else
+                        {
+                            marketType.priceTotal += filteredOrders[orderCount].price * filteredOrders[orderCount].volume_remain;
+                            remainingQuantity -= filteredOrders[orderCount].volume_remain;
+                        }
+                        orderCount++;
+                    }
+                    if (remainingQuantity > 0)
+                    {
+                        marketType.priceTotal += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
+                        remainingQuantity = 0;
+                    }
+                }
+            }
+
+            return marketType;
+        }
+
+        public async static Task<ESIMarketType> GetBuyOrderPriceForQuantityAsync(ESIMarketType marketType, long region_id)
+        {
+            List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetBuyOrderAsync(marketType.typeID, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
+
+            if (orders != null && orders.Count > 0)
+            {
+                //order by price High to Low
+                List<Objects.MarketOrder> filteredOrders = orders.FindAll(x => x.system_id == Enums.Enums.JitaSystemId).OrderByDescending(x => x.price).ToList();
+
+                long remainingQuantity = marketType.quantity;
+                int orderCount = 0;
+
+                if (filteredOrders.Count > 0)
+                {
+                    marketType.pricePer = filteredOrders[0].price;
+                    while (orderCount < filteredOrders.Count && remainingQuantity > 0)
+                    {
+                        if (filteredOrders[orderCount].volume_remain > remainingQuantity)
+                        {
+                            marketType.priceTotal += filteredOrders[orderCount].price * remainingQuantity;
+                            remainingQuantity = 0;
+                        }
+                        else
+                        {
+                            marketType.priceTotal += filteredOrders[orderCount].price * filteredOrders[orderCount].volume_remain;
+                            remainingQuantity -= filteredOrders[orderCount].volume_remain;
+                        }
+                        orderCount++;
+                    }
+                    if (remainingQuantity > 0)
+                    {
+                        marketType.priceTotal += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
+                        remainingQuantity = 0;
+                    }
+                }
+            }
+
+            return marketType;
+        }
+        #endregion
     }
 }
