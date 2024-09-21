@@ -137,7 +137,7 @@ namespace EveHelperWF.ESI_Calls
                         CacheAdjustedCosts(adjustedCosts);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     FileHelper.LogError(ex.Message, ex.StackTrace);
                 }
@@ -207,7 +207,7 @@ namespace EveHelperWF.ESI_Calls
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     FileHelper.LogError(ex.Message, ex.StackTrace);
                 }
@@ -229,7 +229,7 @@ namespace EveHelperWF.ESI_Calls
             }
 
             Debug.WriteLine("Waiting for all tasks to finish");
-            ESIMarketType[] results =  await Task.WhenAll(orderTasks).ConfigureAwait(false);
+            ESIMarketType[] results = await Task.WhenAll(orderTasks).ConfigureAwait(false);
             Debug.WriteLine("All tasks are finished");
             foreach (ESIMarketType material in results)
             {
@@ -290,7 +290,16 @@ namespace EveHelperWF.ESI_Calls
                 {
                     string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=buy&page=1&type_id={1}", region_id, type_id);
                     System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
-                    System.Net.Http.HttpResponseMessage response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                    System.Net.Http.HttpResponseMessage response = null;
+                    //retry 10 times
+                    for (int i = 0; i < 10; i++)
+                    {
+                        response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                        if (response != null && response.IsSuccessStatusCode)
+                        {
+                            break;
+                        }
+                    }
 
                     if (response != null && response.IsSuccessStatusCode)
                     {
@@ -313,9 +322,8 @@ namespace EveHelperWF.ESI_Calls
             decimal price = 0;
 
 
-            Debug.WriteLine("Callin Get Sell order Async for" + type_id.ToString());
             List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetSellOrderAsync(type_id, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
-            Debug.WriteLine("Finished Sell order Async for" + type_id.ToString());
+
             if (orders != null && orders.Count > 0)
             {
                 Debug.WriteLine("Order count for" + type_id.ToString() + " is " + orders.Count);
@@ -345,13 +353,26 @@ namespace EveHelperWF.ESI_Calls
                     string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=sell&page=1&type_id={1}", region_id, type_id);
                     System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
                     Debug.WriteLine("Calling ESI For " + type_id + " with " + combinedURI);
-                    System.Net.Http.HttpResponseMessage response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                    System.Net.Http.HttpResponseMessage response = null;
+                    //retry 10 times
+                    for (int i = 0; i < 10; i++)
+                    {
+                        response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                        if (response != null && response.IsSuccessStatusCode)
+                        {
+                            break;
+                        }
+                    }
                     Debug.WriteLine("ESI finished For " + type_id);
                     if (response != null && response.IsSuccessStatusCode)
                     {
                         string orders = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                         marketOrders = JsonConvert.DeserializeObject<List<EveHelperWF.Objects.MarketOrder>>(orders);
                         CacheMarketOrders(false, type_id, region_id, marketOrders);
+                    }
+                    else if (response != null)
+                    {
+                        Debug.WriteLine("Response for " + type_id.ToString() + " Failed with " + response?.StatusCode.ToString());
                     }
                 }
                 catch (Exception ex)
@@ -367,6 +388,7 @@ namespace EveHelperWF.ESI_Calls
         public async static Task<ESIMarketType> GetSellOrderPriceForQuantityAsync(ESIMarketType marketType, long region_id)
         {
             List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetSellOrderAsync(marketType.typeID, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
+            Debug.WriteLine("Sell order list count for " + marketType.typeID.ToString() + " is " + orders?.Count().ToString());
             if (orders != null && orders.Count > 0)
             {
                 //order by price low to High
