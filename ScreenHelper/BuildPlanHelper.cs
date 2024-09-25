@@ -370,24 +370,24 @@ namespace EveHelperWF.ScreenHelper
             List<MaterialsWithMarketData> childMaterials;
             List<IndustryActivityProduct> products;
             int blueprintOrReactionTypeId;
-            int activityID = 0;
+            string activityName = "";
             foreach (MaterialsWithMarketData mat in outputMaterials)
             {
                 mat.quantityTotal = mat.quantityTotal * buildPlan.NumOfCopies;
-                activityID = 0;
+                activityName = "";
                 if (mat.Buildable)
                 {
-                    activityID = (int)Enums.Enums.ActivityManufacturing;
+                    activityName = Enums.Enums.ActivityManufacturing;
                 }
                 if (mat.Reactable)
                 {
-                    activityID = (int)Enums.Enums.ActivityReactions;
+                    activityName = Enums.Enums.ActivityReactions;
                 }
 
-                if (activityID > 0)
+                if (!string.IsNullOrWhiteSpace(activityName))
                 {
                     blueprintOrReactionTypeId = Database.SQLiteCalls.GetBlueprintByProductTypeID(mat.materialTypeID);
-                    products = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintOrReactionTypeId, activityID);
+                    products = Database.SQLiteCalls.GetIndustryActivityProducts(blueprintOrReactionTypeId, activityName);
                     mat.RunsNeeded = (int)Math.Ceiling((decimal)mat.quantityTotal / (decimal)products[0].quantity);
                 }
             }
@@ -636,16 +636,16 @@ namespace EveHelperWF.ScreenHelper
             {
                 optimizedBuild.TotalQuantityNeeded = matToBuildReact.quantityTotal;
             }
-            int activityId = 0;
+            string activityName = "";
             if (matToBuildReact.Buildable)
             {
-                activityId = Enums.Enums.ActivityManufacturing;
+                activityName = Enums.Enums.ActivityManufacturing;
             }
             else
             {
-                activityId = Enums.Enums.ActivityReactions;
+                activityName = Enums.Enums.ActivityReactions;
             }
-            List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, activityId);
+            List<IndustryActivityMaterials> baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(optimizedBuild.BlueprintOrReactionTypeID, activityName);
             MaterialsWithMarketData outputMat;
             foreach (IndustryActivityMaterials baseMat in baseMaterials)
             {
@@ -722,12 +722,12 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, int activityID, BlueprintInfo bpInfo, bool isFinalProduct, BuildPlan buildPlan)
+        private static void SetBatchRunInformation(ref OptimizedBuild optimizedBuild, int teValue, string activityName, BlueprintInfo bpInfo, bool isFinalProduct, BuildPlan buildPlan)
         {
             List<IndustryActivityTypes> activities =
                     Database.SQLiteCalls.GetIndustryActivityTypes(optimizedBuild.BlueprintOrReactionTypeID);
 
-            IndustryActivityTypes manuActivity = activities.Find(x => x.activityID == activityID);
+            IndustryActivityTypes manuActivity = activities.Find(x => x.activityName == activityName);
 
             long timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, manuActivity.time, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted);
             long maxTime = (30 * 24 * 60 * 60);

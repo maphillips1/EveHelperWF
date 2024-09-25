@@ -15,7 +15,6 @@ namespace EveHelperWF.Objects
             typeID = Convert.ToInt32(dr["typeID"]);
             skillID = Convert.ToInt32(dr["skillID"]);
             skillName = Convert.ToString(dr["typeName"]);
-            activityID = Convert.ToInt32(dr["activityID"]);
             activityName = Convert.ToString(dr["activityName"]);
             level = Convert.ToInt32(dr["level"]);
         }
@@ -23,7 +22,6 @@ namespace EveHelperWF.Objects
         public int typeID { get; set; }
         public int skillID { get; set; }
         public string skillName { get; set; }
-        public int activityID { get; set; }
         public string activityName { get; set; }
         public int level { get; set; }
     }

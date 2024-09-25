@@ -10,7 +10,6 @@ namespace EveHelperWF.Objects
     public class IndustryActivityMaterials
     {
         public int typeID { get; set; }
-        public int activityID { get; set; }
         public int materialTypeID { get; set; }
         public string materialName { get; set; }
         public int quantity { get; set; }

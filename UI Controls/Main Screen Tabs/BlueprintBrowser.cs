@@ -858,8 +858,6 @@ namespace EveHelperWF
 
             ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityCopying, ref CopyMats, buildComponents);
 
-            ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityReverseEngineering, ref ReverseEngMats, buildComponents);
-
             ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityInvention, ref InventionMats, buildComponents);
 
             ScreenHelper.BlueprintBrowserHelper.GetMatsForTypeAndActivity(IndustryActivityTypes, SelectedType.typeId, Enums.Enums.ActivityReactions, ref ReactionMats, buildComponents);
@@ -880,9 +878,6 @@ namespace EveHelperWF
 
             CopyProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityCopying);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref CopyProds);
-
-            ReverseEngProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityReverseEngineering);
-            ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref ReverseEngProds);
 
             InventionProds = Database.SQLiteCalls.GetIndustryActivityProducts(SelectedType.typeId, Enums.Enums.ActivityInvention);
             ScreenHelper.BlueprintBrowserHelper.GetPriceForProduct(outputPriceType, ref InventionProds);
@@ -929,7 +924,7 @@ namespace EveHelperWF
         {
             bool hasActivity = false;
 
-            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)) != null)
+            if (IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityResearchingMaterialEfficiency) != null)
             {
                 hasActivity = true;
             }
@@ -941,7 +936,7 @@ namespace EveHelperWF
         {
             bool hasActivity = false;
 
-            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingTimeEfficiency)) != null)
+            if (IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityResearchingTimeEfficiency) != null)
             {
                 hasActivity = true;
             }
@@ -953,7 +948,7 @@ namespace EveHelperWF
         {
             bool hasActivity = false;
 
-            if (IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityCopying)) != null)
+            if (IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityCopying) != null)
             {
                 hasActivity = true;
             }
@@ -1147,7 +1142,7 @@ namespace EveHelperWF
 
         private void CalculateMETotals(Objects.CalculationHelperClass calculationHelperClass)
         {
-            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingMaterialEfficiency)).time;
+            long baseTime = IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityResearchingMaterialEfficiency).time;
             ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResMEMats, calculationHelperClass.MEFromLevel, calculationHelperClass.METoLevel);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ResMEMats, calculationHelperClass.BuildComponents);
             ResMETime = BlueprintBrowserHelper.GetMeResearchTime(baseTime, calculationHelperClass);
@@ -1172,7 +1167,7 @@ namespace EveHelperWF
 
         private void CalculateTETotals(Objects.CalculationHelperClass calculationHelperClass)
         {
-            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityResearchingTimeEfficiency)).time;
+            long baseTime = IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityResearchingTimeEfficiency).time;
             int teFromLevel = calculationHelperClass.TEFromLevel / 2;
             int teToLevel = calculationHelperClass.TEToLevel / 2;
             ScreenHelper.BlueprintBrowserHelper.GetMETETotalInputMats(ref ResTEMats, teFromLevel, teToLevel);
@@ -1199,7 +1194,7 @@ namespace EveHelperWF
 
         private void CalculateCopyTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
-            long baseTime = IndustryActivityTypes.Find(x => x.activityID == (int)(Enums.Enums.ActivityCopying)).time;
+            long baseTime = IndustryActivityTypes.Find(x => x.activityName == Enums.Enums.ActivityCopying).time;
             ScreenHelper.BlueprintBrowserHelper.GetCopyingTotalMats(ref CopyMats, calculationHelperClass);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref CopyMats, calculationHelperClass.BuildComponents);
             ResCopyTime = BlueprintBrowserHelper.GetCopyingTime(baseTime, calculationHelperClass);
@@ -1660,21 +1655,20 @@ namespace EveHelperWF
                 EnableDisablePanel(Enums.Enums.ActivityResearchingMaterialEfficiency, MEResearchPage, ref ResMESkills);
                 EnableDisablePanel(Enums.Enums.ActivityResearchingTimeEfficiency, TEResearchPage, ref ResTESkills);
                 EnableDisablePanel(Enums.Enums.ActivityCopying, CopyPage, ref CopySkills);
-                EnableDisablePanel(Enums.Enums.ActivityReverseEngineering, ReverseEngineerPage, ref ReverseEngSkills);
                 EnableDisablePanel(Enums.Enums.ActivityInvention, InventionPage, ref InventionSkills);
                 EnableDisablePanel(Enums.Enums.ActivityReactions, ReactionPage, ref ReactionSkills);
             }
         }
 
-        private void EnableDisablePanel(int activityID, TabPage tabPage, ref List<Objects.IndustryActivitySkill> skills)
+        private void EnableDisablePanel(string activityName, TabPage tabPage, ref List<Objects.IndustryActivitySkill> skills)
         {
-            if (IndustryActivityTypes.Find(x => x.activityID == activityID) != null)
+            if (IndustryActivityTypes.Find(x => x.activityName == activityName) != null)
             {
                 if (!ActivityTabPanel.TabPages.Contains(tabPage))
                 {
                     ActivityTabPanel.TabPages.Add(tabPage);
                 }
-                skills = Database.SQLiteCalls.GetINdustryActivitySkills(SelectedType.typeId, activityID);
+                skills = Database.SQLiteCalls.GetINdustryActivitySkills(SelectedType.typeId, activityName);
             }
             else
             {
