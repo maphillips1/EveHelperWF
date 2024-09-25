@@ -36,8 +36,6 @@
             DefaultsButtonClick = new Button();
             MarketBrowserButton = new Button();
             AbyssTrackerButton = new Button();
-            label8 = new Label();
-            FuzzworksLinkLabel = new LinkLabel();
             PriceHistoryButton = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -183,28 +181,6 @@
             AbyssTrackerButton.UseVisualStyleBackColor = true;
             AbyssTrackerButton.Click += AbyssTrackerButton_Click;
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label8.Location = new Point(12, 268);
-            label8.Name = "label8";
-            label8.Size = new Size(141, 20);
-            label8.TabIndex = 14;
-            label8.Text = "Support FuzzWorks";
-            // 
-            // FuzzworksLinkLabel
-            // 
-            FuzzworksLinkLabel.AutoSize = true;
-            FuzzworksLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FuzzworksLinkLabel.Location = new Point(159, 271);
-            FuzzworksLinkLabel.Name = "FuzzworksLinkLabel";
-            FuzzworksLinkLabel.Size = new Size(106, 15);
-            FuzzworksLinkLabel.TabIndex = 15;
-            FuzzworksLinkLabel.TabStop = true;
-            FuzzworksLinkLabel.Text = "Fuzzworks Website";
-            FuzzworksLinkLabel.LinkClicked += FuzzworksLinkLabel_LinkClicked;
-            // 
             // PriceHistoryButton
             // 
             PriceHistoryButton.Cursor = Cursors.Hand;
@@ -277,7 +253,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(98, 298);
+            FreyaLinkLabel.Location = new Point(98, 276);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -289,7 +265,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label10.Location = new Point(12, 295);
+            label10.Location = new Point(12, 273);
             label10.Name = "label10";
             label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
@@ -350,7 +326,7 @@
             DocumentationLabel.AutoSize = true;
             DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            DocumentationLabel.Location = new Point(12, 327);
+            DocumentationLabel.Location = new Point(12, 305);
             DocumentationLabel.Name = "DocumentationLabel";
             DocumentationLabel.Size = new Size(118, 20);
             DocumentationLabel.TabIndex = 25;
@@ -369,8 +345,6 @@
             Controls.Add(FreyaLinkLabel);
             Controls.Add(label10);
             Controls.Add(PriceHistoryButton);
-            Controls.Add(FuzzworksLinkLabel);
-            Controls.Add(label8);
             Controls.Add(AbyssTrackerButton);
             Controls.Add(MarketBrowserButton);
             Controls.Add(DefaultsButtonClick);
@@ -401,8 +375,6 @@
         private Button DefaultsButtonClick;
         private Button MarketBrowserButton;
         private Button AbyssTrackerButton;
-        private Label label8;
-        private LinkLabel FuzzworksLinkLabel;
         private Button PriceHistoryButton;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;

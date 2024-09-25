@@ -11,15 +11,19 @@ namespace FileIO
 {
     public static class FileHelper
     {
+        private static Object SyncLockObejct = new Object();
         public static string GetFileContent(string directoryName, string filename)
         {
             string fileContent = "";
-
-            if (Directory.Exists(directoryName))
+            lock (SyncLockObejct)
             {
-                if (File.Exists(filename))
+
+                if (Directory.Exists(directoryName))
                 {
-                    fileContent = File.ReadAllText(filename);
+                    if (File.Exists(filename))
+                    {
+                        fileContent = File.ReadAllText(filename);
+                    }
                 }
             }
 
@@ -29,9 +33,12 @@ namespace FileIO
         public static string GetFileContent(string filename)
         {
             string fileContent = "";
-            if (File.Exists(filename))
+            lock (SyncLockObejct)
             {
-                fileContent = File.ReadAllText(filename);
+                if (File.Exists(filename))
+                {
+                    fileContent = File.ReadAllText(filename);
+                }
             }
 
             return fileContent;
@@ -44,17 +51,20 @@ namespace FileIO
         /// <param name="content"></param>
         public static void SaveFileContent(string directoryName, string fileName, string content)
         {
-            if (!System.IO.Directory.Exists(directoryName))
+            lock (SyncLockObejct)
             {
-                System.IO.Directory.CreateDirectory(directoryName);
-            }
+                if (!System.IO.Directory.Exists(directoryName))
+                {
+                    System.IO.Directory.CreateDirectory(directoryName);
+                }
 
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
 
-            File.WriteAllText(fileName, content);
+                File.WriteAllText(fileName, content);
+            }
 
         }
 
@@ -65,28 +75,33 @@ namespace FileIO
         /// <param name="content"></param>
         public static void SaveFileContent(string fileName, string content)
         {
-
-            if (File.Exists(fileName))
+            lock (SyncLockObejct)
             {
-                File.Delete(fileName);
-            }
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
 
-            File.WriteAllText(fileName, content);
+                File.WriteAllText(fileName, content);
+            }
         }
 
         public static void SaveFileContent(string directoryName, string fileName, byte[] content)
         {
-            if (!System.IO.Directory.Exists(directoryName))
+            lock (SyncLockObejct)
             {
-                System.IO.Directory.CreateDirectory(directoryName);
-            }
+                if (!System.IO.Directory.Exists(directoryName))
+                {
+                    System.IO.Directory.CreateDirectory(directoryName);
+                }
 
-            if (File.Exists(fileName))
-            {
-                File.Delete(fileName);
-            }
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
 
-            File.WriteAllBytes(fileName, content);
+                File.WriteAllBytes(fileName, content);
+            }
 
         }
 
@@ -110,17 +125,20 @@ namespace FileIO
 
         public static void DeleteFile(string directoryName, string fileName)
         {
-            if (!System.IO.Directory.Exists(directoryName))
+            lock (SyncLockObejct)
             {
-                System.IO.Directory.CreateDirectory(directoryName);
-            }
+                if (!System.IO.Directory.Exists(directoryName))
+                {
+                    System.IO.Directory.CreateDirectory(directoryName);
+                }
 
-            if (File.Exists(fileName))
-            {
+                if (File.Exists(fileName))
+                {
+                    File.Delete(fileName);
+                }
+
                 File.Delete(fileName);
             }
-
-            File.Delete(fileName);
         }
 
         public static string ReplaceInvalidChars(string filename)
@@ -130,23 +148,26 @@ namespace FileIO
 
         public static void LogError(string errorMessage, string? fullCallstack)
         {
-            string fileName = Enums.Enums.ErrorLogDirectory + "ErrorLog.txt";
-
-            string currentLogs = GetFileContent(Enums.Enums.ErrorLogDirectory, fileName);
-
-            StringBuilder logBuilder = new StringBuilder(currentLogs);
-
-            logBuilder.AppendLine("----------------------");
-            logBuilder.AppendLine("New Error Encountered at : " + System.DateTime.Now.ToString());
-            logBuilder.AppendLine("");
-            logBuilder.AppendLine(errorMessage);
-            logBuilder.AppendLine("");
-            if (fullCallstack != null)
+            lock(SyncLockObejct)
             {
-                logBuilder.AppendLine(fullCallstack);
-            }
+                string fileName = Enums.Enums.ErrorLogDirectory + "ErrorLog.txt";
 
-            SaveFileContent(Enums.Enums.ErrorLogDirectory, fileName, logBuilder.ToString());
+                string currentLogs = GetFileContent(Enums.Enums.ErrorLogDirectory, fileName);
+
+                StringBuilder logBuilder = new StringBuilder(currentLogs);
+
+                logBuilder.AppendLine("----------------------");
+                logBuilder.AppendLine("New Error Encountered at : " + System.DateTime.Now.ToString());
+                logBuilder.AppendLine("");
+                logBuilder.AppendLine(errorMessage);
+                logBuilder.AppendLine("");
+                if (fullCallstack != null)
+                {
+                    logBuilder.AppendLine(fullCallstack);
+                }
+
+                SaveFileContent(Enums.Enums.ErrorLogDirectory, fileName, logBuilder.ToString());
+            }
         }
     }
 }

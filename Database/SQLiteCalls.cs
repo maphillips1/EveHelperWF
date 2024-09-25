@@ -26,7 +26,7 @@ namespace EveHelperWF.Database
 
         public static string GetSQLitePath()
         {
-            string dbpath = Path.Combine(GetSQLiteDirectory(), "new_SDE_latest.sqlite");
+            string dbpath = Path.Combine(GetSQLiteDirectory(), "sqlite-latest.sqlite");
 
             return dbpath;
         }
