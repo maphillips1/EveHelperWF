@@ -766,7 +766,7 @@
             // 
             // SummaryPage
             // 
-            SummaryPage.BackColor = Color.FromArgb(2, 23, 38);
+            SummaryPage.BackColor = Enums.Enums.BackgroundColor;
             SummaryPage.Controls.Add(SummaryHelpPanel);
             SummaryPage.Controls.Add(leftoverMatsValueLabel);
             SummaryPage.Controls.Add(label27);
@@ -1039,7 +1039,7 @@
             // 
             // MaterialPricePage
             // 
-            MaterialPricePage.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialPricePage.BackColor = Enums.Enums.BackgroundColor;
             MaterialPricePage.Controls.Add(label56);
             MaterialPricePage.Controls.Add(MostExpensiveTree);
             MaterialPricePage.Controls.Add(ImportPricesButton);
@@ -1062,7 +1062,7 @@
             // MostExpensiveTree
             // 
             MostExpensiveTree.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            MostExpensiveTree.BackColor = Color.FromArgb(2, 23, 38);
+            MostExpensiveTree.BackColor = Enums.Enums.BackgroundColor;
             MostExpensiveTree.Location = new Point(756, 123);
             MostExpensiveTree.MinimumSize = new Size(582, 317);
             MostExpensiveTree.Name = "MostExpensiveTree";
@@ -1136,7 +1136,7 @@
             // MaterialsPriceTreeView
             // 
             MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MaterialsPriceTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialsPriceTreeView.BackColor = Enums.Enums.BackgroundColor;
             MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MaterialsPriceTreeView.HotTracking = true;
             MaterialsPriceTreeView.Location = new Point(3, 123);
@@ -1175,7 +1175,7 @@
             // 
             // IndustrySettingsTabPage
             // 
-            IndustrySettingsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            IndustrySettingsTabPage.BackColor = Enums.Enums.BackgroundColor;
             IndustrySettingsTabPage.BorderStyle = BorderStyle.FixedSingle;
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 5);
@@ -1202,7 +1202,7 @@
             // 
             // ManufacturingDefaultsTabPage
             // 
-            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureMERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureCombo);
@@ -1289,7 +1289,7 @@
             // 
             // ReactionsDefaultTabPage
             // 
-            ReactionsDefaultTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            ReactionsDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
             ReactionsDefaultTabPage.Controls.Add(label35);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);
@@ -1363,7 +1363,7 @@
             // 
             // SkillsPage
             // 
-            SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
+            SkillsPage.BackColor = Enums.Enums.BackgroundColor;
             SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
             SkillsPage.Controls.Add(label55);
             SkillsPage.Controls.Add(CapConSkillUpDown);
@@ -1614,7 +1614,7 @@
             // 
             // OrderTypePage
             // 
-            OrderTypePage.BackColor = Color.FromArgb(2, 23, 38);
+            OrderTypePage.BackColor = Enums.Enums.BackgroundColor;
             OrderTypePage.Controls.Add(OutputOrderTypeCombo);
             OrderTypePage.Controls.Add(InputOrderTypeCombo);
             OrderTypePage.Controls.Add(label49);
@@ -1670,7 +1670,7 @@
             // 
             // DetailsPage
             // 
-            DetailsPage.BackColor = Color.FromArgb(2, 23, 38);
+            DetailsPage.BackColor = Enums.Enums.BackgroundColor;
             DetailsPage.Controls.Add(ExportBuildList);
             DetailsPage.Controls.Add(label44);
             DetailsPage.Controls.Add(TotalManufacturingSlotsLabel);
@@ -1733,7 +1733,7 @@
             // OptimizedBuildTreeView
             // 
             OptimizedBuildTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            OptimizedBuildTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            OptimizedBuildTreeView.BackColor = Enums.Enums.BackgroundColor;
             OptimizedBuildTreeView.CausesValidation = false;
             OptimizedBuildTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             OptimizedBuildTreeView.ForeColor = Color.White;
@@ -1761,7 +1761,7 @@
             // MaterialsTreeView
             // 
             MaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            MaterialsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MaterialsTreeView.BackColor = Enums.Enums.BackgroundColor;
             MaterialsTreeView.CausesValidation = false;
             MaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MaterialsTreeView.ForeColor = Color.White;
@@ -1795,7 +1795,7 @@
             // 
             // PlanetaryMaterialsTabPage
             // 
-            PlanetaryMaterialsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetaryMaterialsTabPage.BackColor = Enums.Enums.BackgroundColor;
             PlanetaryMaterialsTabPage.Controls.Add(label57);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMatsTotalTreeview);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
@@ -1808,7 +1808,7 @@
             // PlanetMatsTotalTreeview
             // 
             PlanetMatsTotalTreeview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            PlanetMatsTotalTreeview.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetMatsTotalTreeview.BackColor = Enums.Enums.BackgroundColor;
             PlanetMatsTotalTreeview.ForeColor = Color.White;
             PlanetMatsTotalTreeview.Location = new Point(621, 43);
             PlanetMatsTotalTreeview.MinimumSize = new Size(716, 456);
@@ -1819,7 +1819,7 @@
             // PlanetMaterialsTreeView
             // 
             PlanetMaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PlanetMaterialsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            PlanetMaterialsTreeView.BackColor = Enums.Enums.BackgroundColor;
             PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
@@ -1831,7 +1831,7 @@
             // 
             // BPReactionTabPage
             // 
-            BPReactionTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            BPReactionTabPage.BackColor = Enums.Enums.BackgroundColor;
             BPReactionTabPage.Controls.Add(SetReactionsButton);
             BPReactionTabPage.Controls.Add(SetBlueprintButton);
             BPReactionTabPage.Controls.Add(label54);
@@ -1867,7 +1867,7 @@
             // BPTreeView
             // 
             BPTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BPTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            BPTreeView.BackColor = Enums.Enums.BackgroundColor;
             BPTreeView.CausesValidation = false;
             BPTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             BPTreeView.ForeColor = Color.White;
@@ -1939,7 +1939,7 @@
             // 
             // CostBreakdownPage
             // 
-            CostBreakdownPage.BackColor = Color.FromArgb(2, 23, 38);
+            CostBreakdownPage.BackColor = Enums.Enums.BackgroundColor;
             CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
             CostBreakdownPage.Location = new Point(4, 5);
             CostBreakdownPage.Name = "CostBreakdownPage";
@@ -1950,7 +1950,7 @@
             // CostBreakdownTextBox
             // 
             CostBreakdownTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CostBreakdownTextBox.BackColor = Color.FromArgb(2, 23, 38);
+            CostBreakdownTextBox.BackColor = Enums.Enums.BackgroundColor;
             CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             CostBreakdownTextBox.ForeColor = Color.White;
             CostBreakdownTextBox.Location = new Point(3, 3);

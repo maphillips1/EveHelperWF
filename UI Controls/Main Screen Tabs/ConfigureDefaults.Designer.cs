@@ -251,7 +251,7 @@
             // 
             // MainDefaultTabPage
             // 
-            MainDefaultTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            MainDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
             MainDefaultTabPage.Controls.Add(InventBlueprintCheckbox);
             MainDefaultTabPage.Controls.Add(OutputOrderTypeCombo);
             MainDefaultTabPage.Controls.Add(InputOrderTypeCombo);
@@ -359,7 +359,7 @@
             // 
             // ManufacturingDefaultsTabPage
             // 
-            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
             ManufacturingDefaultsTabPage.Controls.Add(BuildComponentCheckbox);
             ManufacturingDefaultsTabPage.Controls.Add(StructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(StructureMERigCombo);
@@ -635,7 +635,7 @@
             // 
             // InventionDefaultsTabPage
             // 
-            InventionDefaultsTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            InventionDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
             InventionDefaultsTabPage.Controls.Add(EncryptionStarshipSkillUpDown);
             InventionDefaultsTabPage.Controls.Add(Datacore2SkillUpDown);
             InventionDefaultsTabPage.Controls.Add(DataCore1SkillUpDown);
@@ -846,7 +846,7 @@
             // 
             // ReactionsDefaultTabPage
             // 
-            ReactionsDefaultTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            ReactionsDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
             ReactionsDefaultTabPage.Controls.Add(label26);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);
@@ -981,7 +981,7 @@
             // 
             // CopyPage
             // 
-            CopyPage.BackColor = Color.FromArgb(2, 23, 38);
+            CopyPage.BackColor = Enums.Enums.BackgroundColor;
             CopyPage.Controls.Add(CopyRunsCopyUpDown);
             CopyPage.Controls.Add(CopyNumCopiesUpDown);
             CopyPage.Controls.Add(CopyTaxUpDown);
@@ -1164,7 +1164,7 @@
             // 
             // MEPage
             // 
-            MEPage.BackColor = Color.FromArgb(2, 23, 38);
+            MEPage.BackColor = Enums.Enums.BackgroundColor;
             MEPage.Controls.Add(METoLevelUpDown);
             MEPage.Controls.Add(MEFromLevelUpDown);
             MEPage.Controls.Add(METaxUpDown);
@@ -1346,7 +1346,7 @@
             // 
             // TEPage
             // 
-            TEPage.BackColor = Color.FromArgb(2, 23, 38);
+            TEPage.BackColor = Enums.Enums.BackgroundColor;
             TEPage.Controls.Add(TEToLevelUpDown);
             TEPage.Controls.Add(TEFromLevelUpDown);
             TEPage.Controls.Add(TETaxUpDown);
@@ -1529,7 +1529,7 @@
             // 
             // SkillsPage
             // 
-            SkillsPage.BackColor = Color.FromArgb(2, 23, 38);
+            SkillsPage.BackColor = Enums.Enums.BackgroundColor;
             SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
             SkillsPage.Controls.Add(label55);
             SkillsPage.Controls.Add(ReactionsSkillUpDown);

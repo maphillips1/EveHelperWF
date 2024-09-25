@@ -229,7 +229,7 @@
             // InputMatsTreeView
             // 
             InputMatsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            InputMatsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            InputMatsTreeView.BackColor = Enums.Enums.BackgroundColor;
             InputMatsTreeView.Location = new Point(326, 45);
             InputMatsTreeView.Name = "InputMatsTreeView";
             InputMatsTreeView.ShowLines = false;

@@ -81,6 +81,9 @@ namespace Enums
                                          "EveHelper\\BuildPlans\\");
         public static string ErrorLogDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\ErrorLogs\\");
+
+        public static Color BackgroundColor = Color.FromArgb(255, 21, 21, 21);
+
         public enum PlanetMatTierGroupId
         {
             T0_Organic = 1035,
