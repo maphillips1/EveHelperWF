@@ -592,6 +592,32 @@ namespace EveHelperWF.Database
 
             return sb.ToString();
         }
+
+        private static string LoadNPCCorpLPOffersCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select distinct NPCC.npcCorporationID, IUN.itemName");
+            sb.AppendLine("from NPCCorpLPOfferTable NPCC");
+            sb.AppendLine("    inner join InvUniqueName IUN");
+            sb.AppendLine("        on IUN.itemID = NPCC.npcCorporationID");
+            sb.AppendLine("order by IUN.itemName");
+
+            return sb.ToString();
+        }
+
+        private static string GetTypeNameForTypeIDCommand(int typeId)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("select ETN.en");
+            sb.AppendLine("from EveType ET");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeId");
+            sb.AppendLine("Where ET.typeID = " + typeId.ToString());
+
+            return sb.ToString();
+        }
         #endregion
 
         #region "Public Functions"
@@ -1810,6 +1836,55 @@ namespace EveHelperWF.Database
             }
 
             return solarSystemIDs;
+        }
+
+        public static List<NPCCorporation> LoadNPCCorpLPOffers()
+        {
+            List<NPCCorporation> npcCorporations = new List<NPCCorporation>();
+            npcCorporations.Add(new NPCCorporation());
+            NPCCorporation newCorp = null;
+            string queryCommand = LoadNPCCorpLPOffersCommand();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(queryCommand, db);
+                SqliteDataReader query = command.ExecuteReader();
+
+                while (query.Read())
+                {
+                    newCorp = new NPCCorporation();
+                    newCorp.npcCorporationID = query.GetInt64(0);
+                    newCorp.npcCorporationName = query.GetString(1);
+                    npcCorporations.Add(newCorp);
+                }
+            }
+
+            return npcCorporations;
+        }
+
+        public static string GetTypeNameForTypeID(int typeID)
+        {
+            string typeName = "";
+            string queryCommand = GetTypeNameForTypeIDCommand(typeID);
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(queryCommand, db);
+                SqliteDataReader query = command.ExecuteReader();
+
+                while (query.Read())
+                {
+                    typeName = query.GetString(0);
+                }
+            }
+
+            return typeName;
         }
 
         #endregion

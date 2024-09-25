@@ -83,7 +83,7 @@
             // 
             // OutputTreeView
             // 
-            OutputTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            OutputTreeView.BackColor = Enums.Enums.BackgroundColor;
             OutputTreeView.ForeColor = SystemColors.ControlLight;
             OutputTreeView.HotTracking = true;
             OutputTreeView.Location = new Point(10, 9);

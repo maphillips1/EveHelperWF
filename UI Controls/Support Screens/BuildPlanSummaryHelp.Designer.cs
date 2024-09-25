@@ -36,7 +36,7 @@
             // HelpTextbox
             // 
             HelpTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            HelpTextbox.BackColor = Color.FromArgb(2, 23, 38);
+            HelpTextbox.BackColor = Enums.Enums.BackgroundColor;
             HelpTextbox.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             HelpTextbox.ForeColor = Color.White;
             HelpTextbox.Location = new Point(12, 50);

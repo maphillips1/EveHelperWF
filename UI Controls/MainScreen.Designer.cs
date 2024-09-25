@@ -51,6 +51,7 @@
             UpdateWorker = new System.ComponentModel.BackgroundWorker();
             CheckInternetBGWorker = new System.ComponentModel.BackgroundWorker();
             DocumentationLabel = new LinkLabel();
+            LPOfferButton = new Button();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -81,7 +82,7 @@
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PlanetPlannerButton.FlatStyle = FlatStyle.Flat;
             PlanetPlannerButton.ForeColor = Color.White;
-            PlanetPlannerButton.Location = new Point(142, 115);
+            PlanetPlannerButton.Location = new Point(9, 168);
             PlanetPlannerButton.Margin = new Padding(3, 2, 3, 2);
             PlanetPlannerButton.MaximumSize = new Size(120, 120);
             PlanetPlannerButton.Name = "PlanetPlannerButton";
@@ -117,7 +118,7 @@
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             SystemFinderButton.FlatStyle = FlatStyle.Flat;
             SystemFinderButton.ForeColor = Color.White;
-            SystemFinderButton.Location = new Point(142, 212);
+            SystemFinderButton.Location = new Point(9, 269);
             SystemFinderButton.Margin = new Padding(3, 2, 3, 2);
             SystemFinderButton.MaximumSize = new Size(120, 120);
             SystemFinderButton.Name = "SystemFinderButton";
@@ -135,7 +136,7 @@
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
             DefaultsButtonClick.FlatStyle = FlatStyle.Flat;
             DefaultsButtonClick.ForeColor = Color.White;
-            DefaultsButtonClick.Location = new Point(142, 169);
+            DefaultsButtonClick.Location = new Point(9, 222);
             DefaultsButtonClick.Margin = new Padding(3, 2, 3, 2);
             DefaultsButtonClick.MaximumSize = new Size(120, 120);
             DefaultsButtonClick.Name = "DefaultsButtonClick";
@@ -153,7 +154,7 @@
             MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             MarketBrowserButton.FlatStyle = FlatStyle.Flat;
             MarketBrowserButton.ForeColor = Color.White;
-            MarketBrowserButton.Location = new Point(9, 115);
+            MarketBrowserButton.Location = new Point(142, 114);
             MarketBrowserButton.Margin = new Padding(3, 2, 3, 2);
             MarketBrowserButton.MaximumSize = new Size(120, 120);
             MarketBrowserButton.Name = "MarketBrowserButton";
@@ -189,11 +190,11 @@
             PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PriceHistoryButton.FlatStyle = FlatStyle.Flat;
             PriceHistoryButton.ForeColor = Color.White;
-            PriceHistoryButton.Location = new Point(9, 169);
+            PriceHistoryButton.Location = new Point(142, 171);
             PriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryButton.MaximumSize = new Size(120, 120);
             PriceHistoryButton.Name = "PriceHistoryButton";
-            PriceHistoryButton.Size = new Size(120, 39);
+            PriceHistoryButton.Size = new Size(120, 47);
             PriceHistoryButton.TabIndex = 16;
             PriceHistoryButton.Text = "Price History";
             PriceHistoryButton.UseVisualStyleBackColor = true;
@@ -253,7 +254,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(98, 276);
+            FreyaLinkLabel.Location = new Point(95, 325);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -264,8 +265,8 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label10.Location = new Point(12, 273);
+            label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic);
+            label10.Location = new Point(9, 322);
             label10.Name = "label10";
             label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
@@ -283,11 +284,11 @@
             ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             ShoppingListButton.FlatStyle = FlatStyle.Flat;
             ShoppingListButton.ForeColor = Color.White;
-            ShoppingListButton.Location = new Point(9, 212);
+            ShoppingListButton.Location = new Point(142, 222);
             ShoppingListButton.Margin = new Padding(3, 2, 3, 2);
             ShoppingListButton.MaximumSize = new Size(120, 120);
             ShoppingListButton.Name = "ShoppingListButton";
-            ShoppingListButton.Size = new Size(120, 42);
+            ShoppingListButton.Size = new Size(120, 39);
             ShoppingListButton.TabIndex = 22;
             ShoppingListButton.Text = "Shopping List";
             ShoppingListButton.UseVisualStyleBackColor = true;
@@ -324,9 +325,9 @@
             // DocumentationLabel
             // 
             DocumentationLabel.AutoSize = true;
-            DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            DocumentationLabel.Location = new Point(12, 305);
+            DocumentationLabel.Location = new Point(9, 354);
             DocumentationLabel.Name = "DocumentationLabel";
             DocumentationLabel.Size = new Size(118, 20);
             DocumentationLabel.TabIndex = 25;
@@ -334,11 +335,31 @@
             DocumentationLabel.Text = "Documentation";
             DocumentationLabel.LinkClicked += DocumentationLabel_LinkClicked;
             // 
+            // LPOfferButton
+            // 
+            LPOfferButton.Cursor = Cursors.Hand;
+            LPOfferButton.FlatAppearance.BorderColor = Color.Gray;
+            LPOfferButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            LPOfferButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            LPOfferButton.FlatStyle = FlatStyle.Flat;
+            LPOfferButton.ForeColor = Color.White;
+            LPOfferButton.Location = new Point(9, 114);
+            LPOfferButton.Margin = new Padding(3, 2, 3, 2);
+            LPOfferButton.MaximumSize = new Size(120, 120);
+            LPOfferButton.Name = "LPOfferButton";
+            LPOfferButton.Size = new Size(120, 50);
+            LPOfferButton.TabIndex = 26;
+            LPOfferButton.Text = "LP Offers";
+            LPOfferButton.UseVisualStyleBackColor = true;
+            LPOfferButton.Click += LPOfferButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(21, 21, 21);
             ClientSize = new Size(471, 381);
+            Controls.Add(LPOfferButton);
             Controls.Add(DocumentationLabel);
             Controls.Add(BuildPlansButton);
             Controls.Add(ShoppingListButton);
@@ -354,11 +375,12 @@
             Controls.Add(BlueprintBrowserButton);
             Controls.Add(menuStrip1);
             ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainScreen";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Eve Helper";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -390,5 +412,6 @@
         private System.ComponentModel.BackgroundWorker UpdateWorker;
         private System.ComponentModel.BackgroundWorker CheckInternetBGWorker;
         private LinkLabel DocumentationLabel;
+        private Button LPOfferButton;
     }
 }

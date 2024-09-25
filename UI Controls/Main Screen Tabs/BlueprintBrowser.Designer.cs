@@ -506,7 +506,7 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.BackColor = Color.FromArgb(2, 23, 38);
+            panel1.BackColor = Enums.Enums.BackgroundColor;
             panel1.Controls.Add(AdditionalBPCostLabel);
             panel1.Controls.Add(label70);
             panel1.Controls.Add(InventionCostLabel);
@@ -1672,7 +1672,7 @@
             // 
             // ManufacturingPage
             // 
-            ManufacturingPage.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPage.BackColor = Enums.Enums.BackgroundColor;
             ManufacturingPage.Controls.Add(InventedFromLabel);
             ManufacturingPage.Controls.Add(InventedFromLabelLabel);
             ManufacturingPage.Controls.Add(AdditionalCostsNumeric);
@@ -2296,7 +2296,7 @@
             // TreeViewList
             // 
             TreeViewList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            TreeViewList.BackColor = Color.FromArgb(2, 23, 38);
+            TreeViewList.BackColor = Enums.Enums.BackgroundColor;
             TreeViewList.CausesValidation = false;
             TreeViewList.ForeColor = SystemColors.ControlLight;
             TreeViewList.HideSelection = false;
@@ -2312,7 +2312,7 @@
             // ManufacturingPanel
             // 
             ManufacturingPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            ManufacturingPanel.BackColor = Color.FromArgb(2, 23, 38);
+            ManufacturingPanel.BackColor = Enums.Enums.BackgroundColor;
             ManufacturingPanel.Controls.Add(TaxOutputsCheckbox);
             ManufacturingPanel.Controls.Add(TaxInputCheckbox);
             ManufacturingPanel.Controls.Add(CreateBuildPlanButton);
@@ -2463,7 +2463,7 @@
             // 
             // CopyPage
             // 
-            CopyPage.BackColor = Color.FromArgb(2, 23, 38);
+            CopyPage.BackColor = Enums.Enums.BackgroundColor;
             CopyPage.Controls.Add(CopyMatGrid);
             CopyPage.Controls.Add(CopySystemCostIndexLabel);
             CopyPage.Controls.Add(label20);
@@ -2763,7 +2763,7 @@
             // 
             // MEResearchPage
             // 
-            MEResearchPage.BackColor = Color.FromArgb(2, 23, 38);
+            MEResearchPage.BackColor = Enums.Enums.BackgroundColor;
             MEResearchPage.Controls.Add(MESystemCostIndexLabel);
             MEResearchPage.Controls.Add(label65);
             MEResearchPage.Controls.Add(MEInputVolumeLabel);
@@ -3062,7 +3062,7 @@
             // 
             // TEResearchPage
             // 
-            TEResearchPage.BackColor = Color.FromArgb(2, 23, 38);
+            TEResearchPage.BackColor = Enums.Enums.BackgroundColor;
             TEResearchPage.Controls.Add(TESystemCostIndexLabel);
             TEResearchPage.Controls.Add(label19);
             TEResearchPage.Controls.Add(TEInputVolumeLabel);
@@ -3362,7 +3362,7 @@
             // 
             // InventionPage
             // 
-            InventionPage.BackColor = Color.FromArgb(2, 23, 38);
+            InventionPage.BackColor = Enums.Enums.BackgroundColor;
             InventionPage.Controls.Add(EncryptionStarshipSkillUpDown);
             InventionPage.Controls.Add(Datacore2SkillUpDown);
             InventionPage.Controls.Add(DataCore1SkillUpDown);
@@ -3861,7 +3861,7 @@
             // 
             // ReverseEngineerPage
             // 
-            ReverseEngineerPage.BackColor = Color.FromArgb(2, 23, 38);
+            ReverseEngineerPage.BackColor = Enums.Enums.BackgroundColor;
             ReverseEngineerPage.Location = new Point(4, 28);
             ReverseEngineerPage.Margin = new Padding(2);
             ReverseEngineerPage.Name = "ReverseEngineerPage";
@@ -3872,7 +3872,7 @@
             // 
             // ReactionPage
             // 
-            ReactionPage.BackColor = Color.FromArgb(2, 23, 38);
+            ReactionPage.BackColor = Enums.Enums.BackgroundColor;
             ReactionPage.Controls.Add(ReactionInputGrid);
             ReactionPage.Controls.Add(ReactionsImagePanel);
             ReactionPage.Controls.Add(ReactionsSCILabel);
@@ -4237,7 +4237,7 @@
             // 
             // SearchResultsTreeView
             // 
-            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            SearchResultsTreeView.BackColor = Enums.Enums.BackgroundColor;
             SearchResultsTreeView.CausesValidation = false;
             SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
             SearchResultsTreeView.HideSelection = false;

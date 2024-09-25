@@ -298,5 +298,13 @@ namespace EveHelperWF.UI_Controls
             startInfo.UseShellExecute = true;
             Process.Start(startInfo);
         }
+
+        private void LPOfferButton_Click(object sender, EventArgs e)
+        {
+            LPStore lPStore = new LPStore();
+            lPStore.StartPosition = FormStartPosition.CenterParent;
+            lPStore.Show();
+            lPStore.BringToFront();
+        }
     }
 }

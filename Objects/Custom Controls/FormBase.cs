@@ -15,7 +15,7 @@ namespace EveHelperWF.Objects
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F); // for design in 96 DPI
 
-            Color mainBackgroundColor = Color.FromArgb(255, 2, 23, 38);
+            Color mainBackgroundColor = Enums.Enums.BackgroundColor;
 
             this.BackColor = mainBackgroundColor;
             this.ForeColor = Color.White;

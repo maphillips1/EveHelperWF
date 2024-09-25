@@ -126,7 +126,7 @@
             // 
             // textBox1
             // 
-            textBox1.BackColor = Color.FromArgb(2, 23, 38);
+            textBox1.BackColor = Enums.Enums.BackgroundColor;
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             textBox1.ForeColor = Color.White;

@@ -169,7 +169,7 @@
             // MarketListTreeView
             // 
             MarketListTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            MarketListTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            MarketListTreeView.BackColor = Enums.Enums.BackgroundColor;
             MarketListTreeView.ForeColor = Color.White;
             MarketListTreeView.Location = new Point(2, 166);
             MarketListTreeView.Margin = new Padding(3, 2, 3, 2);
@@ -194,7 +194,7 @@
             // 
             // OrdersTabPage
             // 
-            OrdersTabPage.BackColor = Color.FromArgb(2, 23, 38);
+            OrdersTabPage.BackColor = Enums.Enums.BackgroundColor;
             OrdersTabPage.Controls.Add(label3);
             OrdersTabPage.Controls.Add(SellOrdersGridView);
             OrdersTabPage.Controls.Add(BuyOrdersGridView);
@@ -735,7 +735,7 @@
             // 
             // SearchResultsTreeView
             // 
-            SearchResultsTreeView.BackColor = Color.FromArgb(2, 23, 38);
+            SearchResultsTreeView.BackColor = Enums.Enums.BackgroundColor;
             SearchResultsTreeView.CausesValidation = false;
             SearchResultsTreeView.ForeColor = SystemColors.ControlLight;
             SearchResultsTreeView.HideSelection = false;
