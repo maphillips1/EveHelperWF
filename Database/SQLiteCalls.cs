@@ -23,11 +23,10 @@ namespace EveHelperWF.Database
             return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                                          "SQLite FIles\\");
         }
-        
 
         public static string GetSQLitePath()
         {
-            string dbpath = Path.Combine(GetSQLiteDirectory(), "sqlite-latest.sqlite");
+            string dbpath = Path.Combine(GetSQLiteDirectory(), "new_SDE_latest.sqlite");
 
             return dbpath;
         }
@@ -39,7 +38,7 @@ namespace EveHelperWF.Database
 
             sb.AppendLine("Select");
             sb.AppendLine("regionID, regionName");
-            sb.AppendLine("FROM mapRegions MR");
+            sb.AppendLine("FROM Region");
             sb.AppendLine("ORDER BY regionName");
 
             return sb.ToString();
@@ -49,17 +48,21 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT MSS.solarSystemName,");
+            sb.AppendLine("SELECT SS.solarSystemName,");
             sb.AppendLine("CASE");
-            sb.AppendLine("WHEN mssj.fromRegionID<> mssj.toRegionID THEN 1");
+            sb.AppendLine("WHEN SS_Source.regionID <> SS.regionID THEN 1");
             sb.AppendLine("ELSE 0");
             sb.AppendLine("END AS is_regionalJump,");
-            sb.AppendLine("MSS.security,");
-            sb.AppendLine("mssj.toSolarSystemID");
-            sb.AppendLine("from mapSolarSystemJumps mssj");
-            sb.AppendLine("INNER JOIN mapSolarSystems MSS");
-            sb.AppendLine("ON MSS.solarSystemID = MSSJ.toSolarSystemID");
-            sb.AppendLine("WHERE mssj.fromSolarSystemID = " + solarsystemID.ToString());
+            sb.AppendLine("SS.security,");
+            sb.AppendLine("SS.solarSystemID");
+            sb.AppendLine("from SolarSystemStargate SSS");
+            sb.AppendLine("INNER JOIN SolarSystemStargate SSS_Dest");
+            sb.AppendLine("    on SSS_Dest.stargateID = SSS.destination");
+            sb.AppendLine("INNER JOIN SolarSystem SS");
+            sb.AppendLine("    ON SS.solarSystemID = SSS_Dest.solarSystemID");
+            sb.AppendLine("INNER JOIN SolarSystem SS_Source");
+            sb.AppendLine("    ON SS_Source.solarSystemID = SSS.solarSystemID");
+            sb.AppendLine("WHERE SSS.solarSystemID = " + solarsystemID.ToString());
 
             return sb.ToString();
         }
@@ -68,11 +71,11 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT factionName");
-            sb.AppendLine("FROM mapSolarSystems MSS");
-            sb.AppendLine("INNER JOIN chrFactions F");
-            sb.AppendLine("ON F.factionID = MSS.factionID");
-            sb.AppendLine("WHERE MSS.solarSystemID = " + solarsystemID.ToString());
+            sb.AppendLine("SELECT en");
+            sb.AppendLine("FROM SolarSystem SS");
+            sb.AppendLine("INNER JOIN FactionName FN");
+            sb.AppendLine("ON FN.parentTypeID = SS.factionID");
+            sb.AppendLine("WHERE SS.solarSystemID = " + solarsystemID.ToString());
 
             return sb.ToString();
         }
@@ -82,9 +85,10 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT count(*) as moon_count");
-            sb.AppendLine("FROM mapDenormalize");
-            sb.AppendLine("WHERE solarSystemID = " + solarSystemID.ToString());
-            sb.AppendLine("and groupID = 8");
+            sb.AppendLine("FROM SolarSystemPlanet SSP");
+            sb.AppendLine("    Inner Join PlanetMoon PM");
+            sb.AppendLine("        on PM.planetID = SSP.planetID");
+            sb.AppendLine("WHERE SSP.solarSystemID = " + solarSystemID.ToString());
 
             return sb.ToString();
         }
@@ -94,9 +98,10 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT count(*) as belt_count");
-            sb.AppendLine("FROM mapDenormalize");
-            sb.AppendLine("WHERE solarSystemID = " + solarSystemID.ToString());
-            sb.AppendLine("and groupID = 9");
+            sb.AppendLine("FROM SolarSystemPlanet SSP");
+            sb.AppendLine("    Inner Join PlanetAsteroidBelt PAB");
+            sb.AppendLine("        on PAB.planetID = SSP.planetID");
+            sb.AppendLine("WHERE SSP.solarSystemID = " + solarSystemID.ToString());
 
 
             return sb.ToString();
@@ -107,12 +112,12 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("SELECT");
             sb.AppendLine("    ss.stationName,");
-            sb.AppendLine("    fact.factionName");
-            sb.AppendLine("FROM staStations SS");
-            sb.AppendLine("    Inner join crpNPCCorporations Corp");
-            sb.AppendLine("        on Corp.corporationID = ss.corporationID");
-            sb.AppendLine("    inner join chrFactions Fact");
-            sb.AppendLine("        on Fact.factionID = Corp.factionID");
+            sb.AppendLine("    fact.en");
+            sb.AppendLine("FROM StaStation SS");
+            sb.AppendLine("    Inner join NPCCorporation Corp");
+            sb.AppendLine("        on Corp.npcCorporationID = ss.corporationID");
+            sb.AppendLine("    inner join FactionName Fact");
+            sb.AppendLine("        on Fact.parentTypeId = Corp.factionID");
             sb.AppendLine("WHERE ss.solarSystemID = " + solarSystemID.ToString());
             return sb.ToString();
         }
@@ -122,16 +127,19 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT");
-            sb.AppendLine("    md.itemName,");
-            sb.AppendLine("    it.typeName,");
-            sb.AppendLine("    ig.groupName");
-            sb.AppendLine("FROM mapDenormalize md");
-            sb.AppendLine("    INNER JOIN invTypes IT");
-            sb.AppendLine("        ON IT.typeID = MD.typeID");
-            sb.AppendLine("    INNER JOIN invGroups IG");
-            sb.AppendLine("        ON IG.groupID = IT.groupID");
-            sb.AppendLine("WHERE solarSystemID = " + solarSystemID.ToString());
-            sb.AppendLine("AND ig.groupID = 7");
+            sb.AppendLine("    IUN.itemName,");
+            sb.AppendLine("    ETN.en,");
+            sb.AppendLine("    GN.en");
+            sb.AppendLine("FROM SolarSystemPlanet SSP");
+            sb.AppendLine("    INNER JOIN InvUniqueName IUN");
+            sb.AppendLine("        ON IUN.itemID = SSP.planetID");
+            sb.AppendLine("    INNER JOIN EveType ET");
+            sb.AppendLine("        ON SSP.typeID = ET.typeID");
+            sb.AppendLine("    INNER JOIN EveTypeName ETN");
+            sb.AppendLine("        ON ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("    INNER JOIN GroupName GN");
+            sb.AppendLine("        ON GN.parentTypeId = ET.groupID");
+            sb.AppendLine("WHERE SSP.solarSystemID = " + solarSystemID.ToString());
             return sb.ToString();
         }
 
@@ -139,11 +147,13 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT typeID, typeName");
-            sb.AppendLine("FROM invTypes");
-            sb.AppendLine("WHERE UPPER(typeName) LIKE '%' || " + searchText.ToUpperInvariant());
+            sb.AppendLine("SELECT parentTypeId, ETN.en");
+            sb.AppendLine("FROM EveTypeName  ETN");
+            sb.AppendLine("    INNER JOIN EveType ET");
+            sb.AppendLine("        on ET.typeID = ETN.parentTypeID");
+            sb.AppendLine("WHERE UPPER(en) LIKE '%' || " + searchText.ToUpperInvariant());
             sb.AppendLine("AND published = 1");
-            sb.AppendLine("order by length(typeName)");
+            sb.AppendLine("order by length(ETN.en)");
 
             return sb.ToString();
         }
@@ -152,12 +162,14 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT typeID, typeName");
-            sb.AppendLine("FROM invTypes");
-            sb.AppendLine("WHERE UPPER(typeName) LIKE '%' || " + searchText.ToUpperInvariant());
-            sb.AppendLine("AND marketGroupID > 0");
-            sb.AppendLine("AND published = 1");
-            sb.AppendLine("order by length(typeName)");
+            sb.AppendLine("SELECT ET.typeID, ETN.en");
+            sb.AppendLine("FROM EveTypeName  ETN");
+            sb.AppendLine("    INNER JOIN EveType ET");
+            sb.AppendLine("        on ET.typeID = ETN.parentTypeID");
+            sb.AppendLine("WHERE UPPER(en) LIKE '%' || " + searchText.ToUpperInvariant());
+            sb.AppendLine("    AND published = 1");
+            sb.AppendLine("    AND ET.marketGroupID > 0");
+            sb.AppendLine("order by length(ETN.en)");
 
             return sb.ToString();
         }
@@ -166,13 +178,13 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select MSS.regionID, mss.constellationID, mss.solarSystemID, mss.solarSystemName, mc.constellationName, mr.regionName, mss.security");
-            sb.AppendLine("from mapSolarSystems MSS");
-            sb.AppendLine("    inner join mapRegions MR");
-            sb.AppendLine("        on MR.regionID = MSS.regionID");
-            sb.AppendLine("    inner join mapConstellations MC");
-            sb.AppendLine("        on MC.constellationID = MSS.constellationId");
-            sb.AppendLine("where solarSystemID in (");
+            sb.AppendLine("select SS.regionID, SS.constellationID, SS.solarSystemID, SS.solarSystemName, C.constellationName, R.regionName, SS.security");
+            sb.AppendLine("from SolarSystem SS");
+            sb.AppendLine("    inner join Region R");
+            sb.AppendLine("        on R.regionID = SS.regionID");
+            sb.AppendLine("    inner join Constellation C");
+            sb.AppendLine("        on C.constellationID = SS.constellationId");
+            sb.AppendLine("where SS.solarSystemID in (");
             int count = 0;
             foreach (int solarSystemID in solarSystemIDs)
             {
@@ -192,16 +204,10 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select PSOut.schematicID");
-            sb.AppendLine("from planetSchematics PSOut");
-            sb.AppendLine("inner join planetSchematicsTypeMap PSTM");
-            sb.AppendLine("    on PSTM.schematicID = PSOut.schematicID");
-            sb.AppendLine("        and isInput = 0");
-            sb.AppendLine("inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = PSTM.typeID");
-            sb.AppendLine("        AND IT.published = 1");
-            sb.AppendLine("where IT.typeID = " + typeID.ToString());
-            sb.AppendLine("order by PSOut.schematicName, IT.typeName");
+            sb.AppendLine("select planetSchematicID");
+            sb.AppendLine("from PlanetSchematicType");
+            sb.AppendLine("where planetSchematicTypeID = " + typeID.ToString());
+            sb.AppendLine("    and isInput = 0");
 
             return sb.ToString();
         }
@@ -210,27 +216,31 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select PSOut.schematicID,");
-            sb.AppendLine("        PSOut.schematicName,");
-            sb.AppendLine("        PSOut.cycleTime,");
-            sb.AppendLine("        PSTM.quantity,");
-            sb.AppendLine("        PSTM.isInput,");
-            sb.AppendLine("        IT.typeName,");
-            sb.AppendLine("        IT.typeID,");
-            sb.AppendLine("        IT.volume,");
-            sb.AppendLine("        IG.groupID,");
-            sb.AppendLine("        IG.groupName");
-            sb.AppendLine("from planetSchematics PSOut");
-            sb.AppendLine("inner join planetSchematicsTypeMap PSTM");
-            sb.AppendLine("    on PSTM.schematicID = PSOut.schematicID");
-            sb.AppendLine("        and isInput = 1");
-            sb.AppendLine("inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = PSTM.typeID");
-            sb.AppendLine("        AND IT.published = 1");
-            sb.AppendLine("inner join invGroups IG");
-            sb.AppendLine("    on IG.groupID = IT.groupID");
-            sb.AppendLine("where PSOut.schematicID = " + schematicID.ToString());
-            sb.AppendLine("order by PSOut.schematicName, IT.typeName");
+            sb.AppendLine("select PS.planetSchematicID,");
+            sb.AppendLine("        PSN.en,");
+            sb.AppendLine("        PS.cycleTime,");
+            sb.AppendLine("        PST.quantity,");
+            sb.AppendLine("        PST.isInput,");
+            sb.AppendLine("        ETN.en,");
+            sb.AppendLine("        ET.typeID,");
+            sb.AppendLine("        ET.volume,");
+            sb.AppendLine("        ET.groupID,");
+            sb.AppendLine("        GN.en");
+            sb.AppendLine("from PlanetSchematic PS");
+            sb.AppendLine("    inner join PlanetSchematicName PSN");
+            sb.AppendLine("        on PSN.parentTypeId = PS.planetSchematicID");
+            sb.AppendLine("    inner join PlanetSchematicType PST");
+            sb.AppendLine("        on PST.planetSchematicID = PS.planetSchematicID");
+            sb.AppendLine("            and isInput = 1");
+            sb.AppendLine("    inner join EveType ET");
+            sb.AppendLine("        on ET.typeID = PST.planetSchematicTypeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("    inner join GroupName GN");
+            sb.AppendLine("        on GN.parentTypeId = ET.groupID");
+            sb.AppendLine("where PS.planetSchematicID = " + schematicID.ToString());
+            sb.AppendLine("order by PSN.en, ETN.en");
 
             return sb.ToString();
         }
@@ -239,26 +249,30 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select PSOut.schematicID,");
-            sb.AppendLine("        PSOut.schematicName,");
-            sb.AppendLine("        PSOut.cycleTime,");
-            sb.AppendLine("        PSTM.quantity,");
-            sb.AppendLine("        PSTM.isInput,");
-            sb.AppendLine("        IT.typeName,");
-            sb.AppendLine("        IT.typeID,");
-            sb.AppendLine("        IT.volume,");
-            sb.AppendLine("        IG.groupID,");
-            sb.AppendLine("        IG.groupName");
-            sb.AppendLine("from planetSchematics PSOut");
-            sb.AppendLine("inner join planetSchematicsTypeMap PSTM");
-            sb.AppendLine("    on PSTM.schematicID = PSOut.schematicID");
-            sb.AppendLine("        and isInput = 0");
-            sb.AppendLine("inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = PSTM.typeID");
-            sb.AppendLine("        AND IT.published = 1");
-            sb.AppendLine("inner join invGroups IG");
-            sb.AppendLine("    on IG.groupID = IT.groupID");
-            sb.AppendLine("order by PSOut.schematicName, IT.typeName");
+            sb.AppendLine("select PS.planetSchematicID,");
+            sb.AppendLine("        PSN.en,");
+            sb.AppendLine("        PS.cycleTime,");
+            sb.AppendLine("        PST.quantity,");
+            sb.AppendLine("        PST.isInput,");
+            sb.AppendLine("        ETN.en,");
+            sb.AppendLine("        ET.typeID,");
+            sb.AppendLine("        ET.volume,");
+            sb.AppendLine("        ET.groupID,");
+            sb.AppendLine("        GN.en");
+            sb.AppendLine("from PlanetSchematic PS");
+            sb.AppendLine("    inner join PlanetSchematicName PSN");
+            sb.AppendLine("        on PSN.parentTypeId = PS.planetSchematicID");
+            sb.AppendLine("    inner join PlanetSchematicType PST");
+            sb.AppendLine("        on PST.planetSchematicID = PS.planetSchematicID");
+            sb.AppendLine("            and isInput = 0");
+            sb.AppendLine("    inner join EveType ET");
+            sb.AppendLine("        on ET.typeID = PST.planetSchematicTypeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("    inner join GroupName GN");
+            sb.AppendLine("        on GN.parentTypeId = ET.groupID");
+            sb.AppendLine("order by PSN.en, ETN.en");
 
             return sb.ToString();
         }
@@ -267,27 +281,31 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select PSOut.schematicID,");
-            sb.AppendLine("        PSOut.schematicName,");
-            sb.AppendLine("        PSOut.cycleTime,");
-            sb.AppendLine("        PSTM.quantity,");
-            sb.AppendLine("        PSTM.isInput,");
-            sb.AppendLine("        IT.typeName,");
-            sb.AppendLine("        IT.typeID,");
-            sb.AppendLine("        IT.volume,");
-            sb.AppendLine("        IG.groupID,");
-            sb.AppendLine("        IG.groupName");
-            sb.AppendLine("from planetSchematics PSOut");
-            sb.AppendLine("inner join planetSchematicsTypeMap PSTM");
-            sb.AppendLine("    on PSTM.schematicID = PSOut.schematicID");
-            sb.AppendLine("        and isInput = 0");
-            sb.AppendLine("inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = PSTM.typeID");
-            sb.AppendLine("        AND IT.published = 1");
-            sb.AppendLine("inner join invGroups IG");
-            sb.AppendLine("    on IG.groupID = IT.groupID");
-            sb.AppendLine("where PSOut.schematicID = " + schematicID.ToString());
-            sb.AppendLine("order by PSOut.schematicName, IT.typeName");
+            sb.AppendLine("select PS.planetSchematicID,");
+            sb.AppendLine("        PSN.en,");
+            sb.AppendLine("        PS.cycleTime,");
+            sb.AppendLine("        PST.quantity,");
+            sb.AppendLine("        PST.isInput,");
+            sb.AppendLine("        ETN.en,");
+            sb.AppendLine("        ET.typeID,");
+            sb.AppendLine("        ET.volume,");
+            sb.AppendLine("        ET.groupID,");
+            sb.AppendLine("        GN.en");
+            sb.AppendLine("from PlanetSchematic PS");
+            sb.AppendLine("    inner join PlanetSchematicName PSN");
+            sb.AppendLine("        on PSN.parentTypeId = PS.planetSchematicID");
+            sb.AppendLine("    inner join PlanetSchematicType PST");
+            sb.AppendLine("        on PST.planetSchematicID = PS.planetSchematicID");
+            sb.AppendLine("            and isInput = 0");
+            sb.AppendLine("    inner join EveType ET");
+            sb.AppendLine("        on ET.typeID = PST.planetSchematicTypeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("    inner join GroupName GN");
+            sb.AppendLine("        on GN.parentTypeId = ET.groupID");
+            sb.AppendLine("where PS.planetSchematicID = " + schematicID.ToString());
+            sb.AppendLine("order by PSN.en, ETN.en");
 
             return sb.ToString();
         }
@@ -296,30 +314,38 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IT.typeID,");
-            sb.AppendLine("    IT.typeName,");
-            sb.AppendLine("    IT.[description],");
-            sb.AppendLine("    IT.volume,");
-            sb.AppendLine("    IT.portionSize,");
-            sb.AppendLine("    IT.raceID,");
-            sb.AppendLine("    IT.basePrice,");
-            sb.AppendLine("    IT.marketGroupID,");
-            sb.AppendLine("    IT.iconID,");
-            sb.AppendLine("    IT.soundID,");
-            sb.AppendLine("    IG.groupID,");
-            sb.AppendLine("    IG.groupName,");
-            sb.AppendLine("    IC.categoryID,");
-            sb.AppendLine("    IC.categoryName,");
-            sb.AppendLine("    Coalesce(IMG.parentGroupID, 0) as parentGroupID,");
-            sb.AppendLine("    IMG.marketGroupName");
-            sb.AppendLine("from invTypes IT");
-            sb.AppendLine("inner join invGroups IG");
-            sb.AppendLine("    on IG.groupID = IT.groupID");
-            sb.AppendLine("inner join invCategories IC");
-            sb.AppendLine("    on IC.categoryID = IG.categoryID");
-            sb.AppendLine("left outer join invMarketGroups IMG");
-            sb.AppendLine("    on IMG.marketGroupID = iT.marketGroupID");
-            sb.AppendLine("where IT.published = 1");
+            sb.AppendLine("select ET.typeID,");
+            sb.AppendLine("    ETN.en,");
+            sb.AppendLine("    Coalesce(ETD.en, '') as d_en,");
+            sb.AppendLine("    ET.volume,");
+            sb.AppendLine("    ET.portionSize,");
+            sb.AppendLine("    ET.raceID,");
+            sb.AppendLine("    ET.basePrice,");
+            sb.AppendLine("    ET.marketGroupID,");
+            sb.AppendLine("    0 as iconID,");
+            sb.AppendLine("    0 as soundID,");
+            sb.AppendLine("    ET.groupID,");
+            sb.AppendLine("    GN.en,");
+            sb.AppendLine("    EG.categoryID,");
+            sb.AppendLine("    CN.en,");
+            sb.AppendLine("    Coalesce(MG.parentGroupID, 0) as parentGroupID,");
+            sb.AppendLine("    MGN.en");
+            sb.AppendLine("from EveType ET");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeId");
+            sb.AppendLine("    LEFT OUTER JOIN EveTypeDescription ETD");
+            sb.AppendLine("        on ETD.parentTypeId = ET.typeID");
+            sb.AppendLine("    inner join EveGroup EG");
+            sb.AppendLine("        on EG.groupID = ET.groupID");
+            sb.AppendLine("    inner join GroupName GN");
+            sb.AppendLine("        on GN.parentTypeId = EG.groupID");
+            sb.AppendLine("    inner join CategoryName CN");
+            sb.AppendLine("        on CN.parentTypeId = EG.categoryID");
+            sb.AppendLine("    left outer join MarketGroup MG");
+            sb.AppendLine("        on MG.marketGroupID = ET.marketGroupID");
+            sb.AppendLine("    left outer join MarketGroupName MGN");
+            sb.AppendLine("        on MGN.parentTypeId = ET.marketGroupID");
+            sb.AppendLine("where ET.published = 1");
 
             return sb.ToString();
         }
@@ -328,60 +354,56 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IA.typeID,");
-            sb.AppendLine("        IA.activityID,");
-            sb.AppendLine("        IA.time,");
-            sb.AppendLine("        RA.activityName,");
-            sb.AppendLine("        Coalesce(IAP.productTypeID, 0) as productTypeID,");
-            sb.AppendLine("        Coalesce(pIT.typeName, '') as typeName");
-            sb.AppendLine("from industryActivity IA");
-            sb.AppendLine("Inner");
-            sb.AppendLine("join ramActivities RA");
-            sb.AppendLine("    on RA.activityID = IA.activityID");
-            sb.AppendLine("LEFT OUTER join industryActivityProducts IAP");
-            sb.AppendLine("    on IAP.typeID = IA.typeID");
-            sb.AppendLine("        and IAP.activityID = IA.activityID");
-            sb.AppendLine("LEFT OUTER join invTypes pIT");
-            sb.AppendLine("    on pIT.typeID = IAP.productTypeID");
-            sb.AppendLine("            AND pIT.published = 1");
-            sb.AppendLine("where ia.typeID = " + type_id.ToString());
-            sb.AppendLine("and Ra.published = 1");
+            sb.AppendLine("select BAT.blueprintTypeId,");
+            sb.AppendLine("        BAT.time,");
+            sb.AppendLine("        BAT.activityName,");
+            sb.AppendLine("        Coalesce(BP.typeID, 0) as productTypeID,");
+            sb.AppendLine("        Coalesce(ETN.en, '') as typeName");
+            sb.AppendLine("from BlueprintActivityType BAT");
+            sb.AppendLine("LEFT OUTER join BlueprintProduct BP");
+            sb.AppendLine("    on BP.blueprintTYpeID = BAT.blueprintTypeID");
+            sb.AppendLine("        and BP.activityName = BAT.activityName");
+            sb.AppendLine("LEFT OUTER join EveType ET");
+            sb.AppendLine("    on ET.typeID = BP.typeId");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("LEFT OUTER join EveTypeName ETN");
+            sb.AppendLine("    on ETN.parentTypeID = ET.typeID");
+            sb.AppendLine("where BAT.blueprintTypeId = " + type_id.ToString());
 
             return sb.ToString();
         }
 
-        private static string GetIndustryActivityMaterialsCommand(int type_id, int activity_id)
+        private static string GetIndustryActivityMaterialsCommand(int type_id, string activityName)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IAM.typeID,");
-            sb.AppendLine("    IAM.activityID,");
-            sb.AppendLine("    IAM.materialTypeID,");
-            sb.AppendLine("    IT.typeName,");
-            sb.AppendLine("    IAM.quantity,");
-            sb.AppendLine("    RA.activityName,");
+            sb.AppendLine("select BAM.blueprintTypeId,");
+            sb.AppendLine("    BAM.typeId,");
+            sb.AppendLine("    ETN.en,");
+            sb.AppendLine("    BAM.quantity,");
+            sb.AppendLine("    BAM.activityName,");
             sb.AppendLine("    case");
-            sb.AppendLine("        when IAP.productTypeID IS NOT NULL Then 1 ");
+            sb.AppendLine("        when manuProd.typeID IS NOT NULL Then 1 ");
             sb.AppendLine("        else 0");
             sb.AppendLine("    end as isManufacturable,");
             sb.AppendLine("    case");
-            sb.AppendLine("        when IAP2.productTypeID IS NOT NULL Then 1");
+            sb.AppendLine("        when reactProd.typeID IS NOT NULL Then 1");
             sb.AppendLine("        else 0");
             sb.AppendLine("    end as isReactable");
-            sb.AppendLine("from industryActivityMaterials IAM");
-            sb.AppendLine("Inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = IAM.materialTypeID");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("Inner join ramActivities RA");
-            sb.AppendLine("    on RA.activityID = IAM.activityID");
-            sb.AppendLine("LEFT OUTER JOIN industryActivityProducts IAP");
-            sb.AppendLine("    on IAP.productTypeID = IAM.materialTypeID");
-            sb.AppendLine("        and IAP.activityID = 1");
-            sb.AppendLine("LEFT OUTER JOIN industryActivityProducts IAP2");
-            sb.AppendLine("    on IAP2.productTypeID = IAM.materialTypeID");
-            sb.AppendLine("        and IAP2.activityID = 11");
-            sb.AppendLine("where IAM.typeID = " + type_id.ToString());
-            sb.AppendLine("and IAM.activityID = " + activity_id.ToString());
+            sb.AppendLine("from BlueprintActivityMaterial BAM");
+            sb.AppendLine("Inner join EveType ET");
+            sb.AppendLine("    on ET.typeID = BAM.typeId");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("Inner join EveTypeName ETN");
+            sb.AppendLine("    on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("LEFT OUTER JOIN BlueprintProduct manuProd");
+            sb.AppendLine("    on manuProd.typeId = BAM.typeId");
+            sb.AppendLine("        and manuProd.activityName = 'manufacturing'");
+            sb.AppendLine("LEFT OUTER JOIN BlueprintProduct reactProd");
+            sb.AppendLine("    on reactProd.typeId = BAM.typeId");
+            sb.AppendLine("        and reactProd.activityName = 'reaction'");
+            sb.AppendLine("where BAM.blueprintTypeId = " + type_id.ToString());
+            sb.AppendLine("and BAM.activityName = '" + activityName + "'");
 
             return sb.ToString();
         }
@@ -390,52 +412,54 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select marketGroupID, coalesce(parentGroupID, 0) as parentGroupID, marketGroupName, description");
-            sb.AppendLine("from invMarketGroups");
+            sb.AppendLine("select mg.marketGroupID, coalesce(mg.parentGroupID, 0) as parentGroupID, MGN.en, Coalesce(MGD.en, '')");
+            sb.AppendLine("from MarketGroup MG");
+            sb.AppendLine("    LEFT OUTER JOIN MarketGroupDescription MGD");
+            sb.AppendLine("        on MGD.parentTypeID = MG.marketGroupID");
+            sb.AppendLine("    INNER JOIN MarketGroupName MGN");
+            sb.AppendLine("        on MGN.parentTypeID = MG.marketGroupID");
 
             return sb.ToString();
         }
 
-        private static string GetIndustryActivitySkillsCommand(int type_id, int activity_id)
+        private static string GetIndustryActivitySkillsCommand(int type_id, string activityName)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IAS.typeID,");
-			sb.AppendLine("        IAS.activityID,");
-			sb.AppendLine("        IAS.skillID,");
-			sb.AppendLine("        IT.typeName,");
-			sb.AppendLine("        IAS.level,");
-			sb.AppendLine("        RA.activityName");
-            sb.AppendLine("from industryActivitySkills IAS");
-            sb.AppendLine("Inner join invTypes IT");
-            sb.AppendLine("    on IT.typeID = IAS.skillID");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("Inner join ramActivities RA");
-            sb.AppendLine("    on RA.activityID = IAS.activityID");
-            sb.AppendLine("where IAS.typeID = " + type_id.ToString());
-            sb.AppendLine("and IAS.activityID = " + activity_id.ToString());
+            sb.AppendLine("select BPS.parentTypeId,");
+			sb.AppendLine("        BPS.typeId,");
+			sb.AppendLine("        ETN.en,");
+			sb.AppendLine("        BPS.level,");
+			sb.AppendLine("        BPS.activityName");
+            sb.AppendLine("from BlueprintSkill BPS");
+            sb.AppendLine("Inner join EveType ET");
+            sb.AppendLine("    on ET.typeID = BPS.typeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("Inner join EveTypeName ETN");
+            sb.AppendLine("    on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("where BPS.parentTypeID = " + type_id.ToString());
+            sb.AppendLine("and BPS.activityName = '" + activityName + "'");
 
             return sb.ToString();
         }
 
-        private static string GetIndustryActivityProductsCommand(int type_id, int activity_id)
+        private static string GetIndustryActivityProductsCommand(int type_id, string activityName)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IAP.typeID,");
-		    sb.AppendLine("    IAP.activityID,");
-		    sb.AppendLine("    IAP.productTypeID,");
-		    sb.AppendLine("    IT.typeName,");
-		    sb.AppendLine("    IAP.quantity,");
-		    sb.AppendLine("    RA.activityName");
-	        sb.AppendLine("from industryActivityProducts IAP");
-	        sb.AppendLine("Inner join invTypes IT");
-		    sb.AppendLine("    on IT.typeID = IAP.productTypeID");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("Inner join ramActivities RA");
-		    sb.AppendLine("    on RA.activityID = IAP.activityID");
-	        sb.AppendLine("where IAP.typeID = " + type_id);
-	        sb.AppendLine("and IAP.activityID = " + activity_id);
+            sb.AppendLine("select BP.blueprintTypeID,");
+		    sb.AppendLine("    BP.typeID,");
+		    sb.AppendLine("    ETN.en,");
+		    sb.AppendLine("    BP.quantity,");
+		    sb.AppendLine("    BP.activityName");
+	        sb.AppendLine("from BlueprintProduct BP");
+	        sb.AppendLine("Inner join EveType ET");
+		    sb.AppendLine("    on ET.typeID = BP.typeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("    INNER JOIN EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
+	        sb.AppendLine("where bp.blueprintTypeId = " + type_id);
+	        sb.AppendLine("and BP.activityName = '" + activityName + "'");
 
             return sb.ToString();
         }
@@ -445,19 +469,19 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("select");
-		    sb.AppendLine("    mss.regionID,");
-		    sb.AppendLine("    mss.constellationID,");
-		    sb.AppendLine("    mss.solarSystemID,");
-		    sb.AppendLine("    mss.solarSystemName,");
-		    sb.AppendLine("    mc.constellationName,");
-		    sb.AppendLine("    mr.regionName,");
-		    sb.AppendLine("    round(mss.security, 1)");
-	        sb.AppendLine("from mapSolarSystems MSS");
-	        sb.AppendLine("inner join mapRegions MR");
-	        sb.AppendLine("on MR.regionID = MSS.regionID");
-	        sb.AppendLine("inner join mapConstellations MC");
-	        sb.AppendLine("on MC.constellationID = MSS.constellationID");
-            sb.AppendLine("order by solarSystemName");
+		    sb.AppendLine("    SS.regionID,");
+		    sb.AppendLine("    SS.constellationID,");
+		    sb.AppendLine("    SS.solarSystemID,");
+		    sb.AppendLine("    SS.solarSystemName,");
+		    sb.AppendLine("    C.constellationName,");
+		    sb.AppendLine("    R.regionName,");
+		    sb.AppendLine("    round(SS.security, 1)");
+	        sb.AppendLine("from SolarSystem SS");
+	        sb.AppendLine("    inner join Region R");
+	        sb.AppendLine("        on R.regionID = SS.regionID");
+	        sb.AppendLine("    inner join Constellation C");
+	        sb.AppendLine("        on C.constellationID = SS.constellationID");
+            sb.AppendLine("order by SS.solarSystemName");
 
             return sb.ToString();
         }
@@ -466,10 +490,10 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select typeID");
-            sb.AppendLine("from industryActivityProducts");
-            sb.AppendLine("where productTypeID = " + type_id.ToString());
-            sb.AppendLine("and activityID = 8");
+            sb.AppendLine("select blueprintTypeID");
+            sb.AppendLine("from BlueprintProduct");
+            sb.AppendLine("where typeID = " + type_id.ToString());
+            sb.AppendLine("and activityName = 'invention'");
             
             return sb.ToString();
         }
@@ -478,27 +502,27 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IAP.typeID");
-            sb.AppendLine("from industryActivityProducts IAP");
-            sb.AppendLine("INNER JOIN invTypes IT ");
-            sb.AppendLine("    ON IT.typeID = IAP.typeID ");
-            sb.AppendLine("        AND IT.published = 1");
-            sb.AppendLine("where productTypeID = " + typeID.ToString());
+            sb.AppendLine("select BP.blueprintTypeID");
+            sb.AppendLine("from BlueprintProduct BP");
+            sb.AppendLine("    INNER JOIN EveType ET ");
+            sb.AppendLine("        ON ET.typeID = BP.blueprintTypeID ");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("where BP.typeID = " + typeID.ToString());
 
             return sb.ToString();
         }
 
-        private static string GetInventionProbabilitiesCommand(int typeID, int activityID)
+        private static string GetInventionProbabilitiesCommand(int typeID)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select IAP.typeID, IAP.productTypeID, IAP.probability");
-            sb.AppendLine("from industryActivityProbabilities IAP");
-            sb.AppendLine("Inner join invTypes IT	");
-            sb.AppendLine("    on IT.typeID = IAP.productTypeID");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("where IAP.typeID = " + typeID.ToString());
-            sb.AppendLine("and IAP.activityID = " + activityID.ToString());
+            sb.AppendLine("select BP.blueprintTypeID, BP.typeID, BP.probability");
+            sb.AppendLine("from BlueprintProduct BP");
+            sb.AppendLine("Inner join EveType ET");
+            sb.AppendLine("    on ET.typeID = BP.blueprintTypeID");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("where BP.blueprintTypeID = " + typeID.ToString());
+            sb.AppendLine("and BP.activityName = 'invention'");
 
             return sb.ToString();
         }
@@ -508,23 +532,9 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("select 1 as invented");
-            sb.AppendLine("from industryActivityProducts");
-            sb.AppendLine("where productTypeID = " + typeID);
-            sb.AppendLine("and activityID = 8");
-
-            return sb.ToString();
-        }
-
-        private static string GetMarketGroupForBlueprintTypeIDCommand(int typeID)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("select Coalesce(IT.marketGroupID, 0) as marketGroupID from industryActivityProducts IAP");
-            sb.AppendLine("Inner join invTypes IT");
-            sb.AppendLine("on IT.typeID = IAP.productTypeID");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("where IAP.typeID = " + typeID.ToString());
-            sb.AppendLine("and (IAP.activityID = 1 or IAP.activityID = 11)");
+            sb.AppendLine("from BlueprintProduct");
+            sb.AppendLine("where typeID = " + typeID);
+            sb.AppendLine("and activityName = 'invention'");
 
             return sb.ToString();
         }
@@ -534,7 +544,7 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT solarSystemName, solarSystemID");
-            sb.AppendLine("FROM mapSolarSystems");
+            sb.AppendLine("FROM SolarSystem");
 	        sb.AppendLine("WHERE regionID = " + regionID.ToString());
             sb.AppendLine("ORDER BY solarSystemName");
 
@@ -546,7 +556,7 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("select stationID, stationName");
-            sb.AppendLine("from staStations");
+            sb.AppendLine("from StaStation");
             sb.AppendLine("where stationID = " + stationID.ToString());
 
             return  sb.ToString();
@@ -556,10 +566,12 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select typeID, typeName from invTypes");
+            sb.AppendLine("select ET.typeID, ETN.en from EveType ET");
+            sb.AppendLine("    INNER JOIN EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeID = ET.typeID");
             sb.AppendLine("where groupID = 1979");
             sb.AppendLine("            AND published = 1");
-            sb.AppendLine("order by typeName");
+            sb.AppendLine("order by ETN.en");
 
             return sb.ToString();
         }
@@ -568,13 +580,15 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select it.typeID, it.typeName");
-            sb.AppendLine("from invTypes IT");
-            sb.AppendLine("inner join industryActivityProducts IAP");
-            sb.AppendLine("on IAP.productTypeID = it.typeID");
-            sb.AppendLine("where IAP.activityID in (1, 7, 11)");
-            sb.AppendLine("            AND IT.published = 1");
-            sb.AppendLine("order by it.typeName");
+            sb.AppendLine("select ET.typeID, ETN.en");
+            sb.AppendLine("from EveType ET");
+            sb.AppendLine("    inner join EveTypeName ETN");
+            sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
+            sb.AppendLine("    inner join BlueprintProduct BP");
+            sb.AppendLine("        on BP.typeId = ET.typeID");
+            sb.AppendLine("where BP.activityName in ('manufacturing', 'reaction')");
+            sb.AppendLine("            AND ET.published = 1");
+            sb.AppendLine("order by ETN.en");
 
             return sb.ToString();
         }
@@ -1219,11 +1233,10 @@ namespace EveHelperWF.Database
                 {
                     activityType = new IndustryActivityTypes();
                     activityType.typeID = query.GetInt32(0);
-                    activityType.activityID = query.GetInt32(1);
-                    activityType.time = query.GetInt64(2);
-                    activityType.activityName = query.GetString(3);
-                    activityType.productTypeId = query.GetInt32(4);
-                    activityType.productName = query.GetString(5);
+                    activityType.time = query.GetInt64(1);
+                    activityType.activityName = query.GetString(2);
+                    activityType.productTypeId = query.GetInt32(3);
+                    activityType.productName = query.GetString(4);
                     industryActivityTypes.Add(activityType);
                 }
             }
@@ -1231,7 +1244,7 @@ namespace EveHelperWF.Database
             return industryActivityTypes;
         }
 
-        public static List<EveHelperWF.Objects.IndustryActivityMaterials> GetIndustryActivityMaterials(int type_id, int activity_id)
+        public static List<EveHelperWF.Objects.IndustryActivityMaterials> GetIndustryActivityMaterials(int type_id, string activityName)
         {
             List<EveHelperWF.Objects.IndustryActivityMaterials> industryActivityMaterials = new List<Objects.IndustryActivityMaterials>();
 
@@ -1240,7 +1253,7 @@ namespace EveHelperWF.Database
             {
                 db.Open();
 
-                SqliteCommand command = new SqliteCommand(GetIndustryActivityMaterialsCommand(type_id, activity_id), db);
+                SqliteCommand command = new SqliteCommand(GetIndustryActivityMaterialsCommand(type_id, activityName), db);
 
                 SqliteDataReader query = command.ExecuteReader();
 
@@ -1249,13 +1262,12 @@ namespace EveHelperWF.Database
                 {
                     activityMaterial = new IndustryActivityMaterials();
                     activityMaterial.typeID = query.GetInt32(0);
-                    activityMaterial.activityID = query.GetInt32(1);
-                    activityMaterial.materialTypeID = query.GetInt32(2);
-                    activityMaterial.materialName = query.GetString(3);
-                    activityMaterial.quantity = query.GetInt32(4);
-                    activityMaterial.activityName = query.GetString(5);
-                    activityMaterial.isManufacturable = query.GetBoolean(6);
-                    activityMaterial.isReactable = query.GetBoolean(7);
+                    activityMaterial.materialTypeID = query.GetInt32(1);
+                    activityMaterial.materialName = query.GetString(2);
+                    activityMaterial.quantity = query.GetInt32(3);
+                    activityMaterial.activityName = query.GetString(4);
+                    activityMaterial.isManufacturable = query.GetBoolean(5);
+                    activityMaterial.isReactable = query.GetBoolean(6);
                     industryActivityMaterials.Add(activityMaterial);
                 }
             }
@@ -1291,7 +1303,7 @@ namespace EveHelperWF.Database
             return marketGroups;
         }
 
-        public static List<Objects.IndustryActivitySkill> GetINdustryActivitySkills(int type_id, int activity_id)
+        public static List<Objects.IndustryActivitySkill> GetINdustryActivitySkills(int type_id, string activityName)
         {
             List<EveHelperWF.Objects.IndustryActivitySkill> activitySkills = new List<Objects.IndustryActivitySkill>();
 
@@ -1300,7 +1312,7 @@ namespace EveHelperWF.Database
             {
                 db.Open();
 
-                SqliteCommand command = new SqliteCommand(GetIndustryActivitySkillsCommand(type_id, activity_id), db);
+                SqliteCommand command = new SqliteCommand(GetIndustryActivitySkillsCommand(type_id, activityName), db);
 
                 SqliteDataReader query = command.ExecuteReader();
 
@@ -1309,11 +1321,10 @@ namespace EveHelperWF.Database
                 {
                     activitySkill = new IndustryActivitySkill();
                     activitySkill.typeID = query.GetInt32(0);
-                    activitySkill.activityID = query.GetInt32(1);
-                    activitySkill.skillID = query.GetInt32(2);
-                    activitySkill.skillName = query.GetString(3);
-                    activitySkill.level = query.GetInt32(4);
-                    activitySkill.activityName = query.GetString(5);
+                    activitySkill.skillID = query.GetInt32(1);
+                    activitySkill.skillName = query.GetString(2);
+                    activitySkill.level = query.GetInt32(3);
+                    activitySkill.activityName = query.GetString(4);
                     activitySkills.Add(activitySkill);
                 }
             }
@@ -1321,7 +1332,7 @@ namespace EveHelperWF.Database
             return activitySkills;
         }
 
-        public static List<Objects.IndustryActivityProduct> GetIndustryActivityProducts(int type_id, int activity_id)
+        public static List<Objects.IndustryActivityProduct> GetIndustryActivityProducts(int type_id, string activityName)
         {
             List<EveHelperWF.Objects.IndustryActivityProduct> activityProducts = new List<Objects.IndustryActivityProduct>();
 
@@ -1330,7 +1341,7 @@ namespace EveHelperWF.Database
             {
                 db.Open();
 
-                SqliteCommand command = new SqliteCommand(GetIndustryActivityProductsCommand(type_id, activity_id), db);
+                SqliteCommand command = new SqliteCommand(GetIndustryActivityProductsCommand(type_id, activityName), db);
 
                 SqliteDataReader query = command.ExecuteReader();
 
@@ -1339,11 +1350,10 @@ namespace EveHelperWF.Database
                 {
                     activityProduct = new IndustryActivityProduct();
                     activityProduct.typeID = query.GetInt32(0);
-                    activityProduct.activityID = query.GetInt32(1);
-                    activityProduct.productTypeID = query.GetInt32(2);
-                    activityProduct.productName = query.GetString(3);
-                    activityProduct.quantity =  query.GetInt32(4);
-                    activityProduct.activityName = query.GetString(5);
+                    activityProduct.productTypeID = query.GetInt32(1);
+                    activityProduct.productName = query.GetString(2);
+                    activityProduct.quantity =  query.GetInt32(3);
+                    activityProduct.activityName = query.GetString(4);
                     activityProducts.Add(activityProduct);
                 }
             }
@@ -1426,7 +1436,7 @@ namespace EveHelperWF.Database
             return blueprintTypeID;
         }
 
-        public static List<Objects.InventionProbability> GetInventionProbabilities(int type_id, int activity_id)
+        public static List<Objects.InventionProbability> GetInventionProbabilities(int type_id)
         {
             List<Objects.InventionProbability> probabilityList = new List<Objects.InventionProbability>();
 
@@ -1435,7 +1445,7 @@ namespace EveHelperWF.Database
             {
                 db.Open();
 
-                SqliteCommand command = new SqliteCommand(GetInventionProbabilitiesCommand(type_id, activity_id), db);
+                SqliteCommand command = new SqliteCommand(GetInventionProbabilitiesCommand(type_id), db);
 
                 SqliteDataReader query = command.ExecuteReader();
 
@@ -1474,30 +1484,6 @@ namespace EveHelperWF.Database
             }
 
             return isInvented;
-        }
-
-        public static int GetMarketGroupForBlueprintTypeID(int type_id)
-        {
-            int marketGroupID = 0;
-
-
-            string dbpath = GetSQLitePath();
-            using (var db = new SqliteConnection($"Filename={dbpath}"))
-            {
-                db.Open();
-
-                SqliteCommand command = new SqliteCommand(GetMarketGroupForBlueprintTypeIDCommand(type_id), db);
-
-                SqliteDataReader query = command.ExecuteReader();
-
-                while (query.Read())
-                {
-                    marketGroupID = query.GetInt32(0);
-                    break;
-                }
-            }
-
-            return marketGroupID;
         }
 
         public static List<Objects.SolarSystem> GetSolarSystemsForRegionID(int regionID)
@@ -1637,7 +1623,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from mapSolarSystems mss inner join mapRegions mr on mr.regionID = mss.regionID where regionName NOT like 'ADR0%'";
+            string queryCommand = "select solarSystemID from SolarSystem SS inner join Region R on R.regionID = SS.regionID where regionName NOT like 'ADR0%'";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1660,7 +1646,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "SELECT solarSystemID FROM mapDenormalize WHERE typeID = " + planetTypeID.ToString();
+            string queryCommand = "SELECT solarSystemID FROM SolarSystemPlanet WHERE typeID = " + planetTypeID.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1686,9 +1672,9 @@ namespace EveHelperWF.Database
             string queryCommand;
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select solarSystemID from mapSolarSystems mss");
-            sb.AppendLine("    inner join mapRegions MR");
-            sb.AppendLine("        on MR.regionId = mss.regionID");
+            sb.AppendLine("select solarSystemID from SolarSystem SS");
+            sb.AppendLine("    inner join Region R");
+            sb.AppendLine("        on R.regionId = SS.regionID");
             sb.AppendLine("where regionName like '%-%'");
 
             queryCommand = sb.ToString();
@@ -1715,7 +1701,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from mapSolarSystems where regionID = 10000070";
+            string queryCommand = "select solarSystemID from SolarSystem where regionID = 10000070";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1738,7 +1724,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from staStations";
+            string queryCommand = "select solarSystemID from staStation";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1761,7 +1747,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from mapSolarSystems\r\nwhere round(security, 1) >= " + min_security.ToString() + "\r\nand round(security, 1) <= " + max_security.ToString();
+            string queryCommand = "select solarSystemID from SolarSystem\r\nwhere round(security, 1) >= " + min_security.ToString() + "\r\nand round(security, 1) <= " + max_security.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1784,7 +1770,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from mapSolarSystems where regionID = " + regionId.ToString();
+            string queryCommand = "select solarSystemID from SolarSystem where regionID = " + regionId.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1807,7 +1793,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from mapSolarSystems where solarSystemName like '%' ||" + systemName + "|| '%'";
+            string queryCommand = "select solarSystemID from SolarSystem where solarSystemName like '%' ||" + systemName + "|| '%'";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))

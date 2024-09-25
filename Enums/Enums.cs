@@ -8,13 +8,12 @@ namespace Enums
 {
     public static class Enums
     {
-        public const int ActivityManufacturing = 1;
-        public const int ActivityResearchingTimeEfficiency = 3;
-        public const int ActivityResearchingMaterialEfficiency = 4;
-        public const int ActivityCopying = 5;
-        public const int ActivityReverseEngineering = 7;
-        public const int ActivityInvention = 8;
-        public const int ActivityReactions = 11;
+        public const string ActivityManufacturing = "manufacturing";
+        public const string ActivityResearchingTimeEfficiency = "research_time";
+        public const string ActivityResearchingMaterialEfficiency = "research_material";
+        public const string ActivityCopying = "copying";
+        public const string ActivityInvention = "invention";
+        public const string ActivityReactions = "reaction";
 
         public const int TheForgeRegionId = 10000002;
         public const int JitaSystemId = 30000142;

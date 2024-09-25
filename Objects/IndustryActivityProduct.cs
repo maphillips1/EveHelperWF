@@ -13,7 +13,6 @@ namespace EveHelperWF.Objects
         public IndustryActivityProduct(System.Data.DataRow dr)
         {
             typeID = Convert.ToInt32(dr["typeID"]);
-            activityID = Convert.ToInt32(dr["activityID"]);
             productTypeID = Convert.ToInt32(dr["productTypeID"]);
             productName = Convert.ToString(dr["typeName"]);
             quantity = Convert.ToInt32(dr["quantity"]);
@@ -21,7 +20,6 @@ namespace EveHelperWF.Objects
         }
 
         public int typeID { get; set; }
-        public int activityID { get; set; }
         public int productTypeID { get; set; }
         public string productName { get; set; }
         public int quantity { get; set; }

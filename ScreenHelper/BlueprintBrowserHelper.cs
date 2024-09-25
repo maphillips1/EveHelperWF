@@ -3,6 +3,7 @@ using EveHelperWF.Objects;
 using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -491,8 +492,11 @@ namespace EveHelperWF.ScreenHelper
             List<Objects.InventoryType> invTypes = CommonHelper.InventoryTypes.FindAll(x => x.categoryID == 9); //Blueprint
             List<Objects.InventoryMarketGroups> marketGroups = Database.SQLiteCalls.GetMarketGroups();
 
-
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             treeViewGroups = GetTreeViewGroups(ref invTypes, marketGroups);
+            sw.Stop();
+            Debug.WriteLine("Get Treeview Groups took " + sw.Elapsed.TotalSeconds);
 
             return treeViewGroups;
         }
@@ -502,10 +506,8 @@ namespace EveHelperWF.ScreenHelper
             List<TreeNode> groups = new List<TreeNode>();
 
             List<Int32> MarketGroups = new List<Int32>();
-            //Change the market group ID first
             foreach (Objects.InventoryType inventoryType in invTypes)
             {
-                inventoryType.marketGroupId = Database.SQLiteCalls.GetMarketGroupForBlueprintTypeID(inventoryType.typeId);
                 if (inventoryType.marketGroupId > 0)
                 {
                     inventoryType.marketGroupName = marketGroups.Find(x => x.marketGroupID == inventoryType.marketGroupId).marketGroupName;
@@ -605,12 +607,12 @@ namespace EveHelperWF.ScreenHelper
         #endregion
 
         #region "Generic Methods"
-        public static void GetMatsForTypeAndActivity(List<Objects.IndustryActivityTypes> industryActivityTypes, int type_id, int activity_id, ref List<Objects.MaterialsWithMarketData> mats, bool buildComponents)
+        public static void GetMatsForTypeAndActivity(List<Objects.IndustryActivityTypes> industryActivityTypes, int type_id, string activityName, ref List<Objects.MaterialsWithMarketData> mats, bool buildComponents)
         {
-            if (industryActivityTypes.Find(x => x.activityID == activity_id) != null)
+            if (industryActivityTypes.Find(x => x.activityName == activityName) != null)
             {
                 mats = new List<Objects.MaterialsWithMarketData>();
-                List<Objects.IndustryActivityMaterials> baseMats = baseMats = Database.SQLiteCalls.GetIndustryActivityMaterials(type_id, activity_id);
+                List<Objects.IndustryActivityMaterials> baseMats = baseMats = Database.SQLiteCalls.GetIndustryActivityMaterials(type_id, activityName);
                 foreach (Objects.IndustryActivityMaterials mat in baseMats)
                 {
                     Objects.MaterialsWithMarketData newMat = new Objects.MaterialsWithMarketData();
@@ -763,13 +765,13 @@ namespace EveHelperWF.ScreenHelper
             return totalVolume;
         }
 
-        public static decimal CalculateOutputTotalVolume(List<Objects.IndustryActivityProduct> products, int runs, int activityID)
+        public static decimal CalculateOutputTotalVolume(List<Objects.IndustryActivityProduct> products, int runs, string activityName)
         {
             decimal totalVolume = 0;
 
             foreach (Objects.IndustryActivityProduct product in products)
             {
-                if (product.activityID == activityID)
+                if (product.activityName == activityName)
                 {
                     Objects.InventoryType prodType = CommonHelper.InventoryTypes.Find(x => x.typeId == product.productTypeID);
                     if (prodType != null)
@@ -782,13 +784,13 @@ namespace EveHelperWF.ScreenHelper
             return totalVolume;
         }
 
-        public static decimal CalculateTotalOutputPrice(List<Objects.IndustryActivityProduct> products, int runs, int activityID)
+        public static decimal CalculateTotalOutputPrice(List<Objects.IndustryActivityProduct> products, int runs, string activityName)
         {
             decimal price = 0;
             int totalQuantity = 0;
             foreach (Objects.IndustryActivityProduct prod in products)
             {
-                if (prod.activityID == activityID)
+                if (prod.activityName == activityName)
                 {
                     totalQuantity += (prod.quantity * runs);
                     price += (prod.pricePer * totalQuantity);
@@ -797,12 +799,12 @@ namespace EveHelperWF.ScreenHelper
             return price;
         }
 
-        public static int CalculateTotalOutputQuantity(List<Objects.IndustryActivityProduct> products, int runs, int activityID)
+        public static int CalculateTotalOutputQuantity(List<Objects.IndustryActivityProduct> products, int runs, string activityName)
         {
             int totalQuantity = 0;
             foreach (Objects.IndustryActivityProduct prod in products)
             {
-                if (prod.activityID == activityID)
+                if (prod.activityName == activityName)
                 {
                     totalQuantity += (prod.quantity * runs);
                 }
@@ -898,7 +900,7 @@ namespace EveHelperWF.ScreenHelper
         {
             Int64 time = 0;
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityManufacturing);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityName == Enums.Enums.ActivityManufacturing);
             if (industryActivity != null)
             {
                 time = industryActivity.time * helperClass.Runs;
@@ -1034,7 +1036,7 @@ namespace EveHelperWF.ScreenHelper
         {
             Int64 time = 0;
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityReactions);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityName == Enums.Enums.ActivityReactions);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
@@ -1102,7 +1104,7 @@ namespace EveHelperWF.ScreenHelper
             decimal structureTEBonus = GetInventionStructureTEBonus(helperClass);
             decimal skillBonus = Convert.ToDecimal(0.85);
 
-            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityID == Enums.Enums.ActivityInvention);
+            Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityName == Enums.Enums.ActivityInvention);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
@@ -1288,7 +1290,7 @@ namespace EveHelperWF.ScreenHelper
             decimal skillBonus = 1 + Convert.ToDecimal(encryptionSkillLevel / Convert.ToDecimal(40)) + ((dataCoreSkill1Level + dataCoreSkillLevel2) / 30);
             decimal decryptorBonus = 1;
 
-            List<Objects.InventionProbability> probabilities = Database.SQLiteCalls.GetInventionProbabilities(helperClass.SelectedTypeID, Enums.Enums.ActivityInvention);
+            List<Objects.InventionProbability> probabilities = Database.SQLiteCalls.GetInventionProbabilities(helperClass.SelectedTypeID);
             if (probabilities != null && probabilities.Count > 0 && helperClass.InventionProductTypeId > 0)
             {
                 Objects.InventionProbability prob = probabilities.Find(x => x.productTypeID == helperClass.InventionProductTypeId);
