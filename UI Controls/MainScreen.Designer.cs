@@ -52,6 +52,8 @@
             CheckInternetBGWorker = new System.ComponentModel.BackgroundWorker();
             DocumentationLabel = new LinkLabel();
             LPOfferButton = new Button();
+            ThemePickerButton = new Button();
+            linkLabel1 = new LinkLabel();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,6 +61,7 @@
             // 
             BlueprintBrowserButton.BackgroundImageLayout = ImageLayout.None;
             BlueprintBrowserButton.Cursor = Cursors.Hand;
+            BlueprintBrowserButton.Enabled = false;
             BlueprintBrowserButton.FlatAppearance.BorderColor = Color.Gray;
             BlueprintBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             BlueprintBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -77,6 +80,7 @@
             // PlanetPlannerButton
             // 
             PlanetPlannerButton.Cursor = Cursors.Hand;
+            PlanetPlannerButton.Enabled = false;
             PlanetPlannerButton.FlatAppearance.BorderColor = Color.Gray;
             PlanetPlannerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -95,6 +99,7 @@
             // LootAppraisalButton
             // 
             LootAppraisalButton.Cursor = Cursors.Hand;
+            LootAppraisalButton.Enabled = false;
             LootAppraisalButton.FlatAppearance.BorderColor = Color.Gray;
             LootAppraisalButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             LootAppraisalButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -113,6 +118,7 @@
             // SystemFinderButton
             // 
             SystemFinderButton.Cursor = Cursors.Hand;
+            SystemFinderButton.Enabled = false;
             SystemFinderButton.FlatAppearance.BorderColor = Color.Gray;
             SystemFinderButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -131,6 +137,7 @@
             // DefaultsButtonClick
             // 
             DefaultsButtonClick.Cursor = Cursors.Hand;
+            DefaultsButtonClick.Enabled = false;
             DefaultsButtonClick.FlatAppearance.BorderColor = Color.Gray;
             DefaultsButtonClick.FlatAppearance.MouseDownBackColor = Color.Cyan;
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -149,6 +156,7 @@
             // MarketBrowserButton
             // 
             MarketBrowserButton.Cursor = Cursors.Hand;
+            MarketBrowserButton.Enabled = false;
             MarketBrowserButton.FlatAppearance.BorderColor = Color.Gray;
             MarketBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -167,6 +175,7 @@
             // AbyssTrackerButton
             // 
             AbyssTrackerButton.Cursor = Cursors.Hand;
+            AbyssTrackerButton.Enabled = false;
             AbyssTrackerButton.FlatAppearance.BorderColor = Color.Gray;
             AbyssTrackerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             AbyssTrackerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -185,6 +194,7 @@
             // PriceHistoryButton
             // 
             PriceHistoryButton.Cursor = Cursors.Hand;
+            PriceHistoryButton.Enabled = false;
             PriceHistoryButton.FlatAppearance.BorderColor = Color.Gray;
             PriceHistoryButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -240,6 +250,7 @@
             updateEveDataToolStripMenuItem.Name = "updateEveDataToolStripMenuItem";
             updateEveDataToolStripMenuItem.Size = new Size(105, 20);
             updateEveDataToolStripMenuItem.Text = "Update Eve Data";
+            updateEveDataToolStripMenuItem.Visible = false;
             updateEveDataToolStripMenuItem.Click += updateEveDataToolStripMenuItem_Click;
             // 
             // reportIssueToolStripMenuItem
@@ -275,10 +286,12 @@
             // InitLongLoadingWorker
             // 
             InitLongLoadingWorker.DoWork += InitLongLoadingWorker_DoWork;
+            InitLongLoadingWorker.RunWorkerCompleted += InitLongLoadingWorker_RunWorkerCompleted;
             // 
             // ShoppingListButton
             // 
             ShoppingListButton.Cursor = Cursors.Hand;
+            ShoppingListButton.Enabled = false;
             ShoppingListButton.FlatAppearance.BorderColor = Color.Gray;
             ShoppingListButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -297,6 +310,7 @@
             // BuildPlansButton
             // 
             BuildPlansButton.Cursor = Cursors.Hand;
+            BuildPlansButton.Enabled = false;
             BuildPlansButton.FlatAppearance.BorderColor = Color.Gray;
             BuildPlansButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             BuildPlansButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -338,6 +352,7 @@
             // LPOfferButton
             // 
             LPOfferButton.Cursor = Cursors.Hand;
+            LPOfferButton.Enabled = false;
             LPOfferButton.FlatAppearance.BorderColor = Color.Gray;
             LPOfferButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             LPOfferButton.FlatAppearance.MouseOverBackColor = Color.Teal;
@@ -353,12 +368,45 @@
             LPOfferButton.UseVisualStyleBackColor = true;
             LPOfferButton.Click += LPOfferButton_Click;
             // 
+            // ThemePickerButton
+            // 
+            ThemePickerButton.Cursor = Cursors.Hand;
+            ThemePickerButton.FlatAppearance.BorderColor = Color.Gray;
+            ThemePickerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            ThemePickerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            ThemePickerButton.FlatStyle = FlatStyle.Flat;
+            ThemePickerButton.ForeColor = Color.White;
+            ThemePickerButton.Location = new Point(142, 269);
+            ThemePickerButton.Margin = new Padding(3, 2, 3, 2);
+            ThemePickerButton.MaximumSize = new Size(120, 120);
+            ThemePickerButton.Name = "ThemePickerButton";
+            ThemePickerButton.Size = new Size(120, 42);
+            ThemePickerButton.TabIndex = 27;
+            ThemePickerButton.Text = "Theme Picker";
+            ThemePickerButton.UseVisualStyleBackColor = true;
+            ThemePickerButton.Click += ThemePickerButton_Click;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
+            linkLabel1.LinkColor = Color.FromArgb(128, 255, 255);
+            linkLabel1.Location = new Point(12, 389);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(175, 20);
+            linkLabel1.TabIndex = 28;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Reset Theme to Default";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
-            ClientSize = new Size(471, 381);
+            ClientSize = new Size(471, 441);
+            Controls.Add(linkLabel1);
+            Controls.Add(ThemePickerButton);
             Controls.Add(LPOfferButton);
             Controls.Add(DocumentationLabel);
             Controls.Add(BuildPlansButton);
@@ -382,6 +430,7 @@
             Name = "MainScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Eve Helper";
+            FormClosing += MainScreen_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -413,5 +462,7 @@
         private System.ComponentModel.BackgroundWorker CheckInternetBGWorker;
         private LinkLabel DocumentationLabel;
         private Button LPOfferButton;
+        private Button ThemePickerButton;
+        private LinkLabel linkLabel1;
     }
 }

@@ -5,6 +5,7 @@ using EveHelperWF.UI_Controls.Support_Screens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -15,6 +16,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls
 {
@@ -39,7 +41,8 @@ namespace EveHelperWF.UI_Controls
 
         public MainScreen()
         {
-            //Stopwatch sw = Stopwatch.StartNew();
+            Enums.Enums.BackgroundColor = Properties.Settings.Default.BackgroundColor;
+
             InitializeComponent();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
@@ -63,8 +66,6 @@ namespace EveHelperWF.UI_Controls
 
             this.BringToFront();
 
-            //sw.Start();
-            //MessageBox.Show("Elapsed: " + sw.ElapsedMilliseconds);
         }
 
         //Ensures that we only ever have one instance of EveHelper open at a given time. 
@@ -172,14 +173,6 @@ namespace EveHelperWF.UI_Controls
             abyssTracker.StartPosition = FormStartPosition.CenterScreen;
             abyssTracker.Show();
             abyssTracker.BringToFront();
-        }
-
-        private void FuzzworksLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string fuzzLabel = String.Format("https://www.fuzzwork.co.uk/");
-            ProcessStartInfo startInfo = new ProcessStartInfo(fuzzLabel);
-            startInfo.UseShellExecute = true;
-            Process.Start(startInfo);
         }
 
         private void PriceHistoryButton_Click(object sender, EventArgs e)
@@ -305,6 +298,47 @@ namespace EveHelperWF.UI_Controls
             lPStore.StartPosition = FormStartPosition.CenterParent;
             lPStore.Show();
             lPStore.BringToFront();
+        }
+
+        private void InitLongLoadingWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            AbyssTrackerButton.Enabled = true;
+            BlueprintBrowserButton.Enabled = true;
+            BuildPlansButton.Enabled = true;
+            LootAppraisalButton.Enabled = true;
+            LPOfferButton.Enabled = true;
+            MarketBrowserButton.Enabled = true;
+            PlanetPlannerButton.Enabled = true;
+            PriceHistoryButton.Enabled = true;
+            DefaultsButtonClick.Enabled = true;
+            ShoppingListButton.Enabled = true;
+            SystemFinderButton.Enabled = true;
+        }
+
+        private void ThemePickerButton_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+
+
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                Enums.Enums.BackgroundColor = colorDialog.Color;
+                Properties.Settings.Default.BackgroundColor = Enums.Enums.BackgroundColor;
+                this.BackColor = colorDialog.Color;
+            }
+        }
+
+        private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.BackgroundColor = Enums.Enums.BackgroundColor;
+            Properties.Settings.Default.Save();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Enums.Enums.BackgroundColor = Color.FromArgb(21, 21, 21);
+            this.BackColor = Enums.Enums.BackgroundColor;
+            Properties.Settings.Default.BackgroundColor = Enums.Enums.BackgroundColor;
         }
     }
 }
