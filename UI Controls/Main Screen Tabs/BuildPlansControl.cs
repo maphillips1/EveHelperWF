@@ -4,14 +4,9 @@ using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
 using FileIO;
-using Newtonsoft.Json.Linq;
-using System;
 using System.ComponentModel;
 using System.Data;
-using System.IO.Pipes;
 using System.Text;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
@@ -401,6 +396,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 bpInfo.MaxRuns = 99999;
                 bpInfo.ME = 10;
                 bpInfo.TE = 20;
+                bpInfo.BlueprintName = "All Blueprints";
 
                 BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, true);
                 BVC.StartPosition = FormStartPosition.CenterScreen;
@@ -429,6 +425,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 BlueprintInfo bpInfo = new BlueprintInfo();
                 bpInfo.IsReacted = true;
                 bpInfo.MaxRuns = 99999;
+                bpInfo.BlueprintName = "All Reactions";
 
                 BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, true);
                 BVC.StartPosition = FormStartPosition.CenterScreen;
@@ -475,6 +472,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ManufacturingSystemCombo.ValueMember = "solarSystemID";
             ManufacturingSystemCombo.DataSource = CommonHelper.SolarSystemList;
 
+            if (CommonHelper.SolarSystemList?.Count <= 0)
+            {
+                FileHelper.LogError("Build Plan Control is loading and solar system count is " + CommonHelper.SolarSystemList?.Count.ToString(), null);
+                FileHelper.LogError("Why is this list empty here?", "");
+                MessageBox.Show("Balkr, If this is you, I need you to send me the error text file. To do this, go to the file location below, copy the error log text file, and send it to me in discord. \n" + Enums.Enums.ErrorLogDirectory);
+            }
             List<Objects.SolarSystem> lowAndNullSystems = CommonHelper.SolarSystemList.FindAll(x => Math.Round(x.security, 1) < Convert.ToDecimal(0.5));
             ReactionSolarSystemCombo.BindingContext = new BindingContext();
             ReactionSolarSystemCombo.DisplayMember = "solarSystemName";

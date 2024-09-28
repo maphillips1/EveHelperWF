@@ -794,6 +794,7 @@ namespace EveHelperWF.Database
 
         public static Objects.InventoryType InventoryTypeSearch(string searchText)
         {
+            searchText = searchText.Trim();
             Objects.InventoryType foundType = null;
 
             string dbpath = GetSQLitePath();

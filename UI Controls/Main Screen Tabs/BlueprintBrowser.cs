@@ -3,10 +3,8 @@ using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Main_Screen_Tabs;
 using EveHelperWF.UI_Controls.Support_Screens;
-using System;
 using System.Diagnostics;
 using System.Text;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace EveHelperWF
 {

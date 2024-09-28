@@ -3,17 +3,8 @@ using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Configuration;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF
 {

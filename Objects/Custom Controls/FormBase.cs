@@ -29,6 +29,7 @@ namespace EveHelperWF.Objects
             DataGridViewAutoSizeRowsMode dataGridViewAutoSizeRowMode = grid.AutoSizeRowsMode;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            grid.AutoGenerateColumns = false;
             grid.DataSource = dataSource;
             grid.AutoSizeColumnsMode = dataGridViewAutoSizeColumnsMode;
             grid.AutoSizeRowsMode = dataGridViewAutoSizeRowMode;
