@@ -1,4 +1,5 @@
 ﻿using EveHelperWF.Objects;
+using FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,32 @@ namespace EveHelperWF.ScreenHelper
 {
     public static class CommonHelper
     {
-        public static List<Objects.InventoryType> InventoryTypes = null;
-        public static List<Objects.SolarSystem> SolarSystemList = null;
+        private static List<Objects.InventoryType> m_InventoryTypes = new List<InventoryType>();
+        public static List<Objects.InventoryType> InventoryTypes
+        {
+            get
+            {
+                if (m_InventoryTypes == null) { m_InventoryTypes = new List<InventoryType>(); }
+                return m_InventoryTypes;
+            }
+            set
+            {
+                m_InventoryTypes = value;
+            }
+        }
+        private static List<Objects.SolarSystem> m_SolarSystemLists = new List<SolarSystem>();
+        public static List<Objects.SolarSystem> SolarSystemList
+        {
+            get
+            {
+                if (m_SolarSystemLists == null) { m_SolarSystemLists = new List<Objects.SolarSystem>();}
+                return m_SolarSystemLists;
+            }
+            set
+            {
+                m_SolarSystemLists = value;
+            }
+        }
         public static List<Objects.AdjustedCost> AdjustedCosts
         {
             get
@@ -80,7 +105,9 @@ namespace EveHelperWF.ScreenHelper
 
         public static void LoadSolarSystems()
         {
+            FileHelper.LogError("Loading Solar Systems", "");
             SolarSystemList = Database.SQLiteCalls.GetSolarSystems();
+            FileHelper.LogError("Loading systems done. Solar system count = " + SolarSystemList?.Count(), "");
         }
 
         public static void LoadEngineeringComplexes()
@@ -144,13 +171,17 @@ namespace EveHelperWF.ScreenHelper
                 decimal shortenedAmount;
                 switch (iskAmount)
                 {
-                    case > 1000000000:
+                    case >= 1000000000:
                         shortenedAmount = Math.Round(iskAmount / (decimal)1000000000, 3);
                         formattedIsk = shortenedAmount.ToString("C") + " B";
                         break;
-                    case > 100000000:
+                    case >= 1000000:
                         shortenedAmount = Math.Round(iskAmount / (decimal)1000000, 3);
                         formattedIsk = shortenedAmount.ToString("C") + " M";
+                        break;
+                    case >= 1000:
+                        shortenedAmount = Math.Round(iskAmount / (decimal)1000, 3);
+                        formattedIsk = shortenedAmount.ToString("C") + " K";
                         break;
                     default:
                         formattedIsk = iskAmount.ToString("C");

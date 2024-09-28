@@ -288,13 +288,17 @@ namespace EveHelperWF.ESI_Calls
             {
                 try
                 {
+                    Stopwatch stopwatch = new Stopwatch();
                     string combinedURI = String.Format("https://esi.evetech.net/latest/markets/{0}/orders/?datasource=tranquility&order_type=buy&page=1&type_id={1}", region_id, type_id);
                     System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
                     System.Net.Http.HttpResponseMessage response = null;
                     //retry 10 times
                     for (int i = 0; i < 10; i++)
                     {
+                        stopwatch.Restart();
                         response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                        stopwatch.Stop();
+                        Debug.WriteLine("It took " + stopwatch.Elapsed.TotalSeconds + " to get a response from the ESI server for type ID " + type_id.ToString());
                         if (response != null && response.IsSuccessStatusCode)
                         {
                             break;
@@ -355,9 +359,13 @@ namespace EveHelperWF.ESI_Calls
                     Debug.WriteLine("Calling ESI For " + type_id + " with " + combinedURI);
                     System.Net.Http.HttpResponseMessage response = null;
                     //retry 10 times
+                    Stopwatch stopwatch = new Stopwatch();
                     for (int i = 0; i < 10; i++)
                     {
+                        stopwatch.Restart();
                         response = await client.GetAsync(combinedURI).ConfigureAwait(false);
+                        stopwatch.Stop();
+                        Debug.WriteLine("It took " + stopwatch.Elapsed.TotalSeconds + " to get a response from the ESI server for type ID " + type_id.ToString());
                         if (response != null && response.IsSuccessStatusCode)
                         {
                             break;

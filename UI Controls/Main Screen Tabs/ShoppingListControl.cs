@@ -1,18 +1,8 @@
 ﻿using EveHelperWF.Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.AccessControl;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using static System.Windows.Forms.DataFormats;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {

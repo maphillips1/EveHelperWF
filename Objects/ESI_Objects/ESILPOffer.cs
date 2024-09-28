@@ -15,7 +15,7 @@ namespace EveHelperWF.Objects.ESI_Objects
         {
             get
             {
-                return CommonHelper.FormatIsk(isk_cost);
+                return CommonHelper.FormatIskShortened(isk_cost);
             }
         }
         public int lp_cost { get; set; }
@@ -34,7 +34,7 @@ namespace EveHelperWF.Objects.ESI_Objects
                     StringBuilder sb = new StringBuilder();
                     if (required_items?.Count > 0)
                     {
-                        required_items.ForEach(x => sb.AppendLine(x.typeName + " x " + x.quantity.ToString("N0")));
+                        required_items.ForEach(x => sb.AppendLine(x.typeName + " x " + x.quantity.ToString("N0") + " "));
                     }
                     else
                     {

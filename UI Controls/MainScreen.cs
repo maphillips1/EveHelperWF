@@ -1,22 +1,11 @@
-﻿using EveHelperWF.Objects;
-using EveHelperWF.ScreenHelper;
+﻿using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Main_Screen_Tabs;
 using EveHelperWF.UI_Controls.Support_Screens;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls
 {

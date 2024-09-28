@@ -30,12 +30,18 @@
         {
             Label label1;
             Label label2;
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LPStore));
             NPCCorpCombo = new ComboBox();
             LPOfferGridView = new DataGridView();
+            SearchTextBox = new TextBox();
+            SearchButton = new Button();
             AKCost = new DataGridViewTextBoxColumn();
             IskCost = new DataGridViewTextBoxColumn();
             LPCost = new DataGridViewTextBoxColumn();
@@ -44,8 +50,6 @@
             RequiredItems = new DataGridViewTextBoxColumn();
             HiddenOfferId = new DataGridViewTextBoxColumn();
             hidden_isk_cost = new DataGridViewTextBoxColumn();
-            SearchTextBox = new TextBox();
-            SearchButton = new Button();
             label1 = new Label();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)LPOfferGridView).BeginInit();
@@ -92,14 +96,14 @@
             LPOfferGridView.BackgroundColor = Color.Black;
             LPOfferGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             LPOfferGridView.Columns.AddRange(new DataGridViewColumn[] { AKCost, IskCost, LPCost, ItemName, Quantity, RequiredItems, HiddenOfferId, hidden_isk_cost });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Black;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            LPOfferGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.Black;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            LPOfferGridView.DefaultCellStyle = dataGridViewCellStyle7;
             LPOfferGridView.Dock = DockStyle.Bottom;
             LPOfferGridView.GridColor = Color.Black;
             LPOfferGridView.Location = new Point(0, 108);
@@ -109,81 +113,6 @@
             LPOfferGridView.RowTemplate.Height = 29;
             LPOfferGridView.Size = new Size(933, 411);
             LPOfferGridView.TabIndex = 5;
-            // 
-            // AKCost
-            // 
-            AKCost.DataPropertyName = "ak_cost";
-            dataGridViewCellStyle1.Format = "N0";
-            dataGridViewCellStyle1.NullValue = null;
-            AKCost.DefaultCellStyle = dataGridViewCellStyle1;
-            AKCost.HeaderText = "AK Cost";
-            AKCost.Name = "AKCost";
-            AKCost.ReadOnly = true;
-            AKCost.Width = 74;
-            // 
-            // IskCost
-            // 
-            IskCost.DataPropertyName = "formattedIskCost";
-            IskCost.HeaderText = "Isk Cost";
-            IskCost.Name = "IskCost";
-            IskCost.ReadOnly = true;
-            IskCost.Width = 73;
-            // 
-            // LPCost
-            // 
-            LPCost.DataPropertyName = "lp_cost";
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            LPCost.DefaultCellStyle = dataGridViewCellStyle2;
-            LPCost.HeaderText = "LP Cost";
-            LPCost.Name = "LPCost";
-            LPCost.ReadOnly = true;
-            LPCost.Width = 72;
-            // 
-            // ItemName
-            // 
-            ItemName.DataPropertyName = "typeName";
-            ItemName.HeaderText = "Item Name";
-            ItemName.Name = "ItemName";
-            ItemName.ReadOnly = true;
-            ItemName.Width = 91;
-            // 
-            // Quantity
-            // 
-            Quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            Quantity.DefaultCellStyle = dataGridViewCellStyle3;
-            Quantity.HeaderText = "Quantity";
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
-            Quantity.Width = 78;
-            // 
-            // RequiredItems
-            // 
-            RequiredItems.DataPropertyName = "requiredItemsString";
-            RequiredItems.HeaderText = "Required Items";
-            RequiredItems.Name = "RequiredItems";
-            RequiredItems.ReadOnly = true;
-            RequiredItems.Width = 111;
-            // 
-            // HiddenOfferId
-            // 
-            HiddenOfferId.DataPropertyName = "offer_id";
-            HiddenOfferId.HeaderText = "Hidden Offer Id";
-            HiddenOfferId.Name = "HiddenOfferId";
-            HiddenOfferId.ReadOnly = true;
-            HiddenOfferId.Visible = false;
-            HiddenOfferId.Width = 114;
-            // 
-            // hidden_isk_cost
-            // 
-            hidden_isk_cost.DataPropertyName = "isk_cost";
-            hidden_isk_cost.HeaderText = "hidden isk cost";
-            hidden_isk_cost.Name = "hidden_isk_cost";
-            hidden_isk_cost.ReadOnly = true;
-            hidden_isk_cost.Visible = false;
-            hidden_isk_cost.Width = 111;
             // 
             // SearchTextBox
             // 
@@ -204,6 +133,96 @@
             SearchButton.UseVisualStyleBackColor = true;
             SearchButton.Click += SearchButton_Click;
             // 
+            // AKCost
+            // 
+            AKCost.DataPropertyName = "ak_cost";
+            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            AKCost.DefaultCellStyle = dataGridViewCellStyle1;
+            AKCost.HeaderText = "AK Cost";
+            AKCost.Name = "AKCost";
+            AKCost.ReadOnly = true;
+            AKCost.SortMode = DataGridViewColumnSortMode.Programmatic;
+            AKCost.Width = 74;
+            // 
+            // IskCost
+            // 
+            IskCost.DataPropertyName = "formattedIskCost";
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            IskCost.DefaultCellStyle = dataGridViewCellStyle2;
+            IskCost.HeaderText = "Isk Cost";
+            IskCost.Name = "IskCost";
+            IskCost.ReadOnly = true;
+            IskCost.SortMode = DataGridViewColumnSortMode.Programmatic;
+            IskCost.Width = 73;
+            // 
+            // LPCost
+            // 
+            LPCost.DataPropertyName = "lp_cost";
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            LPCost.DefaultCellStyle = dataGridViewCellStyle3;
+            LPCost.HeaderText = "LP Cost";
+            LPCost.Name = "LPCost";
+            LPCost.ReadOnly = true;
+            LPCost.SortMode = DataGridViewColumnSortMode.Programmatic;
+            LPCost.Width = 72;
+            // 
+            // ItemName
+            // 
+            ItemName.DataPropertyName = "typeName";
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            ItemName.DefaultCellStyle = dataGridViewCellStyle4;
+            ItemName.HeaderText = "Item Name";
+            ItemName.Name = "ItemName";
+            ItemName.ReadOnly = true;
+            ItemName.SortMode = DataGridViewColumnSortMode.Programmatic;
+            ItemName.Width = 91;
+            // 
+            // Quantity
+            // 
+            Quantity.DataPropertyName = "quantity";
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            Quantity.DefaultCellStyle = dataGridViewCellStyle5;
+            Quantity.HeaderText = "Quantity";
+            Quantity.Name = "Quantity";
+            Quantity.ReadOnly = true;
+            Quantity.SortMode = DataGridViewColumnSortMode.Programmatic;
+            Quantity.Width = 78;
+            // 
+            // RequiredItems
+            // 
+            RequiredItems.DataPropertyName = "requiredItemsString";
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            RequiredItems.DefaultCellStyle = dataGridViewCellStyle6;
+            RequiredItems.HeaderText = "Required Items";
+            RequiredItems.Name = "RequiredItems";
+            RequiredItems.ReadOnly = true;
+            RequiredItems.SortMode = DataGridViewColumnSortMode.Programmatic;
+            RequiredItems.Width = 111;
+            // 
+            // HiddenOfferId
+            // 
+            HiddenOfferId.DataPropertyName = "offer_id";
+            HiddenOfferId.HeaderText = "Hidden Offer Id";
+            HiddenOfferId.Name = "HiddenOfferId";
+            HiddenOfferId.ReadOnly = true;
+            HiddenOfferId.Visible = false;
+            HiddenOfferId.Width = 114;
+            // 
+            // hidden_isk_cost
+            // 
+            hidden_isk_cost.DataPropertyName = "isk_cost";
+            hidden_isk_cost.HeaderText = "hidden isk cost";
+            hidden_isk_cost.Name = "hidden_isk_cost";
+            hidden_isk_cost.ReadOnly = true;
+            hidden_isk_cost.Visible = false;
+            hidden_isk_cost.Width = 111;
+            // 
             // LPStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -217,6 +236,7 @@
             Controls.Add(label1);
             ForeColor = Color.White;
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "LPStore";
             Text = "LPStore";
@@ -229,6 +249,8 @@
 
         private ComboBox NPCCorpCombo;
         private DataGridView LPOfferGridView;
+        private TextBox SearchTextBox;
+        private Button SearchButton;
         private DataGridViewTextBoxColumn AKCost;
         private DataGridViewTextBoxColumn IskCost;
         private DataGridViewTextBoxColumn LPCost;
@@ -237,7 +259,5 @@
         private DataGridViewTextBoxColumn RequiredItems;
         private DataGridViewTextBoxColumn HiddenOfferId;
         private DataGridViewTextBoxColumn hidden_isk_cost;
-        private TextBox SearchTextBox;
-        private Button SearchButton;
     }
 }

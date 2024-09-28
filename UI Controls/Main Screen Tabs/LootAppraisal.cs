@@ -2,16 +2,8 @@
 using EveHelperWF.Objects;
 using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using EveHelperWF.ScreenHelper;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {

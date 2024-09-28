@@ -172,6 +172,7 @@ namespace EveHelperWF.ScreenHelper
         private static Tuple<int, string> FindTypeInDB(string input)
         {
             Tuple<int, string> result = null;
+            input = input.Trim();
 
 
             List<string> parts = input.Replace("'", "''").Split(" ").ToList();
