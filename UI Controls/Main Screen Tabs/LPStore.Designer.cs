@@ -40,16 +40,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LPStore));
             NPCCorpCombo = new ComboBox();
             LPOfferGridView = new DataGridView();
-            SearchTextBox = new TextBox();
-            SearchButton = new Button();
             AKCost = new DataGridViewTextBoxColumn();
             IskCost = new DataGridViewTextBoxColumn();
             LPCost = new DataGridViewTextBoxColumn();
             ItemName = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
+            buyvalue = new DataGridViewTextBoxColumn();
+            sellvalue = new DataGridViewTextBoxColumn();
             RequiredItems = new DataGridViewTextBoxColumn();
-            HiddenOfferId = new DataGridViewTextBoxColumn();
-            hidden_isk_cost = new DataGridViewTextBoxColumn();
+            ProfitBuy = new DataGridViewTextBoxColumn();
+            ProfitSell = new DataGridViewTextBoxColumn();
+            IskLpBuy = new DataGridViewTextBoxColumn();
+            IskLpSell = new DataGridViewTextBoxColumn();
+            SearchTextBox = new TextBox();
+            SearchButton = new Button();
+            InfoLoadingLabel = new Label();
             label1 = new Label();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)LPOfferGridView).BeginInit();
@@ -91,11 +96,12 @@
             // 
             // LPOfferGridView
             // 
+            LPOfferGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LPOfferGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             LPOfferGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             LPOfferGridView.BackgroundColor = Color.Black;
             LPOfferGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            LPOfferGridView.Columns.AddRange(new DataGridViewColumn[] { AKCost, IskCost, LPCost, ItemName, Quantity, RequiredItems, HiddenOfferId, hidden_isk_cost });
+            LPOfferGridView.Columns.AddRange(new DataGridViewColumn[] { AKCost, IskCost, LPCost, ItemName, Quantity, buyvalue, sellvalue, RequiredItems, ProfitBuy, ProfitSell, IskLpBuy, IskLpSell });
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = Color.Black;
             dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -104,7 +110,6 @@
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
             LPOfferGridView.DefaultCellStyle = dataGridViewCellStyle7;
-            LPOfferGridView.Dock = DockStyle.Bottom;
             LPOfferGridView.GridColor = Color.Black;
             LPOfferGridView.Location = new Point(0, 108);
             LPOfferGridView.Margin = new Padding(3, 2, 3, 2);
@@ -113,25 +118,6 @@
             LPOfferGridView.RowTemplate.Height = 29;
             LPOfferGridView.Size = new Size(933, 411);
             LPOfferGridView.TabIndex = 5;
-            // 
-            // SearchTextBox
-            // 
-            SearchTextBox.Location = new Point(113, 80);
-            SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(223, 23);
-            SearchTextBox.TabIndex = 7;
-            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
-            // 
-            // SearchButton
-            // 
-            SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(342, 80);
-            SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(75, 23);
-            SearchButton.TabIndex = 8;
-            SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
-            SearchButton.Click += SearchButton_Click;
             // 
             // AKCost
             // 
@@ -194,6 +180,20 @@
             Quantity.SortMode = DataGridViewColumnSortMode.Programmatic;
             Quantity.Width = 78;
             // 
+            // buyvalue
+            // 
+            buyvalue.DataPropertyName = "totalBuyValue";
+            buyvalue.HeaderText = "Buy Value";
+            buyvalue.Name = "buyvalue";
+            buyvalue.Width = 83;
+            // 
+            // sellvalue
+            // 
+            sellvalue.DataPropertyName = "totalSellValue";
+            sellvalue.HeaderText = "Sell Value";
+            sellvalue.Name = "sellvalue";
+            sellvalue.Width = 81;
+            // 
             // RequiredItems
             // 
             RequiredItems.DataPropertyName = "requiredItemsString";
@@ -205,29 +205,69 @@
             RequiredItems.SortMode = DataGridViewColumnSortMode.Programmatic;
             RequiredItems.Width = 111;
             // 
-            // HiddenOfferId
+            // ProfitBuy
             // 
-            HiddenOfferId.DataPropertyName = "offer_id";
-            HiddenOfferId.HeaderText = "Hidden Offer Id";
-            HiddenOfferId.Name = "HiddenOfferId";
-            HiddenOfferId.ReadOnly = true;
-            HiddenOfferId.Visible = false;
-            HiddenOfferId.Width = 114;
+            ProfitBuy.DataPropertyName = "ProfitBuyString";
+            ProfitBuy.HeaderText = "Profit Buy";
+            ProfitBuy.Name = "ProfitBuy";
+            ProfitBuy.Width = 84;
             // 
-            // hidden_isk_cost
+            // ProfitSell
             // 
-            hidden_isk_cost.DataPropertyName = "isk_cost";
-            hidden_isk_cost.HeaderText = "hidden isk cost";
-            hidden_isk_cost.Name = "hidden_isk_cost";
-            hidden_isk_cost.ReadOnly = true;
-            hidden_isk_cost.Visible = false;
-            hidden_isk_cost.Width = 111;
+            ProfitSell.DataPropertyName = "ProfitSellString";
+            ProfitSell.HeaderText = "Profit Sell";
+            ProfitSell.Name = "ProfitSell";
+            ProfitSell.Width = 82;
+            // 
+            // IskLpBuy
+            // 
+            IskLpBuy.DataPropertyName = "IskLpBuy";
+            IskLpBuy.HeaderText = "Isk / LP (Buy)";
+            IskLpBuy.Name = "IskLpBuy";
+            IskLpBuy.Width = 101;
+            // 
+            // IskLpSell
+            // 
+            IskLpSell.DataPropertyName = "IskLpSell";
+            IskLpSell.HeaderText = "Isk / LP (Sell)";
+            IskLpSell.Name = "IskLpSell";
+            IskLpSell.Width = 99;
+            // 
+            // SearchTextBox
+            // 
+            SearchTextBox.Location = new Point(113, 80);
+            SearchTextBox.Name = "SearchTextBox";
+            SearchTextBox.Size = new Size(223, 23);
+            SearchTextBox.TabIndex = 7;
+            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+            // 
+            // SearchButton
+            // 
+            SearchButton.ForeColor = Color.Black;
+            SearchButton.Location = new Point(342, 80);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(75, 23);
+            SearchButton.TabIndex = 8;
+            SearchButton.Text = "Search";
+            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
+            // 
+            // InfoLoadingLabel
+            // 
+            InfoLoadingLabel.AutoSize = true;
+            InfoLoadingLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            InfoLoadingLabel.Location = new Point(605, 81);
+            InfoLoadingLabel.Name = "InfoLoadingLabel";
+            InfoLoadingLabel.Size = new Size(316, 20);
+            InfoLoadingLabel.TabIndex = 9;
+            InfoLoadingLabel.Text = "Information is Loading. This may take a while...";
             // 
             // LPStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(933, 519);
+            Controls.Add(InfoLoadingLabel);
             Controls.Add(SearchButton);
             Controls.Add(SearchTextBox);
             Controls.Add(label2);
@@ -240,6 +280,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "LPStore";
             Text = "LPStore";
+            WindowState = FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)LPOfferGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -251,13 +292,18 @@
         private DataGridView LPOfferGridView;
         private TextBox SearchTextBox;
         private Button SearchButton;
+        private Label InfoLoadingLabel;
         private DataGridViewTextBoxColumn AKCost;
         private DataGridViewTextBoxColumn IskCost;
         private DataGridViewTextBoxColumn LPCost;
         private DataGridViewTextBoxColumn ItemName;
         private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn buyvalue;
+        private DataGridViewTextBoxColumn sellvalue;
         private DataGridViewTextBoxColumn RequiredItems;
-        private DataGridViewTextBoxColumn HiddenOfferId;
-        private DataGridViewTextBoxColumn hidden_isk_cost;
+        private DataGridViewTextBoxColumn ProfitBuy;
+        private DataGridViewTextBoxColumn ProfitSell;
+        private DataGridViewTextBoxColumn IskLpBuy;
+        private DataGridViewTextBoxColumn IskLpSell;
     }
 }

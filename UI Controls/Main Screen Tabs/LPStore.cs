@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.Objects;
 using EveHelperWF.Objects.ESI_Objects;
+using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using System.Data;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
@@ -12,6 +13,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             InitializeComponent();
             LoadCombo();
+            InfoLoadingLabel.Visible = false;
         }
 
         private void LoadCombo()
@@ -25,6 +27,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void NPCCorpCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+            InfoLoadingLabel.Visible = true;
             if (NPCCorpCombo.SelectedValue != null)
             {
                 long npcCorpId = (long)NPCCorpCombo.SelectedValue;
@@ -37,9 +41,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     {
                         allOffers = allOffers.OrderBy(x => x.typeName).ToList();
                         DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
+                        GetMarketInformationForOffers();
+                        allOffers = allOffers.OrderByDescending(x => x.iskLPBuyDecimal).ToList();
+                        DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
                     }
                 }
             }
+            InfoLoadingLabel.Visible = false;
+            this.Cursor = Cursors.Default;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -68,6 +77,49 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (e.KeyCode == Keys.Enter)
             {
                 SearchButton_Click(sender, new EventArgs());
+            }
+        }
+
+        private void GetMarketInformationForOffers()
+        {
+            if (allOffers?.Count > 0)
+            {
+                List<ESIMarketType> eSIMarketTypes = new List<ESIMarketType>();
+                foreach (ESILPOffer offer in allOffers)
+                {
+                    eSIMarketTypes.Add(new ESIMarketType() { typeID = offer.type_id, quantity = 1 });
+                    if (offer.required_items?.Count > 0)
+                    {
+                        foreach (ESILPOfferRequiredItem requiredItem in offer.required_items)
+                        {
+                            if (eSIMarketTypes.Find(x => x.typeID == requiredItem.type_id) == null)
+                            {
+                                eSIMarketTypes.Add(new ESIMarketType() { typeID = requiredItem.type_id, quantity = 1 });
+                            }
+                        }
+                    }
+                }
+
+                eSIMarketTypes = ESI_Calls.ESIMarketData.GetPriceForItemListWithQuantityAsync(eSIMarketTypes, (int)Enums.Enums.OrderType.Buy, Enums.Enums.TheForgeRegionId).Result;
+
+                foreach (ESILPOffer offer in allOffers)
+                {
+                    offer.buyValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                }
+
+                eSIMarketTypes = ESI_Calls.ESIMarketData.GetPriceForItemListWithQuantityAsync(eSIMarketTypes, (int)Enums.Enums.OrderType.Sell, Enums.Enums.TheForgeRegionId).Result;
+
+                foreach (ESILPOffer offer in allOffers)
+                {
+                    offer.sellValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                    if (offer.required_items?.Count > 0)
+                    {
+                        foreach (ESILPOfferRequiredItem requiredItem in offer.required_items)
+                        {
+                            requiredItem.sellValue = eSIMarketTypes.Find(x => x.typeID == requiredItem.type_id).pricePer;
+                        }
+                    }
+                }
             }
         }
     }

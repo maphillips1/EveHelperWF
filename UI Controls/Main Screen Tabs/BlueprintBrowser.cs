@@ -21,7 +21,6 @@ namespace EveHelperWF
         private static List<Objects.IndustryActivitySkill> ResMESkills = null;
         private static List<Objects.IndustryActivitySkill> ResTESkills = null;
         private static List<Objects.IndustryActivitySkill> CopySkills = null;
-        private static List<Objects.IndustryActivitySkill> ReverseEngSkills = null;
         private static List<Objects.IndustryActivitySkill> InventionSkills = null;
         private static List<Objects.IndustryActivitySkill> ReactionSkills = null;
 
@@ -29,7 +28,6 @@ namespace EveHelperWF
         private static List<Objects.MaterialsWithMarketData> ResMEMats = null;
         private static List<Objects.MaterialsWithMarketData> ResTEMats = null;
         private static List<Objects.MaterialsWithMarketData> CopyMats = null;
-        private static List<Objects.MaterialsWithMarketData> ReverseEngMats = null;
         private static List<Objects.MaterialsWithMarketData> InventionMats = null;
         private static List<Objects.MaterialsWithMarketData> ReactionMats = null;
 
@@ -37,7 +35,6 @@ namespace EveHelperWF
         private static List<Objects.IndustryActivityProduct> ResMEProds = null;
         private static List<Objects.IndustryActivityProduct> ResTEProds = null;
         private static List<Objects.IndustryActivityProduct> CopyProds = null;
-        private static List<Objects.IndustryActivityProduct> ReverseEngProds = null;
         private static List<Objects.IndustryActivityProduct> InventionProds = null;
         private static List<Objects.IndustryActivityProduct> ReactionProds = null;
 
