@@ -41,6 +41,7 @@ namespace EveHelperWF.ScreenHelper
             if (!Loaded)
             {
                 LoadRefineryComplices();
+                LoadManufacturingImplants();
                 LoadImplants();
             }
             Loaded = true;
@@ -67,7 +68,6 @@ namespace EveHelperWF.ScreenHelper
 
         public static void LoadImplants()
         {
-            LoadManufacturingImplants();
             LoadMeImplants();
             LoadTEImplants();
             LoadCopyImplants();

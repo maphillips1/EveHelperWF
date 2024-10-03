@@ -71,7 +71,7 @@
             BlueprintBrowserButton.Margin = new Padding(3, 2, 3, 2);
             BlueprintBrowserButton.MaximumSize = new Size(120, 120);
             BlueprintBrowserButton.Name = "BlueprintBrowserButton";
-            BlueprintBrowserButton.Size = new Size(120, 44);
+            BlueprintBrowserButton.Size = new Size(120, 50);
             BlueprintBrowserButton.TabIndex = 0;
             BlueprintBrowserButton.Text = "Blueprints";
             BlueprintBrowserButton.UseVisualStyleBackColor = true;
@@ -86,7 +86,7 @@
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PlanetPlannerButton.FlatStyle = FlatStyle.Flat;
             PlanetPlannerButton.ForeColor = Color.White;
-            PlanetPlannerButton.Location = new Point(9, 168);
+            PlanetPlannerButton.Location = new Point(9, 188);
             PlanetPlannerButton.Margin = new Padding(3, 2, 3, 2);
             PlanetPlannerButton.MaximumSize = new Size(120, 120);
             PlanetPlannerButton.Name = "PlanetPlannerButton";
@@ -105,11 +105,11 @@
             LootAppraisalButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             LootAppraisalButton.FlatStyle = FlatStyle.Flat;
             LootAppraisalButton.ForeColor = Color.White;
-            LootAppraisalButton.Location = new Point(142, 74);
+            LootAppraisalButton.Location = new Point(142, 80);
             LootAppraisalButton.Margin = new Padding(3, 2, 3, 2);
             LootAppraisalButton.MaximumSize = new Size(120, 120);
             LootAppraisalButton.Name = "LootAppraisalButton";
-            LootAppraisalButton.Size = new Size(120, 35);
+            LootAppraisalButton.Size = new Size(120, 50);
             LootAppraisalButton.TabIndex = 2;
             LootAppraisalButton.Text = "Loot Appraisal";
             LootAppraisalButton.UseVisualStyleBackColor = true;
@@ -124,11 +124,11 @@
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             SystemFinderButton.FlatStyle = FlatStyle.Flat;
             SystemFinderButton.ForeColor = Color.White;
-            SystemFinderButton.Location = new Point(9, 269);
+            SystemFinderButton.Location = new Point(9, 296);
             SystemFinderButton.Margin = new Padding(3, 2, 3, 2);
             SystemFinderButton.MaximumSize = new Size(120, 120);
             SystemFinderButton.Name = "SystemFinderButton";
-            SystemFinderButton.Size = new Size(120, 42);
+            SystemFinderButton.Size = new Size(120, 50);
             SystemFinderButton.TabIndex = 3;
             SystemFinderButton.Text = "System Finder";
             SystemFinderButton.UseVisualStyleBackColor = true;
@@ -143,11 +143,11 @@
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
             DefaultsButtonClick.FlatStyle = FlatStyle.Flat;
             DefaultsButtonClick.ForeColor = Color.White;
-            DefaultsButtonClick.Location = new Point(9, 222);
+            DefaultsButtonClick.Location = new Point(9, 242);
             DefaultsButtonClick.Margin = new Padding(3, 2, 3, 2);
             DefaultsButtonClick.MaximumSize = new Size(120, 120);
             DefaultsButtonClick.Name = "DefaultsButtonClick";
-            DefaultsButtonClick.Size = new Size(120, 39);
+            DefaultsButtonClick.Size = new Size(120, 50);
             DefaultsButtonClick.TabIndex = 8;
             DefaultsButtonClick.Text = "Settings";
             DefaultsButtonClick.UseVisualStyleBackColor = true;
@@ -162,7 +162,7 @@
             MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             MarketBrowserButton.FlatStyle = FlatStyle.Flat;
             MarketBrowserButton.ForeColor = Color.White;
-            MarketBrowserButton.Location = new Point(142, 114);
+            MarketBrowserButton.Location = new Point(142, 134);
             MarketBrowserButton.Margin = new Padding(3, 2, 3, 2);
             MarketBrowserButton.MaximumSize = new Size(120, 120);
             MarketBrowserButton.Name = "MarketBrowserButton";
@@ -185,7 +185,7 @@
             AbyssTrackerButton.Margin = new Padding(3, 2, 3, 2);
             AbyssTrackerButton.MaximumSize = new Size(120, 120);
             AbyssTrackerButton.Name = "AbyssTrackerButton";
-            AbyssTrackerButton.Size = new Size(120, 44);
+            AbyssTrackerButton.Size = new Size(120, 50);
             AbyssTrackerButton.TabIndex = 12;
             AbyssTrackerButton.Text = "Abyss Tracker";
             AbyssTrackerButton.UseVisualStyleBackColor = true;
@@ -200,11 +200,11 @@
             PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PriceHistoryButton.FlatStyle = FlatStyle.Flat;
             PriceHistoryButton.ForeColor = Color.White;
-            PriceHistoryButton.Location = new Point(142, 171);
+            PriceHistoryButton.Location = new Point(142, 188);
             PriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryButton.MaximumSize = new Size(120, 120);
             PriceHistoryButton.Name = "PriceHistoryButton";
-            PriceHistoryButton.Size = new Size(120, 47);
+            PriceHistoryButton.Size = new Size(120, 50);
             PriceHistoryButton.TabIndex = 16;
             PriceHistoryButton.Text = "Price History";
             PriceHistoryButton.UseVisualStyleBackColor = true;
@@ -218,7 +218,7 @@
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
-            menuStrip1.Size = new Size(471, 24);
+            menuStrip1.Size = new Size(397, 24);
             menuStrip1.TabIndex = 18;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -265,7 +265,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(95, 325);
+            FreyaLinkLabel.Location = new Point(98, 394);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -277,7 +277,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic);
-            label10.Location = new Point(9, 322);
+            label10.Location = new Point(12, 391);
             label10.Name = "label10";
             label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
@@ -297,11 +297,11 @@
             ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             ShoppingListButton.FlatStyle = FlatStyle.Flat;
             ShoppingListButton.ForeColor = Color.White;
-            ShoppingListButton.Location = new Point(142, 222);
+            ShoppingListButton.Location = new Point(142, 242);
             ShoppingListButton.Margin = new Padding(3, 2, 3, 2);
             ShoppingListButton.MaximumSize = new Size(120, 120);
             ShoppingListButton.Name = "ShoppingListButton";
-            ShoppingListButton.Size = new Size(120, 39);
+            ShoppingListButton.Size = new Size(120, 50);
             ShoppingListButton.TabIndex = 22;
             ShoppingListButton.Text = "Shopping List";
             ShoppingListButton.UseVisualStyleBackColor = true;
@@ -316,11 +316,11 @@
             BuildPlansButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             BuildPlansButton.FlatStyle = FlatStyle.Flat;
             BuildPlansButton.ForeColor = Color.White;
-            BuildPlansButton.Location = new Point(9, 74);
+            BuildPlansButton.Location = new Point(9, 80);
             BuildPlansButton.Margin = new Padding(3, 2, 3, 2);
             BuildPlansButton.MaximumSize = new Size(120, 120);
             BuildPlansButton.Name = "BuildPlansButton";
-            BuildPlansButton.Size = new Size(120, 34);
+            BuildPlansButton.Size = new Size(120, 50);
             BuildPlansButton.TabIndex = 24;
             BuildPlansButton.Text = "Build Plans";
             BuildPlansButton.UseVisualStyleBackColor = true;
@@ -341,7 +341,7 @@
             DocumentationLabel.AutoSize = true;
             DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            DocumentationLabel.Location = new Point(9, 354);
+            DocumentationLabel.Location = new Point(12, 423);
             DocumentationLabel.Name = "DocumentationLabel";
             DocumentationLabel.Size = new Size(118, 20);
             DocumentationLabel.TabIndex = 25;
@@ -358,7 +358,7 @@
             LPOfferButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             LPOfferButton.FlatStyle = FlatStyle.Flat;
             LPOfferButton.ForeColor = Color.White;
-            LPOfferButton.Location = new Point(9, 114);
+            LPOfferButton.Location = new Point(9, 134);
             LPOfferButton.Margin = new Padding(3, 2, 3, 2);
             LPOfferButton.MaximumSize = new Size(120, 120);
             LPOfferButton.Name = "LPOfferButton";
@@ -376,11 +376,11 @@
             ThemePickerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             ThemePickerButton.FlatStyle = FlatStyle.Flat;
             ThemePickerButton.ForeColor = Color.White;
-            ThemePickerButton.Location = new Point(142, 269);
+            ThemePickerButton.Location = new Point(142, 296);
             ThemePickerButton.Margin = new Padding(3, 2, 3, 2);
             ThemePickerButton.MaximumSize = new Size(120, 120);
             ThemePickerButton.Name = "ThemePickerButton";
-            ThemePickerButton.Size = new Size(120, 42);
+            ThemePickerButton.Size = new Size(120, 50);
             ThemePickerButton.TabIndex = 27;
             ThemePickerButton.Text = "Theme Picker";
             ThemePickerButton.UseVisualStyleBackColor = true;
@@ -391,7 +391,7 @@
             linkLabel1.AutoSize = true;
             linkLabel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             linkLabel1.LinkColor = Color.FromArgb(128, 255, 255);
-            linkLabel1.Location = new Point(12, 389);
+            linkLabel1.Location = new Point(15, 458);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(175, 20);
             linkLabel1.TabIndex = 28;
@@ -404,7 +404,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
-            ClientSize = new Size(471, 441);
+            ClientSize = new Size(397, 491);
             Controls.Add(linkLabel1);
             Controls.Add(ThemePickerButton);
             Controls.Add(LPOfferButton);
