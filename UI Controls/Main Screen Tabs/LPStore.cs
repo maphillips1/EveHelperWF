@@ -9,6 +9,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
     {
         List<NPCCorporation> corporations = new List<NPCCorporation>();
         List<ESILPOffer> allOffers = new List<ESILPOffer>();
+        Dictionary<int, int> bpcOutcomeTypeIDs = new Dictionary<int, int>();
         public LPStore()
         {
             InitializeComponent();
@@ -29,6 +30,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             this.Cursor = Cursors.WaitCursor;
             InfoLoadingLabel.Visible = true;
+            bpcOutcomeTypeIDs.Clear();
+            SearchTextBox.Text = string.Empty;
             if (NPCCorpCombo.SelectedValue != null)
             {
                 long npcCorpId = (long)NPCCorpCombo.SelectedValue;
@@ -40,6 +43,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (allOffers?.Count > 0)
                     {
                         allOffers = allOffers.OrderBy(x => x.typeName).ToList();
+                        DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
+                        AddInputsForBPCs();
                         DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
                         GetMarketInformationForOffers();
                         allOffers = allOffers.OrderByDescending(x => x.iskLPBuyDecimal).ToList();
@@ -80,6 +85,27 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void AddInputsForBPCs()
+        {
+            List<IndustryActivityMaterials> materials = null;
+            List<IndustryActivityProduct> products = null;
+            foreach (ESILPOffer offer in allOffers)
+            {
+                products = Database.SQLiteCalls.GetIndustryActivityProducts(offer.type_id, Enums.Enums.ActivityManufacturing);
+                materials = Database.SQLiteCalls.GetIndustryActivityMaterials(offer.type_id, Enums.Enums.ActivityManufacturing);
+                if (materials?.Count > 0 && products?.Count > 0)
+                {
+                    bpcOutcomeTypeIDs.Add(offer.type_id, products[0].productTypeID);
+                    foreach (IndustryActivityMaterials material in materials)
+                    {
+                        offer.required_items.Add(new ESILPOfferRequiredItem() { quantity = material.quantity, 
+                                                                                type_id = material.materialTypeID, 
+                                                                                typeName = material.materialName });
+                    }
+                }
+            }
+        }
+
         private void GetMarketInformationForOffers()
         {
             if (allOffers?.Count > 0)
@@ -87,7 +113,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 List<ESIMarketType> eSIMarketTypes = new List<ESIMarketType>();
                 foreach (ESILPOffer offer in allOffers)
                 {
-                    eSIMarketTypes.Add(new ESIMarketType() { typeID = offer.type_id, quantity = 1 });
+                    if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
+                    {
+                        eSIMarketTypes.Add(new ESIMarketType() { typeID = bpcOutcomeTypeIDs[offer.type_id], quantity = 1 });
+                    }
+                    else
+                    {
+                        eSIMarketTypes.Add(new ESIMarketType() { typeID = offer.type_id, quantity = 1 });
+                    }
+
                     if (offer.required_items?.Count > 0)
                     {
                         foreach (ESILPOfferRequiredItem requiredItem in offer.required_items)
@@ -104,14 +138,29 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 foreach (ESILPOffer offer in allOffers)
                 {
-                    offer.buyValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                    if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
+                    {
+                        offer.buyValue = eSIMarketTypes.Find(x => x.typeID == bpcOutcomeTypeIDs[offer.type_id]).pricePer;
+                    }
+                    else
+                    {
+                        offer.buyValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                    }
                 }
 
                 eSIMarketTypes = ESI_Calls.ESIMarketData.GetPriceForItemListWithQuantityAsync(eSIMarketTypes, (int)Enums.Enums.OrderType.Sell, Enums.Enums.TheForgeRegionId).Result;
 
                 foreach (ESILPOffer offer in allOffers)
                 {
-                    offer.sellValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                    if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
+                    {
+                        offer.sellValue = eSIMarketTypes.Find(x => x.typeID == bpcOutcomeTypeIDs[offer.type_id]).pricePer;
+                    }
+                    else
+                    {
+                        offer.sellValue = eSIMarketTypes.Find(x => x.typeID == offer.type_id).pricePer;
+                    }
+
                     if (offer.required_items?.Count > 0)
                     {
                         foreach (ESILPOfferRequiredItem requiredItem in offer.required_items)
