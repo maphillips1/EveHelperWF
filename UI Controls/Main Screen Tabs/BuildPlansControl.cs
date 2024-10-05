@@ -7,6 +7,7 @@ using FileIO;
 using System.ComponentModel;
 using System.Data;
 using System.Text;
+using System.Windows.Forms;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
@@ -18,9 +19,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BPReaction = 1,
             SystemStruct = 2,
             MaterialPrices = 3,
-            BuildDetails = 4,
-            PlanetMats = 5,
-            CostBreakdown = 6
+            CurrentInventory = 4,
+            BuildDetails = 5,
+            PlanetMats = 6,
+            CostBreakdown = 7
         }
 
         private BuildPlan currentBuildPlan;
@@ -46,6 +48,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private List<PlanetMaterial> UniquePlanetMaterials;
         private decimal FinalProductSellOrderPrice;
         private decimal FinalProductBuyOrderPrice;
+        private bool IgnoreTextChangedEvent;
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -616,6 +619,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 EnsureInputMaterials();
                 EnsureMinimumRunsAndCopies();
                 EnsureBlueprintStore();
+                EnsureCurrentInventory();
 
                 //Load Blueprint Store
                 LoadBlueprintStoreTreeView();
@@ -661,6 +665,31 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 SaveBuildPlan();
             }
+        }
+
+        private void EnsureCurrentInventory()
+        {
+            InventoryTypeWithQuantity foundType;
+            if (currentBuildPlan != null && currentBuildPlan.CurrentInventory == null)
+            {
+                currentBuildPlan.CurrentInventory = new List<InventoryTypeWithQuantity>();
+                foreach (BlueprintInfo blueprint in currentBuildPlan.BlueprintStore)
+                {
+                    List<IndustryActivityMaterials> industryActivityMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprint.BlueprintTypeId, Enums.Enums.ActivityManufacturing);
+                    if (industryActivityMaterials?.Count > 0)
+                    {
+                        foreach (IndustryActivityMaterials material in industryActivityMaterials)
+                        {
+                            foundType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == material.materialTypeID);
+                            if (foundType == null)
+                            {
+                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity(material.materialTypeID, material.materialName));
+                            }
+                        }
+                    }
+                }
+            }
+            this.currentBuildPlan.CurrentInventory = this.currentBuildPlan.CurrentInventory.OrderBy(x => x.typeName).ToList();
         }
 
         private void LoadProductImage()
@@ -947,13 +976,25 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             StringBuilder stringBuilder = new StringBuilder();
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
+            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
 
+            InventoryTypeWithQuantity currentInventory;
+            long quantityNeeded = 0;
             foreach (MaterialsWithMarketData mat in combinedMats)
             {
-                if (!BuildPlanHelper.IsItemMade(currentBuildPlan.BlueprintStore, mat.materialTypeID))
+                currentInventory = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == mat.materialTypeID);
+                quantityNeeded = mat.quantityTotal;
+                if (currentInventory != null)
                 {
-                    stringBuilder.AppendLine(mat.materialName + " " + mat.quantityTotal);
+                    quantityNeeded -= currentInventory.quantity;
+                    if (quantityNeeded < 0) { quantityNeeded = 0; }
+                }
+                if (quantityNeeded > 0)
+                {
+                    if (!BuildPlanHelper.IsItemMade(currentBuildPlan.BlueprintStore, mat.materialTypeID))
+                    {
+                        stringBuilder.AppendLine(mat.materialName + " " + quantityNeeded);
+                    }
                 }
             }
             Clipboard.SetText(stringBuilder.ToString());
@@ -1182,12 +1223,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             return needToSetData;
         }
 
-        private void CombineMatsFromOptimizedBuilds(ref List<MaterialsWithMarketData> outputList, List<OptimizedBuild> optimizedBuilds)
+        private void CombineMatsFromOptimizedBuilds(ref List<MaterialsWithMarketData> outputList, List<OptimizedBuild> optimizedBuilds, bool ignoreCompletedBuilds = false)
         {
             MaterialsWithMarketData existingMat;
             OptimizedBuild buildPlan;
             foreach (OptimizedBuild build in optimizedBuilds)
             {
+                if (ignoreCompletedBuilds && build.TotalQuantityNeeded == 0)
+                {
+                    continue;
+                }
                 foreach (MaterialsWithMarketData input in build.InputMaterials)
                 {
                     buildPlan = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == input.materialTypeID);
@@ -1425,7 +1470,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             MaterialsPriceTreeView.Nodes.Clear();
             List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
+            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
             TreeNode tn;
             combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
@@ -1436,6 +1481,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = BuildPlanHelper.GroupInputMaterials(combinedMats);
 
             List<KeyValuePair<string, List<MaterialsWithMarketData>>> orderedMats = groupedMaterials.OrderBy(x => x.Key).ToList();
+            InventoryTypeWithQuantity currentInventory;
+            long quantityNeeded = 0;
             foreach (KeyValuePair<string, List<MaterialsWithMarketData>> inputGroup in orderedMats)
             {
                 marketGroupNode = new TreeNode();
@@ -1444,10 +1491,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 foreach (MaterialsWithMarketData mat in inputGroup.Value.OrderBy(x => x.materialName))
                 {
+                    quantityNeeded = mat.quantityTotal;
+                    currentInventory = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == mat.materialTypeID);
+                    if (currentInventory != null)
+                    {
+                        quantityNeeded -= currentInventory.quantity;
+                        if (quantityNeeded < 0) { quantityNeeded = 0; }
+                    }
                     pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
                     tn = new TreeNode();
                     tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                    tn.Text = mat.quantityTotal.ToString("N0") + " x " + mat.materialName;
+                    tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
                     tn.Tag = mat.materialTypeID;
 
                     pricePer = new TreeNode();
@@ -1456,7 +1510,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     tn.Nodes.Add(pricePer);
 
                     priceTotal = new TreeNode();
-                    priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(mat.quantityTotal * pricedMat.pricePer);
+                    priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
                     priceTotal.ForeColor = Color.White;
                     tn.Nodes.Add(priceTotal);
                     marketGroupNode.Nodes.Add(tn);
@@ -1500,6 +1554,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     PlanetMaterialsTreeView.Nodes.Clear();
                 }
             }
+        }
+
+        private void LoadCurrentInventoryPage()
+        {
+            DatabindGridView<List<InventoryTypeWithQuantity>>(CurrentInventoryGrid, this.currentBuildPlan.CurrentInventory);
         }
 
         private void LoadUniquePlanetMaterials()
@@ -1549,6 +1608,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadOptimumBuildSchedule();
             SetSummaryInformation();
             LoadPlanetaryMaterialsPage();
+            LoadCurrentInventoryPage();
         }
 
         private void LoadPlanetaryTreeView()
@@ -1588,7 +1648,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             if (input.Inputs.Count > 0)
             {
-                foreach (PlanetMaterial child in  input.Inputs)
+                foreach (PlanetMaterial child in input.Inputs)
                 {
                     AddTotalPlanetMats(child, ref totals);
                 }
@@ -2186,6 +2246,139 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void CostBreakdownButton_Click(object sender, EventArgs e)
         {
             ShowHideTabPage((int)TabPages.CostBreakdown);
+        }
+
+        private void CurrentInventoryButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.CurrentInventory);
+        }
+
+        private void CurrentInventoryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                if (!IgnoreTextChangedEvent)
+                {
+                    IgnoreTextChangedEvent = true;
+                    string rawInput = CurrentInventoryTextBox.Text;
+                    string formattedText = rawInput.Replace("\r\n", "\n").Replace("\n", "\r\n");
+                    CurrentInventoryTextBox.Text = formattedText;
+                    string[] inputItems = formattedText.Split("\r\n");
+                    if (inputItems != null)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
+                        appraisedItems = AppraisalHelper.ParseTypeIds(inputItems);
+                        InventoryTypeWithQuantity inventoryType;
+                        foreach (AppraisedItem item in appraisedItems)
+                        {
+                            inventoryType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == item.typeID);
+                            if (inventoryType != null)
+                            {
+                                inventoryType.quantity = item.quantity;
+                            }
+                        }
+                        if (!this.isLoading)
+                        {
+                            this.isLoading = true;
+                            RunCalcs();
+                            this.isLoading = false;
+                        }
+                        SaveBuildPlan();
+                        this.Cursor = Cursors.Default;
+                    }
+
+                    IgnoreTextChangedEvent = false;
+                }
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                SaveBuildPlan();
+                if (!this.isLoading)
+                {
+                    this.isLoading = true;
+                    RunCalcs();
+                    this.isLoading = false;
+                }
+            }
+        }
+        private void CurrentInventoryGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (CurrentInventoryGrid.CurrentCell.ColumnIndex == 1) //Desired Column
+            {
+                e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+        }
+
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Convert.ToString(e.Value)))
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (this.currentBuildPlan != null && e.ColumnIndex == 1)
+            {
+                if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Please enter a value before leaving the cell.");
+                }
+            }
+        }
+
+        private void CurrentInventoryGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                if (e.ColumnIndex == 1)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void ClearInventoryButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.CurrentInventory.ForEach(x => x.quantity = 0);
+                if (!this.isLoading)
+                {
+                    this.isLoading = true;
+                    RunCalcs();
+                    this.isLoading = false;
+                }
+                SaveBuildPlan();
+            }
         }
     }
 }

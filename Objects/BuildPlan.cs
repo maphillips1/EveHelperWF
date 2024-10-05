@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace EveHelperWF.Objects
 {
@@ -26,5 +27,6 @@ namespace EveHelperWF.Objects
             }
         }
         public decimal finalSellPrice { get; set; }
+        public List<InventoryTypeWithQuantity> CurrentInventory {  get; set; }
     }
 }
