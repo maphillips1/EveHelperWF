@@ -74,15 +74,22 @@
             Label label56;
             Label label44;
             Label label57;
+            Label label58;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
@@ -177,6 +184,12 @@
             NewBuildPlanButton = new Button();
             DeleteBuildPlanButton = new Button();
             BuildPlanTabControl = new TabControl();
+            CurrentInventoryTabPanel = new TabPage();
+            ClearInventoryButton = new Button();
+            CurrentInventoryTextBox = new TextBox();
+            CurrentInventoryGrid = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             CostBreakdownPage = new TabPage();
             CostBreakdownTextBox = new TextBox();
             LoadProductImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -197,6 +210,7 @@
             BuildDetailsButton = new Button();
             MaterialsButton = new Button();
             SystemButton = new Button();
+            CurrentInventoryButton = new Button();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -243,6 +257,7 @@
             label56 = new Label();
             label44 = new Label();
             label57 = new Label();
+            label58 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).BeginInit();
@@ -272,6 +287,8 @@
             PlanetaryMaterialsTabPage.SuspendLayout();
             BPReactionTabPage.SuspendLayout();
             BuildPlanTabControl.SuspendLayout();
+            CurrentInventoryTabPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)CurrentInventoryGrid).BeginInit();
             CostBreakdownPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
@@ -281,7 +298,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F);
             label1.ForeColor = Color.Gold;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
@@ -301,7 +318,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 9.75F);
             label8.Location = new Point(13, 50);
             label8.Name = "label8";
             label8.Size = new Size(98, 17);
@@ -311,7 +328,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 9.75F);
             label7.Location = new Point(13, 11);
             label7.Name = "label7";
             label7.Size = new Size(98, 17);
@@ -321,7 +338,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 9.75F);
             label6.Location = new Point(43, 240);
             label6.Name = "label6";
             label6.Size = new Size(116, 17);
@@ -331,7 +348,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 9.75F);
             label4.Location = new Point(19, 270);
             label4.Name = "label4";
             label4.Size = new Size(140, 17);
@@ -341,7 +358,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 9.75F);
             label3.Location = new Point(8, 210);
             label3.Name = "label3";
             label3.Size = new Size(151, 17);
@@ -351,7 +368,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 9.75F);
             label2.Location = new Point(14, 180);
             label2.Name = "label2";
             label2.Size = new Size(145, 17);
@@ -371,7 +388,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label21.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label21.Location = new Point(65, 181);
             label21.Margin = new Padding(2, 0, 2, 0);
             label21.Name = "label21";
@@ -382,7 +399,7 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label22.Location = new Point(93, 148);
             label22.Margin = new Padding(2, 0, 2, 0);
             label22.Name = "label22";
@@ -393,7 +410,7 @@
             // label23
             // 
             label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label23.Location = new Point(8, 120);
             label23.Margin = new Padding(2, 0, 2, 0);
             label23.Name = "label23";
@@ -404,7 +421,7 @@
             // label24
             // 
             label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label24.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label24.Location = new Point(3, 82);
             label24.Margin = new Padding(2, 0, 2, 0);
             label24.Name = "label24";
@@ -416,7 +433,7 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label25.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label25.Location = new Point(54, 49);
             label25.Margin = new Padding(2, 0, 2, 0);
             label25.Name = "label25";
@@ -427,7 +444,7 @@
             // label26
             // 
             label26.AutoSize = true;
-            label26.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label26.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label26.Location = new Point(68, 16);
             label26.Margin = new Padding(2, 0, 2, 0);
             label26.Name = "label26";
@@ -438,7 +455,7 @@
             // label35
             // 
             label35.AutoSize = true;
-            label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label35.Location = new Point(82, 163);
             label35.Margin = new Padding(2, 0, 2, 0);
             label35.Name = "label35";
@@ -449,7 +466,7 @@
             // label36
             // 
             label36.AutoSize = true;
-            label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label36.Location = new Point(9, 122);
             label36.Margin = new Padding(2, 0, 2, 0);
             label36.Name = "label36";
@@ -460,7 +477,7 @@
             // label37
             // 
             label37.AutoSize = true;
-            label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label37.Location = new Point(4, 86);
             label37.Margin = new Padding(2, 0, 2, 0);
             label37.Name = "label37";
@@ -471,7 +488,7 @@
             // label38
             // 
             label38.AutoSize = true;
-            label38.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label38.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label38.Location = new Point(50, 52);
             label38.Margin = new Padding(2, 0, 2, 0);
             label38.Name = "label38";
@@ -482,7 +499,7 @@
             // label39
             // 
             label39.AutoSize = true;
-            label39.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label39.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label39.Location = new Point(29, 15);
             label39.Margin = new Padding(2, 0, 2, 0);
             label39.Name = "label39";
@@ -494,7 +511,7 @@
             // label40
             // 
             label40.AutoSize = true;
-            label40.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label40.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label40.Location = new Point(2, 44);
             label40.Margin = new Padding(2, 0, 2, 0);
             label40.Name = "label40";
@@ -505,7 +522,7 @@
             // label41
             // 
             label41.AutoSize = true;
-            label41.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label41.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label41.Location = new Point(32, 14);
             label41.Margin = new Padding(2, 0, 2, 0);
             label41.Name = "label41";
@@ -516,7 +533,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 12F);
             label10.Location = new Point(365, 13);
             label10.Name = "label10";
             label10.Size = new Size(112, 21);
@@ -526,7 +543,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Font = new Font("Segoe UI", 12F);
             label14.Location = new Point(703, 49);
             label14.Margin = new Padding(2, 0, 2, 0);
             label14.Name = "label14";
@@ -537,7 +554,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Font = new Font("Segoe UI", 12F);
             label13.Location = new Point(340, 49);
             label13.Name = "label13";
             label13.Size = new Size(137, 21);
@@ -547,7 +564,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label12.Location = new Point(686, 82);
             label12.Name = "label12";
             label12.Size = new Size(53, 17);
@@ -557,7 +574,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label16.ForeColor = Color.MediumPurple;
             label16.Location = new Point(686, 144);
             label16.Name = "label16";
@@ -568,7 +585,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label17.ForeColor = Color.DarkOrange;
             label17.Location = new Point(686, 164);
             label17.Name = "label17";
@@ -579,7 +596,7 @@
             // label42
             // 
             label42.AutoSize = true;
-            label42.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label42.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label42.ForeColor = Color.Cyan;
             label42.Location = new Point(686, 124);
             label42.Name = "label42";
@@ -590,7 +607,7 @@
             // label43
             // 
             label43.AutoSize = true;
-            label43.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label43.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label43.ForeColor = Color.Chartreuse;
             label43.Location = new Point(686, 104);
             label43.Name = "label43";
@@ -601,7 +618,7 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label20.Location = new Point(686, 184);
             label20.Name = "label20";
             label20.Size = new Size(162, 17);
@@ -611,7 +628,7 @@
             // label45
             // 
             label45.AutoSize = true;
-            label45.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label45.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label45.Location = new Point(854, 78);
             label45.Name = "label45";
             label45.Size = new Size(201, 21);
@@ -621,7 +638,7 @@
             // label47
             // 
             label47.AutoSize = true;
-            label47.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label47.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label47.Location = new Point(1038, 55);
             label47.Name = "label47";
             label47.Size = new Size(67, 17);
@@ -631,7 +648,7 @@
             // label46
             // 
             label46.AutoSize = true;
-            label46.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label46.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label46.Location = new Point(1006, 36);
             label46.Name = "label46";
             label46.Size = new Size(99, 17);
@@ -641,7 +658,7 @@
             // label48
             // 
             label48.AutoSize = true;
-            label48.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label48.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label48.Location = new Point(1022, 14);
             label48.Name = "label48";
             label48.Size = new Size(180, 17);
@@ -651,7 +668,7 @@
             // label52
             // 
             label52.AutoSize = true;
-            label52.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label52.Font = new Font("Segoe UI", 9.75F);
             label52.Location = new Point(9, 103);
             label52.Name = "label52";
             label52.Size = new Size(692, 17);
@@ -661,7 +678,7 @@
             // label53
             // 
             label53.AutoSize = true;
-            label53.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label53.Font = new Font("Segoe UI", 12F);
             label53.Location = new Point(1062, 49);
             label53.Margin = new Padding(2, 0, 2, 0);
             label53.Name = "label53";
@@ -672,7 +689,7 @@
             // label54
             // 
             label54.AutoSize = true;
-            label54.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label54.Font = new Font("Segoe UI", 9F);
             label54.Location = new Point(9, 18);
             label54.Name = "label54";
             label54.Size = new Size(567, 15);
@@ -682,7 +699,7 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label19.Font = new Font("Segoe UI", 9.75F);
             label19.Location = new Point(35, 90);
             label19.Name = "label19";
             label19.Size = new Size(124, 17);
@@ -692,7 +709,7 @@
             // label29
             // 
             label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label29.Font = new Font("Segoe UI", 9.75F);
             label29.Location = new Point(120, 120);
             label29.Name = "label29";
             label29.Size = new Size(39, 17);
@@ -702,7 +719,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label18.Font = new Font("Segoe UI", 9.75F);
             label18.Location = new Point(9, 18);
             label18.Name = "label18";
             label18.Size = new Size(139, 17);
@@ -712,7 +729,7 @@
             // label27
             // 
             label27.AutoSize = true;
-            label27.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label27.Font = new Font("Segoe UI", 9.75F);
             label27.Location = new Point(20, 150);
             label27.Name = "label27";
             label27.Size = new Size(139, 17);
@@ -722,7 +739,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label5.Location = new Point(41, 76);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
@@ -734,7 +751,7 @@
             // 
             label56.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label56.AutoSize = true;
-            label56.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label56.Font = new Font("Segoe UI", 9.75F);
             label56.Location = new Point(756, 103);
             label56.Name = "label56";
             label56.Size = new Size(210, 17);
@@ -744,7 +761,7 @@
             // label44
             // 
             label44.AutoSize = true;
-            label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label44.ForeColor = Color.Tomato;
             label44.Location = new Point(1115, 82);
             label44.Name = "label44";
@@ -756,7 +773,7 @@
             // 
             label57.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label57.AutoSize = true;
-            label57.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label57.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             label57.ForeColor = Color.WhiteSmoke;
             label57.Location = new Point(621, 15);
             label57.Name = "label57";
@@ -764,9 +781,19 @@
             label57.TabIndex = 2;
             label57.Text = "Total of each type";
             // 
+            // label58
+            // 
+            label58.AutoSize = true;
+            label58.Font = new Font("Segoe UI", 12F);
+            label58.Location = new Point(5, 65);
+            label58.Name = "label58";
+            label58.Size = new Size(630, 21);
+            label58.TabIndex = 50;
+            label58.Text = "You can change the quantity by typing in the grid or Copy / Paste from your Eve Inventory";
+            // 
             // SummaryPage
             // 
-            SummaryPage.BackColor = Enums.Enums.BackgroundColor;
+            SummaryPage.BackColor = Color.FromArgb(21, 21, 21);
             SummaryPage.Controls.Add(SummaryHelpPanel);
             SummaryPage.Controls.Add(leftoverMatsValueLabel);
             SummaryPage.Controls.Add(label27);
@@ -787,10 +814,10 @@
             SummaryPage.Controls.Add(label2);
             SummaryPage.Controls.Add(ProductLabel);
             SummaryPage.Controls.Add(FinalProductImagePanel);
-            SummaryPage.Location = new Point(4, 24);
+            SummaryPage.Location = new Point(4, 5);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1346, 512);
+            SummaryPage.Size = new Size(1346, 531);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
             // 
@@ -808,7 +835,7 @@
             // leftoverMatsValueLabel
             // 
             leftoverMatsValueLabel.AutoSize = true;
-            leftoverMatsValueLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            leftoverMatsValueLabel.Font = new Font("Segoe UI", 9.75F);
             leftoverMatsValueLabel.Location = new Point(184, 150);
             leftoverMatsValueLabel.Name = "leftoverMatsValueLabel";
             leftoverMatsValueLabel.Size = new Size(127, 17);
@@ -818,7 +845,7 @@
             // ProfitLabel
             // 
             ProfitLabel.AutoSize = true;
-            ProfitLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            ProfitLabel.Font = new Font("Segoe UI", 9.75F);
             ProfitLabel.Location = new Point(185, 120);
             ProfitLabel.Name = "ProfitLabel";
             ProfitLabel.Size = new Size(96, 17);
@@ -828,7 +855,7 @@
             // IskNeededForPlanLabel
             // 
             IskNeededForPlanLabel.AutoSize = true;
-            IskNeededForPlanLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            IskNeededForPlanLabel.Font = new Font("Segoe UI", 9.75F);
             IskNeededForPlanLabel.Location = new Point(185, 90);
             IskNeededForPlanLabel.Name = "IskNeededForPlanLabel";
             IskNeededForPlanLabel.Size = new Size(132, 17);
@@ -848,7 +875,7 @@
             // InputVolumeLabel
             // 
             InputVolumeLabel.AutoSize = true;
-            InputVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            InputVolumeLabel.Font = new Font("Segoe UI", 9.75F);
             InputVolumeLabel.Location = new Point(184, 240);
             InputVolumeLabel.Name = "InputVolumeLabel";
             InputVolumeLabel.Size = new Size(92, 17);
@@ -858,7 +885,7 @@
             // OutcomeVolumeLabel
             // 
             OutcomeVolumeLabel.AutoSize = true;
-            OutcomeVolumeLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutcomeVolumeLabel.Font = new Font("Segoe UI", 9.75F);
             OutcomeVolumeLabel.Location = new Point(184, 270);
             OutcomeVolumeLabel.Name = "OutcomeVolumeLabel";
             OutcomeVolumeLabel.Size = new Size(116, 17);
@@ -868,7 +895,7 @@
             // ProductionCostUnitLabel
             // 
             ProductionCostUnitLabel.AutoSize = true;
-            ProductionCostUnitLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            ProductionCostUnitLabel.Font = new Font("Segoe UI", 9.75F);
             ProductionCostUnitLabel.Location = new Point(184, 210);
             ProductionCostUnitLabel.Name = "ProductionCostUnitLabel";
             ProductionCostUnitLabel.Size = new Size(109, 17);
@@ -878,7 +905,7 @@
             // OutcomeQuantityLabel
             // 
             OutcomeQuantityLabel.AutoSize = true;
-            OutcomeQuantityLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            OutcomeQuantityLabel.Font = new Font("Segoe UI", 9.75F);
             OutcomeQuantityLabel.Location = new Point(184, 180);
             OutcomeQuantityLabel.Name = "OutcomeQuantityLabel";
             OutcomeQuantityLabel.Size = new Size(156, 17);
@@ -895,13 +922,13 @@
             SummaryMarketData.Dock = DockStyle.Right;
             SummaryMarketData.Location = new Point(394, 3);
             SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(949, 506);
+            SummaryMarketData.Size = new Size(949, 525);
             SummaryMarketData.TabIndex = 7;
             // 
             // JitaBuyLabel
             // 
             JitaBuyLabel.AutoSize = true;
-            JitaBuyLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            JitaBuyLabel.Font = new Font("Segoe UI", 9.75F);
             JitaBuyLabel.Location = new Point(131, 50);
             JitaBuyLabel.Name = "JitaBuyLabel";
             JitaBuyLabel.Size = new Size(59, 17);
@@ -911,7 +938,7 @@
             // JitaSellLabel
             // 
             JitaSellLabel.AutoSize = true;
-            JitaSellLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            JitaSellLabel.Font = new Font("Segoe UI", 9.75F);
             JitaSellLabel.Location = new Point(131, 11);
             JitaSellLabel.Name = "JitaSellLabel";
             JitaSellLabel.Size = new Size(59, 17);
@@ -923,38 +950,38 @@
             PriceHistoryGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = SystemColors.Control;
-            dataGridViewCellStyle17.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.True;
-            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = SystemColors.Control;
+            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = Color.Black;
-            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle24.ForeColor = Color.White;
-            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = Color.Black;
+            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle22.ForeColor = Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle22;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryGridView.Name = "PriceHistoryGridView";
             PriceHistoryGridView.RowHeadersWidth = 51;
             PriceHistoryGridView.RowTemplate.Height = 29;
-            PriceHistoryGridView.Size = new Size(931, 423);
+            PriceHistoryGridView.Size = new Size(931, 442);
             PriceHistoryGridView.TabIndex = 5;
             // 
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle18.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle16.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle16;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -963,10 +990,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle19.Format = "N0";
-            dataGridViewCellStyle19.NullValue = "0";
-            dataGridViewCellStyle19.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle17.Format = "N0";
+            dataGridViewCellStyle17.NullValue = "0";
+            dataGridViewCellStyle17.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle17;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -975,10 +1002,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle20.Format = "N0";
-            dataGridViewCellStyle20.NullValue = "0";
-            dataGridViewCellStyle20.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle18.Format = "N0";
+            dataGridViewCellStyle18.NullValue = "0";
+            dataGridViewCellStyle18.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle18;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -987,10 +1014,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle21.Format = "N0";
-            dataGridViewCellStyle21.NullValue = "0";
-            dataGridViewCellStyle21.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle19.Format = "N0";
+            dataGridViewCellStyle19.NullValue = "0";
+            dataGridViewCellStyle19.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle19;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -999,10 +1026,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle22.Format = "N0";
-            dataGridViewCellStyle22.NullValue = "0";
-            dataGridViewCellStyle22.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle20.Format = "N0";
+            dataGridViewCellStyle20.NullValue = "0";
+            dataGridViewCellStyle20.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle20;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -1011,8 +1038,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle23.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle21.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle21;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1021,7 +1048,7 @@
             // ProductLabel
             // 
             ProductLabel.AutoSize = true;
-            ProductLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ProductLabel.Font = new Font("Segoe UI", 14.25F);
             ProductLabel.ForeColor = Color.Gold;
             ProductLabel.Location = new Point(78, 6);
             ProductLabel.Name = "ProductLabel";
@@ -1039,7 +1066,7 @@
             // 
             // MaterialPricePage
             // 
-            MaterialPricePage.BackColor = Enums.Enums.BackgroundColor;
+            MaterialPricePage.BackColor = Color.FromArgb(21, 21, 21);
             MaterialPricePage.Controls.Add(label56);
             MaterialPricePage.Controls.Add(MostExpensiveTree);
             MaterialPricePage.Controls.Add(ImportPricesButton);
@@ -1062,7 +1089,7 @@
             // MostExpensiveTree
             // 
             MostExpensiveTree.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            MostExpensiveTree.BackColor = Enums.Enums.BackgroundColor;
+            MostExpensiveTree.BackColor = Color.FromArgb(21, 21, 21);
             MostExpensiveTree.Location = new Point(756, 123);
             MostExpensiveTree.MinimumSize = new Size(582, 317);
             MostExpensiveTree.Name = "MostExpensiveTree";
@@ -1097,7 +1124,7 @@
             TaxFinalProductCheckbox.AutoSize = true;
             TaxFinalProductCheckbox.Checked = true;
             TaxFinalProductCheckbox.CheckState = CheckState.Checked;
-            TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F);
             TaxFinalProductCheckbox.Location = new Point(513, 56);
             TaxFinalProductCheckbox.Name = "TaxFinalProductCheckbox";
             TaxFinalProductCheckbox.Size = new Size(226, 24);
@@ -1112,7 +1139,7 @@
             TaxInputCheckbox.AutoSize = true;
             TaxInputCheckbox.Checked = true;
             TaxInputCheckbox.CheckState = CheckState.Checked;
-            TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F);
             TaxInputCheckbox.Location = new Point(513, 26);
             TaxInputCheckbox.Name = "TaxInputCheckbox";
             TaxInputCheckbox.Size = new Size(180, 24);
@@ -1136,8 +1163,8 @@
             // MaterialsPriceTreeView
             // 
             MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MaterialsPriceTreeView.BackColor = Enums.Enums.BackgroundColor;
-            MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MaterialsPriceTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F);
             MaterialsPriceTreeView.HotTracking = true;
             MaterialsPriceTreeView.Location = new Point(3, 123);
             MaterialsPriceTreeView.MinimumSize = new Size(580, 320);
@@ -1175,7 +1202,7 @@
             // 
             // IndustrySettingsTabPage
             // 
-            IndustrySettingsTabPage.BackColor = Enums.Enums.BackgroundColor;
+            IndustrySettingsTabPage.BackColor = Color.FromArgb(21, 21, 21);
             IndustrySettingsTabPage.BorderStyle = BorderStyle.FixedSingle;
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 5);
@@ -1202,7 +1229,7 @@
             // 
             // ManufacturingDefaultsTabPage
             // 
-            ManufacturingDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
+            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(21, 21, 21);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureMERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(ManufacturingStructureCombo);
@@ -1289,7 +1316,7 @@
             // 
             // ReactionsDefaultTabPage
             // 
-            ReactionsDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
+            ReactionsDefaultTabPage.BackColor = Color.FromArgb(21, 21, 21);
             ReactionsDefaultTabPage.Controls.Add(label35);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);
@@ -1363,7 +1390,7 @@
             // 
             // SkillsPage
             // 
-            SkillsPage.BackColor = Enums.Enums.BackgroundColor;
+            SkillsPage.BackColor = Color.FromArgb(21, 21, 21);
             SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
             SkillsPage.Controls.Add(label55);
             SkillsPage.Controls.Add(CapConSkillUpDown);
@@ -1406,7 +1433,7 @@
             // label55
             // 
             label55.AutoSize = true;
-            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label55.Location = new Point(275, 181);
             label55.Margin = new Padding(2, 0, 2, 0);
             label55.Name = "label55";
@@ -1437,7 +1464,7 @@
             // label33
             // 
             label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label33.Location = new Point(271, 14);
             label33.Margin = new Padding(2, 0, 2, 0);
             label33.Name = "label33";
@@ -1458,7 +1485,7 @@
             // label30
             // 
             label30.AutoSize = true;
-            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label30.Location = new Point(278, 44);
             label30.Margin = new Padding(2, 0, 2, 0);
             label30.Name = "label30";
@@ -1489,7 +1516,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label15.Location = new Point(44, 109);
             label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
@@ -1500,7 +1527,7 @@
             // label31
             // 
             label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label31.Location = new Point(277, 74);
             label31.Margin = new Padding(2, 0, 2, 0);
             label31.Name = "label31";
@@ -1531,7 +1558,7 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label28.Location = new Point(44, 145);
             label28.Margin = new Padding(2, 0, 2, 0);
             label28.Name = "label28";
@@ -1542,7 +1569,7 @@
             // label32
             // 
             label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label32.Location = new Point(288, 141);
             label32.Margin = new Padding(2, 0, 2, 0);
             label32.Name = "label32";
@@ -1573,7 +1600,7 @@
             // label34
             // 
             label34.AutoSize = true;
-            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label34.Location = new Point(22, 179);
             label34.Margin = new Padding(2, 0, 2, 0);
             label34.Name = "label34";
@@ -1584,7 +1611,7 @@
             // label51
             // 
             label51.AutoSize = true;
-            label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label51.Location = new Point(277, 107);
             label51.Margin = new Padding(2, 0, 2, 0);
             label51.Name = "label51";
@@ -1614,7 +1641,7 @@
             // 
             // OrderTypePage
             // 
-            OrderTypePage.BackColor = Enums.Enums.BackgroundColor;
+            OrderTypePage.BackColor = Color.FromArgb(21, 21, 21);
             OrderTypePage.Controls.Add(OutputOrderTypeCombo);
             OrderTypePage.Controls.Add(InputOrderTypeCombo);
             OrderTypePage.Controls.Add(label49);
@@ -1649,7 +1676,7 @@
             // label49
             // 
             label49.AutoSize = true;
-            label49.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label49.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label49.Location = new Point(7, 50);
             label49.Margin = new Padding(2, 0, 2, 0);
             label49.Name = "label49";
@@ -1660,7 +1687,7 @@
             // label50
             // 
             label50.AutoSize = true;
-            label50.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label50.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label50.Location = new Point(19, 13);
             label50.Margin = new Padding(2, 0, 2, 0);
             label50.Name = "label50";
@@ -1670,7 +1697,7 @@
             // 
             // DetailsPage
             // 
-            DetailsPage.BackColor = Enums.Enums.BackgroundColor;
+            DetailsPage.BackColor = Color.FromArgb(21, 21, 21);
             DetailsPage.Controls.Add(ExportBuildList);
             DetailsPage.Controls.Add(label44);
             DetailsPage.Controls.Add(TotalManufacturingSlotsLabel);
@@ -1711,7 +1738,7 @@
             // TotalManufacturingSlotsLabel
             // 
             TotalManufacturingSlotsLabel.AutoSize = true;
-            TotalManufacturingSlotsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            TotalManufacturingSlotsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             TotalManufacturingSlotsLabel.ForeColor = Color.Cyan;
             TotalManufacturingSlotsLabel.Location = new Point(1115, 36);
             TotalManufacturingSlotsLabel.Name = "TotalManufacturingSlotsLabel";
@@ -1722,7 +1749,7 @@
             // TotalReactionSlotsLabel
             // 
             TotalReactionSlotsLabel.AutoSize = true;
-            TotalReactionSlotsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            TotalReactionSlotsLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             TotalReactionSlotsLabel.ForeColor = Color.MediumPurple;
             TotalReactionSlotsLabel.Location = new Point(1115, 55);
             TotalReactionSlotsLabel.Name = "TotalReactionSlotsLabel";
@@ -1733,9 +1760,9 @@
             // OptimizedBuildTreeView
             // 
             OptimizedBuildTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            OptimizedBuildTreeView.BackColor = Enums.Enums.BackgroundColor;
+            OptimizedBuildTreeView.BackColor = Color.FromArgb(21, 21, 21);
             OptimizedBuildTreeView.CausesValidation = false;
-            OptimizedBuildTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            OptimizedBuildTreeView.Font = new Font("Segoe UI", 12F);
             OptimizedBuildTreeView.ForeColor = Color.White;
             OptimizedBuildTreeView.HotTracking = true;
             OptimizedBuildTreeView.ItemHeight = 30;
@@ -1761,9 +1788,9 @@
             // MaterialsTreeView
             // 
             MaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            MaterialsTreeView.BackColor = Enums.Enums.BackgroundColor;
+            MaterialsTreeView.BackColor = Color.FromArgb(21, 21, 21);
             MaterialsTreeView.CausesValidation = false;
-            MaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MaterialsTreeView.Font = new Font("Segoe UI", 12F);
             MaterialsTreeView.ForeColor = Color.White;
             MaterialsTreeView.HotTracking = true;
             MaterialsTreeView.ItemHeight = 30;
@@ -1777,7 +1804,7 @@
             // DetailsProductLabel
             // 
             DetailsProductLabel.AutoSize = true;
-            DetailsProductLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            DetailsProductLabel.Font = new Font("Segoe UI", 14.25F);
             DetailsProductLabel.ForeColor = Color.Gold;
             DetailsProductLabel.Location = new Point(79, 6);
             DetailsProductLabel.Name = "DetailsProductLabel";
@@ -1795,7 +1822,7 @@
             // 
             // PlanetaryMaterialsTabPage
             // 
-            PlanetaryMaterialsTabPage.BackColor = Enums.Enums.BackgroundColor;
+            PlanetaryMaterialsTabPage.BackColor = Color.FromArgb(21, 21, 21);
             PlanetaryMaterialsTabPage.Controls.Add(label57);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMatsTotalTreeview);
             PlanetaryMaterialsTabPage.Controls.Add(PlanetMaterialsTreeView);
@@ -1808,7 +1835,7 @@
             // PlanetMatsTotalTreeview
             // 
             PlanetMatsTotalTreeview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            PlanetMatsTotalTreeview.BackColor = Enums.Enums.BackgroundColor;
+            PlanetMatsTotalTreeview.BackColor = Color.FromArgb(21, 21, 21);
             PlanetMatsTotalTreeview.ForeColor = Color.White;
             PlanetMatsTotalTreeview.Location = new Point(621, 43);
             PlanetMatsTotalTreeview.MinimumSize = new Size(716, 456);
@@ -1819,8 +1846,8 @@
             // PlanetMaterialsTreeView
             // 
             PlanetMaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PlanetMaterialsTreeView.BackColor = Enums.Enums.BackgroundColor;
-            PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            PlanetMaterialsTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F);
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
             PlanetMaterialsTreeView.MinimumSize = new Size(515, 515);
@@ -1831,7 +1858,7 @@
             // 
             // BPReactionTabPage
             // 
-            BPReactionTabPage.BackColor = Enums.Enums.BackgroundColor;
+            BPReactionTabPage.BackColor = Color.FromArgb(21, 21, 21);
             BPReactionTabPage.Controls.Add(SetReactionsButton);
             BPReactionTabPage.Controls.Add(SetBlueprintButton);
             BPReactionTabPage.Controls.Add(label54);
@@ -1867,9 +1894,9 @@
             // BPTreeView
             // 
             BPTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BPTreeView.BackColor = Enums.Enums.BackgroundColor;
+            BPTreeView.BackColor = Color.FromArgb(21, 21, 21);
             BPTreeView.CausesValidation = false;
-            BPTreeView.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            BPTreeView.Font = new Font("Segoe UI", 12F);
             BPTreeView.ForeColor = Color.White;
             BPTreeView.HotTracking = true;
             BPTreeView.ItemHeight = 30;
@@ -1923,10 +1950,11 @@
             BuildPlanTabControl.Controls.Add(BPReactionTabPage);
             BuildPlanTabControl.Controls.Add(IndustrySettingsTabPage);
             BuildPlanTabControl.Controls.Add(MaterialPricePage);
+            BuildPlanTabControl.Controls.Add(CurrentInventoryTabPanel);
             BuildPlanTabControl.Controls.Add(DetailsPage);
             BuildPlanTabControl.Controls.Add(PlanetaryMaterialsTabPage);
             BuildPlanTabControl.Controls.Add(CostBreakdownPage);
-            BuildPlanTabControl.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            BuildPlanTabControl.Font = new Font("Segoe UI", 9F);
             BuildPlanTabControl.ItemSize = new Size(1, 1);
             BuildPlanTabControl.Location = new Point(187, 94);
             BuildPlanTabControl.MinimumSize = new Size(1354, 540);
@@ -1937,9 +1965,117 @@
             BuildPlanTabControl.Size = new Size(1354, 540);
             BuildPlanTabControl.TabIndex = 4;
             // 
+            // CurrentInventoryTabPanel
+            // 
+            CurrentInventoryTabPanel.BackColor = Color.FromArgb(21, 21, 21);
+            CurrentInventoryTabPanel.Controls.Add(ClearInventoryButton);
+            CurrentInventoryTabPanel.Controls.Add(CurrentInventoryTextBox);
+            CurrentInventoryTabPanel.Controls.Add(label58);
+            CurrentInventoryTabPanel.Controls.Add(CurrentInventoryGrid);
+            CurrentInventoryTabPanel.Location = new Point(4, 5);
+            CurrentInventoryTabPanel.Name = "CurrentInventoryTabPanel";
+            CurrentInventoryTabPanel.Size = new Size(1346, 531);
+            CurrentInventoryTabPanel.TabIndex = 7;
+            CurrentInventoryTabPanel.Text = "Current Inventory";
+            CurrentInventoryTabPanel.UseVisualStyleBackColor = true;
+            // 
+            // ClearInventoryButton
+            // 
+            ClearInventoryButton.ForeColor = Color.Black;
+            ClearInventoryButton.Location = new Point(5, 21);
+            ClearInventoryButton.Name = "ClearInventoryButton";
+            ClearInventoryButton.Size = new Size(149, 27);
+            ClearInventoryButton.TabIndex = 52;
+            ClearInventoryButton.Text = "Clear Inventory";
+            ClearInventoryButton.UseVisualStyleBackColor = true;
+            ClearInventoryButton.Click += ClearInventoryButton_Click;
+            // 
+            // CurrentInventoryTextBox
+            // 
+            CurrentInventoryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            CurrentInventoryTextBox.Location = new Point(759, 67);
+            CurrentInventoryTextBox.Multiline = true;
+            CurrentInventoryTextBox.Name = "CurrentInventoryTextBox";
+            CurrentInventoryTextBox.ScrollBars = ScrollBars.Vertical;
+            CurrentInventoryTextBox.Size = new Size(584, 461);
+            CurrentInventoryTextBox.TabIndex = 51;
+            CurrentInventoryTextBox.TextChanged += CurrentInventoryTextBox_TextChanged;
+            // 
+            // CurrentInventoryGrid
+            // 
+            dataGridViewCellStyle23.BackColor = Color.DimGray;
+            CurrentInventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
+            CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CurrentInventoryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            CurrentInventoryGrid.BackgroundColor = Color.Black;
+            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = SystemColors.Control;
+            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle24.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3 });
+            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = Color.Black;
+            dataGridViewCellStyle27.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle27.ForeColor = Color.White;
+            dataGridViewCellStyle27.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle27;
+            CurrentInventoryGrid.GridColor = Color.Black;
+            CurrentInventoryGrid.Location = new Point(3, 98);
+            CurrentInventoryGrid.Margin = new Padding(3, 2, 3, 2);
+            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
+            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = SystemColors.Control;
+            dataGridViewCellStyle28.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle28.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle28.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            CurrentInventoryGrid.RowHeadersWidth = 51;
+            CurrentInventoryGrid.RowTemplate.Height = 29;
+            CurrentInventoryGrid.Size = new Size(580, 426);
+            CurrentInventoryGrid.TabIndex = 6;
+            CurrentInventoryGrid.CellValidating += CurrentInventoryGrid_CellValidating;
+            CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
+            CurrentInventoryGrid.CellValueNeeded += CurrentInventoryGrid_CellValueNeeded;
+            CurrentInventoryGrid.CellValuePushed += CurrentInventoryGrid_CellValuePushed;
+            CurrentInventoryGrid.DataError += CurrentInventoryGrid_DataError;
+            CurrentInventoryGrid.EditingControlShowing += CurrentInventoryGrid_EditingControlShowing;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "typeName";
+            dataGridViewCellStyle25.Padding = new Padding(2);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewTextBoxColumn1.HeaderText = "Type Name";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 84;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "quantityString";
+            dataGridViewCellStyle26.BackColor = Color.White;
+            dataGridViewCellStyle26.ForeColor = Color.Black;
+            dataGridViewCellStyle26.Format = "N0";
+            dataGridViewCellStyle26.NullValue = "0";
+            dataGridViewCellStyle26.Padding = new Padding(2);
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewTextBoxColumn3.HeaderText = "Current Inventory";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 115;
+            // 
             // CostBreakdownPage
             // 
-            CostBreakdownPage.BackColor = Enums.Enums.BackgroundColor;
+            CostBreakdownPage.BackColor = Color.FromArgb(21, 21, 21);
             CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
             CostBreakdownPage.Location = new Point(4, 5);
             CostBreakdownPage.Name = "CostBreakdownPage";
@@ -1950,8 +2086,8 @@
             // CostBreakdownTextBox
             // 
             CostBreakdownTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CostBreakdownTextBox.BackColor = Enums.Enums.BackgroundColor;
-            CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            CostBreakdownTextBox.BackColor = Color.FromArgb(21, 21, 21);
+            CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F);
             CostBreakdownTextBox.ForeColor = Color.White;
             CostBreakdownTextBox.Location = new Point(3, 3);
             CostBreakdownTextBox.MinimumSize = new Size(603, 510);
@@ -1984,7 +2120,7 @@
             // ProgressLabel
             // 
             ProgressLabel.AutoSize = true;
-            ProgressLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ProgressLabel.Font = new Font("Segoe UI", 12F);
             ProgressLabel.ForeColor = Color.GhostWhite;
             ProgressLabel.Location = new Point(703, 9);
             ProgressLabel.Name = "ProgressLabel";
@@ -2028,7 +2164,7 @@
             // HeaderCostUnitLabel
             // 
             HeaderCostUnitLabel.AutoSize = true;
-            HeaderCostUnitLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            HeaderCostUnitLabel.Font = new Font("Segoe UI", 12F);
             HeaderCostUnitLabel.Location = new Point(1211, 49);
             HeaderCostUnitLabel.Margin = new Padding(2, 0, 2, 0);
             HeaderCostUnitLabel.Name = "HeaderCostUnitLabel";
@@ -2088,7 +2224,7 @@
             // 
             CostBreakdownButton.Cursor = Cursors.Hand;
             CostBreakdownButton.FlatStyle = FlatStyle.Flat;
-            CostBreakdownButton.Location = new Point(12, 310);
+            CostBreakdownButton.Location = new Point(12, 345);
             CostBreakdownButton.Name = "CostBreakdownButton";
             CostBreakdownButton.Size = new Size(169, 30);
             CostBreakdownButton.TabIndex = 54;
@@ -2101,7 +2237,7 @@
             // 
             PlanetMaterialsButton.Cursor = Cursors.Hand;
             PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
-            PlanetMaterialsButton.Location = new Point(12, 274);
+            PlanetMaterialsButton.Location = new Point(12, 309);
             PlanetMaterialsButton.Name = "PlanetMaterialsButton";
             PlanetMaterialsButton.Size = new Size(169, 30);
             PlanetMaterialsButton.TabIndex = 55;
@@ -2114,7 +2250,7 @@
             // 
             BuildDetailsButton.Cursor = Cursors.Hand;
             BuildDetailsButton.FlatStyle = FlatStyle.Flat;
-            BuildDetailsButton.Location = new Point(12, 238);
+            BuildDetailsButton.Location = new Point(12, 273);
             BuildDetailsButton.Name = "BuildDetailsButton";
             BuildDetailsButton.Size = new Size(169, 30);
             BuildDetailsButton.TabIndex = 56;
@@ -2149,11 +2285,25 @@
             SystemButton.UseVisualStyleBackColor = true;
             SystemButton.Click += SystemButton_Click;
             // 
+            // CurrentInventoryButton
+            // 
+            CurrentInventoryButton.Cursor = Cursors.Hand;
+            CurrentInventoryButton.FlatStyle = FlatStyle.Flat;
+            CurrentInventoryButton.Location = new Point(12, 236);
+            CurrentInventoryButton.Name = "CurrentInventoryButton";
+            CurrentInventoryButton.Size = new Size(169, 30);
+            CurrentInventoryButton.TabIndex = 59;
+            CurrentInventoryButton.TabStop = false;
+            CurrentInventoryButton.Text = "Current Inventory";
+            CurrentInventoryButton.UseVisualStyleBackColor = true;
+            CurrentInventoryButton.Click += CurrentInventoryButton_Click;
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1540, 634);
+            Controls.Add(CurrentInventoryButton);
             Controls.Add(SystemButton);
             Controls.Add(MaterialsButton);
             Controls.Add(BuildDetailsButton);
@@ -2221,6 +2371,9 @@
             BPReactionTabPage.ResumeLayout(false);
             BPReactionTabPage.PerformLayout();
             BuildPlanTabControl.ResumeLayout(false);
+            CurrentInventoryTabPanel.ResumeLayout(false);
+            CurrentInventoryTabPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)CurrentInventoryGrid).EndInit();
             CostBreakdownPage.ResumeLayout(false);
             CostBreakdownPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
@@ -2373,5 +2526,12 @@
         private Button SystemButton;
         private Label label57;
         private TreeView PlanetMatsTotalTreeview;
+        private TabPage CurrentInventoryTabPanel;
+        private Button CurrentInventoryButton;
+        private DataGridView CurrentInventoryGrid;
+        private TextBox CurrentInventoryTextBox;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private Button ClearInventoryButton;
     }
 }

@@ -481,11 +481,18 @@ namespace EveHelperWF.ScreenHelper
 
             bool isFinal = true;
             OptimizedBuild currentBuild;
+            InventoryTypeWithQuantity currentInventory;
             foreach (int key in buildPlan.OptimumBuildGroups.Keys.OrderByDescending(x => x))
             {
                 for (int i = 0; i < buildPlan.OptimumBuildGroups[key].Count(); i++)
                 {
                     currentBuild = buildPlan.OptimumBuildGroups[key][i];
+                    currentInventory = buildPlan.CurrentInventory.Find(x => x.typeID == currentBuild.BuiltOrReactedTypeId);
+                    if (currentInventory != null)
+                    {
+                        currentBuild.TotalQuantityNeeded -= currentInventory.quantity;
+                        if (currentBuild.TotalQuantityNeeded < 0) { currentBuild.TotalQuantityNeeded = 0; }
+                    }
                     if (buildPlan.OptimumBuildGroups[key][i].isBuilt)
                     {
                         PerformOptimumManufacturingCalcs(ref currentBuild, buildPlan, isFinal);
