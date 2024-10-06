@@ -670,12 +670,27 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void EnsureCurrentInventory()
         {
             InventoryTypeWithQuantity foundType;
-            if (currentBuildPlan != null && currentBuildPlan.CurrentInventory == null)
+            if (currentBuildPlan != null)
             {
-                currentBuildPlan.CurrentInventory = new List<InventoryTypeWithQuantity>();
+                if (currentBuildPlan.CurrentInventory == null)
+                {
+                    currentBuildPlan.CurrentInventory = new List<InventoryTypeWithQuantity>();
+                }
                 foreach (BlueprintInfo blueprint in currentBuildPlan.BlueprintStore)
                 {
                     List<IndustryActivityMaterials> industryActivityMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprint.BlueprintTypeId, Enums.Enums.ActivityManufacturing);
+                    if (industryActivityMaterials?.Count > 0)
+                    {
+                        foreach (IndustryActivityMaterials material in industryActivityMaterials)
+                        {
+                            foundType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == material.materialTypeID);
+                            if (foundType == null)
+                            {
+                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity(material.materialTypeID, material.materialName));
+                            }
+                        }
+                    }
+                    industryActivityMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprint.BlueprintTypeId, Enums.Enums.ActivityReactions);
                     if (industryActivityMaterials?.Count > 0)
                     {
                         foreach (IndustryActivityMaterials material in industryActivityMaterials)

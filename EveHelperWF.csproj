@@ -14,7 +14,7 @@
     <Product>EveHelper</Product>
     <PackageIcon>EveHelperIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.4.6</Version>
+    <Version>1.4.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
