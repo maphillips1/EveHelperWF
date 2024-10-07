@@ -28,6 +28,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void NPCCorpCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            if (GetMarketDataPriceWorker.IsBusy)
+            {
+                MessageBox.Show("Still getting price data from previous request. please wait until it is done.");
+                return;
+            }
+
             this.Cursor = Cursors.WaitCursor;
             InfoLoadingLabel.Visible = true;
             bpcOutcomeTypeIDs.Clear();
@@ -46,13 +53,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
                         AddInputsForBPCs();
                         DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
-                        GetMarketInformationForOffers();
-                        allOffers = allOffers.OrderByDescending(x => x.iskLPBuyDecimal).ToList();
-                        DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
+
+                        if (!GetMarketDataPriceWorker.IsBusy)
+                        {
+                            GetMarketDataPriceWorker.RunWorkerAsync(allOffers);
+                        }
+
                     }
                 }
             }
-            InfoLoadingLabel.Visible = false;
             this.Cursor = Cursors.Default;
         }
 
@@ -95,23 +104,29 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 materials = Database.SQLiteCalls.GetIndustryActivityMaterials(offer.type_id, Enums.Enums.ActivityManufacturing);
                 if (materials?.Count > 0 && products?.Count > 0)
                 {
-                    bpcOutcomeTypeIDs.Add(offer.type_id, products[0].productTypeID);
-                    foreach (IndustryActivityMaterials material in materials)
+                    if (!bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
                     {
-                        offer.required_items.Add(new ESILPOfferRequiredItem() { quantity = material.quantity, 
-                                                                                type_id = material.materialTypeID, 
-                                                                                typeName = material.materialName });
+                        bpcOutcomeTypeIDs.Add(offer.type_id, products[0].productTypeID);
                     }
+                    foreach (IndustryActivityMaterials material in materials)
+                        {
+                            offer.required_items.Add(new ESILPOfferRequiredItem()
+                            {
+                                quantity = material.quantity,
+                                type_id = material.materialTypeID,
+                                typeName = material.materialName
+                            });
+                        }
                 }
             }
         }
 
-        private void GetMarketInformationForOffers()
+        private void GetMarketInformationForOffers(List<ESILPOffer> offersForMarketData)
         {
-            if (allOffers?.Count > 0)
+            if (offersForMarketData?.Count > 0)
             {
                 List<ESIMarketType> eSIMarketTypes = new List<ESIMarketType>();
-                foreach (ESILPOffer offer in allOffers)
+                foreach (ESILPOffer offer in offersForMarketData)
                 {
                     if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
                     {
@@ -136,7 +151,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 eSIMarketTypes = ESI_Calls.ESIMarketData.GetPriceForItemListWithQuantityAsync(eSIMarketTypes, (int)Enums.Enums.OrderType.Buy, Enums.Enums.TheForgeRegionId).Result;
 
-                foreach (ESILPOffer offer in allOffers)
+                foreach (ESILPOffer offer in offersForMarketData)
                 {
                     if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
                     {
@@ -150,7 +165,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 eSIMarketTypes = ESI_Calls.ESIMarketData.GetPriceForItemListWithQuantityAsync(eSIMarketTypes, (int)Enums.Enums.OrderType.Sell, Enums.Enums.TheForgeRegionId).Result;
 
-                foreach (ESILPOffer offer in allOffers)
+                foreach (ESILPOffer offer in offersForMarketData)
                 {
                     if (bpcOutcomeTypeIDs.Keys.Contains(offer.type_id))
                     {
@@ -170,6 +185,35 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                 }
             }
+        }
+
+        private void GetMarketDataPriceWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            if (e.Argument != null)
+            {
+                List<ESILPOffer> offers = (List<ESILPOffer>)e.Argument;
+
+                GetMarketInformationForOffers(offers);
+
+                e.Result = offers;
+            }
+            else
+            {
+                e.Result = null;
+            }
+        }
+
+        private void GetMarketDataPriceWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result != null)
+            {
+                List<ESILPOffer> offers = (List<ESILPOffer>)e.Result;
+                allOffers = offers;
+                allOffers = allOffers.OrderByDescending(x => x.iskLPBuyDecimal).ToList();
+                DatabindGridView<List<ESILPOffer>>(LPOfferGridView, allOffers);
+            }
+
+            InfoLoadingLabel.Visible = false;
         }
     }
 }

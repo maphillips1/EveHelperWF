@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListControl));
             label1 = new Label();
             ShoppingListCombo = new ComboBox();
@@ -56,18 +62,22 @@
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
             AddItemsButton = new Button();
-            ShoppingListItemsPanel = new Panel();
-            ShowBoughtItemsCheckbox = new CheckBox();
             label3 = new Label();
             CopyToClipboardButton = new Button();
             label4 = new Label();
+            ShoppingListGrid = new DataGridView();
+            Bought = new DataGridViewCheckBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            BoughtAtPrice = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ShoppingListGrid).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label1.ForeColor = Color.Gold;
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
@@ -119,7 +129,7 @@
             ItemSearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { typeID, typeName, marketGroupName, groupId, description, volume, portionSize, raceId, basePrice, marketGroupId, parentMarketGroupId, iconId, soundId, graphicId, groupName, categoryID, categoryName });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -330,26 +340,6 @@
             AddItemsButton.UseVisualStyleBackColor = true;
             AddItemsButton.Click += AddItemsButton_Click;
             // 
-            // ShoppingListItemsPanel
-            // 
-            ShoppingListItemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            ShoppingListItemsPanel.AutoScroll = true;
-            ShoppingListItemsPanel.Location = new Point(12, 125);
-            ShoppingListItemsPanel.Name = "ShoppingListItemsPanel";
-            ShoppingListItemsPanel.Size = new Size(443, 382);
-            ShoppingListItemsPanel.TabIndex = 10;
-            // 
-            // ShowBoughtItemsCheckbox
-            // 
-            ShowBoughtItemsCheckbox.AutoSize = true;
-            ShowBoughtItemsCheckbox.Location = new Point(12, 72);
-            ShowBoughtItemsCheckbox.Name = "ShowBoughtItemsCheckbox";
-            ShowBoughtItemsCheckbox.Size = new Size(129, 19);
-            ShowBoughtItemsCheckbox.TabIndex = 11;
-            ShowBoughtItemsCheckbox.Text = "Show Bought Items";
-            ShowBoughtItemsCheckbox.UseVisualStyleBackColor = true;
-            ShowBoughtItemsCheckbox.CheckedChanged += ShowBoughtItemsCheckbox_CheckedChanged;
-            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -379,16 +369,104 @@
             label4.TabIndex = 14;
             label4.Text = "Works with Multibuy in Eve";
             // 
+            // ShoppingListGrid
+            // 
+            dataGridViewCellStyle2.BackColor = Color.DimGray;
+            ShoppingListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            ShoppingListGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ShoppingListGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ShoppingListGrid.BackgroundColor = Color.Black;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            ShoppingListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            ShoppingListGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ShoppingListGrid.Columns.AddRange(new DataGridViewColumn[] { Bought, dataGridViewTextBoxColumn3, BoughtAtPrice, dataGridViewTextBoxColumn1 });
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.Black;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            ShoppingListGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            ShoppingListGrid.GridColor = Color.Black;
+            ShoppingListGrid.Location = new Point(12, 125);
+            ShoppingListGrid.Margin = new Padding(3, 2, 3, 2);
+            ShoppingListGrid.Name = "ShoppingListGrid";
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            ShoppingListGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            ShoppingListGrid.RowHeadersWidth = 51;
+            ShoppingListGrid.RowTemplate.Height = 29;
+            ShoppingListGrid.Size = new Size(419, 391);
+            ShoppingListGrid.TabIndex = 15;
+            ShoppingListGrid.CellValidating += ShoppingListGrid_CellValidating;
+            ShoppingListGrid.CellValueChanged += ShoppingListGrid_CellValueChanged;
+            ShoppingListGrid.CellValueNeeded += ShoppingListGrid_CellValueNeeded;
+            ShoppingListGrid.CellValuePushed += ShppingListGrid_CellValuePushed;
+            ShoppingListGrid.DataError += ShoppingListyGrid_DataError;
+            ShoppingListGrid.EditingControlShowing += ShoppingListGrid_EditingControlShowing;
+            // 
+            // Bought
+            // 
+            Bought.DataPropertyName = "Bought";
+            Bought.HeaderText = "Bought";
+            Bought.Name = "Bought";
+            Bought.Resizable = DataGridViewTriState.True;
+            Bought.SortMode = DataGridViewColumnSortMode.Automatic;
+            Bought.Width = 71;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "QuantityString";
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewCellStyle4.Padding = new Padding(2);
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewTextBoxColumn3.HeaderText = "Quantity";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 78;
+            // 
+            // BoughtAtPrice
+            // 
+            BoughtAtPrice.DataPropertyName = "BoughtAtPriceString";
+            BoughtAtPrice.HeaderText = "Price";
+            BoughtAtPrice.Name = "BoughtAtPrice";
+            BoughtAtPrice.Width = 58;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "typeName";
+            dataGridViewCellStyle5.Padding = new Padding(2);
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewTextBoxColumn1.HeaderText = "Type Name";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 91;
+            // 
             // ShoppingListControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1022, 519);
+            Controls.Add(ShoppingListGrid);
             Controls.Add(label4);
             Controls.Add(CopyToClipboardButton);
             Controls.Add(label3);
-            Controls.Add(ShowBoughtItemsCheckbox);
-            Controls.Add(ShoppingListItemsPanel);
             Controls.Add(AddItemsButton);
             Controls.Add(ItemSearchResultsGrid);
             Controls.Add(SearchButton);
@@ -405,6 +483,7 @@
             Name = "ShoppingListControl";
             Text = "ShoppingList";
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ShoppingListGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -437,10 +516,13 @@
         private TextBox ItemSearchTextBox;
         private Label label2;
         private Button AddItemsButton;
-        private Panel ShoppingListItemsPanel;
-        private CheckBox ShowBoughtItemsCheckbox;
         private Label label3;
         private Button CopyToClipboardButton;
         private Label label4;
+        private DataGridView ShoppingListGrid;
+        private DataGridViewCheckBoxColumn Bought;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn BoughtAtPrice;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

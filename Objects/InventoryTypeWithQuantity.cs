@@ -21,7 +21,7 @@ namespace EveHelperWF.Objects
         {
             get
             {
-                return quantity.ToString();
+                return quantity.ToString("N0");
             }
             set
             {
