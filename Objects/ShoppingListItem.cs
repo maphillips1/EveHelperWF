@@ -11,5 +11,44 @@ namespace EveHelperWF.Objects
         public int Quantity { get; set; }
         public double BoughtAtPrice { get; set; }
         public bool Bought { get; set; }
+        public string QuantityString
+        {
+            get
+            {
+                return Quantity.ToString();
+            }
+            set
+            {
+                int testValue;
+                if (int.TryParse(value, out testValue))
+                {
+                    Quantity = testValue;
+                }
+                else
+                {
+                    Quantity = 0;
+                }
+            }
+        }
+
+        public string BoutAtPriceString
+        {
+            get
+            {
+                return BoughtAtPrice.ToString();
+            }
+            set
+            {
+                double testValue;
+                if (double.TryParse(value, out testValue))
+                {
+                    BoughtAtPrice = testValue;
+                }
+                else
+                {
+                    BoughtAtPrice = 0;
+                }
+            }
+        }
     }
 }

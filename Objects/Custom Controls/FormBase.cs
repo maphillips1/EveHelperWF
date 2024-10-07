@@ -25,6 +25,7 @@ namespace EveHelperWF.Objects
 
         public void DatabindGridView<T>(DataGridView grid, T dataSource)
         {
+            grid.DataSource = null;
             DataGridViewAutoSizeColumnsMode dataGridViewAutoSizeColumnsMode = grid.AutoSizeColumnsMode;
             DataGridViewAutoSizeRowsMode dataGridViewAutoSizeRowMode = grid.AutoSizeRowsMode;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;

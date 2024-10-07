@@ -31,53 +31,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void ShowBoughtItemsCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            LoadShoppingItemsPanel();
-        }
-
-        private void BoughtCheckbox_Checked(Object sender, EventArgs e)
-        {
-            CheckBox checkBox = (CheckBox)sender;
-            string[] checkName = checkBox.Name.Split(new char[] { '_' });
-            int typeId = int.Parse(checkName[1]);
-            if (typeId > 0)
-            {
-                theShoppingList.ShoppinglistItems.Find(x => x.typeId == typeId).Bought = checkBox.Checked;
-            }
-            SaveShoppingList();
-            LoadShoppingItemsPanel();
-        }
-
-        private void QuantityUpDown_ValueChanged(Object sender, EventArgs e)
-        {
-            NumericUpDown upDown = (NumericUpDown)sender;
-            string[] checkName = upDown.Name.Split(new char[] { '_' });
-            int typeId = int.Parse(checkName[1]);
-            if (typeId > 0)
-            {
-                theShoppingList.ShoppinglistItems.Find(x => x.typeId == typeId).Quantity = (int)upDown.Value;
-            }
-            SaveShoppingList();
-        }
-
-        private void PriceUpDown_ValueChanged(Object sender, EventArgs e)
-        {
-            NumericUpDown upDown = (NumericUpDown)sender;
-            string[] checkName = upDown.Name.Split(new char[] { '_' });
-            int typeId = int.Parse(checkName[1]);
-            if (typeId > 0)
-            {
-                theShoppingList.ShoppinglistItems.Find(x => x.typeId == typeId).BoughtAtPrice = (int)upDown.Value;
-            }
-            SaveShoppingList();
-        }
-
-        private void Numeric_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Back)
-            {
-                NumericUpDown numericUpDown = (NumericUpDown)sender;
-                numericUpDown.Value = 0;
-            }
+            LoadShoppingListGrid();
         }
 
         private void DeleteListButton_Click(object sender, EventArgs e)
@@ -92,6 +46,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     theShoppingList = null;
                     FileIO.FileHelper.DeleteFile(Enums.Enums.ShoppingListsDirectory, ShoppingListFileName);
                     LoadShoppingListCombo();
+                    ShoppingListCombo.SelectedIndex = 0;
                 }
             }
         }
@@ -189,13 +144,24 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (theShoppingList != null && theShoppingList.ShoppinglistItems.Count > 0)
             {
+                bool showBoughtItemMessage = false;
                 StringBuilder sb = new StringBuilder();
                 foreach (ShoppingListItem item in theShoppingList.ShoppinglistItems)
                 {
-                    sb.AppendLine(item.typeName + " " + item.Quantity);
+                    if (!item.Bought)
+                    {
+                        sb.AppendLine(item.typeName + " " + item.Quantity);
+                    }
+                    else
+                    {
+                        showBoughtItemMessage = true;
+                    }
                 }
                 Clipboard.SetText(sb.ToString());
-                MessageBox.Show("Copied items to clipboard!", "Items Copied");
+                if (showBoughtItemMessage)
+                {
+                    MessageBox.Show("Items marked as bought are not copied tot he clipboard.");
+                }
             }
         }
         #endregion
@@ -203,6 +169,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         #region "Methods"
         private void LoadShoppingListCombo()
         {
+            ShoppingListCombo.DataSource = null;
             ComboItems.Clear();
             ComboItems.Add(new ComboListItem { key = 0, value = string.Empty });
             fileNames = FileIO.FileHelper.GetFileNamesInDirectory(Enums.Enums.ShoppingListsDirectory);
@@ -229,7 +196,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadShoppingList()
         {
-            ClearShoppingListControls();
             theShoppingList = null;
             string selectedFileName = GetSelectedFileName();
             if (!String.IsNullOrWhiteSpace(selectedFileName))
@@ -239,27 +205,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     theShoppingList = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.ShoppingList>(content);
                 }
-                LoadShoppingItemsPanel();
+                LoadShoppingListGrid();
             }
-        }
-
-        private void ClearShoppingListControls()
-        {
-            System.Windows.Forms.Control.ControlCollection controls = ShoppingListItemsPanel.Controls;
-            EventHandlerList eventHandlerList = null;
-            foreach (Control item in controls)
+            else
             {
-                eventHandlerList =
-                        (EventHandlerList)typeof(Control).GetProperty(
-                            "Events",
-                            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(item, null);
-                if (eventHandlerList != null)
-                {
-                    typeof(EventHandlerList).GetMethod("Dispose").Invoke(eventHandlerList, null);
-                }
-                item.Dispose();
+                ShoppingListGrid.DataSource = null;
             }
-            System.GC.Collect();
         }
 
         private string GetSelectedFileName()
@@ -283,106 +234,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             return "";
         }
 
-        private void LoadShoppingItemsPanel()
+        private void LoadShoppingListGrid()
         {
-            ClearShoppingListControls();
-            if (theShoppingList != null && theShoppingList.ShoppinglistItems.Count > 0)
-            {
-                int currentY = 5;
-                string controlName = "";
-
-                foreach (ShoppingListItem item in theShoppingList.ShoppinglistItems)
-                {
-                    if (ShowBoughtItemsCheckbox.Checked || !item.Bought)
-                    {
-                        controlName = "Type_" + item.typeId.ToString();
-                        ShoppingListItemsPanel.Controls.Add(BuildTypeLabel(currentY, item.typeName, controlName));
-                        currentY += 30;
-                        ShoppingListItemsPanel.Controls.Add(BuildBoughtCheckBox(currentY, item.Bought, controlName));
-                        ShoppingListItemsPanel.Controls.Add(BuildQuantityLabel(currentY, controlName));
-                        ShoppingListItemsPanel.Controls.Add(BuildQuantityUpDown(currentY, item.Quantity, controlName));
-                        ShoppingListItemsPanel.Controls.Add(BuildPriceLabel(currentY, controlName));
-                        ShoppingListItemsPanel.Controls.Add(BuildPriceUpDown(currentY, item.BoughtAtPrice, controlName));
-                        currentY += 40;
-                    }
-                }
-            }
-        }
-        private Label BuildTypeLabel(int currentY, string typeName, string controlName)
-        {
-            Label typeLabel = new Label();
-            typeLabel.Name = controlName + "_TypeLabel";
-            typeLabel.Text = typeName;
-            typeLabel.AutoSize = true;
-            typeLabel.Location = new Point(65, currentY);
-            typeLabel.ForeColor = Color.Gold;
-
-            return typeLabel;
-        }
-
-        private CheckBox BuildBoughtCheckBox(int currentY, bool bought, string controlName)
-        {
-            CheckBox boughtCheckbox = new CheckBox();
-            boughtCheckbox.Name = controlName + "_BoughtCheckbox";
-            boughtCheckbox.Checked = bought;
-            boughtCheckbox.Size = new Size(20, 25);
-            boughtCheckbox.Location = new Point(5, currentY);
-            boughtCheckbox.ForeColor = Color.White;
-            boughtCheckbox.CheckedChanged += new EventHandler(BoughtCheckbox_Checked);
-            boughtCheckbox.Text = "Bought";
-            return boughtCheckbox;
-        }
-
-        private Label BuildQuantityLabel(int currentY, string controlName)
-        {
-            Label quantityLabel = new Label();
-            quantityLabel.Name = controlName + "_QuantityLabel";
-            quantityLabel.Text = "Quantity";
-            quantityLabel.Size = new Size(70, 25);
-            quantityLabel.Location = new Point(65, currentY);
-            quantityLabel.ForeColor = Color.White;
-
-            return quantityLabel;
-        }
-
-        private NumericUpDown BuildQuantityUpDown(int currentY, int quantity, string controlName)
-        {
-
-            NumericUpDown quantityUpDown = new NumericUpDown();
-            quantityUpDown.Name = controlName + "_QuantityUpDown";
-            quantityUpDown.Size = new System.Drawing.Size(125, 90);
-            quantityUpDown.Maximum = 100000000000;
-            quantityUpDown.Value = quantity;
-            quantityUpDown.Location = new System.Drawing.Point(155, currentY);
-            quantityUpDown.ValueChanged += new EventHandler(QuantityUpDown_ValueChanged);
-            quantityUpDown.KeyUp += new KeyEventHandler(Numeric_KeyUp);
-            return quantityUpDown;
-        }
-
-        private Label BuildPriceLabel(int currentY, string controlName)
-        {
-            Label priceLabel = new Label();
-            priceLabel.Name = controlName + "_PriceLabel";
-            priceLabel.Text = "Price";
-            priceLabel.Size = new Size(50, 25);
-            priceLabel.Location = new Point(300, currentY);
-            priceLabel.ForeColor = Color.White;
-
-            return priceLabel;
-        }
-
-        private NumericUpDown BuildPriceUpDown(int currentY, double price, string controlName)
-        {
-
-            NumericUpDown boughtPriceUpDown = new NumericUpDown();
-            boughtPriceUpDown.Name = controlName + "_PriceUpDown";
-            boughtPriceUpDown.Size = new System.Drawing.Size(125, 90);
-            boughtPriceUpDown.Maximum = 100000000000;
-            boughtPriceUpDown.Value = (decimal)price;
-            boughtPriceUpDown.Location = new System.Drawing.Point(360, currentY);
-            boughtPriceUpDown.ValueChanged += new EventHandler(PriceUpDown_ValueChanged);
-            boughtPriceUpDown.KeyUp += new KeyEventHandler(Numeric_KeyUp);
-            return boughtPriceUpDown;
+            ShoppingListGrid.DataSource = null;
+            DatabindGridView<List<ShoppingListItem>>(ShoppingListGrid, theShoppingList.ShoppinglistItems);
         }
 
         private void SaveShoppingList()
@@ -436,7 +291,77 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
             }
             SaveShoppingList();
-            LoadShoppingItemsPanel();
+            LoadShoppingListGrid();
+        }
+
+        private void ShoppingListGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.theShoppingList != null)
+            {
+                SaveShoppingList();
+            }
+        }
+
+        private void ShoppingListGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (ShoppingListGrid.CurrentCell.ColumnIndex == 1 ||
+                ShoppingListGrid.CurrentCell.ColumnIndex == 2) //Desired Column
+            {
+                e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+        }
+
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void ShppingListGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Convert.ToString(e.Value)))
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void ShoppingListGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void ShoppingListGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (this.theShoppingList != null && 
+                (e.ColumnIndex == 1 || e.ColumnIndex == 2))
+            {
+                if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Please enter a value before leaving the cell.");
+                }
+            }
+        }
+
+        private void ShoppingListyGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (this.theShoppingList != null)
+            {
+                if (e.ColumnIndex == 1 || e.ColumnIndex == 2)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
         #endregion
     }

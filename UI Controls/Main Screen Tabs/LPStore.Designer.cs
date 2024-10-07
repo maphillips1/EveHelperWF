@@ -55,6 +55,7 @@
             SearchTextBox = new TextBox();
             SearchButton = new Button();
             InfoLoadingLabel = new Label();
+            GetMarketDataPriceWorker = new System.ComponentModel.BackgroundWorker();
             label1 = new Label();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)LPOfferGridView).BeginInit();
@@ -262,6 +263,12 @@
             InfoLoadingLabel.TabIndex = 9;
             InfoLoadingLabel.Text = "Information is Loading. This may take a while...";
             // 
+            // GetMarketDataPriceWorker
+            // 
+            GetMarketDataPriceWorker.WorkerSupportsCancellation = true;
+            GetMarketDataPriceWorker.DoWork += GetMarketDataPriceWorker_DoWork;
+            GetMarketDataPriceWorker.RunWorkerCompleted += GetMarketDataPriceWorker_RunWorkerCompleted;
+            // 
             // LPStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -305,5 +312,6 @@
         private DataGridViewTextBoxColumn ProfitSell;
         private DataGridViewTextBoxColumn IskLpBuy;
         private DataGridViewTextBoxColumn IskLpSell;
+        private System.ComponentModel.BackgroundWorker GetMarketDataPriceWorker;
     }
 }
