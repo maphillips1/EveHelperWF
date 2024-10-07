@@ -15,7 +15,7 @@ namespace EveHelperWF.Objects
         {
             get
             {
-                return Quantity.ToString();
+                return Quantity.ToString("N0");
             }
             set
             {
@@ -35,7 +35,7 @@ namespace EveHelperWF.Objects
         {
             get
             {
-                return BoughtAtPrice.ToString();
+                return BoughtAtPrice.ToString("N2");
             }
             set
             {
