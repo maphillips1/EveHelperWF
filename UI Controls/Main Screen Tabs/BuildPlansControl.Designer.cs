@@ -868,7 +868,7 @@
             NotesTextBox.Location = new Point(6, 371);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 40);
+            NotesTextBox.Size = new Size(382, 152);
             NotesTextBox.TabIndex = 13;
             NotesTextBox.TextChanged += NotesTextBox_TextChanged;
             // 
@@ -1131,7 +1131,7 @@
             TaxFinalProductCheckbox.TabIndex = 27;
             TaxFinalProductCheckbox.Text = "Include Taxes on Final Product";
             TaxFinalProductCheckbox.UseVisualStyleBackColor = true;
-            TaxFinalProductCheckbox.CheckedChanged += checkBox1_CheckedChanged;
+            TaxFinalProductCheckbox.CheckedChanged += TaxFinalProductCheckbox_CheckedChanged;
             // 
             // TaxInputCheckbox
             // 
@@ -2331,6 +2331,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "BuildPlansControl";
             Text = "Build Plan";
+            WindowState = FormWindowState.Maximized;
             FormClosing += BuildPlansControl_FormClosing;
             SummaryPage.ResumeLayout(false);
             SummaryPage.PerformLayout();
