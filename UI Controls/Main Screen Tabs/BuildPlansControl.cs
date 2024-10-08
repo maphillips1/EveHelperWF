@@ -49,6 +49,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private decimal FinalProductSellOrderPrice;
         private decimal FinalProductBuyOrderPrice;
         private bool IgnoreTextChangedEvent;
+        private bool IsResetting;
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -89,13 +90,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (!isLoading && WaitForWorkers())
             {
-                ResetControls();
                 isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 if (this.currentBuildPlan != null)
                 {
                     SaveBuildPlan();
                 }
+                this.currentBuildPlan = null;
+                ResetControls();
                 LoadBuildPlanFromFile();
                 LoadUIForBuildPlan();
                 this.Cursor = Cursors.Default;
@@ -216,7 +218,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AdditionalCostsNumeric_ValueChanged(object sender, EventArgs e)
         {
-            if (this.currentBuildPlan != null && !isLoading)
+            if (this.currentBuildPlan != null && !isLoading && !IsResetting)
             {
                 this.isLoading = true;
                 this.currentBuildPlan.additionalCosts = (decimal)AdditionalCostsNumeric.Value;
@@ -452,9 +454,305 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             SetSummaryInformation();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void TaxFinalProductCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             SetSummaryInformation();
+        }
+
+        private void FinalSellPriceNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            if (currentBuildPlan != null && !isLoading && FinalSellPriceNumeric.Validate())
+            {
+                currentBuildPlan.finalSellPrice = FinalSellPriceNumeric.Value;
+                SetSummaryInformation();
+            }
+        }
+
+        private void SummaryHelpPanel_Click(object sender, EventArgs e)
+        {
+            BuildPlanSummaryHelp buildPlanSummaryHelp = new BuildPlanSummaryHelp();
+            buildPlanSummaryHelp.StartPosition = FormStartPosition.CenterParent;
+            buildPlanSummaryHelp.ShowDialog();
+        }
+
+        private void NotesTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading && !IsResetting)
+            {
+                this.currentBuildPlan.BuildPlanNotes = NotesTextBox.Text;
+            }
+        }
+
+        private void ImportPricesButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = OpenFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = OpenFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            ImportPrices(fileName);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during import: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void ExportPricesButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = SaveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = SaveFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            ExportPrices(fileName);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during export: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void SummaryButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.Summary);
+        }
+
+        private void BPSettingsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.BPReaction);
+        }
+
+        private void SystemButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.SystemStruct);
+        }
+
+        private void MaterialsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.MaterialPrices);
+        }
+
+        private void BuildDetailsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.BuildDetails);
+        }
+
+        private void PlanetMaterialsButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.PlanetMats);
+        }
+
+        private void CostBreakdownButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.CostBreakdown);
+        }
+
+        private void CurrentInventoryButton_Click(object sender, EventArgs e)
+        {
+            ShowHideTabPage((int)TabPages.CurrentInventory);
+        }
+
+        private void CurrentInventoryTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                if (!IgnoreTextChangedEvent)
+                {
+                    IgnoreTextChangedEvent = true;
+                    string rawInput = CurrentInventoryTextBox.Text;
+                    string formattedText = rawInput.Replace("\r\n", "\n").Replace("\n", "\r\n");
+                    CurrentInventoryTextBox.Text = formattedText;
+                    string[] inputItems = formattedText.Split("\r\n");
+                    if (inputItems != null)
+                    {
+                        this.Cursor = Cursors.WaitCursor;
+                        List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
+                        appraisedItems = AppraisalHelper.ParseTypeIds(inputItems);
+                        InventoryTypeWithQuantity inventoryType;
+                        foreach (AppraisedItem item in appraisedItems)
+                        {
+                            if (this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == item.typeID) != null)
+                            {
+                                this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == item.typeID).quantity = item.quantity;
+                            }
+                        }
+                        if (!this.isLoading)
+                        {
+                            this.isLoading = true;
+                            RunCalcs();
+                            this.isLoading = false;
+                        }
+                        SaveBuildPlan();
+                        this.Cursor = Cursors.Default;
+                    }
+
+                    IgnoreTextChangedEvent = false;
+                }
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                SaveBuildPlan();
+                if (!this.isLoading)
+                {
+                    this.isLoading = true;
+                    RunCalcs();
+                    this.isLoading = false;
+                }
+            }
+        }
+
+        private void CurrentInventoryGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (CurrentInventoryGrid.CurrentCell.ColumnIndex == 1) //Desired Column
+            {
+                e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+        }
+
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(Convert.ToString(e.Value)))
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                e.Value = 0;
+            }
+        }
+
+        private void CurrentInventoryGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (this.currentBuildPlan != null && e.ColumnIndex == 1)
+            {
+                if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Please enter a value before leaving the cell.");
+                }
+            }
+        }
+
+        private void CurrentInventoryGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                if (e.ColumnIndex == 1)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void ClearInventoryButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.CurrentInventory.ForEach(x => x.quantity = 0);
+                if (!this.isLoading)
+                {
+                    this.isLoading = true;
+                    RunCalcs();
+                    this.isLoading = false;
+                }
+                SaveBuildPlan();
+            }
+        }
+
+        private void ExportBuildListButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null && !isLoading)
+            {
+                DialogResult result = SaveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    try
+                    {
+                        string fileName = SaveFileDialog.FileName;
+                        string pathEx = Path.GetExtension(fileName);
+                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            if (this.currentBuildPlan != null && this.currentBuildPlan.OptimumBuildGroups != null && this.currentBuildPlan.OptimumBuildGroups.Count > 0)
+                            {
+                                List<int> orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
+                                foreach (int key in orderedKeys)
+                                {
+                                    sb.AppendLine("Build Group: " + key.ToString());
+                                    sb.AppendLine("Material Name, Quantity Needed, Runs Needed, Is Complete");
+
+                                    foreach (OptimizedBuild build in this.currentBuildPlan.OptimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
+                                    {
+                                        sb.AppendLine(build.BuiltOrReactedName + "," + build.TotalQuantityNeeded + "," + build.RunsNeeded + ", False");
+                                    }
+                                    sb.AppendLine("");
+                                }
+                            }
+                            FileHelper.SaveFileContent(fileName, sb.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error ocurred during export: " + ex.Message);
+                    }
+                }
+            }
+
         }
         #endregion
 
@@ -686,7 +984,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             foundType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == material.materialTypeID);
                             if (foundType == null)
                             {
-                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity(material.materialTypeID, material.materialName));
+                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity() { typeID = material.materialTypeID, typeName = material.materialName });
                             }
                         }
                     }
@@ -698,7 +996,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             foundType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == material.materialTypeID);
                             if (foundType == null)
                             {
-                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity(material.materialTypeID, material.materialName));
+                                this.currentBuildPlan.CurrentInventory.Add(new InventoryTypeWithQuantity() { typeID = material.materialTypeID, typeName = material.materialName});
                             }
                         }
                     }
@@ -773,8 +1071,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 SaveBuildPlan();
             }
         }
-
-
 
         private void EnsureCalculationHelperClass()
         {
@@ -954,8 +1250,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void ResetControls()
         {
+            this.IsResetting = true;
             this.SuspendLayout();
-
             NotesTextBox.Text = string.Empty;
             ProductLabel.Text = string.Empty;
             DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, new List<ESIPriceHistory>());
@@ -985,6 +1281,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ProfitLabel.Text = CommonHelper.FormatIsk(0);
             leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(0);
             this.ResumeLayout();
+            this.IsResetting = false;
         }
 
         private void CopyInputsToClipboard()
@@ -1831,176 +2128,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
             }
         }
-        #endregion
-
-        #region "Background Workers"
-        private void LoadProductImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            byte[]? bpImage = null;
-            if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
-            {
-                if (LoadProductImageBackgroundWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
-                }
-            }
-            e.Result = bpImage;
-        }
-
-        private void LoadProductImageBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (!e.Cancelled)
-            {
-                bool imageSet = false;
-                byte[] productImage = (byte[])(e.Result);
-                if (productImage != null && productImage.Length > 0)
-                {
-                    MemoryStream memstream = new MemoryStream();
-                    memstream.Write(productImage, 0, productImage.Length);
-                    FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
-                    DetailsImagePanel.BackgroundImage = Image.FromStream(memstream);
-                    imageSet = true;
-                }
-                if (!imageSet)
-                {
-                    FinalProductImagePanel.BackgroundImage = null;
-                    DetailsImagePanel.BackgroundImage = null;
-                }
-            }
-        }
-
-        private void EnsurePriceWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)e.Argument;
-            if (mats?.Count > 0)
-            {
-                List<ESIMarketType> marketTypes = new List<ESIMarketType>();
-                mats.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.materialTypeID }));
-                int currentMatCount = 0;
-                int totalMats = mats.Count;
-                decimal progress = 0;
-                marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, this.currentBuildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
-                foreach (ESIMarketType marketType in marketTypes)
-                {
-                    mats.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
-                }
-            }
-            e.Result = mats;
-        }
-
-        private void EnsurePriceWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (!e.Cancelled)
-            {
-                List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)(e.Result);
-                foreach (MaterialsWithMarketData mat in mats)
-                {
-                    this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
-                }
-                BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
-                                                                     this.currentBuildPlan.AllItems,
-                                                                     FinalProductType.typeId,
-                                                                     this.currentBuildPlan.additionalCosts,
-                                                                     this.currentBuildPlan);
-                SaveBuildPlan();
-                this.PriceInfoSet = true;
-                ProgressLabel.Text = "";
-                LoadUIAfterCalcs();
-            }
-        }
-
-        private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            decimal currentProgress = (decimal)e.ProgressPercentage / (decimal)100;
-            ProgressLabel.Text = "Getting Market Data Progress: " + currentProgress.ToString("P");
-        }
-        #endregion
-
-        private void FinalSellPriceNumeric_ValueChanged(object sender, EventArgs e)
-        {
-            if (currentBuildPlan != null && !isLoading && FinalSellPriceNumeric.Validate())
-            {
-                currentBuildPlan.finalSellPrice = FinalSellPriceNumeric.Value;
-                SetSummaryInformation();
-            }
-        }
-
-        private void SummaryHelpPanel_Click(object sender, EventArgs e)
-        {
-            BuildPlanSummaryHelp buildPlanSummaryHelp = new BuildPlanSummaryHelp();
-            buildPlanSummaryHelp.StartPosition = FormStartPosition.CenterParent;
-            buildPlanSummaryHelp.ShowDialog();
-        }
-
-        private void NotesTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                this.currentBuildPlan.BuildPlanNotes = NotesTextBox.Text;
-            }
-        }
-
-        private void ImportPricesButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                DialogResult result = OpenFileDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    try
-                    {
-                        string fileName = OpenFileDialog.FileName;
-                        string pathEx = Path.GetExtension(fileName);
-                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
-                        {
-                            ImportPrices(fileName);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error ocurred during import: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void ExportPricesButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                DialogResult result = SaveFileDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    try
-                    {
-                        string fileName = SaveFileDialog.FileName;
-                        string pathEx = Path.GetExtension(fileName);
-                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
-                        {
-                            ExportPrices(fileName);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error ocurred during export: " + ex.Message);
-                    }
-                }
-            }
-        }
 
         private void ExportPrices(string fileName)
         {
@@ -2097,6 +2224,124 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         }
 
+        private bool WaitForWorkers()
+        {
+            if (LoadProductImageBackgroundWorker.IsBusy)
+            {
+                LoadProductImageBackgroundWorker.CancelAsync();
+            }
+            if (WasteValueWorker.IsBusy)
+            {
+                WasteValueWorker.CancelAsync();
+            }
+            if (EnsurePriceWorker.IsBusy)
+            {
+                EnsurePriceWorker.CancelAsync();
+            }
+            if (LoadPriceHistoryBGWorker.IsBusy)
+            {
+                LoadPriceHistoryBGWorker.CancelAsync();
+            }
+            {
+
+            }
+            //give it 50ms to cancel the workers. 
+            Thread.Sleep(50);
+            return true;
+        }
+
+        private void ShowHideTabPage(int visibleTabPage)
+        {
+            BuildPlanTabControl.SelectTab(visibleTabPage);
+        }
+        #endregion
+
+        #region "Background Workers"
+        private void LoadProductImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            byte[]? bpImage = null;
+            if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
+            {
+                if (LoadProductImageBackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
+                }
+            }
+            e.Result = bpImage;
+        }
+
+        private void LoadProductImageBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                bool imageSet = false;
+                byte[] productImage = (byte[])(e.Result);
+                if (productImage != null && productImage.Length > 0)
+                {
+                    MemoryStream memstream = new MemoryStream();
+                    memstream.Write(productImage, 0, productImage.Length);
+                    FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
+                    DetailsImagePanel.BackgroundImage = Image.FromStream(memstream);
+                    imageSet = true;
+                }
+                if (!imageSet)
+                {
+                    FinalProductImagePanel.BackgroundImage = null;
+                    DetailsImagePanel.BackgroundImage = null;
+                }
+            }
+        }
+
+        private void EnsurePriceWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)e.Argument;
+            if (mats?.Count > 0)
+            {
+                List<ESIMarketType> marketTypes = new List<ESIMarketType>();
+                mats.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.materialTypeID }));
+                int currentMatCount = 0;
+                int totalMats = mats.Count;
+                decimal progress = 0;
+                marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, this.currentBuildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
+                foreach (ESIMarketType marketType in marketTypes)
+                {
+                    mats.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
+                }
+            }
+            e.Result = mats;
+        }
+
+        private void EnsurePriceWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                List<MaterialsWithMarketData> mats = (List<MaterialsWithMarketData>)(e.Result);
+                foreach (MaterialsWithMarketData mat in mats)
+                {
+                    this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
+                }
+                BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                                                                     this.currentBuildPlan.AllItems,
+                                                                     FinalProductType.typeId,
+                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan);
+                SaveBuildPlan();
+                this.PriceInfoSet = true;
+                ProgressLabel.Text = "";
+                LoadUIAfterCalcs();
+            }
+        }
+
+        private void EnsurePriceWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            decimal currentProgress = (decimal)e.ProgressPercentage / (decimal)100;
+            ProgressLabel.Text = "Getting Market Data Progress: " + currentProgress.ToString("P");
+        }
+
         private void WasteValueWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             decimal wasteValue = 0;
@@ -2131,78 +2376,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private bool WaitForWorkers()
-        {
-            if (LoadProductImageBackgroundWorker.IsBusy)
-            {
-                LoadProductImageBackgroundWorker.CancelAsync();
-            }
-            if (WasteValueWorker.IsBusy)
-            {
-                WasteValueWorker.CancelAsync();
-            }
-            if (EnsurePriceWorker.IsBusy)
-            {
-                EnsurePriceWorker.CancelAsync();
-            }
-            if (LoadPriceHistoryBGWorker.IsBusy)
-            {
-                LoadPriceHistoryBGWorker.CancelAsync();
-            }
-            {
-
-            }
-            //give it 50ms to cancel the workers. 
-            Thread.Sleep(50);
-            return true;
-        }
-
-        private void ExportBuildListButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                DialogResult result = SaveFileDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    try
-                    {
-                        string fileName = SaveFileDialog.FileName;
-                        string pathEx = Path.GetExtension(fileName);
-                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            if (this.currentBuildPlan != null && this.currentBuildPlan.OptimumBuildGroups != null && this.currentBuildPlan.OptimumBuildGroups.Count > 0)
-                            {
-                                List<int> orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
-                                foreach (int key in orderedKeys)
-                                {
-                                    sb.AppendLine("Build Group: " + key.ToString());
-                                    sb.AppendLine("Material Name, Quantity Needed, Runs Needed, Is Complete");
-
-                                    foreach (OptimizedBuild build in this.currentBuildPlan.OptimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
-                                    {
-                                        sb.AppendLine(build.BuiltOrReactedName + "," + build.TotalQuantityNeeded + "," + build.RunsNeeded + ", False");
-                                    }
-                                    sb.AppendLine("");
-                                }
-                            }
-                            FileHelper.SaveFileContent(fileName, sb.ToString());
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error ocurred during export: " + ex.Message);
-                    }
-                }
-            }
-
-        }
-
         private void LoadPriceHistoryBGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int typeId = (int)(e.Argument);
@@ -2222,178 +2395,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 PriceHistoryGridView.DataSource = e.Result;
             }
         }
-
-        private void ShowHideTabPage(int visibleTabPage)
-        {
-            BuildPlanTabControl.SelectTab(visibleTabPage);
-        }
-
-        private void SummaryButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.Summary);
-        }
-
-        private void BPSettingsButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.BPReaction);
-        }
-
-        private void SystemButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.SystemStruct);
-        }
-
-        private void MaterialsButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.MaterialPrices);
-        }
-
-        private void BuildDetailsButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.BuildDetails);
-        }
-
-        private void PlanetMaterialsButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.PlanetMats);
-        }
-
-        private void CostBreakdownButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.CostBreakdown);
-        }
-
-        private void CurrentInventoryButton_Click(object sender, EventArgs e)
-        {
-            ShowHideTabPage((int)TabPages.CurrentInventory);
-        }
-
-        private void CurrentInventoryTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null)
-            {
-                if (!IgnoreTextChangedEvent)
-                {
-                    IgnoreTextChangedEvent = true;
-                    string rawInput = CurrentInventoryTextBox.Text;
-                    string formattedText = rawInput.Replace("\r\n", "\n").Replace("\n", "\r\n");
-                    CurrentInventoryTextBox.Text = formattedText;
-                    string[] inputItems = formattedText.Split("\r\n");
-                    if (inputItems != null)
-                    {
-                        this.Cursor = Cursors.WaitCursor;
-                        List<AppraisedItem> appraisedItems = new List<AppraisedItem>();
-                        appraisedItems = AppraisalHelper.ParseTypeIds(inputItems);
-                        InventoryTypeWithQuantity inventoryType;
-                        foreach (AppraisedItem item in appraisedItems)
-                        {
-                            inventoryType = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == item.typeID);
-                            if (inventoryType != null)
-                            {
-                                inventoryType.quantity = item.quantity;
-                            }
-                        }
-                        if (!this.isLoading)
-                        {
-                            this.isLoading = true;
-                            RunCalcs();
-                            this.isLoading = false;
-                        }
-                        SaveBuildPlan();
-                        this.Cursor = Cursors.Default;
-                    }
-
-                    IgnoreTextChangedEvent = false;
-                }
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (this.currentBuildPlan != null)
-            {
-                SaveBuildPlan();
-                if (!this.isLoading)
-                {
-                    this.isLoading = true;
-                    RunCalcs();
-                    this.isLoading = false;
-                }
-            }
-        }
-        private void CurrentInventoryGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (CurrentInventoryGrid.CurrentCell.ColumnIndex == 1) //Desired Column
-            {
-                e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
-                }
-            }
-        }
-
-        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(Convert.ToString(e.Value)))
-            {
-                e.Value = 0;
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
-        {
-            if (e.ColumnIndex == 1)
-            {
-                e.Value = 0;
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (this.currentBuildPlan != null && e.ColumnIndex == 1)
-            {
-                if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
-                {
-                    e.Cancel = true;
-                    MessageBox.Show("Please enter a value before leaving the cell.");
-                }
-            }
-        }
-
-        private void CurrentInventoryGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-            if (this.currentBuildPlan != null)
-            {
-                if (e.ColumnIndex == 1)
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void ClearInventoryButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null)
-            {
-                this.currentBuildPlan.CurrentInventory.ForEach(x => x.quantity = 0);
-                if (!this.isLoading)
-                {
-                    this.isLoading = true;
-                    RunCalcs();
-                    this.isLoading = false;
-                }
-                SaveBuildPlan();
-            }
-        }
+        #endregion
     }
 }
