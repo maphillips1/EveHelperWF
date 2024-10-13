@@ -1068,7 +1068,7 @@ namespace EveHelperWF
 
         private void CalculateReactionsTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
-            ScreenHelper.BlueprintBrowserHelper.CalculateReactionInputQuantAndPrice(ref ReactionMats, calculationHelperClass);
+            CommonHelper.PerformReactionMECalculations(ref ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats, calculationHelperClass.BuildComponents);
             ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
             TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);

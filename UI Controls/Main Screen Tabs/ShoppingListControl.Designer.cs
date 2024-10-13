@@ -482,6 +482,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "ShoppingListControl";
             Text = "ShoppingList";
+            FormClosing += ShoppingListControl_FormClosing;
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).EndInit();
             ((System.ComponentModel.ISupportInitialize)ShoppingListGrid).EndInit();
             ResumeLayout(false);
