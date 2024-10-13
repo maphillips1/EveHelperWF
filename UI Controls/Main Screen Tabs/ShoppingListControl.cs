@@ -342,7 +342,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void ShoppingListGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (this.theShoppingList != null && 
+            if (this.theShoppingList != null &&
                 (e.ColumnIndex == 1 || e.ColumnIndex == 2))
             {
                 if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
@@ -364,5 +364,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
         #endregion
+
+        private void ShoppingListControl_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (theShoppingList != null)
+            {
+                SaveShoppingList();
+            }
+        }
     }
 }

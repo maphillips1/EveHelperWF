@@ -26,23 +26,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         private BuildPlan currentBuildPlan;
-        private BindingList<ComboListItem> FileComboItems = new BindingList<ComboListItem>();
-        string[] FileNames;
         string CurrentFileName;
         private InventoryType FinalProductType;
-        private bool m_isLoading = false;
-        private bool isLoading
-        {
-            get
-            {
-                return m_isLoading;
-            }
-            set
-            {
-                m_isLoading = value;
-            }
-        }
-        private List<Control> DetailFlowsControls = new List<Control>();
+        private bool isLoading = false;
         private OptimizedBuildDetailsControl DetailsControl;
         private bool PriceInfoSet = true;
         private List<PlanetMaterial> UniquePlanetMaterials;
@@ -50,6 +36,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private decimal FinalProductBuyOrderPrice;
         private bool IgnoreTextChangedEvent;
         private bool IsResetting;
+        BindingList<KeyValuePair<string, string>> FileNames = new BindingList<KeyValuePair<string, string>>();
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -75,10 +62,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BlueprintBrowserHelper.Init();
             LoadIndySettingCombos();
             LoadControl();
-            ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.value.Contains(buildPlan.BuildPlanName.Replace(".json", "")));
-            if (comboListItem != null)
+            string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(buildPlan.BuildPlanName.Replace(".json", "")));
+            if (selectedFileName != null)
             {
-                BuildPlanCombo.SelectedValue = comboListItem.key;
+                BuildPlanCombo.SelectedValue = selectedFileName;
             }
             isLoading = false;
         }
@@ -102,16 +89,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 LoadUIForBuildPlan();
                 this.Cursor = Cursors.Default;
                 isLoading = false;
-            }
-        }
-
-        private void SaveNotesButton_Click(object sender, EventArgs e)
-        {
-            if (currentBuildPlan != null)
-            {
-                this.currentBuildPlan.BuildPlanNotes = NotesTextBox.Text;
-                SaveBuildPlan();
-                MessageBox.Show("Saved!", "Saved");
             }
         }
 
@@ -145,12 +122,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.finalProductTypeID = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
                     this.currentBuildPlan.RunsPerCopy = 1;
                     this.currentBuildPlan.NumOfCopies = 1;
+                    CurrentFileName = Enums.Enums.BuildPlanDirectory + this.currentBuildPlan.BuildPlanName;
                     SaveBuildPlan();
                     LoadFileCombo();
-                    ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.value.Contains(addBuildPlanScreen.PlanNameTextBox.Text));
-                    if (comboListItem != null)
+                    string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(addBuildPlanScreen.PlanNameTextBox.Text));
+                    if (selectedFileName != null)
                     {
-                        BuildPlanCombo.SelectedValue = comboListItem.key;
+                        BuildPlanCombo.SelectedValue = CurrentFileName;
                     }
                 }
             }
@@ -837,73 +815,52 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadFileCombo()
         {
-            FileComboItems.Clear();
-            FileComboItems.Add(new ComboListItem { key = 0, value = string.Empty });
-            FileNames = FileIO.FileHelper.GetFileNamesInDirectory(Enums.Enums.BuildPlanDirectory);
-            if (FileNames.Length > 0)
+            FileNames.Clear();
+            FileNames.Add(new KeyValuePair<string, string>("",""));
+            string[] directoryFileNames = FileIO.FileHelper.GetFileNamesInDirectory(Enums.Enums.BuildPlanDirectory);
+
+
+            if (directoryFileNames.Length > 0)
             {
                 string comboName = "";
                 int lastSlashIndex;
                 int lastDotIndex;
                 int count = 1;
-                foreach (string file in FileNames)
+                foreach (string file in directoryFileNames)
                 {
                     lastSlashIndex = file.LastIndexOf('\\');
                     lastDotIndex = file.LastIndexOf(".");
                     comboName = file.Substring(lastSlashIndex + 1, lastDotIndex - 1 - lastSlashIndex);
-                    FileComboItems.Add(new ComboListItem { key = count, value = comboName });
+                    FileNames.Add(new KeyValuePair<string, string>(comboName, file));
                     count++;
                 }
             }
-            BuildPlanCombo.ValueMember = "key";
-            BuildPlanCombo.DisplayMember = "value";
-            BuildPlanCombo.DataSource = FileComboItems;
+            BuildPlanCombo.ValueMember = "Value";
+            BuildPlanCombo.DisplayMember = "Key";            
+            BuildPlanCombo.DataSource = FileNames.ToList<KeyValuePair<string, string>>();
             BuildPlanCombo.SelectedIndex = 0;
         }
 
         private void SaveBuildPlan()
         {
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(currentBuildPlan);
-            string fullFileName = Enums.Enums.BuildPlanDirectory + currentBuildPlan.BuildPlanName;
+            string fullFileName = CurrentFileName;
             FileIO.FileHelper.SaveFileContent(Enums.Enums.BuildPlanDirectory, fullFileName, content);
         }
 
         private void LoadBuildPlanFromFile()
         {
             currentBuildPlan = null;
-            string selectedFileName = GetSelectedFileName();
+            string? selectedFileName = (string?)BuildPlanCombo.SelectedValue;
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
+                CurrentFileName = selectedFileName;
                 string content = FileIO.FileHelper.GetFileContent(Enums.Enums.BuildPlanDirectory, selectedFileName);
                 if (!string.IsNullOrEmpty(content))
                 {
                     currentBuildPlan = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.BuildPlan>(content);
                 }
             }
-        }
-
-        private string GetSelectedFileName()
-        {
-            if (BuildPlanCombo.SelectedIndex > 0)
-            {
-                int selectedFile = Convert.ToInt32(BuildPlanCombo.SelectedValue);
-
-                if (selectedFile > 0)
-                {
-                    ComboListItem comboListItem = FileComboItems.ToList().Find(x => x.key == selectedFile);
-
-                    if (comboListItem != null)
-                    {
-                        string fileName = FileNames.ToList().Find(x => x.Contains(comboListItem.value));
-                        if (!string.IsNullOrWhiteSpace(fileName))
-                        {
-                            CurrentFileName = fileName;
-                            return fileName;
-                        }
-                    }
-                }
-            }
-            return "";
         }
 
         private void LoadUIForBuildPlan()
@@ -1524,11 +1481,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         this.PriceInfoSet = false;
                         this.ProgressLabel.Text = "Price Information is Loading. This may take some time.";
                         EnsurePriceWorker.RunWorkerAsync(matsForPriceSetting);
-
-                        while (EnsurePriceWorker.IsBusy)
-                        {
-                            Application.DoEvents();
-                        }
                     }
                 }
             }
@@ -1854,17 +1806,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadPlanetaryMaterialsPage()
         {
+            PlanetMaterialsTreeView.Nodes.Clear();
             LoadUniquePlanetMaterials();
-            if (UniquePlanetMaterials != null && UniquePlanetMaterials.Count > 0)
+            if (UniquePlanetMaterials?.Count > 0)
             {
                 LoadPlanetaryTreeView();
-            }
-            else
-            {
-                if (PlanetMaterialsTreeView.Nodes.Count > 0)
-                {
-                    PlanetMaterialsTreeView.Nodes.Clear();
-                }
             }
         }
 

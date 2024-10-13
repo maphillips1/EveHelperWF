@@ -64,10 +64,14 @@ namespace EveHelperWF.ScreenHelper
                     appraisedItem.typeName = foundType.Item2;
                     if (splitString.Length > 1)
                     {
-                        int itemCount = 0;
-                        if (int.TryParse(splitString[1], out itemCount))
+                        decimal itemCount = 0;
+                        if (decimal.TryParse(splitString[1], out itemCount))
                         {
-                            appraisedItem.quantity = itemCount;
+                            appraisedItem.quantity = Convert.ToInt32(itemCount);
+                        }
+                        else
+                        {
+                            appraisedItem.quantity = 1;
                         }
                     }
                 }

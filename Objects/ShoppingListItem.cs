@@ -11,6 +11,7 @@ namespace EveHelperWF.Objects
         public int Quantity { get; set; }
         public double BoughtAtPrice { get; set; }
         public bool Bought { get; set; }
+        [Newtonsoft.Json.JsonIgnore()]
         public string QuantityString
         {
             get
@@ -30,7 +31,7 @@ namespace EveHelperWF.Objects
                 }
             }
         }
-
+        [Newtonsoft.Json.JsonIgnore()]
         public string BoutAtPriceString
         {
             get

@@ -666,5 +666,61 @@ namespace EveHelperWF.ScreenHelper
 
             return factor;
         }
+
+        public static void PerformReactionMECalculations(ref List<MaterialsWithMarketData> childMats, CalculationHelperClass industrySettings, int runsNeeded)
+        {
+            decimal totalStructureMEBonus = 1;
+            long quantityTotal = 0;
+            if (industrySettings.ReactionsStructureTypeID > 0)
+            {
+                totalStructureMEBonus = CommonHelper.GetReactionStructureMEBonus(industrySettings);
+            }
+            foreach (Objects.MaterialsWithMarketData mat in childMats)
+            {
+                //Calculation
+                //Total = BaseQuantity * runs * (Bonus Percentage total (rigs, structure bonuses, etc) )
+
+                //Step 1 = Quantity Total * runs Ceiling
+                quantityTotal = (long)((mat.quantity * runsNeeded));
+
+                //Step 3 = Apply the structure ME Bonuses
+                quantityTotal = (long)(Math.Ceiling(quantityTotal * totalStructureMEBonus));
+
+                //Always need at least one.
+                if (quantityTotal < runsNeeded) { quantityTotal = runsNeeded; }
+
+                mat.quantityTotal += quantityTotal;
+                mat.quantityPerRun = quantityTotal / runsNeeded;
+            }
+        }
+
+        public static void PerformManufacturingMECalculations(ref List<MaterialsWithMarketData> outputMaterials, CalculationHelperClass industrySettings, int runsNeeded, int bpME)
+        {
+            decimal totalStructureMEBonus = 1;
+            decimal MEBonus = (100m - Convert.ToDecimal(bpME)) / 100;
+            long quantityTotal = 0;
+            List<Int32> buildableMats = new List<int>();
+            if (industrySettings.ManufacturingStructureTypeID > 0)
+            {
+                totalStructureMEBonus = CommonHelper.GetManufacturingStructureMEBonus(industrySettings);
+            }
+            foreach (Objects.MaterialsWithMarketData mat in outputMaterials)
+            {
+                //Calculation
+                //QuantityTotal = BaseMat * Num Runs. Completed in SetBaseInputValues. 
+                //
+                //QuantityTotal = Math.Ceiling(QuantityTotal * (Bonus Percentage total (rigs, structure bonuses, etc) )
+                quantityTotal = mat.quantity * runsNeeded;
+
+                //Step 1 = Set quantity Total to Base Blueprint * ME.
+                quantityTotal = (long)Math.Ceiling(quantityTotal * MEBonus * totalStructureMEBonus);
+
+                //You always need at least 1 item per run
+                if (quantityTotal < runsNeeded) { quantityTotal = runsNeeded; }
+
+                mat.quantityTotal += quantityTotal;
+                mat.quantityPerRun = quantityTotal / runsNeeded;
+            }
+        }
     }
 }

@@ -843,45 +843,20 @@ namespace EveHelperWF.ScreenHelper
         #region "Manufacturing Methods"
         public static void CalculateManufacturingInputQuantAndPrice(ref List<Objects.MaterialsWithMarketData> inputMats, Objects.CalculationHelperClass calculationHelperClass)
         {
-            decimal totalStructureMEBonus = 1;
-            decimal MEBonus = (100m - Convert.ToDecimal(calculationHelperClass.ME)) / 100;
             List<Int32> buildableMats = new List<int>();
-            decimal quantityTotal = 0;
-            if (calculationHelperClass.ManufacturingStructureTypeID > 0)
+
+            //This call does the ME calc
+            CommonHelper.PerformManufacturingMECalculations(ref inputMats, calculationHelperClass, calculationHelperClass.Runs, calculationHelperClass.ME);
+
+            if (calculationHelperClass.BuildComponents)
             {
-                totalStructureMEBonus = CommonHelper.GetManufacturingStructureMEBonus(calculationHelperClass);
-            }
-            foreach (Objects.MaterialsWithMarketData mat in inputMats)
-            {
-                //Calculation
-                //Base Blueprint Input Quantity * ME. = new base quantity. 
-                //Total = BaseQuantity * runs * (Bonus Percentage total (rigs, structure bonuses, etc) )
-
-                //Step 1 = Set quantity Total to Base Blueprint * ME.
-                quantityTotal = mat.quantity * MEBonus;
-
-                //Step 2 = Quantity Total * runs Ceiling
-                quantityTotal *= calculationHelperClass.Runs;
-
-                //If the blueprint requires 1 of each item the next ME calc does not apply because
-                //it will always require 1 item per run./
-                if (quantityTotal > calculationHelperClass.Runs)
+                foreach (Objects.MaterialsWithMarketData mat in inputMats)
                 {
-                    //Step 3 = Apply the structure ME Bonuses
-                    mat.quantityTotal = Convert.ToInt64(Math.Ceiling(quantityTotal * totalStructureMEBonus));
-                }
-                else
-                {
-                    mat.quantityTotal = Convert.ToInt64(Math.Ceiling(quantityTotal));
-                }
-
-                //Set Price Total. 
-                mat.priceTotal = mat.pricePer * mat.quantityTotal;
-
-                if (calculationHelperClass.BuildComponents && mat.Buildable)
-                {
-                    mat.priceTotal = 0;
-                    buildableMats.Add(mat.materialTypeID);
+                    if (mat.Buildable)
+                    {
+                        mat.priceTotal = 0;
+                        buildableMats.Add(mat.materialTypeID);
+                    }
                 }
             }
 
@@ -1003,33 +978,6 @@ namespace EveHelperWF.ScreenHelper
         #endregion
 
         #region "Reaction Methods"
-        public static void CalculateReactionInputQuantAndPrice(ref List<Objects.MaterialsWithMarketData> inputMats, Objects.CalculationHelperClass calculationHelperClass)
-        {
-            decimal totalStructureMEBonus = 1;
-            if (calculationHelperClass.ReactionsStructureTypeID > 0)
-            {
-                totalStructureMEBonus = CommonHelper.GetReactionStructureMEBonus(calculationHelperClass);
-            }
-            foreach (Objects.MaterialsWithMarketData mat in inputMats)
-            {
-                //Calculation
-                //Total = BaseQuantity * runs * (Bonus Percentage total (rigs, structure bonuses, etc) )
-
-                //Step 1 = Quantity Total * runs Ceiling
-                mat.quantityTotal = Convert.ToInt64((mat.quantity * calculationHelperClass.Runs));
-
-                //If the blueprint requires 1 of each item the next ME calc does not apply because
-                //it will always require 1 item per run.
-                if (mat.quantityTotal != calculationHelperClass.Runs)
-                {
-                    //Step 3 = Apply the structure ME Bonuses
-                    mat.quantityTotal = Convert.ToInt64(Math.Ceiling(mat.quantityTotal * totalStructureMEBonus));
-                }
-
-                //Set Price Total. 
-                mat.priceTotal = mat.pricePer * mat.quantityTotal;
-            }
-        }
 
 
         public static Int64 CalculateReactionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
