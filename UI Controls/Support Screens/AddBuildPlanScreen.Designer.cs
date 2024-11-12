@@ -33,14 +33,14 @@
             PlanNameTextBox = new TextBox();
             ProductCombo = new ComboBox();
             label2 = new Label();
-            AddButton = new Button();
-            CancelButton = new Button();
+            AddButton = new Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F);
             label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(125, 21);
@@ -70,7 +70,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 12F);
             label2.Location = new Point(16, 64);
             label2.Name = "label2";
             label2.Size = new Size(121, 21);
@@ -126,7 +126,7 @@
         public TextBox PlanNameTextBox;
         public ComboBox ProductCombo;
         private Label label2;
-        private Button AddButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton AddButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
     }
 }

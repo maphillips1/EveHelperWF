@@ -76,20 +76,18 @@
             Label label57;
             Label label58;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle23 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle24 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             SummaryHelpPanel = new Panel();
             leftoverMatsValueLabel = new Label();
@@ -103,7 +101,7 @@
             SummaryMarketData = new Panel();
             JitaBuyLabel = new Label();
             JitaSellLabel = new Label();
-            PriceHistoryGridView = new DataGridView();
+            PriceHistoryGridView = new Objects.Custom_Controls.EveHelperGridView();
             date = new DataGridViewTextBoxColumn();
             Avg = new DataGridViewTextBoxColumn();
             Low = new DataGridViewTextBoxColumn();
@@ -114,14 +112,14 @@
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
             MostExpensiveTree = new TreeView();
-            ImportPricesButton = new Button();
-            ExportPricesButton = new Button();
+            ImportPricesButton = new Objects.Custom_Controls.EveHelperButton();
+            ExportPricesButton = new Objects.Custom_Controls.EveHelperButton();
             TaxFinalProductCheckbox = new CheckBox();
             TaxInputCheckbox = new CheckBox();
             FinalSellPriceNumeric = new NumericUpDown();
             MaterialsPriceTreeView = new TreeView();
-            UpdatePricesJitaButton = new Button();
-            CopyToClipboardButton = new Button();
+            UpdatePricesJitaButton = new Objects.Custom_Controls.EveHelperButton();
+            CopyToClipboardButton = new Objects.Custom_Controls.EveHelperButton();
             IndustrySettingsTabPage = new TabPage();
             DefaultsTabContainer = new TabControl();
             ManufacturingDefaultsTabPage = new TabPage();
@@ -165,11 +163,11 @@
             label49 = new Label();
             label50 = new Label();
             DetailsPage = new TabPage();
-            ExportBuildList = new Button();
+            ExportBuildList = new Objects.Custom_Controls.EveHelperButton();
             TotalManufacturingSlotsLabel = new Label();
             TotalReactionSlotsLabel = new Label();
             OptimizedBuildTreeView = new TreeView();
-            CollapseAllButton = new Button();
+            CollapseAllButton = new Objects.Custom_Controls.EveHelperButton();
             MaterialsTreeView = new TreeView();
             DetailsProductLabel = new Label();
             DetailsImagePanel = new Panel();
@@ -177,19 +175,19 @@
             PlanetMatsTotalTreeview = new TreeView();
             PlanetMaterialsTreeView = new TreeView();
             BPReactionTabPage = new TabPage();
-            SetReactionsButton = new Button();
-            SetBlueprintButton = new Button();
+            SetReactionsButton = new Objects.Custom_Controls.EveHelperButton();
+            SetBlueprintButton = new Objects.Custom_Controls.EveHelperButton();
             BPTreeView = new TreeView();
             BuildPlanCombo = new ComboBox();
-            NewBuildPlanButton = new Button();
-            DeleteBuildPlanButton = new Button();
+            NewBuildPlanButton = new Objects.Custom_Controls.EveHelperButton();
+            DeleteBuildPlanButton = new Objects.Custom_Controls.EveHelperButton();
             BuildPlanTabControl = new TabControl();
             CurrentInventoryTabPanel = new TabPage();
-            ClearInventoryButton = new Button();
+            CurrentInventoryGrid = new Objects.Custom_Controls.EveHelperGridView();
+            typeName = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
+            ClearInventoryButton = new Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryTextBox = new TextBox();
-            CurrentInventoryGrid = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             CostBreakdownPage = new TabPage();
             CostBreakdownTextBox = new TextBox();
             LoadProductImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -203,14 +201,14 @@
             OpenFileDialog = new OpenFileDialog();
             WasteValueWorker = new System.ComponentModel.BackgroundWorker();
             LoadPriceHistoryBGWorker = new System.ComponentModel.BackgroundWorker();
-            SummaryButton = new Button();
-            BPSettingsButton = new Button();
-            CostBreakdownButton = new Button();
-            PlanetMaterialsButton = new Button();
-            BuildDetailsButton = new Button();
-            MaterialsButton = new Button();
-            SystemButton = new Button();
-            CurrentInventoryButton = new Button();
+            BPSettingsButton = new Objects.Custom_Controls.EveHelperButton();
+            CostBreakdownButton = new Objects.Custom_Controls.EveHelperButton();
+            PlanetMaterialsButton = new Objects.Custom_Controls.EveHelperButton();
+            BuildDetailsButton = new Objects.Custom_Controls.EveHelperButton();
+            MaterialsButton = new Objects.Custom_Controls.EveHelperButton();
+            SystemButton = new Objects.Custom_Controls.EveHelperButton();
+            CurrentInventoryButton = new Objects.Custom_Controls.EveHelperButton();
+            SummaryButton = new Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -950,24 +948,24 @@
             PriceHistoryGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PriceHistoryGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             PriceHistoryGridView.BackgroundColor = Color.Black;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = SystemColors.Control;
-            dataGridViewCellStyle15.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
-            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            PriceHistoryGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             PriceHistoryGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PriceHistoryGridView.Columns.AddRange(new DataGridViewColumn[] { date, Avg, Low, High, volume, orderCount });
-            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = Color.Black;
-            dataGridViewCellStyle22.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle22.ForeColor = Color.White;
-            dataGridViewCellStyle22.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = DataGridViewTriState.False;
-            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.Black;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            PriceHistoryGridView.DefaultCellStyle = dataGridViewCellStyle8;
             PriceHistoryGridView.GridColor = Color.Black;
             PriceHistoryGridView.Location = new Point(13, 79);
             PriceHistoryGridView.Margin = new Padding(3, 2, 3, 2);
@@ -980,8 +978,8 @@
             // date
             // 
             date.DataPropertyName = "date";
-            dataGridViewCellStyle16.Padding = new Padding(2);
-            date.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle2.Padding = new Padding(2);
+            date.DefaultCellStyle = dataGridViewCellStyle2;
             date.HeaderText = "Date";
             date.MinimumWidth = 6;
             date.Name = "date";
@@ -990,10 +988,10 @@
             // Avg
             // 
             Avg.DataPropertyName = "average";
-            dataGridViewCellStyle17.Format = "N0";
-            dataGridViewCellStyle17.NullValue = "0";
-            dataGridViewCellStyle17.Padding = new Padding(2);
-            Avg.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "0";
+            dataGridViewCellStyle3.Padding = new Padding(2);
+            Avg.DefaultCellStyle = dataGridViewCellStyle3;
             Avg.HeaderText = "avg";
             Avg.MinimumWidth = 6;
             Avg.Name = "Avg";
@@ -1002,10 +1000,10 @@
             // Low
             // 
             Low.DataPropertyName = "lowest";
-            dataGridViewCellStyle18.Format = "N0";
-            dataGridViewCellStyle18.NullValue = "0";
-            dataGridViewCellStyle18.Padding = new Padding(2);
-            Low.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewCellStyle4.Padding = new Padding(2);
+            Low.DefaultCellStyle = dataGridViewCellStyle4;
             Low.HeaderText = "low";
             Low.MinimumWidth = 6;
             Low.Name = "Low";
@@ -1014,10 +1012,10 @@
             // High
             // 
             High.DataPropertyName = "highest";
-            dataGridViewCellStyle19.Format = "N0";
-            dataGridViewCellStyle19.NullValue = "0";
-            dataGridViewCellStyle19.Padding = new Padding(2);
-            High.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            dataGridViewCellStyle5.Padding = new Padding(2);
+            High.DefaultCellStyle = dataGridViewCellStyle5;
             High.HeaderText = "high";
             High.MinimumWidth = 6;
             High.Name = "High";
@@ -1026,10 +1024,10 @@
             // volume
             // 
             volume.DataPropertyName = "volume";
-            dataGridViewCellStyle20.Format = "N0";
-            dataGridViewCellStyle20.NullValue = "0";
-            dataGridViewCellStyle20.Padding = new Padding(2);
-            volume.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle6.Format = "N0";
+            dataGridViewCellStyle6.NullValue = "0";
+            dataGridViewCellStyle6.Padding = new Padding(2);
+            volume.DefaultCellStyle = dataGridViewCellStyle6;
             volume.HeaderText = "Volume";
             volume.MinimumWidth = 6;
             volume.Name = "volume";
@@ -1038,8 +1036,8 @@
             // orderCount
             // 
             orderCount.DataPropertyName = "order_count";
-            dataGridViewCellStyle21.Padding = new Padding(2);
-            orderCount.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Padding = new Padding(2);
+            orderCount.DefaultCellStyle = dataGridViewCellStyle7;
             orderCount.HeaderText = "Order Count";
             orderCount.MinimumWidth = 6;
             orderCount.Name = "orderCount";
@@ -1877,7 +1875,7 @@
             SetReactionsButton.Size = new Size(150, 23);
             SetReactionsButton.TabIndex = 10;
             SetReactionsButton.Text = "Set all Reaction Info";
-            SetReactionsButton.UseVisualStyleBackColor = true;
+            SetReactionsButton.UseVisualStyleBackColor = false;
             SetReactionsButton.Click += SetReactionsButton_Click;
             // 
             // SetBlueprintButton
@@ -1888,7 +1886,7 @@
             SetBlueprintButton.Size = new Size(150, 23);
             SetBlueprintButton.TabIndex = 9;
             SetBlueprintButton.Text = "Set all Blueprint Info";
-            SetBlueprintButton.UseVisualStyleBackColor = true;
+            SetBlueprintButton.UseVisualStyleBackColor = false;
             SetBlueprintButton.Click += SetBlueprintButton_Click;
             // 
             // BPTreeView
@@ -1921,24 +1919,24 @@
             // 
             // NewBuildPlanButton
             // 
-            NewBuildPlanButton.ForeColor = Color.Black;
+            NewBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             NewBuildPlanButton.Location = new Point(104, 40);
             NewBuildPlanButton.Name = "NewBuildPlanButton";
             NewBuildPlanButton.Size = new Size(103, 23);
             NewBuildPlanButton.TabIndex = 2;
             NewBuildPlanButton.Text = "New Build Plan";
-            NewBuildPlanButton.UseVisualStyleBackColor = true;
+            NewBuildPlanButton.UseVisualStyleBackColor = false;
             NewBuildPlanButton.Click += NewBuildPlanButton_Click;
             // 
             // DeleteBuildPlanButton
             // 
-            DeleteBuildPlanButton.ForeColor = Color.Black;
+            DeleteBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             DeleteBuildPlanButton.Location = new Point(223, 40);
             DeleteBuildPlanButton.Name = "DeleteBuildPlanButton";
             DeleteBuildPlanButton.Size = new Size(109, 23);
             DeleteBuildPlanButton.TabIndex = 3;
             DeleteBuildPlanButton.Text = "Delete Build Plan";
-            DeleteBuildPlanButton.UseVisualStyleBackColor = true;
+            DeleteBuildPlanButton.UseVisualStyleBackColor = false;
             DeleteBuildPlanButton.Click += DeleteBuildPlanButton_Click;
             // 
             // BuildPlanTabControl
@@ -1968,10 +1966,10 @@
             // CurrentInventoryTabPanel
             // 
             CurrentInventoryTabPanel.BackColor = Color.FromArgb(21, 21, 21);
+            CurrentInventoryTabPanel.Controls.Add(CurrentInventoryGrid);
             CurrentInventoryTabPanel.Controls.Add(ClearInventoryButton);
             CurrentInventoryTabPanel.Controls.Add(CurrentInventoryTextBox);
             CurrentInventoryTabPanel.Controls.Add(label58);
-            CurrentInventoryTabPanel.Controls.Add(CurrentInventoryGrid);
             CurrentInventoryTabPanel.Location = new Point(4, 5);
             CurrentInventoryTabPanel.Name = "CurrentInventoryTabPanel";
             CurrentInventoryTabPanel.Size = new Size(1346, 531);
@@ -1979,15 +1977,70 @@
             CurrentInventoryTabPanel.Text = "Current Inventory";
             CurrentInventoryTabPanel.UseVisualStyleBackColor = true;
             // 
+            // CurrentInventoryGrid
+            // 
+            CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CurrentInventoryGrid.BackgroundColor = Color.Black;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.Black;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle11;
+            CurrentInventoryGrid.EditableColumns = "Quantity";
+            CurrentInventoryGrid.GridColor = Color.Black;
+            CurrentInventoryGrid.Location = new Point(5, 90);
+            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Control;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            CurrentInventoryGrid.Size = new Size(630, 433);
+            CurrentInventoryGrid.TabIndex = 53;
+            CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
+            CurrentInventoryGrid.DataError += CurrentInventoryGrid_DataError;
+            CurrentInventoryGrid.EditingControlShowing += CurrentInventoryGrid_EditingControlShowing;
+            // 
+            // typeName
+            // 
+            typeName.DataPropertyName = "typeName";
+            typeName.HeaderText = "Type Name";
+            typeName.Name = "typeName";
+            // 
+            // Quantity
+            // 
+            Quantity.DataPropertyName = "quantity";
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = "0";
+            Quantity.DefaultCellStyle = dataGridViewCellStyle10;
+            Quantity.HeaderText = "Quantity";
+            Quantity.Name = "Quantity";
+            // 
             // ClearInventoryButton
             // 
-            ClearInventoryButton.ForeColor = Color.Black;
+            ClearInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearInventoryButton.Location = new Point(5, 21);
             ClearInventoryButton.Name = "ClearInventoryButton";
             ClearInventoryButton.Size = new Size(149, 27);
             ClearInventoryButton.TabIndex = 52;
             ClearInventoryButton.Text = "Clear Inventory";
-            ClearInventoryButton.UseVisualStyleBackColor = true;
+            ClearInventoryButton.UseVisualStyleBackColor = false;
             ClearInventoryButton.Click += ClearInventoryButton_Click;
             // 
             // CurrentInventoryTextBox
@@ -2000,78 +2053,6 @@
             CurrentInventoryTextBox.Size = new Size(584, 461);
             CurrentInventoryTextBox.TabIndex = 51;
             CurrentInventoryTextBox.TextChanged += CurrentInventoryTextBox_TextChanged;
-            // 
-            // CurrentInventoryGrid
-            // 
-            dataGridViewCellStyle23.BackColor = Color.DimGray;
-            CurrentInventoryGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
-            CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CurrentInventoryGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            CurrentInventoryGrid.BackgroundColor = Color.Black;
-            dataGridViewCellStyle24.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = SystemColors.Control;
-            dataGridViewCellStyle24.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle24.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn3 });
-            dataGridViewCellStyle27.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = Color.Black;
-            dataGridViewCellStyle27.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle27.ForeColor = Color.White;
-            dataGridViewCellStyle27.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = DataGridViewTriState.False;
-            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle27;
-            CurrentInventoryGrid.GridColor = Color.Black;
-            CurrentInventoryGrid.Location = new Point(3, 98);
-            CurrentInventoryGrid.Margin = new Padding(3, 2, 3, 2);
-            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
-            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = SystemColors.Control;
-            dataGridViewCellStyle28.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle28.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle28.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
-            CurrentInventoryGrid.RowHeadersWidth = 51;
-            CurrentInventoryGrid.RowTemplate.Height = 29;
-            CurrentInventoryGrid.Size = new Size(580, 426);
-            CurrentInventoryGrid.TabIndex = 6;
-            CurrentInventoryGrid.CellValidating += CurrentInventoryGrid_CellValidating;
-            CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
-            CurrentInventoryGrid.CellValueNeeded += CurrentInventoryGrid_CellValueNeeded;
-            CurrentInventoryGrid.CellValuePushed += CurrentInventoryGrid_CellValuePushed;
-            CurrentInventoryGrid.DataError += CurrentInventoryGrid_DataError;
-            CurrentInventoryGrid.EditingControlShowing += CurrentInventoryGrid_EditingControlShowing;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "typeName";
-            dataGridViewCellStyle25.Padding = new Padding(2);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle25;
-            dataGridViewTextBoxColumn1.HeaderText = "Type Name";
-            dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 84;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "quantityString";
-            dataGridViewCellStyle26.BackColor = Color.White;
-            dataGridViewCellStyle26.ForeColor = Color.Black;
-            dataGridViewCellStyle26.Format = "N0";
-            dataGridViewCellStyle26.NullValue = "0";
-            dataGridViewCellStyle26.Padding = new Padding(2);
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle26;
-            dataGridViewTextBoxColumn3.HeaderText = "Current Inventory";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 115;
             // 
             // CostBreakdownPage
             // 
@@ -2194,115 +2175,116 @@
             LoadPriceHistoryBGWorker.DoWork += LoadPriceHistoryBGWorker_DoWork;
             LoadPriceHistoryBGWorker.RunWorkerCompleted += LoadPriceHistoryBGWorker_RunWorkerCompleted;
             // 
-            // SummaryButton
-            // 
-            SummaryButton.Cursor = Cursors.Hand;
-            SummaryButton.FlatStyle = FlatStyle.Flat;
-            SummaryButton.Location = new Point(12, 94);
-            SummaryButton.Name = "SummaryButton";
-            SummaryButton.Size = new Size(169, 30);
-            SummaryButton.TabIndex = 52;
-            SummaryButton.TabStop = false;
-            SummaryButton.Text = "Summary";
-            SummaryButton.UseVisualStyleBackColor = true;
-            SummaryButton.Click += SummaryButton_Click;
-            // 
             // BPSettingsButton
             // 
             BPSettingsButton.Cursor = Cursors.Hand;
-            BPSettingsButton.FlatStyle = FlatStyle.Flat;
+            BPSettingsButton.ForeColor = Color.FromArgb(234, 234, 234);
             BPSettingsButton.Location = new Point(12, 130);
             BPSettingsButton.Name = "BPSettingsButton";
             BPSettingsButton.Size = new Size(169, 30);
             BPSettingsButton.TabIndex = 53;
             BPSettingsButton.TabStop = false;
             BPSettingsButton.Text = "BP/ Reaction Settings";
-            BPSettingsButton.UseVisualStyleBackColor = true;
+            BPSettingsButton.UseVisualStyleBackColor = false;
             BPSettingsButton.Click += BPSettingsButton_Click;
             // 
             // CostBreakdownButton
             // 
             CostBreakdownButton.Cursor = Cursors.Hand;
-            CostBreakdownButton.FlatStyle = FlatStyle.Flat;
+            CostBreakdownButton.ForeColor = Color.FromArgb(234, 234, 234);
             CostBreakdownButton.Location = new Point(12, 345);
             CostBreakdownButton.Name = "CostBreakdownButton";
             CostBreakdownButton.Size = new Size(169, 30);
             CostBreakdownButton.TabIndex = 54;
             CostBreakdownButton.TabStop = false;
             CostBreakdownButton.Text = "Cost Breakdown";
-            CostBreakdownButton.UseVisualStyleBackColor = true;
+            CostBreakdownButton.UseVisualStyleBackColor = false;
             CostBreakdownButton.Click += CostBreakdownButton_Click;
             // 
             // PlanetMaterialsButton
             // 
             PlanetMaterialsButton.Cursor = Cursors.Hand;
-            PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
+            PlanetMaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
             PlanetMaterialsButton.Location = new Point(12, 309);
             PlanetMaterialsButton.Name = "PlanetMaterialsButton";
             PlanetMaterialsButton.Size = new Size(169, 30);
             PlanetMaterialsButton.TabIndex = 55;
             PlanetMaterialsButton.TabStop = false;
             PlanetMaterialsButton.Text = "Planet Materials";
-            PlanetMaterialsButton.UseVisualStyleBackColor = true;
+            PlanetMaterialsButton.UseVisualStyleBackColor = false;
             PlanetMaterialsButton.Click += PlanetMaterialsButton_Click;
             // 
             // BuildDetailsButton
             // 
             BuildDetailsButton.Cursor = Cursors.Hand;
-            BuildDetailsButton.FlatStyle = FlatStyle.Flat;
+            BuildDetailsButton.ForeColor = Color.FromArgb(234, 234, 234);
             BuildDetailsButton.Location = new Point(12, 273);
             BuildDetailsButton.Name = "BuildDetailsButton";
             BuildDetailsButton.Size = new Size(169, 30);
             BuildDetailsButton.TabIndex = 56;
             BuildDetailsButton.TabStop = false;
             BuildDetailsButton.Text = "Build Details";
-            BuildDetailsButton.UseVisualStyleBackColor = true;
+            BuildDetailsButton.UseVisualStyleBackColor = false;
             BuildDetailsButton.Click += BuildDetailsButton_Click;
             // 
             // MaterialsButton
             // 
             MaterialsButton.Cursor = Cursors.Hand;
-            MaterialsButton.FlatStyle = FlatStyle.Flat;
+            MaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
             MaterialsButton.Location = new Point(12, 202);
             MaterialsButton.Name = "MaterialsButton";
             MaterialsButton.Size = new Size(169, 30);
             MaterialsButton.TabIndex = 57;
             MaterialsButton.TabStop = false;
             MaterialsButton.Text = "Materials and Prices";
-            MaterialsButton.UseVisualStyleBackColor = true;
+            MaterialsButton.UseVisualStyleBackColor = false;
             MaterialsButton.Click += MaterialsButton_Click;
             // 
             // SystemButton
             // 
             SystemButton.Cursor = Cursors.Hand;
-            SystemButton.FlatStyle = FlatStyle.Flat;
+            SystemButton.ForeColor = Color.FromArgb(234, 234, 234);
             SystemButton.Location = new Point(12, 166);
             SystemButton.Name = "SystemButton";
             SystemButton.Size = new Size(169, 30);
             SystemButton.TabIndex = 58;
             SystemButton.TabStop = false;
             SystemButton.Text = "Sys/Struct/Order";
-            SystemButton.UseVisualStyleBackColor = true;
+            SystemButton.UseVisualStyleBackColor = false;
             SystemButton.Click += SystemButton_Click;
             // 
             // CurrentInventoryButton
             // 
             CurrentInventoryButton.Cursor = Cursors.Hand;
-            CurrentInventoryButton.FlatStyle = FlatStyle.Flat;
+            CurrentInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             CurrentInventoryButton.Location = new Point(12, 236);
             CurrentInventoryButton.Name = "CurrentInventoryButton";
             CurrentInventoryButton.Size = new Size(169, 30);
             CurrentInventoryButton.TabIndex = 59;
             CurrentInventoryButton.TabStop = false;
             CurrentInventoryButton.Text = "Current Inventory";
-            CurrentInventoryButton.UseVisualStyleBackColor = true;
+            CurrentInventoryButton.UseVisualStyleBackColor = false;
             CurrentInventoryButton.Click += CurrentInventoryButton_Click;
+            // 
+            // SummaryButton
+            // 
+            SummaryButton.BackColor = Color.FromArgb(21, 21, 21);
+            SummaryButton.FlatAppearance.BorderColor = Color.White;
+            SummaryButton.ForeColor = Color.FromArgb(234, 234, 234);
+            SummaryButton.Location = new Point(12, 94);
+            SummaryButton.Name = "SummaryButton";
+            SummaryButton.Size = new Size(169, 30);
+            SummaryButton.TabIndex = 60;
+            SummaryButton.Text = "Summary";
+            SummaryButton.UseVisualStyleBackColor = false;
+            SummaryButton.Click += SummaryButton_Click;
             // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1540, 634);
+            Controls.Add(SummaryButton);
             Controls.Add(CurrentInventoryButton);
             Controls.Add(SystemButton);
             Controls.Add(MaterialsButton);
@@ -2310,7 +2292,6 @@
             Controls.Add(PlanetMaterialsButton);
             Controls.Add(CostBreakdownButton);
             Controls.Add(BPSettingsButton);
-            Controls.Add(SummaryButton);
             Controls.Add(HeaderCostUnitLabel);
             Controls.Add(label53);
             Controls.Add(NumberCopiesUpDown);
@@ -2388,8 +2369,8 @@
 
         private ComboBox BuildPlanCombo;
         private Label label1;
-        private Button NewBuildPlanButton;
-        private Button DeleteBuildPlanButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton NewBuildPlanButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton DeleteBuildPlanButton;
         private TabControl BuildPlanTabControl;
         private TabPage SummaryPage;
         private TabPage DetailsPage;
@@ -2402,7 +2383,7 @@
         private Label label3;
         private Label label7;
         private Label label8;
-        private DataGridView PriceHistoryGridView;
+        private Objects.Custom_Controls.EveHelperGridView PriceHistoryGridView;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn Avg;
         private DataGridViewTextBoxColumn Low;
@@ -2423,7 +2404,7 @@
         private Label ProgressLabel;
         private TabPage MaterialPricePage;
         private Label label11;
-        private Button CopyToClipboardButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton CopyToClipboardButton;
         private NumericUpDown AdditionalCostsNumeric;
         private Label label14;
         private TabPage IndustrySettingsTabPage;
@@ -2462,7 +2443,7 @@
         private NumericUpDown NumberCopiesUpDown;
         private Label label13;
         private TreeView MaterialsTreeView;
-        private Button CollapseAllButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton CollapseAllButton;
         private TreeView OptimizedBuildTreeView;
         private Label label45;
         private Label TotalManufacturingSlotsLabel;
@@ -2473,15 +2454,15 @@
         private Label label49;
         private Label label50;
         private System.ComponentModel.BackgroundWorker EnsurePriceWorker;
-        private Button UpdatePricesJitaButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton UpdatePricesJitaButton;
         private TreeView MaterialsPriceTreeView;
         private Label HeaderCostUnitLabel;
         private TabPage PlanetaryMaterialsTabPage;
         private TreeView PlanetMaterialsTreeView;
         private TreeView BPTreeView;
         private TabPage BPReactionTabPage;
-        private Button SetReactionsButton;
-        private Button SetBlueprintButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetReactionsButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetBlueprintButton;
         private Label IskNeededForPlanLabel;
         private Label ProfitLabel;
         private TabPage CostBreakdownPage;
@@ -2510,29 +2491,29 @@
         private Label label51;
         private NumericUpDown AdvancedIndustrialConsSkillUpDoan;
         private Label label55;
-        private Button ExportPricesButton;
-        private Button ImportPricesButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton ExportPricesButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton ImportPricesButton;
         private SaveFileDialog SaveFileDialog;
         private OpenFileDialog OpenFileDialog;
         private TreeView MostExpensiveTree;
         private System.ComponentModel.BackgroundWorker WasteValueWorker;
-        private Button ExportBuildList;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton ExportBuildList;
         private System.ComponentModel.BackgroundWorker LoadPriceHistoryBGWorker;
-        private Button SummaryButton;
-        private Button BPSettingsButton;
-        private Button CostBreakdownButton;
-        private Button PlanetMaterialsButton;
-        private Button BuildDetailsButton;
-        private Button MaterialsButton;
-        private Button SystemButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton BPSettingsButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton CostBreakdownButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton PlanetMaterialsButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton BuildDetailsButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton MaterialsButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton SystemButton;
         private Label label57;
         private TreeView PlanetMatsTotalTreeview;
         private TabPage CurrentInventoryTabPanel;
-        private Button CurrentInventoryButton;
-        private DataGridView CurrentInventoryGrid;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton CurrentInventoryButton;
         private TextBox CurrentInventoryTextBox;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private Button ClearInventoryButton;
+        private EveHelperWF.Objects.Custom_Controls.EveHelperButton ClearInventoryButton;
+        private Objects.Custom_Controls.EveHelperGridView CurrentInventoryGrid;
+        private DataGridViewTextBoxColumn typeName;
+        private DataGridViewTextBoxColumn Quantity;
+        private Objects.Custom_Controls.EveHelperButton SummaryButton;
     }
 }

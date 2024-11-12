@@ -162,7 +162,7 @@
             AccountingLevelUpDown = new NumericUpDown();
             label16 = new Label();
             label21 = new Label();
-            SaveButton = new Button();
+            SaveButton = new Objects.Custom_Controls.EveHelperButton();
             label37 = new Label();
             label78 = new Label();
             DefaultsTabContainer.SuspendLayout();
@@ -1881,7 +1881,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private Button SaveButton;
+        private Objects.Custom_Controls.EveHelperButton SaveButton;
         private CheckBox BuildComponentCheckbox;
         private ComboBox StructureTERigCombo;
         private ComboBox StructureMERigCombo;

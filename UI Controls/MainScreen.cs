@@ -19,6 +19,7 @@ namespace EveHelperWF.UI_Controls
         LootAppraisal? lootAppraisal;
         ShoppingListControl? shoppingList;
         BuildPlansControl? buildPlans;
+        HunterIntel hunterIntel;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
@@ -328,6 +329,22 @@ namespace EveHelperWF.UI_Controls
             Enums.Enums.BackgroundColor = Color.FromArgb(21, 21, 21);
             this.BackColor = Enums.Enums.BackgroundColor;
             Properties.Settings.Default.BackgroundColor = Enums.Enums.BackgroundColor;
+        }
+
+        private void HunterIntelButton_Click(object sender, EventArgs e)
+        {
+            if (hunterIntel == null)
+            {
+                hunterIntel = new HunterIntel();
+                hunterIntel.StartPosition = FormStartPosition.CenterScreen;
+                hunterIntel.WindowState = FormWindowState.Maximized;
+                hunterIntel.Show();
+                hunterIntel.BringToFront();
+            }
+            else
+            {
+                hunterIntel.BringToFront();
+            }
         }
     }
 }

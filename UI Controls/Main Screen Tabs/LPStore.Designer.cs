@@ -39,7 +39,7 @@
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LPStore));
             NPCCorpCombo = new ComboBox();
-            LPOfferGridView = new DataGridView();
+            LPOfferGridView = new Objects.Custom_Controls.EveHelperGridView();
             AKCost = new DataGridViewTextBoxColumn();
             IskCost = new DataGridViewTextBoxColumn();
             LPCost = new DataGridViewTextBoxColumn();
@@ -53,7 +53,7 @@
             IskLpBuy = new DataGridViewTextBoxColumn();
             IskLpSell = new DataGridViewTextBoxColumn();
             SearchTextBox = new TextBox();
-            SearchButton = new Button();
+            SearchButton = new Objects.Custom_Controls.EveHelperButton();
             InfoLoadingLabel = new Label();
             GetMarketDataPriceWorker = new System.ComponentModel.BackgroundWorker();
             label1 = new Label();
@@ -296,9 +296,9 @@
         #endregion
 
         private ComboBox NPCCorpCombo;
-        private DataGridView LPOfferGridView;
+        private Objects.Custom_Controls.EveHelperGridView LPOfferGridView;
         private TextBox SearchTextBox;
-        private Button SearchButton;
+        private Objects.Custom_Controls.EveHelperButton SearchButton;
         private Label InfoLoadingLabel;
         private DataGridViewTextBoxColumn AKCost;
         private DataGridViewTextBoxColumn IskCost;

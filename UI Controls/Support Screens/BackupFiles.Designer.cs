@@ -33,7 +33,7 @@
             DefaultValuesCheckbox = new CheckBox();
             AbyssRunsCheckbox = new CheckBox();
             TrackedItemsCheckbox = new CheckBox();
-            BackupFilesButton = new Button();
+            BackupFilesButton = new Objects.Custom_Controls.EveHelperButton();
             BackupFilesDialog = new FolderBrowserDialog();
             BuildPlansCheckbox = new CheckBox();
             ShoppingListCheckbox = new CheckBox();
@@ -158,7 +158,7 @@
         private CheckBox DefaultValuesCheckbox;
         private CheckBox AbyssRunsCheckbox;
         private CheckBox TrackedItemsCheckbox;
-        private Button BackupFilesButton;
+        private Objects.Custom_Controls.EveHelperButton BackupFilesButton;
         private FolderBrowserDialog BackupFilesDialog;
         private CheckBox BuildPlansCheckbox;
         private CheckBox ShoppingListCheckbox;

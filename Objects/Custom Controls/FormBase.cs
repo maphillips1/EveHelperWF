@@ -15,26 +15,21 @@ namespace EveHelperWF.Objects
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F); // for design in 96 DPI
 
-            Color mainBackgroundColor = Enums.Enums.BackgroundColor;
 
-            this.BackColor = mainBackgroundColor;
+            this.BackColor = Enums.Enums.BackgroundColor;
             this.ForeColor = Color.White;
 
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
         }
 
-        public void DatabindGridView<T>(DataGridView grid, T dataSource)
+        public void DatabindGridView<T>(Objects.Custom_Controls.EveHelperGridView grid, T dataSource)
         {
-            grid.DataSource = null;
-            DataGridViewAutoSizeColumnsMode dataGridViewAutoSizeColumnsMode = grid.AutoSizeColumnsMode;
-            DataGridViewAutoSizeRowsMode dataGridViewAutoSizeRowMode = grid.AutoSizeRowsMode;
-            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            grid.AutoGenerateColumns = false;
-            grid.DataSource = dataSource;
-            grid.AutoSizeColumnsMode = dataGridViewAutoSizeColumnsMode;
-            grid.AutoSizeRowsMode = dataGridViewAutoSizeRowMode;
-            
+            grid.DatabindGridView(dataSource);            
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Enums.Enums.BackgroundColor, ButtonBorderStyle.Solid);
         }
     }
 }

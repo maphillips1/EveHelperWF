@@ -51,7 +51,7 @@
             CycleTimeLabel = new Label();
             GetPricesBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             PerfectPlanetsListLabel = new Label();
-            SolarSystemSearchButton = new Button();
+            SolarSystemSearchButton = new Objects.Custom_Controls.EveHelperButton();
             PIOutputImageWorker = new System.ComponentModel.BackgroundWorker();
             UniqueResourcesLabel = new Label();
             label7 = new Label();
@@ -374,7 +374,7 @@
         private System.ComponentModel.BackgroundWorker GetPricesBackgroundWorker;
         private Label PerfectPlanetsListLabel;
         private Label label7;
-        private Button SolarSystemSearchButton;
+        private Objects.Custom_Controls.EveHelperButton SolarSystemSearchButton;
         private Panel PIOutputImagePanel;
         private System.ComponentModel.BackgroundWorker PIOutputImageWorker;
         private Label UniqueResourcesLabel;

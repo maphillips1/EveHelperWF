@@ -31,7 +31,7 @@
             Label label8;
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SystemFinder));
-            SolarSystemResultsGrid = new DataGridView();
+            SolarSystemResultsGrid = new Objects.Custom_Controls.EveHelperGridView();
             regionName = new DataGridViewTextBoxColumn();
             constellationName = new DataGridViewTextBoxColumn();
             systemName = new DataGridViewTextBoxColumn();
@@ -39,7 +39,7 @@
             regionID = new DataGridViewTextBoxColumn();
             constellationID = new DataGridViewTextBoxColumn();
             solarSystemID = new DataGridViewTextBoxColumn();
-            SearchButton = new Button();
+            SearchButton = new Objects.Custom_Controls.EveHelperButton();
             TemperateCheckbox = new CheckBox();
             PlasmaCheckbox = new CheckBox();
             StormCheckbox = new CheckBox();
@@ -473,7 +473,7 @@
 
         #endregion
 
-        private Button SearchButton;
+        private Objects.Custom_Controls.EveHelperButton SearchButton;
         private CheckBox TemperateCheckbox;
         private CheckBox PlasmaCheckbox;
         private CheckBox StormCheckbox;
@@ -488,7 +488,7 @@
         private NumericUpDown MaxSecurityUpDown;
         private CheckBox WormholesCheckbox;
         private CheckBox IncludePochvenCheckbox;
-        private DataGridView SolarSystemResultsGrid;
+        private Objects.Custom_Controls.EveHelperGridView SolarSystemResultsGrid;
         private System.ComponentModel.BackgroundWorker PlanetSearchBackgroundWorker;
         private Label LoadingLabel;
         private Label label3;

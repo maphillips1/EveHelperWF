@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileNameDialog));
             label1 = new Label();
-            SaveButton = new Button();
-            CancelButton = new Button();
+            SaveButton = new Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
             FileNameTextBox = new TextBox();
             SuspendLayout();
             // 
@@ -97,8 +97,8 @@
         #endregion
 
         private Label label1;
-        private Button SaveButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton SaveButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
         public TextBox FileNameTextBox;
     }
 }

@@ -183,7 +183,7 @@
             ManuSystemCombo = new ComboBox();
             ManuImplantCombo = new ComboBox();
             ManuInputVolLabel = new Label();
-            ManuInputGrid = new DataGridView();
+            ManuInputGrid = new Objects.Custom_Controls.EveHelperGridView();
             materialName = new DataGridViewTextBoxColumn();
             quantityTotal = new DataGridViewTextBoxColumn();
             Cost = new DataGridViewTextBoxColumn();
@@ -218,8 +218,8 @@
             ManufacturingPanel = new Panel();
             TaxOutputsCheckbox = new CheckBox();
             TaxInputCheckbox = new CheckBox();
-            CreateBuildPlanButton = new Button();
-            CopyToClipboardButton = new Button();
+            CreateBuildPlanButton = new Objects.Custom_Controls.EveHelperButton();
+            CopyToClipboardButton = new Objects.Custom_Controls.EveHelperButton();
             BlueprintImagePanel = new Panel();
             StatusLabel = new Label();
             RunsUpDown = new NumericUpDown();
@@ -227,7 +227,7 @@
             InputTypeCombo = new ComboBox();
             ActivityTabPanel = new TabControl();
             CopyPage = new TabPage();
-            CopyMatGrid = new DataGridView();
+            CopyMatGrid = new Objects.Custom_Controls.EveHelperGridView();
             dataGridViewTextBoxColumn49 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn50 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn51 = new DataGridViewTextBoxColumn();
@@ -261,7 +261,7 @@
             MEImplantCombo = new ComboBox();
             METimeRigCombo = new ComboBox();
             MEStructureCombo = new ComboBox();
-            MEMaterialsGrid = new DataGridView();
+            MEMaterialsGrid = new Objects.Custom_Controls.EveHelperGridView();
             dataGridViewTextBoxColumn25 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn26 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn27 = new DataGridViewTextBoxColumn();
@@ -285,7 +285,7 @@
             TEImplantCombo = new ComboBox();
             TEStructRigCombo = new ComboBox();
             TEStructureCombo = new ComboBox();
-            TEMatGrid = new DataGridView();
+            TEMatGrid = new Objects.Custom_Controls.EveHelperGridView();
             dataGridViewTextBoxColumn37 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn38 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn39 = new DataGridViewTextBoxColumn();
@@ -304,7 +304,7 @@
             DataCore1SkillUpDown = new NumericUpDown();
             label63 = new Label();
             label74 = new Label();
-            InventionInputGrid = new DataGridView();
+            InventionInputGrid = new Objects.Custom_Controls.EveHelperGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -340,7 +340,7 @@
             InventionStructureCombo = new ComboBox();
             InventionSolarSystemCombo = new ComboBox();
             ReactionPage = new TabPage();
-            ReactionInputGrid = new DataGridView();
+            ReactionInputGrid = new Objects.Custom_Controls.EveHelperGridView();
             dataGridViewTextBoxColumn13 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn14 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn15 = new DataGridViewTextBoxColumn();
@@ -371,7 +371,7 @@
             ReactionImageWorker = new System.ComponentModel.BackgroundWorker();
             InventionImageWorker = new System.ComponentModel.BackgroundWorker();
             SearchTextBox = new TextBox();
-            SearchButton = new Button();
+            SearchButton = new Objects.Custom_Controls.EveHelperButton();
             SearchResultsTreeView = new TreeView();
             BlueprintToolTip = new ToolTip(components);
             label29 = new Label();
@@ -4344,7 +4344,7 @@
         private TabPage MEResearchPage;
         private TabPage TEResearchPage;
         private TabPage InventionPage;
-        private DataGridView ManuInputGrid;
+        private Objects.Custom_Controls.EveHelperGridView ManuInputGrid;
         private ComboBox ManuRigTEBonusCombo;
         private Label ManuRig2Label;
         private ComboBox ManuRigMEBonusCombo;
@@ -4495,7 +4495,7 @@
         private System.ComponentModel.BackgroundWorker ReactionImageWorker;
         private System.ComponentModel.BackgroundWorker InventionImageWorker;
         private Panel InventionImagePanel;
-        private DataGridView InventionInputGrid;
+        private Objects.Custom_Controls.EveHelperGridView InventionInputGrid;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -4508,7 +4508,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private DataGridView ReactionInputGrid;
+        private Objects.Custom_Controls.EveHelperGridView ReactionInputGrid;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
@@ -4523,7 +4523,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn24;
         private Label TotalOutputVolumeLabel;
         private Label label25;
-        private DataGridView MEMaterialsGrid;
+        private Objects.Custom_Controls.EveHelperGridView MEMaterialsGrid;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
@@ -4578,7 +4578,7 @@
         private Label label64;
         private Label label66;
         private Label label67;
-        private DataGridView TEMatGrid;
+        private Objects.Custom_Controls.EveHelperGridView TEMatGrid;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
@@ -4591,7 +4591,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn46;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn47;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn48;
-        private DataGridView CopyMatGrid;
+        private Objects.Custom_Controls.EveHelperGridView CopyMatGrid;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn49;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn50;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn51;
@@ -4625,7 +4625,7 @@
         private Label label76;
         private Label label77;
         private TextBox SearchTextBox;
-        private Button SearchButton;
+        private Objects.Custom_Controls.EveHelperButton SearchButton;
         private TreeView SearchResultsTreeView;
         private Label AdditionalBPCostLabel;
         private Label label70;
@@ -4634,8 +4634,8 @@
         private NumericUpDown AdditionalCostsNumeric;
         private Label label14;
         private Label label29;
-        private Button CopyToClipboardButton;
-        private Button CreateBuildPlanButton;
+        private Objects.Custom_Controls.EveHelperButton CopyToClipboardButton;
+        private Objects.Custom_Controls.EveHelperButton CreateBuildPlanButton;
         private CheckBox TaxInputCheckbox;
         private CheckBox TaxOutputsCheckbox;
         private ToolTip BlueprintToolTip;

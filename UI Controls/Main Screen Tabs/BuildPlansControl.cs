@@ -633,34 +633,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void CurrentInventoryGrid_CellValuePushed(object sender, DataGridViewCellValueEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(Convert.ToString(e.Value)))
-            {
-                e.Value = 0;
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
-        {
-            if (e.ColumnIndex == 1)
-            {
-                e.Value = 0;
-            }
-        }
-
-        private void CurrentInventoryGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (this.currentBuildPlan != null && e.ColumnIndex == 1)
-            {
-                if (string.IsNullOrWhiteSpace(Convert.ToString(e.FormattedValue)))
-                {
-                    e.Cancel = true;
-                    MessageBox.Show("Please enter a value before leaving the cell.");
-                }
-            }
-        }
-
         private void CurrentInventoryGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (this.currentBuildPlan != null)
@@ -1816,7 +1788,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadCurrentInventoryPage()
         {
-            DatabindGridView<List<InventoryTypeWithQuantity>>(CurrentInventoryGrid, this.currentBuildPlan.CurrentInventory);
+            CurrentInventoryGrid.DatabindGridView(this.currentBuildPlan.CurrentInventory);
         }
 
         private void LoadUniquePlanetMaterials()

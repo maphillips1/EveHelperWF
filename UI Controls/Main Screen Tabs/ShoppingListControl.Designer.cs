@@ -38,9 +38,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShoppingListControl));
             label1 = new Label();
             ShoppingListCombo = new ComboBox();
-            NewListButton = new Button();
-            DeleteListButton = new Button();
-            ItemSearchResultsGrid = new DataGridView();
+            NewListButton = new Objects.Custom_Controls.EveHelperButton();
+            DeleteListButton = new Objects.Custom_Controls.EveHelperButton();
+            ItemSearchResultsGrid = new Objects.Custom_Controls.EveHelperGridView();
             typeID = new DataGridViewTextBoxColumn();
             typeName = new DataGridViewTextBoxColumn();
             marketGroupName = new DataGridViewTextBoxColumn();
@@ -58,16 +58,16 @@
             groupName = new DataGridViewTextBoxColumn();
             categoryID = new DataGridViewTextBoxColumn();
             categoryName = new DataGridViewTextBoxColumn();
-            SearchButton = new Button();
+            SearchButton = new Objects.Custom_Controls.EveHelperButton();
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
-            AddItemsButton = new Button();
+            AddItemsButton = new Objects.Custom_Controls.EveHelperButton();
             label3 = new Label();
-            CopyToClipboardButton = new Button();
+            CopyToClipboardButton = new Objects.Custom_Controls.EveHelperButton();
             label4 = new Label();
-            ShoppingListGrid = new DataGridView();
+            ShoppingListGrid = new Objects.Custom_Controls.EveHelperGridView();
             Bought = new DataGridViewCheckBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
             BoughtAtPrice = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)ItemSearchResultsGrid).BeginInit();
@@ -98,24 +98,24 @@
             // 
             // NewListButton
             // 
-            NewListButton.ForeColor = Color.Black;
+            NewListButton.ForeColor = Color.FromArgb(234, 234, 234);
             NewListButton.Location = new Point(119, 37);
             NewListButton.Name = "NewListButton";
             NewListButton.Size = new Size(118, 23);
             NewListButton.TabIndex = 2;
             NewListButton.Text = "New Shopping List";
-            NewListButton.UseVisualStyleBackColor = true;
+            NewListButton.UseVisualStyleBackColor = false;
             NewListButton.Click += NewListButton_Click;
             // 
             // DeleteListButton
             // 
-            DeleteListButton.ForeColor = Color.Black;
+            DeleteListButton.ForeColor = Color.FromArgb(234, 234, 234);
             DeleteListButton.Location = new Point(243, 37);
             DeleteListButton.Name = "DeleteListButton";
             DeleteListButton.Size = new Size(118, 23);
             DeleteListButton.TabIndex = 3;
             DeleteListButton.Text = "Delete List";
-            DeleteListButton.UseVisualStyleBackColor = true;
+            DeleteListButton.UseVisualStyleBackColor = false;
             DeleteListButton.Click += DeleteListButton_Click;
             // 
             // ItemSearchResultsGrid
@@ -135,6 +135,7 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            ItemSearchResultsGrid.EditableColumns = null;
             ItemSearchResultsGrid.GridColor = Color.Black;
             ItemSearchResultsGrid.Location = new Point(462, 125);
             ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
@@ -331,13 +332,13 @@
             // 
             // AddItemsButton
             // 
-            AddItemsButton.ForeColor = Color.Black;
+            AddItemsButton.ForeColor = Color.FromArgb(234, 234, 234);
             AddItemsButton.Location = new Point(462, 97);
             AddItemsButton.Name = "AddItemsButton";
             AddItemsButton.Size = new Size(118, 23);
             AddItemsButton.TabIndex = 9;
             AddItemsButton.Text = "Add Items To List";
-            AddItemsButton.UseVisualStyleBackColor = true;
+            AddItemsButton.UseVisualStyleBackColor = false;
             AddItemsButton.Click += AddItemsButton_Click;
             // 
             // label3
@@ -351,13 +352,13 @@
             // 
             // CopyToClipboardButton
             // 
-            CopyToClipboardButton.ForeColor = Color.Black;
+            CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
             CopyToClipboardButton.Location = new Point(223, 96);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
             CopyToClipboardButton.Size = new Size(138, 23);
             CopyToClipboardButton.TabIndex = 13;
             CopyToClipboardButton.Text = "Copy to Clipboard";
-            CopyToClipboardButton.UseVisualStyleBackColor = true;
+            CopyToClipboardButton.UseVisualStyleBackColor = false;
             CopyToClipboardButton.Click += CopyToClipboard_Click;
             // 
             // label4
@@ -385,7 +386,7 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             ShoppingListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             ShoppingListGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ShoppingListGrid.Columns.AddRange(new DataGridViewColumn[] { Bought, dataGridViewTextBoxColumn3, BoughtAtPrice, dataGridViewTextBoxColumn1 });
+            ShoppingListGrid.Columns.AddRange(new DataGridViewColumn[] { Bought, Quantity, BoughtAtPrice, dataGridViewTextBoxColumn1 });
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.Black;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -394,6 +395,7 @@
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ShoppingListGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            ShoppingListGrid.EditableColumns = "Quantity,BoughtAtPrice,Bought";
             ShoppingListGrid.GridColor = Color.Black;
             ShoppingListGrid.Location = new Point(12, 125);
             ShoppingListGrid.Margin = new Padding(3, 2, 3, 2);
@@ -426,23 +428,23 @@
             Bought.SortMode = DataGridViewColumnSortMode.Automatic;
             Bought.Width = 71;
             // 
-            // dataGridViewTextBoxColumn3
+            // Quantity
             // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "QuantityString";
+            Quantity.DataPropertyName = "Quantity";
             dataGridViewCellStyle4.BackColor = Color.White;
             dataGridViewCellStyle4.ForeColor = Color.Black;
             dataGridViewCellStyle4.Format = "N0";
             dataGridViewCellStyle4.NullValue = "0";
             dataGridViewCellStyle4.Padding = new Padding(2);
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGridViewTextBoxColumn3.HeaderText = "Quantity";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 78;
+            Quantity.DefaultCellStyle = dataGridViewCellStyle4;
+            Quantity.HeaderText = "Quantity";
+            Quantity.MinimumWidth = 6;
+            Quantity.Name = "Quantity";
+            Quantity.Width = 78;
             // 
             // BoughtAtPrice
             // 
-            BoughtAtPrice.DataPropertyName = "BoughtAtPriceString";
+            BoughtAtPrice.DataPropertyName = "BoughtAtPrice";
             BoughtAtPrice.HeaderText = "Price";
             BoughtAtPrice.Name = "BoughtAtPrice";
             BoughtAtPrice.Width = 58;
@@ -493,9 +495,9 @@
 
         private Label label1;
         private ComboBox ShoppingListCombo;
-        private Button NewListButton;
-        private Button DeleteListButton;
-        private DataGridView ItemSearchResultsGrid;
+        private Objects.Custom_Controls.EveHelperButton NewListButton;
+        private Objects.Custom_Controls.EveHelperButton DeleteListButton;
+        private Objects.Custom_Controls.EveHelperGridView ItemSearchResultsGrid;
         private DataGridViewTextBoxColumn typeID;
         private DataGridViewTextBoxColumn typeName;
         private DataGridViewTextBoxColumn marketGroupName;
@@ -513,16 +515,16 @@
         private DataGridViewTextBoxColumn groupName;
         private DataGridViewTextBoxColumn categoryID;
         private DataGridViewTextBoxColumn categoryName;
-        private Button SearchButton;
+        private Objects.Custom_Controls.EveHelperButton SearchButton;
         private TextBox ItemSearchTextBox;
         private Label label2;
-        private Button AddItemsButton;
+        private Objects.Custom_Controls.EveHelperButton AddItemsButton;
         private Label label3;
-        private Button CopyToClipboardButton;
+        private Objects.Custom_Controls.EveHelperButton CopyToClipboardButton;
         private Label label4;
-        private DataGridView ShoppingListGrid;
+        private Objects.Custom_Controls.EveHelperGridView ShoppingListGrid;
         private DataGridViewCheckBoxColumn Bought;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn BoughtAtPrice;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }

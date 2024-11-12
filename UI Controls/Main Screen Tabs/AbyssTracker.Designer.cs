@@ -40,19 +40,19 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbyssTracker));
             splitContainer1 = new SplitContainer();
-            AddRunButton = new Button();
+            AddRunButton = new Objects.Custom_Controls.EveHelperButton();
             LootTextBox = new TextBox();
             SuccessCheckbox = new CheckBox();
             ShipTypeCombo = new ComboBox();
             FilamentTypeCombo = new ComboBox();
             label1 = new Label();
-            StatisticsButton = new Button();
+            StatisticsButton = new Objects.Custom_Controls.EveHelperButton();
             ProfitLabel = new Label();
-            DeleteRunButton = new Button();
+            DeleteRunButton = new Objects.Custom_Controls.EveHelperButton();
             AverageLootLabel = new Label();
             TotalFilamentCostLabel = new Label();
             TotalLootValueLabel = new Label();
-            AbyssTrackerGridView = new DataGridView();
+            AbyssTrackerGridView = new Objects.Custom_Controls.EveHelperGridView();
             abyssRunID = new DataGridViewTextBoxColumn();
             FilamentName = new DataGridViewTextBoxColumn();
             FilamentCost = new DataGridViewTextBoxColumn();
@@ -464,15 +464,15 @@
         private Label label1;
         private TextBox LootTextBox;
         private Label label5;
-        private Button AddRunButton;
-        private DataGridView AbyssTrackerGridView;
+        private Objects.Custom_Controls.EveHelperButton AddRunButton;
+        private Objects.Custom_Controls.EveHelperGridView AbyssTrackerGridView;
         private Label AverageLootLabel;
         private Label TotalFilamentCostLabel;
         private Label TotalLootValueLabel;
         private Label label8;
         private Label label7;
         private Label label6;
-        private Button DeleteRunButton;
+        private Objects.Custom_Controls.EveHelperButton DeleteRunButton;
         private DataGridViewTextBoxColumn abyssRunID;
         private DataGridViewTextBoxColumn FilamentName;
         private DataGridViewTextBoxColumn FilamentCost;
@@ -483,6 +483,6 @@
         private DataGridViewTextBoxColumn FilamentType;
         private Label ProfitLabel;
         private Label label10;
-        private Button StatisticsButton;
+        private Objects.Custom_Controls.EveHelperButton StatisticsButton;
     }
 }

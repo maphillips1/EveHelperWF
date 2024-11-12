@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuantityDialog));
-            SaveButton = new Button();
-            CancelButton = new Button();
+            SaveButton = new Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             QuantityUpDown = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)QuantityUpDown).BeginInit();
@@ -100,8 +100,8 @@
         }
 
         #endregion
-        private Button SaveButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton SaveButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
         private Label label1;
         public NumericUpDown QuantityUpDown;
     }
