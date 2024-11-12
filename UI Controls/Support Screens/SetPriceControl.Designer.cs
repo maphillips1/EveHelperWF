@@ -31,8 +31,8 @@
             Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetPriceControl));
             PricePerItem = new NumericUpDown();
-            SaveButton = new Button();
-            CancelButton = new Button();
+            SaveButton = new Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)PricePerItem).BeginInit();
             SuspendLayout();
@@ -104,7 +104,7 @@
         #endregion
 
         public NumericUpDown PricePerItem;
-        private Button SaveButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton SaveButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
     }
 }

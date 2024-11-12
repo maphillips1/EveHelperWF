@@ -40,7 +40,7 @@
             InputTextMultiLine = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            ResultsGridView = new DataGridView();
+            ResultsGridView = new Objects.Custom_Controls.EveHelperGridView();
             typeName = new DataGridViewTextBoxColumn();
             typeID = new DataGridViewTextBoxColumn();
             quantity = new DataGridViewTextBoxColumn();
@@ -48,7 +48,7 @@
             buyPriceTotal = new DataGridViewTextBoxColumn();
             sellPricePer = new DataGridViewTextBoxColumn();
             buyPricePer = new DataGridViewTextBoxColumn();
-            AppraiseButton = new Button();
+            AppraiseButton = new Objects.Custom_Controls.EveHelperButton();
             GetPricesWorker = new System.ComponentModel.BackgroundWorker();
             label3 = new Label();
             TotalBuyValueLabel = new Label();
@@ -277,8 +277,8 @@
         private TextBox InputTextMultiLine;
         private Label label1;
         private Label label2;
-        private DataGridView ResultsGridView;
-        private Button AppraiseButton;
+        private Objects.Custom_Controls.EveHelperGridView ResultsGridView;
+        private Objects.Custom_Controls.EveHelperButton AppraiseButton;
         private System.ComponentModel.BackgroundWorker GetPricesWorker;
         private Label label3;
         private Label TotalBuyValueLabel;

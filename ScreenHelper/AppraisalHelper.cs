@@ -69,6 +69,10 @@ namespace EveHelperWF.ScreenHelper
                         {
                             appraisedItem.quantity = Convert.ToInt32(itemCount);
                         }
+                        else if (splitString.Length > 2 && decimal.TryParse(splitString[2], out itemCount))
+                        {
+                            appraisedItem.quantity = Convert.ToInt32(itemCount);
+                        }
                         else
                         {
                             appraisedItem.quantity = 1;

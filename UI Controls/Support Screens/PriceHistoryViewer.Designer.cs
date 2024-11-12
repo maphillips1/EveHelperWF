@@ -39,7 +39,7 @@
             PriceHistoryForLabel = new Label();
             SelectedItemImagePanel = new Panel();
             GetImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            PriceHistoryGridView = new DataGridView();
+            PriceHistoryGridView = new Objects.Custom_Controls.EveHelperGridView();
             date = new DataGridViewTextBoxColumn();
             Avg = new DataGridViewTextBoxColumn();
             Low = new DataGridViewTextBoxColumn();
@@ -190,7 +190,7 @@
         private Label PriceHistoryForLabel;
         private Panel SelectedItemImagePanel;
         private System.ComponentModel.BackgroundWorker GetImageBackgroundWorker;
-        private DataGridView PriceHistoryGridView;
+        private Objects.Custom_Controls.EveHelperGridView PriceHistoryGridView;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn Avg;
         private DataGridViewTextBoxColumn Low;

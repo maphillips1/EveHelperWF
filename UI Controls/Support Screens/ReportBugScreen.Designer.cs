@@ -35,7 +35,7 @@
             TypeIssueTextBox = new TextBox();
             DetailsTextBox = new TextBox();
             label3 = new Label();
-            button1 = new Button();
+            button1 = new Objects.Custom_Controls.EveHelperButton();
             SuspendLayout();
             // 
             // label1
@@ -135,6 +135,6 @@
         private TextBox TypeIssueTextBox;
         private TextBox DetailsTextBox;
         private Label label3;
-        private Button button1;
+        private Objects.Custom_Controls.EveHelperButton button1;
     }
 }

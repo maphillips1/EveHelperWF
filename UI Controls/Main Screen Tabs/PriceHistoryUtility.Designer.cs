@@ -34,8 +34,8 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PriceHistoryUtility));
             splitContainer1 = new SplitContainer();
-            TrackItemsButton = new Button();
-            ItemSearchResultsGrid = new DataGridView();
+            TrackItemsButton = new Objects.Custom_Controls.EveHelperButton();
+            ItemSearchResultsGrid = new Objects.Custom_Controls.EveHelperGridView();
             typeID = new DataGridViewTextBoxColumn();
             typeName = new DataGridViewTextBoxColumn();
             marketGroupName = new DataGridViewTextBoxColumn();
@@ -53,15 +53,15 @@
             groupName = new DataGridViewTextBoxColumn();
             categoryID = new DataGridViewTextBoxColumn();
             categoryName = new DataGridViewTextBoxColumn();
-            SearchButton = new Button();
+            SearchButton = new Objects.Custom_Controls.EveHelperButton();
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            CancelButton = new Button();
-            ViewPriceHistoryButton = new Button();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
+            ViewPriceHistoryButton = new Objects.Custom_Controls.EveHelperButton();
             ProgressLabel = new Label();
             UpdateHistoryProgressBar = new ProgressBar();
-            TrackedTypesGrid = new DataGridView();
+            TrackedTypesGrid = new Objects.Custom_Controls.EveHelperGridView();
             trackedTypeId = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
@@ -81,9 +81,9 @@
             dataGridViewTextBoxColumn17 = new DataGridViewTextBoxColumn();
             RegionCombo = new ComboBox();
             label4 = new Label();
-            DeleteTrackedItemButton = new Button();
+            DeleteTrackedItemButton = new Objects.Custom_Controls.EveHelperButton();
             label3 = new Label();
-            UpdatePriceHistoryButton = new Button();
+            UpdatePriceHistoryButton = new Objects.Custom_Controls.EveHelperButton();
             UpdatePriceHistoryWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -671,12 +671,12 @@
         private TextBox ItemSearchTextBox;
         private Label label2;
         private Label label1;
-        private Button SearchButton;
-        private DataGridView ItemSearchResultsGrid;
-        private Button TrackItemsButton;
-        private Button UpdatePriceHistoryButton;
+        private Objects.Custom_Controls.EveHelperButton SearchButton;
+        private Objects.Custom_Controls.EveHelperGridView ItemSearchResultsGrid;
+        private Objects.Custom_Controls.EveHelperButton TrackItemsButton;
+        private Objects.Custom_Controls.EveHelperButton UpdatePriceHistoryButton;
         private Label label3;
-        private Button DeleteTrackedItemButton;
+        private Objects.Custom_Controls.EveHelperButton DeleteTrackedItemButton;
         private Label label4;
         private ComboBox RegionCombo;
         private DataGridViewTextBoxColumn typeID;
@@ -696,7 +696,7 @@
         private DataGridViewTextBoxColumn groupName;
         private DataGridViewTextBoxColumn categoryID;
         private DataGridViewTextBoxColumn categoryName;
-        private DataGridView TrackedTypesGrid;
+        private Objects.Custom_Controls.EveHelperGridView TrackedTypesGrid;
         private System.ComponentModel.BackgroundWorker UpdatePriceHistoryWorker;
         private Label ProgressLabel;
         private ProgressBar UpdateHistoryProgressBar;
@@ -717,7 +717,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private Button ViewPriceHistoryButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton ViewPriceHistoryButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
     }
 }

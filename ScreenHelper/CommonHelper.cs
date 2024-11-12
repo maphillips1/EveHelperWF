@@ -722,5 +722,10 @@ namespace EveHelperWF.ScreenHelper
                 mat.quantityPerRun = quantityTotal / runsNeeded;
             }
         }
+
+        public static Color GetInvertedColor(Color c)
+        {
+            return Color.FromArgb(c.ToArgb() ^ 0xffffff);
+        }
     }
 }

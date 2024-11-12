@@ -5,6 +5,9 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 {
     public partial class AddBuildPlanScreen : Objects.FormBase
     {
+        List<ComboListItem> comboItems = new List<ComboListItem>();
+        List<ComboListItem> filteredItems = new List<ComboListItem>();
+
         public AddBuildPlanScreen()
         {
             InitializeComponent();
@@ -13,8 +16,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void LoadCombo()
         {
-            List<ComboListItem> comboItems = new List<ComboListItem>();
-            
             ComboListItem blankItem = new ComboListItem();
             comboItems.Add(blankItem);
 

@@ -35,8 +35,8 @@
             MEUpDown = new NumericUpDown();
             TEUpDown = new NumericUpDown();
             MaxRunsUpDown = new NumericUpDown();
-            SaveButton = new Button();
-            CancelButton = new Button();
+            SaveButton = new Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             MakeItemCheckbox = new CheckBox();
             ExcludeFPCheckbox = new CheckBox();
@@ -206,8 +206,8 @@
         public NumericUpDown MEUpDown;
         public NumericUpDown TEUpDown;
         public NumericUpDown MaxRunsUpDown;
-        private Button SaveButton;
-        private Button CancelButton;
+        private Objects.Custom_Controls.EveHelperButton SaveButton;
+        private Objects.Custom_Controls.EveHelperButton CancelButton;
         private Label label1;
         public CheckBox MakeItemCheckbox;
         public CheckBox ExcludeFPCheckbox;

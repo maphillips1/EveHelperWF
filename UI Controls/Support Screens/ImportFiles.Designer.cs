@@ -31,9 +31,9 @@
             Label label1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportFiles));
             FileTypeCombo = new ComboBox();
-            SelectFilesButton = new Button();
+            SelectFilesButton = new Objects.Custom_Controls.EveHelperButton();
             FileNamesTextBox = new TextBox();
-            importButton = new Button();
+            importButton = new Objects.Custom_Controls.EveHelperButton();
             ImportFileDialog = new OpenFileDialog();
             label1 = new Label();
             SuspendLayout();
@@ -118,9 +118,9 @@
         #endregion
 
         private ComboBox FileTypeCombo;
-        private Button SelectFilesButton;
+        private Objects.Custom_Controls.EveHelperButton SelectFilesButton;
         private TextBox FileNamesTextBox;
-        private Button importButton;
+        private Objects.Custom_Controls.EveHelperButton importButton;
         private OpenFileDialog ImportFileDialog;
     }
 }
