@@ -16,5 +16,6 @@ namespace EveHelperWF.Objects.ESI_Objects.Market_Objects
         public decimal pricePer { get; set; }
         public decimal priceTotal { get; set; }
         public long quantity { get; set; }
+        public bool quntityNeededExceedsMarket { get; set; }
     }
 }

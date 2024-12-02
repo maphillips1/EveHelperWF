@@ -407,7 +407,6 @@ namespace EveHelperWF.ESI_Calls
 
                 if (filteredOrders.Count > 0)
                 {
-                    marketType.pricePer = filteredOrders[0].price;
                     while (orderCount < filteredOrders.Count && remainingQuantity > 0)
                     {
                         if (filteredOrders[orderCount].volume_remain > remainingQuantity)
@@ -417,6 +416,7 @@ namespace EveHelperWF.ESI_Calls
                         }
                         else
                         {
+                            marketType.pricePer = filteredOrders[orderCount].price;
                             marketType.priceTotal += filteredOrders[orderCount].price * filteredOrders[orderCount].volume_remain;
                             remainingQuantity -= filteredOrders[orderCount].volume_remain;
                         }
@@ -424,10 +424,16 @@ namespace EveHelperWF.ESI_Calls
                     }
                     if (remainingQuantity > 0)
                     {
+                        marketType.quntityNeededExceedsMarket = true;
+                        marketType.pricePer = filteredOrders[filteredOrders.Count - 1].price;
                         marketType.priceTotal += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
                         remainingQuantity = 0;
                     }
                 }
+            }
+            if (marketType.priceTotal > 0 && marketType.quantity > 0)
+            {
+                marketType.pricePer = marketType.priceTotal / marketType.quantity;
             }
 
             return marketType;
@@ -447,7 +453,6 @@ namespace EveHelperWF.ESI_Calls
 
                 if (filteredOrders.Count > 0)
                 {
-                    marketType.pricePer = filteredOrders[0].price;
                     while (orderCount < filteredOrders.Count && remainingQuantity > 0)
                     {
                         if (filteredOrders[orderCount].volume_remain > remainingQuantity)
@@ -457,6 +462,7 @@ namespace EveHelperWF.ESI_Calls
                         }
                         else
                         {
+                            marketType.pricePer = filteredOrders[orderCount].price;
                             marketType.priceTotal += filteredOrders[orderCount].price * filteredOrders[orderCount].volume_remain;
                             remainingQuantity -= filteredOrders[orderCount].volume_remain;
                         }
@@ -464,10 +470,16 @@ namespace EveHelperWF.ESI_Calls
                     }
                     if (remainingQuantity > 0)
                     {
+                        marketType.quntityNeededExceedsMarket = true;
+                        marketType.pricePer = filteredOrders[filteredOrders.Count - 1].price;
                         marketType.priceTotal += (filteredOrders[filteredOrders.Count - 1].price * remainingQuantity);
                         remainingQuantity = 0;
                     }
                 }
+            }
+            if (marketType.priceTotal > 0 && marketType.quantity > 0)
+            {
+                marketType.pricePer = marketType.priceTotal / marketType.quantity;
             }
 
             return marketType;

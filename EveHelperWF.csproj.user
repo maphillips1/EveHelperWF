@@ -13,8 +13,8 @@
     <Compile Update="Objects\Custom Controls\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Objects\Custom Controls\PriceHistoryGraph.cs">
-      <SubType>Component</SubType>
+    <Compile Update="Objects\Custom Controls\PriceHistory.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\AbyssTracker.cs">
       <SubType>Form</SubType>

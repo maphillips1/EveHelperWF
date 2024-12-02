@@ -250,7 +250,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             if (priceHistory != null)
             {
-                DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, priceHistory.OrderByDescending(x => x.date).ToList());
+                PriceHistoryControl.DatabindPriceHistory(priceHistory);
             }
         }
 

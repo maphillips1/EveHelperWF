@@ -39,18 +39,9 @@ namespace EveHelperWF.Objects.Custom_Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            DataGridViewCellStyle cellStyle = new DataGridViewCellStyle();
             this.BackgroundColor = Enums.Enums.BackgroundColor;
             this.GridColor = Enums.Enums.BackgroundColor;
             this.ForeColor = CommonHelper.GetInvertedColor(this.BackColor);
-
-            cellStyle.BackColor = Enums.Enums.BackgroundColor;
-            cellStyle.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
-
-            foreach (DataGridViewColumn column in this.Columns)
-            {
-                column.DefaultCellStyle = cellStyle;
-            }
 
             base.OnPaint(e);
         }
@@ -64,6 +55,53 @@ namespace EveHelperWF.Objects.Custom_Controls
             this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             this.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             SetColumnEditMode();
+            SetColumnFormat();
+        }
+
+        private void SetColumnFormat()
+        {
+            foreach (DataGridViewColumn column in this.Columns)
+            {
+                column.DefaultCellStyle.BackColor = Enums.Enums.BackgroundColor;
+                column.DefaultCellStyle.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+                column.DefaultCellStyle.Padding = new Padding(3, 3, 3, 3);
+                if (datasourceType != null)
+                {
+                    Type itemType = datasourceType;
+                    foreach (Type interfaceType in datasourceType.GetInterfaces())
+                    {
+                        if (interfaceType.IsGenericType &&
+                            interfaceType.GetGenericTypeDefinition()
+                            == typeof(IList<>))
+                        {
+                            itemType = datasourceType.GetGenericArguments()[0];
+                        }
+                    }
+
+                    Type? columnPropertyType = itemType.GetProperty(column.DataPropertyName)?.PropertyType;
+                    if (columnPropertyType != null)
+                    {
+                        switch (Type.GetTypeCode(columnPropertyType))
+                        {
+                            case TypeCode.Double:
+                            case TypeCode.Decimal:
+                                column.DefaultCellStyle.Format = "N2";
+                                break;
+                            case TypeCode.Int16:
+                            case TypeCode.Int32:
+                            case TypeCode.Int64:
+                                column.DefaultCellStyle.Format = "N0";
+                                break;
+                            case TypeCode.DateTime:
+                                column.DefaultCellStyle.Format = "d";
+                                break;
+                            default:
+                                column.DefaultCellStyle.Format = "";
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         private void SetColumnEditMode()
@@ -104,7 +142,7 @@ namespace EveHelperWF.Objects.Custom_Controls
                     }
                 }
 
-                Type? columnPropertyType = itemType.GetProperty(column.DataPropertyName)?.GetType();
+                Type? columnPropertyType = itemType.GetProperty(column.DataPropertyName)?.PropertyType;
                 if (columnPropertyType != null)
                 {
                     defaultVlaue  = columnPropertyType.IsValueType ? Activator.CreateInstance(columnPropertyType) : null;
@@ -138,14 +176,14 @@ namespace EveHelperWF.Objects.Custom_Controls
                 PropertyInfo? propertyInfo = itemType.GetProperty(column.DataPropertyName);
                 if (propertyInfo != null)
                 {
-                    Type columnPropertyType = propertyInfo.GetType();
+                    Type columnPropertyType = propertyInfo.PropertyType;
                     if (columnPropertyType != null)
                     {
                         defaultVlaue = columnPropertyType.IsValueType ? Activator.CreateInstance(columnPropertyType) : null;
 
                         try
                         {
-                            e.Value = Convert.ChangeType(e.Value, columnPropertyType.GetType());
+                            e.Value = Convert.ChangeType(e.Value, columnPropertyType);
                         }
                         catch (InvalidCastException ex)
                         {

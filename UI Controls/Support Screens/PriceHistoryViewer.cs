@@ -10,7 +10,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
     {
         private int SelectedTypeId = 0;
         private int RegionId = 0;
-        private BindingList<Objects.ESIPriceHistory> PriceHistory = new BindingList<ESIPriceHistory>();
+        private List<Objects.ESIPriceHistory> PriceHistory = new List<ESIPriceHistory>();
 
 
         #region "Init"
@@ -26,14 +26,9 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void LoadPriceHistory()
         {
-            List<ESIPriceHistory> history = MarketBrowserHelper.GetPriceHistoryForRegionAndType(RegionId, SelectedTypeId);
-            if (history == null) { history = new List<ESIPriceHistory>(); }
-            foreach (ESIPriceHistory priceHistory in history)
-            {
-                PriceHistory.Add(priceHistory);
-            }
+            PriceHistory = MarketBrowserHelper.GetPriceHistoryForRegionAndType(RegionId, SelectedTypeId);
 
-            DatabindGridView<List<ESIPriceHistory>>(PriceHistoryGridView, PriceHistory.OrderByDescending(x => x.date).ToList());
+            PriceHistoryControl.DatabindPriceHistory(PriceHistory);
         }
 
         private void LoadImage()
