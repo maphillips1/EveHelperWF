@@ -106,9 +106,9 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 }
             }
 
-            if (AbyssRuns.Count > 0)
+            if (FilteredList?.Count > 0)
             {
-                averageLootValue = totalLootValue / AbyssRuns.Count;
+                averageLootValue = totalLootValue / FilteredList.Count;
             }
             NumRunsLabel.Text = filteredList.Count().ToString("N0");
             SuccessRateLabel.Text = successPercent.ToString("P2");

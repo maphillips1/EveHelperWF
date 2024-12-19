@@ -2386,8 +2386,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             //Need to go in order of build groups. 
             List<int> orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
-            foreach (int key in orderedKeys)
+            int numBuildGroups = orderedKeys.Count;
+            int counter = 0;
+            int key = 0;
+            while (counter < numBuildGroups)
             {
+                key = orderedKeys[counter];
                 foreach (OptimizedBuild optimizedBuild in this.currentBuildPlan.OptimumBuildGroups[key])
                 {
                     if (optimizedBuild.BuiltOrReactedTypeId != FinalProductType.typeId)
@@ -2398,7 +2402,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                         eSIMarketType = ESIMarketData.GetPriceForITemAndQuantityAsync(eSIMarketType, this.currentBuildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
 
-                        
+
                         if (eSIMarketType.pricePer > 0 && !eSIMarketType.quntityNeededExceedsMarket)
                         {
                             blueprintInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.ProductTypeId == optimizedBuild.BuiltOrReactedTypeId);
@@ -2424,10 +2428,22 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
 
                 RunCalcs();
-                SaveBuildPlan();
+
+                //If the number of build groups lowered, you need to not increment. 
+                //if it didn't, increment.
+                if (this.currentBuildPlan.OptimumBuildGroups.Keys.Count < numBuildGroups)
+                {
+                    orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
+                    numBuildGroups = this.currentBuildPlan.OptimumBuildGroups.Keys.Count;
+                }
+                else
+                {
+                    counter += 1;
+                }
             }
 
 
+            SaveBuildPlan();
             LoadBlueprintStoreTreeView();
 
             this.Cursor = Cursors.Default;
