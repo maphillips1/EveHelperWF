@@ -79,30 +79,31 @@
             // 
             // AddButton
             // 
-            AddButton.ForeColor = Color.Black;
+            AddButton.ForeColor = Color.FromArgb(234, 234, 234);
             AddButton.Location = new Point(69, 126);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(121, 45);
             AddButton.TabIndex = 4;
             AddButton.Text = "Add";
-            AddButton.UseVisualStyleBackColor = true;
+            AddButton.UseVisualStyleBackColor = false;
             AddButton.Click += AddButton_Click;
             // 
             // CancelButton
             // 
-            CancelButton.ForeColor = Color.Black;
+            CancelButton.ForeColor = Color.FromArgb(234, 234, 234);
             CancelButton.Location = new Point(284, 126);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(121, 45);
             CancelButton.TabIndex = 5;
             CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.UseVisualStyleBackColor = false;
             CancelButton.Click += CancelButton_Click;
             // 
             // AddBuildPlanScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(483, 257);
             Controls.Add(CancelButton);
             Controls.Add(AddButton);

@@ -78,6 +78,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
             Controls.Add(StatsPanel);
             Controls.Add(SearchButton);
@@ -87,7 +88,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "HunterIntel";
-            Text = "HunterIntel";
+            Text = "Hunter Intel";
             ResumeLayout(false);
             PerformLayout();
         }

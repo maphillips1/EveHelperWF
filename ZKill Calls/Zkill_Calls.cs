@@ -79,18 +79,20 @@ namespace EveHelperWF.ZKill_Calls
             return killmails;
         }
 
-        public static object LoadStats(string entityType, long entityID)
+        public static ZKillStats LoadStats(string entityType, long entityID)
         {
-            object obj = null;
+            ZKillStats stats = new ZKillStats();
             string url = baseUrl + "stats/" + entityType + "/" + entityID.ToString() + "/";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = client.GetAsync(url).Result;
 
+
             if (response.IsSuccessStatusCode)
             {
                 string content = response.Content.ReadAsStringAsync().Result;
+                stats = Newtonsoft.Json.JsonConvert.DeserializeObject<ZKillStats>(content);
             }
-            return obj;
+            return stats;
         }
     }
 }

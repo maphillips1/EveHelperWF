@@ -71,7 +71,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F);
             label1.Location = new Point(93, 58);
             label1.Name = "label1";
             label1.Size = new Size(153, 21);
@@ -81,7 +81,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 12F);
             label2.Location = new Point(481, 7);
             label2.Name = "label2";
             label2.Size = new Size(77, 21);
@@ -93,10 +93,10 @@
             ResultsGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ResultsGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ResultsGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ResultsGridView.BackgroundColor = Color.Black;
+            ResultsGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -106,19 +106,20 @@
             ResultsGridView.Columns.AddRange(new DataGridViewColumn[] { typeName, typeID, quantity, sellPriceTotal, buyPriceTotal, sellPricePer, buyPricePer });
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.Black;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ResultsGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            ResultsGridView.GridColor = Color.Black;
+            ResultsGridView.EditableColumns = null;
+            ResultsGridView.GridColor = Color.FromArgb(21, 21, 21);
             ResultsGridView.Location = new Point(422, 86);
             ResultsGridView.Margin = new Padding(3, 2, 3, 2);
             ResultsGridView.Name = "ResultsGridView";
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = Color.Black;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle7.ForeColor = Color.White;
             dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
@@ -203,14 +204,14 @@
             // 
             // AppraiseButton
             // 
-            AppraiseButton.ForeColor = Color.Black;
+            AppraiseButton.ForeColor = Color.FromArgb(234, 234, 234);
             AppraiseButton.Location = new Point(305, 59);
             AppraiseButton.Margin = new Padding(3, 2, 3, 2);
             AppraiseButton.Name = "AppraiseButton";
             AppraiseButton.Size = new Size(82, 22);
             AppraiseButton.TabIndex = 5;
             AppraiseButton.Text = "Appraise";
-            AppraiseButton.UseVisualStyleBackColor = true;
+            AppraiseButton.UseVisualStyleBackColor = false;
             AppraiseButton.Click += AppraiseButton_Click;
             // 
             // GetPricesWorker
@@ -221,7 +222,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 12F);
             label3.Location = new Point(481, 44);
             label3.Name = "label3";
             label3.Size = new Size(78, 21);
@@ -231,7 +232,7 @@
             // TotalBuyValueLabel
             // 
             TotalBuyValueLabel.AutoSize = true;
-            TotalBuyValueLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            TotalBuyValueLabel.Font = new Font("Segoe UI", 12F);
             TotalBuyValueLabel.Location = new Point(598, 44);
             TotalBuyValueLabel.Name = "TotalBuyValueLabel";
             TotalBuyValueLabel.Size = new Size(114, 21);
@@ -241,7 +242,7 @@
             // TotalSellValueLabel
             // 
             TotalSellValueLabel.AutoSize = true;
-            TotalSellValueLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            TotalSellValueLabel.Font = new Font("Segoe UI", 12F);
             TotalSellValueLabel.Location = new Point(598, 7);
             TotalSellValueLabel.Name = "TotalSellValueLabel";
             TotalSellValueLabel.Size = new Size(113, 21);
@@ -252,6 +253,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1147, 461);
             Controls.Add(TotalBuyValueLabel);
             Controls.Add(TotalSellValueLabel);

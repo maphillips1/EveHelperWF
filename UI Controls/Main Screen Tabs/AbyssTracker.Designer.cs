@@ -106,7 +106,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 10.2F);
             label2.Location = new Point(10, 56);
             label2.Name = "label2";
             label2.Size = new Size(93, 19);
@@ -116,7 +116,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             label10.Location = new Point(119, 101);
             label10.Name = "label10";
             label10.Size = new Size(49, 20);
@@ -126,7 +126,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             label8.Location = new Point(16, 70);
             label8.Name = "label8";
             label8.Size = new Size(146, 20);
@@ -136,7 +136,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             label7.Location = new Point(19, 42);
             label7.Name = "label7";
             label7.Size = new Size(144, 20);
@@ -146,7 +146,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             label6.Location = new Point(41, 16);
             label6.Name = "label6";
             label6.Size = new Size(122, 20);
@@ -193,14 +193,14 @@
             // AddRunButton
             // 
             AddRunButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            AddRunButton.ForeColor = Color.Black;
+            AddRunButton.ForeColor = Color.FromArgb(234, 234, 234);
             AddRunButton.Location = new Point(332, 144);
             AddRunButton.Margin = new Padding(3, 2, 3, 2);
             AddRunButton.Name = "AddRunButton";
             AddRunButton.Size = new Size(82, 22);
             AddRunButton.TabIndex = 10;
             AddRunButton.Text = "Add Run";
-            AddRunButton.UseVisualStyleBackColor = true;
+            AddRunButton.UseVisualStyleBackColor = false;
             AddRunButton.Click += AddRunButton_Click;
             // 
             // LootTextBox
@@ -253,7 +253,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label1.Location = new Point(10, 7);
             label1.Name = "label1";
             label1.Size = new Size(123, 21);
@@ -276,7 +276,7 @@
             // ProfitLabel
             // 
             ProfitLabel.AutoSize = true;
-            ProfitLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            ProfitLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             ProfitLabel.Location = new Point(210, 102);
             ProfitLabel.Name = "ProfitLabel";
             ProfitLabel.Size = new Size(61, 20);
@@ -285,20 +285,20 @@
             // 
             // DeleteRunButton
             // 
-            DeleteRunButton.ForeColor = Color.Black;
+            DeleteRunButton.ForeColor = Color.FromArgb(234, 234, 234);
             DeleteRunButton.Location = new Point(19, 144);
             DeleteRunButton.Margin = new Padding(3, 2, 3, 2);
             DeleteRunButton.Name = "DeleteRunButton";
             DeleteRunButton.Size = new Size(82, 22);
             DeleteRunButton.TabIndex = 7;
             DeleteRunButton.Text = "Delete Run";
-            DeleteRunButton.UseVisualStyleBackColor = true;
+            DeleteRunButton.UseVisualStyleBackColor = false;
             DeleteRunButton.Click += DeleteRunButton_Click;
             // 
             // AverageLootLabel
             // 
             AverageLootLabel.AutoSize = true;
-            AverageLootLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            AverageLootLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             AverageLootLabel.Location = new Point(210, 70);
             AverageLootLabel.Name = "AverageLootLabel";
             AverageLootLabel.Size = new Size(158, 20);
@@ -308,7 +308,7 @@
             // TotalFilamentCostLabel
             // 
             TotalFilamentCostLabel.AutoSize = true;
-            TotalFilamentCostLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            TotalFilamentCostLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             TotalFilamentCostLabel.Location = new Point(210, 42);
             TotalFilamentCostLabel.Name = "TotalFilamentCostLabel";
             TotalFilamentCostLabel.Size = new Size(156, 20);
@@ -318,7 +318,7 @@
             // TotalLootValueLabel
             // 
             TotalLootValueLabel.AutoSize = true;
-            TotalLootValueLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+            TotalLootValueLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
             TotalLootValueLabel.Location = new Point(210, 16);
             TotalLootValueLabel.Name = "TotalLootValueLabel";
             TotalLootValueLabel.Size = new Size(134, 20);
@@ -330,18 +330,19 @@
             AbyssTrackerGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             AbyssTrackerGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             AbyssTrackerGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            AbyssTrackerGridView.BackgroundColor = Color.Black;
+            AbyssTrackerGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
             AbyssTrackerGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AbyssTrackerGridView.Columns.AddRange(new DataGridViewColumn[] { abyssRunID, FilamentName, FilamentCost, LootValue, Success, ShipType, loot, FilamentType });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             AbyssTrackerGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            AbyssTrackerGridView.GridColor = Color.Black;
+            AbyssTrackerGridView.EditableColumns = null;
+            AbyssTrackerGridView.GridColor = Color.FromArgb(21, 21, 21);
             AbyssTrackerGridView.Location = new Point(19, 172);
             AbyssTrackerGridView.Margin = new Padding(3, 2, 3, 2);
             AbyssTrackerGridView.MultiSelect = false;
@@ -434,6 +435,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1238, 563);
             Controls.Add(splitContainer1);
             ForeColor = Color.White;

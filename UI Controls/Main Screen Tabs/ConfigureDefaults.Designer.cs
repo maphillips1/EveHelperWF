@@ -211,7 +211,7 @@
             // label37
             // 
             label37.AutoSize = true;
-            label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label37.Location = new Point(41, 74);
             label37.Margin = new Padding(2, 0, 2, 0);
             label37.Name = "label37";
@@ -222,7 +222,7 @@
             // label78
             // 
             label78.AutoSize = true;
-            label78.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label78.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label78.Location = new Point(291, 19);
             label78.Margin = new Padding(2, 0, 2, 0);
             label78.Name = "label78";
@@ -251,7 +251,7 @@
             // 
             // MainDefaultTabPage
             // 
-            MainDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
+            MainDefaultTabPage.BackColor = Color.FromArgb(21, 21, 21);
             MainDefaultTabPage.Controls.Add(InventBlueprintCheckbox);
             MainDefaultTabPage.Controls.Add(OutputOrderTypeCombo);
             MainDefaultTabPage.Controls.Add(InputOrderTypeCombo);
@@ -282,7 +282,6 @@
             // 
             OutputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             OutputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            OutputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             OutputOrderTypeCombo.FormattingEnabled = true;
             OutputOrderTypeCombo.Location = new Point(167, 82);
             OutputOrderTypeCombo.Margin = new Padding(2);
@@ -294,7 +293,6 @@
             // 
             InputOrderTypeCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InputOrderTypeCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InputOrderTypeCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InputOrderTypeCombo.FormattingEnabled = true;
             InputOrderTypeCombo.Location = new Point(167, 45);
             InputOrderTypeCombo.Margin = new Padding(2);
@@ -316,7 +314,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label4.Location = new Point(23, 120);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
@@ -327,7 +325,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label3.Location = new Point(6, 82);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
@@ -338,7 +336,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.Location = new Point(18, 45);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
@@ -349,7 +347,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label1.Location = new Point(98, 15);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
@@ -359,7 +357,7 @@
             // 
             // ManufacturingDefaultsTabPage
             // 
-            ManufacturingDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
+            ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(21, 21, 21);
             ManufacturingDefaultsTabPage.Controls.Add(BuildComponentCheckbox);
             ManufacturingDefaultsTabPage.Controls.Add(StructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(StructureMERigCombo);
@@ -404,7 +402,6 @@
             // 
             StructureTERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureTERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureTERigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureTERigCombo.FormattingEnabled = true;
             StructureTERigCombo.Location = new Point(140, 184);
             StructureTERigCombo.Margin = new Padding(2);
@@ -416,7 +413,6 @@
             // 
             StructureMERigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureMERigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureMERigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureMERigCombo.FormattingEnabled = true;
             StructureMERigCombo.Location = new Point(140, 149);
             StructureMERigCombo.Margin = new Padding(2);
@@ -428,7 +424,6 @@
             // 
             StructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             StructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             StructureCombo.FormattingEnabled = true;
             StructureCombo.Location = new Point(140, 116);
             StructureCombo.Margin = new Padding(2);
@@ -440,7 +435,6 @@
             // 
             ImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ImplantCombo.FormattingEnabled = true;
             ImplantCombo.Location = new Point(429, 48);
             ImplantCombo.Margin = new Padding(2);
@@ -453,7 +447,6 @@
             SystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             SystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             SystemCombo.DropDownHeight = 150;
-            SystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             SystemCombo.FormattingEnabled = true;
             SystemCombo.IntegralHeight = false;
             SystemCombo.Location = new Point(140, 83);
@@ -514,7 +507,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label11.Location = new Point(352, 149);
             label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
@@ -525,7 +518,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label10.Location = new Point(346, 116);
             label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
@@ -536,7 +529,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label9.Location = new Point(289, 83);
             label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
@@ -547,7 +540,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label8.Location = new Point(359, 47);
             label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
@@ -558,7 +551,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label7.Location = new Point(387, 14);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
@@ -569,7 +562,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label6.Location = new Point(12, 187);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
@@ -580,7 +573,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label5.Location = new Point(7, 149);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
@@ -592,7 +585,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label12.Location = new Point(58, 116);
             label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
@@ -603,7 +596,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label13.Location = new Point(72, 83);
             label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
@@ -614,7 +607,7 @@
             // label14
             // 
             label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label14.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label14.Location = new Point(103, 47);
             label14.Margin = new Padding(2, 0, 2, 0);
             label14.Name = "label14";
@@ -625,7 +618,7 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label15.Location = new Point(99, 14);
             label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
@@ -635,7 +628,7 @@
             // 
             // InventionDefaultsTabPage
             // 
-            InventionDefaultsTabPage.BackColor = Enums.Enums.BackgroundColor;
+            InventionDefaultsTabPage.BackColor = Color.FromArgb(21, 21, 21);
             InventionDefaultsTabPage.Controls.Add(EncryptionStarshipSkillUpDown);
             InventionDefaultsTabPage.Controls.Add(Datacore2SkillUpDown);
             InventionDefaultsTabPage.Controls.Add(DataCore1SkillUpDown);
@@ -688,7 +681,7 @@
             // label63
             // 
             label63.AutoSize = true;
-            label63.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label63.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label63.Location = new Point(273, 92);
             label63.Margin = new Padding(2, 0, 2, 0);
             label63.Name = "label63";
@@ -699,7 +692,7 @@
             // label74
             // 
             label74.AutoSize = true;
-            label74.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label74.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label74.Location = new Point(290, 56);
             label74.Margin = new Padding(2, 0, 2, 0);
             label74.Name = "label74";
@@ -720,7 +713,6 @@
             // 
             InventionDecryptorCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionDecryptorCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionDecryptorCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionDecryptorCombo.FormattingEnabled = true;
             InventionDecryptorCombo.Location = new Point(131, 135);
             InventionDecryptorCombo.Margin = new Padding(2);
@@ -732,7 +724,6 @@
             // 
             InventionStructureTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureTimeRigCombo.FormattingEnabled = true;
             InventionStructureTimeRigCombo.Location = new Point(131, 105);
             InventionStructureTimeRigCombo.Margin = new Padding(2);
@@ -744,7 +735,6 @@
             // 
             InventionStructureCostRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureCostRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureCostRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureCostRigCombo.FormattingEnabled = true;
             InventionStructureCostRigCombo.Location = new Point(131, 73);
             InventionStructureCostRigCombo.Margin = new Padding(2);
@@ -756,7 +746,6 @@
             // 
             InventionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            InventionStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionStructureCombo.FormattingEnabled = true;
             InventionStructureCombo.Location = new Point(131, 40);
             InventionStructureCombo.Margin = new Padding(2);
@@ -769,7 +758,6 @@
             InventionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             InventionSolarSystemCombo.DropDownHeight = 150;
-            InventionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             InventionSolarSystemCombo.FormattingEnabled = true;
             InventionSolarSystemCombo.IntegralHeight = false;
             InventionSolarSystemCombo.Location = new Point(131, 12);
@@ -781,7 +769,7 @@
             // label32
             // 
             label32.AutoSize = true;
-            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label32.Location = new Point(99, 168);
             label32.Margin = new Padding(2, 0, 2, 0);
             label32.Name = "label32";
@@ -792,7 +780,7 @@
             // label31
             // 
             label31.AutoSize = true;
-            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label31.Location = new Point(59, 136);
             label31.Margin = new Padding(2, 0, 2, 0);
             label31.Name = "label31";
@@ -803,7 +791,7 @@
             // label30
             // 
             label30.AutoSize = true;
-            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label30.Location = new Point(8, 106);
             label30.Margin = new Padding(2, 0, 2, 0);
             label30.Name = "label30";
@@ -814,7 +802,7 @@
             // label29
             // 
             label29.AutoSize = true;
-            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label29.Location = new Point(11, 74);
             label29.Margin = new Padding(2, 0, 2, 0);
             label29.Name = "label29";
@@ -825,7 +813,7 @@
             // label28
             // 
             label28.AutoSize = true;
-            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label28.Location = new Point(64, 46);
             label28.Margin = new Padding(2, 0, 2, 0);
             label28.Name = "label28";
@@ -836,7 +824,7 @@
             // label27
             // 
             label27.AutoSize = true;
-            label27.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label27.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label27.Location = new Point(43, 14);
             label27.Margin = new Padding(2, 0, 2, 0);
             label27.Name = "label27";
@@ -846,7 +834,7 @@
             // 
             // ReactionsDefaultTabPage
             // 
-            ReactionsDefaultTabPage.BackColor = Enums.Enums.BackgroundColor;
+            ReactionsDefaultTabPage.BackColor = Color.FromArgb(21, 21, 21);
             ReactionsDefaultTabPage.Controls.Add(label26);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);
@@ -867,7 +855,7 @@
             // label26
             // 
             label26.AutoSize = true;
-            label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label26.Location = new Point(85, 153);
             label26.Margin = new Padding(2, 0, 2, 0);
             label26.Name = "label26";
@@ -888,7 +876,6 @@
             // 
             ReactionStructureTERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureTERig.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureTERig.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureTERig.FormattingEnabled = true;
             ReactionStructureTERig.Location = new Point(122, 122);
             ReactionStructureTERig.Margin = new Padding(2);
@@ -899,7 +886,7 @@
             // label20
             // 
             label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label20.Location = new Point(9, 122);
             label20.Margin = new Padding(2, 0, 2, 0);
             label20.Name = "label20";
@@ -911,7 +898,6 @@
             // 
             ReactionStructureMERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureMERig.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureMERig.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureMERig.FormattingEnabled = true;
             ReactionStructureMERig.Location = new Point(122, 86);
             ReactionStructureMERig.Margin = new Padding(2);
@@ -922,7 +908,7 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label19.Location = new Point(4, 86);
             label19.Margin = new Padding(2, 0, 2, 0);
             label19.Name = "label19";
@@ -934,7 +920,6 @@
             // 
             ReactionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            ReactionStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionStructureCombo.FormattingEnabled = true;
             ReactionStructureCombo.Location = new Point(122, 52);
             ReactionStructureCombo.Margin = new Padding(2);
@@ -945,7 +930,7 @@
             // label18
             // 
             label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label18.Location = new Point(50, 52);
             label18.Margin = new Padding(2, 0, 2, 0);
             label18.Name = "label18";
@@ -956,7 +941,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label17.Location = new Point(29, 15);
             label17.Margin = new Padding(2, 0, 2, 0);
             label17.Name = "label17";
@@ -970,7 +955,6 @@
             ReactionSolarSystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionSolarSystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionSolarSystemCombo.DropDownHeight = 150;
-            ReactionSolarSystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             ReactionSolarSystemCombo.FormattingEnabled = true;
             ReactionSolarSystemCombo.IntegralHeight = false;
             ReactionSolarSystemCombo.Location = new Point(122, 14);
@@ -981,7 +965,7 @@
             // 
             // CopyPage
             // 
-            CopyPage.BackColor = Enums.Enums.BackgroundColor;
+            CopyPage.BackColor = Color.FromArgb(21, 21, 21);
             CopyPage.Controls.Add(CopyRunsCopyUpDown);
             CopyPage.Controls.Add(CopyNumCopiesUpDown);
             CopyPage.Controls.Add(CopyTaxUpDown);
@@ -1037,7 +1021,7 @@
             // CopyTaxLabel
             // 
             CopyTaxLabel.AutoSize = true;
-            CopyTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CopyTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             CopyTaxLabel.Location = new Point(68, 161);
             CopyTaxLabel.Margin = new Padding(2, 0, 2, 0);
             CopyTaxLabel.Name = "CopyTaxLabel";
@@ -1050,7 +1034,6 @@
             CopySystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopySystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             CopySystemCombo.DropDownHeight = 150;
-            CopySystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopySystemCombo.FormattingEnabled = true;
             CopySystemCombo.IntegralHeight = false;
             CopySystemCombo.Location = new Point(103, 66);
@@ -1062,7 +1045,7 @@
             // label72
             // 
             label72.AutoSize = true;
-            label72.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label72.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label72.Location = new Point(46, 66);
             label72.Margin = new Padding(2, 0, 2, 0);
             label72.Name = "label72";
@@ -1074,7 +1057,6 @@
             // 
             CopyImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyImplantCombo.FormattingEnabled = true;
             CopyImplantCombo.Location = new Point(102, 195);
             CopyImplantCombo.Margin = new Padding(2);
@@ -1085,7 +1067,7 @@
             // label73
             // 
             label73.AutoSize = true;
-            label73.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label73.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label73.Location = new Point(39, 197);
             label73.Margin = new Padding(2, 0, 2, 0);
             label73.Name = "label73";
@@ -1098,7 +1080,6 @@
             // 
             CopyTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyTimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyTimeRigCombo.FormattingEnabled = true;
             CopyTimeRigCombo.Location = new Point(103, 129);
             CopyTimeRigCombo.Margin = new Padding(2);
@@ -1109,7 +1090,7 @@
             // CopyRigLabel
             // 
             CopyRigLabel.AutoSize = true;
-            CopyRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CopyRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             CopyRigLabel.Location = new Point(8, 131);
             CopyRigLabel.Margin = new Padding(2, 0, 2, 0);
             CopyRigLabel.Name = "CopyRigLabel";
@@ -1121,7 +1102,6 @@
             // 
             CopyStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            CopyStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             CopyStructureCombo.FormattingEnabled = true;
             CopyStructureCombo.Location = new Point(103, 97);
             CopyStructureCombo.Margin = new Padding(2);
@@ -1132,7 +1112,7 @@
             // label75
             // 
             label75.AutoSize = true;
-            label75.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label75.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label75.Location = new Point(32, 99);
             label75.Margin = new Padding(2, 0, 2, 0);
             label75.Name = "label75";
@@ -1143,7 +1123,7 @@
             // label76
             // 
             label76.AutoSize = true;
-            label76.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label76.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label76.Location = new Point(13, 40);
             label76.Margin = new Padding(2, 0, 2, 0);
             label76.Name = "label76";
@@ -1154,7 +1134,7 @@
             // label77
             // 
             label77.AutoSize = true;
-            label77.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label77.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label77.Location = new Point(21, 14);
             label77.Margin = new Padding(2, 0, 2, 0);
             label77.Name = "label77";
@@ -1164,7 +1144,7 @@
             // 
             // MEPage
             // 
-            MEPage.BackColor = Enums.Enums.BackgroundColor;
+            MEPage.BackColor = Color.FromArgb(21, 21, 21);
             MEPage.Controls.Add(METoLevelUpDown);
             MEPage.Controls.Add(MEFromLevelUpDown);
             MEPage.Controls.Add(METaxUpDown);
@@ -1219,7 +1199,7 @@
             // METaxLabel
             // 
             METaxLabel.AutoSize = true;
-            METaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            METaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             METaxLabel.Location = new Point(76, 157);
             METaxLabel.Margin = new Padding(2, 0, 2, 0);
             METaxLabel.Name = "METaxLabel";
@@ -1232,7 +1212,6 @@
             MESystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MESystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             MESystemCombo.DropDownHeight = 150;
-            MESystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MESystemCombo.FormattingEnabled = true;
             MESystemCombo.IntegralHeight = false;
             MESystemCombo.Location = new Point(111, 62);
@@ -1244,7 +1223,7 @@
             // label51
             // 
             label51.AutoSize = true;
-            label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label51.Location = new Point(53, 62);
             label51.Margin = new Padding(2, 0, 2, 0);
             label51.Name = "label51";
@@ -1256,7 +1235,6 @@
             // 
             MEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            MEImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MEImplantCombo.FormattingEnabled = true;
             MEImplantCombo.Location = new Point(110, 190);
             MEImplantCombo.Margin = new Padding(2);
@@ -1267,7 +1245,7 @@
             // label54
             // 
             label54.AutoSize = true;
-            label54.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label54.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label54.Location = new Point(47, 193);
             label54.Margin = new Padding(2, 0, 2, 0);
             label54.Name = "label54";
@@ -1280,7 +1258,6 @@
             // 
             METimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             METimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            METimeRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             METimeRigCombo.FormattingEnabled = true;
             METimeRigCombo.Location = new Point(111, 124);
             METimeRigCombo.Margin = new Padding(2);
@@ -1291,7 +1268,7 @@
             // MEStructRigLabel
             // 
             MEStructRigLabel.AutoSize = true;
-            MEStructRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            MEStructRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             MEStructRigLabel.Location = new Point(16, 127);
             MEStructRigLabel.Margin = new Padding(2, 0, 2, 0);
             MEStructRigLabel.Name = "MEStructRigLabel";
@@ -1303,7 +1280,6 @@
             // 
             MEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            MEStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             MEStructureCombo.FormattingEnabled = true;
             MEStructureCombo.Location = new Point(111, 92);
             MEStructureCombo.Margin = new Padding(2);
@@ -1314,7 +1290,7 @@
             // label60
             // 
             label60.AutoSize = true;
-            label60.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label60.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label60.Location = new Point(40, 94);
             label60.Margin = new Padding(2, 0, 2, 0);
             label60.Name = "label60";
@@ -1325,7 +1301,7 @@
             // label61
             // 
             label61.AutoSize = true;
-            label61.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label61.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label61.Location = new Point(46, 36);
             label61.Margin = new Padding(2, 0, 2, 0);
             label61.Name = "label61";
@@ -1336,7 +1312,7 @@
             // label62
             // 
             label62.AutoSize = true;
-            label62.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label62.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label62.Location = new Point(28, 10);
             label62.Margin = new Padding(2, 0, 2, 0);
             label62.Name = "label62";
@@ -1346,7 +1322,7 @@
             // 
             // TEPage
             // 
-            TEPage.BackColor = Enums.Enums.BackgroundColor;
+            TEPage.BackColor = Color.FromArgb(21, 21, 21);
             TEPage.Controls.Add(TEToLevelUpDown);
             TEPage.Controls.Add(TEFromLevelUpDown);
             TEPage.Controls.Add(TETaxUpDown);
@@ -1402,7 +1378,7 @@
             // TETaxLabel
             // 
             TETaxLabel.AutoSize = true;
-            TETaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TETaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             TETaxLabel.Location = new Point(62, 159);
             TETaxLabel.Margin = new Padding(2, 0, 2, 0);
             TETaxLabel.Name = "TETaxLabel";
@@ -1415,7 +1391,6 @@
             TESystemCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TESystemCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             TESystemCombo.DropDownHeight = 150;
-            TESystemCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TESystemCombo.FormattingEnabled = true;
             TESystemCombo.IntegralHeight = false;
             TESystemCombo.Location = new Point(97, 64);
@@ -1427,7 +1402,7 @@
             // label58
             // 
             label58.AutoSize = true;
-            label58.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label58.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label58.Location = new Point(39, 64);
             label58.Margin = new Padding(2, 0, 2, 0);
             label58.Name = "label58";
@@ -1439,7 +1414,6 @@
             // 
             TEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEImplantCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEImplantCombo.FormattingEnabled = true;
             TEImplantCombo.Location = new Point(96, 193);
             TEImplantCombo.Margin = new Padding(2);
@@ -1450,7 +1424,7 @@
             // label59
             // 
             label59.AutoSize = true;
-            label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label59.Location = new Point(33, 195);
             label59.Margin = new Padding(2, 0, 2, 0);
             label59.Name = "label59";
@@ -1463,7 +1437,6 @@
             // 
             TEStructRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEStructRigCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEStructRigCombo.FormattingEnabled = true;
             TEStructRigCombo.Location = new Point(97, 127);
             TEStructRigCombo.Margin = new Padding(2);
@@ -1474,7 +1447,7 @@
             // TEStructureRigLabel
             // 
             TEStructureRigLabel.AutoSize = true;
-            TEStructureRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            TEStructureRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             TEStructureRigLabel.Location = new Point(2, 129);
             TEStructureRigLabel.Margin = new Padding(2, 0, 2, 0);
             TEStructureRigLabel.Name = "TEStructureRigLabel";
@@ -1486,7 +1459,6 @@
             // 
             TEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
-            TEStructureCombo.DropDownStyle = ComboBoxStyle.DropDown;
             TEStructureCombo.FormattingEnabled = true;
             TEStructureCombo.Location = new Point(97, 94);
             TEStructureCombo.Margin = new Padding(2);
@@ -1497,7 +1469,7 @@
             // label64
             // 
             label64.AutoSize = true;
-            label64.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label64.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label64.Location = new Point(26, 97);
             label64.Margin = new Padding(2, 0, 2, 0);
             label64.Name = "label64";
@@ -1508,7 +1480,7 @@
             // label66
             // 
             label66.AutoSize = true;
-            label66.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label66.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label66.Location = new Point(32, 38);
             label66.Margin = new Padding(2, 0, 2, 0);
             label66.Name = "label66";
@@ -1519,7 +1491,7 @@
             // label67
             // 
             label67.AutoSize = true;
-            label67.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label67.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label67.Location = new Point(14, 12);
             label67.Margin = new Padding(2, 0, 2, 0);
             label67.Name = "label67";
@@ -1529,7 +1501,7 @@
             // 
             // SkillsPage
             // 
-            SkillsPage.BackColor = Enums.Enums.BackgroundColor;
+            SkillsPage.BackColor = Color.FromArgb(21, 21, 21);
             SkillsPage.Controls.Add(AdvancedIndustrialConsSkillUpDoan);
             SkillsPage.Controls.Add(label55);
             SkillsPage.Controls.Add(ReactionsSkillUpDown);
@@ -1572,7 +1544,7 @@
             // label55
             // 
             label55.AutoSize = true;
-            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label55.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label55.Location = new Point(283, 177);
             label55.Margin = new Padding(2, 0, 2, 0);
             label55.Name = "label55";
@@ -1601,7 +1573,7 @@
             // label36
             // 
             label36.AutoSize = true;
-            label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label36.Location = new Point(44, 107);
             label36.Margin = new Padding(2, 0, 2, 0);
             label36.Name = "label36";
@@ -1621,7 +1593,7 @@
             // label35
             // 
             label35.AutoSize = true;
-            label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label35.Location = new Point(44, 143);
             label35.Margin = new Padding(2, 0, 2, 0);
             label35.Name = "label35";
@@ -1641,7 +1613,7 @@
             // label34
             // 
             label34.AutoSize = true;
-            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label34.Location = new Point(22, 177);
             label34.Margin = new Padding(2, 0, 2, 0);
             label34.Name = "label34";
@@ -1661,7 +1633,7 @@
             // label33
             // 
             label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label33.Location = new Point(279, 14);
             label33.Margin = new Padding(2, 0, 2, 0);
             label33.Name = "label33";
@@ -1681,7 +1653,7 @@
             // label25
             // 
             label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label25.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label25.Location = new Point(286, 44);
             label25.Margin = new Padding(2, 0, 2, 0);
             label25.Name = "label25";
@@ -1701,7 +1673,7 @@
             // label24
             // 
             label24.AutoSize = true;
-            label24.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label24.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label24.Location = new Point(285, 74);
             label24.Margin = new Padding(2, 0, 2, 0);
             label24.Name = "label24";
@@ -1721,7 +1693,7 @@
             // label23
             // 
             label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label23.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label23.Location = new Point(296, 141);
             label23.Margin = new Padding(2, 0, 2, 0);
             label23.Name = "label23";
@@ -1741,7 +1713,7 @@
             // label22
             // 
             label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label22.Location = new Point(285, 107);
             label22.Margin = new Padding(2, 0, 2, 0);
             label22.Name = "label22";
@@ -1770,7 +1742,7 @@
             // label16
             // 
             label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label16.Location = new Point(2, 44);
             label16.Margin = new Padding(2, 0, 2, 0);
             label16.Name = "label16";
@@ -1781,7 +1753,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label21.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label21.Location = new Point(32, 14);
             label21.Margin = new Padding(2, 0, 2, 0);
             label21.Name = "label21";
@@ -1791,20 +1763,21 @@
             // 
             // SaveButton
             // 
-            SaveButton.ForeColor = Color.Black;
+            SaveButton.ForeColor = Color.FromArgb(234, 234, 234);
             SaveButton.Location = new Point(10, 9);
             SaveButton.Margin = new Padding(3, 2, 3, 2);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(82, 22);
             SaveButton.TabIndex = 1;
             SaveButton.Text = "Save";
-            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.UseVisualStyleBackColor = false;
             SaveButton.Click += SaveButton_Click;
             // 
             // ConfigureDefaults
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(612, 322);
             Controls.Add(SaveButton);
             Controls.Add(DefaultsTabContainer);

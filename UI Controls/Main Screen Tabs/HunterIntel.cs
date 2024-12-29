@@ -21,6 +21,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             string searchText = SearchTextBox.Text.Trim();
             if (!string.IsNullOrWhiteSpace(searchText))
             {
@@ -41,6 +42,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     MessageBox.Show("Could not find a match. Due to CCP logic, the name must be exact. Check your text and try again");
                 }
             }
+            this.Cursor= Cursors.Default;
         }
 
         private void HandleSearchResults(UniverseIdSearchResults searchResults)
