@@ -2161,7 +2161,6 @@ namespace EveHelperWF
                 }
             }
             Clipboard.SetText(sb.ToString());
-            MessageBox.Show("Copied items to clipboard!", "Items Copied");
         }
         #endregion
 

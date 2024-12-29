@@ -82,19 +82,20 @@
             // 
             // SolarSystemResultsGrid
             // 
-            SolarSystemResultsGrid.BackgroundColor = Color.Black;
+            SolarSystemResultsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             SolarSystemResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SolarSystemResultsGrid.Columns.AddRange(new DataGridViewColumn[] { regionName, constellationName, systemName, security, regionID, constellationID, solarSystemID });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             SolarSystemResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
             SolarSystemResultsGrid.Dock = DockStyle.Bottom;
-            SolarSystemResultsGrid.GridColor = Color.Black;
+            SolarSystemResultsGrid.EditableColumns = null;
+            SolarSystemResultsGrid.GridColor = Color.FromArgb(21, 21, 21);
             SolarSystemResultsGrid.Location = new Point(0, 231);
             SolarSystemResultsGrid.Margin = new Padding(3, 2, 3, 2);
             SolarSystemResultsGrid.MultiSelect = false;
@@ -167,14 +168,14 @@
             // 
             // SearchButton
             // 
-            SearchButton.ForeColor = Color.Black;
+            SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(7, 191);
             SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 0;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // TemperateCheckbox
@@ -346,7 +347,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label3.ForeColor = Color.Gold;
             label3.Location = new Point(10, 7);
             label3.Name = "label3";
@@ -357,7 +358,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label4.ForeColor = Color.Gold;
             label4.Location = new Point(10, 58);
             label4.Name = "label4";
@@ -369,7 +370,6 @@
             // 
             RegionCombobox.AutoCompleteMode = AutoCompleteMode.Suggest;
             RegionCombobox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            RegionCombobox.DropDownStyle = ComboBoxStyle.DropDown;
             RegionCombobox.FormattingEnabled = true;
             RegionCombobox.Location = new Point(70, 151);
             RegionCombobox.Margin = new Padding(3, 2, 3, 2);
@@ -407,7 +407,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label7.ForeColor = Color.Gold;
             label7.Location = new Point(434, 57);
             label7.Name = "label7";
@@ -419,7 +419,6 @@
             // 
             StationComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             StationComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-            StationComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             StationComboBox.FormattingEnabled = true;
             StationComboBox.Location = new Point(399, 81);
             StationComboBox.Margin = new Padding(3, 2, 3, 2);
@@ -431,6 +430,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(559, 573);
             Controls.Add(label8);
             Controls.Add(StationComboBox);

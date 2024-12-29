@@ -1053,14 +1053,14 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle2;
             MostExpensiveGridView.EditableColumns = null;
             MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
-            MostExpensiveGridView.Location = new Point(871, 54);
+            MostExpensiveGridView.Location = new Point(787, 54);
             MostExpensiveGridView.Name = "MostExpensiveGridView";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -1070,7 +1070,7 @@
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            MostExpensiveGridView.Size = new Size(466, 469);
+            MostExpensiveGridView.Size = new Size(550, 469);
             MostExpensiveGridView.TabIndex = 30;
             // 
             // materialName
@@ -1095,7 +1095,7 @@
             // 
             ImportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ImportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
-            ImportPricesButton.Location = new Point(649, 97);
+            ImportPricesButton.Location = new Point(497, 103);
             ImportPricesButton.Name = "ImportPricesButton";
             ImportPricesButton.Size = new Size(135, 23);
             ImportPricesButton.TabIndex = 29;
@@ -1107,7 +1107,7 @@
             // 
             ExportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ExportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
-            ExportPricesButton.Location = new Point(649, 68);
+            ExportPricesButton.Location = new Point(497, 74);
             ExportPricesButton.Name = "ExportPricesButton";
             ExportPricesButton.Size = new Size(135, 23);
             ExportPricesButton.TabIndex = 28;
@@ -1122,7 +1122,7 @@
             TaxFinalProductCheckbox.Checked = true;
             TaxFinalProductCheckbox.CheckState = CheckState.Checked;
             TaxFinalProductCheckbox.Font = new Font("Segoe UI", 11.25F);
-            TaxFinalProductCheckbox.Location = new Point(615, 216);
+            TaxFinalProductCheckbox.Location = new Point(512, 222);
             TaxFinalProductCheckbox.Name = "TaxFinalProductCheckbox";
             TaxFinalProductCheckbox.Size = new Size(226, 24);
             TaxFinalProductCheckbox.TabIndex = 27;
@@ -1137,7 +1137,7 @@
             TaxInputCheckbox.Checked = true;
             TaxInputCheckbox.CheckState = CheckState.Checked;
             TaxInputCheckbox.Font = new Font("Segoe UI", 11.25F);
-            TaxInputCheckbox.Location = new Point(625, 186);
+            TaxInputCheckbox.Location = new Point(512, 192);
             TaxInputCheckbox.Name = "TaxInputCheckbox";
             TaxInputCheckbox.Size = new Size(180, 24);
             TaxInputCheckbox.TabIndex = 26;
@@ -1164,10 +1164,10 @@
             MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F);
             MaterialsPriceTreeView.HotTracking = true;
             MaterialsPriceTreeView.Location = new Point(9, 67);
-            MaterialsPriceTreeView.MinimumSize = new Size(580, 320);
+            MaterialsPriceTreeView.MinimumSize = new Size(400, 400);
             MaterialsPriceTreeView.Name = "MaterialsPriceTreeView";
             MaterialsPriceTreeView.ShowLines = false;
-            MaterialsPriceTreeView.Size = new Size(580, 456);
+            MaterialsPriceTreeView.Size = new Size(400, 456);
             MaterialsPriceTreeView.TabIndex = 23;
             MaterialsPriceTreeView.TabStop = false;
             MaterialsPriceTreeView.AfterSelect += MaterialsPriceTreeView_AfterSelect;
@@ -1176,7 +1176,7 @@
             // 
             UpdatePricesJitaButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             UpdatePricesJitaButton.ForeColor = Color.FromArgb(234, 234, 234);
-            UpdatePricesJitaButton.Location = new Point(634, 126);
+            UpdatePricesJitaButton.Location = new Point(497, 132);
             UpdatePricesJitaButton.Name = "UpdatePricesJitaButton";
             UpdatePricesJitaButton.Size = new Size(162, 23);
             UpdatePricesJitaButton.TabIndex = 22;
@@ -1190,7 +1190,7 @@
             CopyToClipboardButton.AutoSize = true;
             CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CopyToClipboardButton.Location = new Point(657, 155);
+            CopyToClipboardButton.Location = new Point(497, 161);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
             CopyToClipboardButton.Size = new Size(114, 25);
             CopyToClipboardButton.TabIndex = 18;
@@ -2275,6 +2275,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1540, 634);
             Controls.Add(SummaryButton);
             Controls.Add(CurrentInventoryButton);

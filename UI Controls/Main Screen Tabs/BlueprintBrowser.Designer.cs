@@ -1985,6 +1985,7 @@
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            ManuInputGrid.EditableColumns = null;
             ManuInputGrid.GridColor = Color.Black;
             ManuInputGrid.Location = new Point(581, 4);
             ManuInputGrid.Margin = new Padding(2);
@@ -2390,24 +2391,24 @@
             // 
             // CreateBuildPlanButton
             // 
-            CreateBuildPlanButton.ForeColor = Color.Black;
+            CreateBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             CreateBuildPlanButton.Location = new Point(181, 200);
             CreateBuildPlanButton.Name = "CreateBuildPlanButton";
             CreateBuildPlanButton.Size = new Size(138, 23);
             CreateBuildPlanButton.TabIndex = 40;
             CreateBuildPlanButton.Text = "Create Build Plan";
-            CreateBuildPlanButton.UseVisualStyleBackColor = true;
+            CreateBuildPlanButton.UseVisualStyleBackColor = false;
             CreateBuildPlanButton.Click += CreateBuildPlanButton_Click;
             // 
             // CopyToClipboardButton
             // 
-            CopyToClipboardButton.ForeColor = Color.Black;
+            CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
             CopyToClipboardButton.Location = new Point(9, 200);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
             CopyToClipboardButton.Size = new Size(138, 23);
             CopyToClipboardButton.TabIndex = 38;
             CopyToClipboardButton.Text = "Copy to Clipboard";
-            CopyToClipboardButton.UseVisualStyleBackColor = true;
+            CopyToClipboardButton.UseVisualStyleBackColor = false;
             CopyToClipboardButton.Click += CopyToClipboardButton_Click;
             // 
             // BlueprintImagePanel
@@ -2535,6 +2536,7 @@
             dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
             CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle10;
+            CopyMatGrid.EditableColumns = null;
             CopyMatGrid.GridColor = Color.Black;
             CopyMatGrid.Location = new Point(353, 2);
             CopyMatGrid.Margin = new Padding(2);
@@ -2948,6 +2950,7 @@
             dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
             MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle15;
+            MEMaterialsGrid.EditableColumns = null;
             MEMaterialsGrid.GridColor = Color.Black;
             MEMaterialsGrid.Location = new Point(349, 5);
             MEMaterialsGrid.Margin = new Padding(2);
@@ -3248,6 +3251,7 @@
             dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
             TEMatGrid.DefaultCellStyle = dataGridViewCellStyle20;
+            TEMatGrid.EditableColumns = null;
             TEMatGrid.GridColor = Color.Black;
             TEMatGrid.Location = new Point(353, 0);
             TEMatGrid.Margin = new Padding(2);
@@ -3513,6 +3517,7 @@
             dataGridViewCellStyle25.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle25.WrapMode = DataGridViewTriState.False;
             InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle25;
+            InventionInputGrid.EditableColumns = null;
             InventionInputGrid.GridColor = Color.Black;
             InventionInputGrid.Location = new Point(2, 328);
             InventionInputGrid.Margin = new Padding(2);
@@ -3937,6 +3942,7 @@
             dataGridViewCellStyle30.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
             ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle30;
+            ReactionInputGrid.EditableColumns = null;
             ReactionInputGrid.GridColor = Color.Black;
             ReactionInputGrid.Location = new Point(2, 232);
             ReactionInputGrid.Margin = new Padding(2);
@@ -4242,14 +4248,14 @@
             // 
             // SearchButton
             // 
-            SearchButton.ForeColor = Color.Black;
+            SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(147, 1);
             SearchButton.Margin = new Padding(2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(75, 23);
             SearchButton.TabIndex = 3;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // SearchResultsTreeView
@@ -4271,6 +4277,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Black;
             ClientSize = new Size(1267, 713);
             Controls.Add(SearchResultsTreeView);

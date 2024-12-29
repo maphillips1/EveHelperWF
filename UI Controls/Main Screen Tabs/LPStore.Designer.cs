@@ -100,18 +100,19 @@
             LPOfferGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LPOfferGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             LPOfferGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            LPOfferGridView.BackgroundColor = Color.Black;
+            LPOfferGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
             LPOfferGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             LPOfferGridView.Columns.AddRange(new DataGridViewColumn[] { AKCost, IskCost, LPCost, ItemName, Quantity, buyvalue, sellvalue, RequiredItems, ProfitBuy, ProfitSell, IskLpBuy, IskLpSell });
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = Color.Black;
             dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle7.ForeColor = Color.White;
+            dataGridViewCellStyle7.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
             LPOfferGridView.DefaultCellStyle = dataGridViewCellStyle7;
-            LPOfferGridView.GridColor = Color.Black;
+            LPOfferGridView.EditableColumns = null;
+            LPOfferGridView.GridColor = Color.FromArgb(21, 21, 21);
             LPOfferGridView.Location = new Point(0, 108);
             LPOfferGridView.Margin = new Padding(3, 2, 3, 2);
             LPOfferGridView.Name = "LPOfferGridView";
@@ -244,13 +245,13 @@
             // 
             // SearchButton
             // 
-            SearchButton.ForeColor = Color.Black;
+            SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(342, 80);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(75, 23);
             SearchButton.TabIndex = 8;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // InfoLoadingLabel
@@ -273,6 +274,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
             Controls.Add(InfoLoadingLabel);
             Controls.Add(SearchButton);

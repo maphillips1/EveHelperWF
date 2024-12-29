@@ -69,9 +69,9 @@
             // 
             // tabControl1
             // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tablePage);
             tabControl1.Controls.Add(GraphPage);
-            tabControl1.Dock = DockStyle.Bottom;
             tabControl1.Location = new Point(0, 39);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -179,7 +179,7 @@
             GraphPage.Location = new Point(4, 24);
             GraphPage.Name = "GraphPage";
             GraphPage.Padding = new Padding(3);
-            GraphPage.Size = new Size(596, 364);
+            GraphPage.Size = new Size(596, 383);
             GraphPage.TabIndex = 1;
             GraphPage.Text = "Graph";
             GraphPage.UseVisualStyleBackColor = true;
@@ -190,11 +190,14 @@
             chartArea1.Name = "ChartArea1";
             PriceHistoryChart.ChartAreas.Add(chartArea1);
             PriceHistoryChart.Dock = DockStyle.Fill;
+            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
             legend1.Name = "Legend1";
             PriceHistoryChart.Legends.Add(legend1);
             PriceHistoryChart.Location = new Point(3, 3);
             PriceHistoryChart.Name = "PriceHistoryChart";
+            PriceHistoryChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.IsXValueIndexed = true;
             series1.Legend = "Legend1";
             series1.Name = "Average";
@@ -215,7 +218,7 @@
             PriceHistoryChart.Series.Add(series1);
             PriceHistoryChart.Series.Add(series2);
             PriceHistoryChart.Series.Add(series3);
-            PriceHistoryChart.Size = new Size(590, 358);
+            PriceHistoryChart.Size = new Size(590, 377);
             PriceHistoryChart.SuppressExceptions = true;
             PriceHistoryChart.TabIndex = 0;
             PriceHistoryChart.Text = "chart1";
@@ -238,7 +241,7 @@
             Controls.Add(label1);
             Controls.Add(tabControl1);
             Name = "PriceHistory";
-            Size = new Size(604, 450);
+            Size = new Size(607, 453);
             tabControl1.ResumeLayout(false);
             tablePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)PriceHistoryGridView).EndInit();

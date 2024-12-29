@@ -30,8 +30,6 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PriceHistoryUtility));
             splitContainer1 = new SplitContainer();
             TrackItemsButton = new Objects.Custom_Controls.EveHelperButton();
@@ -128,32 +126,33 @@
             // TrackItemsButton
             // 
             TrackItemsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            TrackItemsButton.ForeColor = Color.Black;
+            TrackItemsButton.ForeColor = Color.FromArgb(234, 234, 234);
             TrackItemsButton.Location = new Point(460, 478);
             TrackItemsButton.Margin = new Padding(3, 2, 3, 2);
             TrackItemsButton.Name = "TrackItemsButton";
             TrackItemsButton.Size = new Size(82, 22);
             TrackItemsButton.TabIndex = 5;
             TrackItemsButton.Text = "Track Items";
-            TrackItemsButton.UseVisualStyleBackColor = true;
+            TrackItemsButton.UseVisualStyleBackColor = false;
             TrackItemsButton.Click += TrackItemsButton_Click;
             // 
             // ItemSearchResultsGrid
             // 
             ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ItemSearchResultsGrid.BackgroundColor = Color.Black;
+            ItemSearchResultsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ItemSearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { typeID, typeName, marketGroupName, groupId, description, volume, portionSize, raceId, basePrice, marketGroupId, parentMarketGroupId, iconId, soundId, graphicId, groupName, categoryID, categoryName });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            ItemSearchResultsGrid.GridColor = Color.Black;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            ItemSearchResultsGrid.EditableColumns = null;
+            ItemSearchResultsGrid.GridColor = Color.FromArgb(21, 21, 21);
             ItemSearchResultsGrid.Location = new Point(10, 106);
             ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
@@ -316,14 +315,14 @@
             // SearchButton
             // 
             SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SearchButton.ForeColor = Color.Black;
+            SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(440, 70);
             SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 3;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // ItemSearchTextBox
@@ -348,7 +347,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label1.Location = new Point(171, 7);
             label1.Name = "label1";
             label1.Size = new Size(166, 21);
@@ -384,7 +383,7 @@
             // ProgressLabel
             // 
             ProgressLabel.AutoSize = true;
-            ProgressLabel.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ProgressLabel.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             ProgressLabel.Location = new Point(20, 73);
             ProgressLabel.Name = "ProgressLabel";
             ProgressLabel.Size = new Size(62, 19);
@@ -403,18 +402,19 @@
             // 
             TrackedTypesGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             TrackedTypesGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            TrackedTypesGrid.BackgroundColor = Color.Black;
+            TrackedTypesGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             TrackedTypesGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TrackedTypesGrid.Columns.AddRange(new DataGridViewColumn[] { trackedTypeId, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12, dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17 });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.Black;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            TrackedTypesGrid.DefaultCellStyle = dataGridViewCellStyle4;
-            TrackedTypesGrid.GridColor = Color.Black;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            TrackedTypesGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            TrackedTypesGrid.EditableColumns = null;
+            TrackedTypesGrid.GridColor = Color.FromArgb(21, 21, 21);
             TrackedTypesGrid.Location = new Point(23, 106);
             TrackedTypesGrid.Margin = new Padding(3, 2, 3, 2);
             TrackedTypesGrid.MultiSelect = false;
@@ -581,7 +581,6 @@
             RegionCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             RegionCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             RegionCombo.DropDownHeight = 150;
-            RegionCombo.DropDownStyle = ComboBoxStyle.DropDown;
             RegionCombo.FormattingEnabled = true;
             RegionCombo.IntegralHeight = false;
             RegionCombo.Location = new Point(353, 40);
@@ -593,7 +592,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             label4.Location = new Point(265, 40);
             label4.Name = "label4";
             label4.Size = new Size(77, 19);
@@ -602,20 +601,20 @@
             // 
             // DeleteTrackedItemButton
             // 
-            DeleteTrackedItemButton.ForeColor = Color.Black;
+            DeleteTrackedItemButton.ForeColor = Color.FromArgb(234, 234, 234);
             DeleteTrackedItemButton.Location = new Point(23, 478);
             DeleteTrackedItemButton.Margin = new Padding(3, 2, 3, 2);
             DeleteTrackedItemButton.Name = "DeleteTrackedItemButton";
             DeleteTrackedItemButton.Size = new Size(148, 22);
             DeleteTrackedItemButton.TabIndex = 8;
             DeleteTrackedItemButton.Text = "Delete Tracked Item";
-            DeleteTrackedItemButton.UseVisualStyleBackColor = true;
+            DeleteTrackedItemButton.UseVisualStyleBackColor = false;
             DeleteTrackedItemButton.Click += DeleteTrackedItemButton_Click;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.Location = new Point(185, 7);
             label3.Name = "label3";
             label3.Size = new Size(115, 21);
@@ -624,14 +623,14 @@
             // 
             // UpdatePriceHistoryButton
             // 
-            UpdatePriceHistoryButton.ForeColor = Color.Black;
+            UpdatePriceHistoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             UpdatePriceHistoryButton.Location = new Point(23, 39);
             UpdatePriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             UpdatePriceHistoryButton.Name = "UpdatePriceHistoryButton";
             UpdatePriceHistoryButton.Size = new Size(234, 22);
             UpdatePriceHistoryButton.TabIndex = 0;
             UpdatePriceHistoryButton.Text = "Update Price History For All Items";
-            UpdatePriceHistoryButton.UseVisualStyleBackColor = true;
+            UpdatePriceHistoryButton.UseVisualStyleBackColor = false;
             UpdatePriceHistoryButton.Click += UpdatePriceHistoryButton_Click;
             // 
             // UpdatePriceHistoryWorker
@@ -646,6 +645,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1078, 550);
             Controls.Add(splitContainer1);
             ForeColor = Color.White;

@@ -124,19 +124,19 @@
             ItemSearchResultsGrid.AllowUserToDeleteRows = false;
             ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ItemSearchResultsGrid.BackgroundColor = Color.Black;
+            ItemSearchResultsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ItemSearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { typeID, typeName, marketGroupName, groupId, description, volume, portionSize, raceId, basePrice, marketGroupId, parentMarketGroupId, iconId, soundId, graphicId, groupName, categoryID, categoryName });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.Black;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
             ItemSearchResultsGrid.EditableColumns = null;
-            ItemSearchResultsGrid.GridColor = Color.Black;
+            ItemSearchResultsGrid.GridColor = Color.FromArgb(21, 21, 21);
             ItemSearchResultsGrid.Location = new Point(462, 125);
             ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
             ItemSearchResultsGrid.MultiSelect = false;
@@ -376,7 +376,7 @@
             ShoppingListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             ShoppingListGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             ShoppingListGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            ShoppingListGrid.BackgroundColor = Color.Black;
+            ShoppingListGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -390,13 +390,13 @@
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.Black;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             ShoppingListGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ShoppingListGrid.EditableColumns = "Quantity,BoughtAtPrice,Bought";
-            ShoppingListGrid.GridColor = Color.Black;
+            ShoppingListGrid.GridColor = Color.FromArgb(21, 21, 21);
             ShoppingListGrid.Location = new Point(12, 125);
             ShoppingListGrid.Margin = new Padding(3, 2, 3, 2);
             ShoppingListGrid.Name = "ShoppingListGrid";
@@ -464,6 +464,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(1022, 519);
             Controls.Add(ShoppingListGrid);
             Controls.Add(label4);

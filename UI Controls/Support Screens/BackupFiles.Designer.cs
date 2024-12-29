@@ -42,7 +42,7 @@
             // PriceHistoryCheckbox
             // 
             PriceHistoryCheckbox.AutoSize = true;
-            PriceHistoryCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            PriceHistoryCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             PriceHistoryCheckbox.Location = new Point(10, 9);
             PriceHistoryCheckbox.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryCheckbox.Name = "PriceHistoryCheckbox";
@@ -54,7 +54,7 @@
             // DefaultValuesCheckbox
             // 
             DefaultValuesCheckbox.AutoSize = true;
-            DefaultValuesCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            DefaultValuesCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             DefaultValuesCheckbox.Location = new Point(10, 83);
             DefaultValuesCheckbox.Margin = new Padding(3, 2, 3, 2);
             DefaultValuesCheckbox.Name = "DefaultValuesCheckbox";
@@ -66,7 +66,7 @@
             // AbyssRunsCheckbox
             // 
             AbyssRunsCheckbox.AutoSize = true;
-            AbyssRunsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            AbyssRunsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             AbyssRunsCheckbox.Location = new Point(10, 58);
             AbyssRunsCheckbox.Margin = new Padding(3, 2, 3, 2);
             AbyssRunsCheckbox.Name = "AbyssRunsCheckbox";
@@ -78,7 +78,7 @@
             // TrackedItemsCheckbox
             // 
             TrackedItemsCheckbox.AutoSize = true;
-            TrackedItemsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            TrackedItemsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             TrackedItemsCheckbox.Location = new Point(10, 34);
             TrackedItemsCheckbox.Margin = new Padding(3, 2, 3, 2);
             TrackedItemsCheckbox.Name = "TrackedItemsCheckbox";
@@ -89,15 +89,15 @@
             // 
             // BackupFilesButton
             // 
-            BackupFilesButton.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            BackupFilesButton.ForeColor = Color.Black;
+            BackupFilesButton.Font = new Font("Segoe UI", 10.2F);
+            BackupFilesButton.ForeColor = Color.FromArgb(234, 234, 234);
             BackupFilesButton.Location = new Point(10, 186);
             BackupFilesButton.Margin = new Padding(3, 2, 3, 2);
             BackupFilesButton.Name = "BackupFilesButton";
             BackupFilesButton.Size = new Size(124, 25);
             BackupFilesButton.TabIndex = 4;
             BackupFilesButton.Text = "Backup Files";
-            BackupFilesButton.UseVisualStyleBackColor = true;
+            BackupFilesButton.UseVisualStyleBackColor = false;
             BackupFilesButton.Click += BackupFilesButton_Click;
             // 
             // BackupFilesDialog
@@ -109,7 +109,7 @@
             // BuildPlansCheckbox
             // 
             BuildPlansCheckbox.AutoSize = true;
-            BuildPlansCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            BuildPlansCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             BuildPlansCheckbox.Location = new Point(10, 110);
             BuildPlansCheckbox.Margin = new Padding(3, 2, 3, 2);
             BuildPlansCheckbox.Name = "BuildPlansCheckbox";
@@ -121,7 +121,7 @@
             // ShoppingListCheckbox
             // 
             ShoppingListCheckbox.AutoSize = true;
-            ShoppingListCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            ShoppingListCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             ShoppingListCheckbox.Location = new Point(10, 138);
             ShoppingListCheckbox.Margin = new Padding(3, 2, 3, 2);
             ShoppingListCheckbox.Name = "ShoppingListCheckbox";
@@ -134,6 +134,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(176, 244);
             Controls.Add(ShoppingListCheckbox);
             Controls.Add(BuildPlansCheckbox);

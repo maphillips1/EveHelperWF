@@ -156,7 +156,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                 //Reset Loot TextBox
                 LootTextBox.Text = string.Empty;
-                MessageBox.Show("Added Run!");
                 this.Cursor = Cursors.Default;
             }
             else

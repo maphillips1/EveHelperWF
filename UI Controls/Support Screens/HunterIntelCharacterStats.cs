@@ -1,4 +1,5 @@
-﻿using EveHelperWF.Objects.ESI_Objects;
+﻿using EveHelperWF.Objects;
+using EveHelperWF.Objects.ESI_Objects;
 using EveHelperWF.Objects.ESI_Objects.KillMail;
 using EveHelperWF.Objects.ZKill_Objects;
 using EveHelperWF.ScreenHelper;
@@ -17,24 +18,29 @@ namespace EveHelperWF.UI_Controls.Support_Screens
     public partial class HunterIntelCharacterStats : UserControl
     {
         UniverseIdSearchResultItem itemForStats;
-        List<Killmail> Kills = new List<Killmail>();
-        List<ESI_KillMail> ESI_Kills = new List<ESI_KillMail>();
+        ZKillStats Stats = new ZKillStats();
         List<Killmail> Losses = new List<Killmail>();
         List<ESI_KillMail> ESI_Losses = new List<ESI_KillMail>();
 
-        List<long> CynoFieldIDs = new List<long>() { 28646, 21096  };
+        Dictionary<long, int> KillSystemCount = new Dictionary<long, int>();
+        Dictionary<long, int> LossSystemCount = new Dictionary<long, int>();
+
+        List<long> CynoFieldIDs = new List<long>() { 28646, 21096 };
         long industrialCynoId = 52694;
 
-
-
-        List<ESI_KillMail> killsWIthCynos = new List<ESI_KillMail>();
         List<ESI_KillMail> LossedWithIndyCyno = new List<ESI_KillMail>();
-        List<ESI_KillMail> KillsWithShipsCynoCapable = new List<ESI_KillMail>();
+        List<ESI_KillMail> LossesWithCynos = new List<ESI_KillMail>();
 
         public HunterIntelCharacterStats(UniverseIdSearchResultItem characterResult)
         {
             InitializeComponent();
             itemForStats = characterResult;
+            KillSystemListBox.BackColor = Enums.Enums.BackgroundColor;
+            KillSystemListBox.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+            
+            TopShipsTreeView.BackColor = Enums.Enums.BackgroundColor;
+            TopShipsTreeView.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+
             LoadStats();
         }
 
@@ -47,19 +53,17 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void LoadStats()
         {
-            LoadZkillKills();
+            this.Cursor = Cursors.WaitCursor;
+            LoadZKillStats();
             LoadZkillLosses();
-            ConvertZkillMailsToESIKillMails();
+            //ConvertZkillMailsToESIKillMails();
             DatabindScreen();
+            this.Cursor = Cursors.Default;
         }
 
-        private void LoadZkillKills()
+        private void LoadZKillStats()
         {
-            List<Killmail> killmails = ZKill_Calls.Zkill_Calls.LoadCharacterKills(itemForStats.id);
-            if (killmails != null)
-            {
-                Kills = killmails;
-            }
+            Stats = ZKill_Calls.Zkill_Calls.LoadStats("characterID", itemForStats.id);
         }
 
         private void LoadZkillLosses()
@@ -69,76 +73,77 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             {
                 Losses = killmails;
             }
-        }
-
-        private void ConvertZkillMailsToESIKillMails()
-        {
-            if (!ConvertZkillBackgroundWorker.IsBusy)
-            {
-                ConvertZkillBackgroundWorker.RunWorkerAsync();
-            }
+            ESI_Losses = ESI_Calls.ESIKillMail.ConvertZkillToESIKillMails(Losses).Result;
         }
 
         private void DatabindScreen()
         {
             NameLabel.Text = itemForStats.name;
-            KillCountLabel.Text = Kills.Count.ToString("N0");
-            LossCountLabel.Text = Losses.Count.ToString("N0");
+            KillCountLabel.Text = Stats.shipsDestroyed.ToString("N0");
+            LossCountLabel.Text = Stats.shipsLost.ToString("N0");
+            DangerRatingLabel.Text = Stats.dangerRatio.ToString("N0");
+            DestroyedValueLabel.Text = CommonHelper.FormatIskShortened((decimal)Stats.iskDestroyed);
+            LostValueLabel.Text = CommonHelper.FormatIskShortened((decimal)Stats.iskLost);
 
-            double destroyedValue = 0;
-            Kills.ForEach(x => destroyedValue += x.zkb.totalValue);
+            SetCynoField();
+            SetTopSystems();
+            SetTopShips();
+        }
 
-            double LostValue = 0;
-            Losses.ForEach(x => LostValue += x.zkb.totalValue);
-
-            DestroyedValueLabel.Text = CommonHelper.FormatIskShortened((decimal)destroyedValue);
-            LostValueLabel.Text = CommonHelper.FormatIskShortened((decimal)LostValue);
-
-            if (killsWIthCynos.Count == 0 && LossedWithIndyCyno.Count > 0)
+        private void SetCynoField()
+        {
+            FindKillsWithCyno();
+            if (LossesWithCynos.Count == 0 && LossedWithIndyCyno.Count > 0)
             {
-                IsCynoPilotLabel.Text = "True, Industrial Only";
+                IsCynoPilotLabel.Text = "Yes, Industrial Only";
             }
             else
             {
-                IsCynoPilotLabel.Text = (killsWIthCynos?.Count > 0).ToString();
+                bool isCynoPilot = (LossesWithCynos?.Count > 0 || LossedWithIndyCyno?.Count > 0);
+                IsCynoPilotLabel.Text = "Yes";
             }
-
         }
 
-        private void ConvertZkillBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void SetTopSystems()
         {
-            Tuple<List<ESI_KillMail>, List<ESI_KillMail>> result = null;
-
-            List<ESI_KillMail> convertedKills = ESI_Calls.ESIKillMail.ConvertZkillToESIKillMails(Kills).Result;
-            List<ESI_KillMail> convertedLosses = null;
-            if (!ConvertZkillBackgroundWorker.CancellationPending)
+            ZkillTopLists topSystems = Stats.topLists?.Find(x => x.type.Equals("solarSystem"));
+            if (topSystems != null)
             {
-                convertedLosses = ESI_Calls.ESIKillMail.ConvertZkillToESIKillMails(Losses).Result;
+                List<string> topSystemsList = new List<string>();
+                SolarSystem solarSystem = new SolarSystem();
+                foreach (ZkillTopListsValues systems in topSystems.values)
+                {
+                    solarSystem = CommonHelper.SolarSystemList.Find(x => x.solarSystemID == systems.solarSystemID);
+                    if (solarSystem != null)
+                    {
+                        topSystemsList.Add("System: " + solarSystem.solarSystemName + " , Kills: " + systems.kills.ToString("N0") + ", Region: " + solarSystem.regionName);
+                    }
+                }
+                KillSystemListBox.DataSource = topSystemsList;  
             }
-            e.Result = new Tuple<List<ESI_KillMail>, List<ESI_KillMail>>(convertedKills, convertedLosses);
         }
 
-        private void ConvertZkillBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void SetTopShips()
         {
-            if (e.Cancelled) return;
-            Tuple<List<ESI_KillMail>, List<ESI_KillMail>> result = (Tuple<List<ESI_KillMail>, List<ESI_KillMail>>)e.Result;
-
-            if (result.Item1 != null)
+            TopShipsTreeView.Nodes.Clear();
+            ZkillTopLists topShips = Stats.topLists?.Find(x => x.type.Equals("shipType"));
+            if (topShips != null)
             {
-                ESI_Kills.AddRange(result.Item1);
+                InventoryType shipInvType;
+                foreach (ZkillTopListsValues shipTypes in topShips.values)
+                {
+                    shipInvType = CommonHelper.InventoryTypes.Find(x => x.typeId == shipTypes.shipTypeID);
+                    if (shipInvType != null)
+                    {
+                        TopShipsTreeView.Nodes.Add(shipInvType.typeName + " , Kills: " + shipTypes.kills.ToString("N0"));
+                    }
+                }
             }
-            if (result.Item2 != null)
-            {
-                ESI_Losses.AddRange(result.Item2);
-            }
-            FindKillsWithCyno();
-
-            DatabindScreen();
         }
 
         private void FindKillsWithCyno()
         {
-            killsWIthCynos = ESI_Losses.FindAll(x => x.victim.items?.FindAll(y => CynoFieldIDs.Contains(y.item_type_id))?.Count > 0);
+            LossesWithCynos = ESI_Losses.FindAll(x => x.victim.items?.FindAll(y => CynoFieldIDs.Contains(y.item_type_id))?.Count > 0);
             LossedWithIndyCyno = ESI_Losses.FindAll(x => x.victim.items?.FindAll(y => y.item_type_id == industrialCynoId)?.Count > 0);
         }
     }

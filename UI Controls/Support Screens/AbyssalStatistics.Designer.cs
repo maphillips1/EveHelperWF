@@ -68,7 +68,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F);
             label1.Location = new Point(12, 35);
             label1.Name = "label1";
             label1.Size = new Size(55, 21);
@@ -78,7 +78,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 11.25F);
             label2.Location = new Point(12, 75);
             label2.Name = "label2";
             label2.Size = new Size(75, 20);
@@ -88,7 +88,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Segoe UI", 11.25F);
             label3.Location = new Point(12, 115);
             label3.Name = "label3";
             label3.Size = new Size(66, 20);
@@ -132,7 +132,7 @@
             // NumRunsLabel
             // 
             NumRunsLabel.AutoSize = true;
-            NumRunsLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            NumRunsLabel.Font = new Font("Segoe UI", 11.25F);
             NumRunsLabel.Location = new Point(140, 9);
             NumRunsLabel.Name = "NumRunsLabel";
             NumRunsLabel.Size = new Size(76, 20);
@@ -142,7 +142,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 11.25F);
             label11.Location = new Point(19, 9);
             label11.Name = "label11";
             label11.Size = new Size(71, 20);
@@ -152,7 +152,7 @@
             // AverageLootRunLabel
             // 
             AverageLootRunLabel.AutoSize = true;
-            AverageLootRunLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            AverageLootRunLabel.Font = new Font("Segoe UI", 11.25F);
             AverageLootRunLabel.Location = new Point(140, 259);
             AverageLootRunLabel.Name = "AverageLootRunLabel";
             AverageLootRunLabel.Size = new Size(70, 20);
@@ -162,7 +162,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Font = new Font("Segoe UI", 11.25F);
             label10.Location = new Point(19, 259);
             label10.Name = "label10";
             label10.Size = new Size(103, 20);
@@ -172,7 +172,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 11.25F);
             label5.Location = new Point(273, 12);
             label5.Name = "label5";
             label5.Size = new Size(83, 20);
@@ -182,7 +182,7 @@
             // ProfitLabel
             // 
             ProfitLabel.AutoSize = true;
-            ProfitLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            ProfitLabel.Font = new Font("Segoe UI", 11.25F);
             ProfitLabel.Location = new Point(140, 209);
             ProfitLabel.Name = "ProfitLabel";
             ProfitLabel.Size = new Size(45, 20);
@@ -192,7 +192,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Segoe UI", 11.25F);
             label8.Location = new Point(19, 209);
             label8.Name = "label8";
             label8.Size = new Size(45, 20);
@@ -202,7 +202,7 @@
             // LootValueLabel
             // 
             LootValueLabel.AutoSize = true;
-            LootValueLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            LootValueLabel.Font = new Font("Segoe UI", 11.25F);
             LootValueLabel.Location = new Point(140, 159);
             LootValueLabel.Name = "LootValueLabel";
             LootValueLabel.Size = new Size(79, 20);
@@ -212,7 +212,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 11.25F);
             label7.Location = new Point(19, 159);
             label7.Name = "label7";
             label7.Size = new Size(79, 20);
@@ -222,7 +222,7 @@
             // FilamentCostLabel
             // 
             FilamentCostLabel.AutoSize = true;
-            FilamentCostLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            FilamentCostLabel.Font = new Font("Segoe UI", 11.25F);
             FilamentCostLabel.Location = new Point(140, 106);
             FilamentCostLabel.Name = "FilamentCostLabel";
             FilamentCostLabel.Size = new Size(99, 20);
@@ -232,7 +232,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 11.25F);
             label6.Location = new Point(19, 109);
             label6.Name = "label6";
             label6.Size = new Size(99, 20);
@@ -242,7 +242,7 @@
             // SuccessRateLabel
             // 
             SuccessRateLabel.AutoSize = true;
-            SuccessRateLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            SuccessRateLabel.Font = new Font("Segoe UI", 11.25F);
             SuccessRateLabel.Location = new Point(140, 59);
             SuccessRateLabel.Name = "SuccessRateLabel";
             SuccessRateLabel.Size = new Size(93, 20);
@@ -252,7 +252,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Font = new Font("Segoe UI", 11.25F);
             label4.Location = new Point(19, 59);
             label4.Name = "label4";
             label4.Size = new Size(93, 20);
@@ -282,6 +282,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
             Controls.Add(panel1);
             Controls.Add(FilamentCombo);

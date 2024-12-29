@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace EveHelperWF.Objects.Custom_Controls
 {
@@ -27,6 +28,7 @@ namespace EveHelperWF.Objects.Custom_Controls
             _isLoading = false;
             this.BackColor = Enums.Enums.BackgroundColor;
             this.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+            
         }
 
         private void DatabindCombo()
@@ -67,6 +69,8 @@ namespace EveHelperWF.Objects.Custom_Controls
         {
             filteredPriceHistories = filteredPriceHistories.OrderBy(x => x.date).ToList();
 
+            //BuildDummySeries(filteredPriceHistories);
+
             PriceHistoryChart.Series["Average"].XValueMember = "date";
             PriceHistoryChart.Series["Low"].XValueMember = "date";
             PriceHistoryChart.Series["High"].XValueMember = "date";
@@ -80,6 +84,7 @@ namespace EveHelperWF.Objects.Custom_Controls
             {
                 for (int i = 0; i < filteredPriceHistories.Count; i += step)
                 {
+                    
                     PriceHistoryChart.Series["Average"].Points.Add(i, filteredPriceHistories[i].average);
                     PriceHistoryChart.Series["Low"].Points.Add(i, filteredPriceHistories[i].lowest);
                     PriceHistoryChart.Series["High"].Points.Add(i, filteredPriceHistories[i].highest);
@@ -98,6 +103,19 @@ namespace EveHelperWF.Objects.Custom_Controls
             }
 
             PriceHistoryChart.DataSource = filteredPriceHistories;
+        }
+
+        private void BuildDummySeries(List<ESIPriceHistory> filteredPriceHistories)
+        {
+            double rangeMin = filteredPriceHistories.Min(x => x.lowest) *0.9;
+            double rangeMax = filteredPriceHistories.Max(x => x.highest) * 1.1;
+
+            Series sDummy = PriceHistoryChart.Series.Add("dummy");
+            sDummy.Color = Color.Transparent;
+            sDummy.IsVisibleInLegend = false;
+            sDummy.ChartType = SeriesChartType.Point;
+            sDummy.Points.AddXY(0, rangeMin + 1);
+            sDummy.Points.AddXY(0, rangeMax - 1);
         }
 
         private DateTime GetFirstDate()
