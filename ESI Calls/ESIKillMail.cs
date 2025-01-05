@@ -14,15 +14,18 @@ namespace EveHelperWF.ESI_Calls
     {
         private static string baseURL = "https://esi.evetech.net/latest/killmails/";
         private static string urlDataSource = "?datasource=tranquility";
+        private static int maxESIKillMails = 50;
 
         public static async Task<List<ESI_KillMail>> ConvertZkillToESIKillMails(List<Killmail> zKillMails)
         {
+            int max = Math.Min(zKillMails.Count, maxESIKillMails);
             List<ESI_KillMail> killmails = new List<ESI_KillMail>();
 
             List<Task<ESI_KillMail>> tasks = new List<Task<ESI_KillMail>>();
-
-            foreach (Killmail killmail in zKillMails)
+            Killmail killmail;
+            for (int i = 0; i < max; i++)
             {
+                killmail = zKillMails[i];
                 tasks.Add(LoadKillMail(killmail.killmail_id, killmail.zkb.hash));
             }
             ESI_KillMail[] results = await Task.WhenAll(tasks).ConfigureAwait(false);

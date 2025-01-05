@@ -1082,7 +1082,7 @@ namespace EveHelperWF
             {
                 TotalReactionTaxesAndFees = 0;
             }
-            
+
             decimal TotalMatPrice = 0;
             foreach (MaterialsWithMarketData mat in ReactionMats)
             {
@@ -2309,5 +2309,6 @@ namespace EveHelperWF
             }
         }
         #endregion
+
     }
 }

@@ -43,7 +43,7 @@
             // 
             PriceHistoryCheckbox.AutoSize = true;
             PriceHistoryCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            PriceHistoryCheckbox.Location = new Point(10, 9);
+            PriceHistoryCheckbox.Location = new Point(60, 11);
             PriceHistoryCheckbox.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryCheckbox.Name = "PriceHistoryCheckbox";
             PriceHistoryCheckbox.Size = new Size(118, 23);
@@ -55,7 +55,7 @@
             // 
             DefaultValuesCheckbox.AutoSize = true;
             DefaultValuesCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            DefaultValuesCheckbox.Location = new Point(10, 83);
+            DefaultValuesCheckbox.Location = new Point(60, 85);
             DefaultValuesCheckbox.Margin = new Padding(3, 2, 3, 2);
             DefaultValuesCheckbox.Name = "DefaultValuesCheckbox";
             DefaultValuesCheckbox.Size = new Size(118, 23);
@@ -67,7 +67,7 @@
             // 
             AbyssRunsCheckbox.AutoSize = true;
             AbyssRunsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            AbyssRunsCheckbox.Location = new Point(10, 58);
+            AbyssRunsCheckbox.Location = new Point(60, 60);
             AbyssRunsCheckbox.Margin = new Padding(3, 2, 3, 2);
             AbyssRunsCheckbox.Name = "AbyssRunsCheckbox";
             AbyssRunsCheckbox.Size = new Size(99, 23);
@@ -79,7 +79,7 @@
             // 
             TrackedItemsCheckbox.AutoSize = true;
             TrackedItemsCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            TrackedItemsCheckbox.Location = new Point(10, 34);
+            TrackedItemsCheckbox.Location = new Point(60, 36);
             TrackedItemsCheckbox.Margin = new Padding(3, 2, 3, 2);
             TrackedItemsCheckbox.Name = "TrackedItemsCheckbox";
             TrackedItemsCheckbox.Size = new Size(114, 23);
@@ -91,7 +91,7 @@
             // 
             BackupFilesButton.Font = new Font("Segoe UI", 10.2F);
             BackupFilesButton.ForeColor = Color.FromArgb(234, 234, 234);
-            BackupFilesButton.Location = new Point(10, 186);
+            BackupFilesButton.Location = new Point(54, 188);
             BackupFilesButton.Margin = new Padding(3, 2, 3, 2);
             BackupFilesButton.Name = "BackupFilesButton";
             BackupFilesButton.Size = new Size(124, 25);
@@ -110,7 +110,7 @@
             // 
             BuildPlansCheckbox.AutoSize = true;
             BuildPlansCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            BuildPlansCheckbox.Location = new Point(10, 110);
+            BuildPlansCheckbox.Location = new Point(60, 112);
             BuildPlansCheckbox.Margin = new Padding(3, 2, 3, 2);
             BuildPlansCheckbox.Name = "BuildPlansCheckbox";
             BuildPlansCheckbox.Size = new Size(97, 23);
@@ -122,7 +122,7 @@
             // 
             ShoppingListCheckbox.AutoSize = true;
             ShoppingListCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
-            ShoppingListCheckbox.Location = new Point(10, 138);
+            ShoppingListCheckbox.Location = new Point(60, 140);
             ShoppingListCheckbox.Margin = new Padding(3, 2, 3, 2);
             ShoppingListCheckbox.Name = "ShoppingListCheckbox";
             ShoppingListCheckbox.Size = new Size(120, 23);
@@ -135,7 +135,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(176, 244);
+            ClientSize = new Size(244, 244);
             Controls.Add(ShoppingListCheckbox);
             Controls.Add(BuildPlansCheckbox);
             Controls.Add(BackupFilesButton);

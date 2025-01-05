@@ -60,6 +60,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             isLoading = true;
             InitializeComponent();
             this.currentBuildPlan = buildPlan;
+            CurrentFileName = Enums.Enums.BuildPlanDirectory + this.currentBuildPlan.BuildPlanName;
             SaveBuildPlan();
             BlueprintBrowserHelper.Init();
             LoadIndySettingCombos();
@@ -310,7 +311,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan);
                 SetSummaryInformation();
                 LoadMaterialsPriceTreeView();
-                LoadMostExpensiveTreeView();
+                LoadMostExpensiveGridView();
                 ProgressLabel.Text = "";
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -336,7 +337,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     SaveBuildPlan();
                     SetSummaryInformation();
                     LoadMaterialsPriceTreeView();
-                    LoadMostExpensiveTreeView();
+                    LoadMostExpensiveGridView();
                 }
                 MaterialsPriceTreeView.SelectedNode = null;
                 this.isLoading = false;
@@ -1566,7 +1567,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
 
-
+                    //Taxes when selling on Market
                     decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                 this.currentBuildPlan.IndustrySettings,
                                                                                 (int)Enums.Enums.OrderType.Sell);
@@ -1616,8 +1617,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     HeaderCostUnitLabel.Text = CommonHelper.FormatIsk(totalCostPerItem);
 
-                    decimal totalVolume = GetTotalVolumeForMaterials(combinedMats);
-                    InputVolumeLabel.Text = totalVolume.ToString("N2") + " m3";
+                    decimal totalInputVolume = GetTotalVolumeForMaterials(combinedMats);
+                    InputVolumeLabel.Text = totalInputVolume.ToString("N2") + " m3";
 
                     ProfitLabel.Text = CommonHelper.FormatIsk(profit);
                     if (profit < 0)
@@ -1828,7 +1829,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void LoadMostExpensiveTreeView()
+        private void LoadMostExpensiveGridView()
         {
 
 
@@ -1895,7 +1896,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadIndySettings();
             LoadFinalProductMarketInfo();
             LoadMaterialsPriceTreeView();
-            LoadMostExpensiveTreeView();
+            LoadMostExpensiveGridView();
             LoadDetailsPage(false);
             LoadOptimumBuildSchedule();
             SetSummaryInformation();
@@ -2185,7 +2186,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan.additionalCosts,
                                                                      this.currentBuildPlan);
                         LoadMaterialsPriceTreeView();
-                        LoadMostExpensiveTreeView();
+                        LoadMostExpensiveGridView();
                         SetSummaryInformation();
                         SaveBuildPlan();
                         if (errorBuilder.Length > 0)
