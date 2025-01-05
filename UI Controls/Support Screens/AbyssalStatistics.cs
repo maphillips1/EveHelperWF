@@ -67,6 +67,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             FilamentCostLabel.Text = String.Empty;
             AverageLootRunLabel.Text = String.Empty;
             ProfitLabel.Text = String.Empty;
+            ProfitRunLabel.Text = String.Empty;
             LootFlowPanel.Controls.Clear();
         }
 
@@ -124,6 +125,9 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
             ProfitLabel.Text = CommonHelper.FormatIskShortened(totalLootValue - totalFilamentCost);
             ToolTipControl.SetToolTip(ProfitLabel, CommonHelper.FormatIsk(totalLootValue - totalFilamentCost));
+
+            ProfitRunLabel.Text = CommonHelper.FormatIskShortened((totalLootValue - totalFilamentCost) / FilteredList.Count);
+            ToolTipControl.SetToolTip(ProfitRunLabel, CommonHelper.FormatIsk((totalLootValue - totalFilamentCost) / FilteredList.Count));
         }
 
         private void LoadLootTable(List<AbyssRun> filteredList)
@@ -149,14 +153,14 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             InventoryType invType;
             decimal dropChance = 0;
             Label lootLabel;
-            foreach (KeyValuePair<int,int> kvp in typeDrops.OrderByDescending(x => x.Value))
+            foreach (KeyValuePair<int, int> kvp in typeDrops.OrderByDescending(x => x.Value))
             {
                 invType = CommonHelper.InventoryTypes.Find(x => x.typeId == kvp.Key);
                 if (invType != null)
                 {
                     dropChance = (decimal)kvp.Value / (decimal)filteredList.Count;
                     lootLabel = new Label();
-                    lootLabel.Text = string.Format("{0} - Drop Chance {1}", invType.typeName, dropChance.ToString("P2"));
+                    lootLabel.Text = string.Format("{1} : {0}", invType.typeName, dropChance.ToString("P2"));
                     lootLabel.AutoSize = true;
                     lootLabel.Padding = new Padding(5);
                     LootFlowPanel.Controls.Add(lootLabel);
@@ -172,6 +176,11 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private void FilamentCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadStats();
+        }
+
+        private void AverageLootRunLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -171,6 +171,10 @@ namespace EveHelperWF.ScreenHelper
                 decimal shortenedAmount;
                 switch (iskAmount)
                 {
+                    case >= 1000000000000:
+                        shortenedAmount = Math.Round(iskAmount / (decimal)1000000000000, 3);
+                        formattedIsk = shortenedAmount.ToString("C") + " T";
+                        break;
                     case >= 1000000000:
                         shortenedAmount = Math.Round(iskAmount / (decimal)1000000000, 3);
                         formattedIsk = shortenedAmount.ToString("C") + " B";

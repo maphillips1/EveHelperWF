@@ -62,7 +62,6 @@
             ItemSearchTextBox = new TextBox();
             label2 = new Label();
             AddItemsButton = new Objects.Custom_Controls.EveHelperButton();
-            label3 = new Label();
             CopyToClipboardButton = new Objects.Custom_Controls.EveHelperButton();
             label4 = new Label();
             ShoppingListGrid = new Objects.Custom_Controls.EveHelperGridView();
@@ -79,7 +78,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label1.ForeColor = Color.Gold;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(10, 16);
             label1.Name = "label1";
             label1.Size = new Size(101, 17);
             label1.TabIndex = 0;
@@ -90,7 +89,7 @@
             ShoppingListCombo.DropDownHeight = 150;
             ShoppingListCombo.FormattingEnabled = true;
             ShoppingListCombo.IntegralHeight = false;
-            ShoppingListCombo.Location = new Point(119, 8);
+            ShoppingListCombo.Location = new Point(117, 15);
             ShoppingListCombo.Name = "ShoppingListCombo";
             ShoppingListCombo.Size = new Size(242, 23);
             ShoppingListCombo.TabIndex = 1;
@@ -99,7 +98,7 @@
             // NewListButton
             // 
             NewListButton.ForeColor = Color.FromArgb(234, 234, 234);
-            NewListButton.Location = new Point(119, 37);
+            NewListButton.Location = new Point(117, 44);
             NewListButton.Name = "NewListButton";
             NewListButton.Size = new Size(118, 23);
             NewListButton.TabIndex = 2;
@@ -110,7 +109,7 @@
             // DeleteListButton
             // 
             DeleteListButton.ForeColor = Color.FromArgb(234, 234, 234);
-            DeleteListButton.Location = new Point(243, 37);
+            DeleteListButton.Location = new Point(241, 44);
             DeleteListButton.Name = "DeleteListButton";
             DeleteListButton.Size = new Size(118, 23);
             DeleteListButton.TabIndex = 3;
@@ -122,7 +121,7 @@
             // 
             ItemSearchResultsGrid.AllowUserToAddRows = false;
             ItemSearchResultsGrid.AllowUserToDeleteRows = false;
-            ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ItemSearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             ItemSearchResultsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ItemSearchResultsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             ItemSearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -137,14 +136,14 @@
             ItemSearchResultsGrid.DefaultCellStyle = dataGridViewCellStyle1;
             ItemSearchResultsGrid.EditableColumns = null;
             ItemSearchResultsGrid.GridColor = Color.FromArgb(21, 21, 21);
-            ItemSearchResultsGrid.Location = new Point(462, 125);
+            ItemSearchResultsGrid.Location = new Point(532, 80);
             ItemSearchResultsGrid.Margin = new Padding(3, 2, 3, 2);
             ItemSearchResultsGrid.MultiSelect = false;
             ItemSearchResultsGrid.Name = "ItemSearchResultsGrid";
             ItemSearchResultsGrid.RowHeadersWidth = 51;
             ItemSearchResultsGrid.RowTemplate.Height = 29;
             ItemSearchResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ItemSearchResultsGrid.Size = new Size(548, 383);
+            ItemSearchResultsGrid.Size = new Size(478, 410);
             ItemSearchResultsGrid.TabIndex = 8;
             ItemSearchResultsGrid.DoubleClick += AddItemsButton_Click;
             // 
@@ -301,30 +300,31 @@
             // SearchButton
             // 
             SearchButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            SearchButton.ForeColor = Color.Black;
-            SearchButton.Location = new Point(903, 56);
+            SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
+            SearchButton.Location = new Point(903, 11);
             SearchButton.Margin = new Padding(3, 2, 3, 2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(82, 22);
             SearchButton.TabIndex = 7;
             SearchButton.Text = "Search";
-            SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.UseVisualStyleBackColor = false;
             SearchButton.Click += SearchButton_Click;
             // 
             // ItemSearchTextBox
             // 
-            ItemSearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            ItemSearchTextBox.Location = new Point(462, 56);
+            ItemSearchTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ItemSearchTextBox.Location = new Point(665, 11);
             ItemSearchTextBox.Margin = new Padding(3, 2, 3, 2);
             ItemSearchTextBox.Name = "ItemSearchTextBox";
-            ItemSearchTextBox.Size = new Size(426, 23);
+            ItemSearchTextBox.Size = new Size(223, 23);
             ItemSearchTextBox.TabIndex = 6;
             ItemSearchTextBox.KeyDown += ItemSearchTextBox_KeyDown;
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(389, 59);
+            label2.Location = new Point(593, 15);
             label2.Name = "label2";
             label2.Size = new Size(66, 15);
             label2.TabIndex = 5;
@@ -332,8 +332,9 @@
             // 
             // AddItemsButton
             // 
+            AddItemsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             AddItemsButton.ForeColor = Color.FromArgb(234, 234, 234);
-            AddItemsButton.Location = new Point(462, 97);
+            AddItemsButton.Location = new Point(532, 52);
             AddItemsButton.Name = "AddItemsButton";
             AddItemsButton.Size = new Size(118, 23);
             AddItemsButton.TabIndex = 9;
@@ -341,19 +342,10 @@
             AddItemsButton.UseVisualStyleBackColor = false;
             AddItemsButton.Click += AddItemsButton_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 107);
-            label3.Name = "label3";
-            label3.Size = new Size(46, 15);
-            label3.TabIndex = 12;
-            label3.Text = "Bought";
-            // 
             // CopyToClipboardButton
             // 
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CopyToClipboardButton.Location = new Point(223, 96);
+            CopyToClipboardButton.Location = new Point(381, 52);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
             CopyToClipboardButton.Size = new Size(138, 23);
             CopyToClipboardButton.TabIndex = 13;
@@ -364,7 +356,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(220, 73);
+            label4.Location = new Point(370, 34);
             label4.Name = "label4";
             label4.Size = new Size(151, 15);
             label4.TabIndex = 14;
@@ -374,7 +366,7 @@
             // 
             dataGridViewCellStyle2.BackColor = Color.DimGray;
             ShoppingListGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            ShoppingListGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            ShoppingListGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ShoppingListGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ShoppingListGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -397,7 +389,7 @@
             ShoppingListGrid.DefaultCellStyle = dataGridViewCellStyle6;
             ShoppingListGrid.EditableColumns = "Quantity,BoughtAtPrice,Bought";
             ShoppingListGrid.GridColor = Color.FromArgb(21, 21, 21);
-            ShoppingListGrid.Location = new Point(12, 125);
+            ShoppingListGrid.Location = new Point(12, 80);
             ShoppingListGrid.Margin = new Padding(3, 2, 3, 2);
             ShoppingListGrid.Name = "ShoppingListGrid";
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -410,7 +402,7 @@
             ShoppingListGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             ShoppingListGrid.RowHeadersWidth = 51;
             ShoppingListGrid.RowTemplate.Height = 29;
-            ShoppingListGrid.Size = new Size(419, 391);
+            ShoppingListGrid.Size = new Size(507, 410);
             ShoppingListGrid.TabIndex = 15;
             ShoppingListGrid.CellValidating += ShoppingListGrid_CellValidating;
             ShoppingListGrid.CellValueChanged += ShoppingListGrid_CellValueChanged;
@@ -465,11 +457,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(1022, 519);
+            ClientSize = new Size(1022, 501);
             Controls.Add(ShoppingListGrid);
             Controls.Add(label4);
             Controls.Add(CopyToClipboardButton);
-            Controls.Add(label3);
             Controls.Add(AddItemsButton);
             Controls.Add(ItemSearchResultsGrid);
             Controls.Add(SearchButton);
@@ -520,7 +511,6 @@
         private TextBox ItemSearchTextBox;
         private Label label2;
         private Objects.Custom_Controls.EveHelperButton AddItemsButton;
-        private Label label3;
         private Objects.Custom_Controls.EveHelperButton CopyToClipboardButton;
         private Label label4;
         private Objects.Custom_Controls.EveHelperGridView ShoppingListGrid;

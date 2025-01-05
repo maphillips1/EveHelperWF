@@ -40,6 +40,7 @@
             Label label7;
             Label label6;
             Label label4;
+            Label label12;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbyssalStatistics));
             LootFlowPanel = new FlowLayoutPanel();
             NumRunsLabel = new Label();
@@ -51,6 +52,7 @@
             ShipClassCombo = new ComboBox();
             FilamentCombo = new ComboBox();
             ToolTipControl = new ToolTip(components);
+            ProfitRunLabel = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -62,6 +64,7 @@
             label7 = new Label();
             label6 = new Label();
             label4 = new Label();
+            label12 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,6 +101,8 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(ProfitRunLabel);
+            panel1.Controls.Add(label12);
             panel1.Controls.Add(LootFlowPanel);
             panel1.Controls.Add(NumRunsLabel);
             panel1.Controls.Add(label11);
@@ -153,17 +158,18 @@
             // 
             AverageLootRunLabel.AutoSize = true;
             AverageLootRunLabel.Font = new Font("Segoe UI", 11.25F);
-            AverageLootRunLabel.Location = new Point(140, 259);
+            AverageLootRunLabel.Location = new Point(140, 209);
             AverageLootRunLabel.Name = "AverageLootRunLabel";
             AverageLootRunLabel.Size = new Size(70, 20);
             AverageLootRunLabel.TabIndex = 13;
             AverageLootRunLabel.Text = "Loot/Run";
+            AverageLootRunLabel.Click += AverageLootRunLabel_Click;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F);
-            label10.Location = new Point(19, 259);
+            label10.Location = new Point(19, 209);
             label10.Name = "label10";
             label10.Size = new Size(103, 20);
             label10.TabIndex = 12;
@@ -183,7 +189,7 @@
             // 
             ProfitLabel.AutoSize = true;
             ProfitLabel.Font = new Font("Segoe UI", 11.25F);
-            ProfitLabel.Location = new Point(140, 209);
+            ProfitLabel.Location = new Point(140, 259);
             ProfitLabel.Name = "ProfitLabel";
             ProfitLabel.Size = new Size(45, 20);
             ProfitLabel.TabIndex = 9;
@@ -193,7 +199,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F);
-            label8.Location = new Point(19, 209);
+            label8.Location = new Point(19, 259);
             label8.Name = "label8";
             label8.Size = new Size(45, 20);
             label8.TabIndex = 8;
@@ -277,6 +283,26 @@
             FilamentCombo.TabIndex = 4;
             FilamentCombo.SelectedIndexChanged += FilamentCombo_SelectedIndexChanged;
             // 
+            // ProfitRunLabel
+            // 
+            ProfitRunLabel.AutoSize = true;
+            ProfitRunLabel.Font = new Font("Segoe UI", 11.25F);
+            ProfitRunLabel.Location = new Point(140, 309);
+            ProfitRunLabel.Name = "ProfitRunLabel";
+            ProfitRunLabel.Size = new Size(76, 20);
+            ProfitRunLabel.TabIndex = 18;
+            ProfitRunLabel.Text = "Profit/Run";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 11.25F);
+            label12.Location = new Point(19, 309);
+            label12.Name = "label12";
+            label12.Size = new Size(109, 20);
+            label12.TabIndex = 17;
+            label12.Text = "Avg. Profit/Run";
+            // 
             // AbyssalStatistics
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -315,5 +341,6 @@
         private Label NumRunsLabel;
         private FlowLayoutPanel LootFlowPanel;
         private ToolTip ToolTipControl;
+        private Label ProfitRunLabel;
     }
 }

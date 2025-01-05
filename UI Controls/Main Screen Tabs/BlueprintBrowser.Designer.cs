@@ -543,7 +543,7 @@
             panel1.Location = new Point(357, 5);
             panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(674, 223);
+            panel1.Size = new Size(637, 223);
             panel1.TabIndex = 5;
             // 
             // AdditionalBPCostLabel
@@ -978,7 +978,7 @@
             // 
             label46.AutoSize = true;
             label46.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label46.Location = new Point(1, 390);
+            label46.Location = new Point(1, 389);
             label46.Margin = new Padding(2, 0, 2, 0);
             label46.Name = "label46";
             label46.Size = new Size(59, 15);
@@ -1000,7 +1000,7 @@
             // 
             SystemLabel.AutoSize = true;
             SystemLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            SystemLabel.Location = new Point(63, 106);
+            SystemLabel.Location = new Point(60, 102);
             SystemLabel.Margin = new Padding(2, 0, 2, 0);
             SystemLabel.Name = "SystemLabel";
             SystemLabel.Size = new Size(48, 15);
@@ -1011,7 +1011,7 @@
             // 
             ManuImpllantLabel.AutoSize = true;
             ManuImpllantLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ManuImpllantLabel.Location = new Point(12, 78);
+            ManuImpllantLabel.Location = new Point(58, 73);
             ManuImpllantLabel.Margin = new Padding(2, 0, 2, 0);
             ManuImpllantLabel.Name = "ManuImpllantLabel";
             ManuImpllantLabel.RightToLeft = RightToLeft.No;
@@ -1034,7 +1034,7 @@
             // 
             ManuStructLabel.AutoSize = true;
             ManuStructLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ManuStructLabel.Location = new Point(51, 138);
+            ManuStructLabel.Location = new Point(47, 133);
             ManuStructLabel.Margin = new Padding(2, 0, 2, 0);
             ManuStructLabel.Name = "ManuStructLabel";
             ManuStructLabel.Size = new Size(61, 15);
@@ -1045,7 +1045,7 @@
             // 
             ManuTELabel.AutoSize = true;
             ManuTELabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ManuTELabel.Location = new Point(83, 45);
+            ManuTELabel.Location = new Point(82, 42);
             ManuTELabel.Margin = new Padding(2, 0, 2, 0);
             ManuTELabel.Name = "ManuTELabel";
             ManuTELabel.Size = new Size(26, 15);
@@ -1056,7 +1056,7 @@
             // 
             ManuMELabel.AutoSize = true;
             ManuMELabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ManuMELabel.Location = new Point(78, 17);
+            ManuMELabel.Location = new Point(78, 12);
             ManuMELabel.Margin = new Padding(2, 0, 2, 0);
             ManuMELabel.Name = "ManuMELabel";
             ManuMELabel.Size = new Size(30, 15);
@@ -1090,7 +1090,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label20.Location = new Point(70, 321);
+            label20.Location = new Point(58, 290);
             label20.Margin = new Padding(2, 0, 2, 0);
             label20.Name = "label20";
             label20.Size = new Size(110, 15);
@@ -1101,7 +1101,7 @@
             // 
             label32.AutoSize = true;
             label32.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label32.Location = new Point(58, 294);
+            label32.Location = new Point(46, 263);
             label32.Margin = new Padding(2, 0, 2, 0);
             label32.Name = "label32";
             label32.Size = new Size(119, 15);
@@ -1112,7 +1112,7 @@
             // 
             label68.AutoSize = true;
             label68.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label68.Location = new Point(91, 271);
+            label68.Location = new Point(79, 240);
             label68.Margin = new Padding(2, 0, 2, 0);
             label68.Name = "label68";
             label68.Size = new Size(89, 15);
@@ -1123,7 +1123,7 @@
             // 
             label72.AutoSize = true;
             label72.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label72.Location = new Point(36, 95);
+            label72.Location = new Point(57, 103);
             label72.Margin = new Padding(2, 0, 2, 0);
             label72.Name = "label72";
             label72.Size = new Size(48, 15);
@@ -1134,7 +1134,7 @@
             // 
             label73.AutoSize = true;
             label73.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label73.Location = new Point(31, 69);
+            label73.Location = new Point(55, 73);
             label73.Margin = new Padding(2, 0, 2, 0);
             label73.Name = "label73";
             label73.RightToLeft = RightToLeft.No;
@@ -1146,7 +1146,7 @@
             // 
             label75.AutoSize = true;
             label75.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label75.Location = new Point(24, 130);
+            label75.Location = new Point(44, 133);
             label75.Margin = new Padding(2, 0, 2, 0);
             label75.Name = "label75";
             label75.Size = new Size(61, 15);
@@ -1157,7 +1157,7 @@
             // 
             label76.AutoSize = true;
             label76.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label76.Location = new Point(9, 41);
+            label76.Location = new Point(33, 40);
             label76.Margin = new Padding(2, 0, 2, 0);
             label76.Name = "label76";
             label76.Size = new Size(72, 15);
@@ -1168,7 +1168,7 @@
             // 
             label77.AutoSize = true;
             label77.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label77.Location = new Point(16, 13);
+            label77.Location = new Point(37, 12);
             label77.Margin = new Padding(2, 0, 2, 0);
             label77.Name = "label77";
             label77.Size = new Size(68, 15);
@@ -1179,7 +1179,7 @@
             // 
             label65.AutoSize = true;
             label65.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label65.Location = new Point(90, 323);
+            label65.Location = new Point(66, 280);
             label65.Margin = new Padding(2, 0, 2, 0);
             label65.Name = "label65";
             label65.Size = new Size(110, 15);
@@ -1190,7 +1190,7 @@
             // 
             label69.AutoSize = true;
             label69.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label69.Location = new Point(79, 297);
+            label69.Location = new Point(55, 254);
             label69.Margin = new Padding(2, 0, 2, 0);
             label69.Name = "label69";
             label69.Size = new Size(119, 15);
@@ -1201,7 +1201,7 @@
             // 
             label71.AutoSize = true;
             label71.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label71.Location = new Point(112, 274);
+            label71.Location = new Point(88, 231);
             label71.Margin = new Padding(2, 0, 2, 0);
             label71.Name = "label71";
             label71.Size = new Size(89, 15);
@@ -1212,7 +1212,7 @@
             // 
             label51.AutoSize = true;
             label51.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label51.Location = new Point(37, 106);
+            label51.Location = new Point(57, 103);
             label51.Margin = new Padding(2, 0, 2, 0);
             label51.Name = "label51";
             label51.Size = new Size(48, 15);
@@ -1223,7 +1223,7 @@
             // 
             label54.AutoSize = true;
             label54.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label54.Location = new Point(32, 70);
+            label54.Location = new Point(55, 73);
             label54.Margin = new Padding(2, 0, 2, 0);
             label54.Name = "label54";
             label54.RightToLeft = RightToLeft.No;
@@ -1235,7 +1235,7 @@
             // 
             label60.AutoSize = true;
             label60.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label60.Location = new Point(25, 142);
+            label60.Location = new Point(44, 133);
             label60.Margin = new Padding(2, 0, 2, 0);
             label60.Name = "label60";
             label60.Size = new Size(61, 15);
@@ -1246,7 +1246,7 @@
             // 
             label61.AutoSize = true;
             label61.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label61.Location = new Point(30, 33);
+            label61.Location = new Point(52, 42);
             label61.Margin = new Padding(2, 0, 2, 0);
             label61.Name = "label61";
             label61.Size = new Size(53, 15);
@@ -1257,7 +1257,7 @@
             // 
             label62.AutoSize = true;
             label62.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label62.Location = new Point(14, 5);
+            label62.Location = new Point(36, 12);
             label62.Margin = new Padding(2, 0, 2, 0);
             label62.Name = "label62";
             label62.Size = new Size(69, 15);
@@ -1268,7 +1268,7 @@
             // 
             label19.AutoSize = true;
             label19.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label19.Location = new Point(79, 323);
+            label19.Location = new Point(66, 284);
             label19.Margin = new Padding(2, 0, 2, 0);
             label19.Name = "label19";
             label19.Size = new Size(110, 15);
@@ -1279,7 +1279,7 @@
             // 
             label26.AutoSize = true;
             label26.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label26.Location = new Point(68, 297);
+            label26.Location = new Point(55, 258);
             label26.Margin = new Padding(2, 0, 2, 0);
             label26.Name = "label26";
             label26.Size = new Size(119, 15);
@@ -1290,7 +1290,7 @@
             // 
             label30.AutoSize = true;
             label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label30.Location = new Point(101, 274);
+            label30.Location = new Point(88, 235);
             label30.Margin = new Padding(2, 0, 2, 0);
             label30.Name = "label30";
             label30.Size = new Size(89, 15);
@@ -1301,7 +1301,7 @@
             // 
             label58.AutoSize = true;
             label58.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label58.Location = new Point(38, 97);
+            label58.Location = new Point(57, 100);
             label58.Margin = new Padding(2, 0, 2, 0);
             label58.Name = "label58";
             label58.Size = new Size(48, 15);
@@ -1312,7 +1312,7 @@
             // 
             label59.AutoSize = true;
             label59.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label59.Location = new Point(34, 67);
+            label59.Location = new Point(55, 73);
             label59.Margin = new Padding(2, 0, 2, 0);
             label59.Name = "label59";
             label59.RightToLeft = RightToLeft.No;
@@ -1324,7 +1324,7 @@
             // 
             label64.AutoSize = true;
             label64.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label64.Location = new Point(26, 133);
+            label64.Location = new Point(44, 133);
             label64.Margin = new Padding(2, 0, 2, 0);
             label64.Name = "label64";
             label64.Size = new Size(61, 15);
@@ -1335,7 +1335,7 @@
             // 
             label66.AutoSize = true;
             label66.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label66.Location = new Point(31, 33);
+            label66.Location = new Point(52, 42);
             label66.Margin = new Padding(2, 0, 2, 0);
             label66.Name = "label66";
             label66.Size = new Size(53, 15);
@@ -1346,7 +1346,7 @@
             // 
             label67.AutoSize = true;
             label67.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label67.Location = new Point(15, 5);
+            label67.Location = new Point(36, 12);
             label67.Margin = new Padding(2, 0, 2, 0);
             label67.Name = "label67";
             label67.Size = new Size(69, 15);
@@ -1357,7 +1357,7 @@
             // 
             Label100.AutoSize = true;
             Label100.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            Label100.Location = new Point(602, 230);
+            Label100.Location = new Point(336, 250);
             Label100.Margin = new Padding(2, 0, 2, 0);
             Label100.Name = "Label100";
             Label100.Size = new Size(110, 15);
@@ -1368,7 +1368,7 @@
             // 
             label45.AutoSize = true;
             label45.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label45.Location = new Point(640, 198);
+            label45.Location = new Point(647, 150);
             label45.Margin = new Padding(2, 0, 2, 0);
             label45.Name = "label45";
             label45.Size = new Size(71, 15);
@@ -1379,7 +1379,7 @@
             // 
             label44.AutoSize = true;
             label44.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label44.Location = new Point(636, 162);
+            label44.Location = new Point(643, 114);
             label44.Margin = new Padding(2, 0, 2, 0);
             label44.Name = "label44";
             label44.Size = new Size(75, 15);
@@ -1390,7 +1390,7 @@
             // 
             label43.AutoSize = true;
             label43.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label43.Location = new Point(631, 129);
+            label43.Location = new Point(638, 81);
             label43.Margin = new Padding(2, 0, 2, 0);
             label43.Name = "label43";
             label43.Size = new Size(80, 15);
@@ -1401,7 +1401,7 @@
             // 
             label42.AutoSize = true;
             label42.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label42.Location = new Point(621, 93);
+            label42.Location = new Point(628, 45);
             label42.Margin = new Padding(2, 0, 2, 0);
             label42.Name = "label42";
             label42.Size = new Size(90, 15);
@@ -1412,7 +1412,7 @@
             // 
             label41.AutoSize = true;
             label41.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label41.Location = new Point(662, 58);
+            label41.Location = new Point(669, 10);
             label41.Margin = new Padding(2, 0, 2, 0);
             label41.Name = "label41";
             label41.Size = new Size(102, 15);
@@ -1423,18 +1423,18 @@
             // 
             label40.AutoSize = true;
             label40.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label40.Location = new Point(598, 26);
+            label40.Location = new Point(30, 283);
             label40.Margin = new Padding(2, 0, 2, 0);
             label40.Name = "label40";
-            label40.Size = new Size(114, 15);
+            label40.Size = new Size(75, 15);
             label40.TabIndex = 9;
-            label40.Text = "Outcome Blueprint";
+            label40.Text = "Selected BP.";
             // 
             // label39
             // 
             label39.AutoSize = true;
             label39.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label39.Location = new Point(370, 162);
+            label39.Location = new Point(369, 160);
             label39.Margin = new Padding(2, 0, 2, 0);
             label39.Name = "label39";
             label39.Size = new Size(77, 15);
@@ -1445,7 +1445,7 @@
             // 
             label38.AutoSize = true;
             label38.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label38.Location = new Point(318, 230);
+            label38.Location = new Point(318, 220);
             label38.Margin = new Padding(2, 0, 2, 0);
             label38.Name = "label38";
             label38.Size = new Size(128, 15);
@@ -1456,7 +1456,7 @@
             // 
             label37.AutoSize = true;
             label37.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label37.Location = new Point(342, 197);
+            label37.Location = new Point(342, 190);
             label37.Margin = new Padding(2, 0, 2, 0);
             label37.Name = "label37";
             label37.Size = new Size(104, 15);
@@ -1467,7 +1467,7 @@
             // 
             label36.AutoSize = true;
             label36.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label36.Location = new Point(384, 129);
+            label36.Location = new Point(383, 130);
             label36.Margin = new Padding(2, 0, 2, 0);
             label36.Name = "label36";
             label36.Size = new Size(63, 15);
@@ -1478,7 +1478,7 @@
             // 
             label35.AutoSize = true;
             label35.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label35.Location = new Point(380, 93);
+            label35.Location = new Point(379, 100);
             label35.Margin = new Padding(2, 0, 2, 0);
             label35.Name = "label35";
             label35.Size = new Size(67, 15);
@@ -1489,7 +1489,7 @@
             // 
             label47.AutoSize = true;
             label47.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label47.Location = new Point(305, 29);
+            label47.Location = new Point(304, 40);
             label47.Margin = new Padding(2, 0, 2, 0);
             label47.Name = "label47";
             label47.Size = new Size(140, 15);
@@ -1500,7 +1500,7 @@
             // 
             label34.AutoSize = true;
             label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label34.Location = new Point(334, 58);
+            label34.Location = new Point(334, 70);
             label34.Margin = new Padding(2, 0, 2, 0);
             label34.Name = "label34";
             label34.Size = new Size(112, 15);
@@ -1511,7 +1511,7 @@
             // 
             label33.AutoSize = true;
             label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label33.Location = new Point(352, 2);
+            label33.Location = new Point(352, 10);
             label33.Margin = new Padding(2, 0, 2, 0);
             label33.Name = "label33";
             label33.Size = new Size(94, 15);
@@ -1522,7 +1522,7 @@
             // 
             label28.AutoSize = true;
             label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label28.Location = new Point(59, 42);
+            label28.Location = new Point(44, 43);
             label28.Margin = new Padding(2, 0, 2, 0);
             label28.Name = "label28";
             label28.Size = new Size(61, 15);
@@ -1533,7 +1533,7 @@
             // 
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label27.Location = new Point(39, 7);
+            label27.Location = new Point(26, 13);
             label27.Margin = new Padding(2, 0, 2, 0);
             label27.Name = "label27";
             label27.Size = new Size(79, 15);
@@ -1599,7 +1599,7 @@
             // 
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label18.Location = new Point(46, 48);
+            label18.Location = new Point(44, 43);
             label18.Margin = new Padding(2, 0, 2, 0);
             label18.Name = "label18";
             label18.Size = new Size(61, 15);
@@ -1610,7 +1610,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label17.Location = new Point(26, 7);
+            label17.Location = new Point(28, 13);
             label17.Margin = new Padding(2, 0, 2, 0);
             label17.Name = "label17";
             label17.RightToLeft = RightToLeft.No;
@@ -1622,7 +1622,7 @@
             // 
             label78.AutoSize = true;
             label78.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label78.Location = new Point(25, 217);
+            label78.Location = new Point(11, 192);
             label78.Margin = new Padding(2, 0, 2, 0);
             label78.Name = "label78";
             label78.Size = new Size(94, 15);
@@ -1655,7 +1655,7 @@
             // 
             InventedFromLabelLabel.AutoSize = true;
             InventedFromLabelLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            InventedFromLabelLabel.Location = new Point(195, 288);
+            InventedFromLabelLabel.Location = new Point(335, 284);
             InventedFromLabelLabel.Margin = new Padding(2, 0, 2, 0);
             InventedFromLabelLabel.Name = "InventedFromLabelLabel";
             InventedFromLabelLabel.Size = new Size(90, 15);
@@ -1677,23 +1677,23 @@
             // 
             InventionStructTERigLabel.AutoSize = true;
             InventionStructTERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            InventionStructTERigLabel.Location = new Point(5, 110);
+            InventionStructTERigLabel.Location = new Point(49, 103);
             InventionStructTERigLabel.Margin = new Padding(2, 0, 2, 0);
             InventionStructTERigLabel.Name = "InventionStructTERigLabel";
-            InventionStructTERigLabel.Size = new Size(113, 15);
+            InventionStructTERigLabel.Size = new Size(56, 15);
             InventionStructTERigLabel.TabIndex = 1;
-            InventionStructTERigLabel.Text = "Structure Time Rig";
+            InventionStructTERigLabel.Text = "Time Rig";
             // 
             // InventionStructMERigLabel
             // 
             InventionStructMERigLabel.AutoSize = true;
             InventionStructMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            InventionStructMERigLabel.Location = new Point(8, 74);
+            InventionStructMERigLabel.Location = new Point(53, 73);
             InventionStructMERigLabel.Margin = new Padding(2, 0, 2, 0);
             InventionStructMERigLabel.Name = "InventionStructMERigLabel";
-            InventionStructMERigLabel.Size = new Size(109, 15);
+            InventionStructMERigLabel.Size = new Size(52, 15);
             InventionStructMERigLabel.TabIndex = 1;
-            InventionStructMERigLabel.Text = "Structure Cost Rig";
+            InventionStructMERigLabel.Text = "Cost Rig";
             // 
             // ManufacturingPage
             // 
@@ -1751,7 +1751,7 @@
             // InventedFromLabel
             // 
             InventedFromLabel.AutoSize = true;
-            InventedFromLabel.Location = new Point(289, 288);
+            InventedFromLabel.Location = new Point(439, 284);
             InventedFromLabel.Margin = new Padding(2, 0, 2, 0);
             InventedFromLabel.Name = "InventedFromLabel";
             InventedFromLabel.Size = new Size(92, 15);
@@ -1796,7 +1796,7 @@
             // 
             ManufacturingImagePanel.BackColor = Color.Transparent;
             ManufacturingImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            ManufacturingImagePanel.Location = new Point(255, 15);
+            ManufacturingImagePanel.Location = new Point(439, 15);
             ManufacturingImagePanel.Margin = new Padding(2);
             ManufacturingImagePanel.Name = "ManufacturingImagePanel";
             ManufacturingImagePanel.Size = new Size(102, 102);
@@ -1852,7 +1852,7 @@
             // ManuTEUpDown
             // 
             ManuTEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            ManuTEUpDown.Location = new Point(116, 43);
+            ManuTEUpDown.Location = new Point(116, 40);
             ManuTEUpDown.Margin = new Padding(2);
             ManuTEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             ManuTEUpDown.Minimum = new decimal(new int[] { 20, 0, 0, int.MinValue });
@@ -1865,7 +1865,7 @@
             // CompTEUpDown
             // 
             CompTEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            CompTEUpDown.Location = new Point(67, 419);
+            CompTEUpDown.Location = new Point(67, 417);
             CompTEUpDown.Margin = new Padding(2);
             CompTEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             CompTEUpDown.Name = "CompTEUpDown";
@@ -1890,7 +1890,7 @@
             BuildComponentsCheckbox.AutoSize = true;
             BuildComponentsCheckbox.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             BuildComponentsCheckbox.ForeColor = SystemColors.Control;
-            BuildComponentsCheckbox.Location = new Point(44, 356);
+            BuildComponentsCheckbox.Location = new Point(67, 364);
             BuildComponentsCheckbox.Margin = new Padding(2);
             BuildComponentsCheckbox.Name = "BuildComponentsCheckbox";
             BuildComponentsCheckbox.Size = new Size(127, 19);
@@ -1901,7 +1901,7 @@
             // 
             // ManuMEUpDown
             // 
-            ManuMEUpDown.Location = new Point(116, 15);
+            ManuMEUpDown.Location = new Point(116, 10);
             ManuMEUpDown.Margin = new Padding(2);
             ManuMEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             ManuMEUpDown.Minimum = new decimal(new int[] { 10, 0, 0, int.MinValue });
@@ -1914,7 +1914,7 @@
             // ManuTaxUpDown
             // 
             ManuTaxUpDown.DecimalPlaces = 2;
-            ManuTaxUpDown.Location = new Point(116, 168);
+            ManuTaxUpDown.Location = new Point(116, 160);
             ManuTaxUpDown.Margin = new Padding(2);
             ManuTaxUpDown.Name = "ManuTaxUpDown";
             ManuTaxUpDown.Size = new Size(120, 23);
@@ -1926,7 +1926,7 @@
             // 
             manuTaxLabel.AutoSize = true;
             manuTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            manuTaxLabel.Location = new Point(85, 168);
+            manuTaxLabel.Location = new Point(79, 162);
             manuTaxLabel.Margin = new Padding(2, 0, 2, 0);
             manuTaxLabel.Name = "manuTaxLabel";
             manuTaxLabel.Size = new Size(26, 15);
@@ -1940,7 +1940,7 @@
             ManuSystemCombo.DropDownHeight = 150;
             ManuSystemCombo.FormattingEnabled = true;
             ManuSystemCombo.IntegralHeight = false;
-            ManuSystemCombo.Location = new Point(116, 106);
+            ManuSystemCombo.Location = new Point(116, 100);
             ManuSystemCombo.Margin = new Padding(2);
             ManuSystemCombo.Name = "ManuSystemCombo";
             ManuSystemCombo.Size = new Size(122, 23);
@@ -1952,7 +1952,7 @@
             ManuImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ManuImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ManuImplantCombo.FormattingEnabled = true;
-            ManuImplantCombo.Location = new Point(71, 75);
+            ManuImplantCombo.Location = new Point(116, 70);
             ManuImplantCombo.Margin = new Padding(2);
             ManuImplantCombo.Name = "ManuImplantCombo";
             ManuImplantCombo.Size = new Size(174, 23);
@@ -1974,7 +1974,7 @@
             ManuInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ManuInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ManuInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ManuInputGrid.BackgroundColor = Color.Black;
+            ManuInputGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             ManuInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ManuInputGrid.Columns.AddRange(new DataGridViewColumn[] { materialName, quantityTotal, Cost, build, react, quantity, volume, pricePer, manufacturable, reactable, materialTypeID, parentMaterialTypeID });
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -1986,7 +1986,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle5;
             ManuInputGrid.EditableColumns = null;
-            ManuInputGrid.GridColor = Color.Black;
+            ManuInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             ManuInputGrid.Location = new Point(581, 4);
             ManuInputGrid.Margin = new Padding(2);
             ManuInputGrid.Name = "ManuInputGrid";
@@ -2127,7 +2127,7 @@
             // ManuRigTEBonusCombo
             // 
             ManuRigTEBonusCombo.FormattingEnabled = true;
-            ManuRigTEBonusCombo.Location = new Point(116, 233);
+            ManuRigTEBonusCombo.Location = new Point(116, 220);
             ManuRigTEBonusCombo.Margin = new Padding(2);
             ManuRigTEBonusCombo.Name = "ManuRigTEBonusCombo";
             ManuRigTEBonusCombo.Size = new Size(122, 23);
@@ -2138,7 +2138,7 @@
             // 
             ManuRig2Label.AutoSize = true;
             ManuRig2Label.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ManuRig2Label.Location = new Point(12, 236);
+            ManuRig2Label.Location = new Point(10, 223);
             ManuRig2Label.Margin = new Padding(2, 0, 2, 0);
             ManuRig2Label.Name = "ManuRig2Label";
             ManuRig2Label.Size = new Size(98, 15);
@@ -2148,7 +2148,7 @@
             // ManuRigMEBonusCombo
             // 
             ManuRigMEBonusCombo.FormattingEnabled = true;
-            ManuRigMEBonusCombo.Location = new Point(116, 200);
+            ManuRigMEBonusCombo.Location = new Point(116, 190);
             ManuRigMEBonusCombo.Margin = new Padding(2);
             ManuRigMEBonusCombo.Name = "ManuRigMEBonusCombo";
             ManuRigMEBonusCombo.Size = new Size(122, 23);
@@ -2159,7 +2159,7 @@
             // 
             StructureMERigLabel.AutoSize = true;
             StructureMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            StructureMERigLabel.Location = new Point(8, 200);
+            StructureMERigLabel.Location = new Point(6, 193);
             StructureMERigLabel.Margin = new Padding(2, 0, 2, 0);
             StructureMERigLabel.Name = "StructureMERigLabel";
             StructureMERigLabel.Size = new Size(102, 15);
@@ -2171,7 +2171,7 @@
             ManuStructCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ManuStructCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ManuStructCombo.FormattingEnabled = true;
-            ManuStructCombo.Location = new Point(116, 136);
+            ManuStructCombo.Location = new Point(116, 130);
             ManuStructCombo.Margin = new Padding(2);
             ManuStructCombo.Name = "ManuStructCombo";
             ManuStructCombo.Size = new Size(122, 23);
@@ -2192,7 +2192,7 @@
             // 
             CopyTaxLabel.AutoSize = true;
             CopyTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            CopyTaxLabel.Location = new Point(57, 197);
+            CopyTaxLabel.Location = new Point(79, 192);
             CopyTaxLabel.Margin = new Padding(2, 0, 2, 0);
             CopyTaxLabel.Name = "CopyTaxLabel";
             CopyTaxLabel.Size = new Size(26, 15);
@@ -2203,7 +2203,7 @@
             // 
             CopyRigLabel.AutoSize = true;
             CopyRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            CopyRigLabel.Location = new Point(2, 165);
+            CopyRigLabel.Location = new Point(23, 163);
             CopyRigLabel.Margin = new Padding(2, 0, 2, 0);
             CopyRigLabel.Name = "CopyRigLabel";
             CopyRigLabel.Size = new Size(82, 15);
@@ -2214,7 +2214,7 @@
             // 
             METaxLabel.AutoSize = true;
             METaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            METaxLabel.Location = new Point(58, 208);
+            METaxLabel.Location = new Point(79, 192);
             METaxLabel.Margin = new Padding(2, 0, 2, 0);
             METaxLabel.Name = "METaxLabel";
             METaxLabel.Size = new Size(26, 15);
@@ -2225,7 +2225,7 @@
             // 
             MEStructRigLabel.AutoSize = true;
             MEStructRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            MEStructRigLabel.Location = new Point(3, 176);
+            MEStructRigLabel.Location = new Point(23, 163);
             MEStructRigLabel.Margin = new Padding(2, 0, 2, 0);
             MEStructRigLabel.Name = "MEStructRigLabel";
             MEStructRigLabel.Size = new Size(82, 15);
@@ -2236,7 +2236,7 @@
             // 
             TETaxLabel.AutoSize = true;
             TETaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            TETaxLabel.Location = new Point(59, 199);
+            TETaxLabel.Location = new Point(79, 192);
             TETaxLabel.Margin = new Padding(2, 0, 2, 0);
             TETaxLabel.Name = "TETaxLabel";
             TETaxLabel.Size = new Size(26, 15);
@@ -2247,7 +2247,7 @@
             // 
             TEStructureRigLabel.AutoSize = true;
             TEStructureRigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            TEStructureRigLabel.Location = new Point(4, 167);
+            TEStructureRigLabel.Location = new Point(23, 163);
             TEStructureRigLabel.Margin = new Padding(2, 0, 2, 0);
             TEStructureRigLabel.Name = "TEStructureRigLabel";
             TEStructureRigLabel.Size = new Size(82, 15);
@@ -2258,7 +2258,7 @@
             // 
             InventionTaxLabel.AutoSize = true;
             InventionTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            InventionTaxLabel.Location = new Point(92, 143);
+            InventionTaxLabel.Location = new Point(79, 132);
             InventionTaxLabel.Margin = new Padding(2, 0, 2, 0);
             InventionTaxLabel.Name = "InventionTaxLabel";
             InventionTaxLabel.Size = new Size(26, 15);
@@ -2269,7 +2269,7 @@
             // 
             label31.AutoSize = true;
             label31.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label31.Location = new Point(54, 179);
+            label31.Location = new Point(41, 163);
             label31.Margin = new Padding(2, 0, 2, 0);
             label31.Name = "label31";
             label31.Size = new Size(64, 15);
@@ -2280,7 +2280,7 @@
             // 
             ReactionTaxLabel.AutoSize = true;
             ReactionTaxLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ReactionTaxLabel.Location = new Point(79, 160);
+            ReactionTaxLabel.Location = new Point(79, 132);
             ReactionTaxLabel.Margin = new Padding(2, 0, 2, 0);
             ReactionTaxLabel.Name = "ReactionTaxLabel";
             ReactionTaxLabel.Size = new Size(26, 15);
@@ -2291,7 +2291,7 @@
             // 
             ReactionStructTERigLabel.AutoSize = true;
             ReactionStructTERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ReactionStructTERigLabel.Location = new Point(6, 125);
+            ReactionStructTERigLabel.Location = new Point(7, 103);
             ReactionStructTERigLabel.Margin = new Padding(2, 0, 2, 0);
             ReactionStructTERigLabel.Name = "ReactionStructTERigLabel";
             ReactionStructTERigLabel.Size = new Size(98, 15);
@@ -2302,7 +2302,7 @@
             // 
             ReactionStructMERigLabel.AutoSize = true;
             ReactionStructMERigLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            ReactionStructMERigLabel.Location = new Point(2, 85);
+            ReactionStructMERigLabel.Location = new Point(5, 73);
             ReactionStructMERigLabel.Margin = new Padding(2, 0, 2, 0);
             ReactionStructMERigLabel.Name = "ReactionStructMERigLabel";
             ReactionStructMERigLabel.Size = new Size(102, 15);
@@ -2314,7 +2314,7 @@
             ReactionStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionStructureCombo.FormattingEnabled = true;
-            ReactionStructureCombo.Location = new Point(114, 48);
+            ReactionStructureCombo.Location = new Point(116, 40);
             ReactionStructureCombo.Margin = new Padding(2);
             ReactionStructureCombo.Name = "ReactionStructureCombo";
             ReactionStructureCombo.Size = new Size(122, 23);
@@ -2332,7 +2332,7 @@
             TreeViewList.Location = new Point(4, 186);
             TreeViewList.Margin = new Padding(2);
             TreeViewList.Name = "TreeViewList";
-            TreeViewList.Size = new Size(219, 605);
+            TreeViewList.Size = new Size(255, 605);
             TreeViewList.TabIndex = 1;
             TreeViewList.TabStop = false;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
@@ -2357,10 +2357,10 @@
             ManufacturingPanel.Controls.Add(ActivityTabPanel);
             ManufacturingPanel.Controls.Add(BlueprintNameLabel);
             ManufacturingPanel.Controls.Add(label3);
-            ManufacturingPanel.Location = new Point(226, 0);
+            ManufacturingPanel.Location = new Point(263, 0);
             ManufacturingPanel.Margin = new Padding(2);
             ManufacturingPanel.Name = "ManufacturingPanel";
-            ManufacturingPanel.Size = new Size(1126, 793);
+            ManufacturingPanel.Size = new Size(1089, 793);
             ManufacturingPanel.TabIndex = 0;
             // 
             // TaxOutputsCheckbox
@@ -2484,7 +2484,7 @@
             ActivityTabPanel.Name = "ActivityTabPanel";
             ActivityTabPanel.Padding = new Point(10, 5);
             ActivityTabPanel.SelectedIndex = 0;
-            ActivityTabPanel.Size = new Size(1126, 561);
+            ActivityTabPanel.Size = new Size(1089, 561);
             ActivityTabPanel.TabIndex = 1;
             ActivityTabPanel.SelectedIndexChanged += ActivityTabPanel_SelectedIndexChanged;
             // 
@@ -2525,7 +2525,7 @@
             CopyMatGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CopyMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             CopyMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            CopyMatGrid.BackgroundColor = Color.Black;
+            CopyMatGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             CopyMatGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CopyMatGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn49, dataGridViewTextBoxColumn50, dataGridViewTextBoxColumn51, dataGridViewTextBoxColumn52, dataGridViewTextBoxColumn53, dataGridViewTextBoxColumn54, dataGridViewTextBoxColumn55, dataGridViewTextBoxColumn56, dataGridViewTextBoxColumn57, dataGridViewTextBoxColumn58, dataGridViewTextBoxColumn59, dataGridViewTextBoxColumn60 });
             dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -2537,7 +2537,7 @@
             dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
             CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle10;
             CopyMatGrid.EditableColumns = null;
-            CopyMatGrid.GridColor = Color.Black;
+            CopyMatGrid.GridColor = Color.FromArgb(21, 21, 21);
             CopyMatGrid.Location = new Point(353, 2);
             CopyMatGrid.Margin = new Padding(2);
             CopyMatGrid.Name = "CopyMatGrid";
@@ -2678,7 +2678,7 @@
             // CopySystemCostIndexLabel
             // 
             CopySystemCostIndexLabel.AutoSize = true;
-            CopySystemCostIndexLabel.Location = new Point(191, 321);
+            CopySystemCostIndexLabel.Location = new Point(179, 290);
             CopySystemCostIndexLabel.Margin = new Padding(2, 0, 2, 0);
             CopySystemCostIndexLabel.Name = "CopySystemCostIndexLabel";
             CopySystemCostIndexLabel.Size = new Size(112, 15);
@@ -2688,7 +2688,7 @@
             // CopyInputVolumeLabel
             // 
             CopyInputVolumeLabel.AutoSize = true;
-            CopyInputVolumeLabel.Location = new Point(190, 294);
+            CopyInputVolumeLabel.Location = new Point(178, 263);
             CopyInputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
             CopyInputVolumeLabel.Name = "CopyInputVolumeLabel";
             CopyInputVolumeLabel.Size = new Size(86, 15);
@@ -2698,7 +2698,7 @@
             // CopyTimeLabel
             // 
             CopyTimeLabel.AutoSize = true;
-            CopyTimeLabel.Location = new Point(190, 271);
+            CopyTimeLabel.Location = new Point(178, 240);
             CopyTimeLabel.Margin = new Padding(2, 0, 2, 0);
             CopyTimeLabel.Name = "CopyTimeLabel";
             CopyTimeLabel.Size = new Size(41, 15);
@@ -2707,7 +2707,7 @@
             // 
             // CopyRunsCopyUpDown
             // 
-            CopyRunsCopyUpDown.Location = new Point(91, 39);
+            CopyRunsCopyUpDown.Location = new Point(116, 40);
             CopyRunsCopyUpDown.Margin = new Padding(2);
             CopyRunsCopyUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             CopyRunsCopyUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -2719,7 +2719,7 @@
             // 
             // CopyNumCopiesUpDown
             // 
-            CopyNumCopiesUpDown.Location = new Point(91, 11);
+            CopyNumCopiesUpDown.Location = new Point(116, 10);
             CopyNumCopiesUpDown.Margin = new Padding(2);
             CopyNumCopiesUpDown.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             CopyNumCopiesUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -2732,7 +2732,7 @@
             // CopyTaxUpDown
             // 
             CopyTaxUpDown.DecimalPlaces = 2;
-            CopyTaxUpDown.Location = new Point(88, 197);
+            CopyTaxUpDown.Location = new Point(116, 190);
             CopyTaxUpDown.Margin = new Padding(2);
             CopyTaxUpDown.Name = "CopyTaxUpDown";
             CopyTaxUpDown.Size = new Size(120, 23);
@@ -2746,7 +2746,7 @@
             CopySystemCombo.DropDownHeight = 150;
             CopySystemCombo.FormattingEnabled = true;
             CopySystemCombo.IntegralHeight = false;
-            CopySystemCombo.Location = new Point(89, 95);
+            CopySystemCombo.Location = new Point(116, 100);
             CopySystemCombo.Margin = new Padding(2);
             CopySystemCombo.Name = "CopySystemCombo";
             CopySystemCombo.Size = new Size(122, 23);
@@ -2758,7 +2758,7 @@
             CopyImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             CopyImplantCombo.FormattingEnabled = true;
-            CopyImplantCombo.Location = new Point(88, 66);
+            CopyImplantCombo.Location = new Point(116, 70);
             CopyImplantCombo.Margin = new Padding(2);
             CopyImplantCombo.Name = "CopyImplantCombo";
             CopyImplantCombo.Size = new Size(174, 23);
@@ -2770,7 +2770,7 @@
             CopyTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             CopyTimeRigCombo.FormattingEnabled = true;
-            CopyTimeRigCombo.Location = new Point(89, 162);
+            CopyTimeRigCombo.Location = new Point(116, 160);
             CopyTimeRigCombo.Margin = new Padding(2);
             CopyTimeRigCombo.Name = "CopyTimeRigCombo";
             CopyTimeRigCombo.Size = new Size(122, 23);
@@ -2782,7 +2782,7 @@
             CopyStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             CopyStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             CopyStructureCombo.FormattingEnabled = true;
-            CopyStructureCombo.Location = new Point(89, 128);
+            CopyStructureCombo.Location = new Point(116, 130);
             CopyStructureCombo.Margin = new Padding(2);
             CopyStructureCombo.Name = "CopyStructureCombo";
             CopyStructureCombo.Size = new Size(122, 23);
@@ -2824,7 +2824,7 @@
             // MESystemCostIndexLabel
             // 
             MESystemCostIndexLabel.AutoSize = true;
-            MESystemCostIndexLabel.Location = new Point(212, 323);
+            MESystemCostIndexLabel.Location = new Point(188, 280);
             MESystemCostIndexLabel.Margin = new Padding(2, 0, 2, 0);
             MESystemCostIndexLabel.Name = "MESystemCostIndexLabel";
             MESystemCostIndexLabel.Size = new Size(112, 15);
@@ -2834,7 +2834,7 @@
             // MEInputVolumeLabel
             // 
             MEInputVolumeLabel.AutoSize = true;
-            MEInputVolumeLabel.Location = new Point(211, 297);
+            MEInputVolumeLabel.Location = new Point(187, 254);
             MEInputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
             MEInputVolumeLabel.Name = "MEInputVolumeLabel";
             MEInputVolumeLabel.Size = new Size(86, 15);
@@ -2844,7 +2844,7 @@
             // MEResearchTimeLabel
             // 
             MEResearchTimeLabel.AutoSize = true;
-            MEResearchTimeLabel.Location = new Point(211, 274);
+            MEResearchTimeLabel.Location = new Point(187, 231);
             MEResearchTimeLabel.Margin = new Padding(2, 0, 2, 0);
             MEResearchTimeLabel.Name = "MEResearchTimeLabel";
             MEResearchTimeLabel.Size = new Size(41, 15);
@@ -2853,7 +2853,7 @@
             // 
             // METoLevelUpDown
             // 
-            METoLevelUpDown.Location = new Point(90, 32);
+            METoLevelUpDown.Location = new Point(116, 40);
             METoLevelUpDown.Margin = new Padding(2);
             METoLevelUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             METoLevelUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -2865,7 +2865,7 @@
             // 
             // MEFromLevelUpDown
             // 
-            MEFromLevelUpDown.Location = new Point(90, 4);
+            MEFromLevelUpDown.Location = new Point(116, 10);
             MEFromLevelUpDown.Margin = new Padding(2);
             MEFromLevelUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             MEFromLevelUpDown.Minimum = new decimal(new int[] { 10, 0, 0, int.MinValue });
@@ -2877,7 +2877,7 @@
             // METaxUpDown
             // 
             METaxUpDown.DecimalPlaces = 2;
-            METaxUpDown.Location = new Point(89, 208);
+            METaxUpDown.Location = new Point(116, 190);
             METaxUpDown.Margin = new Padding(2);
             METaxUpDown.Name = "METaxUpDown";
             METaxUpDown.Size = new Size(120, 23);
@@ -2891,7 +2891,7 @@
             MESystemCombo.DropDownHeight = 150;
             MESystemCombo.FormattingEnabled = true;
             MESystemCombo.IntegralHeight = false;
-            MESystemCombo.Location = new Point(90, 106);
+            MESystemCombo.Location = new Point(116, 100);
             MESystemCombo.Margin = new Padding(2);
             MESystemCombo.Name = "MESystemCombo";
             MESystemCombo.Size = new Size(122, 23);
@@ -2903,7 +2903,7 @@
             MEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             MEImplantCombo.FormattingEnabled = true;
-            MEImplantCombo.Location = new Point(89, 68);
+            MEImplantCombo.Location = new Point(116, 70);
             MEImplantCombo.Margin = new Padding(2);
             MEImplantCombo.Name = "MEImplantCombo";
             MEImplantCombo.Size = new Size(174, 23);
@@ -2915,7 +2915,7 @@
             METimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             METimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             METimeRigCombo.FormattingEnabled = true;
-            METimeRigCombo.Location = new Point(90, 174);
+            METimeRigCombo.Location = new Point(116, 160);
             METimeRigCombo.Margin = new Padding(2);
             METimeRigCombo.Name = "METimeRigCombo";
             METimeRigCombo.Size = new Size(122, 23);
@@ -2927,7 +2927,7 @@
             MEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             MEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             MEStructureCombo.FormattingEnabled = true;
-            MEStructureCombo.Location = new Point(90, 139);
+            MEStructureCombo.Location = new Point(116, 130);
             MEStructureCombo.Margin = new Padding(2);
             MEStructureCombo.Name = "MEStructureCombo";
             MEStructureCombo.Size = new Size(122, 23);
@@ -2939,7 +2939,7 @@
             MEMaterialsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MEMaterialsGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             MEMaterialsGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            MEMaterialsGrid.BackgroundColor = Color.Black;
+            MEMaterialsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             MEMaterialsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MEMaterialsGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn25, dataGridViewTextBoxColumn26, dataGridViewTextBoxColumn27, dataGridViewTextBoxColumn28, dataGridViewTextBoxColumn29, dataGridViewTextBoxColumn30, dataGridViewTextBoxColumn31, dataGridViewTextBoxColumn32, dataGridViewTextBoxColumn33, dataGridViewTextBoxColumn34, dataGridViewTextBoxColumn35, dataGridViewTextBoxColumn36 });
             dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -2951,7 +2951,7 @@
             dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
             MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle15;
             MEMaterialsGrid.EditableColumns = null;
-            MEMaterialsGrid.GridColor = Color.Black;
+            MEMaterialsGrid.GridColor = Color.FromArgb(21, 21, 21);
             MEMaterialsGrid.Location = new Point(349, 5);
             MEMaterialsGrid.Margin = new Padding(2);
             MEMaterialsGrid.Name = "MEMaterialsGrid";
@@ -3124,7 +3124,7 @@
             // TESystemCostIndexLabel
             // 
             TESystemCostIndexLabel.AutoSize = true;
-            TESystemCostIndexLabel.Location = new Point(201, 323);
+            TESystemCostIndexLabel.Location = new Point(188, 284);
             TESystemCostIndexLabel.Margin = new Padding(2, 0, 2, 0);
             TESystemCostIndexLabel.Name = "TESystemCostIndexLabel";
             TESystemCostIndexLabel.Size = new Size(112, 15);
@@ -3134,7 +3134,7 @@
             // TEInputVolumeLabel
             // 
             TEInputVolumeLabel.AutoSize = true;
-            TEInputVolumeLabel.Location = new Point(200, 297);
+            TEInputVolumeLabel.Location = new Point(187, 258);
             TEInputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
             TEInputVolumeLabel.Name = "TEInputVolumeLabel";
             TEInputVolumeLabel.Size = new Size(86, 15);
@@ -3144,7 +3144,7 @@
             // TETimeLabel
             // 
             TETimeLabel.AutoSize = true;
-            TETimeLabel.Location = new Point(200, 274);
+            TETimeLabel.Location = new Point(187, 235);
             TETimeLabel.Margin = new Padding(2, 0, 2, 0);
             TETimeLabel.Name = "TETimeLabel";
             TETimeLabel.Size = new Size(41, 15);
@@ -3154,7 +3154,7 @@
             // TEToLevelUpDown
             // 
             TEToLevelUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEToLevelUpDown.Location = new Point(91, 32);
+            TEToLevelUpDown.Location = new Point(116, 40);
             TEToLevelUpDown.Margin = new Padding(2);
             TEToLevelUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEToLevelUpDown.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
@@ -3167,7 +3167,7 @@
             // TEFromLevelUpDown
             // 
             TEFromLevelUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEFromLevelUpDown.Location = new Point(91, 4);
+            TEFromLevelUpDown.Location = new Point(116, 10);
             TEFromLevelUpDown.Margin = new Padding(2);
             TEFromLevelUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEFromLevelUpDown.Name = "TEFromLevelUpDown";
@@ -3178,7 +3178,7 @@
             // TETaxUpDown
             // 
             TETaxUpDown.DecimalPlaces = 2;
-            TETaxUpDown.Location = new Point(90, 199);
+            TETaxUpDown.Location = new Point(116, 190);
             TETaxUpDown.Margin = new Padding(2);
             TETaxUpDown.Name = "TETaxUpDown";
             TETaxUpDown.Size = new Size(120, 23);
@@ -3192,7 +3192,7 @@
             TESystemCombo.DropDownHeight = 150;
             TESystemCombo.FormattingEnabled = true;
             TESystemCombo.IntegralHeight = false;
-            TESystemCombo.Location = new Point(91, 97);
+            TESystemCombo.Location = new Point(116, 100);
             TESystemCombo.Margin = new Padding(2);
             TESystemCombo.Name = "TESystemCombo";
             TESystemCombo.Size = new Size(122, 23);
@@ -3204,7 +3204,7 @@
             TEImplantCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEImplantCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             TEImplantCombo.FormattingEnabled = true;
-            TEImplantCombo.Location = new Point(90, 64);
+            TEImplantCombo.Location = new Point(116, 70);
             TEImplantCombo.Margin = new Padding(2);
             TEImplantCombo.Name = "TEImplantCombo";
             TEImplantCombo.Size = new Size(174, 23);
@@ -3216,7 +3216,7 @@
             TEStructRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             TEStructRigCombo.FormattingEnabled = true;
-            TEStructRigCombo.Location = new Point(91, 165);
+            TEStructRigCombo.Location = new Point(116, 160);
             TEStructRigCombo.Margin = new Padding(2);
             TEStructRigCombo.Name = "TEStructRigCombo";
             TEStructRigCombo.Size = new Size(122, 23);
@@ -3228,7 +3228,7 @@
             TEStructureCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             TEStructureCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             TEStructureCombo.FormattingEnabled = true;
-            TEStructureCombo.Location = new Point(91, 130);
+            TEStructureCombo.Location = new Point(116, 130);
             TEStructureCombo.Margin = new Padding(2);
             TEStructureCombo.Name = "TEStructureCombo";
             TEStructureCombo.Size = new Size(122, 23);
@@ -3240,7 +3240,7 @@
             TEMatGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TEMatGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TEMatGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            TEMatGrid.BackgroundColor = Color.Black;
+            TEMatGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             TEMatGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TEMatGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn37, dataGridViewTextBoxColumn38, dataGridViewTextBoxColumn39, dataGridViewTextBoxColumn40, dataGridViewTextBoxColumn41, dataGridViewTextBoxColumn42, dataGridViewTextBoxColumn43, dataGridViewTextBoxColumn44, dataGridViewTextBoxColumn45, dataGridViewTextBoxColumn46, dataGridViewTextBoxColumn47, dataGridViewTextBoxColumn48 });
             dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -3252,7 +3252,7 @@
             dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
             TEMatGrid.DefaultCellStyle = dataGridViewCellStyle20;
             TEMatGrid.EditableColumns = null;
-            TEMatGrid.GridColor = Color.Black;
+            TEMatGrid.GridColor = Color.FromArgb(21, 21, 21);
             TEMatGrid.Location = new Point(353, 0);
             TEMatGrid.Margin = new Padding(2);
             TEMatGrid.Name = "TEMatGrid";
@@ -3448,13 +3448,13 @@
             InventionPage.Margin = new Padding(2);
             InventionPage.Name = "InventionPage";
             InventionPage.Padding = new Padding(2);
-            InventionPage.Size = new Size(1118, 529);
+            InventionPage.Size = new Size(1081, 529);
             InventionPage.TabIndex = 4;
             InventionPage.Text = "Invention";
             // 
             // EncryptionStarshipSkillUpDown
             // 
-            EncryptionStarshipSkillUpDown.Location = new Point(152, 288);
+            EncryptionStarshipSkillUpDown.Location = new Point(116, 250);
             EncryptionStarshipSkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             EncryptionStarshipSkillUpDown.Name = "EncryptionStarshipSkillUpDown";
             EncryptionStarshipSkillUpDown.Size = new Size(120, 23);
@@ -3463,7 +3463,7 @@
             // 
             // Datacore2SkillUpDown
             // 
-            Datacore2SkillUpDown.Location = new Point(128, 252);
+            Datacore2SkillUpDown.Location = new Point(116, 220);
             Datacore2SkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             Datacore2SkillUpDown.Name = "Datacore2SkillUpDown";
             Datacore2SkillUpDown.Size = new Size(120, 23);
@@ -3472,7 +3472,7 @@
             // 
             // DataCore1SkillUpDown
             // 
-            DataCore1SkillUpDown.Location = new Point(128, 215);
+            DataCore1SkillUpDown.Location = new Point(116, 190);
             DataCore1SkillUpDown.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
             DataCore1SkillUpDown.Name = "DataCore1SkillUpDown";
             DataCore1SkillUpDown.Size = new Size(120, 23);
@@ -3483,18 +3483,18 @@
             // 
             label63.AutoSize = true;
             label63.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label63.Location = new Point(7, 290);
+            label63.Location = new Point(20, 252);
             label63.Margin = new Padding(2, 0, 2, 0);
             label63.Name = "label63";
-            label63.Size = new Size(140, 15);
+            label63.Size = new Size(85, 15);
             label63.TabIndex = 19;
-            label63.Text = "Encryption/Starship skill";
+            label63.Text = "Enc./Star. Skill";
             // 
             // label74
             // 
             label74.AutoSize = true;
             label74.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label74.Location = new Point(24, 254);
+            label74.Location = new Point(13, 222);
             label74.Margin = new Padding(2, 0, 2, 0);
             label74.Name = "label74";
             label74.Size = new Size(92, 15);
@@ -3506,7 +3506,7 @@
             InventionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             InventionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             InventionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            InventionInputGrid.BackgroundColor = Color.Black;
+            InventionInputGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             InventionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             InventionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, dataGridViewTextBoxColumn7, dataGridViewTextBoxColumn8, dataGridViewTextBoxColumn9, dataGridViewTextBoxColumn10, dataGridViewTextBoxColumn11, dataGridViewTextBoxColumn12 });
             dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -3518,14 +3518,14 @@
             dataGridViewCellStyle25.WrapMode = DataGridViewTriState.False;
             InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle25;
             InventionInputGrid.EditableColumns = null;
-            InventionInputGrid.GridColor = Color.Black;
+            InventionInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             InventionInputGrid.Location = new Point(2, 328);
             InventionInputGrid.Margin = new Padding(2);
             InventionInputGrid.Name = "InventionInputGrid";
             InventionInputGrid.ReadOnly = true;
             InventionInputGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             InventionInputGrid.RowTemplate.Height = 33;
-            InventionInputGrid.Size = new Size(663, 124);
+            InventionInputGrid.Size = new Size(626, 124);
             InventionInputGrid.TabIndex = 18;
             // 
             // dataGridViewTextBoxColumn1
@@ -3660,7 +3660,7 @@
             // 
             InventionImagePanel.BackColor = Color.Transparent;
             InventionImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            InventionImagePanel.Location = new Point(557, 114);
+            InventionImagePanel.Location = new Point(708, 192);
             InventionImagePanel.Margin = new Padding(2);
             InventionImagePanel.Name = "InventionImagePanel";
             InventionImagePanel.Size = new Size(51, 51);
@@ -3669,7 +3669,7 @@
             // InventionSCILabel
             // 
             InventionSCILabel.AutoSize = true;
-            InventionSCILabel.Location = new Point(746, 230);
+            InventionSCILabel.Location = new Point(459, 250);
             InventionSCILabel.Margin = new Padding(2, 0, 2, 0);
             InventionSCILabel.Name = "InventionSCILabel";
             InventionSCILabel.Size = new Size(112, 15);
@@ -3679,7 +3679,7 @@
             // InventionJobCostLabel
             // 
             InventionJobCostLabel.AutoSize = true;
-            InventionJobCostLabel.Location = new Point(459, 29);
+            InventionJobCostLabel.Location = new Point(459, 40);
             InventionJobCostLabel.Margin = new Padding(2, 0, 2, 0);
             InventionJobCostLabel.Name = "InventionJobCostLabel";
             InventionJobCostLabel.Size = new Size(113, 15);
@@ -3689,7 +3689,7 @@
             // InventionDecTELabel
             // 
             InventionDecTELabel.AutoSize = true;
-            InventionDecTELabel.Location = new Point(747, 197);
+            InventionDecTELabel.Location = new Point(754, 149);
             InventionDecTELabel.Margin = new Padding(2, 0, 2, 0);
             InventionDecTELabel.Name = "InventionDecTELabel";
             InventionDecTELabel.Size = new Size(58, 15);
@@ -3699,7 +3699,7 @@
             // InventionDecMELabel
             // 
             InventionDecMELabel.AutoSize = true;
-            InventionDecMELabel.Location = new Point(747, 162);
+            InventionDecMELabel.Location = new Point(754, 114);
             InventionDecMELabel.Margin = new Padding(2, 0, 2, 0);
             InventionDecMELabel.Name = "InventionDecMELabel";
             InventionDecMELabel.Size = new Size(63, 15);
@@ -3709,7 +3709,7 @@
             // InventionDecRunLabel
             // 
             InventionDecRunLabel.AutoSize = true;
-            InventionDecRunLabel.Location = new Point(747, 129);
+            InventionDecRunLabel.Location = new Point(754, 81);
             InventionDecRunLabel.Margin = new Padding(2, 0, 2, 0);
             InventionDecRunLabel.Name = "InventionDecRunLabel";
             InventionDecRunLabel.Size = new Size(70, 15);
@@ -3719,7 +3719,7 @@
             // InventionDecProbLabel
             // 
             InventionDecProbLabel.AutoSize = true;
-            InventionDecProbLabel.Location = new Point(747, 93);
+            InventionDecProbLabel.Location = new Point(754, 45);
             InventionDecProbLabel.Margin = new Padding(2, 0, 2, 0);
             InventionDecProbLabel.Name = "InventionDecProbLabel";
             InventionDecProbLabel.Size = new Size(55, 15);
@@ -3729,7 +3729,7 @@
             // InventionOutcomeBPCombo
             // 
             InventionOutcomeBPCombo.FormattingEnabled = true;
-            InventionOutcomeBPCombo.Location = new Point(718, 23);
+            InventionOutcomeBPCombo.Location = new Point(116, 280);
             InventionOutcomeBPCombo.Margin = new Padding(2);
             InventionOutcomeBPCombo.Name = "InventionOutcomeBPCombo";
             InventionOutcomeBPCombo.Size = new Size(178, 23);
@@ -3739,7 +3739,7 @@
             // InventionSkillsTextbox
             // 
             InventionSkillsTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            InventionSkillsTextbox.Location = new Point(669, 287);
+            InventionSkillsTextbox.Location = new Point(632, 287);
             InventionSkillsTextbox.Margin = new Padding(2);
             InventionSkillsTextbox.Multiline = true;
             InventionSkillsTextbox.Name = "InventionSkillsTextbox";
@@ -3751,7 +3751,7 @@
             // InventionRunsFor100Label
             // 
             InventionRunsFor100Label.AutoSize = true;
-            InventionRunsFor100Label.Location = new Point(459, 230);
+            InventionRunsFor100Label.Location = new Point(459, 220);
             InventionRunsFor100Label.Margin = new Padding(2, 0, 2, 0);
             InventionRunsFor100Label.Name = "InventionRunsFor100Label";
             InventionRunsFor100Label.Size = new Size(69, 15);
@@ -3761,7 +3761,7 @@
             // InventionOutputChanceLabel
             // 
             InventionOutputChanceLabel.AutoSize = true;
-            InventionOutputChanceLabel.Location = new Point(459, 197);
+            InventionOutputChanceLabel.Location = new Point(459, 190);
             InventionOutputChanceLabel.Margin = new Padding(2, 0, 2, 0);
             InventionOutputChanceLabel.Name = "InventionOutputChanceLabel";
             InventionOutputChanceLabel.Size = new Size(96, 15);
@@ -3771,7 +3771,7 @@
             // InventionOutputRunsLabel
             // 
             InventionOutputRunsLabel.AutoSize = true;
-            InventionOutputRunsLabel.Location = new Point(459, 162);
+            InventionOutputRunsLabel.Location = new Point(459, 160);
             InventionOutputRunsLabel.Margin = new Padding(2, 0, 2, 0);
             InventionOutputRunsLabel.Name = "InventionOutputRunsLabel";
             InventionOutputRunsLabel.Size = new Size(82, 15);
@@ -3781,7 +3781,7 @@
             // InventionOutputTELabel
             // 
             InventionOutputTELabel.AutoSize = true;
-            InventionOutputTELabel.Location = new Point(459, 129);
+            InventionOutputTELabel.Location = new Point(459, 130);
             InventionOutputTELabel.Margin = new Padding(2, 0, 2, 0);
             InventionOutputTELabel.Name = "InventionOutputTELabel";
             InventionOutputTELabel.Size = new Size(68, 15);
@@ -3791,7 +3791,7 @@
             // InventionOutputMELabel
             // 
             InventionOutputMELabel.AutoSize = true;
-            InventionOutputMELabel.Location = new Point(459, 93);
+            InventionOutputMELabel.Location = new Point(459, 100);
             InventionOutputMELabel.Margin = new Padding(2, 0, 2, 0);
             InventionOutputMELabel.Name = "InventionOutputMELabel";
             InventionOutputMELabel.Size = new Size(73, 15);
@@ -3801,7 +3801,7 @@
             // InventionTotalInputVolumeLabel
             // 
             InventionTotalInputVolumeLabel.AutoSize = true;
-            InventionTotalInputVolumeLabel.Location = new Point(459, 58);
+            InventionTotalInputVolumeLabel.Location = new Point(459, 70);
             InventionTotalInputVolumeLabel.Margin = new Padding(2, 0, 2, 0);
             InventionTotalInputVolumeLabel.Name = "InventionTotalInputVolumeLabel";
             InventionTotalInputVolumeLabel.Size = new Size(114, 15);
@@ -3811,7 +3811,7 @@
             // InventionTotalInputCostLabel
             // 
             InventionTotalInputCostLabel.AutoSize = true;
-            InventionTotalInputCostLabel.Location = new Point(459, 4);
+            InventionTotalInputCostLabel.Location = new Point(459, 10);
             InventionTotalInputCostLabel.Margin = new Padding(2, 0, 2, 0);
             InventionTotalInputCostLabel.Name = "InventionTotalInputCostLabel";
             InventionTotalInputCostLabel.Size = new Size(98, 15);
@@ -3821,7 +3821,7 @@
             // InventionTaxUpDown
             // 
             InventionTaxUpDown.DecimalPlaces = 2;
-            InventionTaxUpDown.Location = new Point(124, 143);
+            InventionTaxUpDown.Location = new Point(116, 130);
             InventionTaxUpDown.Margin = new Padding(2);
             InventionTaxUpDown.Name = "InventionTaxUpDown";
             InventionTaxUpDown.Size = new Size(120, 23);
@@ -3833,7 +3833,7 @@
             InventionDecryptorCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionDecryptorCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             InventionDecryptorCombo.FormattingEnabled = true;
-            InventionDecryptorCombo.Location = new Point(124, 178);
+            InventionDecryptorCombo.Location = new Point(116, 160);
             InventionDecryptorCombo.Margin = new Padding(2);
             InventionDecryptorCombo.Name = "InventionDecryptorCombo";
             InventionDecryptorCombo.Size = new Size(168, 23);
@@ -3845,7 +3845,7 @@
             InventionStructureTimeRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureTimeRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             InventionStructureTimeRigCombo.FormattingEnabled = true;
-            InventionStructureTimeRigCombo.Location = new Point(124, 107);
+            InventionStructureTimeRigCombo.Location = new Point(116, 100);
             InventionStructureTimeRigCombo.Margin = new Padding(2);
             InventionStructureTimeRigCombo.Name = "InventionStructureTimeRigCombo";
             InventionStructureTimeRigCombo.Size = new Size(122, 23);
@@ -3857,7 +3857,7 @@
             InventionStructureCostRigCombo.AutoCompleteMode = AutoCompleteMode.Suggest;
             InventionStructureCostRigCombo.AutoCompleteSource = AutoCompleteSource.ListItems;
             InventionStructureCostRigCombo.FormattingEnabled = true;
-            InventionStructureCostRigCombo.Location = new Point(124, 71);
+            InventionStructureCostRigCombo.Location = new Point(116, 70);
             InventionStructureCostRigCombo.Margin = new Padding(2);
             InventionStructureCostRigCombo.Name = "InventionStructureCostRigCombo";
             InventionStructureCostRigCombo.Size = new Size(122, 23);
@@ -3871,7 +3871,7 @@
             InventionStructureCombo.DropDownHeight = 150;
             InventionStructureCombo.FormattingEnabled = true;
             InventionStructureCombo.IntegralHeight = false;
-            InventionStructureCombo.Location = new Point(124, 36);
+            InventionStructureCombo.Location = new Point(116, 40);
             InventionStructureCombo.Margin = new Padding(2);
             InventionStructureCombo.Name = "InventionStructureCombo";
             InventionStructureCombo.Size = new Size(122, 23);
@@ -3885,7 +3885,7 @@
             InventionSolarSystemCombo.DropDownHeight = 150;
             InventionSolarSystemCombo.FormattingEnabled = true;
             InventionSolarSystemCombo.IntegralHeight = false;
-            InventionSolarSystemCombo.Location = new Point(124, 4);
+            InventionSolarSystemCombo.Location = new Point(116, 10);
             InventionSolarSystemCombo.Margin = new Padding(2);
             InventionSolarSystemCombo.Name = "InventionSolarSystemCombo";
             InventionSolarSystemCombo.Size = new Size(122, 23);
@@ -3931,7 +3931,7 @@
             ReactionInputGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ReactionInputGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             ReactionInputGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-            ReactionInputGrid.BackgroundColor = Color.Black;
+            ReactionInputGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             ReactionInputGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ReactionInputGrid.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn13, dataGridViewTextBoxColumn14, dataGridViewTextBoxColumn15, dataGridViewTextBoxColumn16, dataGridViewTextBoxColumn17, dataGridViewTextBoxColumn18, dataGridViewTextBoxColumn19, dataGridViewTextBoxColumn20, dataGridViewTextBoxColumn21, dataGridViewTextBoxColumn22, dataGridViewTextBoxColumn23, dataGridViewTextBoxColumn24 });
             dataGridViewCellStyle30.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -3943,7 +3943,7 @@
             dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
             ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle30;
             ReactionInputGrid.EditableColumns = null;
-            ReactionInputGrid.GridColor = Color.Black;
+            ReactionInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             ReactionInputGrid.Location = new Point(2, 232);
             ReactionInputGrid.Margin = new Padding(2);
             ReactionInputGrid.Name = "ReactionInputGrid";
@@ -4104,7 +4104,7 @@
             // ReactionTaxUpDown
             // 
             ReactionTaxUpDown.DecimalPlaces = 2;
-            ReactionTaxUpDown.Location = new Point(114, 159);
+            ReactionTaxUpDown.Location = new Point(116, 130);
             ReactionTaxUpDown.Margin = new Padding(2);
             ReactionTaxUpDown.Name = "ReactionTaxUpDown";
             ReactionTaxUpDown.Size = new Size(120, 23);
@@ -4168,7 +4168,7 @@
             ReactionStructureTERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureTERig.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionStructureTERig.FormattingEnabled = true;
-            ReactionStructureTERig.Location = new Point(114, 125);
+            ReactionStructureTERig.Location = new Point(116, 100);
             ReactionStructureTERig.Margin = new Padding(2);
             ReactionStructureTERig.Name = "ReactionStructureTERig";
             ReactionStructureTERig.Size = new Size(122, 23);
@@ -4180,7 +4180,7 @@
             ReactionStructureMERig.AutoCompleteMode = AutoCompleteMode.Suggest;
             ReactionStructureMERig.AutoCompleteSource = AutoCompleteSource.ListItems;
             ReactionStructureMERig.FormattingEnabled = true;
-            ReactionStructureMERig.Location = new Point(114, 85);
+            ReactionStructureMERig.Location = new Point(116, 70);
             ReactionStructureMERig.Margin = new Padding(2);
             ReactionStructureMERig.Name = "ReactionStructureMERig";
             ReactionStructureMERig.Size = new Size(122, 23);
@@ -4194,7 +4194,7 @@
             ReactionSolarSystemCombo.DropDownHeight = 150;
             ReactionSolarSystemCombo.FormattingEnabled = true;
             ReactionSolarSystemCombo.IntegralHeight = false;
-            ReactionSolarSystemCombo.Location = new Point(114, 4);
+            ReactionSolarSystemCombo.Location = new Point(116, 10);
             ReactionSolarSystemCombo.Margin = new Padding(2);
             ReactionSolarSystemCombo.Name = "ReactionSolarSystemCombo";
             ReactionSolarSystemCombo.Size = new Size(122, 23);
@@ -4242,14 +4242,14 @@
             SearchTextBox.Location = new Point(4, 2);
             SearchTextBox.Margin = new Padding(2);
             SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(139, 23);
+            SearchTextBox.Size = new Size(176, 23);
             SearchTextBox.TabIndex = 2;
             SearchTextBox.KeyUp += SearchTextBox_KeyUp;
             // 
             // SearchButton
             // 
             SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SearchButton.Location = new Point(147, 1);
+            SearchButton.Location = new Point(184, 2);
             SearchButton.Margin = new Padding(2);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(75, 23);
@@ -4268,7 +4268,7 @@
             SearchResultsTreeView.Location = new Point(4, 27);
             SearchResultsTreeView.Margin = new Padding(2);
             SearchResultsTreeView.Name = "SearchResultsTreeView";
-            SearchResultsTreeView.Size = new Size(219, 157);
+            SearchResultsTreeView.Size = new Size(255, 157);
             SearchResultsTreeView.TabIndex = 4;
             SearchResultsTreeView.TabStop = false;
             SearchResultsTreeView.AfterSelect += SearchResultsTreeView_AfterSelect;

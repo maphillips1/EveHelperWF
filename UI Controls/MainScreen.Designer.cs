@@ -270,7 +270,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic);
-            label10.Location = new Point(10, 414);
+            label10.Location = new Point(10, 415);
             label10.Name = "label10";
             label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
@@ -332,7 +332,7 @@
             DocumentationLabel.AutoSize = true;
             DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            DocumentationLabel.Location = new Point(197, 413);
+            DocumentationLabel.Location = new Point(9, 445);
             DocumentationLabel.Name = "DocumentationLabel";
             DocumentationLabel.Size = new Size(118, 20);
             DocumentationLabel.TabIndex = 25;
@@ -380,7 +380,7 @@
             linkLabel1.AutoSize = true;
             linkLabel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             linkLabel1.LinkColor = Color.FromArgb(128, 255, 255);
-            linkLabel1.Location = new Point(73, 445);
+            linkLabel1.Location = new Point(10, 475);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(175, 20);
             linkLabel1.TabIndex = 28;
@@ -410,7 +410,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
-            ClientSize = new Size(397, 491);
+            ClientSize = new Size(397, 527);
             Controls.Add(HunterIntelButton);
             Controls.Add(linkLabel1);
             Controls.Add(ThemePickerButton);

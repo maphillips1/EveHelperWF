@@ -36,7 +36,7 @@ namespace EveHelperWF.Objects.ESI_Objects.KillMail
         public int damage_taken { get; set; }
         public List<Item> items { get; set; }
         public Position position { get; set; }
-        public long ship_type_id { get; set; }
+        public int ship_type_id { get; set; }
     }
 
     public class Item

@@ -200,7 +200,7 @@ namespace EveHelperWF.UI_Controls
         private void updateEveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UpdateSDE updateSDE = new UpdateSDE();
-            updateSDE.StartPosition = FormStartPosition.CenterParent;
+            updateSDE.StartPosition = FormStartPosition.CenterScreen;
             updateSDE.Show();
         }
 
@@ -229,7 +229,7 @@ namespace EveHelperWF.UI_Controls
         private void importFIlesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportFiles importFiles = new ImportFiles();
-            importFiles.StartPosition = FormStartPosition.CenterParent;
+            importFiles.StartPosition = FormStartPosition.CenterScreen;
             importFiles.ShowDialog();
         }
 
@@ -333,7 +333,7 @@ namespace EveHelperWF.UI_Controls
 
         private void HunterIntelButton_Click(object sender, EventArgs e)
         {
-            if (hunterIntel == null)
+            if (hunterIntel == null || hunterIntel.IsDisposed)
             {
                 hunterIntel = new HunterIntel();
                 hunterIntel.StartPosition = FormStartPosition.CenterScreen;
