@@ -29,6 +29,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 SetMaterialAndProductionCostLabel();
                 BuildTimeLabel();
                 BuildTreeView();
+                SetInputVolumeLabel();
             }
         }
 
@@ -71,6 +72,20 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             decimal totalcost = OptimizedBuild.TotalBuildCost;
             decimal costPerItem = totalcost / OptimizedBuild.TotalQuantityNeeded;
             ProductCostLabel.Text = CommonHelper.FormatIsk(costPerItem);
+        }
+
+        private void SetInputVolumeLabel()
+        {
+            decimal totalVolume = 0;
+
+            InventoryType inputType;
+            foreach (MaterialsWithMarketData input in OptimizedBuild.InputMaterials)
+            {
+                inputType = CommonHelper.InventoryTypes.Find(x => x.typeId == input.materialTypeID);
+                totalVolume += (inputType.volume * input.quantityTotal);
+            }
+
+            InputVolumeLabel.Text = totalVolume.ToString("N2") + " m3";
         }
     }
 }

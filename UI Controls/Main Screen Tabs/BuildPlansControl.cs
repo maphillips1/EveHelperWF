@@ -1918,14 +1918,47 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 AddTotalPlanetMats(planetMaterial, ref totalMats);
             }
 
+            TreeNode P0_Node = new TreeNode();
+            P0_Node.Text = "P0";
+            TreeNode P1_Node = new TreeNode();
+            P1_Node.Text = "P1";
+            TreeNode P2_Node = new TreeNode();
+            P2_Node.Text = "P2";
+            TreeNode P3_Node = new TreeNode();
+            P3_Node.Text = "P3";
+            TreeNode P4_Node = new TreeNode();
+            P4_Node.Text = "P4";
             if (totalMats.Count > 0)
             {
                 totalMats = totalMats.OrderBy(x => x.typeName).ToList();
                 foreach (PlanetMaterial material in totalMats)
                 {
                     tn = BuildTreeViewForPI(material);
-                    PlanetMatsTotalTreeview.Nodes.Add(tn);
+
+                    switch (material.groupID)
+                    {
+                        case 1042: //Basic Commodities
+                            P1_Node.Nodes.Add(tn);
+                            break;
+                        case 1034: //Refined Commodities
+                            P2_Node.Nodes.Add(tn);
+                            break;
+                        case 1040: //Specialized Commodities
+                            P3_Node.Nodes.Add(tn);
+                            break;
+                        case 1041: //Advanced Commodities
+                            P4_Node.Nodes.Add(tn);
+                            break;
+                        default:
+                            P0_Node.Nodes.Add(tn);
+                            break;
+                    }
                 }
+                PlanetMatsTotalTreeview.Nodes.Add(P4_Node);
+                PlanetMatsTotalTreeview.Nodes.Add(P3_Node);
+                PlanetMatsTotalTreeview.Nodes.Add(P2_Node);
+                PlanetMatsTotalTreeview.Nodes.Add(P1_Node);
+                PlanetMatsTotalTreeview.Nodes.Add(P0_Node);
             }
         }
 
