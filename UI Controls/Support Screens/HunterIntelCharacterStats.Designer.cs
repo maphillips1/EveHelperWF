@@ -30,6 +30,10 @@
         {
             NameLabel = new Label();
             BasicDataPanel = new Panel();
+            EdencomLossLabel = new Label();
+            label18 = new Label();
+            MarauderLossLabel = new Label();
+            label16 = new Label();
             PvELossLabel = new Label();
             label15 = new Label();
             SoloLabel = new Label();
@@ -61,14 +65,18 @@
             RecentLossesTreeView = new TreeView();
             label9 = new Label();
             ZKillLabel = new LinkLabel();
-            MarauderLossLabel = new Label();
-            label16 = new Label();
-            EdencomLossLabel = new Label();
-            label18 = new Label();
+            panel2 = new Panel();
+            TopRegionsTreeView = new TreeView();
+            label11 = new Label();
+            label17 = new Label();
+            CorpAllianceBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            SecurityStatusLabel = new Label();
+            AgeLabel = new Label();
             BasicDataPanel.SuspendLayout();
             TopSystemsPanel.SuspendLayout();
             ShipPanel.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // NameLabel
@@ -109,10 +117,46 @@
             BasicDataPanel.Controls.Add(label3);
             BasicDataPanel.Controls.Add(label2);
             BasicDataPanel.Controls.Add(label1);
-            BasicDataPanel.Location = new Point(3, 62);
+            BasicDataPanel.Location = new Point(3, 75);
             BasicDataPanel.Name = "BasicDataPanel";
-            BasicDataPanel.Size = new Size(227, 353);
+            BasicDataPanel.Size = new Size(227, 340);
             BasicDataPanel.TabIndex = 1;
+            // 
+            // EdencomLossLabel
+            // 
+            EdencomLossLabel.AutoSize = true;
+            EdencomLossLabel.Location = new Point(144, 230);
+            EdencomLossLabel.Name = "EdencomLossLabel";
+            EdencomLossLabel.Size = new Size(57, 15);
+            EdencomLossLabel.TabIndex = 22;
+            EdencomLossLabel.Text = "Edencom";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(3, 230);
+            label18.Name = "label18";
+            label18.Size = new Size(94, 15);
+            label18.TabIndex = 21;
+            label18.Text = "Edencom Losses";
+            // 
+            // MarauderLossLabel
+            // 
+            MarauderLossLabel.AutoSize = true;
+            MarauderLossLabel.Location = new Point(144, 210);
+            MarauderLossLabel.Name = "MarauderLossLabel";
+            MarauderLossLabel.Size = new Size(63, 15);
+            MarauderLossLabel.TabIndex = 20;
+            MarauderLossLabel.Text = "Marauders";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(3, 210);
+            label16.Name = "label16";
+            label16.Size = new Size(95, 15);
+            label16.TabIndex = 19;
+            label16.Text = "Marauder Losses";
             // 
             // PvELossLabel
             // 
@@ -189,18 +233,20 @@
             // IsCynoPilotLabel
             // 
             IsCynoPilotLabel.AutoSize = true;
+            IsCynoPilotLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             IsCynoPilotLabel.Location = new Point(144, 110);
             IsCynoPilotLabel.Name = "IsCynoPilotLabel";
-            IsCynoPilotLabel.Size = new Size(73, 15);
+            IsCynoPilotLabel.Size = new Size(74, 15);
             IsCynoPilotLabel.TabIndex = 10;
             IsCynoPilotLabel.Text = "Is Cyno Pilot";
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label6.Location = new Point(3, 110);
             label6.Name = "label6";
-            label6.Size = new Size(73, 15);
+            label6.Size = new Size(74, 15);
             label6.TabIndex = 9;
             label6.Text = "Is Cyno Pilot";
             // 
@@ -294,9 +340,9 @@
             TopSystemsPanel.Controls.Add(KillSystemTreeView);
             TopSystemsPanel.Controls.Add(label4);
             TopSystemsPanel.Controls.Add(label8);
-            TopSystemsPanel.Location = new Point(245, 62);
+            TopSystemsPanel.Location = new Point(245, 75);
             TopSystemsPanel.Name = "TopSystemsPanel";
-            TopSystemsPanel.Size = new Size(200, 353);
+            TopSystemsPanel.Size = new Size(200, 172);
             TopSystemsPanel.TabIndex = 2;
             // 
             // KillSystemTreeView
@@ -304,7 +350,7 @@
             KillSystemTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             KillSystemTreeView.Location = new Point(-1, 64);
             KillSystemTreeView.Name = "KillSystemTreeView";
-            KillSystemTreeView.Size = new Size(200, 288);
+            KillSystemTreeView.Size = new Size(200, 107);
             KillSystemTreeView.TabIndex = 4;
             // 
             // label4
@@ -334,17 +380,19 @@
             ShipPanel.BorderStyle = BorderStyle.FixedSingle;
             ShipPanel.Controls.Add(TopShipsTreeView);
             ShipPanel.Controls.Add(label12);
-            ShipPanel.Location = new Point(465, 62);
+            ShipPanel.Location = new Point(465, 75);
             ShipPanel.Name = "ShipPanel";
-            ShipPanel.Size = new Size(200, 353);
+            ShipPanel.Size = new Size(200, 340);
             ShipPanel.TabIndex = 3;
             // 
             // TopShipsTreeView
             // 
             TopShipsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            TopShipsTreeView.HideSelection = false;
+            TopShipsTreeView.HotTracking = true;
             TopShipsTreeView.Location = new Point(-1, 64);
             TopShipsTreeView.Name = "TopShipsTreeView";
-            TopShipsTreeView.Size = new Size(200, 288);
+            TopShipsTreeView.Size = new Size(200, 275);
             TopShipsTreeView.TabIndex = 2;
             // 
             // label12
@@ -370,9 +418,9 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(RecentLossesTreeView);
             panel1.Controls.Add(label9);
-            panel1.Location = new Point(685, 62);
+            panel1.Location = new Point(685, 75);
             panel1.Name = "panel1";
-            panel1.Size = new Size(200, 353);
+            panel1.Size = new Size(200, 340);
             panel1.TabIndex = 4;
             // 
             // RecentLossesTreeView
@@ -380,8 +428,9 @@
             RecentLossesTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             RecentLossesTreeView.Location = new Point(-1, 64);
             RecentLossesTreeView.Name = "RecentLossesTreeView";
-            RecentLossesTreeView.Size = new Size(200, 288);
+            RecentLossesTreeView.Size = new Size(200, 275);
             RecentLossesTreeView.TabIndex = 2;
+            RecentLossesTreeView.AfterSelect += RecentLossesTreeView_AfterSelect;
             // 
             // label9
             // 
@@ -396,7 +445,7 @@
             // ZKillLabel
             // 
             ZKillLabel.AutoSize = true;
-            ZKillLabel.Location = new Point(7, 30);
+            ZKillLabel.Location = new Point(7, 29);
             ZKillLabel.Name = "ZKillLabel";
             ZKillLabel.Size = new Size(29, 15);
             ZKillLabel.TabIndex = 5;
@@ -404,47 +453,79 @@
             ZKillLabel.Text = "Zkill";
             ZKillLabel.LinkClicked += ZKillLabel_LinkClicked;
             // 
-            // MarauderLossLabel
+            // panel2
             // 
-            MarauderLossLabel.AutoSize = true;
-            MarauderLossLabel.Location = new Point(144, 210);
-            MarauderLossLabel.Name = "MarauderLossLabel";
-            MarauderLossLabel.Size = new Size(63, 15);
-            MarauderLossLabel.TabIndex = 20;
-            MarauderLossLabel.Text = "Marauders";
+            panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(TopRegionsTreeView);
+            panel2.Controls.Add(label11);
+            panel2.Controls.Add(label17);
+            panel2.Location = new Point(245, 253);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(200, 162);
+            panel2.TabIndex = 6;
             // 
-            // label16
+            // TopRegionsTreeView
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(3, 210);
-            label16.Name = "label16";
-            label16.Size = new Size(95, 15);
-            label16.TabIndex = 19;
-            label16.Text = "Marauder Losses";
+            TopRegionsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            TopRegionsTreeView.Location = new Point(-1, 64);
+            TopRegionsTreeView.Name = "TopRegionsTreeView";
+            TopRegionsTreeView.Size = new Size(200, 97);
+            TopRegionsTreeView.TabIndex = 4;
             // 
-            // EdencomLossLabel
+            // label11
             // 
-            EdencomLossLabel.AutoSize = true;
-            EdencomLossLabel.Location = new Point(144, 230);
-            EdencomLossLabel.Name = "EdencomLossLabel";
-            EdencomLossLabel.Size = new Size(57, 15);
-            EdencomLossLabel.TabIndex = 22;
-            EdencomLossLabel.Text = "Edencom";
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(3, 39);
+            label11.Name = "label11";
+            label11.Size = new Size(29, 15);
+            label11.TabIndex = 3;
+            label11.Text = "Kills";
             // 
-            // label18
+            // label17
             // 
-            label18.AutoSize = true;
-            label18.Location = new Point(3, 230);
-            label18.Name = "label18";
-            label18.Size = new Size(94, 15);
-            label18.TabIndex = 21;
-            label18.Text = "Edencom Losses";
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label17.Location = new Point(3, 1);
+            label17.Name = "label17";
+            label17.Size = new Size(117, 15);
+            label17.TabIndex = 1;
+            label17.Text = "Recent Top Regions";
+            // 
+            // CorpAllianceBackgroundWorker
+            // 
+            CorpAllianceBackgroundWorker.WorkerSupportsCancellation = true;
+            CorpAllianceBackgroundWorker.DoWork += CorpAllianceBackgroundWorker_DoWork;
+            CorpAllianceBackgroundWorker.RunWorkerCompleted += CorpAllianceBackgroundWorker_RunWorkerCompleted;
+            // 
+            // SecurityStatusLabel
+            // 
+            SecurityStatusLabel.AutoSize = true;
+            SecurityStatusLabel.Location = new Point(7, 49);
+            SecurityStatusLabel.Name = "SecurityStatusLabel";
+            SecurityStatusLabel.Size = new Size(84, 15);
+            SecurityStatusLabel.TabIndex = 8;
+            SecurityStatusLabel.Text = "Security Status";
+            // 
+            // AgeLabel
+            // 
+            AgeLabel.AutoSize = true;
+            AgeLabel.Location = new Point(202, 49);
+            AgeLabel.Name = "AgeLabel";
+            AgeLabel.Size = new Size(28, 15);
+            AgeLabel.TabIndex = 9;
+            AgeLabel.Text = "Age";
             // 
             // HunterIntelCharacterStats
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Controls.Add(AgeLabel);
+            Controls.Add(SecurityStatusLabel);
+            Controls.Add(panel2);
             Controls.Add(ZKillLabel);
             Controls.Add(panel1);
             Controls.Add(ShipPanel);
@@ -461,6 +542,8 @@
             ShipPanel.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -504,5 +587,12 @@
         private Label label18;
         private Label MarauderLossLabel;
         private Label label16;
+        private Panel panel2;
+        private TreeView TopRegionsTreeView;
+        private Label label11;
+        private Label label17;
+        private System.ComponentModel.BackgroundWorker CorpAllianceBackgroundWorker;
+        private Label SecurityStatusLabel;
+        private Label AgeLabel;
     }
 }
