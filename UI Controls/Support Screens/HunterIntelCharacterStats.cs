@@ -32,9 +32,13 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         List<ESI_KillMail> LossedWithIndyCyno = new List<ESI_KillMail>();
         List<ESI_KillMail> LossesWithCynos = new List<ESI_KillMail>();
 
-        List<int> PvEShips = new List<int>() {17918,17715,12005};
-        List<int> Marauders = new List<int>() {28659,28710,28665,28661 };
-        List<int> Edencom = new List<int>() {54732,54733 };
+        List<int> PvEShips = new List<int>() { 17918, 17715, 12005 };
+        List<int> Marauders = new List<int>() { 28659, 28710, 28665, 28661 };
+        List<int> Edencom = new List<int>() { 54732, 54733 };
+        string corpName = "";
+        string allianceName = "";
+        double securityStatus = 0;
+        DateTime BirthDate;
 
         public HunterIntelCharacterStats(UniverseIdSearchResultItem characterResult)
         {
@@ -55,11 +59,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             RecentLossesTreeView.BackColor = Enums.Enums.BackgroundColor;
             RecentLossesTreeView.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
 
+            TopRegionsTreeView.BackColor = Enums.Enums.BackgroundColor;
+            TopRegionsTreeView.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+
             ZKillLabel.LinkColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
 
             IsCynoPilotLabel.Text = "No";
 
             LoadStats();
+            LoadCharInfo();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -87,6 +95,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             this.Cursor = Cursors.Default;
         }
 
+        private void LoadCharInfo()
+        {
+            if (CorpAllianceBackgroundWorker.IsBusy)
+            {
+                Thread.Sleep(200);
+            }
+            CorpAllianceBackgroundWorker.RunWorkerAsync(itemForStats.id);
+        }
+
         private void LoadZKillStats()
         {
             Stats = ZKill_Calls.Zkill_Calls.LoadStats("characterID", itemForStats.id);
@@ -94,7 +111,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void DatabindScreen()
         {
-            NameLabel.Text = itemForStats.name;
+            NameLabel.Text = itemForStats.name + corpName + allianceName;
             KillCountLabel.Text = Stats.shipsDestroyed.ToString("N0");
             LossCountLabel.Text = Stats.shipsLost.ToString("N0");
             DangerRatingLabel.Text = Stats.dangerRatio.ToString("N0");
@@ -103,12 +120,22 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             ZKillLabel.Text = "https://zkillboard.com/character/" + itemForStats.id + "/";
             AvgAttackersLabel.Text = Stats.avgGangSize.ToString("N0");
             SoloLabel.Text = Stats.soloRatio.ToString();
+            SecurityStatusLabel.Text = Math.Round(securityStatus,2).ToString();
+            if (securityStatus > 0)
+            {
+                SecurityStatusLabel.ForeColor = Color.LightGreen;
+            }
+            else
+            {
+                SecurityStatusLabel.ForeColor = Color.OrangeRed;
+            }
 
             SetCynoField();
             SetTopSystems();
             SetTopShips();
             SetRecentLosses();
             SetPvELossLabel();
+            SetAge();
         }
 
         private void SetCynoField()
@@ -117,18 +144,34 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             if (LossesWithCynos.Count == 0 && LossedWithIndyCyno.Count > 0)
             {
                 IsCynoPilotLabel.Text = "Yes, Industrial Only";
+                IsCynoPilotLabel.ForeColor = Color.Gold;
             }
             else
             {
                 bool isCynoPilot = (LossesWithCynos?.Count > 0 || LossedWithIndyCyno?.Count > 0);
-                if (isCynoPilot) { IsCynoPilotLabel.Text = "Yes"; }
+                if (isCynoPilot)
+                {
+                    IsCynoPilotLabel.Text = "Yes";
+                    IsCynoPilotLabel.ForeColor = Color.IndianRed;
+                }
 
+            }
+        }
+
+        private void SetAge()
+        {
+            if (BirthDate != null)
+            {
+                var result = GetDateDifference(BirthDate, DateTime.Now);
+                AgeLabel.Text = $"Years: {result.Years}, Months: {result.Months}, Days: {result.Days}";
+                AgeLabel.Left = SecurityStatusLabel.Right + 10;
             }
         }
 
         private void SetTopSystems()
         {
             KillSystemTreeView.Nodes.Clear();
+            Dictionary<long, int> topRegions = new Dictionary<long, int>();
             ZkillTopLists topSystems = Stats.topLists?.Find(x => x.type.Equals("solarSystem"));
             if (topSystems != null && topSystems.values.Count > 0)
             {
@@ -147,7 +190,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         node.Text = solarSystem.solarSystemName;
                         node.Expand();
 
-
                         childNode = new TreeNode();
                         childNode.Text = "Kills: " + systems.kills;
                         node.Nodes.Add(childNode);
@@ -157,6 +199,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         node.Nodes.Add(childNode);
 
                         KillSystemTreeView.Nodes.Add(node);
+
+                        if (!topRegions.Keys.Contains(solarSystem.regionID))
+                        {
+                            topRegions.Add(solarSystem.regionID, systems.kills);
+                        }
+                        else
+                        {
+                            topRegions[solarSystem.regionID] += systems.kills;
+                        }
                     }
                 }
             }
@@ -165,6 +216,34 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 TreeNode node = new TreeNode();
                 node.Text = "None";
                 KillSystemTreeView.Nodes.Add(node);
+            }
+
+            SetTopRegions(topRegions);
+        }
+
+        private void SetTopRegions(Dictionary<long, int> topRegions)
+        {
+            TopRegionsTreeView.Nodes.Clear();
+            if (topRegions.Count > 0)
+            {
+                TreeNode node;
+                TreeNode childNode;
+                SolarSystem solarSystem;
+                foreach (long regionID in topRegions.Keys)
+                {
+                    solarSystem = CommonHelper.SolarSystemList.Find(x => x.regionID == regionID);
+                    node = new TreeNode();
+                    childNode = new TreeNode();
+
+                    node.Text = solarSystem.regionName;
+                    TopRegionsTreeView.Nodes.Add(node);
+                }
+            }
+            else
+            {
+                TreeNode node = new TreeNode();
+                node.Text = "None";
+                TopRegionsTreeView.Nodes.Add(node);
             }
         }
 
@@ -230,6 +309,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                     childNode.Text = eSI_KillMail.killmail_time.ToString();
                     node.Nodes.Add(childNode);
 
+                    childNode = new TreeNode();
+                    childNode.Text = "ZKill Link";
+                    childNode.ForeColor = Color.LightBlue;
+                    childNode.Tag = "https://zkillboard.com/kill/" + eSI_KillMail.killmail_id + "/";
+                    node.Nodes.Add(childNode);
+
+                    childNode = new TreeNode();
+                    childNode.Text = invType.groupName;
+                    node.Nodes.Add(childNode);
+
                     //Cyno being red is more important than "Valuable Kill"
                     if (zkillMail != null && !isCyno)
                     {
@@ -243,11 +332,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                             node.ForeColor = Color.LightGreen;
                         }
                     }
-
-
-                    childNode = new TreeNode();
-                    childNode.Text = invType.groupName;
-                    node.Nodes.Add(childNode);
 
                     RecentLossesTreeView.Nodes.Add(node);
                 }
@@ -340,6 +424,102 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             ProcessStartInfo startInfo = new ProcessStartInfo(ZKillLabel.Text);
             startInfo.UseShellExecute = true;
             Process.Start(startInfo);
+        }
+
+        private void RecentLossesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (RecentLossesTreeView.SelectedNode != null &&
+                RecentLossesTreeView.SelectedNode.Tag != null &&
+                !string.IsNullOrWhiteSpace(RecentLossesTreeView.SelectedNode.Tag.ToString()))
+            {
+                string zkillLink = e.Node.Tag.ToString();
+                ProcessStartInfo startInfo = new ProcessStartInfo(zkillLink);
+                startInfo.UseShellExecute = true;
+                Process.Start(startInfo);
+            }
+        }
+
+        private void CorpAllianceBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Tuple<string, string> corpAllianceInfo;
+            string corp = "", alliance = "";
+            if (e.Argument != null && (long)e.Argument > 0)
+            {
+                Objects.ESI_Objects.ESICharacter esiChar = ESI_Calls.ESICharacter.LoadCharacterForId((long)e.Argument);
+                if (esiChar != null && !CorpAllianceBackgroundWorker.CancellationPending)
+                {
+                    securityStatus = esiChar.SecurityStatus;
+                    BirthDate = esiChar.Birthday;
+                    if (esiChar.CorporationId > 0)
+                    {
+                        Objects.ESI_Objects.ESI_Corporation esiCorp = ESI_Calls.ESICorporation.LoadCorporationById(esiChar.CorporationId);
+                        if (esiCorp != null)
+                        {
+                            corp = " > " + esiCorp.Name;
+                        }
+                    }
+
+                    if (!CorpAllianceBackgroundWorker.CancellationPending && esiChar.AllianceId > 0)
+                    {
+                        Objects.ESI_Objects.ESI_Alliance esiAlliance = ESI_Calls.ESIAlliance.LoadAllianceById(esiChar.AllianceId);
+                        if (esiAlliance != null)
+                        {
+                            alliance = " > " + esiAlliance.Name;
+                        }
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            corpAllianceInfo = new Tuple<string, string>(corp, alliance);
+            e.Result = corpAllianceInfo;
+        }
+
+        private void CorpAllianceBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!e.Cancelled && e.Result != null)
+            {
+                Tuple<string, string> corpAllianceInfo = (Tuple<string, string>)e.Result;
+                corpName = corpAllianceInfo.Item1;
+                allianceName = corpAllianceInfo.Item2;
+                DatabindScreen();
+            }
+        }
+        public (int Years, int Months, int Days) GetDateDifference(DateTime startDate, DateTime endDate)
+        {
+            // Ensure start date is earlier than end date
+            if (startDate > endDate)
+            {
+                var temp = startDate;
+                startDate = endDate;
+                endDate = temp;
+            }
+
+            // Calculate difference
+            int years = endDate.Year - startDate.Year;
+            int months = endDate.Month - startDate.Month;
+            int days = endDate.Day - startDate.Day;
+
+            // Adjust for negative values
+            if (days < 0)
+            {
+                months--;
+                days += DateTime.DaysInMonth(endDate.Year, endDate.Month);
+            }
+
+            if (months < 0)
+            {
+                years--;
+                months += 12;
+            }
+
+            return (years, months, days);
         }
     }
 }
