@@ -11,7 +11,7 @@ namespace EveHelperWF.ZKill_Calls
     {
         static string baseUrl = "https://zkillboard.com/api/";
 
-        public static List<Killmail> LoadCharacterKills(long characterId)
+        public static async Task<List<Killmail>> LoadCharacterKills(long characterId)
         {
             List<Killmail> killmails = new List<Killmail>();
 
@@ -21,7 +21,7 @@ namespace EveHelperWF.ZKill_Calls
             {
                 string url = baseUrl + "kills/characterID/" + characterId.ToString() + "/page/" + i + "/";
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = client.GetAsync(url).Result;
+                HttpResponseMessage response = await client.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -79,12 +79,12 @@ namespace EveHelperWF.ZKill_Calls
             return killmails;
         }
 
-        public static ZKillStats LoadStats(string entityType, long entityID)
+        public static async Task<ZKillStats> LoadStats(string entityType, long entityID)
         {
             ZKillStats stats = new ZKillStats();
             string url = baseUrl + "stats/" + entityType + "/" + entityID.ToString() + "/";
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
 
 
             if (response.IsSuccessStatusCode)

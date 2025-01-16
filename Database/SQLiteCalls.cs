@@ -2,7 +2,9 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,6 +14,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace EveHelperWF.Database
 {
@@ -617,6 +620,11 @@ namespace EveHelperWF.Database
             sb.AppendLine("Where ET.typeID = " + typeId.ToString());
 
             return sb.ToString();
+        }
+
+        private static string GetCovertTypeIdsCommand()
+        {
+            return "select etn.en, TDA.typeId, da.name, tda.*\r\nfrom typeDogmaAttribute TDA\r\ninner join dogmaAttribute DA\r\n    on da.attributeId = tda.attributeId\r\ninner join eveTypeName etn\r\n    on etn.parenttypeid = tda.typeId\r\nwhere tda.attributeId = 1034";
         }
         #endregion
 
@@ -1643,6 +1651,118 @@ namespace EveHelperWF.Database
 
             return comboItems;
         }
+
+        public static List<List<Object>> RunCustomQuery(string queryToRun)
+        {
+            try
+            {
+                List<List<Object>> returnList = new List<List<Object>>();
+                string dbpath = GetSQLitePath();
+                using (var db = new SqliteConnection($"Filename={dbpath}"))
+                {
+                    db.Open();
+
+                    SqliteCommand command = new SqliteCommand(queryToRun, db);
+                    List<Object> rowList;
+                    SqliteDataReader query = command.ExecuteReader();
+                    if (query != null)
+                    {
+                        int i = 0;
+                        rowList = new List<object>();
+                        foreach (DbColumn column in query.GetColumnSchema())
+                        {
+                            rowList.Add(column.ColumnName);
+                        }
+                        returnList.Add(rowList);
+                        while (query.Read())
+                        {
+                            i = 0;
+                            rowList = new List<object>();
+                            while (i < query.FieldCount)
+                            {
+                                rowList.Add(query.GetValue(i));
+                                i++;
+                            }
+                            returnList.Add(rowList);
+                        }
+                    }
+                    return returnList;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+        }
+
+        public static List<string> LoadTableList()
+        {
+            try
+            {
+                string dbpath = GetSQLitePath();
+                using (var db = new SqliteConnection($"Filename={dbpath}"))
+                {
+                    db.Open();
+
+                    SqliteCommand command = new SqliteCommand("SELECT name FROM sqlite_master WHERE type='table'", db);
+
+                    SqliteDataReader query = command.ExecuteReader();
+                    List<string> tableNames = new List<string>();
+                    while (query.Read())
+                    {
+                        tableNames.Add(query.GetString(0));
+                    }
+
+                    return tableNames;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static List<List<Object>> LoadTableSchema(string tableName)
+        {
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand($"PRAGMA table_info({tableName});", db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+
+                List<List<Object>> returnList = new List<List<Object>>();
+                if (query != null)
+                {
+                    int i = 0;
+                    List<Object> rowList;
+                    rowList = new List<object>();
+                    foreach (DbColumn column in query.GetColumnSchema())
+                    {
+                        rowList.Add(column.ColumnName);
+                    }
+                    returnList.Add(rowList);
+                    while (query.Read())
+                    {
+                        i = 0;
+                        rowList = new List<object>();
+                        while (i < query.FieldCount)
+                        {
+                            rowList.Add(query.GetValue(i));
+                            i++;
+                        }
+                        returnList.Add(rowList);
+                    }
+                }
+                return returnList;
+            }
+
+            return null;
+        }
         #endregion
 
         #region "Support Functions"
@@ -1886,6 +2006,28 @@ namespace EveHelperWF.Database
             }
 
             return typeName;
+        }
+
+        public static List<int> GetCovertTypeIds()
+        {
+            List<int> typeIDs = new List<int>();
+            string queryCommand = GetCovertTypeIdsCommand();
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(queryCommand, db);
+                SqliteDataReader query = command.ExecuteReader();
+
+                while (query.Read())
+                {
+                    typeIDs.Add(query.GetInt32(1));
+                }
+            }
+
+            return typeIDs;
         }
 
         #endregion

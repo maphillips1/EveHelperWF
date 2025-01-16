@@ -20,6 +20,7 @@ namespace EveHelperWF.UI_Controls
         ShoppingListControl? shoppingList;
         BuildPlansControl? buildPlans;
         HunterIntel hunterIntel;
+        QueryDatabase queryDatabaseControl;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
@@ -345,6 +346,14 @@ namespace EveHelperWF.UI_Controls
             {
                 hunterIntel.BringToFront();
             }
+        }
+
+        private void QueryDatabaseButton_Click(object sender, EventArgs e)
+        {
+            if (queryDatabaseControl == null || queryDatabaseControl.IsDisposed) { queryDatabaseControl = new QueryDatabase(); }
+            queryDatabaseControl.StartPosition = FormStartPosition.CenterScreen;
+            queryDatabaseControl.Show();
+            queryDatabaseControl.BringToFront();
         }
     }
 }

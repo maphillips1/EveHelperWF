@@ -29,5 +29,23 @@ namespace EveHelperWF.ESI_Calls
             }
             return responseString;
         }
+        public static string SearchUniverseFindIDs(List<string> searchList)
+        {
+            string responseString = "";
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(searchList);
+
+            string url = "https://esi.evetech.net/latest/universe/ids/?datasource=tranquility&language=en";
+
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
+            System.Net.Http.HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                responseString = response.Content.ReadAsStringAsync().Result;
+            }
+            return responseString;
+        }
     }
 }
