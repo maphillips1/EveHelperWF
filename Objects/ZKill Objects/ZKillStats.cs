@@ -8,6 +8,9 @@ namespace EveHelperWF.Objects.ZKill_Objects
 {
     public class ZKillStats
     {
+        public string characterName {  get; set; }
+        public string corpName { get; set; }
+        public string allianceName { get; set; }
         public string type {  get; set; }
         public long id { get; set; }
         public List<ZKillTopAllTime> topAllTime { get; set; }

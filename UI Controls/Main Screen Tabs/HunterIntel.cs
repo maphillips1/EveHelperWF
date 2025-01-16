@@ -9,14 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
     public partial class HunterIntel : Objects.FormBase
     {
+
         public HunterIntel()
         {
             InitializeComponent();
+            //by default, show local scan
+            LoadLocalScan();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -42,7 +46,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     MessageBox.Show("Could not find a match. Due to CCP logic, the name must be exact. Check your text and try again");
                 }
             }
-            this.Cursor= Cursors.Default;
+            this.Cursor = Cursors.Default;
         }
 
         private void HandleSearchResults(UniverseIdSearchResults searchResults)
@@ -111,12 +115,25 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void LoadLocalScan()
+        {
+            StatsPanel.Controls.Clear();
+            HunterLocalScan localScan = new HunterLocalScan();
+            localScan.Dock = DockStyle.Fill;
+            StatsPanel.Controls.Add(localScan);
+        }
+
         private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 SearchButton_Click(sender, e);
             }
+        }
+
+        private void LoadLocalScanButton_Click(object sender, EventArgs e)
+        {
+            LoadLocalScan();
         }
     }
 }

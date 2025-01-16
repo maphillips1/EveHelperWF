@@ -55,6 +55,7 @@
             ThemePickerButton = new Objects.Custom_Controls.EveHelperButton();
             linkLabel1 = new LinkLabel();
             HunterIntelButton = new Objects.Custom_Controls.EveHelperButton();
+            QueryDatabaseButton = new Objects.Custom_Controls.EveHelperButton();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -405,12 +406,30 @@
             HunterIntelButton.UseVisualStyleBackColor = false;
             HunterIntelButton.Click += HunterIntelButton_Click;
             // 
+            // QueryDatabaseButton
+            // 
+            QueryDatabaseButton.Cursor = Cursors.Hand;
+            QueryDatabaseButton.FlatAppearance.BorderColor = Color.Gray;
+            QueryDatabaseButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            QueryDatabaseButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            QueryDatabaseButton.ForeColor = Color.FromArgb(234, 234, 234);
+            QueryDatabaseButton.Location = new Point(142, 350);
+            QueryDatabaseButton.Margin = new Padding(3, 2, 3, 2);
+            QueryDatabaseButton.MaximumSize = new Size(120, 120);
+            QueryDatabaseButton.Name = "QueryDatabaseButton";
+            QueryDatabaseButton.Size = new Size(120, 50);
+            QueryDatabaseButton.TabIndex = 30;
+            QueryDatabaseButton.Text = "Query Database";
+            QueryDatabaseButton.UseVisualStyleBackColor = false;
+            QueryDatabaseButton.Click += QueryDatabaseButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
             ClientSize = new Size(397, 527);
+            Controls.Add(QueryDatabaseButton);
             Controls.Add(HunterIntelButton);
             Controls.Add(linkLabel1);
             Controls.Add(ThemePickerButton);
@@ -472,5 +491,6 @@
         private Objects.Custom_Controls.EveHelperButton ThemePickerButton;
         private LinkLabel linkLabel1;
         private Objects.Custom_Controls.EveHelperButton HunterIntelButton;
+        private Objects.Custom_Controls.EveHelperButton QueryDatabaseButton;
     }
 }

@@ -106,7 +106,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void LoadZKillStats()
         {
-            Stats = ZKill_Calls.Zkill_Calls.LoadStats("characterID", itemForStats.id);
+            Stats = ZKill_Calls.Zkill_Calls.LoadStats("characterID", itemForStats.id).Result;
         }
 
         private void DatabindScreen()

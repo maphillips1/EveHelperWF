@@ -33,6 +33,7 @@
             SearchTextBox = new TextBox();
             SearchButton = new Objects.Custom_Controls.EveHelperButton();
             StatsPanel = new Panel();
+            LoadLocalScanButton = new Objects.Custom_Controls.EveHelperButton();
             SuspendLayout();
             // 
             // label1
@@ -74,12 +75,24 @@
             StatsPanel.Size = new Size(909, 458);
             StatsPanel.TabIndex = 3;
             // 
+            // LoadLocalScanButton
+            // 
+            LoadLocalScanButton.ForeColor = Color.FromArgb(234, 234, 234);
+            LoadLocalScanButton.Location = new Point(773, 4);
+            LoadLocalScanButton.Name = "LoadLocalScanButton";
+            LoadLocalScanButton.Size = new Size(148, 34);
+            LoadLocalScanButton.TabIndex = 4;
+            LoadLocalScanButton.Text = "Load Local Scan";
+            LoadLocalScanButton.UseVisualStyleBackColor = false;
+            LoadLocalScanButton.Click += LoadLocalScanButton_Click;
+            // 
             // HunterIntel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
+            Controls.Add(LoadLocalScanButton);
             Controls.Add(StatsPanel);
             Controls.Add(SearchButton);
             Controls.Add(SearchTextBox);
@@ -99,5 +112,6 @@
         private TextBox SearchTextBox;
         private Objects.Custom_Controls.EveHelperButton SearchButton;
         private Panel StatsPanel;
+        private Objects.Custom_Controls.EveHelperButton LoadLocalScanButton;
     }
 }
