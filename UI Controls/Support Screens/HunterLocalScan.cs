@@ -60,6 +60,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             if (!isLoading)
             {
+                isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 ResultsGridView.Rows.Clear();
                 Invalidate();
@@ -67,9 +68,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 if (!string.IsNullOrEmpty(rawInput))
                 {
                     string[] splitNames = rawInput.Split('\n');
+                    StringBuilder sb = new StringBuilder();
+                    foreach (string item in splitNames)
+                    {
+                        sb.AppendLine(item);
+                    }
+                    LocalScanTextBox.Text = sb.ToString();
                     LoadSearchResults(splitNames.ToList());
                 }
-                this.Cursor= Cursors.Default;
+                this.Cursor = Cursors.Default;
+                isLoading = false;
             }
         }
 
@@ -221,6 +229,13 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 }
             }
             return hasCapital;
+        }
+
+        private void LocalScanTextBox_Enter(object sender, EventArgs e)
+        {
+            isLoading = true;
+            LocalScanTextBox.Text = "";
+            isLoading = false;
         }
     }
 }

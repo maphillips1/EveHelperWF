@@ -55,6 +55,7 @@
             LocalScanTextBox.TabIndex = 0;
             LocalScanTextBox.Text = resources.GetString("LocalScanTextBox.Text");
             LocalScanTextBox.TextChanged += LocalScanTextBox_TextChanged;
+            LocalScanTextBox.Enter += LocalScanTextBox_Enter;
             // 
             // label1
             // 

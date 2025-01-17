@@ -20,11 +20,22 @@ namespace EveHelperWF.Objects.Custom_Controls
             InitializeComponent();
         }
 
+        public Color defaultBackColor = Enums.Enums.BackgroundColor;
+        public Color defaultForeColor = CommonHelper.GetInvertedColor(DefaultBackColor);
+
         public override Color BackColor
         {
             get
             {
-                return Enums.Enums.BackgroundColor;
+                return defaultBackColor;
+            }
+        }
+
+        public override Color ForeColor
+        {
+            get
+            {
+                return CommonHelper.GetInvertedColor(defaultBackColor);
             }
         }
 
@@ -62,9 +73,21 @@ namespace EveHelperWF.Objects.Custom_Controls
         {
             this.FlatStyle = FlatStyle.Standard;
             this.UseVisualStyleBackColor = false;
-            this.ForeColor = CommonHelper.GetInvertedColor(this.BackColor);
+            this.ForeColor = defaultForeColor;
             base.OnPaint(pe);
             DrawCorners();
+        }
+
+        public void SetBackgroundColor(Color color)
+        {
+            defaultBackColor = color;
+            Invalidate();
+        }
+
+        public void SetForeColor(Color color)
+        {
+            defaultForeColor = color;
+            Invalidate();
         }
     }
 }

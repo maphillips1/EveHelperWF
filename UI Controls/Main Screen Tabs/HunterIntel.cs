@@ -135,5 +135,18 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             LoadLocalScan();
         }
+
+        private void SearchTextBox_Enter(object sender, EventArgs e)
+        {
+            SearchTextBox.Text = "";
+        }
+
+        private void SearchTextBox_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(SearchTextBox.Text))
+            {
+                SearchTextBox.Text = "Enter a name of anything. Must match exactly because ccp";
+            }
+        }
     }
 }
