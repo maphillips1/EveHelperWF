@@ -76,13 +76,13 @@
             Label label59;
             Label label60;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             SummaryPage = new TabPage();
             MostProfitableButton = new Objects.Custom_Controls.EveHelperButton();
             ManuSCILabel = new Label();
@@ -970,7 +970,6 @@
             PriceHistoryControl.AutoScroll = true;
             PriceHistoryControl.AutoSize = true;
             PriceHistoryControl.BackColor = Color.FromArgb(21, 21, 21);
-            PriceHistoryControl.BorderStyle = BorderStyle.FixedSingle;
             PriceHistoryControl.ForeColor = Color.FromArgb(234, 234, 234);
             PriceHistoryControl.Location = new Point(13, 100);
             PriceHistoryControl.Name = "PriceHistoryControl";
@@ -1040,36 +1039,36 @@
             // 
             MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             MostExpensiveGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Control;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             MostExpensiveGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MostExpensiveGridView.Columns.AddRange(new DataGridViewColumn[] { materialName, amount, priceTotal });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Window;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle9;
             MostExpensiveGridView.EditableColumns = null;
             MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.Location = new Point(787, 54);
             MostExpensiveGridView.Name = "MostExpensiveGridView";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.Control;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             MostExpensiveGridView.Size = new Size(550, 469);
             MostExpensiveGridView.TabIndex = 30;
             // 
@@ -1161,6 +1160,7 @@
             // 
             MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MaterialsPriceTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            MaterialsPriceTreeView.BorderStyle = BorderStyle.None;
             MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F);
             MaterialsPriceTreeView.HotTracking = true;
             MaterialsPriceTreeView.Location = new Point(9, 67);
@@ -1201,7 +1201,6 @@
             // IndustrySettingsTabPage
             // 
             IndustrySettingsTabPage.BackColor = Color.FromArgb(21, 21, 21);
-            IndustrySettingsTabPage.BorderStyle = BorderStyle.FixedSingle;
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 5);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
@@ -1724,13 +1723,13 @@
             // 
             // ExportBuildList
             // 
-            ExportBuildList.ForeColor = Color.Black;
+            ExportBuildList.ForeColor = Color.FromArgb(234, 234, 234);
             ExportBuildList.Location = new Point(854, 47);
             ExportBuildList.Name = "ExportBuildList";
             ExportBuildList.Size = new Size(124, 23);
             ExportBuildList.TabIndex = 26;
             ExportBuildList.Text = "Export Build List";
-            ExportBuildList.UseVisualStyleBackColor = true;
+            ExportBuildList.UseVisualStyleBackColor = false;
             ExportBuildList.Click += ExportBuildListButton_Click;
             // 
             // TotalManufacturingSlotsLabel
@@ -1759,6 +1758,7 @@
             // 
             OptimizedBuildTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             OptimizedBuildTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            OptimizedBuildTreeView.BorderStyle = BorderStyle.None;
             OptimizedBuildTreeView.CausesValidation = false;
             OptimizedBuildTreeView.Font = new Font("Segoe UI", 12F);
             OptimizedBuildTreeView.ForeColor = Color.White;
@@ -1774,7 +1774,7 @@
             // 
             // CollapseAllButton
             // 
-            CollapseAllButton.ForeColor = Color.Black;
+            CollapseAllButton.ForeColor = Color.FromArgb(234, 234, 234);
             CollapseAllButton.Location = new Point(9, 78);
             CollapseAllButton.Name = "CollapseAllButton";
             CollapseAllButton.Size = new Size(94, 23);
@@ -1787,6 +1787,7 @@
             // 
             MaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             MaterialsTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            MaterialsTreeView.BorderStyle = BorderStyle.None;
             MaterialsTreeView.CausesValidation = false;
             MaterialsTreeView.Font = new Font("Segoe UI", 12F);
             MaterialsTreeView.ForeColor = Color.White;
@@ -1834,6 +1835,7 @@
             // 
             PlanetMatsTotalTreeview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             PlanetMatsTotalTreeview.BackColor = Color.FromArgb(21, 21, 21);
+            PlanetMatsTotalTreeview.BorderStyle = BorderStyle.None;
             PlanetMatsTotalTreeview.ForeColor = Color.White;
             PlanetMatsTotalTreeview.Location = new Point(621, 43);
             PlanetMatsTotalTreeview.MinimumSize = new Size(716, 456);
@@ -1845,6 +1847,7 @@
             // 
             PlanetMaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PlanetMaterialsTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            PlanetMaterialsTreeView.BorderStyle = BorderStyle.None;
             PlanetMaterialsTreeView.Font = new Font("Segoe UI", 12F);
             PlanetMaterialsTreeView.ForeColor = Color.White;
             PlanetMaterialsTreeView.Location = new Point(3, 3);
@@ -1869,7 +1872,7 @@
             // 
             // SetReactionsButton
             // 
-            SetReactionsButton.ForeColor = Color.Black;
+            SetReactionsButton.ForeColor = Color.FromArgb(234, 234, 234);
             SetReactionsButton.Location = new Point(165, 52);
             SetReactionsButton.Name = "SetReactionsButton";
             SetReactionsButton.Size = new Size(150, 23);
@@ -1880,7 +1883,7 @@
             // 
             // SetBlueprintButton
             // 
-            SetBlueprintButton.ForeColor = Color.Black;
+            SetBlueprintButton.ForeColor = Color.FromArgb(234, 234, 234);
             SetBlueprintButton.Location = new Point(9, 52);
             SetBlueprintButton.Name = "SetBlueprintButton";
             SetBlueprintButton.Size = new Size(150, 23);
@@ -1893,6 +1896,7 @@
             // 
             BPTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             BPTreeView.BackColor = Color.FromArgb(21, 21, 21);
+            BPTreeView.BorderStyle = BorderStyle.None;
             BPTreeView.CausesValidation = false;
             BPTreeView.Font = new Font("Segoe UI", 12F);
             BPTreeView.ForeColor = Color.White;
@@ -1981,36 +1985,36 @@
             // 
             CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CurrentInventoryGrid.BackgroundColor = Color.Black;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = SystemColors.Control;
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.Black;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.Black;
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle13;
             CurrentInventoryGrid.EditableColumns = "Quantity";
             CurrentInventoryGrid.GridColor = Color.Black;
             CurrentInventoryGrid.Location = new Point(5, 90);
             CurrentInventoryGrid.Name = "CurrentInventoryGrid";
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = SystemColors.Control;
+            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             CurrentInventoryGrid.Size = new Size(630, 433);
             CurrentInventoryGrid.TabIndex = 53;
             CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
@@ -2026,9 +2030,9 @@
             // Quantity
             // 
             Quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            Quantity.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "N0";
+            dataGridViewCellStyle12.NullValue = "0";
+            Quantity.DefaultCellStyle = dataGridViewCellStyle12;
             Quantity.HeaderText = "Quantity";
             Quantity.Name = "Quantity";
             // 
@@ -2068,6 +2072,7 @@
             // 
             CostBreakdownTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CostBreakdownTextBox.BackColor = Color.FromArgb(21, 21, 21);
+            CostBreakdownTextBox.BorderStyle = BorderStyle.None;
             CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F);
             CostBreakdownTextBox.ForeColor = Color.White;
             CostBreakdownTextBox.Location = new Point(3, 3);
@@ -2170,10 +2175,11 @@
             // BPSettingsButton
             // 
             BPSettingsButton.Cursor = Cursors.Hand;
+            BPSettingsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             BPSettingsButton.ForeColor = Color.FromArgb(234, 234, 234);
-            BPSettingsButton.Location = new Point(12, 130);
+            BPSettingsButton.Location = new Point(1, 160);
             BPSettingsButton.Name = "BPSettingsButton";
-            BPSettingsButton.Size = new Size(169, 30);
+            BPSettingsButton.Size = new Size(180, 60);
             BPSettingsButton.TabIndex = 53;
             BPSettingsButton.TabStop = false;
             BPSettingsButton.Text = "BP/ Reaction Settings";
@@ -2183,10 +2189,11 @@
             // CostBreakdownButton
             // 
             CostBreakdownButton.Cursor = Cursors.Hand;
+            CostBreakdownButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             CostBreakdownButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CostBreakdownButton.Location = new Point(12, 345);
+            CostBreakdownButton.Location = new Point(1, 560);
             CostBreakdownButton.Name = "CostBreakdownButton";
-            CostBreakdownButton.Size = new Size(169, 30);
+            CostBreakdownButton.Size = new Size(180, 60);
             CostBreakdownButton.TabIndex = 54;
             CostBreakdownButton.TabStop = false;
             CostBreakdownButton.Text = "Cost Breakdown";
@@ -2196,10 +2203,11 @@
             // PlanetMaterialsButton
             // 
             PlanetMaterialsButton.Cursor = Cursors.Hand;
+            PlanetMaterialsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             PlanetMaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
-            PlanetMaterialsButton.Location = new Point(12, 309);
+            PlanetMaterialsButton.Location = new Point(1, 494);
             PlanetMaterialsButton.Name = "PlanetMaterialsButton";
-            PlanetMaterialsButton.Size = new Size(169, 30);
+            PlanetMaterialsButton.Size = new Size(180, 60);
             PlanetMaterialsButton.TabIndex = 55;
             PlanetMaterialsButton.TabStop = false;
             PlanetMaterialsButton.Text = "Planet Materials";
@@ -2209,10 +2217,11 @@
             // BuildDetailsButton
             // 
             BuildDetailsButton.Cursor = Cursors.Hand;
+            BuildDetailsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             BuildDetailsButton.ForeColor = Color.FromArgb(234, 234, 234);
-            BuildDetailsButton.Location = new Point(12, 273);
+            BuildDetailsButton.Location = new Point(1, 427);
             BuildDetailsButton.Name = "BuildDetailsButton";
-            BuildDetailsButton.Size = new Size(169, 30);
+            BuildDetailsButton.Size = new Size(180, 60);
             BuildDetailsButton.TabIndex = 56;
             BuildDetailsButton.TabStop = false;
             BuildDetailsButton.Text = "Build Details";
@@ -2222,10 +2231,11 @@
             // MaterialsButton
             // 
             MaterialsButton.Cursor = Cursors.Hand;
+            MaterialsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             MaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
-            MaterialsButton.Location = new Point(12, 202);
+            MaterialsButton.Location = new Point(1, 295);
             MaterialsButton.Name = "MaterialsButton";
-            MaterialsButton.Size = new Size(169, 30);
+            MaterialsButton.Size = new Size(180, 60);
             MaterialsButton.TabIndex = 57;
             MaterialsButton.TabStop = false;
             MaterialsButton.Text = "Materials and Prices";
@@ -2235,10 +2245,11 @@
             // SystemButton
             // 
             SystemButton.Cursor = Cursors.Hand;
+            SystemButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             SystemButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SystemButton.Location = new Point(12, 166);
+            SystemButton.Location = new Point(1, 226);
             SystemButton.Name = "SystemButton";
-            SystemButton.Size = new Size(169, 30);
+            SystemButton.Size = new Size(180, 60);
             SystemButton.TabIndex = 58;
             SystemButton.TabStop = false;
             SystemButton.Text = "Sys/Struct/Order";
@@ -2248,10 +2259,11 @@
             // CurrentInventoryButton
             // 
             CurrentInventoryButton.Cursor = Cursors.Hand;
+            CurrentInventoryButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             CurrentInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CurrentInventoryButton.Location = new Point(12, 236);
+            CurrentInventoryButton.Location = new Point(1, 361);
             CurrentInventoryButton.Name = "CurrentInventoryButton";
-            CurrentInventoryButton.Size = new Size(169, 30);
+            CurrentInventoryButton.Size = new Size(180, 60);
             CurrentInventoryButton.TabIndex = 59;
             CurrentInventoryButton.TabStop = false;
             CurrentInventoryButton.Text = "Current Inventory";
@@ -2262,10 +2274,11 @@
             // 
             SummaryButton.BackColor = Color.FromArgb(21, 21, 21);
             SummaryButton.FlatAppearance.BorderColor = Color.White;
+            SummaryButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             SummaryButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SummaryButton.Location = new Point(12, 94);
+            SummaryButton.Location = new Point(1, 94);
             SummaryButton.Name = "SummaryButton";
-            SummaryButton.Size = new Size(169, 30);
+            SummaryButton.Size = new Size(180, 60);
             SummaryButton.TabIndex = 60;
             SummaryButton.Text = "Summary";
             SummaryButton.UseVisualStyleBackColor = false;
@@ -2300,7 +2313,7 @@
             Controls.Add(label1);
             Controls.Add(BuildPlanCombo);
             ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "BuildPlansControl";

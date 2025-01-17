@@ -55,7 +55,6 @@
             label1 = new Label();
             TopSystemsPanel = new Panel();
             KillSystemTreeView = new TreeView();
-            label4 = new Label();
             label8 = new Label();
             ShipPanel = new Panel();
             TopShipsTreeView = new TreeView();
@@ -67,7 +66,6 @@
             ZKillLabel = new LinkLabel();
             panel2 = new Panel();
             TopRegionsTreeView = new TreeView();
-            label11 = new Label();
             label17 = new Label();
             CorpAllianceBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             SecurityStatusLabel = new Label();
@@ -93,7 +91,6 @@
             // 
             BasicDataPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             BasicDataPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            BasicDataPanel.BorderStyle = BorderStyle.FixedSingle;
             BasicDataPanel.Controls.Add(EdencomLossLabel);
             BasicDataPanel.Controls.Add(label18);
             BasicDataPanel.Controls.Add(MarauderLossLabel);
@@ -336,9 +333,7 @@
             // 
             TopSystemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             TopSystemsPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            TopSystemsPanel.BorderStyle = BorderStyle.FixedSingle;
             TopSystemsPanel.Controls.Add(KillSystemTreeView);
-            TopSystemsPanel.Controls.Add(label4);
             TopSystemsPanel.Controls.Add(label8);
             TopSystemsPanel.Location = new Point(245, 75);
             TopSystemsPanel.Name = "TopSystemsPanel";
@@ -348,20 +343,11 @@
             // KillSystemTreeView
             // 
             KillSystemTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            KillSystemTreeView.Location = new Point(-1, 64);
+            KillSystemTreeView.BorderStyle = BorderStyle.None;
+            KillSystemTreeView.Location = new Point(0, 19);
             KillSystemTreeView.Name = "KillSystemTreeView";
-            KillSystemTreeView.Size = new Size(200, 107);
+            KillSystemTreeView.Size = new Size(200, 150);
             KillSystemTreeView.TabIndex = 4;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(3, 39);
-            label4.Name = "label4";
-            label4.Size = new Size(29, 15);
-            label4.TabIndex = 3;
-            label4.Text = "Kills";
             // 
             // label8
             // 
@@ -377,7 +363,6 @@
             // 
             ShipPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             ShipPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ShipPanel.BorderStyle = BorderStyle.FixedSingle;
             ShipPanel.Controls.Add(TopShipsTreeView);
             ShipPanel.Controls.Add(label12);
             ShipPanel.Location = new Point(465, 75);
@@ -388,11 +373,12 @@
             // TopShipsTreeView
             // 
             TopShipsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            TopShipsTreeView.BorderStyle = BorderStyle.None;
             TopShipsTreeView.HideSelection = false;
             TopShipsTreeView.HotTracking = true;
-            TopShipsTreeView.Location = new Point(-1, 64);
+            TopShipsTreeView.Location = new Point(0, 19);
             TopShipsTreeView.Name = "TopShipsTreeView";
-            TopShipsTreeView.Size = new Size(200, 275);
+            TopShipsTreeView.Size = new Size(200, 318);
             TopShipsTreeView.TabIndex = 2;
             // 
             // label12
@@ -415,7 +401,6 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(RecentLossesTreeView);
             panel1.Controls.Add(label9);
             panel1.Location = new Point(685, 75);
@@ -426,9 +411,10 @@
             // RecentLossesTreeView
             // 
             RecentLossesTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            RecentLossesTreeView.Location = new Point(-1, 64);
+            RecentLossesTreeView.BorderStyle = BorderStyle.None;
+            RecentLossesTreeView.Location = new Point(3, 19);
             RecentLossesTreeView.Name = "RecentLossesTreeView";
-            RecentLossesTreeView.Size = new Size(200, 275);
+            RecentLossesTreeView.Size = new Size(200, 318);
             RecentLossesTreeView.TabIndex = 2;
             RecentLossesTreeView.AfterSelect += RecentLossesTreeView_AfterSelect;
             // 
@@ -457,9 +443,7 @@
             // 
             panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             panel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(TopRegionsTreeView);
-            panel2.Controls.Add(label11);
             panel2.Controls.Add(label17);
             panel2.Location = new Point(245, 253);
             panel2.Name = "panel2";
@@ -469,20 +453,11 @@
             // TopRegionsTreeView
             // 
             TopRegionsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            TopRegionsTreeView.Location = new Point(-1, 64);
+            TopRegionsTreeView.BorderStyle = BorderStyle.None;
+            TopRegionsTreeView.Location = new Point(0, 19);
             TopRegionsTreeView.Name = "TopRegionsTreeView";
-            TopRegionsTreeView.Size = new Size(200, 97);
+            TopRegionsTreeView.Size = new Size(200, 140);
             TopRegionsTreeView.TabIndex = 4;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(3, 39);
-            label11.Name = "label11";
-            label11.Size = new Size(29, 15);
-            label11.TabIndex = 3;
-            label11.Text = "Kills";
             // 
             // label17
             // 
@@ -565,7 +540,6 @@
         private Label label6;
         private Panel TopSystemsPanel;
         private Label label8;
-        private Label label4;
         private Panel ShipPanel;
         private Label label12;
         private TreeView TopShipsTreeView;
@@ -589,7 +563,6 @@
         private Label label16;
         private Panel panel2;
         private TreeView TopRegionsTreeView;
-        private Label label11;
         private Label label17;
         private System.ComponentModel.BackgroundWorker CorpAllianceBackgroundWorker;
         private Label SecurityStatusLabel;

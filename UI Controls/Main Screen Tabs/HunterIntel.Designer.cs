@@ -53,7 +53,9 @@
             SearchTextBox.Size = new Size(374, 23);
             SearchTextBox.TabIndex = 1;
             SearchTextBox.Text = "Enter a name of anything. Must match exactly because ccp";
+            SearchTextBox.Enter += SearchTextBox_Enter;
             SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+            SearchTextBox.Leave += SearchTextBox_Leave;
             // 
             // SearchButton
             // 

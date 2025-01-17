@@ -1,5 +1,6 @@
 ﻿using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
+using EveHelperWF.Objects.Custom_Controls;
 using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using EveHelperWF.ScreenHelper;
 using EveHelperWF.UI_Controls.Support_Screens;
@@ -1784,8 +1785,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             InventoryTypeWithQuantity currentInventory;
             long quantityNeeded = 0;
             InventoryType inventoryType;
+            decimal totalGroupPrice;
             foreach (KeyValuePair<string, List<MaterialsWithMarketData>> inputGroup in orderedMats)
             {
+                totalGroupPrice = 0;
                 marketGroupNode = new TreeNode();
                 marketGroupNode.Text = inputGroup.Key;
                 marketGroupNode.ForeColor = Color.White;
@@ -1814,6 +1817,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     priceTotal = new TreeNode();
                     priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
                     priceTotal.ForeColor = Color.White;
+                    totalGroupPrice += (quantityNeeded * pricedMat.pricePer);
                     tn.Nodes.Add(priceTotal);
 
                     decimal volume = inventoryType.volume * mat.quantityTotal;
@@ -1825,6 +1829,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     marketGroupNode.Nodes.Add(tn);
 
                 }
+                marketGroupNode.Text += " / Total Price: " + CommonHelper.FormatIskShortened(totalGroupPrice);
                 MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
             }
         }
@@ -2484,6 +2489,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.isLoading = false;
             MessageBox.Show("Build plan has been updated to be as profitable as possible", "Build Plan Updated"); ;
         }
+
         #endregion
     }
 }
