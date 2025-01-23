@@ -1913,6 +1913,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             PlanetMaterialsTreeView.Nodes.Clear();
             PlanetMatsTotalTreeview.Nodes.Clear();
+
+            UniquePlanetMaterials = UniquePlanetMaterials.OrderBy(x => x.typeName).ToList();
+
             TreeNode tn;
             List<PlanetMaterial> totalMats = new List<PlanetMaterial>();
             foreach (PlanetMaterial planetMaterial in UniquePlanetMaterials)
