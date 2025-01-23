@@ -36,7 +36,7 @@ namespace EveHelperWF.UI_Controls
 
             InitializeComponent();
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build + "-Beta";
+            this.Text = this.Text + " v" + version.Major + "." + version.Minor + "." + version.Build;
 
             CheckForOtherInstance();
 
