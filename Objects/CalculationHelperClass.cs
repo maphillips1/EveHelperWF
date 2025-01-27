@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +103,12 @@ namespace EveHelperWF.Objects
         public int Datacore1SkillLevel { get; set; }
         public int Datacore2SkillLevel { get; set; }
         public int EncryptionStarshipSkillLevel { get; set; }
+        [DefaultValue(true)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool TaxInputs { get; set; }
+        [DefaultValue(true)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool TaxOutputs { get; set; }
     }
 
     public class StructureRigBonus

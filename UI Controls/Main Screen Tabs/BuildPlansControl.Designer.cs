@@ -548,7 +548,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label12.Location = new Point(686, 82);
+            label12.Location = new Point(608, 105);
             label12.Name = "label12";
             label12.Size = new Size(53, 17);
             label12.TabIndex = 9;
@@ -559,7 +559,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label16.ForeColor = Color.MediumPurple;
-            label16.Location = new Point(686, 144);
+            label16.Location = new Point(608, 167);
             label16.Name = "label16";
             label16.Size = new Size(88, 17);
             label16.TabIndex = 10;
@@ -570,7 +570,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label17.ForeColor = Color.DarkOrange;
-            label17.Location = new Point(686, 164);
+            label17.Location = new Point(608, 187);
             label17.Name = "label17";
             label17.Size = new Size(128, 17);
             label17.TabIndex = 11;
@@ -581,7 +581,7 @@
             label42.AutoSize = true;
             label42.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label42.ForeColor = Color.Cyan;
-            label42.Location = new Point(686, 124);
+            label42.Location = new Point(608, 147);
             label42.Name = "label42";
             label42.Size = new Size(126, 17);
             label42.TabIndex = 13;
@@ -592,7 +592,7 @@
             label43.AutoSize = true;
             label43.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label43.ForeColor = Color.Chartreuse;
-            label43.Location = new Point(686, 104);
+            label43.Location = new Point(608, 127);
             label43.Name = "label43";
             label43.Size = new Size(92, 17);
             label43.TabIndex = 14;
@@ -602,7 +602,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label20.Location = new Point(686, 184);
+            label20.Location = new Point(608, 207);
             label20.Name = "label20";
             label20.Size = new Size(162, 17);
             label20.TabIndex = 15;
@@ -612,11 +612,12 @@
             // 
             label45.AutoSize = true;
             label45.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label45.Location = new Point(854, 78);
+            label45.Location = new Point(793, 67);
             label45.Name = "label45";
             label45.Size = new Size(201, 21);
             label45.TabIndex = 18;
             label45.Text = "Optimum Build Schedule";
+            label45.Click += label45_Click;
             // 
             // label47
             // 
@@ -820,6 +821,14 @@
             // 
             // MostProfitableButton
             // 
+            MostProfitableButton.BorderBottom = false;
+            MostProfitableButton.BorderFull = true;
+            MostProfitableButton.BorderLeft = false;
+            MostProfitableButton.BorderRight = false;
+            MostProfitableButton.BorderTop = false;
+            MostProfitableButton.BorderWidth = 2F;
+            MostProfitableButton.FlatAppearance.BorderSize = 0;
+            MostProfitableButton.FlatStyle = FlatStyle.Flat;
             MostProfitableButton.ForeColor = Color.FromArgb(234, 234, 234);
             MostProfitableButton.Location = new Point(185, 53);
             MostProfitableButton.Name = "MostProfitableButton";
@@ -1052,7 +1061,7 @@
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = SystemColors.Window;
             dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle9.ForeColor = Color.White;
             dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
@@ -1093,6 +1102,12 @@
             // ImportPricesButton
             // 
             ImportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ImportPricesButton.BorderBottom = false;
+            ImportPricesButton.BorderFull = true;
+            ImportPricesButton.BorderLeft = false;
+            ImportPricesButton.BorderRight = false;
+            ImportPricesButton.BorderTop = false;
+            ImportPricesButton.BorderWidth = 2F;
             ImportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
             ImportPricesButton.Location = new Point(497, 103);
             ImportPricesButton.Name = "ImportPricesButton";
@@ -1105,6 +1120,12 @@
             // ExportPricesButton
             // 
             ExportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ExportPricesButton.BorderBottom = false;
+            ExportPricesButton.BorderFull = true;
+            ExportPricesButton.BorderLeft = false;
+            ExportPricesButton.BorderRight = false;
+            ExportPricesButton.BorderTop = false;
+            ExportPricesButton.BorderWidth = 2F;
             ExportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
             ExportPricesButton.Location = new Point(497, 74);
             ExportPricesButton.Name = "ExportPricesButton";
@@ -1175,6 +1196,12 @@
             // UpdatePricesJitaButton
             // 
             UpdatePricesJitaButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            UpdatePricesJitaButton.BorderBottom = false;
+            UpdatePricesJitaButton.BorderFull = true;
+            UpdatePricesJitaButton.BorderLeft = false;
+            UpdatePricesJitaButton.BorderRight = false;
+            UpdatePricesJitaButton.BorderTop = false;
+            UpdatePricesJitaButton.BorderWidth = 2F;
             UpdatePricesJitaButton.ForeColor = Color.FromArgb(234, 234, 234);
             UpdatePricesJitaButton.Location = new Point(497, 132);
             UpdatePricesJitaButton.Name = "UpdatePricesJitaButton";
@@ -1189,6 +1216,12 @@
             CopyToClipboardButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CopyToClipboardButton.AutoSize = true;
             CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            CopyToClipboardButton.BorderBottom = false;
+            CopyToClipboardButton.BorderFull = true;
+            CopyToClipboardButton.BorderLeft = false;
+            CopyToClipboardButton.BorderRight = false;
+            CopyToClipboardButton.BorderTop = false;
+            CopyToClipboardButton.BorderWidth = 2F;
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
             CopyToClipboardButton.Location = new Point(497, 161);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
@@ -1723,8 +1756,16 @@
             // 
             // ExportBuildList
             // 
+            ExportBuildList.BorderBottom = false;
+            ExportBuildList.BorderFull = true;
+            ExportBuildList.BorderLeft = false;
+            ExportBuildList.BorderRight = false;
+            ExportBuildList.BorderTop = false;
+            ExportBuildList.BorderWidth = 2F;
+            ExportBuildList.FlatAppearance.BorderSize = 0;
+            ExportBuildList.FlatStyle = FlatStyle.Flat;
             ExportBuildList.ForeColor = Color.FromArgb(234, 234, 234);
-            ExportBuildList.Location = new Point(854, 47);
+            ExportBuildList.Location = new Point(793, 36);
             ExportBuildList.Name = "ExportBuildList";
             ExportBuildList.Size = new Size(124, 23);
             ExportBuildList.TabIndex = 26;
@@ -1764,23 +1805,31 @@
             OptimizedBuildTreeView.ForeColor = Color.White;
             OptimizedBuildTreeView.HotTracking = true;
             OptimizedBuildTreeView.ItemHeight = 30;
-            OptimizedBuildTreeView.Location = new Point(854, 101);
+            OptimizedBuildTreeView.Location = new Point(793, 101);
             OptimizedBuildTreeView.MinimumSize = new Size(483, 393);
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
-            OptimizedBuildTreeView.Size = new Size(483, 422);
+            OptimizedBuildTreeView.Size = new Size(544, 422);
             OptimizedBuildTreeView.TabIndex = 16;
             OptimizedBuildTreeView.TabStop = false;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
             // 
             // CollapseAllButton
             // 
+            CollapseAllButton.BorderBottom = false;
+            CollapseAllButton.BorderFull = true;
+            CollapseAllButton.BorderLeft = false;
+            CollapseAllButton.BorderRight = false;
+            CollapseAllButton.BorderTop = false;
+            CollapseAllButton.BorderWidth = 2F;
+            CollapseAllButton.FlatAppearance.BorderSize = 0;
+            CollapseAllButton.FlatStyle = FlatStyle.Flat;
             CollapseAllButton.ForeColor = Color.FromArgb(234, 234, 234);
             CollapseAllButton.Location = new Point(9, 78);
             CollapseAllButton.Name = "CollapseAllButton";
             CollapseAllButton.Size = new Size(94, 23);
             CollapseAllButton.TabIndex = 8;
             CollapseAllButton.Text = "Collapse All";
-            CollapseAllButton.UseVisualStyleBackColor = true;
+            CollapseAllButton.UseVisualStyleBackColor = false;
             CollapseAllButton.Click += CollapseAll_Click;
             // 
             // MaterialsTreeView
@@ -1794,9 +1843,9 @@
             MaterialsTreeView.HotTracking = true;
             MaterialsTreeView.ItemHeight = 30;
             MaterialsTreeView.Location = new Point(9, 107);
-            MaterialsTreeView.MinimumSize = new Size(671, 406);
+            MaterialsTreeView.MinimumSize = new Size(400, 406);
             MaterialsTreeView.Name = "MaterialsTreeView";
-            MaterialsTreeView.Size = new Size(671, 435);
+            MaterialsTreeView.Size = new Size(574, 414);
             MaterialsTreeView.TabIndex = 6;
             MaterialsTreeView.TabStop = false;
             // 
@@ -1872,6 +1921,12 @@
             // 
             // SetReactionsButton
             // 
+            SetReactionsButton.BorderBottom = false;
+            SetReactionsButton.BorderFull = true;
+            SetReactionsButton.BorderLeft = false;
+            SetReactionsButton.BorderRight = false;
+            SetReactionsButton.BorderTop = false;
+            SetReactionsButton.BorderWidth = 2F;
             SetReactionsButton.ForeColor = Color.FromArgb(234, 234, 234);
             SetReactionsButton.Location = new Point(165, 52);
             SetReactionsButton.Name = "SetReactionsButton";
@@ -1883,6 +1938,12 @@
             // 
             // SetBlueprintButton
             // 
+            SetBlueprintButton.BorderBottom = false;
+            SetBlueprintButton.BorderFull = true;
+            SetBlueprintButton.BorderLeft = false;
+            SetBlueprintButton.BorderRight = false;
+            SetBlueprintButton.BorderTop = false;
+            SetBlueprintButton.BorderWidth = 2F;
             SetBlueprintButton.ForeColor = Color.FromArgb(234, 234, 234);
             SetBlueprintButton.Location = new Point(9, 52);
             SetBlueprintButton.Name = "SetBlueprintButton";
@@ -1923,6 +1984,14 @@
             // 
             // NewBuildPlanButton
             // 
+            NewBuildPlanButton.BorderBottom = false;
+            NewBuildPlanButton.BorderFull = true;
+            NewBuildPlanButton.BorderLeft = false;
+            NewBuildPlanButton.BorderRight = false;
+            NewBuildPlanButton.BorderTop = false;
+            NewBuildPlanButton.BorderWidth = 2F;
+            NewBuildPlanButton.FlatAppearance.BorderSize = 0;
+            NewBuildPlanButton.FlatStyle = FlatStyle.Flat;
             NewBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             NewBuildPlanButton.Location = new Point(104, 40);
             NewBuildPlanButton.Name = "NewBuildPlanButton";
@@ -1934,6 +2003,14 @@
             // 
             // DeleteBuildPlanButton
             // 
+            DeleteBuildPlanButton.BorderBottom = false;
+            DeleteBuildPlanButton.BorderFull = true;
+            DeleteBuildPlanButton.BorderLeft = false;
+            DeleteBuildPlanButton.BorderRight = false;
+            DeleteBuildPlanButton.BorderTop = false;
+            DeleteBuildPlanButton.BorderWidth = 2F;
+            DeleteBuildPlanButton.FlatAppearance.BorderSize = 0;
+            DeleteBuildPlanButton.FlatStyle = FlatStyle.Flat;
             DeleteBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             DeleteBuildPlanButton.Location = new Point(223, 40);
             DeleteBuildPlanButton.Name = "DeleteBuildPlanButton";
@@ -2038,6 +2115,12 @@
             // 
             // ClearInventoryButton
             // 
+            ClearInventoryButton.BorderBottom = false;
+            ClearInventoryButton.BorderFull = true;
+            ClearInventoryButton.BorderLeft = false;
+            ClearInventoryButton.BorderRight = false;
+            ClearInventoryButton.BorderTop = false;
+            ClearInventoryButton.BorderWidth = 2F;
             ClearInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearInventoryButton.Location = new Point(5, 21);
             ClearInventoryButton.Name = "ClearInventoryButton";
@@ -2174,7 +2257,15 @@
             // 
             // BPSettingsButton
             // 
+            BPSettingsButton.BorderBottom = true;
+            BPSettingsButton.BorderFull = false;
+            BPSettingsButton.BorderLeft = false;
+            BPSettingsButton.BorderRight = false;
+            BPSettingsButton.BorderTop = false;
+            BPSettingsButton.BorderWidth = 2F;
             BPSettingsButton.Cursor = Cursors.Hand;
+            BPSettingsButton.FlatAppearance.BorderSize = 0;
+            BPSettingsButton.FlatStyle = FlatStyle.Flat;
             BPSettingsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             BPSettingsButton.ForeColor = Color.FromArgb(234, 234, 234);
             BPSettingsButton.Location = new Point(1, 160);
@@ -2188,7 +2279,15 @@
             // 
             // CostBreakdownButton
             // 
+            CostBreakdownButton.BorderBottom = true;
+            CostBreakdownButton.BorderFull = false;
+            CostBreakdownButton.BorderLeft = false;
+            CostBreakdownButton.BorderRight = false;
+            CostBreakdownButton.BorderTop = false;
+            CostBreakdownButton.BorderWidth = 2F;
             CostBreakdownButton.Cursor = Cursors.Hand;
+            CostBreakdownButton.FlatAppearance.BorderSize = 0;
+            CostBreakdownButton.FlatStyle = FlatStyle.Flat;
             CostBreakdownButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             CostBreakdownButton.ForeColor = Color.FromArgb(234, 234, 234);
             CostBreakdownButton.Location = new Point(1, 560);
@@ -2202,7 +2301,15 @@
             // 
             // PlanetMaterialsButton
             // 
+            PlanetMaterialsButton.BorderBottom = true;
+            PlanetMaterialsButton.BorderFull = false;
+            PlanetMaterialsButton.BorderLeft = false;
+            PlanetMaterialsButton.BorderRight = false;
+            PlanetMaterialsButton.BorderTop = false;
+            PlanetMaterialsButton.BorderWidth = 2F;
             PlanetMaterialsButton.Cursor = Cursors.Hand;
+            PlanetMaterialsButton.FlatAppearance.BorderSize = 0;
+            PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
             PlanetMaterialsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             PlanetMaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
             PlanetMaterialsButton.Location = new Point(1, 494);
@@ -2216,7 +2323,15 @@
             // 
             // BuildDetailsButton
             // 
+            BuildDetailsButton.BorderBottom = true;
+            BuildDetailsButton.BorderFull = false;
+            BuildDetailsButton.BorderLeft = false;
+            BuildDetailsButton.BorderRight = false;
+            BuildDetailsButton.BorderTop = false;
+            BuildDetailsButton.BorderWidth = 2F;
             BuildDetailsButton.Cursor = Cursors.Hand;
+            BuildDetailsButton.FlatAppearance.BorderSize = 0;
+            BuildDetailsButton.FlatStyle = FlatStyle.Flat;
             BuildDetailsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             BuildDetailsButton.ForeColor = Color.FromArgb(234, 234, 234);
             BuildDetailsButton.Location = new Point(1, 427);
@@ -2230,7 +2345,15 @@
             // 
             // MaterialsButton
             // 
+            MaterialsButton.BorderBottom = true;
+            MaterialsButton.BorderFull = false;
+            MaterialsButton.BorderLeft = false;
+            MaterialsButton.BorderRight = false;
+            MaterialsButton.BorderTop = false;
+            MaterialsButton.BorderWidth = 2F;
             MaterialsButton.Cursor = Cursors.Hand;
+            MaterialsButton.FlatAppearance.BorderSize = 0;
+            MaterialsButton.FlatStyle = FlatStyle.Flat;
             MaterialsButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             MaterialsButton.ForeColor = Color.FromArgb(234, 234, 234);
             MaterialsButton.Location = new Point(1, 295);
@@ -2244,7 +2367,15 @@
             // 
             // SystemButton
             // 
+            SystemButton.BorderBottom = true;
+            SystemButton.BorderFull = false;
+            SystemButton.BorderLeft = false;
+            SystemButton.BorderRight = false;
+            SystemButton.BorderTop = false;
+            SystemButton.BorderWidth = 2F;
             SystemButton.Cursor = Cursors.Hand;
+            SystemButton.FlatAppearance.BorderSize = 0;
+            SystemButton.FlatStyle = FlatStyle.Flat;
             SystemButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             SystemButton.ForeColor = Color.FromArgb(234, 234, 234);
             SystemButton.Location = new Point(1, 226);
@@ -2258,7 +2389,15 @@
             // 
             // CurrentInventoryButton
             // 
+            CurrentInventoryButton.BorderBottom = true;
+            CurrentInventoryButton.BorderFull = false;
+            CurrentInventoryButton.BorderLeft = false;
+            CurrentInventoryButton.BorderRight = false;
+            CurrentInventoryButton.BorderTop = false;
+            CurrentInventoryButton.BorderWidth = 2F;
             CurrentInventoryButton.Cursor = Cursors.Hand;
+            CurrentInventoryButton.FlatAppearance.BorderSize = 0;
+            CurrentInventoryButton.FlatStyle = FlatStyle.Flat;
             CurrentInventoryButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             CurrentInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             CurrentInventoryButton.Location = new Point(1, 361);
@@ -2273,7 +2412,15 @@
             // SummaryButton
             // 
             SummaryButton.BackColor = Color.FromArgb(21, 21, 21);
+            SummaryButton.BorderBottom = true;
+            SummaryButton.BorderFull = false;
+            SummaryButton.BorderLeft = false;
+            SummaryButton.BorderRight = false;
+            SummaryButton.BorderTop = false;
+            SummaryButton.BorderWidth = 2F;
             SummaryButton.FlatAppearance.BorderColor = Color.White;
+            SummaryButton.FlatAppearance.BorderSize = 0;
+            SummaryButton.FlatStyle = FlatStyle.Flat;
             SummaryButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             SummaryButton.ForeColor = Color.FromArgb(234, 234, 234);
             SummaryButton.Location = new Point(1, 94);

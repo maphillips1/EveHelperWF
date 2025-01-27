@@ -37,7 +37,7 @@
             MarketBrowserButton = new Objects.Custom_Controls.EveHelperButton();
             AbyssTrackerButton = new Objects.Custom_Controls.EveHelperButton();
             PriceHistoryButton = new Objects.Custom_Controls.EveHelperButton();
-            menuStrip1 = new MenuStrip();
+            MainMenuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             backupFilesToolStripMenuItem = new ToolStripMenuItem();
             importFIlesToolStripMenuItem = new ToolStripMenuItem();
@@ -52,21 +52,28 @@
             CheckInternetBGWorker = new System.ComponentModel.BackgroundWorker();
             DocumentationLabel = new LinkLabel();
             LPOfferButton = new Objects.Custom_Controls.EveHelperButton();
-            ThemePickerButton = new Objects.Custom_Controls.EveHelperButton();
             linkLabel1 = new LinkLabel();
             HunterIntelButton = new Objects.Custom_Controls.EveHelperButton();
             QueryDatabaseButton = new Objects.Custom_Controls.EveHelperButton();
-            menuStrip1.SuspendLayout();
+            MainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // BlueprintBrowserButton
             // 
             BlueprintBrowserButton.BackgroundImageLayout = ImageLayout.None;
+            BlueprintBrowserButton.BorderBottom = true;
+            BlueprintBrowserButton.BorderFull = false;
+            BlueprintBrowserButton.BorderLeft = false;
+            BlueprintBrowserButton.BorderRight = false;
+            BlueprintBrowserButton.BorderTop = false;
+            BlueprintBrowserButton.BorderWidth = 2F;
             BlueprintBrowserButton.Cursor = Cursors.Hand;
             BlueprintBrowserButton.Enabled = false;
             BlueprintBrowserButton.FlatAppearance.BorderColor = Color.Gray;
+            BlueprintBrowserButton.FlatAppearance.BorderSize = 0;
             BlueprintBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             BlueprintBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            BlueprintBrowserButton.FlatStyle = FlatStyle.Flat;
             BlueprintBrowserButton.ForeColor = Color.FromArgb(234, 234, 234);
             BlueprintBrowserButton.Location = new Point(142, 26);
             BlueprintBrowserButton.Margin = new Padding(3, 2, 3, 2);
@@ -80,11 +87,19 @@
             // 
             // PlanetPlannerButton
             // 
+            PlanetPlannerButton.BorderBottom = true;
+            PlanetPlannerButton.BorderFull = false;
+            PlanetPlannerButton.BorderLeft = false;
+            PlanetPlannerButton.BorderRight = false;
+            PlanetPlannerButton.BorderTop = false;
+            PlanetPlannerButton.BorderWidth = 2F;
             PlanetPlannerButton.Cursor = Cursors.Hand;
             PlanetPlannerButton.Enabled = false;
             PlanetPlannerButton.FlatAppearance.BorderColor = Color.Gray;
+            PlanetPlannerButton.FlatAppearance.BorderSize = 0;
             PlanetPlannerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            PlanetPlannerButton.FlatStyle = FlatStyle.Flat;
             PlanetPlannerButton.ForeColor = Color.FromArgb(234, 234, 234);
             PlanetPlannerButton.Location = new Point(142, 188);
             PlanetPlannerButton.Margin = new Padding(3, 2, 3, 2);
@@ -98,11 +113,19 @@
             // 
             // LootAppraisalButton
             // 
+            LootAppraisalButton.BorderBottom = true;
+            LootAppraisalButton.BorderFull = false;
+            LootAppraisalButton.BorderLeft = false;
+            LootAppraisalButton.BorderRight = false;
+            LootAppraisalButton.BorderTop = false;
+            LootAppraisalButton.BorderWidth = 2F;
             LootAppraisalButton.Cursor = Cursors.Hand;
             LootAppraisalButton.Enabled = false;
             LootAppraisalButton.FlatAppearance.BorderColor = Color.Gray;
+            LootAppraisalButton.FlatAppearance.BorderSize = 0;
             LootAppraisalButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             LootAppraisalButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            LootAppraisalButton.FlatStyle = FlatStyle.Flat;
             LootAppraisalButton.ForeColor = Color.FromArgb(234, 234, 234);
             LootAppraisalButton.Location = new Point(9, 134);
             LootAppraisalButton.Margin = new Padding(3, 2, 3, 2);
@@ -116,11 +139,19 @@
             // 
             // SystemFinderButton
             // 
+            SystemFinderButton.BorderBottom = true;
+            SystemFinderButton.BorderFull = false;
+            SystemFinderButton.BorderLeft = false;
+            SystemFinderButton.BorderRight = false;
+            SystemFinderButton.BorderTop = false;
+            SystemFinderButton.BorderWidth = 2F;
             SystemFinderButton.Cursor = Cursors.Hand;
             SystemFinderButton.Enabled = false;
             SystemFinderButton.FlatAppearance.BorderColor = Color.Gray;
+            SystemFinderButton.FlatAppearance.BorderSize = 0;
             SystemFinderButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            SystemFinderButton.FlatStyle = FlatStyle.Flat;
             SystemFinderButton.ForeColor = Color.FromArgb(234, 234, 234);
             SystemFinderButton.Location = new Point(142, 296);
             SystemFinderButton.Margin = new Padding(3, 2, 3, 2);
@@ -134,11 +165,19 @@
             // 
             // DefaultsButtonClick
             // 
+            DefaultsButtonClick.BorderBottom = true;
+            DefaultsButtonClick.BorderFull = false;
+            DefaultsButtonClick.BorderLeft = false;
+            DefaultsButtonClick.BorderRight = false;
+            DefaultsButtonClick.BorderTop = false;
+            DefaultsButtonClick.BorderWidth = 2F;
             DefaultsButtonClick.Cursor = Cursors.Hand;
             DefaultsButtonClick.Enabled = false;
             DefaultsButtonClick.FlatAppearance.BorderColor = Color.Gray;
+            DefaultsButtonClick.FlatAppearance.BorderSize = 0;
             DefaultsButtonClick.FlatAppearance.MouseDownBackColor = Color.Cyan;
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
+            DefaultsButtonClick.FlatStyle = FlatStyle.Flat;
             DefaultsButtonClick.ForeColor = Color.FromArgb(234, 234, 234);
             DefaultsButtonClick.Location = new Point(142, 242);
             DefaultsButtonClick.Margin = new Padding(3, 2, 3, 2);
@@ -152,11 +191,19 @@
             // 
             // MarketBrowserButton
             // 
+            MarketBrowserButton.BorderBottom = true;
+            MarketBrowserButton.BorderFull = false;
+            MarketBrowserButton.BorderLeft = false;
+            MarketBrowserButton.BorderRight = false;
+            MarketBrowserButton.BorderTop = false;
+            MarketBrowserButton.BorderWidth = 2F;
             MarketBrowserButton.Cursor = Cursors.Hand;
             MarketBrowserButton.Enabled = false;
             MarketBrowserButton.FlatAppearance.BorderColor = Color.Gray;
+            MarketBrowserButton.FlatAppearance.BorderSize = 0;
             MarketBrowserButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             MarketBrowserButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            MarketBrowserButton.FlatStyle = FlatStyle.Flat;
             MarketBrowserButton.ForeColor = Color.FromArgb(234, 234, 234);
             MarketBrowserButton.Location = new Point(9, 188);
             MarketBrowserButton.Margin = new Padding(3, 2, 3, 2);
@@ -170,11 +217,19 @@
             // 
             // AbyssTrackerButton
             // 
+            AbyssTrackerButton.BorderBottom = true;
+            AbyssTrackerButton.BorderFull = false;
+            AbyssTrackerButton.BorderLeft = false;
+            AbyssTrackerButton.BorderRight = false;
+            AbyssTrackerButton.BorderTop = false;
+            AbyssTrackerButton.BorderWidth = 2F;
             AbyssTrackerButton.Cursor = Cursors.Hand;
             AbyssTrackerButton.Enabled = false;
             AbyssTrackerButton.FlatAppearance.BorderColor = Color.Gray;
+            AbyssTrackerButton.FlatAppearance.BorderSize = 0;
             AbyssTrackerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             AbyssTrackerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            AbyssTrackerButton.FlatStyle = FlatStyle.Flat;
             AbyssTrackerButton.ForeColor = Color.FromArgb(234, 234, 234);
             AbyssTrackerButton.Location = new Point(9, 26);
             AbyssTrackerButton.Margin = new Padding(3, 2, 3, 2);
@@ -188,11 +243,19 @@
             // 
             // PriceHistoryButton
             // 
+            PriceHistoryButton.BorderBottom = true;
+            PriceHistoryButton.BorderFull = false;
+            PriceHistoryButton.BorderLeft = false;
+            PriceHistoryButton.BorderRight = false;
+            PriceHistoryButton.BorderTop = false;
+            PriceHistoryButton.BorderWidth = 2F;
             PriceHistoryButton.Cursor = Cursors.Hand;
             PriceHistoryButton.Enabled = false;
             PriceHistoryButton.FlatAppearance.BorderColor = Color.Gray;
+            PriceHistoryButton.FlatAppearance.BorderSize = 0;
             PriceHistoryButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            PriceHistoryButton.FlatStyle = FlatStyle.Flat;
             PriceHistoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             PriceHistoryButton.Location = new Point(9, 242);
             PriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
@@ -204,17 +267,16 @@
             PriceHistoryButton.UseVisualStyleBackColor = false;
             PriceHistoryButton.Click += PriceHistoryButton_Click;
             // 
-            // menuStrip1
+            // MainMenuStrip
             // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, importFIlesToolStripMenuItem, updateEveDataToolStripMenuItem, reportIssueToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new Padding(5, 2, 0, 2);
-            menuStrip1.RenderMode = ToolStripRenderMode.Professional;
-            menuStrip1.Size = new Size(397, 24);
-            menuStrip1.TabIndex = 18;
-            menuStrip1.Text = "menuStrip1";
+            MainMenuStrip.ImageScalingSize = new Size(20, 20);
+            MainMenuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, backupFilesToolStripMenuItem, importFIlesToolStripMenuItem, updateEveDataToolStripMenuItem, reportIssueToolStripMenuItem });
+            MainMenuStrip.Location = new Point(0, 0);
+            MainMenuStrip.Name = "MainMenuStrip";
+            MainMenuStrip.Padding = new Padding(5, 2, 0, 2);
+            MainMenuStrip.RenderMode = ToolStripRenderMode.System;
+            MainMenuStrip.Size = new Size(397, 24);
+            MainMenuStrip.TabIndex = 18;
             // 
             // fileToolStripMenuItem
             // 
@@ -284,11 +346,19 @@
             // 
             // ShoppingListButton
             // 
+            ShoppingListButton.BorderBottom = true;
+            ShoppingListButton.BorderFull = false;
+            ShoppingListButton.BorderLeft = false;
+            ShoppingListButton.BorderRight = false;
+            ShoppingListButton.BorderTop = false;
+            ShoppingListButton.BorderWidth = 2F;
             ShoppingListButton.Cursor = Cursors.Hand;
             ShoppingListButton.Enabled = false;
             ShoppingListButton.FlatAppearance.BorderColor = Color.Gray;
+            ShoppingListButton.FlatAppearance.BorderSize = 0;
             ShoppingListButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            ShoppingListButton.FlatStyle = FlatStyle.Flat;
             ShoppingListButton.ForeColor = Color.FromArgb(234, 234, 234);
             ShoppingListButton.Location = new Point(10, 296);
             ShoppingListButton.Margin = new Padding(3, 2, 3, 2);
@@ -302,11 +372,19 @@
             // 
             // BuildPlansButton
             // 
+            BuildPlansButton.BorderBottom = true;
+            BuildPlansButton.BorderFull = false;
+            BuildPlansButton.BorderLeft = false;
+            BuildPlansButton.BorderRight = false;
+            BuildPlansButton.BorderTop = false;
+            BuildPlansButton.BorderWidth = 2F;
             BuildPlansButton.Cursor = Cursors.Hand;
             BuildPlansButton.Enabled = false;
             BuildPlansButton.FlatAppearance.BorderColor = Color.Gray;
+            BuildPlansButton.FlatAppearance.BorderSize = 0;
             BuildPlansButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             BuildPlansButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            BuildPlansButton.FlatStyle = FlatStyle.Flat;
             BuildPlansButton.ForeColor = Color.FromArgb(234, 234, 234);
             BuildPlansButton.Location = new Point(9, 80);
             BuildPlansButton.Margin = new Padding(3, 2, 3, 2);
@@ -343,11 +421,19 @@
             // 
             // LPOfferButton
             // 
+            LPOfferButton.BorderBottom = true;
+            LPOfferButton.BorderFull = false;
+            LPOfferButton.BorderLeft = false;
+            LPOfferButton.BorderRight = false;
+            LPOfferButton.BorderTop = false;
+            LPOfferButton.BorderWidth = 2F;
             LPOfferButton.Cursor = Cursors.Hand;
             LPOfferButton.Enabled = false;
             LPOfferButton.FlatAppearance.BorderColor = Color.Gray;
+            LPOfferButton.FlatAppearance.BorderSize = 0;
             LPOfferButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             LPOfferButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            LPOfferButton.FlatStyle = FlatStyle.Flat;
             LPOfferButton.ForeColor = Color.FromArgb(234, 234, 234);
             LPOfferButton.Location = new Point(142, 134);
             LPOfferButton.Margin = new Padding(3, 2, 3, 2);
@@ -358,23 +444,6 @@
             LPOfferButton.Text = "LP Offers";
             LPOfferButton.UseVisualStyleBackColor = false;
             LPOfferButton.Click += LPOfferButton_Click;
-            // 
-            // ThemePickerButton
-            // 
-            ThemePickerButton.Cursor = Cursors.Hand;
-            ThemePickerButton.FlatAppearance.BorderColor = Color.Gray;
-            ThemePickerButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
-            ThemePickerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
-            ThemePickerButton.ForeColor = Color.FromArgb(234, 234, 234);
-            ThemePickerButton.Location = new Point(9, 350);
-            ThemePickerButton.Margin = new Padding(3, 2, 3, 2);
-            ThemePickerButton.MaximumSize = new Size(120, 120);
-            ThemePickerButton.Name = "ThemePickerButton";
-            ThemePickerButton.Size = new Size(120, 50);
-            ThemePickerButton.TabIndex = 27;
-            ThemePickerButton.Text = "Theme Picker";
-            ThemePickerButton.UseVisualStyleBackColor = false;
-            ThemePickerButton.Click += ThemePickerButton_Click;
             // 
             // linkLabel1
             // 
@@ -391,10 +460,18 @@
             // 
             // HunterIntelButton
             // 
+            HunterIntelButton.BorderBottom = true;
+            HunterIntelButton.BorderFull = false;
+            HunterIntelButton.BorderLeft = false;
+            HunterIntelButton.BorderRight = false;
+            HunterIntelButton.BorderTop = false;
+            HunterIntelButton.BorderWidth = 2F;
             HunterIntelButton.Cursor = Cursors.Hand;
             HunterIntelButton.FlatAppearance.BorderColor = Color.Gray;
+            HunterIntelButton.FlatAppearance.BorderSize = 0;
             HunterIntelButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             HunterIntelButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            HunterIntelButton.FlatStyle = FlatStyle.Flat;
             HunterIntelButton.ForeColor = Color.FromArgb(234, 234, 234);
             HunterIntelButton.Location = new Point(142, 80);
             HunterIntelButton.Margin = new Padding(3, 2, 3, 2);
@@ -408,12 +485,20 @@
             // 
             // QueryDatabaseButton
             // 
+            QueryDatabaseButton.BorderBottom = true;
+            QueryDatabaseButton.BorderFull = false;
+            QueryDatabaseButton.BorderLeft = false;
+            QueryDatabaseButton.BorderRight = false;
+            QueryDatabaseButton.BorderTop = false;
+            QueryDatabaseButton.BorderWidth = 2F;
             QueryDatabaseButton.Cursor = Cursors.Hand;
             QueryDatabaseButton.FlatAppearance.BorderColor = Color.Gray;
+            QueryDatabaseButton.FlatAppearance.BorderSize = 0;
             QueryDatabaseButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
             QueryDatabaseButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            QueryDatabaseButton.FlatStyle = FlatStyle.Flat;
             QueryDatabaseButton.ForeColor = Color.FromArgb(234, 234, 234);
-            QueryDatabaseButton.Location = new Point(142, 350);
+            QueryDatabaseButton.Location = new Point(9, 350);
             QueryDatabaseButton.Margin = new Padding(3, 2, 3, 2);
             QueryDatabaseButton.MaximumSize = new Size(120, 120);
             QueryDatabaseButton.Name = "QueryDatabaseButton";
@@ -432,7 +517,6 @@
             Controls.Add(QueryDatabaseButton);
             Controls.Add(HunterIntelButton);
             Controls.Add(linkLabel1);
-            Controls.Add(ThemePickerButton);
             Controls.Add(LPOfferButton);
             Controls.Add(DocumentationLabel);
             Controls.Add(BuildPlansButton);
@@ -447,18 +531,17 @@
             Controls.Add(LootAppraisalButton);
             Controls.Add(PlanetPlannerButton);
             Controls.Add(BlueprintBrowserButton);
-            Controls.Add(menuStrip1);
+            Controls.Add(MainMenuStrip);
             ForeColor = Color.White;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainScreen";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Eve Helper";
             FormClosing += MainScreen_FormClosing;
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            MainMenuStrip.ResumeLayout(false);
+            MainMenuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -473,7 +556,7 @@
         private Objects.Custom_Controls.EveHelperButton MarketBrowserButton;
         private Objects.Custom_Controls.EveHelperButton AbyssTrackerButton;
         private Objects.Custom_Controls.EveHelperButton PriceHistoryButton;
-        private MenuStrip menuStrip1;
+        private MenuStrip MainMenuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
         private LinkLabel FreyaLinkLabel;
         private Label label10;
@@ -488,7 +571,6 @@
         private System.ComponentModel.BackgroundWorker CheckInternetBGWorker;
         private LinkLabel DocumentationLabel;
         private Objects.Custom_Controls.EveHelperButton LPOfferButton;
-        private Objects.Custom_Controls.EveHelperButton ThemePickerButton;
         private LinkLabel linkLabel1;
         private Objects.Custom_Controls.EveHelperButton HunterIntelButton;
         private Objects.Custom_Controls.EveHelperButton QueryDatabaseButton;

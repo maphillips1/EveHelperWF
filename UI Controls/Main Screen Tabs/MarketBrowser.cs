@@ -247,6 +247,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 DatabindGridView<List<MarketOrder>>(BuyOrdersGridView, selectedTypeMarketOrders.BuyOrders);
                 DatabindGridView<List<MarketOrder>>(SellOrdersGridView, selectedTypeMarketOrders.SellOrders);
+                MarketVolumeLabel.Text = selectedTypeMarketOrders.SellOrders.Sum(x => (double)x.volume_remain).ToString("N0");
             }
             if (priceHistory != null)
             {

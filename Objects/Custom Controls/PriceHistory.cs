@@ -69,53 +69,54 @@ namespace EveHelperWF.Objects.Custom_Controls
         {
             filteredPriceHistories = filteredPriceHistories.OrderBy(x => x.date).ToList();
 
-            //BuildDummySeries(filteredPriceHistories);
-
-            PriceHistoryChart.Series["Average"].XValueMember = "date";
-            PriceHistoryChart.Series["Low"].XValueMember = "date";
-            PriceHistoryChart.Series["High"].XValueMember = "date";
-
-            PriceHistoryChart.Series["Average"].YValueMembers = "average";
-            PriceHistoryChart.Series["Low"].YValueMembers = "lowest";
-            PriceHistoryChart.Series["High"].YValueMembers = "highest";
-
-            int step = (int)Math.Round((decimal)(filteredPriceHistories.Count / 10));
-            if (step > 1)
+            if (filteredPriceHistories.Count > 0)
             {
-                for (int i = 0; i < filteredPriceHistories.Count; i += step)
+                List<ESIPriceHistory> nonZeroHistories = filteredPriceHistories.FindAll(x => x.lowest > 0);
+                double minYValue = nonZeroHistories.Min(x => x.lowest);
+                minYValue = minYValue * 0.9;
+                double maxYValue = nonZeroHistories.Max(x => x.highest);
+                maxYValue = maxYValue * 1.1;
+
+                PriceHistoryChart.ChartAreas[0].AxisY.Minimum = minYValue;
+                PriceHistoryChart.ChartAreas[0].AxisY.Maximum = maxYValue;
+                PriceHistoryChart.ChartAreas[0].AxisY.LabelStyle.Format = "{0:N2}";
+
+                PriceHistoryChart.ChartAreas[0].BackColor = Enums.Enums.BackgroundColor;
+                PriceHistoryChart.ChartAreas[0].BackSecondaryColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+
+                PriceHistoryChart.Series["Average"].XValueMember = "date";
+                PriceHistoryChart.Series["Low"].XValueMember = "date";
+                PriceHistoryChart.Series["High"].XValueMember = "date";
+
+                PriceHistoryChart.Series["Average"].YValueMembers = "average";
+                PriceHistoryChart.Series["Low"].YValueMembers = "lowest";
+                PriceHistoryChart.Series["High"].YValueMembers = "highest";
+
+                int step = (int)Math.Round((decimal)(filteredPriceHistories.Count / 10));
+                if (step > 1)
                 {
-                    
-                    PriceHistoryChart.Series["Average"].Points.Add(i, filteredPriceHistories[i].average);
-                    PriceHistoryChart.Series["Low"].Points.Add(i, filteredPriceHistories[i].lowest);
-                    PriceHistoryChart.Series["High"].Points.Add(i, filteredPriceHistories[i].highest);
+                    for (int i = 0; i < filteredPriceHistories.Count; i += step)
+                    {
+
+                        PriceHistoryChart.Series["Average"].Points.Add(i, filteredPriceHistories[i].average);
+                        PriceHistoryChart.Series["Low"].Points.Add(i, filteredPriceHistories[i].lowest);
+                        PriceHistoryChart.Series["High"].Points.Add(i, filteredPriceHistories[i].highest);
+                    }
                 }
-            }
-            else
-            {
-                int i = 0;
-                foreach (ESIPriceHistory priceHistory in filteredPriceHistories)
+                else
                 {
-                    PriceHistoryChart.Series["Average"].Points.Add(i, filteredPriceHistories[i].average);
-                    PriceHistoryChart.Series["Low"].Points.Add(i, filteredPriceHistories[i].lowest);
-                    PriceHistoryChart.Series["High"].Points.Add(i, filteredPriceHistories[i].highest);
-                    i++;
+                    int i = 0;
+                    foreach (ESIPriceHistory priceHistory in filteredPriceHistories)
+                    {
+                        PriceHistoryChart.Series["Average"].Points.Add(i, filteredPriceHistories[i].average);
+                        PriceHistoryChart.Series["Low"].Points.Add(i, filteredPriceHistories[i].lowest);
+                        PriceHistoryChart.Series["High"].Points.Add(i, filteredPriceHistories[i].highest);
+                        i++;
+                    }
                 }
             }
 
             PriceHistoryChart.DataSource = filteredPriceHistories;
-        }
-
-        private void BuildDummySeries(List<ESIPriceHistory> filteredPriceHistories)
-        {
-            double rangeMin = filteredPriceHistories.Min(x => x.lowest) *0.9;
-            double rangeMax = filteredPriceHistories.Max(x => x.highest) * 1.1;
-
-            Series sDummy = PriceHistoryChart.Series.Add("dummy");
-            sDummy.Color = Color.Transparent;
-            sDummy.IsVisibleInLegend = false;
-            sDummy.ChartType = SeriesChartType.Point;
-            sDummy.Points.AddXY(0, rangeMin + 1);
-            sDummy.Points.AddXY(0, rangeMax - 1);
         }
 
         private DateTime GetFirstDate()

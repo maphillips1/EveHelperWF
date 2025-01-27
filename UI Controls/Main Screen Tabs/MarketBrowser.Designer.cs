@@ -43,6 +43,8 @@
             MarketListTreeView = new TreeView();
             SelectedItemTabPanel = new TabControl();
             OrdersTabPage = new TabPage();
+            MarketVolumeLabel = new Label();
+            label5 = new Label();
             label3 = new Label();
             SellOrdersGridView = new Objects.Custom_Controls.EveHelperGridView();
             range = new DataGridViewTextBoxColumn();
@@ -106,6 +108,14 @@
             // 
             // TheraButton
             // 
+            TheraButton.BorderBottom = false;
+            TheraButton.BorderFull = true;
+            TheraButton.BorderLeft = false;
+            TheraButton.BorderRight = false;
+            TheraButton.BorderTop = false;
+            TheraButton.BorderWidth = 2F;
+            TheraButton.FlatAppearance.BorderSize = 0;
+            TheraButton.FlatStyle = FlatStyle.Flat;
             TheraButton.ForeColor = Color.FromArgb(234, 234, 234);
             TheraButton.Location = new Point(760, 50);
             TheraButton.Margin = new Padding(3, 2, 3, 2);
@@ -133,7 +143,7 @@
             // SelectedItemImagePanel
             // 
             SelectedItemImagePanel.BackgroundImageLayout = ImageLayout.Stretch;
-            SelectedItemImagePanel.Location = new Point(256, 49);
+            SelectedItemImagePanel.Location = new Point(288, 46);
             SelectedItemImagePanel.Margin = new Padding(3, 2, 3, 2);
             SelectedItemImagePanel.Name = "SelectedItemImagePanel";
             SelectedItemImagePanel.Size = new Size(56, 48);
@@ -141,6 +151,14 @@
             // 
             // SearchButton
             // 
+            SearchButton.BorderBottom = false;
+            SearchButton.BorderFull = true;
+            SearchButton.BorderLeft = false;
+            SearchButton.BorderRight = false;
+            SearchButton.BorderTop = false;
+            SearchButton.BorderWidth = 2F;
+            SearchButton.FlatAppearance.BorderSize = 0;
+            SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(153, 2);
             SearchButton.Margin = new Padding(3, 2, 3, 2);
@@ -180,6 +198,8 @@
             // OrdersTabPage
             // 
             OrdersTabPage.BackColor = Color.FromArgb(21, 21, 21);
+            OrdersTabPage.Controls.Add(MarketVolumeLabel);
+            OrdersTabPage.Controls.Add(label5);
             OrdersTabPage.Controls.Add(label3);
             OrdersTabPage.Controls.Add(SellOrdersGridView);
             OrdersTabPage.Controls.Add(BuyOrdersGridView);
@@ -191,6 +211,25 @@
             OrdersTabPage.Size = new Size(715, 462);
             OrdersTabPage.TabIndex = 0;
             OrdersTabPage.Text = "Orders";
+            // 
+            // MarketVolumeLabel
+            // 
+            MarketVolumeLabel.AutoSize = true;
+            MarketVolumeLabel.Location = new Point(264, 4);
+            MarketVolumeLabel.Name = "MarketVolumeLabel";
+            MarketVolumeLabel.Size = new Size(0, 15);
+            MarketVolumeLabel.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 10.2F);
+            label5.Location = new Point(128, 4);
+            label5.Name = "label5";
+            label5.RightToLeft = RightToLeft.No;
+            label5.Size = new Size(130, 19);
+            label5.TabIndex = 8;
+            label5.Text = "Volume on Market: ";
             // 
             // label3
             // 
@@ -539,6 +578,14 @@
             // 
             // RensButton
             // 
+            RensButton.BorderBottom = false;
+            RensButton.BorderFull = true;
+            RensButton.BorderLeft = false;
+            RensButton.BorderRight = false;
+            RensButton.BorderTop = false;
+            RensButton.BorderWidth = 2F;
+            RensButton.FlatAppearance.BorderSize = 0;
+            RensButton.FlatStyle = FlatStyle.Flat;
             RensButton.ForeColor = Color.FromArgb(234, 234, 234);
             RensButton.Location = new Point(672, 50);
             RensButton.Margin = new Padding(3, 2, 3, 2);
@@ -591,6 +638,14 @@
             // 
             // AmarrButton
             // 
+            AmarrButton.BorderBottom = false;
+            AmarrButton.BorderFull = true;
+            AmarrButton.BorderLeft = false;
+            AmarrButton.BorderRight = false;
+            AmarrButton.BorderTop = false;
+            AmarrButton.BorderWidth = 2F;
+            AmarrButton.FlatAppearance.BorderSize = 0;
+            AmarrButton.FlatStyle = FlatStyle.Flat;
             AmarrButton.ForeColor = Color.FromArgb(234, 234, 234);
             AmarrButton.Location = new Point(585, 77);
             AmarrButton.Margin = new Padding(3, 2, 3, 2);
@@ -603,6 +658,14 @@
             // 
             // DodixieButton
             // 
+            DodixieButton.BorderBottom = false;
+            DodixieButton.BorderFull = true;
+            DodixieButton.BorderLeft = false;
+            DodixieButton.BorderRight = false;
+            DodixieButton.BorderTop = false;
+            DodixieButton.BorderWidth = 2F;
+            DodixieButton.FlatAppearance.BorderSize = 0;
+            DodixieButton.FlatStyle = FlatStyle.Flat;
             DodixieButton.ForeColor = Color.FromArgb(234, 234, 234);
             DodixieButton.Location = new Point(672, 77);
             DodixieButton.Margin = new Padding(3, 2, 3, 2);
@@ -615,6 +678,14 @@
             // 
             // JitaButton
             // 
+            JitaButton.BorderBottom = false;
+            JitaButton.BorderFull = true;
+            JitaButton.BorderLeft = false;
+            JitaButton.BorderRight = false;
+            JitaButton.BorderTop = false;
+            JitaButton.BorderWidth = 2F;
+            JitaButton.FlatAppearance.BorderSize = 0;
+            JitaButton.FlatStyle = FlatStyle.Flat;
             JitaButton.ForeColor = Color.FromArgb(234, 234, 234);
             JitaButton.Location = new Point(585, 50);
             JitaButton.Margin = new Padding(3, 2, 3, 2);
@@ -656,6 +727,14 @@
             // 
             // ClearSystemButton
             // 
+            ClearSystemButton.BorderBottom = false;
+            ClearSystemButton.BorderFull = true;
+            ClearSystemButton.BorderLeft = false;
+            ClearSystemButton.BorderRight = false;
+            ClearSystemButton.BorderTop = false;
+            ClearSystemButton.BorderWidth = 2F;
+            ClearSystemButton.FlatAppearance.BorderSize = 0;
+            ClearSystemButton.FlatStyle = FlatStyle.Flat;
             ClearSystemButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearSystemButton.Location = new Point(388, 103);
             ClearSystemButton.Margin = new Padding(3, 2, 3, 2);
@@ -668,6 +747,14 @@
             // 
             // ClearRegionButton
             // 
+            ClearRegionButton.BorderBottom = false;
+            ClearRegionButton.BorderFull = true;
+            ClearRegionButton.BorderLeft = false;
+            ClearRegionButton.BorderRight = false;
+            ClearRegionButton.BorderTop = false;
+            ClearRegionButton.BorderWidth = 2F;
+            ClearRegionButton.FlatAppearance.BorderSize = 0;
+            ClearRegionButton.FlatStyle = FlatStyle.Flat;
             ClearRegionButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearRegionButton.Location = new Point(266, 103);
             ClearRegionButton.Margin = new Padding(3, 2, 3, 2);
@@ -829,5 +916,7 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private Objects.Custom_Controls.PriceHistory PriceHistoryControl;
+        private Label label5;
+        private Label MarketVolumeLabel;
     }
 }
