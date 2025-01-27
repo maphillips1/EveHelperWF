@@ -20,8 +20,16 @@ namespace EveHelperWF.Objects.Custom_Controls
             InitializeComponent();
         }
 
+        private Pen borderPen;
+
         public Color defaultBackColor = Enums.Enums.BackgroundColor;
         public Color defaultForeColor = CommonHelper.GetInvertedColor(DefaultBackColor);
+        private bool borderFull = true;
+        private bool borderBottom = false;
+        private bool borderLeft = false;
+        private bool borderRight = false;
+        private bool borderTop = false;
+        private float borderWidth = 2;
 
         public override Color BackColor
         {
@@ -47,35 +55,53 @@ namespace EveHelperWF.Objects.Custom_Controls
             }
         }
 
-        
+        public bool BorderFull { get => borderFull; set => borderFull = value; }
+        public bool BorderBottom { get => borderBottom; set => borderBottom = value; }
+        public bool BorderLeft { get => borderLeft; set => borderLeft = value; }
+        public bool BorderRight { get => borderRight; set => borderRight = value; }
+        public bool BorderTop { get => borderTop; set => borderTop = value; }
+        public float BorderWidth { get => borderWidth; set => borderWidth = value; }
 
-        #region <Round Corners> : (Draw)
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect,     // x-coordinate of upper-left corner
-            int nTopRect,      // y-coordinate of upper-left corner
-            int nRightRect,    // x-coordinate of lower-right corner-
-            int nBottomRect,   // y-coordinate of lower-right corner
-            int nWidthEllipse, // width of ellipse
-            int nHeightEllipse // height of ellipse
-        );
 
-        /// <summary> Draw Corners (Round or Square). </summary>
-        /// <param name="e"></param>
-        private void DrawCorners()
+        private void DrawBorder(PaintEventArgs pe)
         {
-            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            if (borderPen == null)
+            {
+                borderPen = new Pen(this.ForeColor, BorderWidth);
+            }
+            if (borderFull)
+            {
+                pe.Graphics.DrawRectangle(borderPen, new RectangleF(0, 0, Width, Height));
+            }
+            else
+            {
+                if (borderBottom)
+                {
+                    pe.Graphics.DrawLine(borderPen, new Point(0, Height), new Point(Width, Height));
+                }
+                if (borderLeft)
+                {
+                    pe.Graphics.DrawLine(borderPen, new Point(0, 0), new Point(0, Height));
+                }
+                if (BorderRight)
+                {
+                    pe.Graphics.DrawLine(borderPen, new Point(Width, 0), new Point(Width, Height));
+                }
+                if (BorderTop)
+                {
+                    pe.Graphics.DrawLine(borderPen, new Point(0, 0), new Point(Width, 0));
+                }
+            }
         }
-        #endregion
 
         protected override void OnPaint(PaintEventArgs pe)
         {
-            this.FlatStyle = FlatStyle.Standard;
+            this.FlatStyle = FlatStyle.Flat;
+            this.FlatAppearance.BorderSize = 0;
             this.UseVisualStyleBackColor = false;
             this.ForeColor = defaultForeColor;
             base.OnPaint(pe);
-            DrawCorners();
+            DrawBorder(pe);
         }
 
         public void SetBackgroundColor(Color color)

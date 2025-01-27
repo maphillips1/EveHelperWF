@@ -20,6 +20,14 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             MaxSecurityUpDown.Value = 1;
         }
 
+        public SystemFinder(bool temperate)
+        {
+            InitializeComponent();
+            LoadRegions();
+            LoadStationCombo();
+            MaxSecurityUpDown.Value = 1;
+        }
+
         private void LoadRegions()
         {
             regions = SQLiteCalls.LoadRegions();

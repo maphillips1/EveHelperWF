@@ -436,12 +436,22 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void TaxInputCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            SetSummaryInformation();
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.IndustrySettings.TaxInputs = TaxInputCheckbox.Checked;
+                SaveBuildPlan();
+                SetSummaryInformation();
+            }
         }
 
         private void TaxFinalProductCheckbox_CheckedChanged(object sender, EventArgs e)
         {
-            SetSummaryInformation();
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.IndustrySettings.TaxOutputs = TaxFinalProductCheckbox.Checked;
+                SaveBuildPlan();
+                SetSummaryInformation();
+            }
         }
 
         private void FinalSellPriceNumeric_ValueChanged(object sender, EventArgs e)
@@ -869,6 +879,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Run the calcs
                 RunCalcs();
 
+                TaxInputCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxInputs;
+                TaxFinalProductCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxOutputs;
                 //Load All the info on the screen
                 this.ResumeLayout();
             }
@@ -967,7 +979,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 ProductLabel.Text = FinalProductType.typeName;
                 NotesTextBox.Text = this.currentBuildPlan.BuildPlanNotes;
-                DetailsProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome;
+                DetailsProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 RunsPerCopyUpDown.Value = this.currentBuildPlan.RunsPerCopy;
                 NumberCopiesUpDown.Value = this.currentBuildPlan.NumOfCopies;
                 AdditionalCostsNumeric.Value = this.currentBuildPlan.additionalCosts;
@@ -1829,7 +1841,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     marketGroupNode.Nodes.Add(tn);
 
                 }
-                marketGroupNode.Text += " / Total Price: " + CommonHelper.FormatIskShortened(totalGroupPrice);
+                marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
                 MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
             }
         }
@@ -2494,5 +2506,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         #endregion
+
+        private void label45_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
