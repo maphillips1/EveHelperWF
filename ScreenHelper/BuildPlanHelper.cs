@@ -8,6 +8,101 @@ namespace EveHelperWF.ScreenHelper
     {
         private static int controlCount = 0;
 
+        public static void RunBuildPlanCalcs(ref BuildPlan buildPlan, ref List<MaterialsWithMarketData> _CombinedMats)
+        {
+
+            CalculateIndustryValues(ref buildPlan);
+            List<MaterialsWithMarketData> allItems = buildPlan.AllItems;
+            BuildPlanHelper.BuildAllItems(buildPlan.InputMaterials, ref allItems);
+            buildPlan.AllItems = allItems;
+            RunOptimumBuildCalc(ref buildPlan);
+            EnsurePriceData(ref buildPlan, ref _CombinedMats);
+            
+        }
+
+        private static void RunOptimumBuildCalc(ref BuildPlan buildPlan)
+        {
+            BuildPlanHelper.DetermineOptimumBuild(buildPlan.InputMaterials, buildPlan);
+        }
+
+        private static void EnsurePriceData(ref BuildPlan buildPlan, ref List<MaterialsWithMarketData> _CombinedMats)
+        {
+            if (buildPlan != null)
+            {
+                List<MaterialsWithMarketData> allItemsNoPrice = buildPlan.AllItems.FindAll(x => x.pricePer <= 0);
+                List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
+                CombineMatsFromOptimizedBuilds(ref combinedMats, buildPlan.OptimizedBuilds, ref _CombinedMats, true);
+                _CombinedMats.AddRange(combinedMats);
+                combinedMats = combinedMats.FindAll(x => allItemsNoPrice.Find(y => y.materialTypeID == x.materialTypeID) != null);
+                if (combinedMats.Count > 0)
+                {
+                    List<ESIMarketType> marketTypes = new List<ESIMarketType>();
+                    combinedMats.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.materialTypeID, quantity = x.quantityTotal }));
+                    int totalMats = combinedMats.Count;
+                    decimal progress = 0;
+                    marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, buildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
+                    foreach (ESIMarketType marketType in marketTypes)
+                    {
+                        combinedMats.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
+                        combinedMats.Find(x => x.materialTypeID == marketType.typeID).priceTotal = marketType.priceTotal;
+                        buildPlan.AllItems.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
+                        buildPlan.AllItems.Find(x => x.materialTypeID == marketType.typeID).priceTotal = marketType.priceTotal;
+                        progress++;
+                    }
+                }
+                foreach (MaterialsWithMarketData mat in _CombinedMats)
+                {
+                    mat.pricePer = buildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer;
+                    mat.priceTotal = mat.pricePer * mat.quantityTotal;
+                }
+            }
+        }
+
+        public static void CombineMatsFromOptimizedBuilds(ref List<MaterialsWithMarketData> outputList, List<OptimizedBuild> optimizedBuilds, ref List<MaterialsWithMarketData> _CombinedMats, bool ignoreCompletedBuilds = false)
+        {
+            if (_CombinedMats.Count <= 0)
+            {
+                MaterialsWithMarketData existingMat;
+                OptimizedBuild buildPlan;
+                foreach (OptimizedBuild build in optimizedBuilds)
+                {
+                    if (ignoreCompletedBuilds && build.TotalQuantityNeeded == 0)
+                    {
+                        continue;
+                    }
+                    foreach (MaterialsWithMarketData input in build.InputMaterials)
+                    {
+                        buildPlan = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == input.materialTypeID);
+                        if (buildPlan == null)
+                        {
+                            existingMat = outputList.Find(x => x.materialTypeID == input.materialTypeID);
+                            if (existingMat == null)
+                            {
+                                existingMat = new MaterialsWithMarketData();
+                                existingMat.materialTypeID = input.materialTypeID;
+                                existingMat.quantityTotal = input.quantityTotal;
+                                existingMat.materialName = input.materialName;
+                                existingMat.pricePer = input.pricePer;
+                                existingMat.Buildable = input.Buildable;
+                                existingMat.Reactable = input.Reactable;
+                                outputList.Add(existingMat);
+                            }
+                            else
+                            {
+                                existingMat.quantityTotal += input.quantityTotal;
+                            }
+                            existingMat.priceTotal = existingMat.pricePer * existingMat.quantityTotal;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                outputList.Clear();
+                outputList.AddRange(_CombinedMats);
+            }
+        }
+
         public static void SetControlNames(List<MaterialsWithMarketData> materials)
         {
             controlCount = 0;
