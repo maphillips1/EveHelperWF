@@ -617,7 +617,6 @@
             label45.Size = new Size(201, 21);
             label45.TabIndex = 18;
             label45.Text = "Optimum Build Schedule";
-            label45.Click += label45_Click;
             // 
             // label47
             // 

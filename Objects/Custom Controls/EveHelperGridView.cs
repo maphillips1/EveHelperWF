@@ -34,15 +34,22 @@ namespace EveHelperWF.Objects.Custom_Controls
         public EveHelperGridView()
         {
             InitializeComponent();
+            this.EnableHeadersVisualStyles = false;
             this.AutoGenerateColumns = false;
         }
+
 
         protected override void OnPaint(PaintEventArgs e)
         {
             this.BackgroundColor = Enums.Enums.BackgroundColor;
             this.GridColor = Enums.Enums.BackgroundColor;
             this.ForeColor = CommonHelper.GetInvertedColor(this.BackColor);
-
+            this.ColumnHeadersDefaultCellStyle.BackColor = this.BackgroundColor;
+            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.Gold;
+            this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.RowHeadersDefaultCellStyle.BackColor = this.BackgroundColor;
+            this.RowHeadersDefaultCellStyle.ForeColor= this.ForeColor;
+            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             base.OnPaint(e);
         }
 

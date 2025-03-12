@@ -292,9 +292,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 List<ESIMarketType> mats = new List<ESIMarketType>();
-                List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-                CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
-                combinedMats.ForEach(x => mats.Add(new ESIMarketType { typeID = x.materialTypeID, quantity = x.quantityTotal }));
+                _CombinedMats.ForEach(x => mats.Add(new ESIMarketType { typeID = x.materialTypeID, quantity = x.quantityTotal }));
                 List<ESIMarketType> pricedMats;
 
                 ProgressLabel.Text = "Getting Market Data";
@@ -1182,25 +1180,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void RunCalcs()
         {
-            BuildPlanHelper.CalculateIndustryValues(ref this.currentBuildPlan);
-            List<MaterialsWithMarketData> allItems = this.currentBuildPlan.AllItems;
-            BuildPlanHelper.BuildAllItems(this.currentBuildPlan.InputMaterials, ref allItems);
-            this.currentBuildPlan.AllItems = allItems;
-            RunOptimumBuildCalc();
-            EnsurePriceData();
+            //Reset before calcs. 
+            _CombinedMats = new List<MaterialsWithMarketData>();
+            BuildPlanHelper.RunBuildPlanCalcs(ref this.currentBuildPlan, ref _CombinedMats);
             BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                  this.currentBuildPlan.AllItems,
                                                                  this.currentBuildPlan.finalProductTypeID,
                                                                  this.currentBuildPlan.additionalCosts,
                                                                  this.currentBuildPlan);
             LoadUIAfterCalcs();
-        }
-
-        private void RunOptimumBuildCalc()
-        {
-            //Reset combined mats since we're re-running calcs.
-            _CombinedMats = new List<MaterialsWithMarketData>();
-            BuildPlanHelper.DetermineOptimumBuild(this.currentBuildPlan.InputMaterials, this.currentBuildPlan);
             SaveBuildPlan();
         }
 
@@ -1246,12 +1234,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void CopyInputsToClipboard()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
 
             InventoryTypeWithQuantity currentInventory;
             long quantityNeeded = 0;
-            foreach (MaterialsWithMarketData mat in combinedMats)
+            foreach (MaterialsWithMarketData mat in _CombinedMats)
             {
                 currentInventory = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == mat.materialTypeID);
                 quantityNeeded = mat.quantityTotal;
@@ -1468,79 +1454,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void EnsurePriceData()
-        {
-            if (this.currentBuildPlan != null)
-            {
-                List<MaterialsWithMarketData> allItemsNoPrice = this.currentBuildPlan.AllItems.FindAll(x => x.pricePer <= 0);
-                List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-                CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
-                combinedMats = combinedMats.FindAll(x => allItemsNoPrice.Find(y => y.materialTypeID == x.materialTypeID) != null);
-                if (combinedMats.Count > 0)
-                {
-                    List<ESIMarketType> marketTypes = new List<ESIMarketType>();
-                    combinedMats.ForEach(x => marketTypes.Add(new ESIMarketType() { typeID = x.materialTypeID, quantity = x.quantityTotal }));
-                    int totalMats = combinedMats.Count;
-                    decimal progress = 0;
-                    marketTypes = ESIMarketData.GetPriceForItemListWithQuantityAsync(marketTypes, this.currentBuildPlan.IndustrySettings.InputOrderType, Enums.Enums.TheForgeRegionId).Result;
-                    foreach (ESIMarketType marketType in marketTypes)
-                    {
-                        combinedMats.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
-                        this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == marketType.typeID).pricePer = marketType.pricePer;
-                        progress++;
-                        this.ProgressLabel.Text = "Price Information is Loading. This may take some time. Progress: " + (progress / totalMats).ToString("P2");
-                    }
-                    this.PriceInfoSet = false;
-                    this.ProgressLabel.Text = "";
-                }
-            }
-        }
-
-        private void CombineMatsFromOptimizedBuilds(ref List<MaterialsWithMarketData> outputList, List<OptimizedBuild> optimizedBuilds, bool ignoreCompletedBuilds = false)
-        {
-            if (_CombinedMats.Count <= 0)
-            {
-                MaterialsWithMarketData existingMat;
-                OptimizedBuild buildPlan;
-                foreach (OptimizedBuild build in optimizedBuilds)
-                {
-                    if (ignoreCompletedBuilds && build.TotalQuantityNeeded == 0)
-                    {
-                        continue;
-                    }
-                    foreach (MaterialsWithMarketData input in build.InputMaterials)
-                    {
-                        buildPlan = optimizedBuilds.Find(x => x.BuiltOrReactedTypeId == input.materialTypeID);
-                        if (buildPlan == null)
-                        {
-                            existingMat = outputList.Find(x => x.materialTypeID == input.materialTypeID);
-                            if (existingMat == null)
-                            {
-                                existingMat = new MaterialsWithMarketData();
-                                existingMat.materialTypeID = input.materialTypeID;
-                                existingMat.quantityTotal = input.quantityTotal;
-                                existingMat.materialName = input.materialName;
-                                existingMat.pricePer = input.pricePer;
-                                existingMat.Buildable = input.Buildable;
-                                existingMat.Reactable = input.Reactable;
-                                outputList.Add(existingMat);
-                            }
-                            else
-                            {
-                                existingMat.quantityTotal += input.quantityTotal;
-                            }
-                            existingMat.priceTotal = existingMat.pricePer * existingMat.quantityTotal;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                outputList.Clear();
-                outputList.AddRange(_CombinedMats);
-            }
-        }
-
         private void SetSummaryInformation()
         {
             if (this.currentBuildPlan != null)
@@ -1553,8 +1466,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     decimal totalJobCost = 0;
                     this.currentBuildPlan.OptimizedBuilds.ForEach(x => totalJobCost += x.JobCost);
-                    List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-                    CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
                     decimal outcomePricePer = currentBuildPlan.finalSellPrice;
                     if (outcomePricePer <= 0)
                     {
@@ -1567,7 +1478,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             outcomePricePer = FinalProductBuyOrderPrice;
                         }
                     }
-                    decimal inputMaterialCostBeforeTax = combinedMats.Sum(x => x.priceTotal);
+                    decimal inputMaterialCostBeforeTax = _CombinedMats.Sum(x => x.priceTotal);
                     decimal totalInputPrice = inputMaterialCostBeforeTax;
                     decimal totalInputTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
                                                                                this.currentBuildPlan.IndustrySettings,
@@ -1630,7 +1541,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     HeaderCostUnitLabel.Text = CommonHelper.FormatIsk(totalCostPerItem);
 
-                    decimal totalInputVolume = GetTotalVolumeForMaterials(combinedMats);
+                    decimal totalInputVolume = GetTotalVolumeForMaterials(_CombinedMats);
                     InputVolumeLabel.Text = totalInputVolume.ToString("N2") + " m3";
 
                     ProfitLabel.Text = CommonHelper.FormatIsk(profit);
@@ -1781,17 +1692,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             FinalSellPriceNumeric.Value = currentBuildPlan.finalSellPrice;
 
             MaterialsPriceTreeView.Nodes.Clear();
-            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds, true);
             TreeNode tn;
-            combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
+            _CombinedMats = _CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
             TreeNode marketGroupNode;
             TreeNode pricePer;
             TreeNode priceTotal;
             TreeNode volumeNode;
 
-            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = BuildPlanHelper.GroupInputMaterials(combinedMats);
+            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = BuildPlanHelper.GroupInputMaterials(_CombinedMats);
 
             List<KeyValuePair<string, List<MaterialsWithMarketData>>> orderedMats = groupedMaterials.OrderBy(x => x.Key).ToList();
             InventoryTypeWithQuantity currentInventory;
@@ -1848,12 +1757,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadMostExpensiveGridView()
         {
-
-
-            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
-            combinedMats = combinedMats.OrderByDescending(x => x.priceTotal).ToList();
-            MostExpensiveGridView.DatabindGridView(combinedMats);
+            _CombinedMats = _CombinedMats.OrderByDescending(x => x.priceTotal).ToList();
+            MostExpensiveGridView.DatabindGridView(_CombinedMats);
         }
 
         private void LoadPlanetaryMaterialsPage()
@@ -1873,12 +1778,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadUniquePlanetMaterials()
         {
-            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
             UniquePlanetMaterials = new List<PlanetMaterial>();
             InventoryType invType;
             PlanetMaterial existingMat;
-            foreach (MaterialsWithMarketData mat in combinedMats)
+            foreach (MaterialsWithMarketData mat in _CombinedMats)
             {
                 invType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
                 switch (invType.categoryID)
@@ -2167,15 +2070,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void ExportPrices(string fileName)
         {
-
             StringBuilder exportBuilder = new StringBuilder();
             exportBuilder.AppendLine("Type ID, Type Name, Price Per Item, Total Needed");
-            List<MaterialsWithMarketData> combinedMats = new List<MaterialsWithMarketData>();
-            CombineMatsFromOptimizedBuilds(ref combinedMats, this.currentBuildPlan.OptimizedBuilds);
-            combinedMats = combinedMats.OrderByDescending(x => x.priceTotal).ToList();
-            combinedMats = combinedMats.OrderBy(x => x.materialName).ToList();
+            _CombinedMats = _CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
-            foreach (MaterialsWithMarketData item in combinedMats)
+            foreach (MaterialsWithMarketData item in _CombinedMats)
             {
                 pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == item.materialTypeID);
                 exportBuilder.AppendLine(String.Format("{0}, {1}, {2}, {3}",
@@ -2506,10 +2405,5 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         #endregion
-
-        private void label45_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
