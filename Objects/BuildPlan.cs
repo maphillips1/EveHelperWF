@@ -28,5 +28,18 @@ namespace EveHelperWF.Objects
         }
         public decimal finalSellPrice { get; set; }
         public List<InventoryTypeWithQuantity> CurrentInventory {  get; set; }
+        private List<int> m_completedBuilds { get; set; }
+        public List<int> completedBuilds
+        {
+            get
+            {
+                if (m_completedBuilds == null) { m_completedBuilds = new List<int>(); } 
+                return m_completedBuilds;
+            }
+            set
+            {
+                m_completedBuilds = value;
+            }
+        }
     }
 }

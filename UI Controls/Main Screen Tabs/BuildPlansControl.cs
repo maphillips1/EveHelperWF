@@ -267,6 +267,31 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
+        private void OptimizedBuildTreeView_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
+            {
+                int optimizedTypeId = Convert.ToInt32(e.Node.Tag);
+                if (optimizedTypeId > 0)
+                {
+                    if (e.Node.Checked)
+                    {
+                        if (!this.currentBuildPlan.completedBuilds.Contains(optimizedTypeId))
+                        {
+                            this.currentBuildPlan.completedBuilds.Add(optimizedTypeId);
+                        }
+                        else
+                        {
+                            if (this.currentBuildPlan.completedBuilds.Contains(optimizedTypeId))
+                            {
+                                this.currentBuildPlan.completedBuilds.Remove(optimizedTypeId);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void InputOrderTypeCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.currentBuildPlan != null && !isLoading)
@@ -1163,6 +1188,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             calculationHelperClass.AdvancedCapitalConstructionSkill = defaultFormValues.AdvancedCapitalConstructionSkill;
             calculationHelperClass.CapitalShipConstructionSkill = defaultFormValues.CapitalShipConstructionSkill;
             calculationHelperClass.AdvancedIndustrialConstructionSkill = defaultFormValues.AdvancedIndustrialConstructionSkill;
+
+            calculationHelperClass.TaxInputs = true;
+            calculationHelperClass.TaxOutputs = true;
             return calculationHelperClass;
         }
 
@@ -1428,6 +1456,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         treeNode.Text = build.TotalQuantityNeeded.ToString("N0") + " x " + build.BuiltOrReactedName + " | Runs Needed: " + build.RunsNeeded;
                         treeNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(build);
                         treeNode.Tag = build.BuiltOrReactedTypeId;
+                        treeNode.Checked = this.currentBuildPlan.completedBuilds.Contains(build.BuiltOrReactedTypeId);
                         if (build.BatchesNeeded > 1)
                         {
                             treeNode.Text += " | Max Runs/Batch " + build.MaxRunsPerBatch + " | Batches Needed | " + build.BatchesNeeded;
@@ -2405,5 +2434,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         #endregion
+
+        private void ClearCompletedButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.completedBuilds.Clear();
+                LoadOptimumBuildSchedule();
+            }
+        }
     }
 }

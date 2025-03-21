@@ -204,6 +204,7 @@
             SystemButton = new Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryButton = new Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new Objects.Custom_Controls.EveHelperButton();
+            ClearCompletedButton = new Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -1066,6 +1067,7 @@
             dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
             MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle9;
             MostExpensiveGridView.EditableColumns = null;
+            MostExpensiveGridView.EnableHeadersVisualStyles = false;
             MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.Location = new Point(787, 54);
             MostExpensiveGridView.Name = "MostExpensiveGridView";
@@ -1727,6 +1729,7 @@
             // DetailsPage
             // 
             DetailsPage.BackColor = Color.FromArgb(21, 21, 21);
+            DetailsPage.Controls.Add(ClearCompletedButton);
             DetailsPage.Controls.Add(ExportBuildList);
             DetailsPage.Controls.Add(label44);
             DetailsPage.Controls.Add(TotalManufacturingSlotsLabel);
@@ -1766,7 +1769,7 @@
             ExportBuildList.ForeColor = Color.FromArgb(234, 234, 234);
             ExportBuildList.Location = new Point(793, 36);
             ExportBuildList.Name = "ExportBuildList";
-            ExportBuildList.Size = new Size(124, 23);
+            ExportBuildList.Size = new Size(169, 23);
             ExportBuildList.TabIndex = 26;
             ExportBuildList.Text = "Export Build List";
             ExportBuildList.UseVisualStyleBackColor = false;
@@ -1800,6 +1803,7 @@
             OptimizedBuildTreeView.BackColor = Color.FromArgb(21, 21, 21);
             OptimizedBuildTreeView.BorderStyle = BorderStyle.None;
             OptimizedBuildTreeView.CausesValidation = false;
+            OptimizedBuildTreeView.CheckBoxes = true;
             OptimizedBuildTreeView.Font = new Font("Segoe UI", 12F);
             OptimizedBuildTreeView.ForeColor = Color.White;
             OptimizedBuildTreeView.HotTracking = true;
@@ -1810,6 +1814,7 @@
             OptimizedBuildTreeView.Size = new Size(544, 422);
             OptimizedBuildTreeView.TabIndex = 16;
             OptimizedBuildTreeView.TabStop = false;
+            OptimizedBuildTreeView.AfterCheck += OptimizedBuildTreeView_AfterCheck;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
             // 
             // CollapseAllButton
@@ -2080,6 +2085,7 @@
             dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
             CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle13;
             CurrentInventoryGrid.EditableColumns = "Quantity";
+            CurrentInventoryGrid.EnableHeadersVisualStyles = false;
             CurrentInventoryGrid.GridColor = Color.Black;
             CurrentInventoryGrid.Location = new Point(5, 90);
             CurrentInventoryGrid.Name = "CurrentInventoryGrid";
@@ -2430,6 +2436,25 @@
             SummaryButton.UseVisualStyleBackColor = false;
             SummaryButton.Click += SummaryButton_Click;
             // 
+            // ClearCompletedButton
+            // 
+            ClearCompletedButton.BorderBottom = false;
+            ClearCompletedButton.BorderFull = true;
+            ClearCompletedButton.BorderLeft = false;
+            ClearCompletedButton.BorderRight = false;
+            ClearCompletedButton.BorderTop = false;
+            ClearCompletedButton.BorderWidth = 2F;
+            ClearCompletedButton.FlatAppearance.BorderSize = 0;
+            ClearCompletedButton.FlatStyle = FlatStyle.Flat;
+            ClearCompletedButton.ForeColor = Color.FromArgb(234, 234, 234);
+            ClearCompletedButton.Location = new Point(793, 3);
+            ClearCompletedButton.Name = "ClearCompletedButton";
+            ClearCompletedButton.Size = new Size(169, 23);
+            ClearCompletedButton.TabIndex = 27;
+            ClearCompletedButton.Text = "Clear Completed Builds";
+            ClearCompletedButton.UseVisualStyleBackColor = false;
+            ClearCompletedButton.Click += ClearCompletedButton_Click;
+            // 
             // BuildPlansControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2666,5 +2691,6 @@
         private Objects.Custom_Controls.PriceHistory PriceHistoryControl;
         private Label label11;
         private Objects.Custom_Controls.EveHelperButton MostProfitableButton;
+        private Objects.Custom_Controls.EveHelperButton ClearCompletedButton;
     }
 }
