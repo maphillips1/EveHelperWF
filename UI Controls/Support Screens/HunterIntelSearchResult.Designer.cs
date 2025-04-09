@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HunterIntelSearchResult));
             label1 = new Label();
             SearchResultsGrid = new Objects.Custom_Controls.EveHelperGridView();
@@ -52,13 +54,32 @@
             // 
             SearchResultsGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             SearchResultsGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
+            SearchResultsGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Gold;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            SearchResultsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             SearchResultsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             SearchResultsGrid.Columns.AddRange(new DataGridViewColumn[] { ResultName, ID, ResultType });
             SearchResultsGrid.EditableColumns = null;
+            SearchResultsGrid.EnableHeadersVisualStyles = false;
             SearchResultsGrid.GridColor = Color.FromArgb(21, 21, 21);
             SearchResultsGrid.Location = new Point(12, 59);
             SearchResultsGrid.MultiSelect = false;
             SearchResultsGrid.Name = "SearchResultsGrid";
+            SearchResultsGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            SearchResultsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             SearchResultsGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             SearchResultsGrid.Size = new Size(558, 448);
             SearchResultsGrid.TabIndex = 1;
@@ -67,23 +88,23 @@
             // ResultName
             // 
             ResultName.DataPropertyName = "name";
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle1.ForeColor = Color.FromArgb(234, 234, 234);
-            ResultName.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
+            ResultName.DefaultCellStyle = dataGridViewCellStyle2;
             ResultName.HeaderText = "Name";
             ResultName.Name = "ResultName";
             // 
             // ID
             // 
             ID.DataPropertyName = "id";
-            ID.DefaultCellStyle = dataGridViewCellStyle1;
+            ID.DefaultCellStyle = dataGridViewCellStyle2;
             ID.HeaderText = "ID";
             ID.Name = "ID";
             // 
             // ResultType
             // 
             ResultType.DataPropertyName = "resultType";
-            ResultType.DefaultCellStyle = dataGridViewCellStyle1;
+            ResultType.DefaultCellStyle = dataGridViewCellStyle2;
             ResultType.HeaderText = "ResultType";
             ResultType.Name = "ResultType";
             // 
@@ -91,6 +112,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(580, 519);
             Controls.Add(SearchResultsGrid);
             Controls.Add(label1);
