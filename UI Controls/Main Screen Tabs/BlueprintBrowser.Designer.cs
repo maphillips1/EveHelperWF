@@ -1744,7 +1744,7 @@
             ManufacturingPage.Margin = new Padding(2);
             ManufacturingPage.Name = "ManufacturingPage";
             ManufacturingPage.Padding = new Padding(2);
-            ManufacturingPage.Size = new Size(1118, 529);
+            ManufacturingPage.Size = new Size(1081, 529);
             ManufacturingPage.TabIndex = 0;
             ManufacturingPage.Text = "Manufacturing";
             // 
@@ -1986,6 +1986,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
             ManuInputGrid.DefaultCellStyle = dataGridViewCellStyle5;
             ManuInputGrid.EditableColumns = null;
+            ManuInputGrid.EnableHeadersVisualStyles = false;
             ManuInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             ManuInputGrid.Location = new Point(581, 4);
             ManuInputGrid.Margin = new Padding(2);
@@ -2329,10 +2330,10 @@
             TreeViewList.ForeColor = SystemColors.ControlLight;
             TreeViewList.HideSelection = false;
             TreeViewList.HotTracking = true;
-            TreeViewList.Location = new Point(4, 186);
+            TreeViewList.Location = new Point(4, 188);
             TreeViewList.Margin = new Padding(2);
             TreeViewList.Name = "TreeViewList";
-            TreeViewList.Size = new Size(255, 605);
+            TreeViewList.Size = new Size(255, 520);
             TreeViewList.TabIndex = 1;
             TreeViewList.TabStop = false;
             TreeViewList.AfterSelect += TreeViewList_AfterSelect;
@@ -2391,6 +2392,14 @@
             // 
             // CreateBuildPlanButton
             // 
+            CreateBuildPlanButton.BorderBottom = false;
+            CreateBuildPlanButton.BorderFull = true;
+            CreateBuildPlanButton.BorderLeft = false;
+            CreateBuildPlanButton.BorderRight = false;
+            CreateBuildPlanButton.BorderTop = false;
+            CreateBuildPlanButton.BorderWidth = 2F;
+            CreateBuildPlanButton.FlatAppearance.BorderSize = 0;
+            CreateBuildPlanButton.FlatStyle = FlatStyle.Flat;
             CreateBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
             CreateBuildPlanButton.Location = new Point(181, 200);
             CreateBuildPlanButton.Name = "CreateBuildPlanButton";
@@ -2402,6 +2411,14 @@
             // 
             // CopyToClipboardButton
             // 
+            CopyToClipboardButton.BorderBottom = false;
+            CopyToClipboardButton.BorderFull = true;
+            CopyToClipboardButton.BorderLeft = false;
+            CopyToClipboardButton.BorderRight = false;
+            CopyToClipboardButton.BorderTop = false;
+            CopyToClipboardButton.BorderWidth = 2F;
+            CopyToClipboardButton.FlatAppearance.BorderSize = 0;
+            CopyToClipboardButton.FlatStyle = FlatStyle.Flat;
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
             CopyToClipboardButton.Location = new Point(9, 200);
             CopyToClipboardButton.Name = "CopyToClipboardButton";
@@ -2516,7 +2533,7 @@
             CopyPage.Margin = new Padding(2);
             CopyPage.Name = "CopyPage";
             CopyPage.Padding = new Padding(2);
-            CopyPage.Size = new Size(1118, 529);
+            CopyPage.Size = new Size(1081, 529);
             CopyPage.TabIndex = 1;
             CopyPage.Text = "Copy";
             // 
@@ -2537,6 +2554,7 @@
             dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
             CopyMatGrid.DefaultCellStyle = dataGridViewCellStyle10;
             CopyMatGrid.EditableColumns = null;
+            CopyMatGrid.EnableHeadersVisualStyles = false;
             CopyMatGrid.GridColor = Color.FromArgb(21, 21, 21);
             CopyMatGrid.Location = new Point(353, 2);
             CopyMatGrid.Margin = new Padding(2);
@@ -2817,7 +2835,7 @@
             MEResearchPage.Margin = new Padding(2);
             MEResearchPage.Name = "MEResearchPage";
             MEResearchPage.Padding = new Padding(2);
-            MEResearchPage.Size = new Size(1118, 529);
+            MEResearchPage.Size = new Size(1081, 529);
             MEResearchPage.TabIndex = 2;
             MEResearchPage.Text = "ME Research";
             // 
@@ -2951,6 +2969,7 @@
             dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
             MEMaterialsGrid.DefaultCellStyle = dataGridViewCellStyle15;
             MEMaterialsGrid.EditableColumns = null;
+            MEMaterialsGrid.EnableHeadersVisualStyles = false;
             MEMaterialsGrid.GridColor = Color.FromArgb(21, 21, 21);
             MEMaterialsGrid.Location = new Point(349, 5);
             MEMaterialsGrid.Margin = new Padding(2);
@@ -3117,7 +3136,7 @@
             TEResearchPage.Margin = new Padding(2);
             TEResearchPage.Name = "TEResearchPage";
             TEResearchPage.Padding = new Padding(2);
-            TEResearchPage.Size = new Size(1118, 529);
+            TEResearchPage.Size = new Size(1081, 529);
             TEResearchPage.TabIndex = 3;
             TEResearchPage.Text = "TE Research";
             // 
@@ -3252,6 +3271,7 @@
             dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
             TEMatGrid.DefaultCellStyle = dataGridViewCellStyle20;
             TEMatGrid.EditableColumns = null;
+            TEMatGrid.EnableHeadersVisualStyles = false;
             TEMatGrid.GridColor = Color.FromArgb(21, 21, 21);
             TEMatGrid.Location = new Point(353, 0);
             TEMatGrid.Margin = new Padding(2);
@@ -3518,6 +3538,7 @@
             dataGridViewCellStyle25.WrapMode = DataGridViewTriState.False;
             InventionInputGrid.DefaultCellStyle = dataGridViewCellStyle25;
             InventionInputGrid.EditableColumns = null;
+            InventionInputGrid.EnableHeadersVisualStyles = false;
             InventionInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             InventionInputGrid.Location = new Point(2, 328);
             InventionInputGrid.Margin = new Padding(2);
@@ -3922,7 +3943,7 @@
             ReactionPage.Margin = new Padding(2);
             ReactionPage.Name = "ReactionPage";
             ReactionPage.Padding = new Padding(2);
-            ReactionPage.Size = new Size(1118, 529);
+            ReactionPage.Size = new Size(1081, 529);
             ReactionPage.TabIndex = 6;
             ReactionPage.Text = "Reactions";
             // 
@@ -3943,6 +3964,7 @@
             dataGridViewCellStyle30.WrapMode = DataGridViewTriState.False;
             ReactionInputGrid.DefaultCellStyle = dataGridViewCellStyle30;
             ReactionInputGrid.EditableColumns = null;
+            ReactionInputGrid.EnableHeadersVisualStyles = false;
             ReactionInputGrid.GridColor = Color.FromArgb(21, 21, 21);
             ReactionInputGrid.Location = new Point(2, 232);
             ReactionInputGrid.Margin = new Padding(2);
@@ -4114,7 +4136,7 @@
             // ReactionSkillsTextBox
             // 
             ReactionSkillsTextBox.Dock = DockStyle.Right;
-            ReactionSkillsTextBox.Location = new Point(896, 2);
+            ReactionSkillsTextBox.Location = new Point(859, 2);
             ReactionSkillsTextBox.Margin = new Padding(2);
             ReactionSkillsTextBox.Multiline = true;
             ReactionSkillsTextBox.Name = "ReactionSkillsTextBox";
@@ -4248,6 +4270,14 @@
             // 
             // SearchButton
             // 
+            SearchButton.BorderBottom = false;
+            SearchButton.BorderFull = true;
+            SearchButton.BorderLeft = false;
+            SearchButton.BorderRight = false;
+            SearchButton.BorderTop = false;
+            SearchButton.BorderWidth = 2F;
+            SearchButton.FlatAppearance.BorderSize = 0;
+            SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(184, 2);
             SearchButton.Margin = new Padding(2);
@@ -4277,6 +4307,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = Color.Black;
             ClientSize = new Size(1267, 713);

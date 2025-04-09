@@ -59,6 +59,14 @@
             // 
             // SearchButton
             // 
+            SearchButton.BorderBottom = false;
+            SearchButton.BorderFull = true;
+            SearchButton.BorderLeft = false;
+            SearchButton.BorderRight = false;
+            SearchButton.BorderTop = false;
+            SearchButton.BorderWidth = 2F;
+            SearchButton.FlatAppearance.BorderSize = 0;
+            SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             SearchButton.ForeColor = Color.FromArgb(234, 234, 234);
             SearchButton.Location = new Point(493, 5);
@@ -79,6 +87,14 @@
             // 
             // LoadLocalScanButton
             // 
+            LoadLocalScanButton.BorderBottom = false;
+            LoadLocalScanButton.BorderFull = true;
+            LoadLocalScanButton.BorderLeft = false;
+            LoadLocalScanButton.BorderRight = false;
+            LoadLocalScanButton.BorderTop = false;
+            LoadLocalScanButton.BorderWidth = 2F;
+            LoadLocalScanButton.FlatAppearance.BorderSize = 0;
+            LoadLocalScanButton.FlatStyle = FlatStyle.Flat;
             LoadLocalScanButton.ForeColor = Color.FromArgb(234, 234, 234);
             LoadLocalScanButton.Location = new Point(773, 4);
             LoadLocalScanButton.Name = "LoadLocalScanButton";
@@ -92,6 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
             Controls.Add(LoadLocalScanButton);
