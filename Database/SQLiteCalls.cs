@@ -53,21 +53,22 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("SELECT SS.solarSystemName,");
-            sb.AppendLine("CASE");
-            sb.AppendLine("WHEN SS_Source.regionID <> SS.regionID THEN 1");
+            sb.AppendLine("SELECT SSN.en,");
+            sb.AppendLine("case when mss_source.regionID <> MSS.regionId then 1");
             sb.AppendLine("ELSE 0");
             sb.AppendLine("END AS is_regionalJump,");
-            sb.AppendLine("SS.security,");
-            sb.AppendLine("SS.solarSystemID");
-            sb.AppendLine("from SolarSystemStargate SSS");
-            sb.AppendLine("INNER JOIN SolarSystemStargate SSS_Dest");
-            sb.AppendLine("    on SSS_Dest.stargateID = SSS.destination");
-            sb.AppendLine("INNER JOIN SolarSystem SS");
-            sb.AppendLine("    ON SS.solarSystemID = SSS_Dest.solarSystemID");
-            sb.AppendLine("INNER JOIN SolarSystem SS_Source");
-            sb.AppendLine("    ON SS_Source.solarSystemID = SSS.solarSystemID");
-            sb.AppendLine("WHERE SSS.solarSystemID = " + solarsystemID.ToString());
+            sb.AppendLine("MSS.securityStatus,");
+            sb.AppendLine("MSS.solarSystemID");
+            sb.AppendLine("from mapStargate MS");
+            sb.AppendLine("INNER JOIN mapSolarSystem MSS_source");
+            sb.AppendLine("    on mss_source.solarSystemId = MS.solarSystemId");
+            sb.AppendLine("inner join StargateDestination SD");
+            sb.AppendLine("    on SD.stargateID = ms.stargateId");
+            sb.AppendLine("inner join mapSolarSystem MSS");
+            sb.AppendLine("    on MSS.solarSystemID = SD.solarSystemID");
+            sb.AppendLine("inner join SolarSystemName SSN");
+            sb.AppendLine("    on SSN.parentTypeID = MSS.solarSystemID");
+            sb.AppendLine("WHERE MS.solarSystemID = " + solarsystemID.ToString());
 
             return sb.ToString();
         }
@@ -77,7 +78,7 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT en");
-            sb.AppendLine("FROM SolarSystem SS");
+            sb.AppendLine("FROM mapSolarSystem SS");
             sb.AppendLine("INNER JOIN FactionName FN");
             sb.AppendLine("ON FN.parentTypeID = SS.factionID");
             sb.AppendLine("WHERE SS.solarSystemID = " + solarsystemID.ToString());
@@ -116,14 +117,18 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("SELECT");
-            sb.AppendLine("    ss.stationName,");
-            sb.AppendLine("    fact.en");
-            sb.AppendLine("FROM StaStation SS");
-            sb.AppendLine("    Inner join NPCCorporation Corp");
-            sb.AppendLine("        on Corp.npcCorporationID = ss.corporationID");
-            sb.AppendLine("    inner join FactionName Fact");
-            sb.AppendLine("        on Fact.parentTypeId = Corp.factionID");
-            sb.AppendLine("WHERE ss.solarSystemID = " + solarSystemID.ToString());
+            sb.AppendLine("    NPC.celestialIndex || ' - '  || orbitIndex || ' ' || NPCN.en || ' ' || SON.en,");
+            sb.AppendLine("    FN.en");
+            sb.AppendLine("from NPCStation NPC");
+            sb.AppendLine("    inner join NPCCorporationName NPCN");
+            sb.AppendLine("        on NPCN.parentTypeId = NPC.ownerID");
+            sb.AppendLine("    inner join StationOperationName SON");
+            sb.AppendLine("        on SON.parentTypeId = NPC.operationID");
+            sb.AppendLine("    inner join NPCCorporation NPCC");
+            sb.AppendLine("        on NPCC.npcCorporationID = NPC.ownerID");
+            sb.AppendLine("    inner join FactionName FN");
+            sb.AppendLine("        on FN.parentTypeID = NPCC.factionID");
+            sb.AppendLine("WHERE NPC.solarSystemID = " + solarSystemID.ToString());
             return sb.ToString();
         }
 
@@ -132,12 +137,12 @@ namespace EveHelperWF.Database
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("SELECT");
-            sb.AppendLine("    IUN.itemName,");
+            sb.AppendLine("    ssn.en || ' - Planet ' || SSP.celestialIndex ,");
             sb.AppendLine("    ETN.en,");
             sb.AppendLine("    GN.en");
-            sb.AppendLine("FROM SolarSystemPlanet SSP");
-            sb.AppendLine("    INNER JOIN InvUniqueName IUN");
-            sb.AppendLine("        ON IUN.itemID = SSP.planetID");
+            sb.AppendLine("FROM mapPlanet SSP");
+            sb.AppendLine("    inner join SolarSystemName SSN");
+            sb.AppendLine("        on ssn.parentTypeID = ssp.solarSystemID");
             sb.AppendLine("    INNER JOIN EveType ET");
             sb.AppendLine("        ON SSP.typeID = ET.typeID");
             sb.AppendLine("    INNER JOIN EveTypeName ETN");
@@ -183,12 +188,14 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select SS.regionID, SS.constellationID, SS.solarSystemID, SS.solarSystemName, C.constellationName, R.regionName, SS.security");
-            sb.AppendLine("from SolarSystem SS");
-            sb.AppendLine("    inner join Region R");
-            sb.AppendLine("        on R.regionID = SS.regionID");
-            sb.AppendLine("    inner join Constellation C");
-            sb.AppendLine("        on C.constellationID = SS.constellationId");
+            sb.AppendLine("select SS.regionID, SS.constellationID, SS.solarSystemID, SSN.en, C.en, R.en, SS.securityStatus");
+            sb.AppendLine("from mapSolarSystem SS");
+            sb.AppendLine("    inner join SolarSystemName SSN");
+            sb.AppendLine("        on SSN.parentTypeId = SS.solarSystemID");
+            sb.AppendLine("    inner join RegionName R");
+            sb.AppendLine("        on R.parentTypeID = SS.regionID");
+            sb.AppendLine("    inner join ConstellationName C");
+            sb.AppendLine("        on C.parentTypeID = SS.constellationId");
             sb.AppendLine("where SS.solarSystemID in (");
             int count = 0;
             foreach (int solarSystemID in solarSystemIDs)
@@ -272,7 +279,6 @@ namespace EveHelperWF.Database
             sb.AppendLine("            and isInput = 0");
             sb.AppendLine("    inner join EveType ET");
             sb.AppendLine("        on ET.typeID = PST.planetSchematicTypeID");
-            sb.AppendLine("            AND ET.published = 1");
             sb.AppendLine("    inner join EveTypeName ETN");
             sb.AppendLine("        on ETN.parentTypeId = ET.typeID");
             sb.AppendLine("    inner join GroupName GN");
@@ -477,20 +483,22 @@ namespace EveHelperWF.Database
 		    sb.AppendLine("    SS.regionID,");
 		    sb.AppendLine("    SS.constellationID,");
 		    sb.AppendLine("    SS.solarSystemID,");
-		    sb.AppendLine("    SS.solarSystemName,");
-		    sb.AppendLine("    C.constellationName,");
+		    sb.AppendLine("    SSN.en,");
+		    sb.AppendLine("    CN.en,");
 		    sb.AppendLine("    RN.en,");
-		    sb.AppendLine("    round(SS.security, 1)");
+		    sb.AppendLine("    round(SS.securityStatus, 1)");
 	        sb.AppendLine("from mapSolarSystem SS");
-	        sb.AppendLine("    inner join mapRegion R");
+            sb.AppendLine("    inner join SolarSystemName SSN");
+            sb.AppendLine("        on SSN.parentTypeId = SS.solarSystemID");
+            sb.AppendLine("    inner join mapRegion R");
 	        sb.AppendLine("        on R.regionID = SS.regionID");
             sb.AppendLine("    inner join RegionName RN");
-            sb.AppendLine("        on RN.regionID = R.regionID");
+            sb.AppendLine("        on RN.parentTypeID = R.regionID");
             sb.AppendLine("    inner join mapConstellation C");
 	        sb.AppendLine("        on C.constellationID = SS.constellationID");
             sb.AppendLine("    inner join ConstellationName CN");
-            sb.AppendLine("        on Cn.constellationID = C.constellationID");
-            sb.AppendLine("order by SS.solarSystemName");
+            sb.AppendLine("        on Cn.parentTypeID = C.constellationID");
+            sb.AppendLine("order by SSN.en");
 
             return sb.ToString();
         }
@@ -614,11 +622,11 @@ namespace EveHelperWF.Database
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select distinct NPCC.npcCorporationID, IUN.itemName");
+            sb.AppendLine("select distinct NPCC.npcCorporationID, IUN.en");
             sb.AppendLine("from NPCCorpLPOfferTable NPCC");
-            sb.AppendLine("    inner join InvUniqueName IUN");
-            sb.AppendLine("        on IUN.itemID = NPCC.npcCorporationID");
-            sb.AppendLine("order by IUN.itemName");
+            sb.AppendLine("    inner join NPCCorporationName IUN");
+            sb.AppendLine("        on IUN.parentTypeID = NPCC.npcCorporationID");
+            sb.AppendLine("order by IUN.en");
 
             return sb.ToString();
         }
@@ -1167,7 +1175,7 @@ namespace EveHelperWF.Database
             List<PlanetMaterial> planetOutputTypes = new List<PlanetMaterial>();
 
             string dbpath = GetSQLitePath();
-            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            using (var db = new SqliteConnection($"Filename={dbpath}")) 
             {
                 db.Open();
 
@@ -1784,7 +1792,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from SolarSystem SS inner join Region R on R.regionID = SS.regionID where regionName NOT like 'ADR0%'";
+            string queryCommand = "select solarSystemID from mapSolarSystem SS inner join RegionName RN on RN.parentTypeId = SS.regionID where en NOT like 'ADR0%'";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1807,7 +1815,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "SELECT solarSystemID FROM SolarSystemPlanet WHERE typeID = " + planetTypeID.ToString();
+            string queryCommand = "SELECT solarSystemID FROM mapPlanet WHERE typeID = " + planetTypeID.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1833,10 +1841,10 @@ namespace EveHelperWF.Database
             string queryCommand;
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("select solarSystemID from SolarSystem SS");
-            sb.AppendLine("    inner join Region R");
-            sb.AppendLine("        on R.regionId = SS.regionID");
-            sb.AppendLine("where regionName like '%-%'");
+            sb.AppendLine("select solarSystemID from mapSolarSystem SS");
+            sb.AppendLine("    inner join RegionName R");
+            sb.AppendLine("        on R.parentTypeID = SS.regionID");
+            sb.AppendLine("where en like '%-%'");
 
             queryCommand = sb.ToString();
 
@@ -1862,7 +1870,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from SolarSystem where regionID = 10000070";
+            string queryCommand = "select solarSystemID from mapSolarSystem where regionID = 10000070";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1885,7 +1893,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from staStation";
+            string queryCommand = "select solarSystemID from NPCStation";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1908,7 +1916,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from SolarSystem\r\nwhere round(security, 1) >= " + min_security.ToString() + "\r\nand round(security, 1) <= " + max_security.ToString();
+            string queryCommand = "select solarSystemID from mapSolarSystem\r\nwhere round(security, 1) >= " + min_security.ToString() + "\r\nand round(security, 1) <= " + max_security.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1931,7 +1939,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from SolarSystem where regionID = " + regionId.ToString();
+            string queryCommand = "select solarSystemID from mapSolarSystem where regionID = " + regionId.ToString();
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
@@ -1954,7 +1962,7 @@ namespace EveHelperWF.Database
         {
             List<int> solarSystemIDs = new List<int>();
 
-            string queryCommand = "select solarSystemID from SolarSystem where solarSystemName like '%' ||" + systemName + "|| '%'";
+            string queryCommand = "select parentTypeID from SolarSystemName where en like '%' ||" + systemName + "|| '%'";
 
             string dbpath = GetSQLitePath();
             using (var db = new SqliteConnection($"Filename={dbpath}"))
