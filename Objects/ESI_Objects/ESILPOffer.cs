@@ -124,7 +124,14 @@ namespace EveHelperWF.Objects.ESI_Objects
         {
             get
             {
-                return ProfitBuy / lp_cost;
+                if (lp_cost > 0)
+                {
+                    return ProfitBuy / lp_cost;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 
@@ -132,7 +139,14 @@ namespace EveHelperWF.Objects.ESI_Objects
         {
             get
             {
-                return ProfitSell / lp_cost;
+                if (lp_cost > 0)
+                {
+                    return ProfitSell / lp_cost;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 
