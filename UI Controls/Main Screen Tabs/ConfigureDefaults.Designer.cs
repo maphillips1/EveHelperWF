@@ -42,6 +42,8 @@
             label2 = new Label();
             label1 = new Label();
             ManufacturingDefaultsTabPage = new TabPage();
+            MaxManufacturingTimeUpDown = new NumericUpDown();
+            label38 = new Label();
             BuildComponentCheckbox = new CheckBox();
             StructureTERigCombo = new ComboBox();
             StructureMERigCombo = new ComboBox();
@@ -83,6 +85,8 @@
             label28 = new Label();
             label27 = new Label();
             ReactionsDefaultTabPage = new TabPage();
+            MaxReactionTimeUpDown = new NumericUpDown();
+            label39 = new Label();
             label26 = new Label();
             ReactionTaxUpDown = new NumericUpDown();
             ReactionStructureTERig = new ComboBox();
@@ -162,13 +166,14 @@
             AccountingLevelUpDown = new NumericUpDown();
             label16 = new Label();
             label21 = new Label();
-            SaveButton = new Objects.Custom_Controls.EveHelperButton();
+            SaveButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             label37 = new Label();
             label78 = new Label();
             DefaultsTabContainer.SuspendLayout();
             MainDefaultTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
             ManufacturingDefaultsTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxManufacturingTimeUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CompTEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CompMEUpDown).BeginInit();
@@ -180,6 +185,7 @@
             ((System.ComponentModel.ISupportInitialize)DataCore1SkillUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).BeginInit();
             ReactionsDefaultTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxReactionTimeUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).BeginInit();
             CopyPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CopyRunsCopyUpDown).BeginInit();
@@ -358,6 +364,8 @@
             // ManufacturingDefaultsTabPage
             // 
             ManufacturingDefaultsTabPage.BackColor = Color.FromArgb(21, 21, 21);
+            ManufacturingDefaultsTabPage.Controls.Add(MaxManufacturingTimeUpDown);
+            ManufacturingDefaultsTabPage.Controls.Add(label38);
             ManufacturingDefaultsTabPage.Controls.Add(BuildComponentCheckbox);
             ManufacturingDefaultsTabPage.Controls.Add(StructureTERigCombo);
             ManufacturingDefaultsTabPage.Controls.Add(StructureMERigCombo);
@@ -387,6 +395,26 @@
             ManufacturingDefaultsTabPage.Size = new Size(604, 236);
             ManufacturingDefaultsTabPage.TabIndex = 1;
             ManufacturingDefaultsTabPage.Text = "Manufacturing";
+            // 
+            // MaxManufacturingTimeUpDown
+            // 
+            MaxManufacturingTimeUpDown.Location = new Point(429, 183);
+            MaxManufacturingTimeUpDown.Margin = new Padding(2);
+            MaxManufacturingTimeUpDown.Maximum = new decimal(new int[] { 720, 0, 0, 0 });
+            MaxManufacturingTimeUpDown.Name = "MaxManufacturingTimeUpDown";
+            MaxManufacturingTimeUpDown.Size = new Size(126, 23);
+            MaxManufacturingTimeUpDown.TabIndex = 27;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label38.Location = new Point(293, 183);
+            label38.Margin = new Padding(2, 0, 2, 0);
+            label38.Name = "label38";
+            label38.Size = new Size(129, 19);
+            label38.TabIndex = 26;
+            label38.Text = "Max Time (Hours)";
             // 
             // BuildComponentCheckbox
             // 
@@ -835,6 +863,8 @@
             // ReactionsDefaultTabPage
             // 
             ReactionsDefaultTabPage.BackColor = Color.FromArgb(21, 21, 21);
+            ReactionsDefaultTabPage.Controls.Add(MaxReactionTimeUpDown);
+            ReactionsDefaultTabPage.Controls.Add(label39);
             ReactionsDefaultTabPage.Controls.Add(label26);
             ReactionsDefaultTabPage.Controls.Add(ReactionTaxUpDown);
             ReactionsDefaultTabPage.Controls.Add(ReactionStructureTERig);
@@ -851,6 +881,26 @@
             ReactionsDefaultTabPage.Size = new Size(604, 236);
             ReactionsDefaultTabPage.TabIndex = 3;
             ReactionsDefaultTabPage.Text = "Reactions";
+            // 
+            // MaxReactionTimeUpDown
+            // 
+            MaxReactionTimeUpDown.Location = new Point(415, 13);
+            MaxReactionTimeUpDown.Margin = new Padding(2);
+            MaxReactionTimeUpDown.Maximum = new decimal(new int[] { 720, 0, 0, 0 });
+            MaxReactionTimeUpDown.Name = "MaxReactionTimeUpDown";
+            MaxReactionTimeUpDown.Size = new Size(126, 23);
+            MaxReactionTimeUpDown.TabIndex = 41;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            label39.Location = new Point(282, 15);
+            label39.Margin = new Padding(2, 0, 2, 0);
+            label39.Name = "label39";
+            label39.Size = new Size(129, 19);
+            label39.TabIndex = 40;
+            label39.Text = "Max Time (Hours)";
             // 
             // label26
             // 
@@ -1763,6 +1813,14 @@
             // 
             // SaveButton
             // 
+            SaveButton.BorderBottom = false;
+            SaveButton.BorderFull = true;
+            SaveButton.BorderLeft = false;
+            SaveButton.BorderRight = false;
+            SaveButton.BorderTop = false;
+            SaveButton.BorderWidth = 2F;
+            SaveButton.FlatAppearance.BorderSize = 0;
+            SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.ForeColor = Color.FromArgb(234, 234, 234);
             SaveButton.Location = new Point(10, 9);
             SaveButton.Margin = new Padding(3, 2, 3, 2);
@@ -1793,6 +1851,7 @@
             ((System.ComponentModel.ISupportInitialize)RunsUpDown).EndInit();
             ManufacturingDefaultsTabPage.ResumeLayout(false);
             ManufacturingDefaultsTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxManufacturingTimeUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)CompTEUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)CompMEUpDown).EndInit();
@@ -1806,6 +1865,7 @@
             ((System.ComponentModel.ISupportInitialize)InventionTaxUpDown).EndInit();
             ReactionsDefaultTabPage.ResumeLayout(false);
             ReactionsDefaultTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)MaxReactionTimeUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)ReactionTaxUpDown).EndInit();
             CopyPage.ResumeLayout(false);
             CopyPage.PerformLayout();
@@ -1974,5 +2034,9 @@
         private NumericUpDown EncryptionStarshipSkillUpDown;
         private NumericUpDown Datacore2SkillUpDown;
         private NumericUpDown DataCore1SkillUpDown;
+        private NumericUpDown MaxManufacturingTimeUpDown;
+        private Label label38;
+        private NumericUpDown MaxReactionTimeUpDown;
+        private Label label39;
     }
 }

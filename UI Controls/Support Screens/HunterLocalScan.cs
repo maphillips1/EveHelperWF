@@ -154,10 +154,13 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             DataGridViewRow dataGridViewRow;
             ZkillTopLists characterTop;
-            ZkillTopLists shipTop;
+            ZkillTopLists shipTop = null;
             int topShipTypeId;
             InventoryType shipType;
-            shipTop = stats.topLists.Find(x => x.type == "shipType");
+            if (stats.topLists != null)
+            {
+                shipTop = stats.topLists.Find(x => x.type == "shipType");
+            }
             bool recentCovertShip = false;
             string topShip = "";
             bool recentCapital = false;

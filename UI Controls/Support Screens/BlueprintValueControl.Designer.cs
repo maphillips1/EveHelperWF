@@ -35,12 +35,12 @@
             MEUpDown = new NumericUpDown();
             TEUpDown = new NumericUpDown();
             MaxRunsUpDown = new NumericUpDown();
-            SaveButton = new Objects.Custom_Controls.EveHelperButton();
-            CancelButton = new Objects.Custom_Controls.EveHelperButton();
+            SaveButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            CancelButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
-            MakeItemCheckbox = new CheckBox();
             ExcludeFPCheckbox = new CheckBox();
             ExcludeFPLabel = new Label();
+            MakeItemCombo = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxRunsUpDown).BeginInit();
@@ -49,7 +49,7 @@
             // MELabel
             // 
             MELabel.AutoSize = true;
-            MELabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MELabel.Font = new Font("Segoe UI", 12F);
             MELabel.Location = new Point(45, 56);
             MELabel.Name = "MELabel";
             MELabel.Size = new Size(32, 21);
@@ -59,7 +59,7 @@
             // TELabel
             // 
             TELabel.AutoSize = true;
-            TELabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            TELabel.Font = new Font("Segoe UI", 12F);
             TELabel.Location = new Point(45, 95);
             TELabel.Name = "TELabel";
             TELabel.Size = new Size(26, 21);
@@ -69,7 +69,7 @@
             // MaxRunsLabel
             // 
             MaxRunsLabel.AutoSize = true;
-            MaxRunsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MaxRunsLabel.Font = new Font("Segoe UI", 12F);
             MaxRunsLabel.Location = new Point(-1, 23);
             MaxRunsLabel.Name = "MaxRunsLabel";
             MaxRunsLabel.Size = new Size(78, 21);
@@ -106,46 +106,53 @@
             // 
             // SaveButton
             // 
-            SaveButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            SaveButton.ForeColor = Color.Black;
+            SaveButton.BorderBottom = false;
+            SaveButton.BorderFull = true;
+            SaveButton.BorderLeft = false;
+            SaveButton.BorderRight = false;
+            SaveButton.BorderTop = false;
+            SaveButton.BorderWidth = 2F;
+            SaveButton.FlatAppearance.BorderSize = 0;
+            SaveButton.FlatStyle = FlatStyle.Flat;
+            SaveButton.Font = new Font("Segoe UI", 9.75F);
+            SaveButton.ForeColor = Color.FromArgb(234, 234, 234);
             SaveButton.Location = new Point(28, 208);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(75, 23);
             SaveButton.TabIndex = 6;
             SaveButton.Text = "Save";
-            SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.UseVisualStyleBackColor = false;
             SaveButton.Click += SaveButton_Click;
             // 
             // CancelButton
             // 
-            CancelButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            CancelButton.ForeColor = Color.Black;
+            CancelButton.BorderBottom = false;
+            CancelButton.BorderFull = true;
+            CancelButton.BorderLeft = false;
+            CancelButton.BorderRight = false;
+            CancelButton.BorderTop = false;
+            CancelButton.BorderWidth = 2F;
+            CancelButton.FlatAppearance.BorderSize = 0;
+            CancelButton.FlatStyle = FlatStyle.Flat;
+            CancelButton.Font = new Font("Segoe UI", 9.75F);
+            CancelButton.ForeColor = Color.FromArgb(234, 234, 234);
             CancelButton.Location = new Point(137, 208);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 23);
             CancelButton.TabIndex = 7;
             CancelButton.Text = "Cancel";
-            CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.UseVisualStyleBackColor = false;
             CancelButton.Click += CancelButton_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 12F);
             label1.Location = new Point(-1, 134);
             label1.Name = "label1";
             label1.Size = new Size(83, 21);
             label1.TabIndex = 8;
             label1.Text = "Make Item";
-            // 
-            // MakeItemCheckbox
-            // 
-            MakeItemCheckbox.AutoSize = true;
-            MakeItemCheckbox.Location = new Point(88, 138);
-            MakeItemCheckbox.Name = "MakeItemCheckbox";
-            MakeItemCheckbox.Size = new Size(15, 14);
-            MakeItemCheckbox.TabIndex = 9;
-            MakeItemCheckbox.UseVisualStyleBackColor = true;
             // 
             // ExcludeFPCheckbox
             // 
@@ -161,21 +168,29 @@
             // ExcludeFPLabel
             // 
             ExcludeFPLabel.AutoSize = true;
-            ExcludeFPLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            ExcludeFPLabel.Font = new Font("Segoe UI", 12F);
             ExcludeFPLabel.Location = new Point(-1, 167);
             ExcludeFPLabel.Name = "ExcludeFPLabel";
             ExcludeFPLabel.Size = new Size(157, 21);
             ExcludeFPLabel.TabIndex = 10;
             ExcludeFPLabel.Text = "Exclude Final Product";
             // 
+            // MakeItemCombo
+            // 
+            MakeItemCombo.FormattingEnabled = true;
+            MakeItemCombo.Location = new Point(82, 132);
+            MakeItemCombo.Name = "MakeItemCombo";
+            MakeItemCombo.Size = new Size(121, 23);
+            MakeItemCombo.TabIndex = 12;
+            // 
             // BlueprintValueControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(248, 259);
+            Controls.Add(MakeItemCombo);
             Controls.Add(ExcludeFPCheckbox);
             Controls.Add(ExcludeFPLabel);
-            Controls.Add(MakeItemCheckbox);
             Controls.Add(label1);
             Controls.Add(CancelButton);
             Controls.Add(SaveButton);
@@ -209,8 +224,8 @@
         private Objects.Custom_Controls.EveHelperButton SaveButton;
         private Objects.Custom_Controls.EveHelperButton CancelButton;
         private Label label1;
-        public CheckBox MakeItemCheckbox;
         public CheckBox ExcludeFPCheckbox;
         private Label ExcludeFPLabel;
+        public ComboBox MakeItemCombo;
     }
 }

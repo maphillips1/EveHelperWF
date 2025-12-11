@@ -384,8 +384,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         bpInfo.ME = (int)BVC.MEUpDown.Value;
                         bpInfo.TE = (int)BVC.TEUpDown.Value;
                         bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
-                        bpInfo.Manufacture = BVC.MakeItemCheckbox.Checked;
-                        bpInfo.React = BVC.MakeItemCheckbox.Checked;
+                        if ((int)BVC.MakeItemCombo.SelectedValue == 0)
+                        {
+                            bpInfo.Manufacture = false;
+                            bpInfo.React = false;
+                        }
+                        else if((int)BVC.MakeItemCombo.SelectedValue == 1)
+                        {
+                            bpInfo.Manufacture = true;
+                            bpInfo.React = true;
+                        }
                         isLoading = true;
                         e.Node.Nodes.Clear();
                         TreeNode parentNode = e.Node;
@@ -418,10 +426,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = (int)BVC.MEUpDown.Value;
                     bpInfo.TE = (int)BVC.TEUpDown.Value;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
-                    bpInfo.Manufacture = BVC.MakeItemCheckbox.Checked;
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
 
-                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, bpInfo.Manufacture, excludeFP);
+                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -447,7 +454,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     isLoading = true;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
-                    SetAllReactionValues(bpInfo.MaxRuns, BVC.MakeItemCheckbox.Checked, excludeFP);
+                    SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -1000,13 +1007,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (FinalProductType != null)
             {
-                ProductLabel.Text = FinalProductType.typeName;
+                ProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 NotesTextBox.Text = this.currentBuildPlan.BuildPlanNotes;
                 DetailsProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 RunsPerCopyUpDown.Value = this.currentBuildPlan.RunsPerCopy;
                 NumberCopiesUpDown.Value = this.currentBuildPlan.NumOfCopies;
                 AdditionalCostsNumeric.Value = this.currentBuildPlan.additionalCosts;
-                OutcomeQuantityLabel.Text = this.currentBuildPlan.TotalOutcome.ToString("N0");
             }
         }
 
@@ -1157,6 +1163,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             calculationHelperClass.CompTE = (int)defaultFormValues.CompTEValue;
             calculationHelperClass.ManufacturingStructureRigBonus.RigMEBonus = defaultFormValues.ManufacturingStructureMERigValue;
             calculationHelperClass.ManufacturingStructureRigBonus.RigTEBonus = defaultFormValues.ManufacturingStructureTERigValue;
+            calculationHelperClass.MaxManufacturingTime = defaultFormValues.MaxManufacturingTime;
 
             //Reactions Values
             calculationHelperClass.ReactionSolarSystemID = defaultFormValues.ReactionsSystemValue;
@@ -1165,6 +1172,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             calculationHelperClass.ReactionStructureRigBonus = new StructureRigBonus();
             calculationHelperClass.ReactionStructureRigBonus.RigMEBonus = defaultFormValues.ReactionStructureMERigValue;
             calculationHelperClass.ReactionStructureRigBonus.RigTEBonus = defaultFormValues.ReactionStructureTERigValue;
+            calculationHelperClass.MaxReactionTime = defaultFormValues.MaxReactionTime;
 
             //Invention Values
             calculationHelperClass.InventBlueprint = defaultFormValues.InventBlueprintValue;
@@ -1237,7 +1245,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             TotalManufacturingSlotsLabel.Text = string.Empty;
             TotalReactionSlotsLabel.Text = string.Empty;
             MaterialsPriceTreeView.Nodes.Clear();
-            OutcomeQuantityLabel.Text = "";
             ProductionCostUnitLabel.Text = "";
             InputVolumeLabel.Text = "";
             OutcomeVolumeLabel.Text = "";
@@ -1296,6 +1303,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.ManufacturingStructureTERigCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus;
                 this.ManufacturingTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.ManufacturingFacilityTax;
                 this.ImplantCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID;
+                this.MaxManufacturingTimeUpDown.Value = this.currentBuildPlan.IndustrySettings.MaxManufacturingTime;
 
                 //Reactions
                 this.ReactionSolarSystemCombo.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID;
@@ -1303,6 +1311,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.ReactionTaxUpDown.Value = this.currentBuildPlan.IndustrySettings.ReactionsFacilityTax;
                 this.ReactionStructureMERig.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigMEBonus;
                 this.ReactionStructureTERig.SelectedValue = this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus;
+                this.MaxReactionTimeUpDown.Value = this.currentBuildPlan.IndustrySettings.MaxReactionTime;
 
                 //Skills
                 this.AccountingLevelUpDown.Value = this.currentBuildPlan.IndustrySettings.AccountingSkill;
@@ -1335,7 +1344,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus = (Int32)(this.ManufacturingStructureTERigCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ManufacturingStructureRigBonus.RigTEBonus);
                     this.currentBuildPlan.IndustrySettings.ManufacturingFacilityTax = (decimal)(this.ManufacturingTaxUpDown.Value);
                     this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID = (Int32)(this.ImplantCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ManufacturingImplantTypeID);
-
+                    this.currentBuildPlan.IndustrySettings.MaxManufacturingTime = (Int32)(this.MaxManufacturingTimeUpDown.Value);
                     break;
                 case 1:
                     this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID = (Int32)(this.ReactionSolarSystemCombo.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID);
@@ -1343,7 +1352,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.IndustrySettings.ReactionsFacilityTax = (decimal)this.ReactionTaxUpDown.Value;
                     this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigMEBonus = (Int32)(this.ReactionStructureMERig.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigMEBonus);
                     this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus = (Int32)(this.ReactionStructureTERig.SelectedValue ?? this.currentBuildPlan.IndustrySettings.ReactionStructureRigBonus.RigTEBonus);
-
+                    this.currentBuildPlan.IndustrySettings.MaxReactionTime = (Int32)(this.MaxReactionTimeUpDown.Value);
                     break;
                 case 2:
                     this.currentBuildPlan.IndustrySettings.AccountingSkill = (Int32)(this.AccountingLevelUpDown.Value);
@@ -1487,7 +1496,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null)
             {
-                OutcomeQuantityLabel.Text = this.currentBuildPlan.TotalOutcome.ToString("N0");
                 decimal finalVolume = this.currentBuildPlan.TotalOutcome * FinalProductType.volume;
                 OutcomeVolumeLabel.Text = finalVolume.ToString("N2");
                 OptimizedBuild optimumBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == FinalProductType.typeId);
@@ -2061,7 +2069,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllBlueprintValues(int me, int te, int maxRuns, bool makeItem, bool excludeFP)
+        private void SetAllBlueprintValues(int me, int te, int maxRuns, int makeItemSelection, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
@@ -2075,12 +2083,19 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = me;
                     bpInfo.TE = te;
                     bpInfo.MaxRuns = maxRuns;
-                    bpInfo.Manufacture = makeItem;
+                    if (makeItemSelection == 0)
+                    {
+                        bpInfo.Manufacture = false;
+                    }
+                    else if (makeItemSelection == 1)
+                    {
+                        bpInfo.Manufacture = true;
+                    }
                 }
             }
         }
 
-        private void SetAllReactionValues(int maxRuns, bool makeItem, bool excludeFP)
+        private void SetAllReactionValues(int maxRuns, int makeItemSelection, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
@@ -2092,7 +2107,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == bpInfo.ProductTypeId).pricePer = 0;
                     bpInfo.MaxRuns = maxRuns;
-                    bpInfo.React = makeItem;
+                    if (makeItemSelection == 0)
+                    {
+                        bpInfo.React = false;
+                    }
+                    else if (makeItemSelection == 1)
+                    {
+                        bpInfo.React = true;
+                    }
                 }
             }
         }
