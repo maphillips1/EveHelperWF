@@ -109,6 +109,9 @@ namespace EveHelperWF.Objects
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool TaxOutputs { get; set; }
+
+        public int MaxManufacturingTime { get; set; }
+        public int MaxReactionTime { get; set; }
     }
 
     public class StructureRigBonus

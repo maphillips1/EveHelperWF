@@ -766,8 +766,28 @@ namespace EveHelperWF.ScreenHelper
 
             IndustryActivityTypes manuActivity = activities.Find(x => x.activityName == activityName);
 
+
             long timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, manuActivity.time, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted);
+            //days * hours * minutes * seconds;
             long maxTime = (30 * 24 * 60 * 60);
+            //If Max Manufactuting/reaction time is set, use that as the max instead.
+            if (!isFinalProduct)
+            {
+                if (bpInfo.IsManufactured)
+                {
+                    if (buildPlan.IndustrySettings.MaxManufacturingTime > 0)
+                    {
+                        maxTime = buildPlan.IndustrySettings.MaxManufacturingTime * 3600;
+                    }
+                }
+                else
+                {
+                    if (buildPlan.IndustrySettings.MaxReactionTime > 0)
+                    {
+                        maxTime = buildPlan.IndustrySettings.MaxReactionTime * 3600;
+                    }
+                }
+            }
             long totalTime = manuActivity.time * optimizedBuild.RunsNeeded;
             totalTime = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, totalTime, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted);
             int batchesNeeded;

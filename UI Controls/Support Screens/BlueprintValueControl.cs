@@ -17,6 +17,14 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void LoadControl()
         {
+            List<ComboListItem> list = new List<ComboListItem>();
+            list.Add(new ComboListItem() { key = 2, value = "Don't Change" });
+            list.Add(new ComboListItem() { key = 0, value = "No" });
+            list.Add(new ComboListItem() { key = 1, value = "Yes" });
+            MakeItemCombo.DataSource = list;
+            MakeItemCombo.DisplayMember = "Value";
+            MakeItemCombo.ValueMember = "Key";
+            MakeItemCombo.SelectedValue = 2;
             if (this.BPInfo.IsReacted)
             {
                 MELabel.Visible = false;
@@ -28,7 +36,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             MEUpDown.Value = BPInfo.ME;
             TEUpDown.Value = BPInfo.TE;
             MaxRunsUpDown.Value = BPInfo.MaxRuns;
-            MakeItemCheckbox.Checked = BPInfo.Manufacture || BPInfo.React;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

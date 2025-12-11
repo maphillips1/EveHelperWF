@@ -208,6 +208,8 @@ namespace EveHelperWF
             StringBuilder sb = new StringBuilder();
             string level = PlanetSchematicsHelper.GetLevelFromGroupName(type.groupName);
             sb.AppendLine(level + " - " + type.typeName);
+            decimal volumeTotal = type.volume * type.quantity;
+            sb.AppendLine(" Quantity: " + type.quantity.ToString("N0") + " Volume: " + volumeTotal.ToString("N2") + "m3");
 
             outputTextBox.Text = sb.ToString();
             //outputTextBox.Multiline = true;

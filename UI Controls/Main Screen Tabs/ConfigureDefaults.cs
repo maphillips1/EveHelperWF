@@ -205,6 +205,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 BuildComponentCheckbox.Checked = DefaultFormValues.BuildComponentsValue;
                 CompMEUpDown.Value = DefaultFormValues.CompMEValue;
                 CompTEUpDown.Value = DefaultFormValues.CompTEValue;
+                MaxManufacturingTimeUpDown.Value = DefaultFormValues.MaxManufacturingTime;
 
                 //Invention
                 InventionSolarSystemCombo.SelectedValue = DefaultFormValues.InventionSystemValue;
@@ -220,6 +221,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 ReactionStructureMERig.SelectedValue = DefaultFormValues.ReactionStructureMERigValue;
                 ReactionStructureTERig.SelectedValue = DefaultFormValues.ReactionStructureTERigValue;
                 ReactionTaxUpDown.Value = DefaultFormValues.ReactionTaxValue;
+                MaxReactionTimeUpDown.Value = DefaultFormValues.MaxReactionTime;
 
                 //Copy
                 if (DefaultFormValues.CopyNumCopies > 0)
@@ -314,6 +316,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.BuildComponentsValue = BuildComponentCheckbox.Checked;
             DefaultFormValues.CompMEValue = Convert.ToInt32(CompMEUpDown.Value);
             DefaultFormValues.CompTEValue = Convert.ToInt32(CompTEUpDown.Value);
+            DefaultFormValues.MaxManufacturingTime = Convert.ToInt32(MaxManufacturingTimeUpDown.Value);
 
             //Invention
             DefaultFormValues.InventionSystemValue = Convert.ToInt32(InventionSolarSystemCombo.SelectedValue);
@@ -329,6 +332,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             DefaultFormValues.ReactionStructureMERigValue = Convert.ToInt32(ReactionStructureMERig.SelectedValue);
             DefaultFormValues.ReactionStructureTERigValue = Convert.ToInt32(ReactionStructureTERig.SelectedValue);
             DefaultFormValues.ReactionTaxValue = Convert.ToDecimal(ReactionTaxUpDown.Value);
+            DefaultFormValues.MaxReactionTime = Convert.ToInt32(MaxReactionTimeUpDown.Value);
 
             //Copy
             DefaultFormValues.CopyNumCopies = Convert.ToInt32(CopyNumCopiesUpDown.Value);
