@@ -395,8 +395,11 @@ namespace EveHelperWF.ESI_Calls
 
         public async static Task<ESIMarketType> GetSellOrderPriceForQuantityAsync(ESIMarketType marketType, long region_id)
         {
+            marketType.pricePer = 0;
+            marketType.priceTotal = 0;
             List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetSellOrderAsync(marketType.typeID, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
             Debug.WriteLine("Sell order list count for " + marketType.typeID.ToString() + " is " + orders?.Count().ToString());
+            
             if (orders != null && orders.Count > 0)
             {
                 //order by price low to High
@@ -441,6 +444,8 @@ namespace EveHelperWF.ESI_Calls
 
         public async static Task<ESIMarketType> GetBuyOrderPriceForQuantityAsync(ESIMarketType marketType, long region_id)
         {
+            marketType.pricePer = 0;
+            marketType.priceTotal = 0;
             List<Objects.MarketOrder> orders = await ESI_Calls.ESIMarketData.GetBuyOrderAsync(marketType.typeID, Enums.Enums.TheForgeRegionId).ConfigureAwait(false);
 
             if (orders != null && orders.Count > 0)

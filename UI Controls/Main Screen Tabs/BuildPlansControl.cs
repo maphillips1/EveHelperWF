@@ -33,7 +33,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private bool isLoading = false;
         private OptimizedBuildDetailsControl DetailsControl;
         private bool PriceInfoSet = true;
-        private List<PlanetMaterial> UniquePlanetMaterials;
         private decimal FinalProductSellOrderPrice;
         private decimal FinalProductBuyOrderPrice;
         private bool IgnoreTextChangedEvent;
@@ -54,6 +53,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadControl();
             ShowHideTabPage((int)TabPages.Summary);
             isLoading = false;
+            BuildPlanDetailsControl.ClearCompletedButton.Click += BuildPlannDetailsControl_ClearCompletedBuilds_Click;
+            BuildPlanDetailsControl.OptimizedBuildTreeView.AfterCheck += BuildPLansDetailsControl_OptimizedBuildTreeView_AfterCheck;
         }
 
         public BuildPlansControl(BuildPlan buildPlan)
@@ -232,42 +233,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void CollapseAll_Click(object sender, EventArgs e)
-        {
-            MaterialsTreeView.CollapseAll();
-        }
-
-        private void OptimizedBuildTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            if (e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
-            {
-                int optimizedTypeId = Convert.ToInt32(e.Node.Tag);
-                if (optimizedTypeId > 0)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    if (!PriceInfoSet)
-                    {
-                        int waitCount = 0;
-                        while (!PriceInfoSet && waitCount < 10)
-                        {
-                            //wait until price info is set
-                            Thread.Sleep(500);
-                            waitCount++;
-                        }
-                    }
-                    OptimizedBuild optimizedBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == optimizedTypeId);
-                    if (optimizedBuild != null)
-                    {
-                        DetailsControl = new OptimizedBuildDetailsControl(optimizedBuild);
-                        DetailsControl.ShowDialog();
-                    }
-                    this.Cursor = Cursors.Default;
-                    OptimizedBuildTreeView.SelectedNode = null;
-                }
-            }
-        }
-
-        private void OptimizedBuildTreeView_AfterCheck(object sender, TreeViewEventArgs e)
+        private void BuildPLansDetailsControl_OptimizedBuildTreeView_AfterCheck(object? sender, TreeViewEventArgs e)
         {
             if (e.Node.Tag != null && e.Action != TreeViewAction.Unknown)
             {
@@ -289,6 +255,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         }
                     }
                 }
+                BuildPlanDetailsControl.UpdateCompletedBuildsList(this.currentBuildPlan.completedBuilds);
             }
         }
 
@@ -706,57 +673,26 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void ExportBuildListButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                DialogResult result = SaveFileDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    try
-                    {
-                        string fileName = SaveFileDialog.FileName;
-                        string pathEx = Path.GetExtension(fileName);
-                        if (pathEx.ToLowerInvariant().Replace(".", "") == "csv")
-                        {
-                            StringBuilder sb = new StringBuilder();
-                            if (this.currentBuildPlan != null && this.currentBuildPlan.OptimumBuildGroups != null && this.currentBuildPlan.OptimumBuildGroups.Count > 0)
-                            {
-                                List<int> orderedKeys = this.currentBuildPlan.OptimumBuildGroups.Keys.OrderBy(x => x).ToList();
-                                foreach (int key in orderedKeys)
-                                {
-                                    sb.AppendLine("Build Group: " + key.ToString());
-                                    sb.AppendLine("Material Name, Quantity Needed, Runs Needed, Is Complete");
-
-                                    foreach (OptimizedBuild build in this.currentBuildPlan.OptimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
-                                    {
-                                        sb.AppendLine(build.BuiltOrReactedName + "," + build.TotalQuantityNeeded + "," + build.RunsNeeded + ", False");
-                                    }
-                                    sb.AppendLine("");
-                                }
-                            }
-                            FileHelper.SaveFileContent(fileName, sb.ToString());
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error: Invalid File Type. Expected CSV, Got " + pathEx);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error ocurred during export: " + ex.Message);
-                    }
-                }
-            }
-
-        }
-
         private void MostProfitableButton_Click(object sender, EventArgs e)
         {
             if (!this.isLoading && this.currentBuildPlan != null)
             {
                 DetermineMostProfitableBuild();
+            }
+        }
+
+        private void BuildPlannDetailsControl_ClearCompletedBuilds_Click(object? sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                this.currentBuildPlan.completedBuilds?.Clear();
+                BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
+                                   this.currentBuildPlan.InputMaterials,
+                                   this.currentBuildPlan.BlueprintStore,
+                                   this.currentBuildPlan.OptimumBuildGroups,
+                                   this.currentBuildPlan.completedBuilds,
+                                   FinalProductType.typeName,
+                                   this.currentBuildPlan.TotalOutcome);
             }
         }
         #endregion
@@ -1009,7 +945,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 ProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 NotesTextBox.Text = this.currentBuildPlan.BuildPlanNotes;
-                DetailsProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 RunsPerCopyUpDown.Value = this.currentBuildPlan.RunsPerCopy;
                 NumberCopiesUpDown.Value = this.currentBuildPlan.NumOfCopies;
                 AdditionalCostsNumeric.Value = this.currentBuildPlan.additionalCosts;
@@ -1239,19 +1174,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             JitaSellLabel.Text = string.Empty;
             FinalProductImagePanel.BackgroundImage = null;
             AdditionalCostsNumeric.Value = AdditionalCostsNumeric.Minimum;
-            MaterialsTreeView.Nodes.Clear();
             MostExpensiveGridView.DataSource = null;
-            OptimizedBuildTreeView.Nodes.Clear();
-            TotalManufacturingSlotsLabel.Text = string.Empty;
-            TotalReactionSlotsLabel.Text = string.Empty;
             MaterialsPriceTreeView.Nodes.Clear();
             ProductionCostUnitLabel.Text = "";
             InputVolumeLabel.Text = "";
             OutcomeVolumeLabel.Text = "";
-            DetailsProductLabel.Text = "";
-            DetailsImagePanel.BackgroundImage = null;
             HeaderCostUnitLabel.Text = "";
-            PlanetMaterialsTreeView.Nodes.Clear();
             BPTreeView.Nodes.Clear();
             IskNeededForPlanLabel.Text = "";
             FinalSellPriceNumeric.Value = FinalSellPriceNumeric.Minimum;
@@ -1264,6 +1192,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             ReactionSCILabel.Text = "";
             CostBreakdownTextBox.Text = "";
             CurrentInventoryGrid.DataSource = null;
+
+            BuildPlanDetailsControl.ResetControls();
+            BuildPlanPlanetMaterialsControl.ResetControl();
         }
 
         private void CopyInputsToClipboard()
@@ -1374,121 +1305,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     break;
                 default:
                     break;
-            }
-        }
-
-        private void LoadDetailsPage(bool fromBuildReactAllChecked)
-        {
-            DetailsPage.SuspendLayout();
-            if (this.currentBuildPlan != null)
-            {
-                if (this.currentBuildPlan.InputMaterials != null && this.currentBuildPlan.InputMaterials.Count > 0)
-                {
-                    BuildIndustryTreeView();
-                }
-            }
-            DetailsPage.ResumeLayout();
-        }
-
-        private void BuildIndustryTreeView()
-        {
-            BuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
-            MaterialsTreeView.Nodes.Clear();
-            MaterialsTreeView.Nodes.AddRange(AddMaterialsToTreeView(this.currentBuildPlan.InputMaterials).ToArray());
-        }
-
-        private List<TreeNode> AddMaterialsToTreeView(List<MaterialsWithMarketData> materialsToBind)
-        {
-            List<TreeNode> nodes = new List<TreeNode>();
-            List<MaterialsWithMarketData> orderedList;
-            TreeNode node;
-            StringBuilder sb = new StringBuilder();
-
-            foreach (MaterialsWithMarketData inputMaterial in materialsToBind)
-            {
-                sb = new StringBuilder();
-
-                node = new TreeNode();
-                node.Tag = inputMaterial.controlName;
-
-                sb.Append("  " + inputMaterial.quantityTotal.ToString("N0") + " x " + inputMaterial.materialName);
-
-                if (inputMaterial.Buildable || inputMaterial.Reactable)
-                {
-                    BlueprintInfo bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.ProductTypeId == inputMaterial.materialTypeID);
-                    if (bpInfo != null)
-                    {
-                        if (bpInfo.Manufacture || bpInfo.React)
-                        {
-                            node.Expand();
-                            if (inputMaterial.ChildMaterials.Count > 0)
-                            {
-                                sb.Append(" | Runs Needed: " + inputMaterial.RunsNeeded.ToString("N0"));
-                                node.Nodes.AddRange(AddMaterialsToTreeView(inputMaterial.ChildMaterials).ToArray());
-                            }
-                        }
-                    }
-                }
-                node.Text = sb.ToString();
-                node.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(inputMaterial);
-
-                nodes.Add(node);
-            }
-            return nodes;
-        }
-
-        private void LoadOptimumBuildSchedule()
-        {
-            Dictionary<int, List<OptimizedBuild>> optimumBuildGroups = this.currentBuildPlan.OptimumBuildGroups;
-            BuildOptimumBuildTreeView(optimumBuildGroups);
-            int manufacturingCount = this.currentBuildPlan.OptimizedBuilds.FindAll(x => x.isBuilt).Sum(x => x.BatchesNeeded);
-            int reactionCount = this.currentBuildPlan.OptimizedBuilds.FindAll(x => x.isReacted).Sum(x => x.BatchesNeeded);
-            TotalManufacturingSlotsLabel.Text = manufacturingCount.ToString("N0");
-            TotalReactionSlotsLabel.Text = reactionCount.ToString("N0");
-        }
-
-        private void BuildOptimumBuildTreeView(Dictionary<int, List<OptimizedBuild>> optimumBuildGroups)
-        {
-            OptimizedBuildTreeView.Nodes.Clear();
-            if (optimumBuildGroups != null)
-            {
-                TreeNode keyNode;
-                TreeNode treeNode;
-                foreach (int key in optimumBuildGroups.Keys)
-                {
-                    keyNode = new TreeNode();
-                    keyNode.Text = "Build Group " + key.ToString();
-
-                    foreach (OptimizedBuild build in optimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
-                    {
-                        treeNode = new TreeNode();
-                        treeNode.Text = build.TotalQuantityNeeded.ToString("N0") + " x " + build.BuiltOrReactedName + " | Runs Needed: " + build.RunsNeeded;
-                        treeNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(build);
-                        treeNode.Tag = build.BuiltOrReactedTypeId;
-                        treeNode.Checked = this.currentBuildPlan.completedBuilds.Contains(build.BuiltOrReactedTypeId);
-                        if (build.BatchesNeeded > 1)
-                        {
-                            treeNode.Text += " | Max Runs/Batch " + build.MaxRunsPerBatch + " | Batches Needed | " + build.BatchesNeeded;
-                        }
-
-                        AddTreeNodesForInputMats(build.InputMaterials, ref treeNode);
-                        keyNode.Nodes.Add(treeNode);
-                    }
-                    OptimizedBuildTreeView.Nodes.Add(keyNode);
-                }
-            }
-        }
-
-        private void AddTreeNodesForInputMats(List<MaterialsWithMarketData> inputMats, ref TreeNode parentTreeNode)
-        {
-            TreeNode treeNode;
-            List<MaterialsWithMarketData> orderedMats = inputMats.OrderBy(x => x.materialName).ToList();
-            foreach (MaterialsWithMarketData mat in orderedMats)
-            {
-                treeNode = new TreeNode();
-                treeNode.Text = "  " + mat.quantityTotal.ToString("N0") + " x " + mat.materialName;
-                treeNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                parentTreeNode.Nodes.Add(treeNode);
             }
         }
 
@@ -1800,50 +1616,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadPlanetaryMaterialsPage()
         {
-            PlanetMaterialsTreeView.Nodes.Clear();
-            LoadUniquePlanetMaterials();
-            if (UniquePlanetMaterials?.Count > 0)
-            {
-                LoadPlanetaryTreeView();
-            }
+            BuildPlanPlanetMaterialsControl.LoadPlanetMaterialsControl(this.currentBuildPlan.CurrentInventory, this._CombinedMats);
         }
 
         private void LoadCurrentInventoryPage()
         {
             CurrentInventoryGrid.DatabindGridView(this.currentBuildPlan.CurrentInventory);
-        }
-
-        private void LoadUniquePlanetMaterials()
-        {
-            UniquePlanetMaterials = new List<PlanetMaterial>();
-            InventoryType invType;
-            PlanetMaterial existingMat;
-            foreach (MaterialsWithMarketData mat in _CombinedMats)
-            {
-                invType = CommonHelper.InventoryTypes.Find(x => x.typeId == mat.materialTypeID);
-                switch (invType.categoryID)
-                {
-                    case (int)Enums.Enums.InvTypeCategory.PlanetResource:
-                    case (int)Enums.Enums.InvTypeCategory.PlanetIndustry:
-                    case (int)Enums.Enums.InvTypeCategory.PlanetCommodity:
-                        existingMat = UniquePlanetMaterials.Find(x => x.typeID == mat.materialTypeID);
-                        if (existingMat != null)
-                        {
-                            existingMat.quantity += (int)mat.quantityTotal;
-                        }
-                        else
-                        {
-                            existingMat = new PlanetMaterial();
-                            existingMat.typeID = mat.materialTypeID;
-                            existingMat.typeName = mat.materialName;
-                            existingMat.quantity = (int)mat.quantityTotal;
-                            existingMat.groupName = invType.groupName;
-                            existingMat.groupID = invType.groupId;
-                            UniquePlanetMaterials.Add(existingMat);
-                        }
-                        break;
-                }
-            }
         }
 
         private void LoadUIAfterCalcs()
@@ -1854,126 +1632,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadFinalProductMarketInfo();
             LoadMaterialsPriceTreeView();
             LoadMostExpensiveGridView();
-            LoadDetailsPage(false);
-            LoadOptimumBuildSchedule();
+
+            //Build Details Load
+            BuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
+            BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
+                               this.currentBuildPlan.InputMaterials,
+                               this.currentBuildPlan.BlueprintStore,
+                               this.currentBuildPlan.OptimumBuildGroups,
+                               this.currentBuildPlan.completedBuilds,
+                               FinalProductType.typeName,
+                               this.currentBuildPlan.TotalOutcome);
+
             SetSummaryInformation();
             LoadPlanetaryMaterialsPage();
             LoadCurrentInventoryPage();
-        }
-
-        private void LoadPlanetaryTreeView()
-        {
-            PlanetMaterialsTreeView.Nodes.Clear();
-            PlanetMatsTotalTreeview.Nodes.Clear();
-
-            UniquePlanetMaterials = UniquePlanetMaterials.OrderBy(x => x.typeName).ToList();
-
-            TreeNode tn;
-            List<PlanetMaterial> totalMats = new List<PlanetMaterial>();
-            foreach (PlanetMaterial planetMaterial in UniquePlanetMaterials)
-            {
-                PlanetSchematicsHelper.GetInputsForSchematicRecurseive(planetMaterial);
-                tn = BuildTreeViewForPIMatRecursive(planetMaterial);
-                PlanetMaterialsTreeView.Nodes.Add(tn);
-                AddTotalPlanetMats(planetMaterial, ref totalMats);
-            }
-
-            TreeNode P0_Node = new TreeNode();
-            P0_Node.Text = "P0";
-            TreeNode P1_Node = new TreeNode();
-            P1_Node.Text = "P1";
-            TreeNode P2_Node = new TreeNode();
-            P2_Node.Text = "P2";
-            TreeNode P3_Node = new TreeNode();
-            P3_Node.Text = "P3";
-            TreeNode P4_Node = new TreeNode();
-            P4_Node.Text = "P4";
-            if (totalMats.Count > 0)
-            {
-                totalMats = totalMats.OrderBy(x => x.typeName).ToList();
-                foreach (PlanetMaterial material in totalMats)
-                {
-                    tn = BuildTreeViewForPI(material);
-
-                    switch (material.groupID)
-                    {
-                        case 1042: //Basic Commodities
-                            P1_Node.Nodes.Add(tn);
-                            break;
-                        case 1034: //Refined Commodities
-                            P2_Node.Nodes.Add(tn);
-                            break;
-                        case 1040: //Specialized Commodities
-                            P3_Node.Nodes.Add(tn);
-                            break;
-                        case 1041: //Advanced Commodities
-                            P4_Node.Nodes.Add(tn);
-                            break;
-                        default:
-                            P0_Node.Nodes.Add(tn);
-                            break;
-                    }
-                }
-                PlanetMatsTotalTreeview.Nodes.Add(P4_Node);
-                PlanetMatsTotalTreeview.Nodes.Add(P3_Node);
-                PlanetMatsTotalTreeview.Nodes.Add(P2_Node);
-                PlanetMatsTotalTreeview.Nodes.Add(P1_Node);
-                PlanetMatsTotalTreeview.Nodes.Add(P0_Node);
-            }
-        }
-
-        private void AddTotalPlanetMats(PlanetMaterial input, ref List<PlanetMaterial> totals)
-        {
-            if (totals.Find(x => x.typeID == input.typeID) == null)
-            {
-                totals.Add(input);
-            }
-            else
-            {
-                totals.Find(x => x.typeID == input.typeID).quantity += input.quantity;
-            }
-            if (input.Inputs.Count > 0)
-            {
-                foreach (PlanetMaterial child in input.Inputs)
-                {
-                    AddTotalPlanetMats(child, ref totals);
-                }
-            }
-        }
-
-        private TreeNode BuildTreeViewForPIMatRecursive(PlanetMaterial planetMaterial)
-        {
-            TreeNode treeNode = new TreeNode();
-
-            treeNode.Text = planetMaterial.typeName;
-            if (planetMaterial.quantity > 0)
-            {
-                treeNode.Text += " x " + planetMaterial.quantity.ToString("N0");
-            }
-
-            if (planetMaterial.Inputs != null && planetMaterial.Inputs.Count > 0)
-            {
-                foreach (PlanetMaterial piInput in planetMaterial.Inputs)
-                {
-                    treeNode.Nodes.Add(BuildTreeViewForPIMatRecursive(piInput));
-                }
-            }
-
-            return treeNode;
-        }
-
-        private TreeNode BuildTreeViewForPI(PlanetMaterial planetMaterial)
-        {
-            TreeNode treeNode = new TreeNode();
-
-            treeNode.Text = planetMaterial.typeName;
-            if (planetMaterial.quantity > 0)
-            {
-                treeNode.Text += " x " + planetMaterial.quantity.ToString("N0");
-            }
-
-
-            return treeNode;
         }
 
         private void LoadBlueprintStoreTreeView()
@@ -2267,13 +1939,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     MemoryStream memstream = new MemoryStream();
                     memstream.Write(productImage, 0, productImage.Length);
                     FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
-                    DetailsImagePanel.BackgroundImage = Image.FromStream(memstream);
+                    BuildPlanDetailsControl.LoadImage( Image.FromStream(memstream));
                     imageSet = true;
                 }
                 if (!imageSet)
                 {
                     FinalProductImagePanel.BackgroundImage = null;
-                    DetailsImagePanel.BackgroundImage = null;
+                    BuildPlanDetailsControl.LoadImage(null);
                 }
             }
         }
@@ -2456,14 +2128,5 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         #endregion
-
-        private void ClearCompletedButton_Click(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null)
-            {
-                this.currentBuildPlan.completedBuilds.Clear();
-                LoadOptimumBuildSchedule();
-            }
-        }
     }
 }

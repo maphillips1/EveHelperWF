@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
-            BlueprintBrowserButton = new Objects.Custom_Controls.EveHelperButton();
-            PlanetPlannerButton = new Objects.Custom_Controls.EveHelperButton();
-            LootAppraisalButton = new Objects.Custom_Controls.EveHelperButton();
-            SystemFinderButton = new Objects.Custom_Controls.EveHelperButton();
-            DefaultsButtonClick = new Objects.Custom_Controls.EveHelperButton();
-            MarketBrowserButton = new Objects.Custom_Controls.EveHelperButton();
-            AbyssTrackerButton = new Objects.Custom_Controls.EveHelperButton();
-            PriceHistoryButton = new Objects.Custom_Controls.EveHelperButton();
+            BlueprintBrowserButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            PlanetPlannerButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            LootAppraisalButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            SystemFinderButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            DefaultsButtonClick = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            MarketBrowserButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            AbyssTrackerButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            PriceHistoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             MainMenuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             backupFilesToolStripMenuItem = new ToolStripMenuItem();
@@ -46,15 +46,14 @@
             FreyaLinkLabel = new LinkLabel();
             label10 = new Label();
             InitLongLoadingWorker = new System.ComponentModel.BackgroundWorker();
-            ShoppingListButton = new Objects.Custom_Controls.EveHelperButton();
-            BuildPlansButton = new Objects.Custom_Controls.EveHelperButton();
+            ShoppingListButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            BuildPlansButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             UpdateWorker = new System.ComponentModel.BackgroundWorker();
             CheckInternetBGWorker = new System.ComponentModel.BackgroundWorker();
             DocumentationLabel = new LinkLabel();
-            LPOfferButton = new Objects.Custom_Controls.EveHelperButton();
-            linkLabel1 = new LinkLabel();
-            HunterIntelButton = new Objects.Custom_Controls.EveHelperButton();
-            QueryDatabaseButton = new Objects.Custom_Controls.EveHelperButton();
+            LPOfferButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            HunterIntelButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            QueryDatabaseButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             MainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -445,19 +444,6 @@
             LPOfferButton.UseVisualStyleBackColor = false;
             LPOfferButton.Click += LPOfferButton_Click;
             // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            linkLabel1.LinkColor = Color.FromArgb(128, 255, 255);
-            linkLabel1.Location = new Point(10, 475);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(175, 20);
-            linkLabel1.TabIndex = 28;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Reset Theme to Default";
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
-            // 
             // HunterIntelButton
             // 
             HunterIntelButton.BorderBottom = true;
@@ -516,7 +502,6 @@
             ClientSize = new Size(397, 527);
             Controls.Add(QueryDatabaseButton);
             Controls.Add(HunterIntelButton);
-            Controls.Add(linkLabel1);
             Controls.Add(LPOfferButton);
             Controls.Add(DocumentationLabel);
             Controls.Add(BuildPlansButton);
@@ -571,7 +556,6 @@
         private System.ComponentModel.BackgroundWorker CheckInternetBGWorker;
         private LinkLabel DocumentationLabel;
         private Objects.Custom_Controls.EveHelperButton LPOfferButton;
-        private LinkLabel linkLabel1;
         private Objects.Custom_Controls.EveHelperButton HunterIntelButton;
         private Objects.Custom_Controls.EveHelperButton QueryDatabaseButton;
     }

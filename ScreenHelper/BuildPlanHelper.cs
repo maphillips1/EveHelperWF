@@ -1073,7 +1073,7 @@ namespace EveHelperWF.ScreenHelper
                             bpInfo.BlueprintName = invType.typeName;
                             bpInfo.IsManufactured = mat.Buildable;
                             bpInfo.IsReacted = mat.Reactable;
-                            bpInfo.MaxRuns = 9999;
+                            bpInfo.MaxRuns = 100000;
                             if (mat.Buildable)
                             {
                                 bpInfo.ME = 10;
