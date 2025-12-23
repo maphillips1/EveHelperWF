@@ -81,6 +81,8 @@ namespace Enums
                                          "EveHelper\\BuildPlans\\");
         public static string ErrorLogDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                          "EveHelper\\ErrorLogs\\");
+        public static string StructureProfilesDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                         "EveHelper\\StructureProfiles\\");
 
         public static Color BackgroundColor = Color.FromArgb(255, 21, 21, 21);
 

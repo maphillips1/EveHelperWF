@@ -41,6 +41,8 @@
             ExcludeFPCheckbox = new CheckBox();
             ExcludeFPLabel = new Label();
             MakeItemCombo = new ComboBox();
+            StructureProfileCombo = new ComboBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)MEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TEUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)MaxRunsUpDown).BeginInit();
@@ -50,7 +52,7 @@
             // 
             MELabel.AutoSize = true;
             MELabel.Font = new Font("Segoe UI", 12F);
-            MELabel.Location = new Point(45, 56);
+            MELabel.Location = new Point(12, 63);
             MELabel.Name = "MELabel";
             MELabel.Size = new Size(32, 21);
             MELabel.TabIndex = 0;
@@ -60,7 +62,7 @@
             // 
             TELabel.AutoSize = true;
             TELabel.Font = new Font("Segoe UI", 12F);
-            TELabel.Location = new Point(45, 95);
+            TELabel.Location = new Point(12, 103);
             TELabel.Name = "TELabel";
             TELabel.Size = new Size(26, 21);
             TELabel.TabIndex = 1;
@@ -70,7 +72,7 @@
             // 
             MaxRunsLabel.AutoSize = true;
             MaxRunsLabel.Font = new Font("Segoe UI", 12F);
-            MaxRunsLabel.Location = new Point(-1, 23);
+            MaxRunsLabel.Location = new Point(12, 23);
             MaxRunsLabel.Name = "MaxRunsLabel";
             MaxRunsLabel.Size = new Size(78, 21);
             MaxRunsLabel.TabIndex = 2;
@@ -78,7 +80,7 @@
             // 
             // MEUpDown
             // 
-            MEUpDown.Location = new Point(83, 59);
+            MEUpDown.Location = new Point(140, 63);
             MEUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             MEUpDown.Name = "MEUpDown";
             MEUpDown.Size = new Size(120, 23);
@@ -88,7 +90,7 @@
             // TEUpDown
             // 
             TEUpDown.Increment = new decimal(new int[] { 2, 0, 0, 0 });
-            TEUpDown.Location = new Point(83, 95);
+            TEUpDown.Location = new Point(140, 103);
             TEUpDown.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
             TEUpDown.Name = "TEUpDown";
             TEUpDown.Size = new Size(120, 23);
@@ -97,7 +99,7 @@
             // 
             // MaxRunsUpDown
             // 
-            MaxRunsUpDown.Location = new Point(83, 21);
+            MaxRunsUpDown.Location = new Point(140, 23);
             MaxRunsUpDown.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             MaxRunsUpDown.Name = "MaxRunsUpDown";
             MaxRunsUpDown.Size = new Size(120, 23);
@@ -116,7 +118,7 @@
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.Font = new Font("Segoe UI", 9.75F);
             SaveButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SaveButton.Location = new Point(28, 208);
+            SaveButton.Location = new Point(31, 284);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(75, 23);
             SaveButton.TabIndex = 6;
@@ -136,7 +138,7 @@
             CancelButton.FlatStyle = FlatStyle.Flat;
             CancelButton.Font = new Font("Segoe UI", 9.75F);
             CancelButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CancelButton.Location = new Point(137, 208);
+            CancelButton.Location = new Point(140, 284);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 23);
             CancelButton.TabIndex = 7;
@@ -148,7 +150,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(-1, 134);
+            label1.Location = new Point(12, 143);
             label1.Name = "label1";
             label1.Size = new Size(83, 21);
             label1.TabIndex = 8;
@@ -159,7 +161,7 @@
             ExcludeFPCheckbox.AutoSize = true;
             ExcludeFPCheckbox.Checked = true;
             ExcludeFPCheckbox.CheckState = CheckState.Checked;
-            ExcludeFPCheckbox.Location = new Point(162, 173);
+            ExcludeFPCheckbox.Location = new Point(165, 235);
             ExcludeFPCheckbox.Name = "ExcludeFPCheckbox";
             ExcludeFPCheckbox.Size = new Size(15, 14);
             ExcludeFPCheckbox.TabIndex = 11;
@@ -169,7 +171,7 @@
             // 
             ExcludeFPLabel.AutoSize = true;
             ExcludeFPLabel.Font = new Font("Segoe UI", 12F);
-            ExcludeFPLabel.Location = new Point(-1, 167);
+            ExcludeFPLabel.Location = new Point(2, 228);
             ExcludeFPLabel.Name = "ExcludeFPLabel";
             ExcludeFPLabel.Size = new Size(157, 21);
             ExcludeFPLabel.TabIndex = 10;
@@ -178,16 +180,36 @@
             // MakeItemCombo
             // 
             MakeItemCombo.FormattingEnabled = true;
-            MakeItemCombo.Location = new Point(82, 132);
+            MakeItemCombo.Location = new Point(140, 143);
             MakeItemCombo.Name = "MakeItemCombo";
             MakeItemCombo.Size = new Size(121, 23);
             MakeItemCombo.TabIndex = 12;
+            // 
+            // StructureProfileCombo
+            // 
+            StructureProfileCombo.FormattingEnabled = true;
+            StructureProfileCombo.Location = new Point(140, 183);
+            StructureProfileCombo.Name = "StructureProfileCombo";
+            StructureProfileCombo.Size = new Size(121, 23);
+            StructureProfileCombo.TabIndex = 14;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F);
+            label2.Location = new Point(12, 183);
+            label2.Name = "label2";
+            label2.Size = new Size(122, 21);
+            label2.TabIndex = 13;
+            label2.Text = "Structure Profile";
             // 
             // BlueprintValueControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(248, 259);
+            ClientSize = new Size(295, 337);
+            Controls.Add(StructureProfileCombo);
+            Controls.Add(label2);
             Controls.Add(MakeItemCombo);
             Controls.Add(ExcludeFPCheckbox);
             Controls.Add(ExcludeFPLabel);
@@ -227,5 +249,7 @@
         public CheckBox ExcludeFPCheckbox;
         private Label ExcludeFPLabel;
         public ComboBox MakeItemCombo;
+        public ComboBox StructureProfileCombo;
+        private Label label2;
     }
 }

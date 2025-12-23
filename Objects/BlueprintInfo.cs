@@ -19,5 +19,6 @@ namespace EveHelperWF.Objects
         public bool IsReacted { get; set; }
         public bool Manufacture { get; set; }
         public bool React { get; set; }
+        public int StructureProfileId {  get; set; }
     }
 }

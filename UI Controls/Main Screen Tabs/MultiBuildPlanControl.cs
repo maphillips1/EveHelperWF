@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 {
-    public partial class BuildPlansControl : Objects.FormBase
+    public partial class MultiBuildPlansControl : Objects.FormBase
     {
         enum TabPages
         {
@@ -44,7 +44,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
 
         #region "Init"
-        public BuildPlansControl()
+        public MultiBuildPlansControl()
         {
             isLoading = true;
             InitializeComponent();
@@ -56,24 +56,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             isLoading = false;
             BuildPlanDetailsControl.ClearCompletedButton.Click += BuildPlannDetailsControl_ClearCompletedBuilds_Click;
             BuildPlanDetailsControl.OptimizedBuildTreeView.AfterCheck += BuildPLansDetailsControl_OptimizedBuildTreeView_AfterCheck;
-        }
-
-        public BuildPlansControl(BuildPlan buildPlan)
-        {
-            isLoading = true;
-            InitializeComponent();
-            this.currentBuildPlan = buildPlan;
-            CurrentFileName = Enums.Enums.BuildPlanDirectory + this.currentBuildPlan.BuildPlanName;
-            SaveBuildPlan();
-            BlueprintBrowserHelper.Init();
-            LoadIndySettingCombos();
-            LoadControl();
-            string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(buildPlan.BuildPlanName.Replace(".json", "")));
-            if (selectedFileName != null)
-            {
-                BuildPlanCombo.SelectedValue = selectedFileName;
-            }
-            isLoading = false;
         }
         #endregion
 
@@ -362,10 +344,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             bpInfo.Manufacture = true;
                             bpInfo.React = true;
                         }
-                        if (BVC.StructureProfileCombo.SelectedValue != null)
-                        {
-                            bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
-                        }
                         isLoading = true;
                         e.Node.Nodes.Clear();
                         TreeNode parentNode = e.Node;
@@ -398,13 +376,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = (int)BVC.MEUpDown.Value;
                     bpInfo.TE = (int)BVC.TEUpDown.Value;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
-                    if (BVC.StructureProfileCombo.SelectedValue != null)
-                    {
-                        bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
-                    }
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
 
-                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
+                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -430,7 +404,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     isLoading = true;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
-                    SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
+                    SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -1684,14 +1658,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 TENode.Text = "TE: " + BPInfo.TE;
                 fpNode.Nodes.Add(TENode);
             }
-            if (BPInfo.StructureProfileId > 0) {
-
-                ComboListItem profile = BuildPlanHelper.GetStructureProfileComboItems().Find(x => x.key == BPInfo.StructureProfileId);
-                if (profile != null)
-                {
-                    fpNode.Nodes.Add("Structure Profile: " + profile.value);
-                }
-            }
             BPTreeView.Nodes.Add(fpNode);
         }
 
@@ -1728,14 +1694,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             parentNode.Nodes.Add("Make Item: " + (bpInfo.Manufacture || bpInfo.React).ToString());
             parentNode.Nodes.Add("Max Runs: " + bpInfo.MaxRuns);
-            if (bpInfo.StructureProfileId > 0)
-            {
-                ComboListItem profile = BuildPlanHelper.GetStructureProfileComboItems().Find(x => x.key == bpInfo.StructureProfileId);
-                if (profile != null)
-                {
-                    parentNode.Nodes.Add("Structure Profile: " + profile.value);
-                }
-            }
         }
 
         private void LoadReactionNodes()
@@ -1763,7 +1721,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllBlueprintValues(int me, int te, int maxRuns, int makeItemSelection, bool excludeFP, int structureProfileId)
+        private void SetAllBlueprintValues(int me, int te, int maxRuns, int makeItemSelection, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
@@ -1777,7 +1735,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = me;
                     bpInfo.TE = te;
                     bpInfo.MaxRuns = maxRuns;
-                    bpInfo.StructureProfileId = structureProfileId;
                     if (makeItemSelection == 0)
                     {
                         bpInfo.Manufacture = false;
@@ -1790,13 +1747,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllReactionValues(int maxRuns, int makeItemSelection, bool excludeFP, int structureProfileId)
+        private void SetAllReactionValues(int maxRuns, int makeItemSelection, bool excludeFP)
         {
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 if (bpInfo.IsReacted)
                 {
-                    bpInfo.StructureProfileId = structureProfileId;
                     if (excludeFP && bpInfo.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID)
                     {
                         continue;

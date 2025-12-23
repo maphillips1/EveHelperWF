@@ -1009,7 +1009,7 @@ namespace EveHelperWF
             {
                 ManufacturingTotalComponentTime = ScreenHelper.BlueprintBrowserHelper.GetComponentManufacturingTime(ManuMats, calculationHelperClass);
             }
-            TotalManufacturingJobCost = ScreenHelper.CommonHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass, calculationHelperClass.Runs);
+            TotalManufacturingJobCost = ScreenHelper.CommonHelper.CalculateManufacturingJobCost(ManuMats, calculationHelperClass, calculationHelperClass.Runs, null);
             TotalManufacturingInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ManuMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalManufacturingOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ManuProds, calculationHelperClass.Runs, Enums.Enums.ActivityManufacturing);
             if (TaxOutputsCheckbox.Checked)
@@ -1068,10 +1068,10 @@ namespace EveHelperWF
 
         private void CalculateReactionsTotals(Objects.CalculationHelperClass calculationHelperClass)
         {
-            CommonHelper.PerformReactionMECalculations(ref ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
+            CommonHelper.PerformReactionMECalculations(ref ReactionMats, calculationHelperClass, calculationHelperClass.Runs, null);
             ScreenHelper.BlueprintBrowserHelper.GetMatPriceForActivity(calculationHelperClass.InputOrderType, ref ReactionMats, calculationHelperClass.BuildComponents);
             ReactionTotalTime = ScreenHelper.BlueprintBrowserHelper.CalculateReactionTime(IndustryActivityTypes, calculationHelperClass);
-            TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs);
+            TotalReactionJobCost = ScreenHelper.CommonHelper.CalculateReactionJobCost(ReactionMats, calculationHelperClass, calculationHelperClass.Runs, null);
             TotalReactionInputVolume = ScreenHelper.BlueprintBrowserHelper.CalculateTotalVolume(ReactionMats, calculationHelperClass, calculationHelperClass.BuildComponents);
             TotalReactionOutputPrice = ScreenHelper.BlueprintBrowserHelper.CalculateTotalOutputPrice(ReactionProds, calculationHelperClass.Runs, Enums.Enums.ActivityReactions);
             if (TaxOutputsCheckbox.Checked)
