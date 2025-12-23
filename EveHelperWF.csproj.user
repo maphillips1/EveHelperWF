@@ -55,6 +55,9 @@
     <Compile Update="UI Controls\Main Screen Tabs\ShoppingListControl.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Main Screen Tabs\StructureProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\SystemFinder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +68,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\AddBuildPlanScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\AddEditStructureProfile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\BackupFiles.cs">

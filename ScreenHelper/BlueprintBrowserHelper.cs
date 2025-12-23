@@ -19,7 +19,6 @@ namespace EveHelperWF.ScreenHelper
         public static List<Objects.ComboListItem> InputPriceTypeItems = null;
         public static List<Objects.ComboListItem> ManufacturingSolarSystemComboItems = null;
         public static List<Objects.ComboListItem> ReactionSolarSystemComboItems = null;
-        public static List<Objects.RefineryComplex> RefinerComplices = null;
         public static List<Objects.ComboListItem> EngineeringComboItems = null;
         public static List<Objects.ComboListItem> RefineryComboItems = null;
         public static List<Objects.IndustryImplant> ManufacturingImplants = null;
@@ -40,30 +39,10 @@ namespace EveHelperWF.ScreenHelper
         {
             if (!Loaded)
             {
-                LoadRefineryComplices();
                 LoadManufacturingImplants();
                 LoadImplants();
             }
             Loaded = true;
-        }
-
-        public static void LoadRefineryComplices()
-        {
-            RefinerComplices = new List<Objects.RefineryComplex>();
-
-            Objects.RefineryComplex athanor = new Objects.RefineryComplex();
-            athanor.StructureTypeID = 35835;
-            athanor.StructureName = "Athanor";
-            athanor.StructureSize = 1;
-            athanor.ReactionTimeBonus = 0;
-            RefinerComplices.Add(athanor);
-
-            Objects.RefineryComplex tatara = new Objects.RefineryComplex();
-            tatara.StructureTypeID = 35836;
-            tatara.StructureName = "Tatara";
-            tatara.StructureSize = 2;
-            tatara.ReactionTimeBonus = 25;
-            RefinerComplices.Add(tatara);
         }
 
         public static void LoadImplants()
@@ -263,7 +242,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 RefineryComboItems = new List<Objects.ComboListItem>();
 
-                foreach (Objects.RefineryComplex complex in RefinerComplices)
+                foreach (Objects.RefineryComplex complex in CommonHelper.RefinerComplices)
                 {
                     Objects.ComboListItem comboListItem = new Objects.ComboListItem();
                     comboListItem.key = complex.StructureTypeID;
@@ -846,7 +825,7 @@ namespace EveHelperWF.ScreenHelper
             List<Int32> buildableMats = new List<int>();
 
             //This call does the ME calc
-            CommonHelper.PerformManufacturingMECalculations(ref inputMats, calculationHelperClass, calculationHelperClass.Runs, calculationHelperClass.ME);
+            CommonHelper.PerformManufacturingMECalculations(ref inputMats, calculationHelperClass, calculationHelperClass.Runs, calculationHelperClass.ME, null);
 
             if (calculationHelperClass.BuildComponents)
             {
@@ -880,7 +859,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 time = industryActivity.time * helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, helperClass.TE, false);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, helperClass.TE, false, null);
             }
 
             return time;
@@ -991,7 +970,7 @@ namespace EveHelperWF.ScreenHelper
                 //Runs
                 time *= helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, 0, true);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, 0, true, null);
             }
 
             return time;

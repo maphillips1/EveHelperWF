@@ -21,6 +21,8 @@ namespace EveHelperWF.UI_Controls
         BuildPlansControl? buildPlans;
         HunterIntel hunterIntel;
         QueryDatabase queryDatabaseControl;
+        MultiBuildPlansControl multiBuildPlansControl;
+        StructureProfile structureProfile;
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr handle);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
@@ -299,10 +301,12 @@ namespace EveHelperWF.UI_Controls
             LootAppraisalButton.Enabled = true;
             LPOfferButton.Enabled = true;
             MarketBrowserButton.Enabled = true;
+            //MultiBuildPlanButton.Enabled = true;
             PlanetPlannerButton.Enabled = true;
             PriceHistoryButton.Enabled = true;
             DefaultsButtonClick.Enabled = true;
             ShoppingListButton.Enabled = true;
+            StructureProfileButton.Enabled = true;
             SystemFinderButton.Enabled = true;
         }
 
@@ -354,6 +358,37 @@ namespace EveHelperWF.UI_Controls
             queryDatabaseControl.StartPosition = FormStartPosition.CenterScreen;
             queryDatabaseControl.Show();
             queryDatabaseControl.BringToFront();
+        }
+
+        private void MultiBuildPlanButton_Click(object sender, EventArgs e)
+        {
+            if (multiBuildPlansControl == null || multiBuildPlansControl.IsDisposed)
+            {
+                multiBuildPlansControl = new MultiBuildPlansControl();
+                multiBuildPlansControl.StartPosition = FormStartPosition.CenterScreen;
+                multiBuildPlansControl.WindowState = FormWindowState.Maximized;
+                multiBuildPlansControl.Show();
+                multiBuildPlansControl.BringToFront();
+            }
+            else
+            {
+                multiBuildPlansControl.BringToFront();
+            }
+        }
+
+        private void StructureProfileButton_Click(object sender, EventArgs e)
+        {
+            if (structureProfile == null || structureProfile.IsDisposed)
+            {
+                structureProfile = new StructureProfile();
+                structureProfile.StartPosition = FormStartPosition.CenterScreen;
+                structureProfile.Show();
+                structureProfile.BringToFront();
+            }
+            else
+            {
+                structureProfile.BringToFront();
+            }
         }
     }
 }

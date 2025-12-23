@@ -54,6 +54,8 @@
             LPOfferButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             HunterIntelButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             QueryDatabaseButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            MultiBuildPlanButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            StructureProfileButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             MainMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -100,7 +102,7 @@
             PlanetPlannerButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PlanetPlannerButton.FlatStyle = FlatStyle.Flat;
             PlanetPlannerButton.ForeColor = Color.FromArgb(234, 234, 234);
-            PlanetPlannerButton.Location = new Point(142, 188);
+            PlanetPlannerButton.Location = new Point(10, 242);
             PlanetPlannerButton.Margin = new Padding(3, 2, 3, 2);
             PlanetPlannerButton.MaximumSize = new Size(120, 120);
             PlanetPlannerButton.Name = "PlanetPlannerButton";
@@ -152,7 +154,7 @@
             SystemFinderButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             SystemFinderButton.FlatStyle = FlatStyle.Flat;
             SystemFinderButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SystemFinderButton.Location = new Point(142, 296);
+            SystemFinderButton.Location = new Point(142, 350);
             SystemFinderButton.Margin = new Padding(3, 2, 3, 2);
             SystemFinderButton.MaximumSize = new Size(120, 120);
             SystemFinderButton.Name = "SystemFinderButton";
@@ -178,7 +180,7 @@
             DefaultsButtonClick.FlatAppearance.MouseOverBackColor = Color.Teal;
             DefaultsButtonClick.FlatStyle = FlatStyle.Flat;
             DefaultsButtonClick.ForeColor = Color.FromArgb(234, 234, 234);
-            DefaultsButtonClick.Location = new Point(142, 242);
+            DefaultsButtonClick.Location = new Point(9, 296);
             DefaultsButtonClick.Margin = new Padding(3, 2, 3, 2);
             DefaultsButtonClick.MaximumSize = new Size(120, 120);
             DefaultsButtonClick.Name = "DefaultsButtonClick";
@@ -256,7 +258,7 @@
             PriceHistoryButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             PriceHistoryButton.FlatStyle = FlatStyle.Flat;
             PriceHistoryButton.ForeColor = Color.FromArgb(234, 234, 234);
-            PriceHistoryButton.Location = new Point(9, 242);
+            PriceHistoryButton.Location = new Point(142, 242);
             PriceHistoryButton.Margin = new Padding(3, 2, 3, 2);
             PriceHistoryButton.MaximumSize = new Size(120, 120);
             PriceHistoryButton.Name = "PriceHistoryButton";
@@ -320,7 +322,7 @@
             // 
             FreyaLinkLabel.AutoSize = true;
             FreyaLinkLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            FreyaLinkLabel.Location = new Point(96, 417);
+            FreyaLinkLabel.Location = new Point(98, 464);
             FreyaLinkLabel.Name = "FreyaLinkLabel";
             FreyaLinkLabel.Size = new Size(85, 15);
             FreyaLinkLabel.TabIndex = 20;
@@ -332,7 +334,7 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold | FontStyle.Italic);
-            label10.Location = new Point(10, 415);
+            label10.Location = new Point(12, 462);
             label10.Name = "label10";
             label10.Size = new Size(88, 20);
             label10.TabIndex = 19;
@@ -359,7 +361,7 @@
             ShoppingListButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             ShoppingListButton.FlatStyle = FlatStyle.Flat;
             ShoppingListButton.ForeColor = Color.FromArgb(234, 234, 234);
-            ShoppingListButton.Location = new Point(10, 296);
+            ShoppingListButton.Location = new Point(142, 296);
             ShoppingListButton.Margin = new Padding(3, 2, 3, 2);
             ShoppingListButton.MaximumSize = new Size(120, 120);
             ShoppingListButton.Name = "ShoppingListButton";
@@ -410,7 +412,7 @@
             DocumentationLabel.AutoSize = true;
             DocumentationLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
             DocumentationLabel.LinkColor = Color.FromArgb(128, 255, 255);
-            DocumentationLabel.Location = new Point(9, 445);
+            DocumentationLabel.Location = new Point(11, 492);
             DocumentationLabel.Name = "DocumentationLabel";
             DocumentationLabel.Size = new Size(118, 20);
             DocumentationLabel.TabIndex = 25;
@@ -484,7 +486,7 @@
             QueryDatabaseButton.FlatAppearance.MouseOverBackColor = Color.Teal;
             QueryDatabaseButton.FlatStyle = FlatStyle.Flat;
             QueryDatabaseButton.ForeColor = Color.FromArgb(234, 234, 234);
-            QueryDatabaseButton.Location = new Point(9, 350);
+            QueryDatabaseButton.Location = new Point(10, 410);
             QueryDatabaseButton.Margin = new Padding(3, 2, 3, 2);
             QueryDatabaseButton.MaximumSize = new Size(120, 120);
             QueryDatabaseButton.Name = "QueryDatabaseButton";
@@ -494,12 +496,66 @@
             QueryDatabaseButton.UseVisualStyleBackColor = false;
             QueryDatabaseButton.Click += QueryDatabaseButton_Click;
             // 
+            // MultiBuildPlanButton
+            // 
+            MultiBuildPlanButton.BorderBottom = true;
+            MultiBuildPlanButton.BorderFull = false;
+            MultiBuildPlanButton.BorderLeft = false;
+            MultiBuildPlanButton.BorderRight = false;
+            MultiBuildPlanButton.BorderTop = false;
+            MultiBuildPlanButton.BorderWidth = 2F;
+            MultiBuildPlanButton.Cursor = Cursors.Hand;
+            MultiBuildPlanButton.Enabled = false;
+            MultiBuildPlanButton.FlatAppearance.BorderColor = Color.Gray;
+            MultiBuildPlanButton.FlatAppearance.BorderSize = 0;
+            MultiBuildPlanButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            MultiBuildPlanButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            MultiBuildPlanButton.FlatStyle = FlatStyle.Flat;
+            MultiBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
+            MultiBuildPlanButton.Location = new Point(142, 188);
+            MultiBuildPlanButton.Margin = new Padding(3, 2, 3, 2);
+            MultiBuildPlanButton.MaximumSize = new Size(120, 120);
+            MultiBuildPlanButton.Name = "MultiBuildPlanButton";
+            MultiBuildPlanButton.Size = new Size(120, 50);
+            MultiBuildPlanButton.TabIndex = 31;
+            MultiBuildPlanButton.Text = "Multi-Build Plan";
+            MultiBuildPlanButton.UseVisualStyleBackColor = false;
+            MultiBuildPlanButton.Click += MultiBuildPlanButton_Click;
+            // 
+            // StructureProfileButton
+            // 
+            StructureProfileButton.BorderBottom = true;
+            StructureProfileButton.BorderFull = false;
+            StructureProfileButton.BorderLeft = false;
+            StructureProfileButton.BorderRight = false;
+            StructureProfileButton.BorderTop = false;
+            StructureProfileButton.BorderWidth = 2F;
+            StructureProfileButton.Cursor = Cursors.Hand;
+            StructureProfileButton.Enabled = false;
+            StructureProfileButton.FlatAppearance.BorderColor = Color.Gray;
+            StructureProfileButton.FlatAppearance.BorderSize = 0;
+            StructureProfileButton.FlatAppearance.MouseDownBackColor = Color.Cyan;
+            StructureProfileButton.FlatAppearance.MouseOverBackColor = Color.Teal;
+            StructureProfileButton.FlatStyle = FlatStyle.Flat;
+            StructureProfileButton.ForeColor = Color.FromArgb(234, 234, 234);
+            StructureProfileButton.Location = new Point(10, 350);
+            StructureProfileButton.Margin = new Padding(3, 2, 3, 2);
+            StructureProfileButton.MaximumSize = new Size(120, 120);
+            StructureProfileButton.Name = "StructureProfileButton";
+            StructureProfileButton.Size = new Size(120, 50);
+            StructureProfileButton.TabIndex = 32;
+            StructureProfileButton.Text = "Structure Profiles";
+            StructureProfileButton.UseVisualStyleBackColor = false;
+            StructureProfileButton.Click += StructureProfileButton_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
             ClientSize = new Size(397, 527);
+            Controls.Add(StructureProfileButton);
+            Controls.Add(MultiBuildPlanButton);
             Controls.Add(QueryDatabaseButton);
             Controls.Add(HunterIntelButton);
             Controls.Add(LPOfferButton);
@@ -558,5 +614,7 @@
         private Objects.Custom_Controls.EveHelperButton LPOfferButton;
         private Objects.Custom_Controls.EveHelperButton HunterIntelButton;
         private Objects.Custom_Controls.EveHelperButton QueryDatabaseButton;
+        private Objects.Custom_Controls.EveHelperButton MultiBuildPlanButton;
+        private Objects.Custom_Controls.EveHelperButton StructureProfileButton;
     }
 }

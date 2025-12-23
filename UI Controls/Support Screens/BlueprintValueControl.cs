@@ -1,4 +1,5 @@
 ﻿using EveHelperWF.Objects;
+using EveHelperWF.ScreenHelper;
 
 namespace EveHelperWF.UI_Controls.Support_Screens
 {
@@ -25,6 +26,15 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             MakeItemCombo.DisplayMember = "Value";
             MakeItemCombo.ValueMember = "Key";
             MakeItemCombo.SelectedValue = 2;
+
+            StructureProfileCombo.DataSource = BuildPlanHelper.GetStructureProfileComboItems();
+            StructureProfileCombo.DisplayMember = "Value";
+            StructureProfileCombo.ValueMember = "Key";
+            if (BPInfo.StructureProfileId > 0)
+            {
+                StructureProfileCombo.SelectedValue = BPInfo.StructureProfileId;
+            }
+
             if (this.BPInfo.IsReacted)
             {
                 MELabel.Visible = false;
