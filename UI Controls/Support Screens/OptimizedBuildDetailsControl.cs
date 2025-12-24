@@ -26,6 +26,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 WasteLabel.Text = OptimizedBuild.ExtraOutput.ToString("N0");
                 JobCostLabel.Text = CommonHelper.FormatIsk(OptimizedBuild.JobCost);
                 TotalCostLabel.Text = CommonHelper.FormatIsk(OptimizedBuild.TotalBuildCost);
+                InputTaxLabel.Text = CommonHelper.FormatIsk(OptimizedBuild.inputMaterialTax);
                 SetMaterialAndProductionCostLabel();
                 BuildTimeLabel();
                 BuildTreeView();

@@ -43,12 +43,12 @@ namespace EveHelperWF.Objects.Custom_Controls
         {
             this.BackgroundColor = Enums.Enums.BackgroundColor;
             this.GridColor = Enums.Enums.BackgroundColor;
-            this.ForeColor = CommonHelper.GetInvertedColor(this.BackColor);
+            this.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
             this.ColumnHeadersDefaultCellStyle.BackColor = this.BackgroundColor;
             this.ColumnHeadersDefaultCellStyle.ForeColor = Color.Gold;
             this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             this.RowHeadersDefaultCellStyle.BackColor = this.BackgroundColor;
-            this.RowHeadersDefaultCellStyle.ForeColor= this.ForeColor;
+            this.RowHeadersDefaultCellStyle.ForeColor= Color.Gold;
             this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             base.OnPaint(e);
         }
@@ -71,6 +71,8 @@ namespace EveHelperWF.Objects.Custom_Controls
             {
                 column.DefaultCellStyle.BackColor = Enums.Enums.BackgroundColor;
                 column.DefaultCellStyle.ForeColor = CommonHelper.GetInvertedColor(Enums.Enums.BackgroundColor);
+                column.DefaultCellStyle.SelectionBackColor = Color.Blue;
+                column.DefaultCellStyle.SelectionForeColor = Color.White;
                 column.DefaultCellStyle.Padding = new Padding(3, 3, 3, 3);
                 if (datasourceType != null)
                 {

@@ -67,7 +67,7 @@
             label44.AutoSize = true;
             label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label44.ForeColor = Color.Tomato;
-            label44.Location = new Point(700, 260);
+            label44.Location = new Point(771, 278);
             label44.Name = "label44";
             label44.Size = new Size(160, 17);
             label44.TabIndex = 45;
@@ -117,7 +117,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label20.Location = new Point(700, 228);
+            label20.Location = new Point(771, 246);
             label20.Name = "label20";
             label20.Size = new Size(162, 17);
             label20.TabIndex = 37;
@@ -128,7 +128,7 @@
             label43.AutoSize = true;
             label43.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label43.ForeColor = Color.Chartreuse;
-            label43.Location = new Point(700, 148);
+            label43.Location = new Point(771, 166);
             label43.Name = "label43";
             label43.Size = new Size(92, 17);
             label43.TabIndex = 36;
@@ -139,7 +139,7 @@
             label42.AutoSize = true;
             label42.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label42.ForeColor = Color.Cyan;
-            label42.Location = new Point(700, 168);
+            label42.Location = new Point(771, 186);
             label42.Name = "label42";
             label42.Size = new Size(126, 17);
             label42.TabIndex = 35;
@@ -150,7 +150,7 @@
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label17.ForeColor = Color.DarkOrange;
-            label17.Location = new Point(700, 208);
+            label17.Location = new Point(771, 226);
             label17.Name = "label17";
             label17.Size = new Size(128, 17);
             label17.TabIndex = 34;
@@ -161,7 +161,7 @@
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label16.ForeColor = Color.MediumPurple;
-            label16.Location = new Point(700, 188);
+            label16.Location = new Point(771, 206);
             label16.Name = "label16";
             label16.Size = new Size(88, 17);
             label16.TabIndex = 33;
@@ -171,7 +171,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label12.Location = new Point(700, 126);
+            label12.Location = new Point(771, 144);
             label12.Name = "label12";
             label12.Size = new Size(53, 17);
             label12.TabIndex = 32;
@@ -250,7 +250,7 @@
             OptimizedBuildTreeView.Location = new Point(8, 133);
             OptimizedBuildTreeView.MinimumSize = new Size(483, 393);
             OptimizedBuildTreeView.Name = "OptimizedBuildTreeView";
-            OptimizedBuildTreeView.Size = new Size(686, 393);
+            OptimizedBuildTreeView.Size = new Size(757, 393);
             OptimizedBuildTreeView.TabIndex = 38;
             OptimizedBuildTreeView.TabStop = false;
             OptimizedBuildTreeView.AfterSelect += OptimizedBuildTreeView_AfterSelect;
@@ -266,7 +266,7 @@
             CollapseAllButton.FlatAppearance.BorderSize = 0;
             CollapseAllButton.FlatStyle = FlatStyle.Flat;
             CollapseAllButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CollapseAllButton.Location = new Point(870, 77);
+            CollapseAllButton.Location = new Point(939, 70);
             CollapseAllButton.Name = "CollapseAllButton";
             CollapseAllButton.Size = new Size(94, 23);
             CollapseAllButton.TabIndex = 31;
@@ -284,10 +284,10 @@
             MaterialsTreeView.ForeColor = Color.White;
             MaterialsTreeView.HotTracking = true;
             MaterialsTreeView.ItemHeight = 30;
-            MaterialsTreeView.Location = new Point(870, 109);
+            MaterialsTreeView.Location = new Point(939, 109);
             MaterialsTreeView.MinimumSize = new Size(400, 406);
             MaterialsTreeView.Name = "MaterialsTreeView";
-            MaterialsTreeView.Size = new Size(469, 414);
+            MaterialsTreeView.Size = new Size(400, 414);
             MaterialsTreeView.TabIndex = 30;
             MaterialsTreeView.TabStop = false;
             // 

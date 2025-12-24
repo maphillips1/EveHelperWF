@@ -41,6 +41,23 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             LoadOptimumBuildSchedule();
         }
 
+        public void LoadDetailsControl(List<OptimizedBuild> optimizedBuilds,
+                                   List<MaterialsWithMarketData> inputMaterials,
+                                   List<BlueprintInfo> blueprintStore,
+                                   Dictionary<int, List<OptimizedBuild>> optimumBuildGroups,
+                                   List<int> completedBuilds)
+        {
+            this.CurrentOptimizedBuilds = optimizedBuilds;
+            this.CurrentInputMaterials = inputMaterials;
+            this.CurrentBlueprintStore = blueprintStore;
+            this.CurrentOptimumBuildGroups = optimumBuildGroups;
+            this.CompletedBuilds = completedBuilds;
+
+            MaterialsTreeView.Nodes.Clear();
+            MaterialsTreeView.Nodes.AddRange(AddMaterialsToTreeView(this.CurrentInputMaterials).ToArray());
+            LoadOptimumBuildSchedule();
+        }
+
         public void UpdateCompletedBuildsList(List<int> completedBuilds)
         {
             this.CompletedBuilds = completedBuilds;
