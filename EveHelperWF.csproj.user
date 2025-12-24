@@ -94,6 +94,9 @@
     <Compile Update="UI Controls\Support Screens\DetailedMaterialsFlowPanelControl.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\EditMultiBuildPlanProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI Controls\Support Screens\FIleLocations.cs">
       <SubType>Form</SubType>
     </Compile>

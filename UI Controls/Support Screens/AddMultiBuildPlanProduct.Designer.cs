@@ -1,6 +1,6 @@
 ﻿namespace EveHelperWF.UI_Controls.Support_Screens
 {
-    partial class AddBuildPlanScreen
+    partial class AddMultiBuildPlanProduct
     {
         /// <summary>
         /// Required designer variable.

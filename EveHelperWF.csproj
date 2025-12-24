@@ -14,7 +14,7 @@
     <Product>EveHelper</Product>
     <PackageIcon>EveHelperIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.6.9</Version>
+    <Version>1.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +47,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Update="UI Controls\Main Screen Tabs\MultiBuildPlanControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI Controls\Support Screens\AddMultiBuildPlanProduct.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI Controls\Support Screens\QuantityDialog.cs">

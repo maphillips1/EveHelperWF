@@ -1,4 +1,5 @@
-﻿using EveHelperWF.ESI_Calls;
+﻿using EveHelperWF.Database;
+using EveHelperWF.ESI_Calls;
 using EveHelperWF.Objects;
 using EveHelperWF.Objects.Custom_Controls;
 using EveHelperWF.Objects.ESI_Objects.Market_Objects;
@@ -27,9 +28,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             CostBreakdown = 7
         }
 
-        private BuildPlan currentBuildPlan;
+        private MultiBuildPlan currentBuildPlan;
         string CurrentFileName;
-        private InventoryType FinalProductType;
         private bool isLoading = false;
         private OptimizedBuildDetailsControl DetailsControl;
         private bool PriceInfoSet = true;
@@ -49,7 +49,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             isLoading = true;
             InitializeComponent();
             BlueprintBrowserHelper.Init();
-            BuildPlanHelper.Init();
+            MultiBuildPlanHelper.Init();
             LoadIndySettingCombos();
             LoadControl();
             ShowHideTabPage((int)TabPages.Summary);
@@ -90,7 +90,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 if (confirmResult == DialogResult.Yes)
                 {
                     currentBuildPlan = null;
-                    FileIO.FileHelper.DeleteFile(Enums.Enums.BuildPlanDirectory, CurrentFileName);
+                    FileIO.FileHelper.DeleteFile(Enums.Enums.MultiBuildPlansDirectory, CurrentFileName);
                     LoadControl();
                 }
             }
@@ -98,19 +98,24 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void NewBuildPlanButton_Click(object sender, EventArgs e)
         {
-            AddBuildPlanScreen addBuildPlanScreen = new AddBuildPlanScreen();
+            AddMultiBuildPlanProduct addBuildPlanScreen = new AddMultiBuildPlanProduct(true);
             addBuildPlanScreen.StartPosition = FormStartPosition.CenterScreen;
 
             if (addBuildPlanScreen.ShowDialog() == DialogResult.OK)
             {
                 if (WaitForWorkers())
                 {
-                    this.currentBuildPlan = new BuildPlan();
+                    this.currentBuildPlan = new MultiBuildPlan();
                     this.currentBuildPlan.BuildPlanName = addBuildPlanScreen.PlanNameTextBox.Text + ".json";
-                    this.currentBuildPlan.finalProductTypeID = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
-                    this.currentBuildPlan.RunsPerCopy = 1;
-                    this.currentBuildPlan.NumOfCopies = 1;
-                    CurrentFileName = Enums.Enums.BuildPlanDirectory + this.currentBuildPlan.BuildPlanName;
+                    FinalProduct finalProduct = new FinalProduct();
+                    finalProduct.finalProductTypeId = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
+                    InventoryType fpType = CommonHelper.InventoryTypes.Find(x => x.typeId == finalProduct.finalProductTypeId);
+                    finalProduct.finalProductTypeName = fpType.typeName;
+                    finalProduct.RunsPerCopy = 1;
+                    finalProduct.NumOfCopies = 1;
+                    finalProduct.blueprintOrReactionTypeId = SQLiteCalls.GetBlueprintByProductTypeID(finalProduct.finalProductTypeId);
+                    this.currentBuildPlan.FinalProducts.Add(finalProduct);
+                    CurrentFileName = Enums.Enums.MultiBuildPlansDirectory + this.currentBuildPlan.BuildPlanName;
                     SaveBuildPlan();
                     LoadFileCombo();
                     string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(addBuildPlanScreen.PlanNameTextBox.Text));
@@ -127,36 +132,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan != null)
             {
                 SaveBuildPlan();
-            }
-        }
-
-        private void RunsPerCopy_Leave(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                this.isLoading = true;
-                this.Cursor = Cursors.WaitCursor;
-                this.currentBuildPlan.RunsPerCopy = (Int32)(RunsPerCopyUpDown.Value);
-                this.currentBuildPlan.IndustrySettings.Runs = (Int32)RunsPerCopyUpDown.Value;
-                SaveBuildPlan();
-                RunCalcs();
-                this.Cursor = Cursors.Default;
-                this.isLoading = false;
-            }
-        }
-
-        private void NumCopies_Leave(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading)
-            {
-                this.isLoading = true;
-                this.Cursor = Cursors.WaitCursor;
-                this.currentBuildPlan.NumOfCopies = (Int32)(NumberCopiesUpDown.Value);
-                this.currentBuildPlan.IndustrySettings.NumCopies = (Int32)NumberCopiesUpDown.Value;
-                SaveBuildPlan();
-                RunCalcs();
-                this.Cursor = Cursors.Default;
-                this.isLoading = false;
             }
         }
 
@@ -178,26 +153,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     numericUpDown.Value = numericUpDown.Minimum;
                 }
-                //TODO: Recalc BP Cost Totals, but don't redo entire Calcs
-            }
-        }
-
-        private void AdditionalCostsNumeric_ValueChanged(object sender, EventArgs e)
-        {
-            if (this.currentBuildPlan != null && !isLoading && !IsResetting)
-            {
-                this.isLoading = true;
-                this.currentBuildPlan.additionalCosts = (decimal)AdditionalCostsNumeric.Value;
-                OptimizedBuild optimizedBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == FinalProductType.typeId);
-                if (optimizedBuild != null)
-                {
-                    optimizedBuild.AdditionalCost = this.currentBuildPlan.additionalCosts;
-                    optimizedBuild.TotalBuildCost = optimizedBuild.MaterialCost + optimizedBuild.JobCost + optimizedBuild.AdditionalCost;
-                    optimizedBuild.PricePerItem = (optimizedBuild.TotalBuildCost / optimizedBuild.RunsNeeded);
-                    SetSummaryInformation();
-                }
-                SaveBuildPlan();
-                this.isLoading = false;
                 //TODO: Recalc BP Cost Totals, but don't redo entire Calcs
             }
         }
@@ -278,10 +233,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.typeID).pricePer = mat.pricePer;
                 }
                 ProgressLabel.Text = "Done.";
-                BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                      this.currentBuildPlan.AllItems,
-                                                                     this.currentBuildPlan.finalProductTypeID,
-                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan.FinalProducts,
                                                                      this.currentBuildPlan);
                 SetSummaryInformation();
                 LoadMaterialsPriceTreeView();
@@ -307,7 +261,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     decimal price = (decimal)(spc.PricePerItem.Value);
                     currentMat.pricePer = price;
-                    BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds, mats, this.currentBuildPlan.finalProductTypeID, this.currentBuildPlan.additionalCosts, this.currentBuildPlan);
+                    MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                                                                              mats,
+                                                                              this.currentBuildPlan.FinalProducts,
+                                                                              this.currentBuildPlan);
                     SaveBuildPlan();
                     SetSummaryInformation();
                     LoadMaterialsPriceTreeView();
@@ -339,10 +296,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             bpInfo.Manufacture = false;
                             bpInfo.React = false;
                         }
-                        else if((int)BVC.MakeItemCombo.SelectedValue == 1)
+                        else if ((int)BVC.MakeItemCombo.SelectedValue == 1)
                         {
                             bpInfo.Manufacture = true;
                             bpInfo.React = true;
+                        }
+                        if (BVC.StructureProfileCombo.SelectedValue != null)
+                        {
+                            bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
                         }
                         isLoading = true;
                         e.Node.Nodes.Clear();
@@ -376,9 +337,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = (int)BVC.MEUpDown.Value;
                     bpInfo.TE = (int)BVC.TEUpDown.Value;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                    if (BVC.StructureProfileCombo.SelectedValue != null)
+                    {
+                        bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
+                    }
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
 
-                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
+                    SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -404,7 +369,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     isLoading = true;
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
-                    SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP);
+                    SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
                     SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
@@ -430,15 +395,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 this.currentBuildPlan.IndustrySettings.TaxOutputs = TaxFinalProductCheckbox.Checked;
                 SaveBuildPlan();
-                SetSummaryInformation();
-            }
-        }
-
-        private void FinalSellPriceNumeric_ValueChanged(object sender, EventArgs e)
-        {
-            if (currentBuildPlan != null && !isLoading && FinalSellPriceNumeric.Validate())
-            {
-                currentBuildPlan.finalSellPrice = FinalSellPriceNumeric.Value;
                 SetSummaryInformation();
             }
         }
@@ -673,9 +629,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                    this.currentBuildPlan.InputMaterials,
                                    this.currentBuildPlan.BlueprintStore,
                                    this.currentBuildPlan.OptimumBuildGroups,
-                                   this.currentBuildPlan.completedBuilds,
-                                   FinalProductType.typeName,
-                                   this.currentBuildPlan.TotalOutcome);
+                                   this.currentBuildPlan.completedBuilds);
             }
         }
         #endregion
@@ -763,7 +717,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             FileNames.Clear();
             FileNames.Add(new KeyValuePair<string, string>("", ""));
-            string[] directoryFileNames = FileIO.FileHelper.GetFileNamesInDirectory(Enums.Enums.BuildPlanDirectory);
+            string[] directoryFileNames = FileIO.FileHelper.GetFileNamesInDirectory(Enums.Enums.MultiBuildPlansDirectory);
 
 
             if (directoryFileNames.Length > 0)
@@ -791,7 +745,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             string content = Newtonsoft.Json.JsonConvert.SerializeObject(currentBuildPlan);
             string fullFileName = CurrentFileName;
-            FileIO.FileHelper.SaveFileContent(Enums.Enums.BuildPlanDirectory, fullFileName, content);
+            FileIO.FileHelper.SaveFileContent(Enums.Enums.MultiBuildPlansDirectory, fullFileName, content);
         }
 
         private void LoadBuildPlanFromFile()
@@ -801,10 +755,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!String.IsNullOrWhiteSpace(selectedFileName))
             {
                 CurrentFileName = selectedFileName;
-                string content = FileIO.FileHelper.GetFileContent(Enums.Enums.BuildPlanDirectory, selectedFileName);
+                string content = FileIO.FileHelper.GetFileContent(Enums.Enums.MultiBuildPlansDirectory, selectedFileName);
                 if (!string.IsNullOrEmpty(content))
                 {
-                    currentBuildPlan = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.BuildPlan>(content);
+                    currentBuildPlan = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.MultiBuildPlan>(content);
                 }
             }
         }
@@ -814,7 +768,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (currentBuildPlan != null)
             {
                 this.SuspendLayout();
-                FinalProductType = CommonHelper.InventoryTypes.Find(x => x.typeId == this.currentBuildPlan.finalProductTypeID);
                 //Ensure we have the minimum information to run the calcs
                 EnsureCalculationHelperClass();
                 EnsureInputMaterials();
@@ -841,20 +794,23 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void EnsureMinimumRunsAndCopies()
         {
-            //Runs Per Copy minimum
-            if (this.currentBuildPlan.RunsPerCopy < RunsPerCopyUpDown.Minimum)
+            bool shouldSave = false;
+            foreach (FinalProduct fp in this.currentBuildPlan.FinalProducts)
             {
-                this.currentBuildPlan.RunsPerCopy = (Int32)RunsPerCopyUpDown.Minimum;
-                this.currentBuildPlan.IndustrySettings.RunsPerCopy = this.currentBuildPlan.RunsPerCopy;
-                SaveBuildPlan();
+                //Runs Per Copy minimum
+                if (fp.RunsPerCopy <= 0)
+                {
+                    fp.RunsPerCopy = 1;
+                    shouldSave = true;
+                }
+                //Num Copies Minimum
+                if (fp.NumOfCopies <= 0)
+                {
+                    fp.NumOfCopies = 1;
+                    shouldSave = true;
+                }
             }
-            //Num Copies Minimum
-            if (this.currentBuildPlan.NumOfCopies < NumberCopiesUpDown.Minimum)
-            {
-                this.currentBuildPlan.NumOfCopies = (Int32)NumberCopiesUpDown.Minimum;
-                this.currentBuildPlan.IndustrySettings.NumCopies = this.currentBuildPlan.NumOfCopies;
-                SaveBuildPlan();
-            }
+            if (shouldSave) { SaveBuildPlan(); }
         }
 
         private void EnsureBlueprintStore()
@@ -864,7 +820,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.currentBuildPlan.BlueprintStore = new List<BlueprintInfo>();
             }
             List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
-            if (BuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
+            if (MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
             {
                 SaveBuildPlan();
             }
@@ -924,28 +880,21 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadBasicInfo()
         {
-            if (FinalProductType != null)
+            if (this.currentBuildPlan != null)
             {
-                ProductLabel.Text = FinalProductType.typeName + " x " + this.currentBuildPlan.TotalOutcome.ToString("N0");
                 NotesTextBox.Text = this.currentBuildPlan.BuildPlanNotes;
-                RunsPerCopyUpDown.Value = this.currentBuildPlan.RunsPerCopy;
-                NumberCopiesUpDown.Value = this.currentBuildPlan.NumOfCopies;
-                AdditionalCostsNumeric.Value = this.currentBuildPlan.additionalCosts;
             }
         }
 
         private void LoadFinalProductMarketInfo()
         {
-            if (!LoadPriceHistoryBGWorker.IsBusy)
+            foreach (FinalProduct fp in currentBuildPlan.FinalProducts)
             {
-                LoadPriceHistoryBGWorker.RunWorkerAsync(FinalProductType.typeId);
+                decimal sellOrderPrice = ESIMarketData.GetSellOrderPriceAsync(fp.finalProductTypeId, Enums.Enums.TheForgeRegionId).Result;
+                decimal buyOrderPrice = ESIMarketData.GetBuyOrderPriceAsync(fp.finalProductTypeId, Enums.Enums.TheForgeRegionId).Result;
+                fp.jitaSellPrice = sellOrderPrice;
+                fp.jitaBuyPrice = buyOrderPrice;
             }
-            decimal sellOrderPrice = ESIMarketData.GetSellOrderPriceAsync(FinalProductType.typeId, Enums.Enums.TheForgeRegionId).Result;
-            decimal buyOrderPrice = ESIMarketData.GetBuyOrderPriceAsync(FinalProductType.typeId, Enums.Enums.TheForgeRegionId).Result;
-            JitaSellLabel.Text = CommonHelper.FormatIsk(sellOrderPrice);
-            JitaBuyLabel.Text = CommonHelper.FormatIsk(buyOrderPrice);
-            FinalProductSellOrderPrice = sellOrderPrice;
-            FinalProductBuyOrderPrice = buyOrderPrice;
         }
 
         private void EnsureInputMaterials()
@@ -955,23 +904,32 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan != null &&
                     (this.currentBuildPlan.InputMaterials == null || this.currentBuildPlan.InputMaterials.Count == 0))
             {
-                List<IndustryActivityMaterials> manufacturingMaterials =
-                    Database.SQLiteCalls.GetIndustryActivityMaterials(this.currentBuildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityManufacturing);
-                List<IndustryActivityMaterials> reactionMaterials =
-                    Database.SQLiteCalls.GetIndustryActivityMaterials(this.currentBuildPlan.parentBlueprintOrReactionTypeID, Enums.Enums.ActivityReactions);
-
-                this.currentBuildPlan.InputMaterials = new List<MaterialsWithMarketData>();
-
-                foreach (IndustryActivityMaterials material in manufacturingMaterials)
+                foreach (FinalProduct fp in this.currentBuildPlan.FinalProducts)
                 {
-                    AddMaterialToInputs(material);
-
-                }
-                foreach (IndustryActivityMaterials material in reactionMaterials)
-                {
-                    AddMaterialToInputs(material);
+                    LoadInputMaterialsForProduct(fp.blueprintOrReactionTypeId);
                 }
                 SaveBuildPlan();
+
+            }
+        }
+
+        private void LoadInputMaterialsForProduct(int blueprintOrReactionTypeId)
+        {
+            List<IndustryActivityMaterials> manufacturingMaterials =
+                Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintOrReactionTypeId, Enums.Enums.ActivityManufacturing);
+            List<IndustryActivityMaterials> reactionMaterials =
+                Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintOrReactionTypeId, Enums.Enums.ActivityReactions);
+
+            this.currentBuildPlan.InputMaterials = new List<MaterialsWithMarketData>();
+
+            foreach (IndustryActivityMaterials material in manufacturingMaterials)
+            {
+                AddMaterialToInputs(material);
+
+            }
+            foreach (IndustryActivityMaterials material in reactionMaterials)
+            {
+                AddMaterialToInputs(material);
             }
         }
 
@@ -1028,12 +986,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     saveBuildPlan = true;
                 }
 
-                if (this.currentBuildPlan.parentBlueprintOrReactionTypeID <= 0)
-                {
-                    this.currentBuildPlan.parentBlueprintOrReactionTypeID = Database.SQLiteCalls.GetBlueprintByProductTypeID(FinalProductType.typeId);
-                    saveBuildPlan = true;
-                }
-
                 if (this.currentBuildPlan.IndustrySettings.InputOrderType <= 0)
                 {
                     this.currentBuildPlan.IndustrySettings.InputOrderType = (int)Enums.Enums.OrderType.Sell;
@@ -1072,13 +1024,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             //Manufacturing Values
             calculationHelperClass.ManufacturingSolarSystemID = defaultFormValues.ManufacturingSystemValue;
             calculationHelperClass.ManufacturingStructureTypeID = defaultFormValues.ManufacturingStructureValue;
-            calculationHelperClass.ManufacturingStructureRigBonus = new StructureRigBonus();
             calculationHelperClass.ManufacturingImplantTypeID = defaultFormValues.ManufacturingImplantValue;
             calculationHelperClass.ManufacturingFacilityTax = defaultFormValues.ManufacturingTaxValue;
             calculationHelperClass.ME = (int)defaultFormValues.ManufacturingMEValue;
             calculationHelperClass.TE = (int)defaultFormValues.ManufacturingTEValue;
             calculationHelperClass.CompME = (int)defaultFormValues.CompMEValue;
             calculationHelperClass.CompTE = (int)defaultFormValues.CompTEValue;
+            calculationHelperClass.ManufacturingStructureRigBonus = new StructureRigBonus();
             calculationHelperClass.ManufacturingStructureRigBonus.RigMEBonus = defaultFormValues.ManufacturingStructureMERigValue;
             calculationHelperClass.ManufacturingStructureRigBonus.RigTEBonus = defaultFormValues.ManufacturingStructureTERigValue;
             calculationHelperClass.MaxManufacturingTime = defaultFormValues.MaxManufacturingTime;
@@ -1122,25 +1074,31 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void AddMaterialToInputs(IndustryActivityMaterials material)
         {
-            this.currentBuildPlan.InputMaterials.Add(new MaterialsWithMarketData
+            MaterialsWithMarketData currentMat = this.currentBuildPlan.InputMaterials.Find(x => x.materialTypeID == material.materialTypeID);
+            if (currentMat == null) 
+            { 
+                currentMat = new MaterialsWithMarketData();
+                currentMat.materialTypeID = material.materialTypeID;
+                currentMat.materialName = material.materialName;
+                currentMat.Buildable = material.isManufacturable;
+                currentMat.Reactable = material.isReactable;
+                currentMat.quantity = material.quantity;
+                this.currentBuildPlan.InputMaterials.Add(currentMat);
+            }
+            else
             {
-                materialTypeID = material.materialTypeID,
-                materialName = material.materialName,
-                Buildable = material.isManufacturable,
-                Reactable = material.isReactable,
-                quantity = material.quantity,
-            });
+                currentMat.quantity += material.quantity;
+            }
         }
 
         private void RunCalcs()
         {
             //Reset before calcs. 
             _CombinedMats = new List<MaterialsWithMarketData>();
-            BuildPlanHelper.RunBuildPlanCalcs(ref this.currentBuildPlan, ref _CombinedMats);
-            BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+            MultiBuildPlanHelper.RunBuildPlanCalcs(ref this.currentBuildPlan, ref _CombinedMats);
+            MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                  this.currentBuildPlan.AllItems,
-                                                                 this.currentBuildPlan.finalProductTypeID,
-                                                                 this.currentBuildPlan.additionalCosts,
+                                                                 this.currentBuildPlan.FinalProducts,
                                                                  this.currentBuildPlan);
             LoadUIAfterCalcs();
             SaveBuildPlan();
@@ -1151,26 +1109,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.IsResetting = true;
             this.SuspendLayout();
             NotesTextBox.Text = string.Empty;
-            ProductLabel.Text = string.Empty;
-            PriceHistoryControl.DatabindPriceHistory(new List<ESIPriceHistory>());
-            JitaBuyLabel.Text = string.Empty;
-            JitaSellLabel.Text = string.Empty;
-            FinalProductImagePanel.BackgroundImage = null;
-            AdditionalCostsNumeric.Value = AdditionalCostsNumeric.Minimum;
-            ProductionCostUnitLabel.Text = "";
-            InputVolumeLabel.Text = "";
-            OutcomeVolumeLabel.Text = "";
-            HeaderCostUnitLabel.Text = "";
             BPTreeView.Nodes.Clear();
-            IskNeededForPlanLabel.Text = "";
-            IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(0);
-            ProfitLabel.Text = CommonHelper.FormatIsk(0);
-            leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(0);
+            FinalProductGridView.DataSource = null;
+            MaterialsPriceTreeView.Nodes.Clear();
+            MostExpensiveGridView.DataSource = null;
             this.ResumeLayout();
             this.IsResetting = false;
-            ManuSCILabel.Text = "";
-            ReactionSCILabel.Text = "";
-            CostBreakdownTextBox.Text = "";
             CurrentInventoryGrid.DataSource = null;
 
             BuildPlanDetailsControl.ResetControls();
@@ -1194,7 +1138,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
                 if (quantityNeeded > 0)
                 {
-                    if (!BuildPlanHelper.IsItemMade(currentBuildPlan.BlueprintStore, mat.materialTypeID))
+                    if (!MultiBuildPlanHelper.IsItemMade(currentBuildPlan.BlueprintStore, mat.materialTypeID))
                     {
                         stringBuilder.AppendLine(mat.materialName + " " + quantityNeeded);
                     }
@@ -1292,238 +1236,87 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null)
             {
-                decimal finalVolume = this.currentBuildPlan.TotalOutcome * FinalProductType.volume;
-                OutcomeVolumeLabel.Text = finalVolume.ToString("N2");
-                OptimizedBuild optimumBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == FinalProductType.typeId);
-                if (optimumBuild != null)
+                InventoryType invType = null;
+                foreach (FinalProduct fp in currentBuildPlan.FinalProducts)
                 {
-                    decimal totalJobCost = 0;
-                    this.currentBuildPlan.OptimizedBuilds.ForEach(x => totalJobCost += x.JobCost);
-                    decimal outcomePricePer = currentBuildPlan.finalSellPrice;
-                    if (outcomePricePer <= 0)
+                    invType = CommonHelper.InventoryTypes.Find(x => x.typeId == fp.finalProductTypeId);
+                    fp.totalOutcomeVolume = fp.TotalOutcome * invType.volume;
+                    OptimizedBuild optimumBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == fp.finalProductTypeId);
+                    if (optimumBuild != null)
                     {
+                        decimal totalJobCost = 0;
+                        this.currentBuildPlan.OptimizedBuilds.ForEach(x => totalJobCost += x.JobCost);
+                        decimal outcomePricePer = fp.customSellPrice;
+                        if (outcomePricePer <= 0)
+                        {
+                            if (this.currentBuildPlan.IndustrySettings.OutputOrderType == (int)(Enums.Enums.OrderType.Sell))
+                            {
+                                outcomePricePer = fp.jitaSellPrice;
+                            }
+                            else
+                            {
+                                outcomePricePer = fp.jitaBuyPrice;
+                            }
+                        }
+
+                        //Taxes when selling on Market
+                        decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
+                                                                                    this.currentBuildPlan.IndustrySettings,
+                                                                                    (int)Enums.Enums.OrderType.Sell);
+
+                        decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
+                                                                                    this.currentBuildPlan.IndustrySettings,
+                                                                                    (int)Enums.Enums.OrderType.Buy);
+                        if (!TaxFinalProductCheckbox.Checked)
+                        {
+                            outcomeSellTaxes = 0;
+                            outcomeBuyTaxes = 0;
+                        }
+
+                        fp.CostPerItem = optimumBuild.PricePerItem;
+
+                        decimal totalCostPerItem = optimumBuild.PricePerItem;
+                        decimal profit = 0;
+                        string outputOrderTypeString;
+                        decimal totalOutComeTaxes;
+                        decimal totalOutcomeIskBeforeTax;
+
                         if (this.currentBuildPlan.IndustrySettings.OutputOrderType == (int)(Enums.Enums.OrderType.Sell))
                         {
-                            outcomePricePer = FinalProductSellOrderPrice;
+                            outputOrderTypeString = "Sell";
+                            totalCostPerItem += outcomeSellTaxes;
+                            totalOutComeTaxes = (outcomeSellTaxes * optimumBuild.TotalQuantityNeeded);
+                            totalOutcomeIskBeforeTax = (outcomePricePer * optimumBuild.TotalQuantityNeeded);
+                            profit = (outcomePricePer * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
                         }
                         else
                         {
-                            outcomePricePer = FinalProductBuyOrderPrice;
+                            outputOrderTypeString = "Buy";
+                            totalCostPerItem += outcomeBuyTaxes;
+                            totalOutComeTaxes = (outcomeBuyTaxes * optimumBuild.TotalQuantityNeeded);
+                            totalOutcomeIskBeforeTax = (outcomePricePer * optimumBuild.TotalQuantityNeeded);
+                            profit = (outcomePricePer * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
                         }
+                        string inputOrderTypeString;
+                        if (this.currentBuildPlan.IndustrySettings.InputOrderType == (int)(Enums.Enums.OrderType.Sell))
+                        {
+                            inputOrderTypeString = "Sell";
+                        }
+                        else
+                        {
+                            inputOrderTypeString = "Buy";
+                        }
+
+                        fp.profit = profit;
                     }
-                    decimal inputMaterialCostBeforeTax = _CombinedMats.Sum(x => x.priceTotal);
-                    decimal totalInputPrice = inputMaterialCostBeforeTax;
-                    decimal totalInputTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
-                                                                               this.currentBuildPlan.IndustrySettings,
-                                                                               this.currentBuildPlan.IndustrySettings.InputOrderType);
-                    decimal inputTaxPerItem = totalInputTaxes / optimumBuild.TotalQuantityNeeded;
-                    if (!TaxInputCheckbox.Checked)
-                    {
-                        totalInputTaxes = 0;
-                        inputTaxPerItem = 0;
-                    }
-                    IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
-
-                    //Taxes when selling on Market
-                    decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                this.currentBuildPlan.IndustrySettings,
-                                                                                (int)Enums.Enums.OrderType.Sell);
-
-                    decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                this.currentBuildPlan.IndustrySettings,
-                                                                                (int)Enums.Enums.OrderType.Buy);
-                    if (!TaxFinalProductCheckbox.Checked)
-                    {
-                        outcomeSellTaxes = 0;
-                        outcomeBuyTaxes = 0;
-                    }
-
-                    ProductionCostUnitLabel.Text = CommonHelper.FormatIsk(optimumBuild.PricePerItem);
-
-                    decimal totalCostPerItem = optimumBuild.PricePerItem;
-                    totalCostPerItem += inputTaxPerItem;
-                    decimal profit = 0;
-                    string outputOrderTypeString;
-                    decimal totalOutComeTaxes;
-                    decimal totalOutcomeIskBeforeTax;
-
-                    if (this.currentBuildPlan.IndustrySettings.OutputOrderType == (int)(Enums.Enums.OrderType.Sell))
-                    {
-                        outputOrderTypeString = "Sell";
-                        totalCostPerItem += outcomeSellTaxes;
-                        totalOutComeTaxes = (outcomeSellTaxes * optimumBuild.TotalQuantityNeeded);
-                        totalOutcomeIskBeforeTax = (outcomePricePer * optimumBuild.TotalQuantityNeeded);
-                        profit = (outcomePricePer * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
-                    }
-                    else
-                    {
-                        outputOrderTypeString = "Buy";
-                        totalCostPerItem += outcomeBuyTaxes;
-                        totalOutComeTaxes = (outcomeBuyTaxes * optimumBuild.TotalQuantityNeeded);
-                        totalOutcomeIskBeforeTax = (outcomePricePer * optimumBuild.TotalQuantityNeeded);
-                        profit = (outcomePricePer * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
-                    }
-                    string inputOrderTypeString;
-                    if (this.currentBuildPlan.IndustrySettings.InputOrderType == (int)(Enums.Enums.OrderType.Sell))
-                    {
-                        inputOrderTypeString = "Sell";
-                    }
-                    else
-                    {
-                        inputOrderTypeString = "Buy";
-                    }
-                    HeaderCostUnitLabel.Text = CommonHelper.FormatIsk(totalCostPerItem);
-
-                    decimal totalInputVolume = GetTotalVolumeForMaterials(_CombinedMats);
-                    InputVolumeLabel.Text = totalInputVolume.ToString("N2") + " m3";
-
-                    ProfitLabel.Text = CommonHelper.FormatIsk(profit);
-                    if (profit < 0)
-                    {
-                        ProfitLabel.ForeColor = System.Drawing.Color.OrangeRed;
-                    }
-                    else
-                    {
-                        ProfitLabel.ForeColor = System.Drawing.Color.LightGreen;
-                    }
-
-                    SetCostBreakdownTextBox(inputMaterialCostBeforeTax,
-                                            totalInputTaxes,
-                                            totalJobCost,
-                                            inputOrderTypeString,
-                                            outputOrderTypeString,
-                                            totalOutComeTaxes,
-                                            totalOutcomeIskBeforeTax,
-                                            outcomePricePer);
-
-
-                    if (!WasteValueWorker.IsBusy)
-                    {
-                        WasteValueWorker.RunWorkerAsync(this.currentBuildPlan);
-                    }
-
-                    SetSCILabel();
                 }
-            }
-        }
 
-        private void SetSCILabel()
-        {
-            if (this.currentBuildPlan != null && this.currentBuildPlan.IndustrySettings != null)
-            {
-                if (this.currentBuildPlan.IndustrySettings.ManufacturingSolarSystemID > 0)
-                {
-                    decimal costIndex = CommonHelper.GetCostIndexForSystemID(this.currentBuildPlan.IndustrySettings.ManufacturingSolarSystemID, Enums.Enums.ActivityManufacturing);
-                    ManuSCILabel.Text = costIndex.ToString("P2");
-                }
-                else
-                {
-                    ManuSCILabel.Text = "";
-                }
-                if (this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID > 0)
-                {
-                    decimal costIndex = CommonHelper.GetCostIndexForSystemID(this.currentBuildPlan.IndustrySettings.ReactionSolarSystemID, Enums.Enums.ActivityReactions);
-                    ReactionSCILabel.Text = costIndex.ToString("P2");
-                }
-                else
-                {
-                    ReactionSCILabel.Text = "";
-                }
+                FinalProductGridView.DatabindGridView(this.currentBuildPlan.FinalProducts);
             }
-            else
-            {
-                ManuSCILabel.Text = "";
-                ReactionSCILabel.Text = "";
-            }
-        }
-
-        private void SetCostBreakdownTextBox(decimal materialCost,
-                                            decimal materialTax,
-                                            decimal jobCost,
-                                            string inputOrderType,
-                                            string outputOrderType,
-                                            decimal outputTax,
-                                            decimal totalOutputIsk,
-                                            decimal pricePerItem)
-        {
-            StringBuilder sb = new StringBuilder();
-            decimal totalCost = materialCost + materialTax + jobCost + outputTax + currentBuildPlan.additionalCosts;
-            sb.AppendLine("Cost Breakdown for " + FinalProductType.typeName);
-            sb.AppendLine("");
-            sb.AppendLine("Input Material Costs");
-            sb.AppendLine("---------------------");
-            sb.AppendLine("Selected Input Order Type:");
-            sb.AppendLine("\t" + inputOrderType);
-            sb.AppendLine("Cost of input Materials before Taxes:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(materialCost));
-            sb.AppendLine("Tax:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(materialTax));
-            sb.AppendLine("");
-            sb.AppendLine("Job Costs");
-            sb.AppendLine("---------------------");
-            sb.AppendLine("Job costs for all manufacturing and reaction jobs: ");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(jobCost));
-            sb.AppendLine("");
-            sb.AppendLine("---------------------");
-            sb.AppendLine("Additional Costs (user input):");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(currentBuildPlan.additionalCosts));
-            sb.AppendLine("");
-            sb.AppendLine("Taxes on selling final product");
-            sb.AppendLine("---------------------");
-            sb.AppendLine("Selected Output Order Type:");
-            sb.AppendLine("\t" + outputOrderType);
-            sb.AppendLine("Tax:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(outputTax));
-            sb.AppendLine("");
-            sb.AppendLine("Total Costs:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(totalCost));
-
-            sb.AppendLine("");
-            sb.AppendLine("Price per Item:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(pricePerItem));
-            if (pricePerItem == FinalSellPriceNumeric.Value)
-            {
-                sb.AppendLine("Item value manually set by user on Material & Prices page.");
-                sb.AppendLine("");
-            }
-            sb.AppendLine("Total Isk Value of Final Product on market Before Taxes:");
-            sb.AppendLine("\t" + CommonHelper.FormatIsk(totalOutputIsk));
-
-            decimal expectedProfit = totalOutputIsk - totalCost;
-            if (expectedProfit > 0)
-            {
-                sb.AppendLine("Expected Profit:");
-                sb.AppendLine("\t" + CommonHelper.FormatIsk(totalOutputIsk - totalCost));
-            }
-            else
-            {
-                sb.AppendLine("Expected Losses:");
-                sb.AppendLine("\t" + CommonHelper.FormatIsk(totalOutputIsk - totalCost));
-            }
-            CostBreakdownTextBox.Text = sb.ToString();
-        }
-
-        private decimal GetTotalVolumeForMaterials(List<MaterialsWithMarketData> materials)
-        {
-            decimal totalVolume = 0;
-
-            InventoryType inventoryType;
-            foreach (MaterialsWithMarketData material in materials)
-            {
-                inventoryType = CommonHelper.InventoryTypes.Find(x => x.typeId == material.materialTypeID);
-                if (inventoryType != null)
-                {
-                    totalVolume += inventoryType.volume * material.quantityTotal;
-                }
-            }
-
-            return totalVolume;
         }
 
         private void LoadMaterialsPriceTreeView()
         {
-            FinalSellPriceNumeric.Value = currentBuildPlan.finalSellPrice;
-
             MaterialsPriceTreeView.Nodes.Clear();
             TreeNode tn;
             _CombinedMats = _CombinedMats.OrderBy(x => x.materialName).ToList();
@@ -1533,7 +1326,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             TreeNode priceTotal;
             TreeNode volumeNode;
 
-            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = BuildPlanHelper.GroupInputMaterials(_CombinedMats);
+            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = MultiBuildPlanHelper.GroupInputMaterials(_CombinedMats);
 
             List<KeyValuePair<string, List<MaterialsWithMarketData>>> orderedMats = groupedMaterials.OrderBy(x => x.Key).ToList();
             InventoryTypeWithQuantity currentInventory;
@@ -1559,7 +1352,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
                     tn = new TreeNode();
-                    tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
+                    tn.ForeColor = MultiBuildPlanHelper.GetForeColorForMaterialCategory(mat);
                     tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
                     tn.Tag = mat.materialTypeID;
 
@@ -1614,14 +1407,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadMostExpensiveGridView();
 
             //Build Details Load
-            BuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
+            MultiBuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
             BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
                                this.currentBuildPlan.InputMaterials,
                                this.currentBuildPlan.BlueprintStore,
                                this.currentBuildPlan.OptimumBuildGroups,
-                               this.currentBuildPlan.completedBuilds,
-                               FinalProductType.typeName,
-                               this.currentBuildPlan.TotalOutcome);
+                               this.currentBuildPlan.completedBuilds);
 
             SetSummaryInformation();
             LoadPlanetaryMaterialsPage();
@@ -1642,28 +1433,44 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadFinalProductNode()
         {
             TreeNode fpNode = new TreeNode();
-            fpNode.Text = "Final Product: " + FinalProductType.typeName;
-            fpNode.Tag = currentBuildPlan.parentBlueprintOrReactionTypeID;
+            fpNode.Text = "Final Products";
             fpNode.Expand();
 
-
-            BlueprintInfo BPInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID);
-            if (BPInfo.IsManufactured)
+            foreach (FinalProduct fp in currentBuildPlan.FinalProducts)
             {
-                TreeNode MENode = new TreeNode();
-                MENode.Text = "ME: " + BPInfo.ME;
-                fpNode.Nodes.Add(MENode);
 
-                TreeNode TENode = new TreeNode();
-                TENode.Text = "TE: " + BPInfo.TE;
-                fpNode.Nodes.Add(TENode);
+                BlueprintInfo BPInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == fp.blueprintOrReactionTypeId);
+                TreeNode productNode = new TreeNode();
+                productNode.Text = BPInfo.BlueprintName;
+                productNode.Tag = BPInfo.BlueprintTypeId;
+                if (BPInfo.IsManufactured)
+                {
+                    TreeNode MENode = new TreeNode();
+                    MENode.Text = "ME: " + BPInfo.ME;
+                    productNode.Nodes.Add(MENode);
+
+                    TreeNode TENode = new TreeNode();
+                    TENode.Text = "TE: " + BPInfo.TE;
+                    productNode.Nodes.Add(TENode);
+                }
+                if (BPInfo.StructureProfileId > 0)
+                {
+
+                    ComboListItem profile = MultiBuildPlanHelper.GetStructureProfileComboItems().Find(x => x.key == BPInfo.StructureProfileId);
+                    if (profile != null)
+                    {
+                        productNode.Nodes.Add("Structure Profile: " + profile.value);
+                    }
+                }
+                fpNode.Nodes.Add(productNode);
             }
             BPTreeView.Nodes.Add(fpNode);
         }
 
         private void LoadManufcaturingNodes()
         {
-            List<BlueprintInfo> manufacturingBPs = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsManufactured && x.BlueprintTypeId != currentBuildPlan.parentBlueprintOrReactionTypeID);
+
+            List<BlueprintInfo> manufacturingBPs = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsManufactured);
 
             if (manufacturingBPs.Count > 0)
             {
@@ -1671,15 +1478,20 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 TreeNode manufactureNode = new TreeNode();
                 manufactureNode.Text = "Blueprints";
                 TreeNode manuNode;
+                FinalProduct fp = null;
                 foreach (BlueprintInfo bp in manufacturingBPs)
                 {
-                    manuNode = new TreeNode();
-                    manuNode.Tag = bp.BlueprintTypeId;
-                    manuNode.Text = bp.BlueprintName;
-                    manuNode.Name = bp.BlueprintTypeId.ToString();
+                    fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bp.BlueprintTypeId);
+                    if (fp == null)
+                    {
+                        manuNode = new TreeNode();
+                        manuNode.Tag = bp.BlueprintTypeId;
+                        manuNode.Text = bp.BlueprintName;
+                        manuNode.Name = bp.BlueprintTypeId.ToString();
 
-                    BuildChildNodes(bp, ref manuNode);
-                    manufactureNode.Nodes.Add(manuNode);
+                        BuildChildNodes(bp, ref manuNode);
+                        manufactureNode.Nodes.Add(manuNode);
+                    }
                 }
                 BPTreeView.Nodes.Add(manufactureNode);
             }
@@ -1694,11 +1506,19 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             parentNode.Nodes.Add("Make Item: " + (bpInfo.Manufacture || bpInfo.React).ToString());
             parentNode.Nodes.Add("Max Runs: " + bpInfo.MaxRuns);
+            if (bpInfo.StructureProfileId > 0)
+            {
+                ComboListItem profile = MultiBuildPlanHelper.GetStructureProfileComboItems().Find(x => x.key == bpInfo.StructureProfileId);
+                if (profile != null)
+                {
+                    parentNode.Nodes.Add("Structure Profile: " + profile.value);
+                }
+            }
         }
 
         private void LoadReactionNodes()
         {
-            List<BlueprintInfo> reactions = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsReacted && x.BlueprintTypeId != currentBuildPlan.parentBlueprintOrReactionTypeID);
+            List<BlueprintInfo> reactions = this.currentBuildPlan.BlueprintStore.FindAll(x => x.IsReacted);
 
             if (reactions.Count > 0)
             {
@@ -1706,28 +1526,35 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 TreeNode ReactionsNode = new TreeNode();
                 ReactionsNode.Text = "Reactions";
                 TreeNode reactionNode;
+                FinalProduct fp = null;
                 foreach (BlueprintInfo bp in reactions)
                 {
-                    reactionNode = new TreeNode();
-                    reactionNode.Tag = bp.BlueprintTypeId;
-                    reactionNode.Text = bp.BlueprintName;
-                    reactionNode.Name = bp.BlueprintTypeId.ToString();
+                    fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bp.BlueprintTypeId);
+                    if (fp == null)
+                    {
+                        reactionNode = new TreeNode();
+                        reactionNode.Tag = bp.BlueprintTypeId;
+                        reactionNode.Text = bp.BlueprintName;
+                        reactionNode.Name = bp.BlueprintTypeId.ToString();
 
-                    BuildChildNodes(bp, ref reactionNode);
+                        BuildChildNodes(bp, ref reactionNode);
 
-                    ReactionsNode.Nodes.Add(reactionNode);
+                        ReactionsNode.Nodes.Add(reactionNode);
+                    }
                 }
                 BPTreeView.Nodes.Add(ReactionsNode);
             }
         }
 
-        private void SetAllBlueprintValues(int me, int te, int maxRuns, int makeItemSelection, bool excludeFP)
+        private void SetAllBlueprintValues(int me, int te, int maxRuns, int makeItemSelection, bool excludeFP, int structureProfileId)
         {
+            FinalProduct fp = null;
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 if (bpInfo.IsManufactured)
                 {
-                    if (excludeFP && bpInfo.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID)
+                    fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bpInfo.BlueprintTypeId);
+                    if (excludeFP && fp != null)
                     {
                         continue;
                     }
@@ -1735,6 +1562,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.ME = me;
                     bpInfo.TE = te;
                     bpInfo.MaxRuns = maxRuns;
+                    bpInfo.StructureProfileId = structureProfileId;
                     if (makeItemSelection == 0)
                     {
                         bpInfo.Manufacture = false;
@@ -1747,13 +1575,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void SetAllReactionValues(int maxRuns, int makeItemSelection, bool excludeFP)
+        private void SetAllReactionValues(int maxRuns, int makeItemSelection, bool excludeFP, int structureProfileId)
         {
+            FinalProduct fp = null;
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 if (bpInfo.IsReacted)
                 {
-                    if (excludeFP && bpInfo.BlueprintTypeId == currentBuildPlan.parentBlueprintOrReactionTypeID)
+                    bpInfo.StructureProfileId = structureProfileId;
+                    fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bpInfo.BlueprintTypeId);
+                    if (excludeFP && fp != null)
                     {
                         continue;
                     }
@@ -1835,10 +1666,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                     if (priceSet)
                     {
-                        BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                        MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                      this.currentBuildPlan.AllItems,
-                                                                     this.currentBuildPlan.finalProductTypeID,
-                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan.FinalProducts,
                                                                      this.currentBuildPlan);
                         LoadMaterialsPriceTreeView();
                         LoadMostExpensiveGridView();
@@ -1894,17 +1724,17 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadProductImageBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             byte[]? bpImage = null;
-            if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
-            {
-                if (LoadProductImageBackgroundWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
-                }
-            }
+            //if (this.currentBuildPlan != null && this.currentBuildPlan.finalProductTypeID > 0)
+            //{
+            //    if (LoadProductImageBackgroundWorker.CancellationPending)
+            //    {
+            //        e.Cancel = true;
+            //    }
+            //    else
+            //    {
+            //        bpImage = ESIImageServer.GetImageForType(this.currentBuildPlan.finalProductTypeID, "icon");
+            //    }
+            //}
             e.Result = bpImage;
         }
 
@@ -1918,14 +1748,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     MemoryStream memstream = new MemoryStream();
                     memstream.Write(productImage, 0, productImage.Length);
-                    FinalProductImagePanel.BackgroundImage = Image.FromStream(memstream);
-                    BuildPlanDetailsControl.LoadImage( Image.FromStream(memstream));
                     imageSet = true;
-                }
-                if (!imageSet)
-                {
-                    FinalProductImagePanel.BackgroundImage = null;
-                    BuildPlanDetailsControl.LoadImage(null);
                 }
             }
         }
@@ -1949,10 +1772,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 {
                     this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID).pricePer = mat.pricePer;
                 }
-                BuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
+                MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                      this.currentBuildPlan.AllItems,
-                                                                     FinalProductType.typeId,
-                                                                     this.currentBuildPlan.additionalCosts,
+                                                                     this.currentBuildPlan.FinalProducts,
                                                                      this.currentBuildPlan);
                 SaveBuildPlan();
                 this.PriceInfoSet = true;
@@ -1997,7 +1819,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!e.Cancelled)
             {
                 decimal wasteValue = (decimal)e.Result;
-                leftoverMatsValueLabel.Text = CommonHelper.FormatIsk(wasteValue);
             }
         }
 
@@ -2017,7 +1838,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (!e.Cancelled && e.Result != null)
             {
                 List<ESIPriceHistory> history = (List<ESIPriceHistory>)(e.Result);
-                PriceHistoryControl.DatabindPriceHistory(history);
             }
         }
 
@@ -2048,9 +1868,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             while (counter < numBuildGroups)
             {
                 key = orderedKeys[counter];
+                FinalProduct fp = null;
                 foreach (OptimizedBuild optimizedBuild in this.currentBuildPlan.OptimumBuildGroups[key])
                 {
-                    if (optimizedBuild.BuiltOrReactedTypeId != FinalProductType.typeId)
+                    fp = this.currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == optimizedBuild.BlueprintOrReactionTypeID);
+                    if (fp == null)
                     {
                         eSIMarketType = new ESIMarketType();
                         eSIMarketType.typeID = optimizedBuild.BuiltOrReactedTypeId;
@@ -2108,5 +1930,71 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         }
 
         #endregion
+
+        private void AddFinalProductButton_Click(object sender, EventArgs e)
+        {
+            AddMultiBuildPlanProduct addProducctScren = new AddMultiBuildPlanProduct(false);
+            addProducctScren.ShowDialog();
+
+            if (addProducctScren.DialogResult == DialogResult.OK)
+            {
+                int productTypeId = (int)addProducctScren.ProductCombo.SelectedValue;
+                FinalProduct fp = currentBuildPlan.FinalProducts.Find(x => x.finalProductTypeId == productTypeId);
+                InventoryType finalProduct;
+                if (fp == null)
+                {
+                    finalProduct = CommonHelper.InventoryTypes.Find(x => x.typeId == productTypeId);
+                    fp = new FinalProduct();
+                    fp.finalProductTypeId = productTypeId;
+                    fp.blueprintOrReactionTypeId = SQLiteCalls.GetBlueprintByProductTypeID(productTypeId);
+                    fp.RunsPerCopy = 1;
+                    fp.NumOfCopies = 1;
+                    fp.finalProductTypeName = finalProduct.typeName;
+                    this.currentBuildPlan.FinalProducts.Add(fp);
+                    LoadInputMaterialsForProduct(fp.blueprintOrReactionTypeId);
+                    MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, this.currentBuildPlan.InputMaterials);
+                    LoadUIForBuildPlan();
+                }
+                else
+                {
+                    MessageBox.Show("You are already building this product", "Product Exists");
+                }
+            }
+        }
+
+        private void EditFinalProductButton_Click(object sender, EventArgs e)
+        {
+            if (currentBuildPlan != null)
+            {
+                if (FinalProductGridView.SelectedRows?.Count > 0)
+                {
+                    FinalProduct fp = this.currentBuildPlan.FinalProducts[FinalProductGridView.SelectedRows[0].Index];
+                    EditMultiBuildPlanProduct editScreen = new EditMultiBuildPlanProduct(fp);
+                    editScreen.StartPosition = FormStartPosition.CenterScreen;
+                    editScreen.ShowDialog();
+
+                    if (editScreen.DialogResult == DialogResult.OK)
+                    {
+                        RunCalcs();
+                    }
+                }
+            }
+        }
+
+        private void DeleteFinalProduct_Click(object sender, EventArgs e)
+        {
+            if (currentBuildPlan != null)
+            {
+                if (FinalProductGridView.SelectedRows?.Count > 0)
+                {
+                    FinalProduct fp = this.currentBuildPlan.FinalProducts[FinalProductGridView.SelectedRows[0].Index];
+                    if (MessageBox.Show("Are you sure you want to delete this product?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        this.currentBuildPlan.FinalProducts.Remove(fp);
+                        RunCalcs();
+                    }
+                }
+            }
+        }
     }
 }

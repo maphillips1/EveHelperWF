@@ -40,6 +40,7 @@
             Label label12;
             Label label11;
             Label label13;
+            Label label14;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptimizedBuildDetailsControl));
             OutcomeNameLabel = new Label();
             RunsNeededLabel = new Label();
@@ -54,6 +55,7 @@
             MaterialCostLabel = new Label();
             TotalCostLabel = new Label();
             InputVolumeLabel = new Label();
+            InputTaxLabel = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -66,6 +68,7 @@
             label12 = new Label();
             label11 = new Label();
             label13 = new Label();
+            label14 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -177,6 +180,16 @@
             label11.Size = new Size(66, 17);
             label11.TabIndex = 22;
             label11.Text = "Total Cost";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9.75F);
+            label13.Location = new Point(14, 345);
+            label13.Name = "label13";
+            label13.Size = new Size(84, 17);
+            label13.TabIndex = 24;
+            label13.Text = "Input Volume";
             // 
             // OutcomeNameLabel
             // 
@@ -309,21 +322,33 @@
             InputVolumeLabel.TabIndex = 25;
             InputVolumeLabel.Text = "Input Volume";
             // 
-            // label13
+            // InputTaxLabel
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 9.75F);
-            label13.Location = new Point(14, 345);
-            label13.Name = "label13";
-            label13.Size = new Size(84, 17);
-            label13.TabIndex = 24;
-            label13.Text = "Input Volume";
+            InputTaxLabel.AutoSize = true;
+            InputTaxLabel.Font = new Font("Segoe UI", 9.75F);
+            InputTaxLabel.Location = new Point(184, 375);
+            InputTaxLabel.Name = "InputTaxLabel";
+            InputTaxLabel.Size = new Size(60, 17);
+            InputTaxLabel.TabIndex = 27;
+            InputTaxLabel.Text = "Input Tax";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9.75F);
+            label14.Location = new Point(15, 375);
+            label14.Name = "label14";
+            label14.Size = new Size(112, 17);
+            label14.TabIndex = 26;
+            label14.Text = "Input Material Tax";
             // 
             // OptimizedBuildDetailsControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(933, 519);
+            Controls.Add(InputTaxLabel);
+            Controls.Add(label14);
             Controls.Add(InputVolumeLabel);
             Controls.Add(label13);
             Controls.Add(TotalCostLabel);
@@ -374,5 +399,6 @@
         private Label MaterialCostLabel;
         private Label TotalCostLabel;
         private Label InputVolumeLabel;
+        private Label InputTaxLabel;
     }
 }

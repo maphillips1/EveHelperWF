@@ -301,7 +301,7 @@ namespace EveHelperWF.UI_Controls
             LootAppraisalButton.Enabled = true;
             LPOfferButton.Enabled = true;
             MarketBrowserButton.Enabled = true;
-            //MultiBuildPlanButton.Enabled = true;
+            MultiBuildPlanButton.Enabled = true;
             PlanetPlannerButton.Enabled = true;
             PriceHistoryButton.Enabled = true;
             DefaultsButtonClick.Enabled = true;

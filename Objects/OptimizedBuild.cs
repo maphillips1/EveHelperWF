@@ -27,5 +27,6 @@ namespace EveHelperWF.Objects
         public decimal PricePerItem { get;set; }
         public decimal MaterialCost { get; set; }
         public decimal AdditionalCost { get; set; }
+        public decimal inputMaterialTax { get; set; }
     }
 }

@@ -30,11 +30,6 @@
         {
             Label label1;
             Label label9;
-            Label label8;
-            Label label7;
-            Label label6;
-            Label label4;
-            Label label3;
             Label label21;
             Label label22;
             Label label23;
@@ -48,49 +43,35 @@
             Label label39;
             Label label40;
             Label label41;
-            Label label10;
-            Label label14;
-            Label label13;
             Label label52;
-            Label label53;
             Label label54;
-            Label label19;
-            Label label29;
             Label label18;
-            Label label27;
             Label label5;
             Label label58;
-            Label label59;
-            Label label60;
             Label label56;
             Label label2;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            Label label3;
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiBuildPlansControl));
             SummaryPage = new TabPage();
+            DeleteFinalProduct = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            EditFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            AddFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            FinalProductGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
-            ManuSCILabel = new Label();
-            ReactionSCILabel = new Label();
-            SummaryHelpPanel = new Panel();
-            leftoverMatsValueLabel = new Label();
-            ProfitLabel = new Label();
-            IskNeededForPlanLabel = new Label();
             NotesTextBox = new TextBox();
-            InputVolumeLabel = new Label();
-            OutcomeVolumeLabel = new Label();
-            ProductionCostUnitLabel = new Label();
-            SummaryMarketData = new Panel();
-            label11 = new Label();
-            PriceHistoryControl = new EveHelperWF.Objects.Custom_Controls.PriceHistory();
-            JitaBuyLabel = new Label();
-            JitaSellLabel = new Label();
-            ProductLabel = new Label();
-            FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
             MostExpensiveGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
             materialName = new DataGridViewTextBoxColumn();
@@ -151,6 +132,7 @@
             DetailsPage = new TabPage();
             BuildPlanDetailsControl = new EveHelperWF.UI_Controls.Support_Screens.BuildPlanDetailsTab();
             PlanetaryMaterialsTabPage = new TabPage();
+            BuildPlanPlanetMaterialsControl = new EveHelperWF.UI_Controls.Support_Screens.BuildPlanPlanetMaterialsTab();
             BPReactionTabPage = new TabPage();
             SetReactionsButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SetBlueprintButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
@@ -166,13 +148,9 @@
             ClearInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryTextBox = new TextBox();
             CostBreakdownPage = new TabPage();
-            CostBreakdownTextBox = new TextBox();
+            CostBreakdownGrid = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
             LoadProductImageBackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            RunsPerCopyUpDown = new NumericUpDown();
             ProgressLabel = new Label();
-            AdditionalCostsNumeric = new NumericUpDown();
-            NumberCopiesUpDown = new NumericUpDown();
-            HeaderCostUnitLabel = new Label();
             SaveFileDialog = new SaveFileDialog();
             OpenFileDialog = new OpenFileDialog();
             WasteValueWorker = new System.ComponentModel.BackgroundWorker();
@@ -185,14 +163,18 @@
             SystemButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
-            BuildPlanPlanetMaterialsControl = new EveHelperWF.UI_Controls.Support_Screens.BuildPlanPlanetMaterialsTab();
+            finalProductTypeName = new DataGridViewTextBoxColumn();
+            additionalCosts = new DataGridViewTextBoxColumn();
+            TotalOutcome = new DataGridViewTextBoxColumn();
+            totalVolume = new DataGridViewTextBoxColumn();
+            TotalRuns = new DataGridViewTextBoxColumn();
+            profit = new DataGridViewTextBoxColumn();
+            finalSellPrice = new DataGridViewTextBoxColumn();
+            jitaSellPrice = new DataGridViewTextBoxColumn();
+            jitaBuyPrice = new DataGridViewTextBoxColumn();
+            CostPerItem = new DataGridViewTextBoxColumn();
             label1 = new Label();
             label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            label6 = new Label();
-            label4 = new Label();
-            label3 = new Label();
             label21 = new Label();
             label22 = new Label();
             label23 = new Label();
@@ -206,24 +188,16 @@
             label39 = new Label();
             label40 = new Label();
             label41 = new Label();
-            label10 = new Label();
-            label14 = new Label();
-            label13 = new Label();
             label52 = new Label();
-            label53 = new Label();
             label54 = new Label();
-            label19 = new Label();
-            label29 = new Label();
             label18 = new Label();
-            label27 = new Label();
             label5 = new Label();
             label58 = new Label();
-            label59 = new Label();
-            label60 = new Label();
             label56 = new Label();
             label2 = new Label();
+            label3 = new Label();
             SummaryPage.SuspendLayout();
-            SummaryMarketData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)FinalProductGridView).BeginInit();
             MaterialPricePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FinalSellPriceNumeric).BeginInit();
@@ -256,9 +230,7 @@
             CurrentInventoryTabPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CurrentInventoryGrid).BeginInit();
             CostBreakdownPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CostBreakdownGrid).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -275,58 +247,12 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(6, 386);
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(179, 14);
             label9.Name = "label9";
-            label9.Size = new Size(38, 15);
+            label9.Size = new Size(51, 21);
             label9.TabIndex = 14;
             label9.Text = "Notes";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9.75F);
-            label8.Location = new Point(13, 50);
-            label8.Name = "label8";
-            label8.Size = new Size(98, 17);
-            label8.TabIndex = 4;
-            label8.Text = "Current Jita Buy";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9.75F);
-            label7.Location = new Point(13, 11);
-            label7.Name = "label7";
-            label7.Size = new Size(98, 17);
-            label7.TabIndex = 3;
-            label7.Text = "Current Jita Sell";
-            // 
-            // label6
-            // 
-            label6.Font = new Font("Segoe UI", 9.75F);
-            label6.Location = new Point(18, 209);
-            label6.Name = "label6";
-            label6.Size = new Size(116, 17);
-            label6.TabIndex = 6;
-            label6.Text = "Total Input Volume";
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI", 9.75F);
-            label4.Location = new Point(18, 239);
-            label4.Name = "label4";
-            label4.Size = new Size(140, 17);
-            label4.TabIndex = 4;
-            label4.Text = "Total Outcome Volume";
-            // 
-            // label3
-            // 
-            label3.Font = new Font("Segoe UI", 9.75F);
-            label3.Location = new Point(18, 179);
-            label3.Name = "label3";
-            label3.Size = new Size(151, 17);
-            label3.TabIndex = 3;
-            label3.Text = "Production Cost Per Unit";
             // 
             // label21
             // 
@@ -473,37 +399,6 @@
             label41.TabIndex = 94;
             label41.Text = "Accounting";
             // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(365, 13);
-            label10.Name = "label10";
-            label10.Size = new Size(112, 21);
-            label10.TabIndex = 5;
-            label10.Text = "Runs per Copy";
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 12F);
-            label14.Location = new Point(703, 49);
-            label14.Margin = new Padding(2, 0, 2, 0);
-            label14.Name = "label14";
-            label14.Size = new Size(123, 21);
-            label14.TabIndex = 47;
-            label14.Text = "Additional Costs";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 12F);
-            label13.Location = new Point(340, 49);
-            label13.Name = "label13";
-            label13.Size = new Size(137, 21);
-            label13.TabIndex = 49;
-            label13.Text = "Number of Copies";
-            // 
             // label52
             // 
             label52.AutoSize = true;
@@ -513,17 +408,6 @@
             label52.Size = new Size(692, 17);
             label52.TabIndex = 21;
             label52.Text = "You can change the price by clicking on the item, Setting the price, and clicking save. All costs are updated afterwards";
-            // 
-            // label53
-            // 
-            label53.AutoSize = true;
-            label53.Font = new Font("Segoe UI", 12F);
-            label53.Location = new Point(1062, 49);
-            label53.Margin = new Padding(2, 0, 2, 0);
-            label53.Name = "label53";
-            label53.Size = new Size(145, 21);
-            label53.TabIndex = 48;
-            label53.Text = "Total Cost Per Item: ";
             // 
             // label54
             // 
@@ -535,24 +419,6 @@
             label54.TabIndex = 8;
             label54.Text = "Click on the blueprint or reaction name to edit the ME, TE, Max Runs, and whether or not to make the item";
             // 
-            // label19
-            // 
-            label19.Font = new Font("Segoe UI", 9.75F);
-            label19.Location = new Point(18, 90);
-            label19.Name = "label19";
-            label19.Size = new Size(124, 17);
-            label19.TabIndex = 21;
-            label19.Text = "Isk Needed for plan";
-            // 
-            // label29
-            // 
-            label29.Font = new Font("Segoe UI", 9.75F);
-            label29.Location = new Point(18, 120);
-            label29.Name = "label29";
-            label29.Size = new Size(39, 17);
-            label29.TabIndex = 23;
-            label29.Text = "Profit";
-            // 
             // label18
             // 
             label18.AutoSize = true;
@@ -562,15 +428,6 @@
             label18.Size = new Size(139, 17);
             label18.TabIndex = 24;
             label18.Text = "Final Product Sell Price";
-            // 
-            // label27
-            // 
-            label27.Font = new Font("Segoe UI", 9.75F);
-            label27.Location = new Point(18, 149);
-            label27.Name = "label27";
-            label27.Size = new Size(139, 17);
-            label27.TabIndex = 25;
-            label27.Text = "Value of Leftover Mats";
             // 
             // label5
             // 
@@ -593,24 +450,6 @@
             label58.TabIndex = 50;
             label58.Text = "You can change the quantity by typing in the grid or Copy / Paste from your Eve Inventory";
             // 
-            // label59
-            // 
-            label59.Font = new Font("Segoe UI", 9.75F);
-            label59.Location = new Point(18, 269);
-            label59.Name = "label59";
-            label59.Size = new Size(114, 17);
-            label59.TabIndex = 29;
-            label59.Text = "Manufacturing SCI";
-            // 
-            // label60
-            // 
-            label60.Font = new Font("Segoe UI", 9.75F);
-            label60.Location = new Point(18, 299);
-            label60.Name = "label60";
-            label60.Size = new Size(80, 17);
-            label60.TabIndex = 28;
-            label60.Text = "Reaction SCI";
-            // 
             // label56
             // 
             label56.AutoSize = true;
@@ -632,38 +471,134 @@
             label2.TabIndex = 40;
             label2.Text = "Max Time (Hours)";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(10, 71);
+            label3.Name = "label3";
+            label3.Size = new Size(108, 21);
+            label3.TabIndex = 33;
+            label3.Text = "Final Products";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(21, 21, 21);
+            SummaryPage.Controls.Add(DeleteFinalProduct);
+            SummaryPage.Controls.Add(EditFinalProductButton);
+            SummaryPage.Controls.Add(AddFinalProductButton);
+            SummaryPage.Controls.Add(FinalProductGridView);
+            SummaryPage.Controls.Add(label3);
             SummaryPage.Controls.Add(MostProfitableButton);
-            SummaryPage.Controls.Add(ManuSCILabel);
-            SummaryPage.Controls.Add(ReactionSCILabel);
-            SummaryPage.Controls.Add(label59);
-            SummaryPage.Controls.Add(label60);
-            SummaryPage.Controls.Add(SummaryHelpPanel);
-            SummaryPage.Controls.Add(leftoverMatsValueLabel);
-            SummaryPage.Controls.Add(label27);
-            SummaryPage.Controls.Add(ProfitLabel);
-            SummaryPage.Controls.Add(label29);
-            SummaryPage.Controls.Add(IskNeededForPlanLabel);
-            SummaryPage.Controls.Add(label19);
             SummaryPage.Controls.Add(label9);
             SummaryPage.Controls.Add(NotesTextBox);
-            SummaryPage.Controls.Add(InputVolumeLabel);
-            SummaryPage.Controls.Add(OutcomeVolumeLabel);
-            SummaryPage.Controls.Add(ProductionCostUnitLabel);
-            SummaryPage.Controls.Add(SummaryMarketData);
-            SummaryPage.Controls.Add(label6);
-            SummaryPage.Controls.Add(label4);
-            SummaryPage.Controls.Add(label3);
-            SummaryPage.Controls.Add(ProductLabel);
-            SummaryPage.Controls.Add(FinalProductImagePanel);
             SummaryPage.Location = new Point(4, 5);
             SummaryPage.Name = "SummaryPage";
             SummaryPage.Padding = new Padding(3);
-            SummaryPage.Size = new Size(1346, 531);
+            SummaryPage.Size = new Size(1315, 517);
             SummaryPage.TabIndex = 0;
             SummaryPage.Text = "Summary";
+            // 
+            // DeleteFinalProduct
+            // 
+            DeleteFinalProduct.BorderBottom = false;
+            DeleteFinalProduct.BorderFull = true;
+            DeleteFinalProduct.BorderLeft = false;
+            DeleteFinalProduct.BorderRight = false;
+            DeleteFinalProduct.BorderTop = false;
+            DeleteFinalProduct.BorderWidth = 2F;
+            DeleteFinalProduct.FlatAppearance.BorderSize = 0;
+            DeleteFinalProduct.FlatStyle = FlatStyle.Flat;
+            DeleteFinalProduct.ForeColor = Color.FromArgb(234, 234, 234);
+            DeleteFinalProduct.Location = new Point(442, 69);
+            DeleteFinalProduct.Name = "DeleteFinalProduct";
+            DeleteFinalProduct.Size = new Size(142, 23);
+            DeleteFinalProduct.TabIndex = 37;
+            DeleteFinalProduct.Text = "Delete Final Product";
+            DeleteFinalProduct.UseVisualStyleBackColor = false;
+            DeleteFinalProduct.Click += DeleteFinalProduct_Click;
+            // 
+            // EditFinalProductButton
+            // 
+            EditFinalProductButton.BorderBottom = false;
+            EditFinalProductButton.BorderFull = true;
+            EditFinalProductButton.BorderLeft = false;
+            EditFinalProductButton.BorderRight = false;
+            EditFinalProductButton.BorderTop = false;
+            EditFinalProductButton.BorderWidth = 2F;
+            EditFinalProductButton.FlatAppearance.BorderSize = 0;
+            EditFinalProductButton.FlatStyle = FlatStyle.Flat;
+            EditFinalProductButton.ForeColor = Color.FromArgb(234, 234, 234);
+            EditFinalProductButton.Location = new Point(283, 69);
+            EditFinalProductButton.Name = "EditFinalProductButton";
+            EditFinalProductButton.Size = new Size(142, 23);
+            EditFinalProductButton.TabIndex = 36;
+            EditFinalProductButton.Text = "Edit Final Product";
+            EditFinalProductButton.UseVisualStyleBackColor = false;
+            EditFinalProductButton.Click += EditFinalProductButton_Click;
+            // 
+            // AddFinalProductButton
+            // 
+            AddFinalProductButton.BorderBottom = false;
+            AddFinalProductButton.BorderFull = true;
+            AddFinalProductButton.BorderLeft = false;
+            AddFinalProductButton.BorderRight = false;
+            AddFinalProductButton.BorderTop = false;
+            AddFinalProductButton.BorderWidth = 2F;
+            AddFinalProductButton.FlatAppearance.BorderSize = 0;
+            AddFinalProductButton.FlatStyle = FlatStyle.Flat;
+            AddFinalProductButton.ForeColor = Color.FromArgb(234, 234, 234);
+            AddFinalProductButton.Location = new Point(124, 69);
+            AddFinalProductButton.Name = "AddFinalProductButton";
+            AddFinalProductButton.Size = new Size(142, 23);
+            AddFinalProductButton.TabIndex = 35;
+            AddFinalProductButton.Text = "Add Final Product";
+            AddFinalProductButton.UseVisualStyleBackColor = false;
+            AddFinalProductButton.Click += AddFinalProductButton_Click;
+            // 
+            // FinalProductGridView
+            // 
+            FinalProductGridView.AllowUserToAddRows = false;
+            FinalProductGridView.AllowUserToDeleteRows = false;
+            FinalProductGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            FinalProductGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
+            FinalProductGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.Gold;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            FinalProductGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            FinalProductGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            FinalProductGridView.Columns.AddRange(new DataGridViewColumn[] { finalProductTypeName, additionalCosts, TotalOutcome, totalVolume, TotalRuns, profit, finalSellPrice, jitaSellPrice, jitaBuyPrice, CostPerItem });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            FinalProductGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            FinalProductGridView.EditableColumns = null;
+            FinalProductGridView.EnableHeadersVisualStyles = false;
+            FinalProductGridView.GridColor = Color.FromArgb(21, 21, 21);
+            FinalProductGridView.Location = new Point(10, 106);
+            FinalProductGridView.MultiSelect = false;
+            FinalProductGridView.Name = "FinalProductGridView";
+            FinalProductGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.Gold;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            FinalProductGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            FinalProductGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            FinalProductGridView.Size = new Size(1292, 401);
+            FinalProductGridView.TabIndex = 34;
             // 
             // MostProfitableButton
             // 
@@ -676,7 +611,7 @@
             MostProfitableButton.FlatAppearance.BorderSize = 0;
             MostProfitableButton.FlatStyle = FlatStyle.Flat;
             MostProfitableButton.ForeColor = Color.FromArgb(234, 234, 234);
-            MostProfitableButton.Location = new Point(185, 53);
+            MostProfitableButton.Location = new Point(10, 15);
             MostProfitableButton.Name = "MostProfitableButton";
             MostProfitableButton.Size = new Size(142, 23);
             MostProfitableButton.TabIndex = 32;
@@ -684,189 +619,15 @@
             MostProfitableButton.UseVisualStyleBackColor = false;
             MostProfitableButton.Click += MostProfitableButton_Click;
             // 
-            // ManuSCILabel
-            // 
-            ManuSCILabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ManuSCILabel.AutoSize = true;
-            ManuSCILabel.Font = new Font("Segoe UI", 9.75F);
-            ManuSCILabel.Location = new Point(184, 269);
-            ManuSCILabel.Name = "ManuSCILabel";
-            ManuSCILabel.Size = new Size(71, 17);
-            ManuSCILabel.TabIndex = 31;
-            ManuSCILabel.Text = "[Manu SCI]";
-            // 
-            // ReactionSCILabel
-            // 
-            ReactionSCILabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ReactionSCILabel.AutoSize = true;
-            ReactionSCILabel.Font = new Font("Segoe UI", 9.75F);
-            ReactionSCILabel.Location = new Point(184, 299);
-            ReactionSCILabel.Name = "ReactionSCILabel";
-            ReactionSCILabel.Size = new Size(88, 17);
-            ReactionSCILabel.TabIndex = 30;
-            ReactionSCILabel.Text = "[Reaction SCI]";
-            // 
-            // SummaryHelpPanel
-            // 
-            SummaryHelpPanel.BackgroundImage = (Image)resources.GetObject("SummaryHelpPanel.BackgroundImage");
-            SummaryHelpPanel.BackgroundImageLayout = ImageLayout.Stretch;
-            SummaryHelpPanel.Cursor = Cursors.Hand;
-            SummaryHelpPanel.Location = new Point(79, 38);
-            SummaryHelpPanel.Name = "SummaryHelpPanel";
-            SummaryHelpPanel.Size = new Size(32, 32);
-            SummaryHelpPanel.TabIndex = 27;
-            SummaryHelpPanel.Click += SummaryHelpPanel_Click;
-            // 
-            // leftoverMatsValueLabel
-            // 
-            leftoverMatsValueLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            leftoverMatsValueLabel.AutoSize = true;
-            leftoverMatsValueLabel.Font = new Font("Segoe UI", 9.75F);
-            leftoverMatsValueLabel.Location = new Point(184, 150);
-            leftoverMatsValueLabel.Name = "leftoverMatsValueLabel";
-            leftoverMatsValueLabel.Size = new Size(127, 17);
-            leftoverMatsValueLabel.TabIndex = 26;
-            leftoverMatsValueLabel.Text = "[Leftover Mats Value";
-            // 
-            // ProfitLabel
-            // 
-            ProfitLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ProfitLabel.AutoSize = true;
-            ProfitLabel.Font = new Font("Segoe UI", 9.75F);
-            ProfitLabel.Location = new Point(184, 120);
-            ProfitLabel.Name = "ProfitLabel";
-            ProfitLabel.Size = new Size(96, 17);
-            ProfitLabel.TabIndex = 24;
-            ProfitLabel.Text = "[Profit for Plan]";
-            // 
-            // IskNeededForPlanLabel
-            // 
-            IskNeededForPlanLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            IskNeededForPlanLabel.AutoSize = true;
-            IskNeededForPlanLabel.Font = new Font("Segoe UI", 9.75F);
-            IskNeededForPlanLabel.Location = new Point(184, 90);
-            IskNeededForPlanLabel.Name = "IskNeededForPlanLabel";
-            IskNeededForPlanLabel.Size = new Size(132, 17);
-            IskNeededForPlanLabel.TabIndex = 22;
-            IskNeededForPlanLabel.Text = "[Isk Needed for plan]";
-            // 
             // NotesTextBox
             // 
-            NotesTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            NotesTextBox.Location = new Point(6, 404);
+            NotesTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            NotesTextBox.Location = new Point(236, 7);
             NotesTextBox.Multiline = true;
             NotesTextBox.Name = "NotesTextBox";
-            NotesTextBox.Size = new Size(382, 119);
+            NotesTextBox.Size = new Size(1048, 48);
             NotesTextBox.TabIndex = 13;
             NotesTextBox.TextChanged += NotesTextBox_TextChanged;
-            // 
-            // InputVolumeLabel
-            // 
-            InputVolumeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            InputVolumeLabel.AutoSize = true;
-            InputVolumeLabel.Font = new Font("Segoe UI", 9.75F);
-            InputVolumeLabel.Location = new Point(184, 209);
-            InputVolumeLabel.Name = "InputVolumeLabel";
-            InputVolumeLabel.Size = new Size(92, 17);
-            InputVolumeLabel.TabIndex = 12;
-            InputVolumeLabel.Text = "[Input Volume]";
-            // 
-            // OutcomeVolumeLabel
-            // 
-            OutcomeVolumeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            OutcomeVolumeLabel.AutoSize = true;
-            OutcomeVolumeLabel.Font = new Font("Segoe UI", 9.75F);
-            OutcomeVolumeLabel.Location = new Point(185, 239);
-            OutcomeVolumeLabel.Name = "OutcomeVolumeLabel";
-            OutcomeVolumeLabel.Size = new Size(116, 17);
-            OutcomeVolumeLabel.TabIndex = 10;
-            OutcomeVolumeLabel.Text = "[Outcome Volume]";
-            // 
-            // ProductionCostUnitLabel
-            // 
-            ProductionCostUnitLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            ProductionCostUnitLabel.AutoSize = true;
-            ProductionCostUnitLabel.Font = new Font("Segoe UI", 9.75F);
-            ProductionCostUnitLabel.Location = new Point(184, 179);
-            ProductionCostUnitLabel.Name = "ProductionCostUnitLabel";
-            ProductionCostUnitLabel.Size = new Size(109, 17);
-            ProductionCostUnitLabel.TabIndex = 9;
-            ProductionCostUnitLabel.Text = "[Production Cost]";
-            // 
-            // SummaryMarketData
-            // 
-            SummaryMarketData.Controls.Add(label11);
-            SummaryMarketData.Controls.Add(PriceHistoryControl);
-            SummaryMarketData.Controls.Add(JitaBuyLabel);
-            SummaryMarketData.Controls.Add(JitaSellLabel);
-            SummaryMarketData.Controls.Add(label8);
-            SummaryMarketData.Controls.Add(label7);
-            SummaryMarketData.Dock = DockStyle.Right;
-            SummaryMarketData.Location = new Point(394, 3);
-            SummaryMarketData.Name = "SummaryMarketData";
-            SummaryMarketData.Size = new Size(949, 525);
-            SummaryMarketData.TabIndex = 7;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(17, 80);
-            label11.Name = "label11";
-            label11.Size = new Size(81, 17);
-            label11.TabIndex = 12;
-            label11.Text = "Price History";
-            // 
-            // PriceHistoryControl
-            // 
-            PriceHistoryControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PriceHistoryControl.AutoScroll = true;
-            PriceHistoryControl.AutoSize = true;
-            PriceHistoryControl.BackColor = Color.FromArgb(21, 21, 21);
-            PriceHistoryControl.ForeColor = Color.FromArgb(234, 234, 234);
-            PriceHistoryControl.Location = new Point(13, 100);
-            PriceHistoryControl.Name = "PriceHistoryControl";
-            PriceHistoryControl.Size = new Size(933, 503);
-            PriceHistoryControl.TabIndex = 11;
-            // 
-            // JitaBuyLabel
-            // 
-            JitaBuyLabel.AutoSize = true;
-            JitaBuyLabel.Font = new Font("Segoe UI", 9.75F);
-            JitaBuyLabel.Location = new Point(131, 50);
-            JitaBuyLabel.Name = "JitaBuyLabel";
-            JitaBuyLabel.Size = new Size(59, 17);
-            JitaBuyLabel.TabIndex = 10;
-            JitaBuyLabel.Text = "[Jita Buy]";
-            // 
-            // JitaSellLabel
-            // 
-            JitaSellLabel.AutoSize = true;
-            JitaSellLabel.Font = new Font("Segoe UI", 9.75F);
-            JitaSellLabel.Location = new Point(131, 11);
-            JitaSellLabel.Name = "JitaSellLabel";
-            JitaSellLabel.Size = new Size(59, 17);
-            JitaSellLabel.TabIndex = 9;
-            JitaSellLabel.Text = "[Jita Sell]";
-            // 
-            // ProductLabel
-            // 
-            ProductLabel.AutoSize = true;
-            ProductLabel.Font = new Font("Segoe UI", 14.25F);
-            ProductLabel.ForeColor = Color.Gold;
-            ProductLabel.Location = new Point(78, 6);
-            ProductLabel.Name = "ProductLabel";
-            ProductLabel.Size = new Size(140, 25);
-            ProductLabel.TabIndex = 1;
-            ProductLabel.Text = "[Product Label]";
-            // 
-            // FinalProductImagePanel
-            // 
-            FinalProductImagePanel.BackgroundImageLayout = ImageLayout.Center;
-            FinalProductImagePanel.Location = new Point(8, 6);
-            FinalProductImagePanel.Name = "FinalProductImagePanel";
-            FinalProductImagePanel.Size = new Size(64, 64);
-            FinalProductImagePanel.TabIndex = 0;
             // 
             // MaterialPricePage
             // 
@@ -884,7 +645,7 @@
             MaterialPricePage.Controls.Add(CopyToClipboardButton);
             MaterialPricePage.Location = new Point(4, 5);
             MaterialPricePage.Name = "MaterialPricePage";
-            MaterialPricePage.Size = new Size(1346, 531);
+            MaterialPricePage.Size = new Size(1315, 517);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
@@ -893,39 +654,39 @@
             MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MostExpensiveGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = Color.Gold;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = Color.Gold;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             MostExpensiveGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             MostExpensiveGridView.Columns.AddRange(new DataGridViewColumn[] { materialName, amount, priceTotal });
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Window;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle5;
             MostExpensiveGridView.EditableColumns = null;
             MostExpensiveGridView.EnableHeadersVisualStyles = false;
             MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.Location = new Point(740, 52);
             MostExpensiveGridView.Name = "MostExpensiveGridView";
             MostExpensiveGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle10.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            MostExpensiveGridView.Size = new Size(593, 469);
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            MostExpensiveGridView.Size = new Size(579, 469);
             MostExpensiveGridView.TabIndex = 30;
             // 
             // materialName
@@ -1021,7 +782,6 @@
             FinalSellPriceNumeric.Size = new Size(113, 23);
             FinalSellPriceNumeric.TabIndex = 25;
             FinalSellPriceNumeric.ThousandsSeparator = true;
-            FinalSellPriceNumeric.ValueChanged += FinalSellPriceNumeric_ValueChanged;
             FinalSellPriceNumeric.KeyUp += Numeric_KeyUp;
             // 
             // MaterialsPriceTreeView
@@ -1086,7 +846,7 @@
             IndustrySettingsTabPage.Controls.Add(DefaultsTabContainer);
             IndustrySettingsTabPage.Location = new Point(4, 5);
             IndustrySettingsTabPage.Name = "IndustrySettingsTabPage";
-            IndustrySettingsTabPage.Size = new Size(1346, 531);
+            IndustrySettingsTabPage.Size = new Size(1315, 517);
             IndustrySettingsTabPage.TabIndex = 3;
             IndustrySettingsTabPage.Text = "2.) System/Structure/Order Type";
             // 
@@ -1605,7 +1365,7 @@
             DetailsPage.Location = new Point(4, 5);
             DetailsPage.Name = "DetailsPage";
             DetailsPage.Padding = new Padding(3);
-            DetailsPage.Size = new Size(1346, 531);
+            DetailsPage.Size = new Size(1315, 517);
             DetailsPage.TabIndex = 1;
             DetailsPage.Text = "Build Details";
             // 
@@ -1616,7 +1376,7 @@
             BuildPlanDetailsControl.ForeColor = Color.White;
             BuildPlanDetailsControl.Location = new Point(3, 3);
             BuildPlanDetailsControl.Name = "BuildPlanDetailsControl";
-            BuildPlanDetailsControl.Size = new Size(1340, 525);
+            BuildPlanDetailsControl.Size = new Size(1309, 511);
             BuildPlanDetailsControl.TabIndex = 0;
             // 
             // PlanetaryMaterialsTabPage
@@ -1625,9 +1385,19 @@
             PlanetaryMaterialsTabPage.Controls.Add(BuildPlanPlanetMaterialsControl);
             PlanetaryMaterialsTabPage.Location = new Point(4, 5);
             PlanetaryMaterialsTabPage.Name = "PlanetaryMaterialsTabPage";
-            PlanetaryMaterialsTabPage.Size = new Size(1346, 531);
+            PlanetaryMaterialsTabPage.Size = new Size(1315, 517);
             PlanetaryMaterialsTabPage.TabIndex = 4;
             PlanetaryMaterialsTabPage.Text = "Planetary Materials";
+            // 
+            // BuildPlanPlanetMaterialsControl
+            // 
+            BuildPlanPlanetMaterialsControl.BackColor = Color.FromArgb(21, 21, 21);
+            BuildPlanPlanetMaterialsControl.Dock = DockStyle.Fill;
+            BuildPlanPlanetMaterialsControl.ForeColor = Color.White;
+            BuildPlanPlanetMaterialsControl.Location = new Point(0, 0);
+            BuildPlanPlanetMaterialsControl.Name = "BuildPlanPlanetMaterialsControl";
+            BuildPlanPlanetMaterialsControl.Size = new Size(1315, 517);
+            BuildPlanPlanetMaterialsControl.TabIndex = 0;
             // 
             // BPReactionTabPage
             // 
@@ -1638,7 +1408,7 @@
             BPReactionTabPage.Controls.Add(BPTreeView);
             BPReactionTabPage.Location = new Point(4, 5);
             BPReactionTabPage.Name = "BPReactionTabPage";
-            BPReactionTabPage.Size = new Size(1346, 531);
+            BPReactionTabPage.Size = new Size(1315, 517);
             BPReactionTabPage.TabIndex = 5;
             BPReactionTabPage.Text = "1.) BP & Reaction Settings";
             // 
@@ -1762,13 +1532,13 @@
             BuildPlanTabControl.Controls.Add(CostBreakdownPage);
             BuildPlanTabControl.Font = new Font("Segoe UI", 9F);
             BuildPlanTabControl.ItemSize = new Size(1, 1);
-            BuildPlanTabControl.Location = new Point(187, 94);
-            BuildPlanTabControl.MinimumSize = new Size(1354, 540);
+            BuildPlanTabControl.Location = new Point(194, 94);
+            BuildPlanTabControl.Margin = new Padding(10);
             BuildPlanTabControl.Name = "BuildPlanTabControl";
             BuildPlanTabControl.Padding = new Point(0, 0);
             BuildPlanTabControl.SelectedIndex = 0;
             BuildPlanTabControl.ShowToolTips = true;
-            BuildPlanTabControl.Size = new Size(1354, 540);
+            BuildPlanTabControl.Size = new Size(1323, 526);
             BuildPlanTabControl.TabIndex = 4;
             // 
             // CurrentInventoryTabPanel
@@ -1780,7 +1550,7 @@
             CurrentInventoryTabPanel.Controls.Add(label58);
             CurrentInventoryTabPanel.Location = new Point(4, 5);
             CurrentInventoryTabPanel.Name = "CurrentInventoryTabPanel";
-            CurrentInventoryTabPanel.Size = new Size(1346, 531);
+            CurrentInventoryTabPanel.Size = new Size(1315, 517);
             CurrentInventoryTabPanel.TabIndex = 7;
             CurrentInventoryTabPanel.Text = "Current Inventory";
             CurrentInventoryTabPanel.UseVisualStyleBackColor = true;
@@ -1789,38 +1559,38 @@
             // 
             CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CurrentInventoryGrid.BackgroundColor = Color.Black;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = SystemColors.Control;
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = Color.Black;
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.Black;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle9;
             CurrentInventoryGrid.EditableColumns = "Quantity";
             CurrentInventoryGrid.EnableHeadersVisualStyles = false;
             CurrentInventoryGrid.GridColor = Color.Black;
             CurrentInventoryGrid.Location = new Point(5, 90);
             CurrentInventoryGrid.Name = "CurrentInventoryGrid";
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = SystemColors.Control;
-            dataGridViewCellStyle14.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            CurrentInventoryGrid.Size = new Size(630, 433);
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = SystemColors.Control;
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            CurrentInventoryGrid.Size = new Size(616, 433);
             CurrentInventoryGrid.TabIndex = 53;
             CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
             CurrentInventoryGrid.DataError += CurrentInventoryGrid_DataError;
@@ -1835,9 +1605,9 @@
             // Quantity
             // 
             Quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle12.Format = "N0";
-            dataGridViewCellStyle12.NullValue = "0";
-            Quantity.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle8.Format = "N0";
+            dataGridViewCellStyle8.NullValue = "0";
+            Quantity.DefaultCellStyle = dataGridViewCellStyle8;
             Quantity.HeaderText = "Quantity";
             Quantity.Name = "Quantity";
             // 
@@ -1861,7 +1631,7 @@
             // CurrentInventoryTextBox
             // 
             CurrentInventoryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            CurrentInventoryTextBox.Location = new Point(759, 67);
+            CurrentInventoryTextBox.Location = new Point(745, 67);
             CurrentInventoryTextBox.Multiline = true;
             CurrentInventoryTextBox.Name = "CurrentInventoryTextBox";
             CurrentInventoryTextBox.ScrollBars = ScrollBars.Vertical;
@@ -1872,28 +1642,51 @@
             // CostBreakdownPage
             // 
             CostBreakdownPage.BackColor = Color.FromArgb(21, 21, 21);
-            CostBreakdownPage.Controls.Add(CostBreakdownTextBox);
+            CostBreakdownPage.Controls.Add(CostBreakdownGrid);
             CostBreakdownPage.Location = new Point(4, 5);
             CostBreakdownPage.Name = "CostBreakdownPage";
-            CostBreakdownPage.Size = new Size(1346, 531);
+            CostBreakdownPage.Size = new Size(1315, 517);
             CostBreakdownPage.TabIndex = 6;
             CostBreakdownPage.Text = "Cost Breakdown";
             // 
-            // CostBreakdownTextBox
+            // CostBreakdownGrid
             // 
-            CostBreakdownTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CostBreakdownTextBox.BackColor = Color.FromArgb(21, 21, 21);
-            CostBreakdownTextBox.BorderStyle = BorderStyle.None;
-            CostBreakdownTextBox.Font = new Font("Segoe UI", 11.25F);
-            CostBreakdownTextBox.ForeColor = Color.White;
-            CostBreakdownTextBox.Location = new Point(3, 3);
-            CostBreakdownTextBox.MinimumSize = new Size(603, 510);
-            CostBreakdownTextBox.Multiline = true;
-            CostBreakdownTextBox.Name = "CostBreakdownTextBox";
-            CostBreakdownTextBox.ReadOnly = true;
-            CostBreakdownTextBox.ScrollBars = ScrollBars.Both;
-            CostBreakdownTextBox.Size = new Size(609, 510);
-            CostBreakdownTextBox.TabIndex = 0;
+            CostBreakdownGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
+            CostBreakdownGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle11.ForeColor = Color.Gold;
+            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
+            CostBreakdownGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            CostBreakdownGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = SystemColors.Window;
+            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
+            CostBreakdownGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            CostBreakdownGrid.Dock = DockStyle.Fill;
+            CostBreakdownGrid.EditableColumns = null;
+            CostBreakdownGrid.EnableHeadersVisualStyles = false;
+            CostBreakdownGrid.GridColor = Color.FromArgb(21, 21, 21);
+            CostBreakdownGrid.Location = new Point(0, 0);
+            CostBreakdownGrid.Name = "CostBreakdownGrid";
+            CostBreakdownGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle13.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            CostBreakdownGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            CostBreakdownGrid.Size = new Size(1315, 517);
+            CostBreakdownGrid.TabIndex = 0;
             // 
             // LoadProductImageBackgroundWorker
             // 
@@ -1901,65 +1694,16 @@
             LoadProductImageBackgroundWorker.DoWork += LoadProductImageBackgroundWorker_DoWork;
             LoadProductImageBackgroundWorker.RunWorkerCompleted += LoadProductImageBackgroundWorker_RunWorkerCompleted;
             // 
-            // RunsPerCopyUpDown
-            // 
-            RunsPerCopyUpDown.Location = new Point(499, 11);
-            RunsPerCopyUpDown.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
-            RunsPerCopyUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            RunsPerCopyUpDown.Name = "RunsPerCopyUpDown";
-            RunsPerCopyUpDown.Size = new Size(184, 23);
-            RunsPerCopyUpDown.TabIndex = 6;
-            RunsPerCopyUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            RunsPerCopyUpDown.ValueChanged += RunsPerCopy_Leave;
-            RunsPerCopyUpDown.KeyUp += Numeric_KeyUp;
-            RunsPerCopyUpDown.Leave += RunsPerCopy_Leave;
-            // 
             // ProgressLabel
             // 
             ProgressLabel.AutoSize = true;
             ProgressLabel.Font = new Font("Segoe UI", 12F);
             ProgressLabel.ForeColor = Color.GhostWhite;
-            ProgressLabel.Location = new Point(703, 9);
+            ProgressLabel.Location = new Point(370, 13);
             ProgressLabel.Name = "ProgressLabel";
             ProgressLabel.Size = new Size(71, 21);
             ProgressLabel.TabIndex = 7;
             ProgressLabel.Text = "Progress";
-            // 
-            // AdditionalCostsNumeric
-            // 
-            AdditionalCostsNumeric.DecimalPlaces = 2;
-            AdditionalCostsNumeric.Location = new Point(848, 51);
-            AdditionalCostsNumeric.Maximum = new decimal(new int[] { -727379968, 232, 0, 0 });
-            AdditionalCostsNumeric.Name = "AdditionalCostsNumeric";
-            AdditionalCostsNumeric.Size = new Size(184, 23);
-            AdditionalCostsNumeric.TabIndex = 48;
-            AdditionalCostsNumeric.ThousandsSeparator = true;
-            AdditionalCostsNumeric.ValueChanged += AdditionalCostsNumeric_ValueChanged;
-            AdditionalCostsNumeric.KeyUp += Numeric_KeyUp;
-            // 
-            // NumberCopiesUpDown
-            // 
-            NumberCopiesUpDown.Location = new Point(499, 49);
-            NumberCopiesUpDown.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
-            NumberCopiesUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            NumberCopiesUpDown.Name = "NumberCopiesUpDown";
-            NumberCopiesUpDown.Size = new Size(184, 23);
-            NumberCopiesUpDown.TabIndex = 50;
-            NumberCopiesUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            NumberCopiesUpDown.ValueChanged += NumCopies_Leave;
-            NumberCopiesUpDown.KeyUp += Numeric_KeyUp;
-            NumberCopiesUpDown.Leave += NumCopies_Leave;
-            // 
-            // HeaderCostUnitLabel
-            // 
-            HeaderCostUnitLabel.AutoSize = true;
-            HeaderCostUnitLabel.Font = new Font("Segoe UI", 12F);
-            HeaderCostUnitLabel.Location = new Point(1211, 49);
-            HeaderCostUnitLabel.Margin = new Padding(2, 0, 2, 0);
-            HeaderCostUnitLabel.Name = "HeaderCostUnitLabel";
-            HeaderCostUnitLabel.Size = new Size(110, 21);
-            HeaderCostUnitLabel.TabIndex = 51;
-            HeaderCostUnitLabel.Text = "[Cost Per Unit]";
             // 
             // SaveFileDialog
             // 
@@ -2159,24 +1903,73 @@
             SummaryButton.UseVisualStyleBackColor = false;
             SummaryButton.Click += SummaryButton_Click;
             // 
-            // BuildPlanPlanetMaterialsControl
+            // finalProductTypeName
             // 
-            BuildPlanPlanetMaterialsControl.BackColor = Color.FromArgb(21, 21, 21);
-            BuildPlanPlanetMaterialsControl.Dock = DockStyle.Fill;
-            BuildPlanPlanetMaterialsControl.ForeColor = Color.White;
-            BuildPlanPlanetMaterialsControl.Location = new Point(0, 0);
-            BuildPlanPlanetMaterialsControl.Name = "BuildPlanPlanetMaterialsControl";
-            BuildPlanPlanetMaterialsControl.Size = new Size(1346, 531);
-            BuildPlanPlanetMaterialsControl.TabIndex = 0;
+            finalProductTypeName.DataPropertyName = "finalProductTypeName";
+            finalProductTypeName.HeaderText = "Product Name";
+            finalProductTypeName.Name = "finalProductTypeName";
             // 
-            // BuildPlansControl
+            // additionalCosts
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            additionalCosts.DataPropertyName = "additionalCosts";
+            additionalCosts.HeaderText = "Additional Costs";
+            additionalCosts.Name = "additionalCosts";
+            // 
+            // TotalOutcome
+            // 
+            TotalOutcome.DataPropertyName = "TotalOutcome";
+            TotalOutcome.HeaderText = "Total Outcome";
+            TotalOutcome.Name = "TotalOutcome";
+            // 
+            // totalVolume
+            // 
+            totalVolume.DataPropertyName = "totalOutcomeVolume";
+            totalVolume.HeaderText = "Total Volume";
+            totalVolume.Name = "totalVolume";
+            // 
+            // TotalRuns
+            // 
+            TotalRuns.DataPropertyName = "TotalRuns";
+            TotalRuns.HeaderText = "Total Runs";
+            TotalRuns.Name = "TotalRuns";
+            // 
+            // profit
+            // 
+            profit.DataPropertyName = "profit";
+            profit.HeaderText = "Profit";
+            profit.Name = "profit";
+            // 
+            // finalSellPrice
+            // 
+            finalSellPrice.DataPropertyName = "customSellPrice";
+            finalSellPrice.HeaderText = "Custom Sell Price";
+            finalSellPrice.Name = "finalSellPrice";
+            // 
+            // jitaSellPrice
+            // 
+            jitaSellPrice.DataPropertyName = "jitaSellPrice ";
+            jitaSellPrice.HeaderText = "Jita Sell";
+            jitaSellPrice.Name = "jitaSellPrice";
+            // 
+            // jitaBuyPrice
+            // 
+            jitaBuyPrice.DataPropertyName = "jitaBuyPrice ";
+            jitaBuyPrice.HeaderText = "Jita Buy";
+            jitaBuyPrice.Name = "jitaBuyPrice";
+            // 
+            // CostPerItem
+            // 
+            CostPerItem.DataPropertyName = "CostPerItem";
+            CostPerItem.HeaderText = "Cost / Item";
+            CostPerItem.Name = "CostPerItem";
+            // 
+            // MultiBuildPlansControl
+            // 
+            AutoScaleMode = AutoScaleMode.None;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoValidate = AutoValidate.Disable;
-            ClientSize = new Size(1536, 634);
+            ClientSize = new Size(1536, 639);
             Controls.Add(SummaryButton);
             Controls.Add(CurrentInventoryButton);
             Controls.Add(SystemButton);
@@ -2185,15 +1978,7 @@
             Controls.Add(PlanetMaterialsButton);
             Controls.Add(CostBreakdownButton);
             Controls.Add(BPSettingsButton);
-            Controls.Add(HeaderCostUnitLabel);
-            Controls.Add(label53);
-            Controls.Add(NumberCopiesUpDown);
-            Controls.Add(label13);
-            Controls.Add(AdditionalCostsNumeric);
-            Controls.Add(label14);
             Controls.Add(ProgressLabel);
-            Controls.Add(RunsPerCopyUpDown);
-            Controls.Add(label10);
             Controls.Add(BuildPlanTabControl);
             Controls.Add(DeleteBuildPlanButton);
             Controls.Add(NewBuildPlanButton);
@@ -2203,14 +1988,13 @@
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
-            Name = "BuildPlansControl";
+            Name = "MultiBuildPlansControl";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Build Plan";
+            Text = "Multi Build Plan";
             FormClosing += BuildPlansControl_FormClosing;
             SummaryPage.ResumeLayout(false);
             SummaryPage.PerformLayout();
-            SummaryMarketData.ResumeLayout(false);
-            SummaryMarketData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)FinalProductGridView).EndInit();
             MaterialPricePage.ResumeLayout(false);
             MaterialPricePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).EndInit();
@@ -2250,10 +2034,7 @@
             CurrentInventoryTabPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CurrentInventoryGrid).EndInit();
             CostBreakdownPage.ResumeLayout(false);
-            CostBreakdownPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)RunsPerCopyUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AdditionalCostsNumeric).EndInit();
-            ((System.ComponentModel.ISupportInitialize)NumberCopiesUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CostBreakdownGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2267,30 +2048,13 @@
         private TabControl BuildPlanTabControl;
         private TabPage SummaryPage;
         private TabPage DetailsPage;
-        private Label ProductLabel;
-        private Panel FinalProductImagePanel;
         private Label label2;
-        private Panel SummaryMarketData;
-        private Label label6;
-        private Label label4;
-        private Label label3;
-        private Label label7;
-        private Label label8;
-        private Label InputVolumeLabel;
-        private Label OutcomeVolumeLabel;
-        private Label ProductionCostUnitLabel;
         private Label label9;
         private TextBox NotesTextBox;
         private System.ComponentModel.BackgroundWorker LoadProductImageBackgroundWorker;
-        private Label JitaBuyLabel;
-        private Label JitaSellLabel;
-        private Label label10;
-        private NumericUpDown RunsPerCopyUpDown;
         private Label ProgressLabel;
         private TabPage MaterialPricePage;
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton CopyToClipboardButton;
-        private NumericUpDown AdditionalCostsNumeric;
-        private Label label14;
         private TabPage IndustrySettingsTabPage;
         private TabControl DefaultsTabContainer;
         private TabPage ManufacturingDefaultsTabPage;
@@ -2322,8 +2086,6 @@
         private NumericUpDown AccountingLevelUpDown;
         private Label label40;
         private Label label41;
-        private NumericUpDown NumberCopiesUpDown;
-        private Label label13;
         private TabPage OrderTypePage;
         private ComboBox OutputOrderTypeCombo;
         private ComboBox InputOrderTypeCombo;
@@ -2331,21 +2093,15 @@
         private Label label50;
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton UpdatePricesJitaButton;
         private TreeView MaterialsPriceTreeView;
-        private Label HeaderCostUnitLabel;
         private TabPage PlanetaryMaterialsTabPage;
         private TreeView BPTreeView;
         private TabPage BPReactionTabPage;
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetReactionsButton;
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetBlueprintButton;
-        private Label IskNeededForPlanLabel;
-        private Label ProfitLabel;
         private TabPage CostBreakdownPage;
-        private TextBox CostBreakdownTextBox;
         private NumericUpDown FinalSellPriceNumeric;
-        private Label leftoverMatsValueLabel;
         private CheckBox TaxFinalProductCheckbox;
         private CheckBox TaxInputCheckbox;
-        private Panel SummaryHelpPanel;
         private NumericUpDown ReactionsSkillUpDown;
         private NumericUpDown ResearchSkillsUpDown;
         private Label label15;
@@ -2389,15 +2145,26 @@
         private DataGridViewTextBoxColumn materialName;
         private DataGridViewTextBoxColumn amount;
         private DataGridViewTextBoxColumn priceTotal;
-        private Label ManuSCILabel;
-        private Label ReactionSCILabel;
-        private Objects.Custom_Controls.PriceHistory PriceHistoryControl;
-        private Label label11;
         private Objects.Custom_Controls.EveHelperButton MostProfitableButton;
         private NumericUpDown MaxManufacturingTimeUpDown;
         private Label label56;
         private NumericUpDown MaxReactionTimeUpDown;
         private Support_Screens.BuildPlanDetailsTab BuildPlanDetailsControl;
         private Support_Screens.BuildPlanPlanetMaterialsTab BuildPlanPlanetMaterialsControl;
+        private Objects.Custom_Controls.EveHelperGridView FinalProductGridView;
+        private Objects.Custom_Controls.EveHelperButton AddFinalProductButton;
+        private Objects.Custom_Controls.EveHelperGridView CostBreakdownGrid;
+        private Objects.Custom_Controls.EveHelperButton EditFinalProductButton;
+        private Objects.Custom_Controls.EveHelperButton DeleteFinalProduct;
+        private DataGridViewTextBoxColumn finalProductTypeName;
+        private DataGridViewTextBoxColumn additionalCosts;
+        private DataGridViewTextBoxColumn TotalOutcome;
+        private DataGridViewTextBoxColumn totalVolume;
+        private DataGridViewTextBoxColumn TotalRuns;
+        private DataGridViewTextBoxColumn profit;
+        private DataGridViewTextBoxColumn finalSellPrice;
+        private DataGridViewTextBoxColumn jitaSellPrice;
+        private DataGridViewTextBoxColumn jitaBuyPrice;
+        private DataGridViewTextBoxColumn CostPerItem;
     }
 }
