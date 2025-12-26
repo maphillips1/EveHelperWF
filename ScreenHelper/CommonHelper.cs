@@ -1,5 +1,4 @@
 ﻿using EveHelperWF.Objects;
-using EveHelperWF.UI_Controls.Main_Screen_Tabs;
 using FileIO;
 using System;
 using System.Collections.Generic;
@@ -416,20 +415,14 @@ namespace EveHelperWF.ScreenHelper
             return bonus;
         }
 
-        public static decimal GetManufacturingStructureCostBonus(Objects.CalculationHelperClass helperClass, BlueprintInfo bpInfo)
+        public static decimal GetManufacturingStructureCostBonus(int structureTypeId)
         {
             decimal costBonus = 1;
 
             Objects.EngineerngComplex complex = null;
-            if (bpInfo != null && bpInfo.StructureProfileId > 0)
+            if (structureTypeId > 0)
             {
-                EveHelperWF.Objects.StructureProfile structureProfile = structureProfiles.Find(x => x.profileId == bpInfo.StructureProfileId);
-                complex = EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
-            }
-
-            if (complex == null && helperClass.ManufacturingStructureTypeID > 0)
-            {
-                complex = EngineerngComplices.Find(x => x.StructureTypeId == helperClass.ManufacturingStructureTypeID);
+                complex = EngineerngComplices.Find(x => x.StructureTypeId == structureTypeId);
             }
 
             if (complex != null)
@@ -489,33 +482,25 @@ namespace EveHelperWF.ScreenHelper
             return costIndex;
         }
 
-        public static decimal CalculateManufacturingJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass, int runsNeeded, BlueprintInfo bpinfo)
+        public static decimal CalculateManufacturingJobCost(List<Objects.MaterialsWithMarketData> Mats, 
+                                                            int runsNeeded, 
+                                                            int manufacturingStructureTypeId,
+                                                            int manufacturingSolarSystemId,
+                                                            decimal manufacturingFacilityTax)
         {
 
             decimal baseCost = GetBaseCost(Mats, true, runsNeeded);
             decimal jobCost = 0;
             decimal costIndice = 0;
             double sccSurcharge = Enums.Enums.SCCSurcharge;
-            decimal structureBonus = GetManufacturingStructureCostBonus(helperClass, bpinfo);
+            decimal structureBonus = GetManufacturingStructureCostBonus(manufacturingStructureTypeId);
             decimal jobGrossCost = 0;
-            int solarSystemId = helperClass.ManufacturingSolarSystemID;
-            decimal tax = helperClass.ManufacturingFacilityTax;
 
 
-            if (bpinfo != null && bpinfo.StructureProfileId > 0)
+
+            if (manufacturingSolarSystemId > 0)
             {
-                Objects.StructureProfile profile = structureProfiles.Find(x => x.profileId == bpinfo.StructureProfileId);
-                EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == profile.structureTypeId);
-                if (complex != null)
-                {
-                    solarSystemId = profile.solarSystemID;
-                    tax = profile.taxAmount;
-                }
-            }
-
-            if (solarSystemId > 0)
-            {
-                costIndice = GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ActivityManufacturing);
+                costIndice = GetCostIndexForSystemID(manufacturingSolarSystemId, CostIndiceActivity.ActivityManufacturing);
             }
 
             jobGrossCost = Math.Round(baseCost * costIndice);
@@ -524,45 +509,34 @@ namespace EveHelperWF.ScreenHelper
 
             jobCost = jobGrossCost;
 
-            jobCost += Math.Round(baseCost * (Convert.ToDecimal(tax) / 100));
+            jobCost += Math.Round(baseCost * (Convert.ToDecimal(manufacturingFacilityTax) / 100));
 
             jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
 
             return jobCost;
         }
 
-        public static decimal CalculateReactionJobCost(List<Objects.MaterialsWithMarketData> Mats, Objects.CalculationHelperClass helperClass, int runsNeeded, BlueprintInfo bpinfo)
+        public static decimal CalculateReactionJobCost(List<Objects.MaterialsWithMarketData> Mats,  
+                                                        int runsNeeded,
+                                                        int reactionSolarSystemId,
+                                                        decimal reactionTax)
         {
             decimal baseCost = GetBaseCost(Mats, true, runsNeeded);
             decimal jobCost = 0;
             decimal costIndice = 0;
             double sccSurcharge = Enums.Enums.SCCSurcharge;
             decimal jobGrossCost = 0;
-            int solarSystemId = helperClass.ReactionSolarSystemID;
-            decimal tax = helperClass.ReactionsFacilityTax;
 
-
-            if (bpinfo != null && bpinfo.StructureProfileId > 0)
+            if (reactionSolarSystemId > 0)
             {
-                Objects.StructureProfile profile = structureProfiles.Find(x => x.profileId == bpinfo.StructureProfileId);
-                RefineryComplex complex = RefinerComplices.Find(x => x.StructureTypeID == profile.structureTypeId);
-                if (complex != null)
-                {
-                    solarSystemId = profile.solarSystemID;
-                    tax = profile.taxAmount;
-                }
-            }
-
-            if (solarSystemId > 0)
-            {
-                costIndice = GetCostIndexForSystemID(solarSystemId, CostIndiceActivity.ACtivityReaction);
+                costIndice = GetCostIndexForSystemID(reactionSolarSystemId, CostIndiceActivity.ACtivityReaction);
             }
 
             jobGrossCost = Math.Round(baseCost * costIndice);
 
             jobCost = jobGrossCost;
 
-            jobCost += Math.Round(baseCost * (Convert.ToDecimal(tax) / 100));
+            jobCost += Math.Round(baseCost * ((reactionTax) / 100));
 
             jobCost += Math.Round(baseCost * (decimal)sccSurcharge);
 
@@ -579,15 +553,13 @@ namespace EveHelperWF.ScreenHelper
             return totalCost;
         }
 
-        public static decimal CalculateTaxAndFees(decimal iskBeingTaxed, Objects.CalculationHelperClass helperClass, int orderType)
+        public static decimal CalculateTaxAndFees(decimal iskBeingTaxed, int orderType, int accountingSkillLevel, int brokerSkillLevel)
         {
             decimal taxAndFees = 0;
             decimal baseSalesTax = Convert.ToDecimal(0.08);
             decimal baseBrokersFee = Convert.ToDecimal(0.03);
-            int accountingSkillLevel = helperClass.AccountingSkill;
             decimal accountingSkillBonus = (Convert.ToDecimal(.0088) * Convert.ToDecimal(accountingSkillLevel));
-            int brokerRelationsSKillLevel = helperClass.BrokersSkill;
-            decimal brokerRelationsSkillBonus = Convert.ToDecimal(.003) * Convert.ToDecimal(brokerRelationsSKillLevel);
+            decimal brokerRelationsSkillBonus = Convert.ToDecimal(.003) * Convert.ToDecimal(brokerSkillLevel);
             bool isBuyOrder = (orderType == 2);
             decimal totalSalesTax = baseSalesTax - accountingSkillBonus;
             decimal totalBrokerFee = baseBrokersFee - brokerRelationsSkillBonus;
@@ -605,15 +577,26 @@ namespace EveHelperWF.ScreenHelper
             return taxAndFees;
         }
 
-        public static long CalculateManufacturingReactionJobTime(int bpReactionTypeID, long baseTime, CalculationHelperClass helperClass, int TEValue, bool isReaction, BlueprintInfo bpInfo)
+        public static long CalculateManufacturingReactionJobTime(int bpReactionTypeID, 
+                                                                long baseTime, 
+                                                                int TEValue, 
+                                                                bool isReaction,
+                                                                int reactionSkillLevel,
+                                                                int industrySkillLevel,
+                                                                int advancedIndustrySkillLevel,
+                                                                int specificAdvancedIndustrySkillLevel,
+                                                                int structureTypeId,
+                                                                int structureTERig,
+                                                                int solarSystemId,
+                                                                int manufacturingImplantTypeId)
         {
             //The base time passed in should be the numruns * time per run
             decimal totalTime = (decimal)baseTime;
             if (isReaction)
             {
-                decimal ReactionSkillBonus = 1 - (((decimal)helperClass.ReactionsSkill * 4) / 100);
-                decimal reactionStructureBonus = ReactionStructureTimeBonus(helperClass.ReactionsStructureTypeID, bpInfo);
-                decimal reactionRigBonus = StructureRigTimeFactor(helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID, isReaction, bpInfo);
+                decimal ReactionSkillBonus = 1 - (((decimal)reactionSkillLevel * 4) / 100);
+                decimal reactionStructureBonus = ReactionStructureTimeBonus(structureTypeId);
+                decimal reactionRigBonus = StructureRigTimeFactor(structureTERig, solarSystemId, isReaction);
 
                 totalTime = totalTime * ReactionSkillBonus;
                 totalTime *= reactionStructureBonus;
@@ -623,12 +606,12 @@ namespace EveHelperWF.ScreenHelper
             else
             {
                 decimal TEDecimal = 1 - (decimal)TEValue / 100;
-                decimal industryFactor = 1 - ((decimal)(helperClass.IndustrySkill * 4) / 100);
-                decimal advIndyFactor = 1 - ((decimal)(helperClass.AdvancedIndustrySkill * 3) / 100);
-                decimal skillFactor = BPSpecificSkillFactor(bpReactionTypeID, helperClass);
-                decimal structureBonus = GetManufacturingStructureTimeBonus(helperClass.ManufacturingStructureTypeID, bpInfo);
-                decimal structureRigFactor = StructureRigTimeFactor(helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID, isReaction, bpInfo);
-                decimal implantBonus = ManufacturingImplantBonus(helperClass.ManufacturingImplantTypeID);
+                decimal industryFactor = 1 - ((decimal)(industrySkillLevel * 4) / 100);
+                decimal advIndyFactor = 1 - ((decimal)(advancedIndustrySkillLevel * 3) / 100);
+                decimal skillFactor = BPSpecificSkillFactor(bpReactionTypeID, specificAdvancedIndustrySkillLevel, industrySkillLevel);
+                decimal structureBonus = GetManufacturingStructureTimeBonus(structureTypeId);
+                decimal structureRigFactor = StructureRigTimeFactor(structureTERig, solarSystemId, isReaction);
+                decimal implantBonus = ManufacturingImplantBonus(manufacturingImplantTypeId);
 
                 totalTime *= TEDecimal;
                 totalTime *= industryFactor;
@@ -642,34 +625,34 @@ namespace EveHelperWF.ScreenHelper
             return Convert.ToInt64(totalTime);
         }
 
-        private static decimal BPSpecificSkillFactor(int bpReactionTypeId, CalculationHelperClass helperClass)
+        private static decimal BPSpecificSkillFactor(int bpReactionTypeId, int specificAdvancedIndustrySkillLevel, int industrySkillLevel)
         {
             decimal factor = 1;
             decimal singleFactor = 1;
 
             if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedSmallShipConstruction))
             {
-                singleFactor = 1 - ((decimal)(helperClass.AdvacnedSmallConstructionSkill * 1) / 100);
+                singleFactor = 1 - ((decimal)(specificAdvancedIndustrySkillLevel * 1) / 100);
                 factor *= singleFactor;
             }
             if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedMediumShipConstruction))
             {
-                singleFactor = 1 - ((decimal)(helperClass.AdvacnedMediumConstructionSkill * 1) / 100);
+                singleFactor = 1 - ((decimal)(specificAdvancedIndustrySkillLevel * 1) / 100);
                 factor *= singleFactor;
             }
             if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedLargeShipConstruction))
             {
-                singleFactor = 1 - ((decimal)(helperClass.AdvacnedLargeConstructionSkill * 1) / 100);
+                singleFactor = 1 - ((decimal)(specificAdvancedIndustrySkillLevel * 1) / 100);
                 factor *= singleFactor;
             }
             if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedCapitalShipConstruction))
             {
-                singleFactor = 1 - ((decimal)(helperClass.AdvancedCapitalConstructionSkill * 1) / 100);
+                singleFactor = 1 - ((decimal)(specificAdvancedIndustrySkillLevel * 1) / 100);
                 factor *= singleFactor;
             }
             if (BPRequiresSkill(bpReactionTypeId, (int)Enums.Enums.SkillID.AdvancedIndustrialShipConstruction))
             {
-                singleFactor = 1 - ((decimal)(helperClass.IndustrySkill * 1) / 100);
+                singleFactor = 1 - ((decimal)(industrySkillLevel * 1) / 100);
                 factor *= singleFactor;
             }
 
@@ -690,17 +673,12 @@ namespace EveHelperWF.ScreenHelper
             return skillRequired;
         }
 
-        private static decimal GetManufacturingStructureTimeBonus(int manuComplexId, BlueprintInfo bpInfo)
+        private static decimal GetManufacturingStructureTimeBonus(int manuComplexId)
         {
             decimal Factor = 1;
             EngineerngComplex engineerngComplex = null;
-            if (bpInfo != null && bpInfo.StructureProfileId > 0)
-            {
-                Objects.StructureProfile structureProfile = structureProfiles.Find(x => x.profileId == bpInfo.StructureProfileId);
-                engineerngComplex = EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
-            }
 
-            if (engineerngComplex == null && manuComplexId > 0)
+            if (manuComplexId > 0)
             {
                 engineerngComplex = EngineerngComplices.Find(x => x.StructureTypeId == manuComplexId);
                 if (engineerngComplex != null)
@@ -712,36 +690,12 @@ namespace EveHelperWF.ScreenHelper
             return Factor;
         }
 
-        private static decimal StructureRigTimeFactor(int TERigType, int systemID, bool isReaction, BlueprintInfo bpInfo)
+        private static decimal StructureRigTimeFactor(int TERigType, int systemID, bool isReaction)
         {
             decimal bonus = 1;
             bool isLowSec = false;
             bool isNullSec = false;
             int solarSystemId = systemID;
-            int teRig = TERigType;
-
-            if (bpInfo != null && bpInfo.StructureProfileId > 0)
-            {
-                Objects.StructureProfile structureProfile = structureProfiles.Find(x => x.profileId == bpInfo.StructureProfileId);
-                if (isReaction)
-                {
-                    RefineryComplex complex = RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
-                    if (complex != null)
-                    {
-                        teRig = structureProfile.TERig;
-                        solarSystemId = structureProfile.solarSystemID;
-                    }
-                }
-                else
-                {
-                    EngineerngComplex complex = EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
-                    if (complex != null)
-                    {
-                        teRig = structureProfile.TERig;
-                        solarSystemId = structureProfile.solarSystemID;
-                    }
-                }
-            }
 
             if (solarSystemId > 0)
             {
@@ -750,15 +704,15 @@ namespace EveHelperWF.ScreenHelper
                 isNullSec = (Math.Round(solarSystem.security, 1) <= 0);
             }
 
-            if (teRig > 0)
+            if (TERigType > 0)
             {
 
                 decimal rigBonus = 0;
-                if (teRig == 1)
+                if (TERigType == 1)
                 {
                     rigBonus = Convert.ToDecimal(0.2);
                 }
-                else if (teRig == 2)
+                else if (TERigType == 2)
                 {
                     rigBonus = Convert.ToDecimal(0.24);
                 }
@@ -809,20 +763,14 @@ namespace EveHelperWF.ScreenHelper
             return factor;
         }
 
-        private static decimal ReactionStructureTimeBonus(int reactionStructureTypeId, BlueprintInfo bpInfo)
+        private static decimal ReactionStructureTimeBonus(int reactionStructureTypeId)
         {
             decimal factor = 1;
             BlueprintBrowserHelper.Init();
 
             RefineryComplex refineryComplex = null;
 
-            if (bpInfo != null && bpInfo.StructureProfileId > 0)
-            {
-                Objects.StructureProfile structureProfile = structureProfiles.Find(x => x.profileId == bpInfo.StructureProfileId);
-                refineryComplex = RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
-            }
-
-            if (refineryComplex == null && reactionStructureTypeId > 0)
+            if (reactionStructureTypeId > 0)
             {
                 refineryComplex = RefinerComplices.Find(x => x.StructureTypeID == reactionStructureTypeId);
             }
@@ -899,6 +847,301 @@ namespace EveHelperWF.ScreenHelper
         public static Color GetInvertedColor(Color c)
         {
             return Color.FromArgb(c.ToArgb() ^ 0xffffff);
+        }
+
+        public static int GetReactionStructureTypeId(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int reactionStructureTypeId = 0;
+            RefineryComplex refineryComplex = null;
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                if (structureProfile != null)
+                {
+                    refineryComplex = CommonHelper.RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
+                    if (refineryComplex != null)
+                    {
+                        reactionStructureTypeId = refineryComplex.StructureTypeID;
+                    }
+                }
+            }
+
+            if (refineryComplex == null)
+            {
+                reactionStructureTypeId = industrySettings.ReactionsStructureTypeID;
+            }
+
+            return reactionStructureTypeId;
+        }
+
+        public static int GetReactionSolarSystemId(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int solarSystemId = 0;
+            RefineryComplex refineryComplex = null;
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                if (structureProfile != null)
+                {
+                    refineryComplex = CommonHelper.RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
+                    if (refineryComplex != null)
+                    {
+                        solarSystemId = structureProfile.solarSystemID;
+                    }
+                }
+            }
+
+            if (refineryComplex == null)
+            {
+                solarSystemId = industrySettings.ReactionSolarSystemID;
+            }
+
+            return solarSystemId;
+        }
+
+        public static int GetReactionTERig(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int teRig = 0;
+            RefineryComplex refineryComplex = null;
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                if (structureProfile != null)
+                {
+                    refineryComplex = CommonHelper.RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
+                    if (refineryComplex != null)
+                    {
+                        teRig = structureProfile.TERig;
+                    }
+                }
+            }
+
+            if (refineryComplex == null)
+            {
+                if (industrySettings.ReactionStructureRigBonus != null)
+                {
+                    teRig = industrySettings.ReactionStructureRigBonus.RigTEBonus;
+                }
+            }
+            return teRig;
+        }
+
+        public static int GetReactionMERig(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int meRig = 0;
+            RefineryComplex refineryComplex = null;
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                if (structureProfile != null)
+                {
+                    refineryComplex = CommonHelper.RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
+                    if (refineryComplex != null)
+                    {
+                        meRig = structureProfile.MERig;
+                    }
+                }
+            }
+
+            if (refineryComplex == null)
+            {
+                if (industrySettings.ReactionStructureRigBonus != null)
+                {
+                    meRig = industrySettings.ReactionStructureRigBonus.RigMEBonus;
+                }
+            }
+
+            return meRig;
+        }
+
+        public static decimal GetReactionTax(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            decimal tax = 0;
+            RefineryComplex refineryComplex = null;
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                if (structureProfile != null)
+                {
+                    refineryComplex = CommonHelper.RefinerComplices.Find(x => x.StructureTypeID == structureProfile.structureTypeId);
+                    if (refineryComplex != null)
+                    {
+                        tax = structureProfile.taxAmount;
+                    }
+                }
+            }
+
+            if (refineryComplex is null)
+            {
+                tax = industrySettings.ManufacturingFacilityTax;
+            }
+
+            return tax;
+        }
+
+        public static int GetManufacturingStructureTypeId(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int manufacturingStructureTypeId = 0;
+            EngineerngComplex engineeringComplex = null;
+
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    if (engineeringComplex != null)
+                    {
+                        manufacturingStructureTypeId = engineeringComplex.StructureTypeId;
+                    }
+                }
+            }
+
+            if (engineeringComplex == null)
+            {
+                manufacturingStructureTypeId = industrySettings.ManufacturingStructureTypeID;
+            }
+
+            return manufacturingStructureTypeId;
+        }
+
+        public static int GetManufacturingSolarSystemId(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int solarSystemId = 0;
+            EngineerngComplex engineeringComplex = null;
+
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    if (engineeringComplex != null)
+                    {
+                        solarSystemId = structureProfile.solarSystemID;
+                    }
+                }
+            }
+
+            if (engineeringComplex == null)
+            {
+                solarSystemId = industrySettings.ManufacturingSolarSystemID;
+            }
+
+            return solarSystemId;
+        }
+
+        public static int GetManufacturingTERig(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int teRig = 0;
+            EngineerngComplex engineeringComplex = null;
+
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    if (engineeringComplex != null)
+                    {
+                        teRig = structureProfile.TERig;
+                    }
+                }
+            }
+
+            if (engineeringComplex == null)
+            {
+                if (industrySettings.ManufacturingStructureRigBonus != null)
+                {
+                    teRig = industrySettings.ManufacturingStructureRigBonus.RigTEBonus;
+                }
+            }
+
+            return teRig;
+        }
+
+        public static int GetManufacturingMERig(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            int meRig = 0;
+            EngineerngComplex engineeringComplex = null;
+
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    if (engineeringComplex != null)
+                    {
+                        meRig = structureProfile.MERig;
+                    }
+                }
+            }
+
+            if (engineeringComplex == null)
+            {
+                if (industrySettings.ManufacturingStructureRigBonus != null)
+                {
+                    meRig = industrySettings.ManufacturingStructureRigBonus.RigMEBonus;
+                }
+            }
+
+            return meRig;
+        }
+
+        public static decimal GetManufacturingTax(CalculationHelperClass industrySettings, BlueprintInfo blueprintInfo)
+        {
+            decimal tax = 0;
+            EngineerngComplex engineeringComplex = null;
+
+            if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
+            {
+                StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
+                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    if (engineeringComplex != null)
+                    {
+                        tax = structureProfile.taxAmount;
+                    }
+                }
+            }
+
+            if (engineeringComplex is null)
+            {
+                tax = industrySettings.ManufacturingFacilityTax;
+            }
+
+            return tax;
+        }
+
+        public static int GetSpecificAdvancedIndustrySkill(int blueprintTypeId, CalculationHelperClass industrySettings)
+        {
+            int specificSkill = 0;
+
+
+            if (BPRequiresSkill(blueprintTypeId, (int)Enums.Enums.SkillID.AdvancedSmallShipConstruction))
+            {
+                specificSkill = industrySettings.AdvacnedSmallConstructionSkill;
+            }
+            if (BPRequiresSkill(blueprintTypeId, (int)Enums.Enums.SkillID.AdvancedMediumShipConstruction))
+            {
+                specificSkill = industrySettings.AdvacnedMediumConstructionSkill;
+            }
+            if (BPRequiresSkill(blueprintTypeId, (int)Enums.Enums.SkillID.AdvancedLargeShipConstruction))
+            {
+                specificSkill = industrySettings.AdvacnedLargeConstructionSkill;
+            }
+            if (BPRequiresSkill(blueprintTypeId, (int)Enums.Enums.SkillID.AdvancedCapitalShipConstruction))
+            {
+                specificSkill = industrySettings.CapitalShipConstructionSkill;
+            }
+            if (BPRequiresSkill(blueprintTypeId, (int)Enums.Enums.SkillID.AdvancedIndustrialShipConstruction))
+            {
+                specificSkill = industrySettings.AdvancedIndustrialConstructionSkill;
+            }
+
+            return specificSkill;
         }
     }
 }

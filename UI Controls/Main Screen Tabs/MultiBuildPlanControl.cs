@@ -1261,12 +1261,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                         //Taxes when selling on Market
                         decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                    this.currentBuildPlan.IndustrySettings,
-                                                                                    (int)Enums.Enums.OrderType.Sell);
+                                                                                   (int)(Enums.Enums.OrderType.Sell),
+                                                                                   this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                                   this.currentBuildPlan.IndustrySettings.BrokersSkill);
 
                         decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                    this.currentBuildPlan.IndustrySettings,
-                                                                                    (int)Enums.Enums.OrderType.Buy);
+                                                                                   (int)(Enums.Enums.OrderType.Buy),
+                                                                                   this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                                   this.currentBuildPlan.IndustrySettings.BrokersSkill);
                         if (!TaxFinalProductCheckbox.Checked)
                         {
                             outcomeSellTaxes = 0;

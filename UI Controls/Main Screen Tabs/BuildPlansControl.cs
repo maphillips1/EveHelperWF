@@ -1340,8 +1340,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     decimal inputMaterialCostBeforeTax = _CombinedMats.Sum(x => x.priceTotal);
                     decimal totalInputPrice = inputMaterialCostBeforeTax;
                     decimal totalInputTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
-                                                                               this.currentBuildPlan.IndustrySettings,
-                                                                               this.currentBuildPlan.IndustrySettings.InputOrderType);
+                                                                               this.currentBuildPlan.IndustrySettings.InputOrderType,
+                                                                               this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                               this.currentBuildPlan.IndustrySettings.BrokersSkill);
                     decimal inputTaxPerItem = totalInputTaxes / optimumBuild.TotalQuantityNeeded;
                     if (!TaxInputCheckbox.Checked)
                     {
@@ -1351,13 +1352,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
 
                     //Taxes when selling on Market
-                    decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                this.currentBuildPlan.IndustrySettings,
-                                                                                (int)Enums.Enums.OrderType.Sell);
+                    decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
+                                                                               (int)Enums.Enums.OrderType.Sell,
+                                                                               this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                               this.currentBuildPlan.IndustrySettings.BrokersSkill);
 
-                    decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                this.currentBuildPlan.IndustrySettings,
-                                                                                (int)Enums.Enums.OrderType.Buy);
+                    decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
+                                                                               (int)Enums.Enums.OrderType.Buy,
+                                                                               this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                               this.currentBuildPlan.IndustrySettings.BrokersSkill);
                     if (!TaxFinalProductCheckbox.Checked)
                     {
                         outcomeSellTaxes = 0;

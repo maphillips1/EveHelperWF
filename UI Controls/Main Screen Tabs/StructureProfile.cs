@@ -25,24 +25,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         public StructureProfile()
         {
             InitializeComponent();
-            LoadStructureProfiles();
+            profiles = CommonHelper.structureProfiles;
             DatabindGridView<List<EveHelperWF.Objects.StructureProfile>>(StructureProfilesGrid, profiles);
-        }
-
-        private void LoadStructureProfiles()
-        {
-            string fileName = Enums.Enums.StructureProfilesDirectory + "StructureProfiles.json";
-            if (File.Exists(fileName))
-            {
-                string allText = FileHelper.GetFileContent(fileName);
-                profiles = Newtonsoft.Json.JsonConvert.DeserializeObject<List<EveHelperWF.Objects.StructureProfile>>(allText);
-            }
-            else
-            {
-                //create the file.
-                string allText = Newtonsoft.Json.JsonConvert.SerializeObject(profiles);
-                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, fileName, allText);
-            }
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -127,7 +111,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 string allText = Newtonsoft.Json.JsonConvert.SerializeObject(profiles);
                 string fileName = Enums.Enums.StructureProfilesDirectory + "StructureProfiles.json";
                 FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, fileName, allText);
-                StructureProfilesGrid.DataSource = null;
                 DatabindGridView<List<EveHelperWF.Objects.StructureProfile>>(StructureProfilesGrid, profiles);
                 CommonHelper.LoadStructureProfiles();
             }
