@@ -41,7 +41,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 //create the file.
                 string allText = Newtonsoft.Json.JsonConvert.SerializeObject(profiles);
-                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, "StructureProfiles.json", allText);
+                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, fileName, allText);
             }
         }
 
@@ -85,7 +85,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 profiles.Remove(profileInEdit);
                 string allText = Newtonsoft.Json.JsonConvert.SerializeObject(profiles);
-                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, "StructureProfiles.json", allText);
+                string fileName = Enums.Enums.StructureProfilesDirectory + "StructureProfiles.json";
+                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, fileName, allText);
                 StructureProfilesGrid.DataSource = null;
                 DatabindGridView<List<EveHelperWF.Objects.StructureProfile>>(StructureProfilesGrid, profiles);
             }
@@ -124,7 +125,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 addEditScreen.Close();
                 string allText = Newtonsoft.Json.JsonConvert.SerializeObject(profiles);
-                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, "StructureProfiles.json", allText);
+                string fileName = Enums.Enums.StructureProfilesDirectory + "StructureProfiles.json";
+                FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, fileName, allText);
                 StructureProfilesGrid.DataSource = null;
                 DatabindGridView<List<EveHelperWF.Objects.StructureProfile>>(StructureProfilesGrid, profiles);
                 CommonHelper.LoadStructureProfiles();
