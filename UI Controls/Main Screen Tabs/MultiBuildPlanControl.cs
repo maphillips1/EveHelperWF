@@ -1310,7 +1310,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         fp.profit = profit;
                     }
                 }
-
                 FinalProductGridView.DatabindGridView(this.currentBuildPlan.FinalProducts);
             }
         }
@@ -1846,14 +1845,19 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.isLoading = true;
             this.Cursor = Cursors.WaitCursor;
 
+            ProgressLabel.Text = "Setting all BP's/Reactions to build = true";
             foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
             {
                 bpInfo.React = true;
                 bpInfo.Manufacture = true;
             }
+            ProgressLabel.Text = "Running calcs with build all = true";
 
             RunCalcs();
 
+            ProgressLabel.Text = "Done running calcs with build all = true";
+
+            ProgressLabel.Text = "Updating all prices with jata value";
             UpdatePricesJitaButton_Click(this, new EventArgs());
             this.Cursor = Cursors.WaitCursor;
 
@@ -1865,12 +1869,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             int numBuildGroups = orderedKeys.Count;
             int counter = 0;
             int key = 0;
+            ProgressLabel.Text = "Running optimum build calcs";
             while (counter < numBuildGroups)
             {
                 key = orderedKeys[counter];
                 FinalProduct fp = null;
                 foreach (OptimizedBuild optimizedBuild in this.currentBuildPlan.OptimumBuildGroups[key])
                 {
+                    ProgressLabel.Text = $"Processing build group {key} / {numBuildGroups}";
                     fp = this.currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == optimizedBuild.BlueprintOrReactionTypeID);
                     if (fp == null)
                     {
@@ -1921,11 +1927,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
 
 
+            ProgressLabel.Text = "Optimum Build Determined. Updating Build Plan";
             SaveBuildPlan();
             LoadBlueprintStoreTreeView();
 
             this.Cursor = Cursors.Default;
             this.isLoading = false;
+            ProgressLabel.Text = "";
             MessageBox.Show("Build plan has been updated to be as profitable as possible", "Build Plan Updated"); ;
         }
 
@@ -1943,6 +1951,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 InventoryType finalProduct;
                 if (fp == null)
                 {
+                    this.Cursor = Cursors.WaitCursor;
                     finalProduct = CommonHelper.InventoryTypes.Find(x => x.typeId == productTypeId);
                     fp = new FinalProduct();
                     fp.finalProductTypeId = productTypeId;
@@ -1953,7 +1962,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.FinalProducts.Add(fp);
                     LoadInputMaterialsForProduct(fp.blueprintOrReactionTypeId);
                     MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, this.currentBuildPlan.InputMaterials);
+                    
                     LoadUIForBuildPlan();
+                    this.Cursor = Cursors.Default;
                 }
                 else
                 {
@@ -1975,7 +1986,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                     if (editScreen.DialogResult == DialogResult.OK)
                     {
-                        RunCalcs();
+                        this.Cursor = Cursors.WaitCursor;
+                        LoadUIForBuildPlan();
+                        this.Cursor = Cursors.Default;
                     }
                 }
             }
@@ -1991,7 +2004,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (MessageBox.Show("Are you sure you want to delete this product?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         this.currentBuildPlan.FinalProducts.Remove(fp);
-                        RunCalcs();
+                        
+                        this.Cursor = Cursors.WaitCursor;
+                        LoadUIForBuildPlan();
+                        this.Cursor = Cursors.Default;
                     }
                 }
             }

@@ -55,6 +55,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 {
                     BackupShoppingPlans(SelectedPath);
                 }
+
+                if (MultiBuildPlansCheckbox.Checked)
+                {
+                    BackupMultiBuildPlans(SelectedPath);
+                }
+
+                if (StructureProfilesCheckbox.Checked)
+                {
+                    BackupStructureProfiles(SelectedPath);
+                }
                 MessageBox.Show("Backup Complete");
             }
         }
@@ -150,6 +160,50 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 foreach (string fileName in ShoppingPlanFiles)
                 {
                     fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.ShoppingListsDirectory, fileName);
+                    if (fileContent != null)
+                    {
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(selectedPathWithSubFolder, actualFileName);
+                        FileHelper.SaveFileContent(selectedPathWithSubFolder, newFileName, fileContent);
+                    }
+                }
+            }
+        }
+
+        private void BackupMultiBuildPlans(string selectedPath)
+        {
+            string[] BuildPlanFiles = Directory.GetFiles(Enums.Enums.MultiBuildPlansDirectory);
+            if (BuildPlanFiles != null && BuildPlanFiles.Count() > 0)
+            {
+                string selectedPathWithSubFolder = Path.Combine(selectedPath, "MultiBuildPlans");
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                foreach (string fileName in BuildPlanFiles)
+                {
+                    fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.MultiBuildPlansDirectory, fileName);
+                    if (fileContent != null)
+                    {
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(selectedPathWithSubFolder, actualFileName);
+                        FileHelper.SaveFileContent(selectedPathWithSubFolder, newFileName, fileContent);
+                    }
+                }
+            }
+        }
+
+        private void BackupStructureProfiles(string selectedPath)
+        {
+            string[] BuildPlanFiles = Directory.GetFiles(Enums.Enums.StructureProfilesDirectory);
+            if (BuildPlanFiles != null && BuildPlanFiles.Count() > 0)
+            {
+                string selectedPathWithSubFolder = Path.Combine(selectedPath, "StructureProfiles");
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                foreach (string fileName in BuildPlanFiles)
+                {
+                    fileContent = FileIO.FileHelper.GetFileContent(Enums.Enums.StructureProfilesDirectory, fileName);
                     if (fileContent != null)
                     {
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));

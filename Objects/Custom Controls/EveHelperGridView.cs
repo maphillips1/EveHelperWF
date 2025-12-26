@@ -57,8 +57,10 @@ namespace EveHelperWF.Objects.Custom_Controls
         {
             this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             this.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-            this.datasourceType = listToBind.GetType();
+            //Force the grid to reload
+            if (this.DataSource != null) { this.DataSource = null; }
             this.DataSource = listToBind;
+            this.datasourceType = listToBind.GetType();
             this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             this.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             SetColumnEditMode();

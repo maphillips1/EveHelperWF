@@ -19,6 +19,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             DefaultFormValuesLabel.Text = Enums.Enums.CachedFormValuesDirectory;
             BuildPlansLinkLabel.Text = Enums.Enums.BuildPlanDirectory;
             ShoppingListsLinkLabel.Text = Enums.Enums.ShoppingListsDirectory;
+            StructureProfilesLabel.Text = Enums.Enums.StructureProfilesDirectory;
+            MultiBuildPlanLabel.Text = Enums.Enums.MultiBuildPlansDirectory;
+        }
+
+        private void OpenFileExplorerToDirectory(string path)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo(path);
+            psi.Arguments = path;
+            psi.FileName = "explorer.exe";
+            Process.Start(psi);
         }
 
         private void SQLiteLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -46,14 +56,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             OpenFileExplorerToDirectory(Enums.Enums.CachedFormValuesDirectory);
         }
 
-        private void OpenFileExplorerToDirectory(string path)
-        {
-            ProcessStartInfo psi = new ProcessStartInfo(path);
-            psi.Arguments = path;
-            psi.FileName = "explorer.exe";
-            Process.Start(psi);
-        }
-
         private void BuildPlansLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenFileExplorerToDirectory(Enums.Enums.BuildPlanDirectory);
@@ -62,6 +64,16 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private void ShoppingListsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             OpenFileExplorerToDirectory(Enums.Enums.ShoppingListsDirectory);
+        }
+
+        private void StructureProfilesLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.StructureProfilesDirectory);
+        }
+
+        private void MultiBuildPlanLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenFileExplorerToDirectory(Enums.Enums.MultiBuildPlansDirectory);
         }
     }
 }

@@ -26,6 +26,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             comboListItems.Add(new ComboListItem(4, "Default Values"));
             comboListItems.Add(new ComboListItem(5, "Build Plans"));
             comboListItems.Add(new ComboListItem(6, "Shopping Lists"));
+            comboListItems.Add(new ComboListItem(7, "Structure Profiles"));
+            comboListItems.Add(new ComboListItem(8, "Multi-Build Plans"));
 
             FileTypeCombo.DisplayMember = "value";
             FileTypeCombo.ValueMember = "key";
@@ -40,6 +42,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 case 1:
                 case 5:
                 case 6:
+                case 8:
                     ImportFileDialog.Multiselect = true;
                     break;
                 default:
@@ -96,6 +99,12 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
                 case 6:
                     ImportShoppingPlans();
+                    break;
+                case 7:
+                    ImportStructureProfiles();
+                    break;
+                case 8:
+                    ImportMultiBuildPlan();
                     break;
             }
             SelectedFileNames = null;
@@ -258,6 +267,81 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
                         newFileName = Path.Combine(Enums.Enums.ShoppingListsDirectory, actualFileName);
                         FileHelper.SaveFileContent(Enums.Enums.ShoppingListsDirectory, newFileName, fileContent);
+                    }
+                }
+                string skippedListString = skippedList.ToString();
+                if (!string.IsNullOrEmpty(skippedListString))
+                {
+                    skippedListString += Environment.NewLine + "Did you select the right file type?";
+                    MessageBox.Show(skippedListString, "Files with Incorrect Format.");
+                }
+            }
+        }
+
+        private void ImportStructureProfiles()
+        {
+            if (SelectedFileNames != null && SelectedFileNames.Count() > 0)
+            {
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                List<StructureProfile> structureProfiles;
+                StringBuilder skippedList = new StringBuilder();
+                foreach (string fileName in SelectedFileNames)
+                {
+                    fileContent = File.ReadAllText(fileName);
+                    if (fileContent != null)
+                    {
+                        try
+                        {
+                            structureProfiles = Newtonsoft.Json.JsonConvert.DeserializeObject<List<StructureProfile>>(fileContent);
+                        }
+                        catch (Exception ex)
+                        {
+                            skippedList.AppendLine("Skipping file: " + fileName);
+                            continue;
+                        }
+
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(Enums.Enums.StructureProfilesDirectory, actualFileName);
+                        FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, newFileName, fileContent);
+                    }
+                }
+                string skippedListString = skippedList.ToString();
+                if (!string.IsNullOrEmpty(skippedListString))
+                {
+                    skippedListString += Environment.NewLine + "Did you select the right file type?";
+                    MessageBox.Show(skippedListString, "Files with Incorrect Format.");
+                }
+            }
+        }
+
+        private void ImportMultiBuildPlan()
+        {
+            if (SelectedFileNames != null && SelectedFileNames.Count() > 0)
+            {
+                string fileContent = null;
+                string actualFileName;
+                string newFileName;
+                MultiBuildPlan buildPlan;
+                StringBuilder skippedList = new StringBuilder();
+                foreach (string fileName in SelectedFileNames)
+                {
+                    fileContent = File.ReadAllText(fileName);
+                    if (fileContent != null)
+                    {
+                        try
+                        {
+                            buildPlan = Newtonsoft.Json.JsonConvert.DeserializeObject<MultiBuildPlan>(fileContent);
+                        }
+                        catch (Exception ex)
+                        {
+                            skippedList.AppendLine("Skipping file: " + fileName);
+                            continue;
+                        }
+                        actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
+                        newFileName = Path.Combine(Enums.Enums.MultiBuildPlansDirectory, actualFileName);
+                        FileHelper.SaveFileContent(Enums.Enums.MultiBuildPlansDirectory, newFileName, fileContent);
                     }
                 }
                 string skippedListString = skippedList.ToString();
