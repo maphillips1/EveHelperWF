@@ -33,10 +33,12 @@
             DefaultValuesCheckbox = new CheckBox();
             AbyssRunsCheckbox = new CheckBox();
             TrackedItemsCheckbox = new CheckBox();
-            BackupFilesButton = new Objects.Custom_Controls.EveHelperButton();
+            BackupFilesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             BackupFilesDialog = new FolderBrowserDialog();
             BuildPlansCheckbox = new CheckBox();
             ShoppingListCheckbox = new CheckBox();
+            StructureProfilesCheckbox = new CheckBox();
+            MultiBuildPlansCheckbox = new CheckBox();
             SuspendLayout();
             // 
             // PriceHistoryCheckbox
@@ -89,9 +91,17 @@
             // 
             // BackupFilesButton
             // 
+            BackupFilesButton.BorderBottom = false;
+            BackupFilesButton.BorderFull = true;
+            BackupFilesButton.BorderLeft = false;
+            BackupFilesButton.BorderRight = false;
+            BackupFilesButton.BorderTop = false;
+            BackupFilesButton.BorderWidth = 2F;
+            BackupFilesButton.FlatAppearance.BorderSize = 0;
+            BackupFilesButton.FlatStyle = FlatStyle.Flat;
             BackupFilesButton.Font = new Font("Segoe UI", 10.2F);
             BackupFilesButton.ForeColor = Color.FromArgb(234, 234, 234);
-            BackupFilesButton.Location = new Point(54, 188);
+            BackupFilesButton.Location = new Point(54, 231);
             BackupFilesButton.Margin = new Padding(3, 2, 3, 2);
             BackupFilesButton.Name = "BackupFilesButton";
             BackupFilesButton.Size = new Size(124, 25);
@@ -130,12 +140,38 @@
             ShoppingListCheckbox.Text = "Shopping Lists";
             ShoppingListCheckbox.UseVisualStyleBackColor = true;
             // 
+            // StructureProfilesCheckbox
+            // 
+            StructureProfilesCheckbox.AutoSize = true;
+            StructureProfilesCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            StructureProfilesCheckbox.Location = new Point(60, 194);
+            StructureProfilesCheckbox.Margin = new Padding(3, 2, 3, 2);
+            StructureProfilesCheckbox.Name = "StructureProfilesCheckbox";
+            StructureProfilesCheckbox.Size = new Size(137, 23);
+            StructureProfilesCheckbox.TabIndex = 9;
+            StructureProfilesCheckbox.Text = "Structure Profiles";
+            StructureProfilesCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // MultiBuildPlansCheckbox
+            // 
+            MultiBuildPlansCheckbox.AutoSize = true;
+            MultiBuildPlansCheckbox.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            MultiBuildPlansCheckbox.Location = new Point(60, 167);
+            MultiBuildPlansCheckbox.Margin = new Padding(3, 2, 3, 2);
+            MultiBuildPlansCheckbox.Name = "MultiBuildPlansCheckbox";
+            MultiBuildPlansCheckbox.Size = new Size(137, 23);
+            MultiBuildPlansCheckbox.TabIndex = 8;
+            MultiBuildPlansCheckbox.Text = "Multi-Build Plans";
+            MultiBuildPlansCheckbox.UseVisualStyleBackColor = true;
+            // 
             // BackupFiles
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(244, 244);
+            ClientSize = new Size(244, 301);
+            Controls.Add(StructureProfilesCheckbox);
+            Controls.Add(MultiBuildPlansCheckbox);
             Controls.Add(ShoppingListCheckbox);
             Controls.Add(BuildPlansCheckbox);
             Controls.Add(BackupFilesButton);
@@ -163,5 +199,7 @@
         private FolderBrowserDialog BackupFilesDialog;
         private CheckBox BuildPlansCheckbox;
         private CheckBox ShoppingListCheckbox;
+        private CheckBox StructureProfilesCheckbox;
+        private CheckBox MultiBuildPlansCheckbox;
     }
 }
