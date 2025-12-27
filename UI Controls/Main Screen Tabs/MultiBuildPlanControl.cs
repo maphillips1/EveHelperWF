@@ -102,25 +102,23 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (addBuildPlanScreen.ShowDialog() == DialogResult.OK)
             {
-                if (WaitForWorkers())
+                this.currentBuildPlan = new MultiBuildPlan();
+                this.currentBuildPlan.BuildPlanName = addBuildPlanScreen.PlanNameTextBox.Text + ".json";
+                FinalProduct finalProduct = new FinalProduct();
+                finalProduct.finalProductTypeId = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
+                InventoryType fpType = CommonHelper.InventoryTypes.Find(x => x.typeId == finalProduct.finalProductTypeId);
+                finalProduct.finalProductTypeName = fpType.typeName;
+                finalProduct.RunsPerCopy = 1;
+                finalProduct.NumOfCopies = 1;
+                finalProduct.blueprintOrReactionTypeId = SQLiteCalls.GetBlueprintByProductTypeID(finalProduct.finalProductTypeId);
+                this.currentBuildPlan.FinalProducts.Add(finalProduct);
+                CurrentFileName = Enums.Enums.MultiBuildPlansDirectory + this.currentBuildPlan.BuildPlanName;
+                SaveBuildPlan();
+                LoadFileCombo();
+                string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(addBuildPlanScreen.PlanNameTextBox.Text));
+                if (selectedFileName != null)
                 {
-                    this.currentBuildPlan = new MultiBuildPlan();
-                    this.currentBuildPlan.BuildPlanName = addBuildPlanScreen.PlanNameTextBox.Text + ".json";
-                    FinalProduct finalProduct = new FinalProduct();
-                    finalProduct.finalProductTypeId = (Int32)addBuildPlanScreen.ProductCombo.SelectedValue;
-                    InventoryType fpType = CommonHelper.InventoryTypes.Find(x => x.typeId == finalProduct.finalProductTypeId);
-                    finalProduct.finalProductTypeName = fpType.typeName;
-                    finalProduct.RunsPerCopy = 1;
-                    finalProduct.NumOfCopies = 1;
-                    finalProduct.blueprintOrReactionTypeId = SQLiteCalls.GetBlueprintByProductTypeID(finalProduct.finalProductTypeId);
-                    this.currentBuildPlan.FinalProducts.Add(finalProduct);
-                    CurrentFileName = Enums.Enums.MultiBuildPlansDirectory + this.currentBuildPlan.BuildPlanName;
-                    LoadFileCombo();
-                    string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(addBuildPlanScreen.PlanNameTextBox.Text));
-                    if (selectedFileName != null)
-                    {
-                        BuildPlanCombo.SelectedValue = CurrentFileName;
-                    }
+                    BuildPlanCombo.SelectedValue = CurrentFileName;
                 }
             }
         }
@@ -759,10 +757,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (currentBuildPlan != null)
             {
                 this.SuspendLayout();
-                if (this.currentBuildPlan.CombinedMats == null)
-                {
-                    RunCalcs();
-                }
 
                 //Ensure we have the minimum information to run the calcs
                 EnsureCalculationHelperClass();
@@ -770,6 +764,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 EnsureMinimumRunsAndCopies();
                 EnsureBlueprintStore();
                 EnsureCurrentInventory();
+
+                if (this.currentBuildPlan.CombinedMats == null)
+                {
+                    RunCalcs();
+                }
 
                 //Load Blueprint Store
                 LoadBlueprintStoreTreeView();

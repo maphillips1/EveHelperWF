@@ -818,6 +818,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 if (!string.IsNullOrEmpty(content))
                 {
                     currentBuildPlan = Newtonsoft.Json.JsonConvert.DeserializeObject<Objects.BuildPlan>(content);
+                    FinalProductType = CommonHelper.InventoryTypes.Find(x => x.typeId == currentBuildPlan.finalProductTypeID);
                 }
             }
         }
@@ -827,6 +828,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (currentBuildPlan != null)
             {
                 this.SuspendLayout();
+                //Ensure we have the minimum information to run the calcs
+                EnsureCalculationHelperClass();
+                EnsureInputMaterials();
+                EnsureMinimumRunsAndCopies();
+                EnsureBlueprintStore();
+                EnsureCurrentInventory();
 
                 //This will fix build plans that existed before this change. 
                 //For new build plans this condition will be true when you first add the new build plan which 
@@ -837,12 +844,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     return;
                 }
                 FinalProductType = CommonHelper.InventoryTypes.Find(x => x.typeId == this.currentBuildPlan.finalProductTypeID);
-                //Ensure we have the minimum information to run the calcs
-                EnsureCalculationHelperClass();
-                EnsureInputMaterials();
-                EnsureMinimumRunsAndCopies();
-                EnsureBlueprintStore();
-                EnsureCurrentInventory();
 
                 //Load Blueprint Store
                 LoadBlueprintStoreTreeView();
