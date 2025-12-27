@@ -69,17 +69,6 @@
             EditFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             AddFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             FinalProductGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
-            finalProductTypeName = new DataGridViewTextBoxColumn();
-            additionalCosts = new DataGridViewTextBoxColumn();
-            TotalOutcome = new DataGridViewTextBoxColumn();
-            totalVolume = new DataGridViewTextBoxColumn();
-            TotalRuns = new DataGridViewTextBoxColumn();
-            profit = new DataGridViewTextBoxColumn();
-            finalSellPrice = new DataGridViewTextBoxColumn();
-            CostPerItem = new DataGridViewTextBoxColumn();
-            totalCost = new DataGridViewTextBoxColumn();
-            jitaSellPrice = new DataGridViewTextBoxColumn();
-            jitaBuyPrice = new DataGridViewTextBoxColumn();
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             NotesTextBox = new TextBox();
             MaterialPricePage = new TabPage();
@@ -173,6 +162,17 @@
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TotalPlanCostLabel = new Label();
+            finalProductTypeName = new DataGridViewTextBoxColumn();
+            additionalCosts = new DataGridViewTextBoxColumn();
+            TotalOutcome = new DataGridViewTextBoxColumn();
+            totalVolume = new DataGridViewTextBoxColumn();
+            TotalRuns = new DataGridViewTextBoxColumn();
+            profit = new DataGridViewTextBoxColumn();
+            finalSellPrice = new DataGridViewTextBoxColumn();
+            CostPerItem = new DataGridViewTextBoxColumn();
+            totalCost = new DataGridViewTextBoxColumn();
+            jitaSellPrice = new DataGridViewTextBoxColumn();
+            jitaBuyPrice = new DataGridViewTextBoxColumn();
             label1 = new Label();
             label9 = new Label();
             label21 = new Label();
@@ -587,72 +587,6 @@
             FinalProductGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             FinalProductGridView.Size = new Size(1292, 401);
             FinalProductGridView.TabIndex = 34;
-            // 
-            // finalProductTypeName
-            // 
-            finalProductTypeName.DataPropertyName = "finalProductTypeName";
-            finalProductTypeName.HeaderText = "Product Name";
-            finalProductTypeName.Name = "finalProductTypeName";
-            // 
-            // additionalCosts
-            // 
-            additionalCosts.DataPropertyName = "additionalCosts";
-            additionalCosts.HeaderText = "Additional Costs";
-            additionalCosts.Name = "additionalCosts";
-            // 
-            // TotalOutcome
-            // 
-            TotalOutcome.DataPropertyName = "TotalOutcome";
-            TotalOutcome.HeaderText = "Total Outcome";
-            TotalOutcome.Name = "TotalOutcome";
-            // 
-            // totalVolume
-            // 
-            totalVolume.DataPropertyName = "totalOutcomeVolume";
-            totalVolume.HeaderText = "Total Volume";
-            totalVolume.Name = "totalVolume";
-            // 
-            // TotalRuns
-            // 
-            TotalRuns.DataPropertyName = "TotalRuns";
-            TotalRuns.HeaderText = "Total Runs";
-            TotalRuns.Name = "TotalRuns";
-            // 
-            // profit
-            // 
-            profit.DataPropertyName = "profit";
-            profit.HeaderText = "Profit";
-            profit.Name = "profit";
-            // 
-            // finalSellPrice
-            // 
-            finalSellPrice.DataPropertyName = "customSellPrice";
-            finalSellPrice.HeaderText = "Custom Sell Price";
-            finalSellPrice.Name = "finalSellPrice";
-            // 
-            // CostPerItem
-            // 
-            CostPerItem.DataPropertyName = "CostPerItem";
-            CostPerItem.HeaderText = "Cost / Item";
-            CostPerItem.Name = "CostPerItem";
-            // 
-            // totalCost
-            // 
-            totalCost.DataPropertyName = "totalCost";
-            totalCost.HeaderText = "Total Cost";
-            totalCost.Name = "totalCost";
-            // 
-            // jitaSellPrice
-            // 
-            jitaSellPrice.DataPropertyName = "jitaSellPrice ";
-            jitaSellPrice.HeaderText = "Jita Sell";
-            jitaSellPrice.Name = "jitaSellPrice";
-            // 
-            // jitaBuyPrice
-            // 
-            jitaBuyPrice.DataPropertyName = "jitaBuyPrice ";
-            jitaBuyPrice.HeaderText = "Jita Buy";
-            jitaBuyPrice.Name = "jitaBuyPrice";
             // 
             // MostProfitableButton
             // 
@@ -1953,6 +1887,72 @@
             TotalPlanCostLabel.Size = new Size(0, 21);
             TotalPlanCostLabel.TabIndex = 61;
             // 
+            // finalProductTypeName
+            // 
+            finalProductTypeName.DataPropertyName = "finalProductTypeName";
+            finalProductTypeName.HeaderText = "Product Name";
+            finalProductTypeName.Name = "finalProductTypeName";
+            // 
+            // additionalCosts
+            // 
+            additionalCosts.DataPropertyName = "additionalCosts";
+            additionalCosts.HeaderText = "Additional Costs";
+            additionalCosts.Name = "additionalCosts";
+            // 
+            // TotalOutcome
+            // 
+            TotalOutcome.DataPropertyName = "TotalOutcome";
+            TotalOutcome.HeaderText = "Total Outcome";
+            TotalOutcome.Name = "TotalOutcome";
+            // 
+            // totalVolume
+            // 
+            totalVolume.DataPropertyName = "totalOutcomeVolume";
+            totalVolume.HeaderText = "Total Volume";
+            totalVolume.Name = "totalVolume";
+            // 
+            // TotalRuns
+            // 
+            TotalRuns.DataPropertyName = "TotalRuns";
+            TotalRuns.HeaderText = "Total Runs";
+            TotalRuns.Name = "TotalRuns";
+            // 
+            // profit
+            // 
+            profit.DataPropertyName = "profit";
+            profit.HeaderText = "Profit";
+            profit.Name = "profit";
+            // 
+            // finalSellPrice
+            // 
+            finalSellPrice.DataPropertyName = "customSellPrice";
+            finalSellPrice.HeaderText = "Custom Sell Price";
+            finalSellPrice.Name = "finalSellPrice";
+            // 
+            // CostPerItem
+            // 
+            CostPerItem.DataPropertyName = "CostPerItem";
+            CostPerItem.HeaderText = "Cost / Item";
+            CostPerItem.Name = "CostPerItem";
+            // 
+            // totalCost
+            // 
+            totalCost.DataPropertyName = "totalCost";
+            totalCost.HeaderText = "Total Cost";
+            totalCost.Name = "totalCost";
+            // 
+            // jitaSellPrice
+            // 
+            jitaSellPrice.DataPropertyName = "jitaSellPrice";
+            jitaSellPrice.HeaderText = "Jita Sell";
+            jitaSellPrice.Name = "jitaSellPrice";
+            // 
+            // jitaBuyPrice
+            // 
+            jitaBuyPrice.DataPropertyName = "jitaBuyPrice";
+            jitaBuyPrice.HeaderText = "Jita Buy";
+            jitaBuyPrice.Name = "jitaBuyPrice";
+            // 
             // MultiBuildPlansControl
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -2145,6 +2145,7 @@
         private Objects.Custom_Controls.EveHelperGridView CostBreakdownGrid;
         private Objects.Custom_Controls.EveHelperButton EditFinalProductButton;
         private Objects.Custom_Controls.EveHelperButton DeleteFinalProduct;
+        private Label TotalPlanCostLabel;
         private DataGridViewTextBoxColumn finalProductTypeName;
         private DataGridViewTextBoxColumn additionalCosts;
         private DataGridViewTextBoxColumn TotalOutcome;
@@ -2156,6 +2157,5 @@
         private DataGridViewTextBoxColumn totalCost;
         private DataGridViewTextBoxColumn jitaSellPrice;
         private DataGridViewTextBoxColumn jitaBuyPrice;
-        private Label TotalPlanCostLabel;
     }
 }
