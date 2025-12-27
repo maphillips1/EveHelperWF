@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EveHelperWF.ScreenHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,5 +29,12 @@ namespace EveHelperWF.Objects
         public decimal CostPerItem { get; set; }
         public decimal totalOutcomeVolume { get; set; }
         public decimal profit {  get; set; }
+        public string TotalCost
+        {
+            get
+            {
+                return CommonHelper.FormatIsk(CostPerItem * TotalRuns);
+            }
+        }
     }
 }

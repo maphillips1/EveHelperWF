@@ -45,7 +45,6 @@
             Label label41;
             Label label52;
             Label label54;
-            Label label18;
             Label label5;
             Label label58;
             Label label56;
@@ -70,6 +69,17 @@
             EditFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             AddFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             FinalProductGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
+            finalProductTypeName = new DataGridViewTextBoxColumn();
+            additionalCosts = new DataGridViewTextBoxColumn();
+            TotalOutcome = new DataGridViewTextBoxColumn();
+            totalVolume = new DataGridViewTextBoxColumn();
+            TotalRuns = new DataGridViewTextBoxColumn();
+            profit = new DataGridViewTextBoxColumn();
+            finalSellPrice = new DataGridViewTextBoxColumn();
+            CostPerItem = new DataGridViewTextBoxColumn();
+            totalCost = new DataGridViewTextBoxColumn();
+            jitaSellPrice = new DataGridViewTextBoxColumn();
+            jitaBuyPrice = new DataGridViewTextBoxColumn();
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             NotesTextBox = new TextBox();
             MaterialPricePage = new TabPage();
@@ -81,7 +91,6 @@
             ExportPricesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TaxFinalProductCheckbox = new CheckBox();
             TaxInputCheckbox = new CheckBox();
-            FinalSellPriceNumeric = new NumericUpDown();
             MaterialsPriceTreeView = new TreeView();
             UpdatePricesJitaButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CopyToClipboardButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
@@ -163,16 +172,7 @@
             SystemButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
-            finalProductTypeName = new DataGridViewTextBoxColumn();
-            additionalCosts = new DataGridViewTextBoxColumn();
-            TotalOutcome = new DataGridViewTextBoxColumn();
-            totalVolume = new DataGridViewTextBoxColumn();
-            TotalRuns = new DataGridViewTextBoxColumn();
-            profit = new DataGridViewTextBoxColumn();
-            finalSellPrice = new DataGridViewTextBoxColumn();
-            jitaSellPrice = new DataGridViewTextBoxColumn();
-            jitaBuyPrice = new DataGridViewTextBoxColumn();
-            CostPerItem = new DataGridViewTextBoxColumn();
+            TotalPlanCostLabel = new Label();
             label1 = new Label();
             label9 = new Label();
             label21 = new Label();
@@ -190,7 +190,6 @@
             label41 = new Label();
             label52 = new Label();
             label54 = new Label();
-            label18 = new Label();
             label5 = new Label();
             label58 = new Label();
             label56 = new Label();
@@ -200,7 +199,6 @@
             ((System.ComponentModel.ISupportInitialize)FinalProductGridView).BeginInit();
             MaterialPricePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)FinalSellPriceNumeric).BeginInit();
             IndustrySettingsTabPage.SuspendLayout();
             DefaultsTabContainer.SuspendLayout();
             ManufacturingDefaultsTabPage.SuspendLayout();
@@ -419,16 +417,6 @@
             label54.TabIndex = 8;
             label54.Text = "Click on the blueprint or reaction name to edit the ME, TE, Max Runs, and whether or not to make the item";
             // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 9.75F);
-            label18.Location = new Point(9, 18);
-            label18.Name = "label18";
-            label18.Size = new Size(139, 17);
-            label18.TabIndex = 24;
-            label18.Text = "Final Product Sell Price";
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -572,7 +560,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             FinalProductGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             FinalProductGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            FinalProductGridView.Columns.AddRange(new DataGridViewColumn[] { finalProductTypeName, additionalCosts, TotalOutcome, totalVolume, TotalRuns, profit, finalSellPrice, jitaSellPrice, jitaBuyPrice, CostPerItem });
+            FinalProductGridView.Columns.AddRange(new DataGridViewColumn[] { finalProductTypeName, additionalCosts, TotalOutcome, totalVolume, TotalRuns, profit, finalSellPrice, CostPerItem, totalCost, jitaSellPrice, jitaBuyPrice });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -599,6 +587,72 @@
             FinalProductGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             FinalProductGridView.Size = new Size(1292, 401);
             FinalProductGridView.TabIndex = 34;
+            // 
+            // finalProductTypeName
+            // 
+            finalProductTypeName.DataPropertyName = "finalProductTypeName";
+            finalProductTypeName.HeaderText = "Product Name";
+            finalProductTypeName.Name = "finalProductTypeName";
+            // 
+            // additionalCosts
+            // 
+            additionalCosts.DataPropertyName = "additionalCosts";
+            additionalCosts.HeaderText = "Additional Costs";
+            additionalCosts.Name = "additionalCosts";
+            // 
+            // TotalOutcome
+            // 
+            TotalOutcome.DataPropertyName = "TotalOutcome";
+            TotalOutcome.HeaderText = "Total Outcome";
+            TotalOutcome.Name = "TotalOutcome";
+            // 
+            // totalVolume
+            // 
+            totalVolume.DataPropertyName = "totalOutcomeVolume";
+            totalVolume.HeaderText = "Total Volume";
+            totalVolume.Name = "totalVolume";
+            // 
+            // TotalRuns
+            // 
+            TotalRuns.DataPropertyName = "TotalRuns";
+            TotalRuns.HeaderText = "Total Runs";
+            TotalRuns.Name = "TotalRuns";
+            // 
+            // profit
+            // 
+            profit.DataPropertyName = "profit";
+            profit.HeaderText = "Profit";
+            profit.Name = "profit";
+            // 
+            // finalSellPrice
+            // 
+            finalSellPrice.DataPropertyName = "customSellPrice";
+            finalSellPrice.HeaderText = "Custom Sell Price";
+            finalSellPrice.Name = "finalSellPrice";
+            // 
+            // CostPerItem
+            // 
+            CostPerItem.DataPropertyName = "CostPerItem";
+            CostPerItem.HeaderText = "Cost / Item";
+            CostPerItem.Name = "CostPerItem";
+            // 
+            // totalCost
+            // 
+            totalCost.DataPropertyName = "totalCost";
+            totalCost.HeaderText = "Total Cost";
+            totalCost.Name = "totalCost";
+            // 
+            // jitaSellPrice
+            // 
+            jitaSellPrice.DataPropertyName = "jitaSellPrice ";
+            jitaSellPrice.HeaderText = "Jita Sell";
+            jitaSellPrice.Name = "jitaSellPrice";
+            // 
+            // jitaBuyPrice
+            // 
+            jitaBuyPrice.DataPropertyName = "jitaBuyPrice ";
+            jitaBuyPrice.HeaderText = "Jita Buy";
+            jitaBuyPrice.Name = "jitaBuyPrice";
             // 
             // MostProfitableButton
             // 
@@ -637,8 +691,6 @@
             MaterialPricePage.Controls.Add(ExportPricesButton);
             MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
             MaterialPricePage.Controls.Add(TaxInputCheckbox);
-            MaterialPricePage.Controls.Add(FinalSellPriceNumeric);
-            MaterialPricePage.Controls.Add(label18);
             MaterialPricePage.Controls.Add(MaterialsPriceTreeView);
             MaterialPricePage.Controls.Add(UpdatePricesJitaButton);
             MaterialPricePage.Controls.Add(label52);
@@ -681,7 +733,7 @@
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle6.ForeColor = Color.Gold;
             dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
@@ -772,17 +824,6 @@
             TaxInputCheckbox.Text = "Include Taxes on Inputs";
             TaxInputCheckbox.UseVisualStyleBackColor = true;
             TaxInputCheckbox.CheckedChanged += TaxInputCheckbox_CheckedChanged;
-            // 
-            // FinalSellPriceNumeric
-            // 
-            FinalSellPriceNumeric.DecimalPlaces = 2;
-            FinalSellPriceNumeric.Location = new Point(174, 14);
-            FinalSellPriceNumeric.Maximum = new decimal(new int[] { 1316134912, 2328, 0, 0 });
-            FinalSellPriceNumeric.Name = "FinalSellPriceNumeric";
-            FinalSellPriceNumeric.Size = new Size(113, 23);
-            FinalSellPriceNumeric.TabIndex = 25;
-            FinalSellPriceNumeric.ThousandsSeparator = true;
-            FinalSellPriceNumeric.KeyUp += Numeric_KeyUp;
             // 
             // MaterialsPriceTreeView
             // 
@@ -1903,65 +1944,14 @@
             SummaryButton.UseVisualStyleBackColor = false;
             SummaryButton.Click += SummaryButton_Click;
             // 
-            // finalProductTypeName
+            // TotalPlanCostLabel
             // 
-            finalProductTypeName.DataPropertyName = "finalProductTypeName";
-            finalProductTypeName.HeaderText = "Product Name";
-            finalProductTypeName.Name = "finalProductTypeName";
-            // 
-            // additionalCosts
-            // 
-            additionalCosts.DataPropertyName = "additionalCosts";
-            additionalCosts.HeaderText = "Additional Costs";
-            additionalCosts.Name = "additionalCosts";
-            // 
-            // TotalOutcome
-            // 
-            TotalOutcome.DataPropertyName = "TotalOutcome";
-            TotalOutcome.HeaderText = "Total Outcome";
-            TotalOutcome.Name = "TotalOutcome";
-            // 
-            // totalVolume
-            // 
-            totalVolume.DataPropertyName = "totalOutcomeVolume";
-            totalVolume.HeaderText = "Total Volume";
-            totalVolume.Name = "totalVolume";
-            // 
-            // TotalRuns
-            // 
-            TotalRuns.DataPropertyName = "TotalRuns";
-            TotalRuns.HeaderText = "Total Runs";
-            TotalRuns.Name = "TotalRuns";
-            // 
-            // profit
-            // 
-            profit.DataPropertyName = "profit";
-            profit.HeaderText = "Profit";
-            profit.Name = "profit";
-            // 
-            // finalSellPrice
-            // 
-            finalSellPrice.DataPropertyName = "customSellPrice";
-            finalSellPrice.HeaderText = "Custom Sell Price";
-            finalSellPrice.Name = "finalSellPrice";
-            // 
-            // jitaSellPrice
-            // 
-            jitaSellPrice.DataPropertyName = "jitaSellPrice ";
-            jitaSellPrice.HeaderText = "Jita Sell";
-            jitaSellPrice.Name = "jitaSellPrice";
-            // 
-            // jitaBuyPrice
-            // 
-            jitaBuyPrice.DataPropertyName = "jitaBuyPrice ";
-            jitaBuyPrice.HeaderText = "Jita Buy";
-            jitaBuyPrice.Name = "jitaBuyPrice";
-            // 
-            // CostPerItem
-            // 
-            CostPerItem.DataPropertyName = "CostPerItem";
-            CostPerItem.HeaderText = "Cost / Item";
-            CostPerItem.Name = "CostPerItem";
+            TotalPlanCostLabel.AutoSize = true;
+            TotalPlanCostLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TotalPlanCostLabel.Location = new Point(370, 48);
+            TotalPlanCostLabel.Name = "TotalPlanCostLabel";
+            TotalPlanCostLabel.Size = new Size(0, 21);
+            TotalPlanCostLabel.TabIndex = 61;
             // 
             // MultiBuildPlansControl
             // 
@@ -1970,6 +1960,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AutoValidate = AutoValidate.Disable;
             ClientSize = new Size(1536, 639);
+            Controls.Add(TotalPlanCostLabel);
             Controls.Add(SummaryButton);
             Controls.Add(CurrentInventoryButton);
             Controls.Add(SystemButton);
@@ -1998,7 +1989,6 @@
             MaterialPricePage.ResumeLayout(false);
             MaterialPricePage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)FinalSellPriceNumeric).EndInit();
             IndustrySettingsTabPage.ResumeLayout(false);
             DefaultsTabContainer.ResumeLayout(false);
             ManufacturingDefaultsTabPage.ResumeLayout(false);
@@ -2099,7 +2089,6 @@
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetReactionsButton;
         private EveHelperWF.Objects.Custom_Controls.EveHelperButton SetBlueprintButton;
         private TabPage CostBreakdownPage;
-        private NumericUpDown FinalSellPriceNumeric;
         private CheckBox TaxFinalProductCheckbox;
         private CheckBox TaxInputCheckbox;
         private NumericUpDown ReactionsSkillUpDown;
@@ -2163,8 +2152,10 @@
         private DataGridViewTextBoxColumn TotalRuns;
         private DataGridViewTextBoxColumn profit;
         private DataGridViewTextBoxColumn finalSellPrice;
+        private DataGridViewTextBoxColumn CostPerItem;
+        private DataGridViewTextBoxColumn totalCost;
         private DataGridViewTextBoxColumn jitaSellPrice;
         private DataGridViewTextBoxColumn jitaBuyPrice;
-        private DataGridViewTextBoxColumn CostPerItem;
+        private Label TotalPlanCostLabel;
     }
 }

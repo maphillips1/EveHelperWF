@@ -278,7 +278,10 @@ namespace EveHelperWF.ScreenHelper
             if (bpInfo != null && bpInfo.StructureProfileId > 0)
             {
                 structureProfile = structureProfiles.Find(x => x.profileId == bpInfo.StructureProfileId);
-                structureProfileEngineeringComplex = EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                if (structureProfile != null)
+                {
+                    structureProfileEngineeringComplex = EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                }
             }
 
             if (structureProfileEngineeringComplex != null)
@@ -987,12 +990,15 @@ namespace EveHelperWF.ScreenHelper
             if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
             {
                 StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
-                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
                 if (structureProfile != null)
                 {
-                    if (engineeringComplex != null)
+                    engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                    if (structureProfile != null)
                     {
-                        manufacturingStructureTypeId = engineeringComplex.StructureTypeId;
+                        if (engineeringComplex != null)
+                        {
+                            manufacturingStructureTypeId = engineeringComplex.StructureTypeId;
+                        }
                     }
                 }
             }
@@ -1013,12 +1019,15 @@ namespace EveHelperWF.ScreenHelper
             if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
             {
                 StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
-                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
                 if (structureProfile != null)
                 {
-                    if (engineeringComplex != null)
+                    engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                    if (structureProfile != null)
                     {
-                        solarSystemId = structureProfile.solarSystemID;
+                        if (engineeringComplex != null)
+                        {
+                            solarSystemId = structureProfile.solarSystemID;
+                        }
                     }
                 }
             }
@@ -1039,12 +1048,15 @@ namespace EveHelperWF.ScreenHelper
             if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
             {
                 StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
-                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
                 if (structureProfile != null)
                 {
-                    if (engineeringComplex != null)
+                    engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                    if (structureProfile != null)
                     {
-                        teRig = structureProfile.TERig;
+                        if (engineeringComplex != null)
+                        {
+                            teRig = structureProfile.TERig;
+                        }
                     }
                 }
             }
@@ -1068,12 +1080,15 @@ namespace EveHelperWF.ScreenHelper
             if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
             {
                 StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
-                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
                 if (structureProfile != null)
                 {
-                    if (engineeringComplex != null)
+                    engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                    if (structureProfile != null)
                     {
-                        meRig = structureProfile.MERig;
+                        if (engineeringComplex != null)
+                        {
+                            meRig = structureProfile.MERig;
+                        }
                     }
                 }
             }
@@ -1097,12 +1112,15 @@ namespace EveHelperWF.ScreenHelper
             if (blueprintInfo != null && blueprintInfo.StructureProfileId > 0)
             {
                 StructureProfile structureProfile = CommonHelper.structureProfiles.Find(x => x.profileId == blueprintInfo.StructureProfileId);
-                engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
                 if (structureProfile != null)
                 {
-                    if (engineeringComplex != null)
+                    engineeringComplex = CommonHelper.EngineerngComplices.Find(x => x.StructureTypeId == structureProfile.structureTypeId);
+                    if (structureProfile != null)
                     {
-                        tax = structureProfile.taxAmount;
+                        if (engineeringComplex != null)
+                        {
+                            tax = structureProfile.taxAmount;
+                        }
                     }
                 }
             }

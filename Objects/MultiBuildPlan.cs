@@ -27,5 +27,6 @@ namespace EveHelperWF.Objects
         public Dictionary<int, List<OptimizedBuild>> OptimumBuildGroups { get; set; }
         public List<InventoryTypeWithQuantity> CurrentInventory { get; set; }
         public List<int> completedBuilds { get;set; }
+        public List<MaterialsWithMarketData> CombinedMats { get; set; }
     }
 }
