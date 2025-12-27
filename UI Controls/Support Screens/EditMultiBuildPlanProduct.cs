@@ -37,6 +37,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 FinalProduct.additionalCosts = AdditionalCostNumeric.Value;
                 FinalProduct.RunsPerCopy = (int)RunsPerCopyNumeric.Value;
                 FinalProduct.NumOfCopies = (int)NumCopiesNumeric.Value;
+                FinalProduct.TotalOutcome = (int)(FinalProduct.RunsPerCopy * FinalProduct.NumOfCopies);
                 FinalProduct.customSellPrice = CustomSellPriceNumeric.Value;
                 DialogResult = DialogResult.OK;
             }

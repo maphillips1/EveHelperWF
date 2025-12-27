@@ -38,7 +38,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private bool IgnoreTextChangedEvent;
         private bool IsResetting;
         BindingList<KeyValuePair<string, string>> FileNames = new BindingList<KeyValuePair<string, string>>();
-        private List<MaterialsWithMarketData> _CombinedMats = new List<MaterialsWithMarketData>();
 
         //Material List
         private static List<Objects.MaterialsWithMarketData> MaterialList = null;
@@ -116,7 +115,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     finalProduct.blueprintOrReactionTypeId = SQLiteCalls.GetBlueprintByProductTypeID(finalProduct.finalProductTypeId);
                     this.currentBuildPlan.FinalProducts.Add(finalProduct);
                     CurrentFileName = Enums.Enums.MultiBuildPlansDirectory + this.currentBuildPlan.BuildPlanName;
-                    SaveBuildPlan();
                     LoadFileCombo();
                     string selectedFileName = FileNames.ToDictionary<string, string>().Keys.ToList().Find(x => x.Equals(addBuildPlanScreen.PlanNameTextBox.Text));
                     if (selectedFileName != null)
@@ -164,7 +162,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 SaveIndustrySettings();
-                SaveBuildPlan();
                 RunCalcs();
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -222,7 +219,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 this.isLoading = true;
                 this.Cursor = Cursors.WaitCursor;
                 List<ESIMarketType> mats = new List<ESIMarketType>();
-                _CombinedMats.ForEach(x => mats.Add(new ESIMarketType { typeID = x.materialTypeID, quantity = x.quantityTotal }));
+                this.currentBuildPlan.CombinedMats.ForEach(x => mats.Add(new ESIMarketType { typeID = x.materialTypeID, quantity = x.quantityTotal }));
                 List<ESIMarketType> pricedMats;
 
                 ProgressLabel.Text = "Getting Market Data";
@@ -310,7 +307,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         TreeNode parentNode = e.Node;
                         BuildChildNodes(bpInfo, ref parentNode);
                         RunCalcs();
-                        SaveBuildPlan();
                         isLoading = false;
                     }
                     BPTreeView.SelectedNode = null;
@@ -344,7 +340,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
 
                     SetAllBlueprintValues(bpInfo.ME, bpInfo.TE, bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
-                    SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
                     isLoading = false;
@@ -370,7 +365,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
                     bool excludeFP = BVC.ExcludeFPCheckbox.Checked;
                     SetAllReactionValues(bpInfo.MaxRuns, (int)BVC.MakeItemCombo.SelectedValue, excludeFP, bpInfo.StructureProfileId);
-                    SaveBuildPlan();
                     LoadBlueprintStoreTreeView();
                     RunCalcs();
                     isLoading = false;
@@ -542,7 +536,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             RunCalcs();
                             this.isLoading = false;
                         }
-                        SaveBuildPlan();
                         this.Cursor = Cursors.Default;
                     }
 
@@ -555,7 +548,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             if (this.currentBuildPlan != null)
             {
-                SaveBuildPlan();
                 if (!this.isLoading)
                 {
                     this.isLoading = true;
@@ -608,7 +600,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     RunCalcs();
                     this.isLoading = false;
                 }
-                SaveBuildPlan();
             }
         }
 
@@ -768,6 +759,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (currentBuildPlan != null)
             {
                 this.SuspendLayout();
+                if (this.currentBuildPlan.CombinedMats == null)
+                {
+                    RunCalcs();
+                }
+
                 //Ensure we have the minimum information to run the calcs
                 EnsureCalculationHelperClass();
                 EnsureInputMaterials();
@@ -778,11 +774,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 //Load Blueprint Store
                 LoadBlueprintStoreTreeView();
 
-                //Run the calcs
-                RunCalcs();
-
                 TaxInputCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxInputs;
                 TaxFinalProductCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxOutputs;
+
+                LoadProductImage();
+                LoadBasicInfo();
+                LoadIndySettings();
+                LoadFinalProductMarketInfo();
+                LoadMaterialsPriceTreeView();
+                LoadMostExpensiveGridView();
+
+                //Build Details Load
+                MultiBuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
+                BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
+                                   this.currentBuildPlan.InputMaterials,
+                                   this.currentBuildPlan.BlueprintStore,
+                                   this.currentBuildPlan.OptimumBuildGroups,
+                                   this.currentBuildPlan.completedBuilds);
+
+                SetSummaryInformation();
+                LoadPlanetaryMaterialsPage();
+                LoadCurrentInventoryPage();
+
                 //Load All the info on the screen
                 this.ResumeLayout();
             }
@@ -1094,13 +1107,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void RunCalcs()
         {
             //Reset before calcs. 
-            _CombinedMats = new List<MaterialsWithMarketData>();
-            MultiBuildPlanHelper.RunBuildPlanCalcs(ref this.currentBuildPlan, ref _CombinedMats);
+            this.currentBuildPlan.CombinedMats = new List<MaterialsWithMarketData>();
+            List<MaterialsWithMarketData> localMats = new List<MaterialsWithMarketData>();
+            MultiBuildPlanHelper.RunBuildPlanCalcs(ref this.currentBuildPlan, ref localMats);
+            this.currentBuildPlan.CombinedMats = localMats;
             MultiBuildPlanHelper.SetPriceInformationOnOptimizedBuilds(this.currentBuildPlan.OptimizedBuilds,
                                                                  this.currentBuildPlan.AllItems,
                                                                  this.currentBuildPlan.FinalProducts,
                                                                  this.currentBuildPlan);
-            LoadUIAfterCalcs();
+            LoadUIForBuildPlan();
             SaveBuildPlan();
         }
 
@@ -1116,6 +1131,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.ResumeLayout();
             this.IsResetting = false;
             CurrentInventoryGrid.DataSource = null;
+            TotalPlanCostLabel.Text = "";
 
             BuildPlanDetailsControl.ResetControls();
             BuildPlanPlanetMaterialsControl.ResetControl();
@@ -1127,7 +1143,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             InventoryTypeWithQuantity currentInventory;
             long quantityNeeded = 0;
-            foreach (MaterialsWithMarketData mat in _CombinedMats)
+            foreach (MaterialsWithMarketData mat in this.currentBuildPlan.CombinedMats)
             {
                 currentInventory = this.currentBuildPlan.CurrentInventory.Find(x => x.typeID == mat.materialTypeID);
                 quantityNeeded = mat.quantityTotal;
@@ -1237,6 +1253,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan != null)
             {
                 InventoryType invType = null;
+                decimal totalPlanCost = 0;
                 foreach (FinalProduct fp in currentBuildPlan.FinalProducts)
                 {
                     invType = CommonHelper.InventoryTypes.Find(x => x.typeId == fp.finalProductTypeId);
@@ -1261,12 +1278,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                         //Taxes when selling on Market
                         decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                    this.currentBuildPlan.IndustrySettings,
-                                                                                    (int)Enums.Enums.OrderType.Sell);
+                                                                                   (int)(Enums.Enums.OrderType.Sell),
+                                                                                   this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                                   this.currentBuildPlan.IndustrySettings.BrokersSkill);
 
                         decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
-                                                                                    this.currentBuildPlan.IndustrySettings,
-                                                                                    (int)Enums.Enums.OrderType.Buy);
+                                                                                   (int)(Enums.Enums.OrderType.Buy),
+                                                                                   this.currentBuildPlan.IndustrySettings.AccountingSkill,
+                                                                                   this.currentBuildPlan.IndustrySettings.BrokersSkill);
                         if (!TaxFinalProductCheckbox.Checked)
                         {
                             outcomeSellTaxes = 0;
@@ -1308,8 +1327,10 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         }
 
                         fp.profit = profit;
+                        totalPlanCost += (fp.TotalRuns * fp.CostPerItem);
                     }
                 }
+                TotalPlanCostLabel.Text = $"Total Plan Cost: {CommonHelper.FormatIsk(totalPlanCost)}";
                 FinalProductGridView.DatabindGridView(this.currentBuildPlan.FinalProducts);
             }
         }
@@ -1318,14 +1339,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             MaterialsPriceTreeView.Nodes.Clear();
             TreeNode tn;
-            _CombinedMats = _CombinedMats.OrderBy(x => x.materialName).ToList();
+            this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
             TreeNode marketGroupNode;
             TreeNode pricePer;
             TreeNode priceTotal;
             TreeNode volumeNode;
 
-            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = MultiBuildPlanHelper.GroupInputMaterials(_CombinedMats);
+            Dictionary<string, List<MaterialsWithMarketData>> groupedMaterials = MultiBuildPlanHelper.GroupInputMaterials(this.currentBuildPlan.CombinedMats);
 
             List<KeyValuePair<string, List<MaterialsWithMarketData>>> orderedMats = groupedMaterials.OrderBy(x => x.Key).ToList();
             InventoryTypeWithQuantity currentInventory;
@@ -1382,40 +1403,18 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadMostExpensiveGridView()
         {
-            _CombinedMats = _CombinedMats.OrderByDescending(x => x.priceTotal).ToList();
-            MostExpensiveGridView.DatabindGridView(_CombinedMats);
+            this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderByDescending(x => x.priceTotal).ToList();
+            MostExpensiveGridView.DatabindGridView(this.currentBuildPlan.CombinedMats);
         }
 
         private void LoadPlanetaryMaterialsPage()
         {
-            BuildPlanPlanetMaterialsControl.LoadPlanetMaterialsControl(this.currentBuildPlan.CurrentInventory, this._CombinedMats);
+            BuildPlanPlanetMaterialsControl.LoadPlanetMaterialsControl(this.currentBuildPlan.CurrentInventory, this.currentBuildPlan.CombinedMats);
         }
 
         private void LoadCurrentInventoryPage()
         {
             CurrentInventoryGrid.DatabindGridView(this.currentBuildPlan.CurrentInventory);
-        }
-
-        private void LoadUIAfterCalcs()
-        {
-            LoadProductImage();
-            LoadBasicInfo();
-            LoadIndySettings();
-            LoadFinalProductMarketInfo();
-            LoadMaterialsPriceTreeView();
-            LoadMostExpensiveGridView();
-
-            //Build Details Load
-            MultiBuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
-            BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
-                               this.currentBuildPlan.InputMaterials,
-                               this.currentBuildPlan.BlueprintStore,
-                               this.currentBuildPlan.OptimumBuildGroups,
-                               this.currentBuildPlan.completedBuilds);
-
-            SetSummaryInformation();
-            LoadPlanetaryMaterialsPage();
-            LoadCurrentInventoryPage();
         }
 
         private void LoadBlueprintStoreTreeView()
@@ -1605,9 +1604,9 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             StringBuilder exportBuilder = new StringBuilder();
             exportBuilder.AppendLine("Type ID, Type Name, Price Per Item, Total Needed");
-            _CombinedMats = _CombinedMats.OrderBy(x => x.materialName).ToList();
+            this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
-            foreach (MaterialsWithMarketData item in _CombinedMats)
+            foreach (MaterialsWithMarketData item in this.currentBuildPlan.CombinedMats)
             {
                 pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == item.materialTypeID);
                 exportBuilder.AppendLine(String.Format("{0}, {1}, {2}, {3}",
@@ -1778,7 +1777,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 SaveBuildPlan();
                 this.PriceInfoSet = true;
                 ProgressLabel.Text = "";
-                LoadUIAfterCalcs();
+                LoadUIForBuildPlan();
             }
         }
 
@@ -1928,7 +1927,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
 
             ProgressLabel.Text = "Optimum Build Determined. Updating Build Plan";
-            SaveBuildPlan();
             LoadBlueprintStoreTreeView();
 
             this.Cursor = Cursors.Default;
@@ -1962,8 +1960,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     this.currentBuildPlan.FinalProducts.Add(fp);
                     LoadInputMaterialsForProduct(fp.blueprintOrReactionTypeId);
                     MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, this.currentBuildPlan.InputMaterials);
-                    
-                    LoadUIForBuildPlan();
+
+                    RunCalcs();
                     this.Cursor = Cursors.Default;
                 }
                 else
@@ -1987,7 +1985,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (editScreen.DialogResult == DialogResult.OK)
                     {
                         this.Cursor = Cursors.WaitCursor;
-                        LoadUIForBuildPlan();
+                        RunCalcs();
                         this.Cursor = Cursors.Default;
                     }
                 }
@@ -2006,7 +2004,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         this.currentBuildPlan.FinalProducts.Remove(fp);
                         
                         this.Cursor = Cursors.WaitCursor;
-                        LoadUIForBuildPlan();
+                        RunCalcs();
                         this.Cursor = Cursors.Default;
                     }
                 }

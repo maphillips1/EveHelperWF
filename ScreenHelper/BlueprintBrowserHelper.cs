@@ -859,7 +859,10 @@ namespace EveHelperWF.ScreenHelper
             {
                 time = industryActivity.time * helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, helperClass.TE, false, null);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass.TE, false, helperClass.ReactionsSkill, 
+                                                                          helperClass.IndustrySkill, helperClass.AdvancedIndustrySkill, CommonHelper.GetSpecificAdvancedIndustrySkill(industryActivity.typeID, helperClass),
+                                                                          helperClass.ManufacturingStructureTypeID, helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID,
+                                                                          helperClass.ManufacturingImplantTypeID);
             }
 
             return time;
@@ -970,7 +973,10 @@ namespace EveHelperWF.ScreenHelper
                 //Runs
                 time *= helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass, 0, true, null);
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, 0, true, helperClass.ReactionsSkill,
+                                                                          0, 0, 0,
+                                                                          helperClass.ReactionsStructureTypeID, helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID,
+                                                                          0);
             }
 
             return time;

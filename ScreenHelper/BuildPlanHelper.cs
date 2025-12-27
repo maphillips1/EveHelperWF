@@ -764,7 +764,11 @@ namespace EveHelperWF.ScreenHelper
                             SetBaseInputValues(currentRuns, ref inputMaterials, baseMaterials);
                             //ME Calculations
                             CommonHelper.PerformManufacturingMECalculations(ref inputMaterials, buildPlan.IndustrySettings, currentRuns, ME, bpInfo);
-                            optimizedBuild.JobCost += CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, currentRuns, bpInfo);
+                            optimizedBuild.JobCost += CommonHelper.CalculateManufacturingJobCost(inputMaterials, 
+                                                                                                 currentRuns,
+                                                                                                 CommonHelper.GetManufacturingStructureTypeId(buildPlan.IndustrySettings, bpInfo),
+                                                                                                 CommonHelper.GetManufacturingSolarSystemId(buildPlan.IndustrySettings, bpInfo),
+                                                                                                 CommonHelper.GetManufacturingTax(buildPlan.IndustrySettings, bpInfo));
                             totalRuns -= optimizedBuild.MaxRunsPerBatch;
                         }
                         optimizedBuild.InputMaterials = inputMaterials;
@@ -775,7 +779,11 @@ namespace EveHelperWF.ScreenHelper
                         SetBaseInputValues(optimizedBuild.RunsNeeded, ref inputMaterials, baseMaterials);
                         //ME Calculations
                         CommonHelper.PerformManufacturingMECalculations(ref inputMaterials, buildPlan.IndustrySettings, optimizedBuild.RunsNeeded, ME, bpInfo);
-                        optimizedBuild.JobCost = CommonHelper.CalculateManufacturingJobCost(inputMaterials, buildPlan.IndustrySettings, optimizedBuild.RunsNeeded, bpInfo);
+                        optimizedBuild.JobCost = CommonHelper.CalculateManufacturingJobCost(inputMaterials,
+                                                                                            optimizedBuild.RunsNeeded,
+                                                                                            CommonHelper.GetManufacturingStructureTypeId(buildPlan.IndustrySettings, bpInfo),
+                                                                                            CommonHelper.GetManufacturingSolarSystemId(buildPlan.IndustrySettings, bpInfo),
+                                                                                            CommonHelper.GetManufacturingTax(buildPlan.IndustrySettings, bpInfo));
                         optimizedBuild.InputMaterials = inputMaterials;
                     }
 
@@ -791,9 +799,37 @@ namespace EveHelperWF.ScreenHelper
                     Database.SQLiteCalls.GetIndustryActivityTypes(optimizedBuild.BlueprintOrReactionTypeID);
 
             IndustryActivityTypes manuActivity = activities.Find(x => x.activityName == activityName);
-
-
-            long timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, manuActivity.time, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted, bpInfo);
+            long timePerRun = 0;
+            if (bpInfo.IsReacted)
+            {
+                timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId,
+                                                                                     manuActivity.time,
+                                                                                     bpInfo.TE,
+                                                                                     true,
+                                                                                     buildPlan.IndustrySettings.ReactionsSkill,
+                                                                                     buildPlan.IndustrySettings.IndustrySkill,
+                                                                                     buildPlan.IndustrySettings.AdvancedIndustrySkill,
+                                                                                     0,
+                                                                                     CommonHelper.GetReactionStructureTypeId(buildPlan.IndustrySettings, bpInfo),
+                                                                                     CommonHelper.GetReactionTERig(buildPlan.IndustrySettings, bpInfo),
+                                                                                     CommonHelper.GetReactionSolarSystemId(buildPlan.IndustrySettings, bpInfo),
+                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID);
+            }
+            else
+            {
+                timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId,
+                                                                                     manuActivity.time,
+                                                                                     bpInfo.TE,
+                                                                                     true,
+                                                                                     buildPlan.IndustrySettings.ReactionsSkill,
+                                                                                     buildPlan.IndustrySettings.IndustrySkill,
+                                                                                     buildPlan.IndustrySettings.AdvancedIndustrySkill,
+                                                                                     CommonHelper.GetSpecificAdvancedIndustrySkill(bpInfo.BlueprintTypeId, buildPlan.IndustrySettings),
+                                                                                     CommonHelper.GetManufacturingStructureTypeId(buildPlan.IndustrySettings, bpInfo),
+                                                                                     CommonHelper.GetManufacturingTERig(buildPlan.IndustrySettings, bpInfo),
+                                                                                     CommonHelper.GetManufacturingSolarSystemId(buildPlan.IndustrySettings, bpInfo),
+                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID);
+            }
             //days * hours * minutes * seconds;
             long maxTime = (30 * 24 * 60 * 60);
             //If Max Manufactuting/reaction time is set, use that as the max instead.
@@ -814,8 +850,6 @@ namespace EveHelperWF.ScreenHelper
                     }
                 }
             }
-            long totalTime = manuActivity.time * optimizedBuild.RunsNeeded;
-            totalTime = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId, totalTime, buildPlan.IndustrySettings, teValue, bpInfo.IsReacted, bpInfo);
             int batchesNeeded;
             int maxRunsPerBatch;
             maxRunsPerBatch = (int)Math.Floor((decimal)maxTime / (decimal)(timePerRun));
@@ -894,7 +928,10 @@ namespace EveHelperWF.ScreenHelper
                                 SetBaseInputValues(currentRuns, ref childMats, baseMaterials);
                                 //ME Calculations
                                 CommonHelper.PerformReactionMECalculations(ref childMats, buildPlan.IndustrySettings, currentRuns, bpInfo);
-                                optimizedBuild.JobCost += CommonHelper.CalculateReactionJobCost(childMats, buildPlan.IndustrySettings, currentRuns, bpInfo);
+                                optimizedBuild.JobCost += CommonHelper.CalculateReactionJobCost(childMats, 
+                                                                                                currentRuns, 
+                                                                                                CommonHelper.GetReactionSolarSystemId(buildPlan.IndustrySettings, bpInfo), 
+                                                                                                CommonHelper.GetReactionTax(buildPlan.IndustrySettings, bpInfo));
                                 totalRuns -= optimizedBuild.MaxRunsPerBatch;
                             }
                             //set child materials on object. 
@@ -906,7 +943,10 @@ namespace EveHelperWF.ScreenHelper
                             SetBaseInputValues(optimizedBuild.RunsNeeded, ref childMats, baseMaterials);
                             //ME Calculations
                             CommonHelper.PerformReactionMECalculations(ref childMats, buildPlan.IndustrySettings, optimizedBuild.RunsNeeded, bpInfo);
-                            optimizedBuild.JobCost = CommonHelper.CalculateReactionJobCost(childMats, buildPlan.IndustrySettings, optimizedBuild.RunsNeeded, bpInfo);
+                            optimizedBuild.JobCost = CommonHelper.CalculateReactionJobCost(childMats,
+                                                                                            optimizedBuild.RunsNeeded,
+                                                                                            CommonHelper.GetReactionSolarSystemId(buildPlan.IndustrySettings, bpInfo),
+                                                                                            CommonHelper.GetReactionTax(buildPlan.IndustrySettings, bpInfo));
                             //set child materials on object. 
                             optimizedBuild.InputMaterials = childMats;
                         }
