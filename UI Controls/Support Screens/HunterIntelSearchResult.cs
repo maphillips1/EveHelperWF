@@ -14,7 +14,8 @@ namespace EveHelperWF.UI_Controls.Support_Screens
     public partial class HunterIntelSearchResult : Objects.FormBase
     {
         private List<UniverseIdSearchResultItem> searchResultItems { get; set; }
-        public UniverseIdSearchResultItem selectedItem { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public UniverseIdSearchResultItem SelectedItem { get; set; }
         public HunterIntelSearchResult(List<UniverseIdSearchResultItem> searchResults)
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                 UniverseIdSearchResultItem selectedItem = (UniverseIdSearchResultItem)SearchResultsGrid.SelectedRows[0].DataBoundItem;
                 if (selectedItem != null)
                 {
-                    this.selectedItem  = selectedItem;
+                    this.SelectedItem  = selectedItem;
                     DialogResult = DialogResult.OK;
                     this.Close();
                 }

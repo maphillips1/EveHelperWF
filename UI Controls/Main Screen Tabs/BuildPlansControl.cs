@@ -901,11 +901,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan.BlueprintStore == null)
             {
                 this.currentBuildPlan.BlueprintStore = new List<BlueprintInfo>();
-            }
-            List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
-            if (BuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
-            {
-                SaveBuildPlan();
+                List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
+                if (BuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
+                {
+                    SaveBuildPlan();
+                }
             }
         }
 
@@ -1171,7 +1171,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             });
         }
 
-        private void RunCalcs()
+        private void RunCalcs(bool LoadUIAndSave = true)
         {
             //Reset before calcs. 
             List<MaterialsWithMarketData> localCombinedMats = new List<MaterialsWithMarketData>();
@@ -1182,8 +1182,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                  this.currentBuildPlan.finalProductTypeID,
                                                                  this.currentBuildPlan.additionalCosts,
                                                                  this.currentBuildPlan);
-            LoadUIForBuildPlan();
-            SaveBuildPlan();
+            if (LoadUIAndSave)
+            {
+                LoadUIForBuildPlan();
+                SaveBuildPlan();
+            }
         }
 
         private void ResetControls()
@@ -2066,7 +2069,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 bpInfo.Manufacture = true;
             }
 
-            RunCalcs();
+            RunCalcs(false);
 
             UpdatePricesJitaButton_Click(this, new EventArgs());
             this.Cursor = Cursors.WaitCursor;
@@ -2117,7 +2120,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                 }
 
-                RunCalcs();
+                RunCalcs(false);
 
                 //If the number of build groups lowered, you need to not increment. 
                 //if it didn't, increment.
@@ -2132,8 +2135,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
             }
 
-
-            LoadBlueprintStoreTreeView();
+            LoadUIForBuildPlan();
 
             this.Cursor = Cursors.Default;
             this.isLoading = false;

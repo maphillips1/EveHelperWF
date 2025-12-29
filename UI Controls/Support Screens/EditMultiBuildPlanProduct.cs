@@ -14,6 +14,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
     public partial class EditMultiBuildPlanProduct : Objects.FormBase
     {
         FinalProduct FinalProduct;
+        public bool ReRunCalcs = false;
         public EditMultiBuildPlanProduct(FinalProduct finalProduct)
         {
             InitializeComponent();
@@ -34,6 +35,13 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         {
             if (FinalProduct != null)
             {
+                if (FinalProduct.NumOfCopies != (int)(NumCopiesNumeric.Value) ||
+                    FinalProduct.RunsPerCopy != (int)(RunsPerCopyNumeric.Value) ||
+                    FinalProduct.additionalCosts != AdditionalCostNumeric.Value)
+                {
+                    ReRunCalcs = true;
+                }
+
                 FinalProduct.additionalCosts = AdditionalCostNumeric.Value;
                 FinalProduct.RunsPerCopy = (int)RunsPerCopyNumeric.Value;
                 FinalProduct.NumOfCopies = (int)NumCopiesNumeric.Value;

@@ -55,11 +55,17 @@ namespace EveHelperWF.Objects.Custom_Controls
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderFull { get => borderFull; set => borderFull = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderBottom { get => borderBottom; set => borderBottom = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderLeft { get => borderLeft; set => borderLeft = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderRight { get => borderRight; set => borderRight = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderTop { get => borderTop; set => borderTop = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public float BorderWidth { get => borderWidth; set => borderWidth = value; }
 
 
