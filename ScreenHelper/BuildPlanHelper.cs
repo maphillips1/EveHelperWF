@@ -820,7 +820,7 @@ namespace EveHelperWF.ScreenHelper
                 timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId,
                                                                                      manuActivity.time,
                                                                                      bpInfo.TE,
-                                                                                     true,
+                                                                                     false,
                                                                                      buildPlan.IndustrySettings.ReactionsSkill,
                                                                                      buildPlan.IndustrySettings.IndustrySkill,
                                                                                      buildPlan.IndustrySettings.AdvancedIndustrySkill,
