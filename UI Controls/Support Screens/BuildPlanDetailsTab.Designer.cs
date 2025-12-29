@@ -64,6 +64,7 @@
             // 
             // label44
             // 
+            label44.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label44.AutoSize = true;
             label44.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label44.ForeColor = Color.Tomato;
@@ -115,6 +116,7 @@
             // 
             // label20
             // 
+            label20.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label20.Location = new Point(771, 246);
@@ -125,6 +127,7 @@
             // 
             // label43
             // 
+            label43.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label43.AutoSize = true;
             label43.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label43.ForeColor = Color.Chartreuse;
@@ -136,6 +139,7 @@
             // 
             // label42
             // 
+            label42.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label42.AutoSize = true;
             label42.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label42.ForeColor = Color.Cyan;
@@ -147,6 +151,7 @@
             // 
             // label17
             // 
+            label17.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label17.ForeColor = Color.DarkOrange;
@@ -158,6 +163,7 @@
             // 
             // label16
             // 
+            label16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label16.ForeColor = Color.MediumPurple;
@@ -169,6 +175,7 @@
             // 
             // label12
             // 
+            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
             label12.Location = new Point(771, 144);
@@ -179,12 +186,6 @@
             // 
             // ClearCompletedButton
             // 
-            ClearCompletedButton.BorderBottom = false;
-            ClearCompletedButton.BorderFull = true;
-            ClearCompletedButton.BorderLeft = false;
-            ClearCompletedButton.BorderRight = false;
-            ClearCompletedButton.BorderTop = false;
-            ClearCompletedButton.BorderWidth = 2F;
             ClearCompletedButton.FlatAppearance.BorderSize = 0;
             ClearCompletedButton.FlatStyle = FlatStyle.Flat;
             ClearCompletedButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -197,12 +198,6 @@
             // 
             // ExportBuildList
             // 
-            ExportBuildList.BorderBottom = false;
-            ExportBuildList.BorderFull = true;
-            ExportBuildList.BorderLeft = false;
-            ExportBuildList.BorderRight = false;
-            ExportBuildList.BorderTop = false;
-            ExportBuildList.BorderWidth = 2F;
             ExportBuildList.FlatAppearance.BorderSize = 0;
             ExportBuildList.FlatStyle = FlatStyle.Flat;
             ExportBuildList.ForeColor = Color.FromArgb(234, 234, 234);
@@ -238,7 +233,7 @@
             // 
             // OptimizedBuildTreeView
             // 
-            OptimizedBuildTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            OptimizedBuildTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             OptimizedBuildTreeView.BackColor = Color.FromArgb(21, 21, 21);
             OptimizedBuildTreeView.BorderStyle = BorderStyle.None;
             OptimizedBuildTreeView.CausesValidation = false;
@@ -257,12 +252,7 @@
             // 
             // CollapseAllButton
             // 
-            CollapseAllButton.BorderBottom = false;
-            CollapseAllButton.BorderFull = true;
-            CollapseAllButton.BorderLeft = false;
-            CollapseAllButton.BorderRight = false;
-            CollapseAllButton.BorderTop = false;
-            CollapseAllButton.BorderWidth = 2F;
+            CollapseAllButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CollapseAllButton.FlatAppearance.BorderSize = 0;
             CollapseAllButton.FlatStyle = FlatStyle.Flat;
             CollapseAllButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -276,7 +266,7 @@
             // 
             // MaterialsTreeView
             // 
-            MaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            MaterialsTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             MaterialsTreeView.BackColor = Color.FromArgb(21, 21, 21);
             MaterialsTreeView.BorderStyle = BorderStyle.None;
             MaterialsTreeView.CausesValidation = false;

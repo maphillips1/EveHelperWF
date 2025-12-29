@@ -9,6 +9,7 @@ using FileIO;
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 
@@ -757,43 +758,98 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (currentBuildPlan != null)
             {
                 this.SuspendLayout();
+                Stopwatch sw = new Stopwatch();
 
                 //Ensure we have the minimum information to run the calcs
+                sw.Start();
                 EnsureCalculationHelperClass();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Ensure Calc Helper took", sw);
+                sw.Restart();
                 EnsureInputMaterials();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Ensure Input Mats took", sw);
+                sw.Restart();
                 EnsureMinimumRunsAndCopies();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Ensure Min Runs and copies took", sw);
+                sw.Restart();
                 EnsureBlueprintStore();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Ensure BP Store took", sw);
+                sw.Restart();
                 EnsureCurrentInventory();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Ensure Current Inventory took", sw);
 
                 if (this.currentBuildPlan.CombinedMats == null)
                 {
+                    sw.Restart();
                     RunCalcs();
+                    sw.Stop();
+                    CommonHelper.LogElapsedTime("Run Calcs took", sw);
                 }
 
                 //Load Blueprint Store
+                sw.Restart();
                 LoadBlueprintStoreTreeView();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("Load BP Store Tree took", sw);
 
                 TaxInputCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxInputs;
                 TaxFinalProductCheckbox.Checked = this.currentBuildPlan.IndustrySettings.TaxOutputs;
 
+                sw.Restart();
                 LoadProductImage();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadProductImage took", sw);
+                sw.Restart();
                 LoadBasicInfo();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadBasicInfo took", sw);
+                sw.Restart();
                 LoadIndySettings();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadIndySettings took", sw);
+                sw.Restart();
                 LoadFinalProductMarketInfo();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadFinalProductMarketInfo took", sw);
+                sw.Restart();
                 LoadMaterialsPriceTreeView();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadMaterialsPriceTreeView took", sw);
+                sw.Restart();
                 LoadMostExpensiveGridView();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadMostExpensiveGridView took", sw);
 
                 //Build Details Load
+                sw.Restart();
                 MultiBuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
+                sw.Stop();
+                CommonHelper.LogElapsedTime("SetControlNames took", sw);
+                sw.Restart();
                 BuildPlanDetailsControl.LoadDetailsControl(this.currentBuildPlan.OptimizedBuilds,
                                    this.currentBuildPlan.InputMaterials,
                                    this.currentBuildPlan.BlueprintStore,
                                    this.currentBuildPlan.OptimumBuildGroups,
                                    this.currentBuildPlan.completedBuilds);
+                sw.Stop();
+                CommonHelper.LogElapsedTime("BuildPlanDetailsControl.LoadDetailsControl took", sw);
 
+                sw.Restart();
                 SetSummaryInformation();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("SetSummaryInformation took", sw);
+                sw.Restart();
                 LoadPlanetaryMaterialsPage();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadPlanetaryMaterialsPage took", sw);
+                sw.Restart();
                 LoadCurrentInventoryPage();
+                sw.Stop();
+                CommonHelper.LogElapsedTime("LoadCurrentInventoryPage took", sw);
 
                 //Load All the info on the screen
                 this.ResumeLayout();
@@ -830,11 +886,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             if (this.currentBuildPlan.BlueprintStore == null)
             {
                 this.currentBuildPlan.BlueprintStore = new List<BlueprintInfo>();
-            }
-            List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
-            if (MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
-            {
-                SaveBuildPlan();
+                List<BlueprintInfo> bpInfos = this.currentBuildPlan.BlueprintStore;
+                if (MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, currentBuildPlan.InputMaterials))
+                {
+                    SaveBuildPlan();
+                }
             }
         }
 
@@ -1103,7 +1159,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
         }
 
-        private void RunCalcs()
+        private void RunCalcs(bool LoadUIAndSave = true)
         {
             //Reset before calcs. 
             this.currentBuildPlan.CombinedMats = new List<MaterialsWithMarketData>();
@@ -1114,8 +1170,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                  this.currentBuildPlan.AllItems,
                                                                  this.currentBuildPlan.FinalProducts,
                                                                  this.currentBuildPlan);
-            LoadUIForBuildPlan();
-            SaveBuildPlan();
+            if (LoadUIAndSave)
+            {
+                LoadUIForBuildPlan();
+                SaveBuildPlan();
+            }
         }
 
         private void ResetControls()
@@ -1260,8 +1319,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     OptimizedBuild optimumBuild = this.currentBuildPlan.OptimizedBuilds.Find(x => x.BuiltOrReactedTypeId == fp.finalProductTypeId);
                     if (optimumBuild != null)
                     {
-                        decimal totalJobCost = 0;
-                        this.currentBuildPlan.OptimizedBuilds.ForEach(x => totalJobCost += x.JobCost);
                         decimal outcomePricePer = fp.customSellPrice;
                         if (outcomePricePer <= 0)
                         {
@@ -1315,6 +1372,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                             totalOutcomeIskBeforeTax = (outcomePricePer * optimumBuild.TotalQuantityNeeded);
                             profit = (outcomePricePer * optimumBuild.TotalQuantityNeeded) - (totalCostPerItem * optimumBuild.TotalQuantityNeeded);
                         }
+                        fp.CostPerItem = totalCostPerItem;
                         string inputOrderTypeString;
                         if (this.currentBuildPlan.IndustrySettings.InputOrderType == (int)(Enums.Enums.OrderType.Sell))
                         {
@@ -1851,7 +1909,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             }
             ProgressLabel.Text = "Running calcs with build all = true";
 
-            RunCalcs();
+            RunCalcs(false);
 
             ProgressLabel.Text = "Done running calcs with build all = true";
 
@@ -1909,7 +1967,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     }
                 }
 
-                RunCalcs();
+                RunCalcs(false);
 
                 //If the number of build groups lowered, you need to not increment. 
                 //if it didn't, increment.
@@ -1926,7 +1984,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
 
             ProgressLabel.Text = "Optimum Build Determined. Updating Build Plan";
-            LoadBlueprintStoreTreeView();
+
+            LoadUIForBuildPlan();
 
             this.Cursor = Cursors.Default;
             this.isLoading = false;
@@ -1984,8 +2043,15 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (editScreen.DialogResult == DialogResult.OK)
                     {
                         this.Cursor = Cursors.WaitCursor;
-                        RunCalcs();
-                        this.Cursor = Cursors.Default;
+                        if (editScreen.ReRunCalcs)
+                        {
+                            RunCalcs();
+                        }
+                        else
+                        {
+                            LoadUIForBuildPlan();
+                        }
+                            this.Cursor = Cursors.Default;
                     }
                 }
             }

@@ -3,6 +3,7 @@ using FileIO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -1160,6 +1161,13 @@ namespace EveHelperWF.ScreenHelper
             }
 
             return specificSkill;
+        }
+
+        public static void LogElapsedTime(string message, Stopwatch sw)
+        {
+#if DEBUG
+            Debug.WriteLine(message + $" : {sw.Elapsed.Seconds} seconds");
+#endif
         }
     }
 }

@@ -72,7 +72,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle2.ForeColor = Color.Gold;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
@@ -120,6 +120,7 @@
             // 
             // AddButton
             // 
+            AddButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             AddButton.BorderBottom = false;
             AddButton.BorderFull = true;
             AddButton.BorderLeft = false;
@@ -139,6 +140,7 @@
             // 
             // EditButton
             // 
+            EditButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             EditButton.BorderBottom = false;
             EditButton.BorderFull = true;
             EditButton.BorderLeft = false;
@@ -158,6 +160,7 @@
             // 
             // DeleteButton
             // 
+            DeleteButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             DeleteButton.BorderBottom = false;
             DeleteButton.BorderFull = true;
             DeleteButton.BorderLeft = false;
@@ -177,8 +180,8 @@
             // 
             // StructureProfile
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ClientSize = new Size(933, 519);
             Controls.Add(DeleteButton);
             Controls.Add(EditButton);

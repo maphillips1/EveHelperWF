@@ -69,6 +69,17 @@
             EditFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             AddFinalProductButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             FinalProductGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
+            finalProductTypeName = new DataGridViewTextBoxColumn();
+            additionalCosts = new DataGridViewTextBoxColumn();
+            TotalOutcome = new DataGridViewTextBoxColumn();
+            totalVolume = new DataGridViewTextBoxColumn();
+            TotalRuns = new DataGridViewTextBoxColumn();
+            profit = new DataGridViewTextBoxColumn();
+            finalSellPrice = new DataGridViewTextBoxColumn();
+            CostPerItem = new DataGridViewTextBoxColumn();
+            totalCost = new DataGridViewTextBoxColumn();
+            jitaSellPrice = new DataGridViewTextBoxColumn();
+            jitaBuyPrice = new DataGridViewTextBoxColumn();
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             NotesTextBox = new TextBox();
             MaterialPricePage = new TabPage();
@@ -162,17 +173,6 @@
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TotalPlanCostLabel = new Label();
-            finalProductTypeName = new DataGridViewTextBoxColumn();
-            additionalCosts = new DataGridViewTextBoxColumn();
-            TotalOutcome = new DataGridViewTextBoxColumn();
-            totalVolume = new DataGridViewTextBoxColumn();
-            TotalRuns = new DataGridViewTextBoxColumn();
-            profit = new DataGridViewTextBoxColumn();
-            finalSellPrice = new DataGridViewTextBoxColumn();
-            CostPerItem = new DataGridViewTextBoxColumn();
-            totalCost = new DataGridViewTextBoxColumn();
-            jitaSellPrice = new DataGridViewTextBoxColumn();
-            jitaBuyPrice = new DataGridViewTextBoxColumn();
             label1 = new Label();
             label9 = new Label();
             label21 = new Label();
@@ -489,12 +489,6 @@
             // 
             // DeleteFinalProduct
             // 
-            DeleteFinalProduct.BorderBottom = false;
-            DeleteFinalProduct.BorderFull = true;
-            DeleteFinalProduct.BorderLeft = false;
-            DeleteFinalProduct.BorderRight = false;
-            DeleteFinalProduct.BorderTop = false;
-            DeleteFinalProduct.BorderWidth = 2F;
             DeleteFinalProduct.FlatAppearance.BorderSize = 0;
             DeleteFinalProduct.FlatStyle = FlatStyle.Flat;
             DeleteFinalProduct.ForeColor = Color.FromArgb(234, 234, 234);
@@ -508,12 +502,6 @@
             // 
             // EditFinalProductButton
             // 
-            EditFinalProductButton.BorderBottom = false;
-            EditFinalProductButton.BorderFull = true;
-            EditFinalProductButton.BorderLeft = false;
-            EditFinalProductButton.BorderRight = false;
-            EditFinalProductButton.BorderTop = false;
-            EditFinalProductButton.BorderWidth = 2F;
             EditFinalProductButton.FlatAppearance.BorderSize = 0;
             EditFinalProductButton.FlatStyle = FlatStyle.Flat;
             EditFinalProductButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -527,12 +515,6 @@
             // 
             // AddFinalProductButton
             // 
-            AddFinalProductButton.BorderBottom = false;
-            AddFinalProductButton.BorderFull = true;
-            AddFinalProductButton.BorderLeft = false;
-            AddFinalProductButton.BorderRight = false;
-            AddFinalProductButton.BorderTop = false;
-            AddFinalProductButton.BorderWidth = 2F;
             AddFinalProductButton.FlatAppearance.BorderSize = 0;
             AddFinalProductButton.FlatStyle = FlatStyle.Flat;
             AddFinalProductButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -569,7 +551,6 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             FinalProductGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            FinalProductGridView.EditableColumns = null;
             FinalProductGridView.EnableHeadersVisualStyles = false;
             FinalProductGridView.GridColor = Color.FromArgb(21, 21, 21);
             FinalProductGridView.Location = new Point(10, 106);
@@ -588,14 +569,74 @@
             FinalProductGridView.Size = new Size(1292, 401);
             FinalProductGridView.TabIndex = 34;
             // 
+            // finalProductTypeName
+            // 
+            finalProductTypeName.DataPropertyName = "finalProductTypeName";
+            finalProductTypeName.HeaderText = "Product Name";
+            finalProductTypeName.Name = "finalProductTypeName";
+            // 
+            // additionalCosts
+            // 
+            additionalCosts.DataPropertyName = "additionalCosts";
+            additionalCosts.HeaderText = "Additional Costs";
+            additionalCosts.Name = "additionalCosts";
+            // 
+            // TotalOutcome
+            // 
+            TotalOutcome.DataPropertyName = "TotalOutcome";
+            TotalOutcome.HeaderText = "Total Outcome";
+            TotalOutcome.Name = "TotalOutcome";
+            // 
+            // totalVolume
+            // 
+            totalVolume.DataPropertyName = "totalOutcomeVolume";
+            totalVolume.HeaderText = "Total Volume";
+            totalVolume.Name = "totalVolume";
+            // 
+            // TotalRuns
+            // 
+            TotalRuns.DataPropertyName = "TotalRuns";
+            TotalRuns.HeaderText = "Total Runs";
+            TotalRuns.Name = "TotalRuns";
+            // 
+            // profit
+            // 
+            profit.DataPropertyName = "profit";
+            profit.HeaderText = "Profit";
+            profit.Name = "profit";
+            // 
+            // finalSellPrice
+            // 
+            finalSellPrice.DataPropertyName = "customSellPrice";
+            finalSellPrice.HeaderText = "Custom Sell Price";
+            finalSellPrice.Name = "finalSellPrice";
+            // 
+            // CostPerItem
+            // 
+            CostPerItem.DataPropertyName = "CostPerItem";
+            CostPerItem.HeaderText = "Cost / Item";
+            CostPerItem.Name = "CostPerItem";
+            // 
+            // totalCost
+            // 
+            totalCost.DataPropertyName = "totalCost";
+            totalCost.HeaderText = "Total Cost";
+            totalCost.Name = "totalCost";
+            // 
+            // jitaSellPrice
+            // 
+            jitaSellPrice.DataPropertyName = "jitaSellPrice";
+            jitaSellPrice.HeaderText = "Jita Sell";
+            jitaSellPrice.Name = "jitaSellPrice";
+            // 
+            // jitaBuyPrice
+            // 
+            jitaBuyPrice.DataPropertyName = "jitaBuyPrice";
+            jitaBuyPrice.HeaderText = "Jita Buy";
+            jitaBuyPrice.Name = "jitaBuyPrice";
+            // 
             // MostProfitableButton
             // 
-            MostProfitableButton.BorderBottom = false;
-            MostProfitableButton.BorderFull = true;
-            MostProfitableButton.BorderLeft = false;
-            MostProfitableButton.BorderRight = false;
-            MostProfitableButton.BorderTop = false;
-            MostProfitableButton.BorderWidth = 2F;
             MostProfitableButton.FlatAppearance.BorderSize = 0;
             MostProfitableButton.FlatStyle = FlatStyle.Flat;
             MostProfitableButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -637,7 +678,7 @@
             // 
             // MostExpensiveGridView
             // 
-            MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             MostExpensiveGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -653,12 +694,11 @@
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = SystemColors.Window;
             dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
             MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle5;
-            MostExpensiveGridView.EditableColumns = null;
             MostExpensiveGridView.EnableHeadersVisualStyles = false;
             MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
             MostExpensiveGridView.Location = new Point(740, 52);
@@ -695,12 +735,7 @@
             // 
             // ImportPricesButton
             // 
-            ImportPricesButton.BorderBottom = false;
-            ImportPricesButton.BorderFull = true;
-            ImportPricesButton.BorderLeft = false;
-            ImportPricesButton.BorderRight = false;
-            ImportPricesButton.BorderTop = false;
-            ImportPricesButton.BorderWidth = 2F;
+            ImportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ImportPricesButton.FlatAppearance.BorderSize = 0;
             ImportPricesButton.FlatStyle = FlatStyle.Flat;
             ImportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -714,12 +749,7 @@
             // 
             // ExportPricesButton
             // 
-            ExportPricesButton.BorderBottom = false;
-            ExportPricesButton.BorderFull = true;
-            ExportPricesButton.BorderLeft = false;
-            ExportPricesButton.BorderRight = false;
-            ExportPricesButton.BorderTop = false;
-            ExportPricesButton.BorderWidth = 2F;
+            ExportPricesButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ExportPricesButton.FlatAppearance.BorderSize = 0;
             ExportPricesButton.FlatStyle = FlatStyle.Flat;
             ExportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -733,6 +763,7 @@
             // 
             // TaxFinalProductCheckbox
             // 
+            TaxFinalProductCheckbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             TaxFinalProductCheckbox.AutoSize = true;
             TaxFinalProductCheckbox.Checked = true;
             TaxFinalProductCheckbox.CheckState = CheckState.Checked;
@@ -747,6 +778,7 @@
             // 
             // TaxInputCheckbox
             // 
+            TaxInputCheckbox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             TaxInputCheckbox.AutoSize = true;
             TaxInputCheckbox.Checked = true;
             TaxInputCheckbox.CheckState = CheckState.Checked;
@@ -761,7 +793,7 @@
             // 
             // MaterialsPriceTreeView
             // 
-            MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            MaterialsPriceTreeView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MaterialsPriceTreeView.BackColor = Color.FromArgb(21, 21, 21);
             MaterialsPriceTreeView.BorderStyle = BorderStyle.None;
             MaterialsPriceTreeView.Font = new Font("Segoe UI", 12F);
@@ -777,12 +809,7 @@
             // 
             // UpdatePricesJitaButton
             // 
-            UpdatePricesJitaButton.BorderBottom = false;
-            UpdatePricesJitaButton.BorderFull = true;
-            UpdatePricesJitaButton.BorderLeft = false;
-            UpdatePricesJitaButton.BorderRight = false;
-            UpdatePricesJitaButton.BorderTop = false;
-            UpdatePricesJitaButton.BorderWidth = 2F;
+            UpdatePricesJitaButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             UpdatePricesJitaButton.FlatAppearance.BorderSize = 0;
             UpdatePricesJitaButton.FlatStyle = FlatStyle.Flat;
             UpdatePricesJitaButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -796,14 +823,9 @@
             // 
             // CopyToClipboardButton
             // 
+            CopyToClipboardButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             CopyToClipboardButton.AutoSize = true;
             CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            CopyToClipboardButton.BorderBottom = false;
-            CopyToClipboardButton.BorderFull = true;
-            CopyToClipboardButton.BorderLeft = false;
-            CopyToClipboardButton.BorderRight = false;
-            CopyToClipboardButton.BorderTop = false;
-            CopyToClipboardButton.BorderWidth = 2F;
             CopyToClipboardButton.FlatAppearance.BorderSize = 0;
             CopyToClipboardButton.FlatStyle = FlatStyle.Flat;
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1389,12 +1411,6 @@
             // 
             // SetReactionsButton
             // 
-            SetReactionsButton.BorderBottom = false;
-            SetReactionsButton.BorderFull = true;
-            SetReactionsButton.BorderLeft = false;
-            SetReactionsButton.BorderRight = false;
-            SetReactionsButton.BorderTop = false;
-            SetReactionsButton.BorderWidth = 2F;
             SetReactionsButton.FlatAppearance.BorderSize = 0;
             SetReactionsButton.FlatStyle = FlatStyle.Flat;
             SetReactionsButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1408,12 +1424,6 @@
             // 
             // SetBlueprintButton
             // 
-            SetBlueprintButton.BorderBottom = false;
-            SetBlueprintButton.BorderFull = true;
-            SetBlueprintButton.BorderLeft = false;
-            SetBlueprintButton.BorderRight = false;
-            SetBlueprintButton.BorderTop = false;
-            SetBlueprintButton.BorderWidth = 2F;
             SetBlueprintButton.FlatAppearance.BorderSize = 0;
             SetBlueprintButton.FlatStyle = FlatStyle.Flat;
             SetBlueprintButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1456,12 +1466,6 @@
             // 
             // NewBuildPlanButton
             // 
-            NewBuildPlanButton.BorderBottom = false;
-            NewBuildPlanButton.BorderFull = true;
-            NewBuildPlanButton.BorderLeft = false;
-            NewBuildPlanButton.BorderRight = false;
-            NewBuildPlanButton.BorderTop = false;
-            NewBuildPlanButton.BorderWidth = 2F;
             NewBuildPlanButton.FlatAppearance.BorderSize = 0;
             NewBuildPlanButton.FlatStyle = FlatStyle.Flat;
             NewBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1475,12 +1479,6 @@
             // 
             // DeleteBuildPlanButton
             // 
-            DeleteBuildPlanButton.BorderBottom = false;
-            DeleteBuildPlanButton.BorderFull = true;
-            DeleteBuildPlanButton.BorderLeft = false;
-            DeleteBuildPlanButton.BorderRight = false;
-            DeleteBuildPlanButton.BorderTop = false;
-            DeleteBuildPlanButton.BorderWidth = 2F;
             DeleteBuildPlanButton.FlatAppearance.BorderSize = 0;
             DeleteBuildPlanButton.FlatStyle = FlatStyle.Flat;
             DeleteBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1552,7 +1550,6 @@
             dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
             CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle9;
-            CurrentInventoryGrid.EditableColumns = "Quantity";
             CurrentInventoryGrid.EnableHeadersVisualStyles = false;
             CurrentInventoryGrid.GridColor = Color.Black;
             CurrentInventoryGrid.Location = new Point(5, 90);
@@ -1588,12 +1585,6 @@
             // 
             // ClearInventoryButton
             // 
-            ClearInventoryButton.BorderBottom = false;
-            ClearInventoryButton.BorderFull = true;
-            ClearInventoryButton.BorderLeft = false;
-            ClearInventoryButton.BorderRight = false;
-            ClearInventoryButton.BorderTop = false;
-            ClearInventoryButton.BorderWidth = 2F;
             ClearInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearInventoryButton.Location = new Point(5, 21);
             ClearInventoryButton.Name = "ClearInventoryButton";
@@ -1646,7 +1637,6 @@
             dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
             CostBreakdownGrid.DefaultCellStyle = dataGridViewCellStyle12;
             CostBreakdownGrid.Dock = DockStyle.Fill;
-            CostBreakdownGrid.EditableColumns = null;
             CostBreakdownGrid.EnableHeadersVisualStyles = false;
             CostBreakdownGrid.GridColor = Color.FromArgb(21, 21, 21);
             CostBreakdownGrid.Location = new Point(0, 0);
@@ -1704,12 +1694,6 @@
             // 
             // BPSettingsButton
             // 
-            BPSettingsButton.BorderBottom = true;
-            BPSettingsButton.BorderFull = false;
-            BPSettingsButton.BorderLeft = false;
-            BPSettingsButton.BorderRight = false;
-            BPSettingsButton.BorderTop = false;
-            BPSettingsButton.BorderWidth = 2F;
             BPSettingsButton.Cursor = Cursors.Hand;
             BPSettingsButton.FlatAppearance.BorderSize = 0;
             BPSettingsButton.FlatStyle = FlatStyle.Flat;
@@ -1726,12 +1710,6 @@
             // 
             // CostBreakdownButton
             // 
-            CostBreakdownButton.BorderBottom = true;
-            CostBreakdownButton.BorderFull = false;
-            CostBreakdownButton.BorderLeft = false;
-            CostBreakdownButton.BorderRight = false;
-            CostBreakdownButton.BorderTop = false;
-            CostBreakdownButton.BorderWidth = 2F;
             CostBreakdownButton.Cursor = Cursors.Hand;
             CostBreakdownButton.FlatAppearance.BorderSize = 0;
             CostBreakdownButton.FlatStyle = FlatStyle.Flat;
@@ -1748,12 +1726,6 @@
             // 
             // PlanetMaterialsButton
             // 
-            PlanetMaterialsButton.BorderBottom = true;
-            PlanetMaterialsButton.BorderFull = false;
-            PlanetMaterialsButton.BorderLeft = false;
-            PlanetMaterialsButton.BorderRight = false;
-            PlanetMaterialsButton.BorderTop = false;
-            PlanetMaterialsButton.BorderWidth = 2F;
             PlanetMaterialsButton.Cursor = Cursors.Hand;
             PlanetMaterialsButton.FlatAppearance.BorderSize = 0;
             PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
@@ -1770,12 +1742,6 @@
             // 
             // BuildDetailsButton
             // 
-            BuildDetailsButton.BorderBottom = true;
-            BuildDetailsButton.BorderFull = false;
-            BuildDetailsButton.BorderLeft = false;
-            BuildDetailsButton.BorderRight = false;
-            BuildDetailsButton.BorderTop = false;
-            BuildDetailsButton.BorderWidth = 2F;
             BuildDetailsButton.Cursor = Cursors.Hand;
             BuildDetailsButton.FlatAppearance.BorderSize = 0;
             BuildDetailsButton.FlatStyle = FlatStyle.Flat;
@@ -1792,12 +1758,6 @@
             // 
             // MaterialsButton
             // 
-            MaterialsButton.BorderBottom = true;
-            MaterialsButton.BorderFull = false;
-            MaterialsButton.BorderLeft = false;
-            MaterialsButton.BorderRight = false;
-            MaterialsButton.BorderTop = false;
-            MaterialsButton.BorderWidth = 2F;
             MaterialsButton.Cursor = Cursors.Hand;
             MaterialsButton.FlatAppearance.BorderSize = 0;
             MaterialsButton.FlatStyle = FlatStyle.Flat;
@@ -1814,12 +1774,6 @@
             // 
             // SystemButton
             // 
-            SystemButton.BorderBottom = true;
-            SystemButton.BorderFull = false;
-            SystemButton.BorderLeft = false;
-            SystemButton.BorderRight = false;
-            SystemButton.BorderTop = false;
-            SystemButton.BorderWidth = 2F;
             SystemButton.Cursor = Cursors.Hand;
             SystemButton.FlatAppearance.BorderSize = 0;
             SystemButton.FlatStyle = FlatStyle.Flat;
@@ -1836,12 +1790,6 @@
             // 
             // CurrentInventoryButton
             // 
-            CurrentInventoryButton.BorderBottom = true;
-            CurrentInventoryButton.BorderFull = false;
-            CurrentInventoryButton.BorderLeft = false;
-            CurrentInventoryButton.BorderRight = false;
-            CurrentInventoryButton.BorderTop = false;
-            CurrentInventoryButton.BorderWidth = 2F;
             CurrentInventoryButton.Cursor = Cursors.Hand;
             CurrentInventoryButton.FlatAppearance.BorderSize = 0;
             CurrentInventoryButton.FlatStyle = FlatStyle.Flat;
@@ -1859,12 +1807,6 @@
             // SummaryButton
             // 
             SummaryButton.BackColor = Color.FromArgb(21, 21, 21);
-            SummaryButton.BorderBottom = true;
-            SummaryButton.BorderFull = false;
-            SummaryButton.BorderLeft = false;
-            SummaryButton.BorderRight = false;
-            SummaryButton.BorderTop = false;
-            SummaryButton.BorderWidth = 2F;
             SummaryButton.FlatAppearance.BorderColor = Color.White;
             SummaryButton.FlatAppearance.BorderSize = 0;
             SummaryButton.FlatStyle = FlatStyle.Flat;
@@ -1886,72 +1828,6 @@
             TotalPlanCostLabel.Name = "TotalPlanCostLabel";
             TotalPlanCostLabel.Size = new Size(0, 21);
             TotalPlanCostLabel.TabIndex = 61;
-            // 
-            // finalProductTypeName
-            // 
-            finalProductTypeName.DataPropertyName = "finalProductTypeName";
-            finalProductTypeName.HeaderText = "Product Name";
-            finalProductTypeName.Name = "finalProductTypeName";
-            // 
-            // additionalCosts
-            // 
-            additionalCosts.DataPropertyName = "additionalCosts";
-            additionalCosts.HeaderText = "Additional Costs";
-            additionalCosts.Name = "additionalCosts";
-            // 
-            // TotalOutcome
-            // 
-            TotalOutcome.DataPropertyName = "TotalOutcome";
-            TotalOutcome.HeaderText = "Total Outcome";
-            TotalOutcome.Name = "TotalOutcome";
-            // 
-            // totalVolume
-            // 
-            totalVolume.DataPropertyName = "totalOutcomeVolume";
-            totalVolume.HeaderText = "Total Volume";
-            totalVolume.Name = "totalVolume";
-            // 
-            // TotalRuns
-            // 
-            TotalRuns.DataPropertyName = "TotalRuns";
-            TotalRuns.HeaderText = "Total Runs";
-            TotalRuns.Name = "TotalRuns";
-            // 
-            // profit
-            // 
-            profit.DataPropertyName = "profit";
-            profit.HeaderText = "Profit";
-            profit.Name = "profit";
-            // 
-            // finalSellPrice
-            // 
-            finalSellPrice.DataPropertyName = "customSellPrice";
-            finalSellPrice.HeaderText = "Custom Sell Price";
-            finalSellPrice.Name = "finalSellPrice";
-            // 
-            // CostPerItem
-            // 
-            CostPerItem.DataPropertyName = "CostPerItem";
-            CostPerItem.HeaderText = "Cost / Item";
-            CostPerItem.Name = "CostPerItem";
-            // 
-            // totalCost
-            // 
-            totalCost.DataPropertyName = "totalCost";
-            totalCost.HeaderText = "Total Cost";
-            totalCost.Name = "totalCost";
-            // 
-            // jitaSellPrice
-            // 
-            jitaSellPrice.DataPropertyName = "jitaSellPrice";
-            jitaSellPrice.HeaderText = "Jita Sell";
-            jitaSellPrice.Name = "jitaSellPrice";
-            // 
-            // jitaBuyPrice
-            // 
-            jitaBuyPrice.DataPropertyName = "jitaBuyPrice";
-            jitaBuyPrice.HeaderText = "Jita Buy";
-            jitaBuyPrice.Name = "jitaBuyPrice";
             // 
             // MultiBuildPlansControl
             // 

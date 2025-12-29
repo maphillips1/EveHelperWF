@@ -19,6 +19,7 @@ namespace EveHelperWF.Objects.Custom_Controls
 
         private Type? datasourceType {  get; set; }
         private string? m_EditableColumns {  get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string? EditableColumns
         {
             get

@@ -80,7 +80,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     hunterIntelSearchResult.StartPosition = FormStartPosition.CenterParent;
                     if (hunterIntelSearchResult.ShowDialog() == DialogResult.OK)
                     {
-                        selectedItem = hunterIntelSearchResult.selectedItem;
+                        selectedItem = hunterIntelSearchResult.SelectedItem;
                     }
                     else
                     {
