@@ -33,7 +33,7 @@ namespace EveHelperWF.Objects
         {
             get
             {
-                return CommonHelper.FormatIsk(CostPerItem * TotalRuns);
+                return CommonHelper.FormatIsk(CostPerItem * TotalOutcome);
             }
         }
     }

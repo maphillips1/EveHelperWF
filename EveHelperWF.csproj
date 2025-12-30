@@ -14,7 +14,7 @@
     <Product>EveHelper</Product>
     <PackageIcon>EveHelperIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.7.6</Version>
+    <Version>1.7.8</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -70,11 +70,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Database\Stored Procs\" />
     <Folder Include="docs\CSS\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Database\Stored Procs\LoadRegion.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\EveHelperIcon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

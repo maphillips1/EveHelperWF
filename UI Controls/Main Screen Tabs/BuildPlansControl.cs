@@ -1369,12 +1369,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     IskNeededForPlanLabel.Text = CommonHelper.FormatIsk(totalInputPrice + totalInputTaxes + totalJobCost + currentBuildPlan.additionalCosts);
 
                     //Taxes when selling on Market
-                    decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
+                    decimal outcomeSellTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                (int)Enums.Enums.OrderType.Sell,
                                                                                this.currentBuildPlan.IndustrySettings.AccountingSkill,
                                                                                this.currentBuildPlan.IndustrySettings.BrokersSkill);
 
-                    decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(totalInputPrice,
+                    decimal outcomeBuyTaxes = CommonHelper.CalculateTaxAndFees(outcomePricePer,
                                                                                (int)Enums.Enums.OrderType.Buy,
                                                                                this.currentBuildPlan.IndustrySettings.AccountingSkill,
                                                                                this.currentBuildPlan.IndustrySettings.BrokersSkill);

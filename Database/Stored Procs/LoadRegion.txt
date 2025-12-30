@@ -1,0 +1,6 @@
+Select
+MR.regionID, RN.en
+FROM mapRegion MR
+    inner join RegionName RN
+    on RN.parentTypeId = MR.RegionID
+ORDER BY RN.en

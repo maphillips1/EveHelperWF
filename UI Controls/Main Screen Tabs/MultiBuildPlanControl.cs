@@ -1384,7 +1384,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         }
 
                         fp.profit = profit;
-                        totalPlanCost += (fp.TotalRuns * fp.CostPerItem);
+                        
+                        totalPlanCost += (fp.TotalOutcome * fp.CostPerItem);
                     }
                 }
                 TotalPlanCostLabel.Text = $"Total Plan Cost: {CommonHelper.FormatIsk(totalPlanCost)}";
@@ -1395,6 +1396,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void LoadMaterialsPriceTreeView()
         {
             MaterialsPriceTreeView.Nodes.Clear();
+            decimal totalVolume = 0;
             TreeNode tn;
             this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
@@ -1449,6 +1451,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     volumeNode.ForeColor = Color.White;
                     volumeNode.Text = volume.ToString("N2") + " m3";
                     tn.Nodes.Add(volumeNode);
+                    totalVolume += volume;
 
                     marketGroupNode.Nodes.Add(tn);
 
@@ -1456,6 +1459,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
                 MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
             }
+            TotalVolumeLabel.Text = $"Total Volume: {totalVolume.ToString("N2")} m3";
         }
 
         private void LoadMostExpensiveGridView()

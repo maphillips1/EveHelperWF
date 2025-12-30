@@ -34,20 +34,28 @@ namespace EveHelperWF.Database
             return dbpath;
         }
 
-        #region "Query Command Functions"
-        private static string LoadRegionCommand()
+        private static string LoadProcAndReplaceVariables(string fileName, Dictionary<string, string>? variables)
         {
-            StringBuilder sb = new StringBuilder();
+            string command = "";
 
-            sb.AppendLine("Select");
-            sb.AppendLine("MR.regionID, RN.en");
-            sb.AppendLine("FROM mapRegion MR");
-            sb.AppendLine("    inner join RegionName RN");
-            sb.AppendLine("    on RN.parentTypeId = MR.RegionID");
-            sb.AppendLine("ORDER BY RN.en");
+            string fullFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Database\\Stored Procs\\" + fileName;
+            if (File.Exists(fullFileName))
+            {
+                command = File.ReadAllText(fullFileName);
+                if (variables != null)
+                {
+                    foreach (string key in variables.Keys)
+                    {
+                        command.Replace(key, variables[key]);
+                    }
+                }
+            }
 
-            return sb.ToString();
+            return command;
         }
+
+
+        #region "Query Command Functions"
 
         private static string GetSolarSystemJumpsCommand(int solarsystemID)
         {
@@ -660,7 +668,7 @@ namespace EveHelperWF.Database
             using (var db = new SqliteConnection($"Filename={dbpath}"))
             {
                 db.Open();
-                string commandString = LoadRegionCommand();
+                string commandString = LoadProcAndReplaceVariables("LoadRegion.txt", null);
                 SqliteCommand selectCommand = new SqliteCommand(commandString, db);
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
