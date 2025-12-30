@@ -83,6 +83,7 @@
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             NotesTextBox = new TextBox();
             MaterialPricePage = new TabPage();
+            TotalVolumeLabel = new Label();
             MostExpensiveGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
             materialName = new DataGridViewTextBoxColumn();
             amount = new DataGridViewTextBoxColumn();
@@ -661,6 +662,7 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(21, 21, 21);
+            MaterialPricePage.Controls.Add(TotalVolumeLabel);
             MaterialPricePage.Controls.Add(MostExpensiveGridView);
             MaterialPricePage.Controls.Add(ImportPricesButton);
             MaterialPricePage.Controls.Add(ExportPricesButton);
@@ -675,6 +677,16 @@
             MaterialPricePage.Size = new Size(1315, 517);
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
+            // 
+            // TotalVolumeLabel
+            // 
+            TotalVolumeLabel.AutoSize = true;
+            TotalVolumeLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TotalVolumeLabel.Location = new Point(10, 10);
+            TotalVolumeLabel.Name = "TotalVolumeLabel";
+            TotalVolumeLabel.Size = new Size(123, 21);
+            TotalVolumeLabel.TabIndex = 31;
+            TotalVolumeLabel.Text = "[Total Volume]";
             // 
             // MostExpensiveGridView
             // 
@@ -2033,5 +2045,6 @@
         private DataGridViewTextBoxColumn totalCost;
         private DataGridViewTextBoxColumn jitaSellPrice;
         private DataGridViewTextBoxColumn jitaBuyPrice;
+        private Label TotalVolumeLabel;
     }
 }
