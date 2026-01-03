@@ -299,7 +299,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan);
                 SetSummaryInformation();
                 LoadMaterialsPriceTreeView();
-                LoadMostExpensiveGridView();
                 ProgressLabel.Text = "";
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -853,7 +852,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 LoadIndySettings();
                 LoadFinalProductMarketInfo();
                 LoadMaterialsPriceTreeView();
-                LoadMostExpensiveGridView();
 
                 //Build Details Load
                 BuildPlanHelper.SetControlNames(this.currentBuildPlan.InputMaterials);
@@ -1571,6 +1569,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             FinalSellPriceNumeric.Value = currentBuildPlan.finalSellPrice;
 
             MaterialsPriceTreeView.Nodes.Clear();
+            decimal totalPrice = 0;
+            decimal totalVolume = 0;
             TreeNode tn;
             this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
@@ -1625,19 +1625,16 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     volumeNode.ForeColor = Color.White;
                     volumeNode.Text = volume.ToString("N2") + " m3";
                     tn.Nodes.Add(volumeNode);
+                    totalVolume += volume;
 
                     marketGroupNode.Nodes.Add(tn);
 
                 }
                 marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
                 MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                totalPrice += totalGroupPrice;
             }
-        }
-
-        private void LoadMostExpensiveGridView()
-        {
-            this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderByDescending(x => x.priceTotal).ToList();
-            MostExpensiveGridView.DatabindGridView(this.currentBuildPlan.CombinedMats);
+            ShippingCostControl.SetVolumeAndPrice(totalVolume, totalPrice);
         }
 
         private void LoadPlanetaryMaterialsPage()

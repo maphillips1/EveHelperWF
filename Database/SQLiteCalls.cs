@@ -20,7 +20,7 @@ namespace EveHelperWF.Database
 {
     public static class SQLiteCalls
     {
-
+        private static Dictionary<string, string> LoadedProcs = new Dictionary<string, string>();
         public static string GetSQLiteDirectory()
         {
             return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
@@ -38,19 +38,27 @@ namespace EveHelperWF.Database
         {
             string command = "";
 
-            string fullFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Database\\Stored Procs\\" + fileName;
-            if (File.Exists(fullFileName))
+            if (LoadedProcs.Keys.Contains(fileName))
             {
-                command = File.ReadAllText(fullFileName);
-                if (variables != null)
+                command = LoadedProcs[fileName];
+            }
+            else
+            {
+                string fullFileName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\Database\\Stored Procs\\" + fileName;
+                if (File.Exists(fullFileName))
                 {
-                    foreach (string key in variables.Keys)
-                    {
-                        command.Replace(key, variables[key]);
-                    }
+                    command = File.ReadAllText(fullFileName);
+                    LoadedProcs.Add(fileName, command);
                 }
             }
 
+            if (variables != null)
+            {
+                foreach (string key in variables.Keys)
+                {
+                    command = command.Replace(key, variables[key]);
+                }
+            }
             return command;
         }
 

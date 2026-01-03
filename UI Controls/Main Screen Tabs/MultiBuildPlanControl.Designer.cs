@@ -54,15 +54,13 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiBuildPlansControl));
             SummaryPage = new TabPage();
             DeleteFinalProduct = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
@@ -83,11 +81,8 @@
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             NotesTextBox = new TextBox();
             MaterialPricePage = new TabPage();
+            ShippingCostControl = new EveHelperWF.UI_Controls.Support_Screens.ShippingCalculator();
             TotalVolumeLabel = new Label();
-            MostExpensiveGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
-            materialName = new DataGridViewTextBoxColumn();
-            amount = new DataGridViewTextBoxColumn();
-            priceTotal = new DataGridViewTextBoxColumn();
             ImportPricesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             ExportPricesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TaxFinalProductCheckbox = new CheckBox();
@@ -196,10 +191,10 @@
             label56 = new Label();
             label2 = new Label();
             label3 = new Label();
+            label4 = new Label();
             SummaryPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)FinalProductGridView).BeginInit();
             MaterialPricePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).BeginInit();
             IndustrySettingsTabPage.SuspendLayout();
             DefaultsTabContainer.SuspendLayout();
             ManufacturingDefaultsTabPage.SuspendLayout();
@@ -547,7 +542,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -662,8 +657,9 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(21, 21, 21);
+            MaterialPricePage.Controls.Add(label4);
+            MaterialPricePage.Controls.Add(ShippingCostControl);
             MaterialPricePage.Controls.Add(TotalVolumeLabel);
-            MaterialPricePage.Controls.Add(MostExpensiveGridView);
             MaterialPricePage.Controls.Add(ImportPricesButton);
             MaterialPricePage.Controls.Add(ExportPricesButton);
             MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
@@ -678,6 +674,16 @@
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
+            // ShippingCostControl
+            // 
+            ShippingCostControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ShippingCostControl.BackColor = Color.FromArgb(21, 21, 21);
+            ShippingCostControl.ForeColor = Color.White;
+            ShippingCostControl.Location = new Point(803, 94);
+            ShippingCostControl.Name = "ShippingCostControl";
+            ShippingCostControl.Size = new Size(451, 326);
+            ShippingCostControl.TabIndex = 32;
+            // 
             // TotalVolumeLabel
             // 
             TotalVolumeLabel.AutoSize = true;
@@ -687,63 +693,6 @@
             TotalVolumeLabel.Size = new Size(123, 21);
             TotalVolumeLabel.TabIndex = 31;
             TotalVolumeLabel.Text = "[Total Volume]";
-            // 
-            // MostExpensiveGridView
-            // 
-            MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            MostExpensiveGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
-            MostExpensiveGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = Color.Gold;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            MostExpensiveGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            MostExpensiveGridView.Columns.AddRange(new DataGridViewColumn[] { materialName, amount, priceTotal });
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle5;
-            MostExpensiveGridView.EnableHeadersVisualStyles = false;
-            MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
-            MostExpensiveGridView.Location = new Point(740, 52);
-            MostExpensiveGridView.Name = "MostExpensiveGridView";
-            MostExpensiveGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.Gold;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            MostExpensiveGridView.Size = new Size(579, 469);
-            MostExpensiveGridView.TabIndex = 30;
-            // 
-            // materialName
-            // 
-            materialName.DataPropertyName = "materialName";
-            materialName.HeaderText = "Name";
-            materialName.Name = "materialName";
-            // 
-            // amount
-            // 
-            amount.DataPropertyName = "quantityTotal";
-            amount.HeaderText = "Quantity";
-            amount.Name = "amount";
-            // 
-            // priceTotal
-            // 
-            priceTotal.DataPropertyName = "priceTotal";
-            priceTotal.HeaderText = "Price Total";
-            priceTotal.Name = "priceTotal";
             // 
             // ImportPricesButton
             // 
@@ -1544,6 +1493,28 @@
             // 
             CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CurrentInventoryGrid.BackgroundColor = Color.Black;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.Black;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle6;
+            CurrentInventoryGrid.EnableHeadersVisualStyles = false;
+            CurrentInventoryGrid.GridColor = Color.Black;
+            CurrentInventoryGrid.Location = new Point(5, 90);
+            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = SystemColors.Control;
             dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
@@ -1551,29 +1522,7 @@
             dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = Color.Black;
-            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = Color.White;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle9;
-            CurrentInventoryGrid.EnableHeadersVisualStyles = false;
-            CurrentInventoryGrid.GridColor = Color.Black;
-            CurrentInventoryGrid.Location = new Point(5, 90);
-            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = SystemColors.Control;
-            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             CurrentInventoryGrid.Size = new Size(616, 433);
             CurrentInventoryGrid.TabIndex = 53;
             CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
@@ -1589,9 +1538,9 @@
             // Quantity
             // 
             Quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle8.Format = "N0";
-            dataGridViewCellStyle8.NullValue = "0";
-            Quantity.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = "0";
+            Quantity.DefaultCellStyle = dataGridViewCellStyle5;
             Quantity.HeaderText = "Quantity";
             Quantity.Name = "Quantity";
             // 
@@ -1631,37 +1580,37 @@
             // 
             CostBreakdownGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
             CostBreakdownGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle11.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle11.ForeColor = Color.Gold;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.True;
-            CostBreakdownGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = Color.Gold;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            CostBreakdownGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             CostBreakdownGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = SystemColors.Window;
-            dataGridViewCellStyle12.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle12.ForeColor = Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.False;
-            CostBreakdownGrid.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Window;
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            CostBreakdownGrid.DefaultCellStyle = dataGridViewCellStyle9;
             CostBreakdownGrid.Dock = DockStyle.Fill;
             CostBreakdownGrid.EnableHeadersVisualStyles = false;
             CostBreakdownGrid.GridColor = Color.FromArgb(21, 21, 21);
             CostBreakdownGrid.Location = new Point(0, 0);
             CostBreakdownGrid.Name = "CostBreakdownGrid";
             CostBreakdownGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle13.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle13.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
-            CostBreakdownGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(21, 21, 21);
+            dataGridViewCellStyle10.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle10.ForeColor = Color.FromArgb(234, 234, 234);
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+            CostBreakdownGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             CostBreakdownGrid.Size = new Size(1315, 517);
             CostBreakdownGrid.TabIndex = 0;
             // 
@@ -1841,6 +1790,17 @@
             TotalPlanCostLabel.Size = new Size(0, 21);
             TotalPlanCostLabel.TabIndex = 61;
             // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(803, 61);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 21);
+            label4.TabIndex = 33;
+            label4.Text = "Shipping Cost";
+            // 
             // MultiBuildPlansControl
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -1876,7 +1836,6 @@
             ((System.ComponentModel.ISupportInitialize)FinalProductGridView).EndInit();
             MaterialPricePage.ResumeLayout(false);
             MaterialPricePage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).EndInit();
             IndustrySettingsTabPage.ResumeLayout(false);
             DefaultsTabContainer.ResumeLayout(false);
             ManufacturingDefaultsTabPage.ResumeLayout(false);
@@ -2018,10 +1977,6 @@
         private DataGridViewTextBoxColumn typeName;
         private DataGridViewTextBoxColumn Quantity;
         private Objects.Custom_Controls.EveHelperButton SummaryButton;
-        private Objects.Custom_Controls.EveHelperGridView MostExpensiveGridView;
-        private DataGridViewTextBoxColumn materialName;
-        private DataGridViewTextBoxColumn amount;
-        private DataGridViewTextBoxColumn priceTotal;
         private Objects.Custom_Controls.EveHelperButton MostProfitableButton;
         private NumericUpDown MaxManufacturingTimeUpDown;
         private Label label56;
@@ -2046,5 +2001,6 @@
         private DataGridViewTextBoxColumn jitaSellPrice;
         private DataGridViewTextBoxColumn jitaBuyPrice;
         private Label TotalVolumeLabel;
+        private Support_Screens.ShippingCalculator ShippingCostControl;
     }
 }

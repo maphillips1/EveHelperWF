@@ -66,12 +66,10 @@
             Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BuildPlansControl));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            Label label12;
             SummaryPage = new TabPage();
             MostProfitableButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             ManuSCILabel = new Label();
@@ -92,10 +90,6 @@
             ProductLabel = new Label();
             FinalProductImagePanel = new Panel();
             MaterialPricePage = new TabPage();
-            MostExpensiveGridView = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
-            materialName = new DataGridViewTextBoxColumn();
-            amount = new DataGridViewTextBoxColumn();
-            priceTotal = new DataGridViewTextBoxColumn();
             ImportPricesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             ExportPricesButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TaxFinalProductCheckbox = new CheckBox();
@@ -186,6 +180,7 @@
             SystemButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            ShippingCostControl = new EveHelperWF.UI_Controls.Support_Screens.ShippingCalculator();
             label1 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -222,10 +217,10 @@
             label60 = new Label();
             label56 = new Label();
             label2 = new Label();
+            label12 = new Label();
             SummaryPage.SuspendLayout();
             SummaryMarketData.SuspendLayout();
             MaterialPricePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FinalSellPriceNumeric).BeginInit();
             IndustrySettingsTabPage.SuspendLayout();
             DefaultsTabContainer.SuspendLayout();
@@ -667,12 +662,6 @@
             // 
             // MostProfitableButton
             // 
-            MostProfitableButton.BorderBottom = false;
-            MostProfitableButton.BorderFull = true;
-            MostProfitableButton.BorderLeft = false;
-            MostProfitableButton.BorderRight = false;
-            MostProfitableButton.BorderTop = false;
-            MostProfitableButton.BorderWidth = 2F;
             MostProfitableButton.FlatAppearance.BorderSize = 0;
             MostProfitableButton.FlatStyle = FlatStyle.Flat;
             MostProfitableButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -871,7 +860,8 @@
             // MaterialPricePage
             // 
             MaterialPricePage.BackColor = Color.FromArgb(21, 21, 21);
-            MaterialPricePage.Controls.Add(MostExpensiveGridView);
+            MaterialPricePage.Controls.Add(label12);
+            MaterialPricePage.Controls.Add(ShippingCostControl);
             MaterialPricePage.Controls.Add(ImportPricesButton);
             MaterialPricePage.Controls.Add(ExportPricesButton);
             MaterialPricePage.Controls.Add(TaxFinalProductCheckbox);
@@ -888,72 +878,8 @@
             MaterialPricePage.TabIndex = 2;
             MaterialPricePage.Text = "3.) Materials & Prices";
             // 
-            // MostExpensiveGridView
-            // 
-            MostExpensiveGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            MostExpensiveGridView.BackgroundColor = Color.FromArgb(21, 21, 21);
-            MostExpensiveGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.Gold;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            MostExpensiveGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            MostExpensiveGridView.Columns.AddRange(new DataGridViewColumn[] { materialName, amount, priceTotal });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            MostExpensiveGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            MostExpensiveGridView.EditableColumns = null;
-            MostExpensiveGridView.EnableHeadersVisualStyles = false;
-            MostExpensiveGridView.GridColor = Color.FromArgb(21, 21, 21);
-            MostExpensiveGridView.Location = new Point(740, 52);
-            MostExpensiveGridView.Name = "MostExpensiveGridView";
-            MostExpensiveGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(21, 21, 21);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(234, 234, 234);
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            MostExpensiveGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            MostExpensiveGridView.Size = new Size(593, 469);
-            MostExpensiveGridView.TabIndex = 30;
-            // 
-            // materialName
-            // 
-            materialName.DataPropertyName = "materialName";
-            materialName.HeaderText = "Name";
-            materialName.Name = "materialName";
-            // 
-            // amount
-            // 
-            amount.DataPropertyName = "quantityTotal";
-            amount.HeaderText = "Quantity";
-            amount.Name = "amount";
-            // 
-            // priceTotal
-            // 
-            priceTotal.DataPropertyName = "priceTotal";
-            priceTotal.HeaderText = "Price Total";
-            priceTotal.Name = "priceTotal";
-            // 
             // ImportPricesButton
             // 
-            ImportPricesButton.BorderBottom = false;
-            ImportPricesButton.BorderFull = true;
-            ImportPricesButton.BorderLeft = false;
-            ImportPricesButton.BorderRight = false;
-            ImportPricesButton.BorderTop = false;
-            ImportPricesButton.BorderWidth = 2F;
             ImportPricesButton.FlatAppearance.BorderSize = 0;
             ImportPricesButton.FlatStyle = FlatStyle.Flat;
             ImportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -967,12 +893,6 @@
             // 
             // ExportPricesButton
             // 
-            ExportPricesButton.BorderBottom = false;
-            ExportPricesButton.BorderFull = true;
-            ExportPricesButton.BorderLeft = false;
-            ExportPricesButton.BorderRight = false;
-            ExportPricesButton.BorderTop = false;
-            ExportPricesButton.BorderWidth = 2F;
             ExportPricesButton.FlatAppearance.BorderSize = 0;
             ExportPricesButton.FlatStyle = FlatStyle.Flat;
             ExportPricesButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1042,12 +962,6 @@
             // 
             // UpdatePricesJitaButton
             // 
-            UpdatePricesJitaButton.BorderBottom = false;
-            UpdatePricesJitaButton.BorderFull = true;
-            UpdatePricesJitaButton.BorderLeft = false;
-            UpdatePricesJitaButton.BorderRight = false;
-            UpdatePricesJitaButton.BorderTop = false;
-            UpdatePricesJitaButton.BorderWidth = 2F;
             UpdatePricesJitaButton.FlatAppearance.BorderSize = 0;
             UpdatePricesJitaButton.FlatStyle = FlatStyle.Flat;
             UpdatePricesJitaButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1063,12 +977,6 @@
             // 
             CopyToClipboardButton.AutoSize = true;
             CopyToClipboardButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            CopyToClipboardButton.BorderBottom = false;
-            CopyToClipboardButton.BorderFull = true;
-            CopyToClipboardButton.BorderLeft = false;
-            CopyToClipboardButton.BorderRight = false;
-            CopyToClipboardButton.BorderTop = false;
-            CopyToClipboardButton.BorderWidth = 2F;
             CopyToClipboardButton.FlatAppearance.BorderSize = 0;
             CopyToClipboardButton.FlatStyle = FlatStyle.Flat;
             CopyToClipboardButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1654,12 +1562,6 @@
             // 
             // SetReactionsButton
             // 
-            SetReactionsButton.BorderBottom = false;
-            SetReactionsButton.BorderFull = true;
-            SetReactionsButton.BorderLeft = false;
-            SetReactionsButton.BorderRight = false;
-            SetReactionsButton.BorderTop = false;
-            SetReactionsButton.BorderWidth = 2F;
             SetReactionsButton.FlatAppearance.BorderSize = 0;
             SetReactionsButton.FlatStyle = FlatStyle.Flat;
             SetReactionsButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1673,12 +1575,6 @@
             // 
             // SetBlueprintButton
             // 
-            SetBlueprintButton.BorderBottom = false;
-            SetBlueprintButton.BorderFull = true;
-            SetBlueprintButton.BorderLeft = false;
-            SetBlueprintButton.BorderRight = false;
-            SetBlueprintButton.BorderTop = false;
-            SetBlueprintButton.BorderWidth = 2F;
             SetBlueprintButton.FlatAppearance.BorderSize = 0;
             SetBlueprintButton.FlatStyle = FlatStyle.Flat;
             SetBlueprintButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1721,12 +1617,6 @@
             // 
             // NewBuildPlanButton
             // 
-            NewBuildPlanButton.BorderBottom = false;
-            NewBuildPlanButton.BorderFull = true;
-            NewBuildPlanButton.BorderLeft = false;
-            NewBuildPlanButton.BorderRight = false;
-            NewBuildPlanButton.BorderTop = false;
-            NewBuildPlanButton.BorderWidth = 2F;
             NewBuildPlanButton.FlatAppearance.BorderSize = 0;
             NewBuildPlanButton.FlatStyle = FlatStyle.Flat;
             NewBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1740,12 +1630,6 @@
             // 
             // DeleteBuildPlanButton
             // 
-            DeleteBuildPlanButton.BorderBottom = false;
-            DeleteBuildPlanButton.BorderFull = true;
-            DeleteBuildPlanButton.BorderLeft = false;
-            DeleteBuildPlanButton.BorderRight = false;
-            DeleteBuildPlanButton.BorderTop = false;
-            DeleteBuildPlanButton.BorderWidth = 2F;
             DeleteBuildPlanButton.FlatAppearance.BorderSize = 0;
             DeleteBuildPlanButton.FlatStyle = FlatStyle.Flat;
             DeleteBuildPlanButton.ForeColor = Color.FromArgb(234, 234, 234);
@@ -1799,6 +1683,28 @@
             // 
             CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             CurrentInventoryGrid.BackgroundColor = Color.Black;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            CurrentInventoryGrid.EnableHeadersVisualStyles = false;
+            CurrentInventoryGrid.GridColor = Color.Black;
+            CurrentInventoryGrid.Location = new Point(5, 90);
+            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = SystemColors.Control;
             dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
@@ -1806,30 +1712,7 @@
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            CurrentInventoryGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            CurrentInventoryGrid.Columns.AddRange(new DataGridViewColumn[] { typeName, Quantity });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.Black;
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle6;
-            CurrentInventoryGrid.EditableColumns = "Quantity";
-            CurrentInventoryGrid.EnableHeadersVisualStyles = false;
-            CurrentInventoryGrid.GridColor = Color.Black;
-            CurrentInventoryGrid.Location = new Point(5, 90);
-            CurrentInventoryGrid.Name = "CurrentInventoryGrid";
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            CurrentInventoryGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             CurrentInventoryGrid.Size = new Size(630, 433);
             CurrentInventoryGrid.TabIndex = 53;
             CurrentInventoryGrid.CellValueChanged += CurrentInventoryGrid_CellValueChanged;
@@ -1845,20 +1728,14 @@
             // Quantity
             // 
             Quantity.DataPropertyName = "quantity";
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = "0";
-            Quantity.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            Quantity.DefaultCellStyle = dataGridViewCellStyle2;
             Quantity.HeaderText = "Quantity";
             Quantity.Name = "Quantity";
             // 
             // ClearInventoryButton
             // 
-            ClearInventoryButton.BorderBottom = false;
-            ClearInventoryButton.BorderFull = true;
-            ClearInventoryButton.BorderLeft = false;
-            ClearInventoryButton.BorderRight = false;
-            ClearInventoryButton.BorderTop = false;
-            ClearInventoryButton.BorderWidth = 2F;
             ClearInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearInventoryButton.Location = new Point(5, 21);
             ClearInventoryButton.Name = "ClearInventoryButton";
@@ -1995,12 +1872,6 @@
             // 
             // BPSettingsButton
             // 
-            BPSettingsButton.BorderBottom = true;
-            BPSettingsButton.BorderFull = false;
-            BPSettingsButton.BorderLeft = false;
-            BPSettingsButton.BorderRight = false;
-            BPSettingsButton.BorderTop = false;
-            BPSettingsButton.BorderWidth = 2F;
             BPSettingsButton.Cursor = Cursors.Hand;
             BPSettingsButton.FlatAppearance.BorderSize = 0;
             BPSettingsButton.FlatStyle = FlatStyle.Flat;
@@ -2017,12 +1888,6 @@
             // 
             // CostBreakdownButton
             // 
-            CostBreakdownButton.BorderBottom = true;
-            CostBreakdownButton.BorderFull = false;
-            CostBreakdownButton.BorderLeft = false;
-            CostBreakdownButton.BorderRight = false;
-            CostBreakdownButton.BorderTop = false;
-            CostBreakdownButton.BorderWidth = 2F;
             CostBreakdownButton.Cursor = Cursors.Hand;
             CostBreakdownButton.FlatAppearance.BorderSize = 0;
             CostBreakdownButton.FlatStyle = FlatStyle.Flat;
@@ -2039,12 +1904,6 @@
             // 
             // PlanetMaterialsButton
             // 
-            PlanetMaterialsButton.BorderBottom = true;
-            PlanetMaterialsButton.BorderFull = false;
-            PlanetMaterialsButton.BorderLeft = false;
-            PlanetMaterialsButton.BorderRight = false;
-            PlanetMaterialsButton.BorderTop = false;
-            PlanetMaterialsButton.BorderWidth = 2F;
             PlanetMaterialsButton.Cursor = Cursors.Hand;
             PlanetMaterialsButton.FlatAppearance.BorderSize = 0;
             PlanetMaterialsButton.FlatStyle = FlatStyle.Flat;
@@ -2061,12 +1920,6 @@
             // 
             // BuildDetailsButton
             // 
-            BuildDetailsButton.BorderBottom = true;
-            BuildDetailsButton.BorderFull = false;
-            BuildDetailsButton.BorderLeft = false;
-            BuildDetailsButton.BorderRight = false;
-            BuildDetailsButton.BorderTop = false;
-            BuildDetailsButton.BorderWidth = 2F;
             BuildDetailsButton.Cursor = Cursors.Hand;
             BuildDetailsButton.FlatAppearance.BorderSize = 0;
             BuildDetailsButton.FlatStyle = FlatStyle.Flat;
@@ -2083,12 +1936,6 @@
             // 
             // MaterialsButton
             // 
-            MaterialsButton.BorderBottom = true;
-            MaterialsButton.BorderFull = false;
-            MaterialsButton.BorderLeft = false;
-            MaterialsButton.BorderRight = false;
-            MaterialsButton.BorderTop = false;
-            MaterialsButton.BorderWidth = 2F;
             MaterialsButton.Cursor = Cursors.Hand;
             MaterialsButton.FlatAppearance.BorderSize = 0;
             MaterialsButton.FlatStyle = FlatStyle.Flat;
@@ -2105,12 +1952,6 @@
             // 
             // SystemButton
             // 
-            SystemButton.BorderBottom = true;
-            SystemButton.BorderFull = false;
-            SystemButton.BorderLeft = false;
-            SystemButton.BorderRight = false;
-            SystemButton.BorderTop = false;
-            SystemButton.BorderWidth = 2F;
             SystemButton.Cursor = Cursors.Hand;
             SystemButton.FlatAppearance.BorderSize = 0;
             SystemButton.FlatStyle = FlatStyle.Flat;
@@ -2127,12 +1968,6 @@
             // 
             // CurrentInventoryButton
             // 
-            CurrentInventoryButton.BorderBottom = true;
-            CurrentInventoryButton.BorderFull = false;
-            CurrentInventoryButton.BorderLeft = false;
-            CurrentInventoryButton.BorderRight = false;
-            CurrentInventoryButton.BorderTop = false;
-            CurrentInventoryButton.BorderWidth = 2F;
             CurrentInventoryButton.Cursor = Cursors.Hand;
             CurrentInventoryButton.FlatAppearance.BorderSize = 0;
             CurrentInventoryButton.FlatStyle = FlatStyle.Flat;
@@ -2150,12 +1985,6 @@
             // SummaryButton
             // 
             SummaryButton.BackColor = Color.FromArgb(21, 21, 21);
-            SummaryButton.BorderBottom = true;
-            SummaryButton.BorderFull = false;
-            SummaryButton.BorderLeft = false;
-            SummaryButton.BorderRight = false;
-            SummaryButton.BorderTop = false;
-            SummaryButton.BorderWidth = 2F;
             SummaryButton.FlatAppearance.BorderColor = Color.White;
             SummaryButton.FlatAppearance.BorderSize = 0;
             SummaryButton.FlatStyle = FlatStyle.Flat;
@@ -2168,6 +1997,27 @@
             SummaryButton.Text = "Summary";
             SummaryButton.UseVisualStyleBackColor = false;
             SummaryButton.Click += SummaryButton_Click;
+            // 
+            // label12
+            // 
+            label12.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label12.Location = new Point(782, 70);
+            label12.Name = "label12";
+            label12.Size = new Size(107, 21);
+            label12.TabIndex = 35;
+            label12.Text = "Shipping Cost";
+            // 
+            // ShippingCostControl
+            // 
+            ShippingCostControl.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ShippingCostControl.BackColor = Color.FromArgb(21, 21, 21);
+            ShippingCostControl.ForeColor = Color.White;
+            ShippingCostControl.Location = new Point(782, 103);
+            ShippingCostControl.Name = "ShippingCostControl";
+            ShippingCostControl.Size = new Size(451, 326);
+            ShippingCostControl.TabIndex = 34;
             // 
             // BuildPlansControl
             // 
@@ -2213,7 +2063,6 @@
             SummaryMarketData.PerformLayout();
             MaterialPricePage.ResumeLayout(false);
             MaterialPricePage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)MostExpensiveGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)FinalSellPriceNumeric).EndInit();
             IndustrySettingsTabPage.ResumeLayout(false);
             DefaultsTabContainer.ResumeLayout(false);
@@ -2385,10 +2234,6 @@
         private DataGridViewTextBoxColumn typeName;
         private DataGridViewTextBoxColumn Quantity;
         private Objects.Custom_Controls.EveHelperButton SummaryButton;
-        private Objects.Custom_Controls.EveHelperGridView MostExpensiveGridView;
-        private DataGridViewTextBoxColumn materialName;
-        private DataGridViewTextBoxColumn amount;
-        private DataGridViewTextBoxColumn priceTotal;
         private Label ManuSCILabel;
         private Label ReactionSCILabel;
         private Objects.Custom_Controls.PriceHistory PriceHistoryControl;
@@ -2399,5 +2244,6 @@
         private NumericUpDown MaxReactionTimeUpDown;
         private Support_Screens.BuildPlanDetailsTab BuildPlanDetailsControl;
         private Support_Screens.BuildPlanPlanetMaterialsTab BuildPlanPlanetMaterialsControl;
+        private Support_Screens.ShippingCalculator ShippingCostControl;
     }
 }

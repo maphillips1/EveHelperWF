@@ -127,6 +127,9 @@
     <Compile Update="UI Controls\Support Screens\SetPriceControl.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI Controls\Support Screens\ShippingCalculator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI Controls\Support Screens\SolarSystemInfo.cs">
       <SubType>Form</SubType>
     </Compile>
