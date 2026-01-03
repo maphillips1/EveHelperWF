@@ -1,4 +1,5 @@
 ﻿using EveHelperWF.Objects;
+using EveHelperWF.ScreenHelper;
 using FileIO;
 using System.ComponentModel;
 using System.Text;
@@ -295,6 +296,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         try
                         {
                             structureProfiles = Newtonsoft.Json.JsonConvert.DeserializeObject<List<StructureProfile>>(fileContent);
+                            fileContent = Newtonsoft.Json.JsonConvert.SerializeObject(structureProfiles);
                         }
                         catch (Exception ex)
                         {
@@ -305,6 +307,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         actualFileName = fileName.Substring(fileName.LastIndexOf("\\") + 1, (fileName.Length - fileName.LastIndexOf("\\") - 1));
                         newFileName = Path.Combine(Enums.Enums.StructureProfilesDirectory, actualFileName);
                         FileHelper.SaveFileContent(Enums.Enums.StructureProfilesDirectory, newFileName, fileContent);
+                        CommonHelper.LoadStructureProfiles();
                     }
                 }
                 string skippedListString = skippedList.ToString();

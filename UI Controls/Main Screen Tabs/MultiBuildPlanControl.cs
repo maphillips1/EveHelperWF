@@ -235,7 +235,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan);
                 SetSummaryInformation();
                 LoadMaterialsPriceTreeView();
-                LoadMostExpensiveGridView();
                 ProgressLabel.Text = "";
                 this.Cursor = Cursors.Default;
                 this.isLoading = false;
@@ -264,7 +263,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     SaveBuildPlan();
                     SetSummaryInformation();
                     LoadMaterialsPriceTreeView();
-                    LoadMostExpensiveGridView();
                 }
                 MaterialsPriceTreeView.SelectedNode = null;
                 this.isLoading = false;
@@ -819,10 +817,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 LoadMaterialsPriceTreeView();
                 sw.Stop();
                 CommonHelper.LogElapsedTime("LoadMaterialsPriceTreeView took", sw);
-                sw.Restart();
-                LoadMostExpensiveGridView();
-                sw.Stop();
-                CommonHelper.LogElapsedTime("LoadMostExpensiveGridView took", sw);
 
                 //Build Details Load
                 sw.Restart();
@@ -1185,7 +1179,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             BPTreeView.Nodes.Clear();
             FinalProductGridView.DataSource = null;
             MaterialsPriceTreeView.Nodes.Clear();
-            MostExpensiveGridView.DataSource = null;
             this.ResumeLayout();
             this.IsResetting = false;
             CurrentInventoryGrid.DataSource = null;
@@ -1397,6 +1390,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         {
             MaterialsPriceTreeView.Nodes.Clear();
             decimal totalVolume = 0;
+            decimal totalPrice = 0;
             TreeNode tn;
             this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderBy(x => x.materialName).ToList();
             MaterialsWithMarketData pricedMat;
@@ -1458,14 +1452,12 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 }
                 marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
                 MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                totalPrice += totalGroupPrice;
             }
             TotalVolumeLabel.Text = $"Total Volume: {totalVolume.ToString("N2")} m3";
-        }
 
-        private void LoadMostExpensiveGridView()
-        {
-            this.currentBuildPlan.CombinedMats = this.currentBuildPlan.CombinedMats.OrderByDescending(x => x.priceTotal).ToList();
-            MostExpensiveGridView.DatabindGridView(this.currentBuildPlan.CombinedMats);
+
+            this.ShippingCostControl.SetVolumeAndPrice(totalVolume, totalPrice);
         }
 
         private void LoadPlanetaryMaterialsPage()
@@ -1730,7 +1722,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                                                                      this.currentBuildPlan.FinalProducts,
                                                                      this.currentBuildPlan);
                         LoadMaterialsPriceTreeView();
-                        LoadMostExpensiveGridView();
                         SetSummaryInformation();
                         SaveBuildPlan();
                         if (errorBuilder.Length > 0)
