@@ -2031,6 +2031,13 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                 if (FinalProductGridView.SelectedRows?.Count > 0)
                 {
                     FinalProduct fp = this.currentBuildPlan.FinalProducts[FinalProductGridView.SelectedRows[0].Index];
+                    BlueprintInfo finalProductBP = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == fp.blueprintOrReactionTypeId);
+
+                    if (finalProductBP != null)
+                    {
+                        fp.ME = finalProductBP.ME;
+                        fp.TE = finalProductBP.TE;
+                    }
                     EditMultiBuildPlanProduct editScreen = new EditMultiBuildPlanProduct(fp);
                     editScreen.StartPosition = FormStartPosition.CenterScreen;
                     editScreen.ShowDialog();
@@ -2038,6 +2045,11 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (editScreen.DialogResult == DialogResult.OK)
                     {
                         this.Cursor = Cursors.WaitCursor;
+                        if (finalProductBP != null)
+                        {
+                            finalProductBP.ME = fp.ME;
+                            finalProductBP.TE = fp.TE;
+                        }
                         if (editScreen.ReRunCalcs)
                         {
                             RunCalcs();

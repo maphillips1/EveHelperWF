@@ -16,6 +16,8 @@ namespace EveHelperWF.Objects
         public int TotalOutcome { get; set; }
         public int RunsPerCopy { get; set; }
         public int NumOfCopies { get; set; }
+        public int ME {  get; set; }
+        public int TE { get; set; }
         public int TotalRuns
         {
             get
