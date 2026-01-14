@@ -13,40 +13,47 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 {
     public partial class EditMultiBuildPlanProduct : Objects.FormBase
     {
-        FinalProduct FinalProduct;
+        FinalProduct finalProduct;
         public bool ReRunCalcs = false;
         public EditMultiBuildPlanProduct(FinalProduct finalProduct)
         {
             InitializeComponent();
             this.Text = "Edit Product - " + finalProduct.finalProductTypeName;
-            FinalProduct = finalProduct;
+            this.finalProduct = finalProduct;
             LoadScreen();
         }
 
         private void LoadScreen()
         {
-            AdditionalCostNumeric.Value = FinalProduct.additionalCosts;
-            RunsPerCopyNumeric.Value = FinalProduct.RunsPerCopy;
-            NumCopiesNumeric.Value = FinalProduct.NumOfCopies;
-            CustomSellPriceNumeric.Value = FinalProduct.customSellPrice;
+            AdditionalCostNumeric.Value = finalProduct.additionalCosts;
+            RunsPerCopyNumeric.Value = finalProduct.RunsPerCopy;
+            NumCopiesNumeric.Value = finalProduct.NumOfCopies;
+            CustomSellPriceNumeric.Value = finalProduct.customSellPrice;
+            MENumeric.Value = finalProduct.ME;
+            TENumeric.Value = finalProduct.TE;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            if (FinalProduct != null)
+            if (finalProduct != null)
             {
-                if (FinalProduct.NumOfCopies != (int)(NumCopiesNumeric.Value) ||
-                    FinalProduct.RunsPerCopy != (int)(RunsPerCopyNumeric.Value) ||
-                    FinalProduct.additionalCosts != AdditionalCostNumeric.Value)
+                if (finalProduct.NumOfCopies != (int)(NumCopiesNumeric.Value) ||
+                    finalProduct.RunsPerCopy != (int)(RunsPerCopyNumeric.Value) ||
+                    finalProduct.ME != (int)(MENumeric.Value) ||
+                    finalProduct.TE != (int)(TENumeric.Value) ||
+                    finalProduct.additionalCosts != AdditionalCostNumeric.Value)
                 {
                     ReRunCalcs = true;
                 }
 
-                FinalProduct.additionalCosts = AdditionalCostNumeric.Value;
-                FinalProduct.RunsPerCopy = (int)RunsPerCopyNumeric.Value;
-                FinalProduct.NumOfCopies = (int)NumCopiesNumeric.Value;
-                FinalProduct.TotalOutcome = (int)(FinalProduct.RunsPerCopy * FinalProduct.NumOfCopies);
-                FinalProduct.customSellPrice = CustomSellPriceNumeric.Value;
+                finalProduct.additionalCosts = AdditionalCostNumeric.Value;
+                finalProduct.RunsPerCopy = (int)RunsPerCopyNumeric.Value;
+                finalProduct.NumOfCopies = (int)NumCopiesNumeric.Value;
+                finalProduct.TotalOutcome = (int)(finalProduct.RunsPerCopy * finalProduct.NumOfCopies);
+                finalProduct.customSellPrice = CustomSellPriceNumeric.Value;
+                finalProduct.ME = (int)MENumeric.Value;
+                finalProduct.TE = (int)TENumeric.Value;
+                
                 DialogResult = DialogResult.OK;
             }
         }

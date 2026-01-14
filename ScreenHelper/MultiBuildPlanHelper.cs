@@ -584,7 +584,7 @@ namespace EveHelperWF.ScreenHelper
                 {
                     currentBuild = buildPlan.OptimumBuildGroups[key][i];
                     currentInventory = buildPlan.CurrentInventory.Find(x => x.typeID == currentBuild.BuiltOrReactedTypeId);
-                    fp = buildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == currentBuild.BuiltOrReactedTypeId);
+                    fp = buildPlan.FinalProducts.Find(x => x.finalProductTypeId == currentBuild.BuiltOrReactedTypeId);
                     isFinal = (fp != null);
                     if (currentInventory != null)
                     {
@@ -881,6 +881,7 @@ namespace EveHelperWF.ScreenHelper
             {
                 if (bpInfo.IsManufactured)
                 {
+                   
                     if (buildPlan.IndustrySettings.MaxManufacturingTime > 0)
                     {
                         maxTime = buildPlan.IndustrySettings.MaxManufacturingTime * 3600;

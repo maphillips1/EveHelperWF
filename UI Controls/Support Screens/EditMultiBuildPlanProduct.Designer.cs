@@ -39,10 +39,16 @@
             CustomSellPriceNumeric = new NumericUpDown();
             SaveButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CancelButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            label5 = new Label();
+            TENumeric = new NumericUpDown();
+            label6 = new Label();
+            MENumeric = new NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)AdditionalCostNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumCopiesNumeric).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CustomSellPriceNumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TENumeric).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)MENumeric).BeginInit();
             SuspendLayout();
             // 
             // AdditionalCostNumeric
@@ -111,7 +117,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(12, 150);
+            label4.Location = new Point(12, 230);
             label4.Name = "label4";
             label4.Size = new Size(131, 21);
             label4.TabIndex = 7;
@@ -120,7 +126,7 @@
             // CustomSellPriceNumeric
             // 
             CustomSellPriceNumeric.DecimalPlaces = 2;
-            CustomSellPriceNumeric.Location = new Point(155, 150);
+            CustomSellPriceNumeric.Location = new Point(155, 230);
             CustomSellPriceNumeric.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
             CustomSellPriceNumeric.Name = "CustomSellPriceNumeric";
             CustomSellPriceNumeric.Size = new Size(321, 23);
@@ -129,17 +135,11 @@
             // 
             // SaveButton
             // 
-            SaveButton.BorderBottom = false;
-            SaveButton.BorderFull = true;
-            SaveButton.BorderLeft = false;
-            SaveButton.BorderRight = false;
-            SaveButton.BorderTop = false;
-            SaveButton.BorderWidth = 2F;
             SaveButton.FlatAppearance.BorderSize = 0;
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             SaveButton.ForeColor = Color.FromArgb(234, 234, 234);
-            SaveButton.Location = new Point(176, 202);
+            SaveButton.Location = new Point(183, 270);
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(75, 37);
             SaveButton.TabIndex = 8;
@@ -149,17 +149,11 @@
             // 
             // CancelButton
             // 
-            CancelButton.BorderBottom = false;
-            CancelButton.BorderFull = true;
-            CancelButton.BorderLeft = false;
-            CancelButton.BorderRight = false;
-            CancelButton.BorderTop = false;
-            CancelButton.BorderWidth = 2F;
             CancelButton.FlatAppearance.BorderSize = 0;
             CancelButton.FlatStyle = FlatStyle.Flat;
             CancelButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             CancelButton.ForeColor = Color.FromArgb(234, 234, 234);
-            CancelButton.Location = new Point(274, 202);
+            CancelButton.Location = new Point(281, 270);
             CancelButton.Name = "CancelButton";
             CancelButton.Size = new Size(75, 37);
             CancelButton.TabIndex = 9;
@@ -167,11 +161,54 @@
             CancelButton.UseVisualStyleBackColor = false;
             CancelButton.Click += CancelButton_Click;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(12, 190);
+            label5.Name = "label5";
+            label5.Size = new Size(26, 21);
+            label5.TabIndex = 13;
+            label5.Text = "TE";
+            // 
+            // TENumeric
+            // 
+            TENumeric.Increment = new decimal(new int[] { 2, 0, 0, 0 });
+            TENumeric.Location = new Point(155, 190);
+            TENumeric.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
+            TENumeric.Name = "TENumeric";
+            TENumeric.Size = new Size(321, 23);
+            TENumeric.TabIndex = 12;
+            TENumeric.TextAlign = HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(12, 150);
+            label6.Name = "label6";
+            label6.Size = new Size(32, 21);
+            label6.TabIndex = 11;
+            label6.Text = "ME";
+            // 
+            // MENumeric
+            // 
+            MENumeric.Location = new Point(155, 150);
+            MENumeric.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            MENumeric.Name = "MENumeric";
+            MENumeric.Size = new Size(321, 23);
+            MENumeric.TabIndex = 10;
+            MENumeric.TextAlign = HorizontalAlignment.Right;
+            // 
             // EditMultiBuildPlanProduct
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(568, 292);
+            ClientSize = new Size(568, 349);
+            Controls.Add(label5);
+            Controls.Add(TENumeric);
+            Controls.Add(label6);
+            Controls.Add(MENumeric);
             Controls.Add(CancelButton);
             Controls.Add(SaveButton);
             Controls.Add(label4);
@@ -191,6 +228,8 @@
             ((System.ComponentModel.ISupportInitialize)RunsPerCopyNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumCopiesNumeric).EndInit();
             ((System.ComponentModel.ISupportInitialize)CustomSellPriceNumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TENumeric).EndInit();
+            ((System.ComponentModel.ISupportInitialize)MENumeric).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -207,5 +246,9 @@
         private NumericUpDown CustomSellPriceNumeric;
         private Objects.Custom_Controls.EveHelperButton SaveButton;
         private Objects.Custom_Controls.EveHelperButton CancelButton;
+        private Label label5;
+        private NumericUpDown TENumeric;
+        private Label label6;
+        private NumericUpDown MENumeric;
     }
 }
