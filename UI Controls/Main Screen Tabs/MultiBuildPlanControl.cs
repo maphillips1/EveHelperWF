@@ -275,38 +275,77 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             {
                 if (e.Node.Tag != null)
                 {
-                    int bpTypeId = Convert.ToInt32(e.Node.Tag);
-                    BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == bpTypeId);
-
-                    BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, false);
-                    BVC.StartPosition = FormStartPosition.CenterScreen;
-                    if (BVC.ShowDialog() == DialogResult.OK)
+                    if (e.Node.Tag.ToString().StartsWith("Group:"))
                     {
-                        bpInfo.ME = (int)BVC.MEUpDown.Value;
-                        bpInfo.TE = (int)BVC.TEUpDown.Value;
-                        bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
-                        if ((int)BVC.MakeItemCombo.SelectedValue == 0)
+                        if (e.Node.Nodes.Count > 0)
                         {
-                            bpInfo.Manufacture = false;
-                            bpInfo.React = false;
+                            int marketgroupid = Convert.ToInt32(e.Node.Tag.ToString().Split(':')[1]);
+                            BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == Convert.ToInt32(e.Node.Nodes[0].Tag));
+                            BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, false);
+                            BVC.StartPosition = FormStartPosition.CenterScreen;
+                            if (BVC.ShowDialog() == DialogResult.OK)
+                            {
+                                bpInfo.ME = (int)BVC.MEUpDown.Value;
+                                bpInfo.TE = (int)BVC.TEUpDown.Value;
+                                bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                                if ((int)BVC.MakeItemCombo.SelectedValue == 0)
+                                {
+                                    bpInfo.Manufacture = false;
+                                    bpInfo.React = false;
+                                }
+                                else if ((int)BVC.MakeItemCombo.SelectedValue == 1)
+                                {
+                                    bpInfo.Manufacture = true;
+                                    bpInfo.React = true;
+                                }
+                                if (BVC.StructureProfileCombo.SelectedValue != null)
+                                {
+                                    bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
+                                }
+                                isLoading = true;
+                                SetAlBPValusInGroup(bpInfo, marketgroupid);
+                                RunCalcs();
+                                isLoading = false;
+                            }
                         }
-                        else if ((int)BVC.MakeItemCombo.SelectedValue == 1)
-                        {
-                            bpInfo.Manufacture = true;
-                            bpInfo.React = true;
-                        }
-                        if (BVC.StructureProfileCombo.SelectedValue != null)
-                        {
-                            bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
-                        }
-                        isLoading = true;
-                        e.Node.Nodes.Clear();
-                        TreeNode parentNode = e.Node;
-                        BuildChildNodes(bpInfo, ref parentNode);
-                        RunCalcs();
-                        isLoading = false;
+
+                        BPTreeView.SelectedNode = null;
                     }
-                    BPTreeView.SelectedNode = null;
+                    else
+                    {
+                        int bpTypeId = Convert.ToInt32(e.Node.Tag);
+                        BlueprintInfo bpInfo = this.currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == bpTypeId);
+
+                        BlueprintValueControl BVC = new BlueprintValueControl(bpInfo, false);
+                        BVC.StartPosition = FormStartPosition.CenterScreen;
+                        if (BVC.ShowDialog() == DialogResult.OK)
+                        {
+                            bpInfo.ME = (int)BVC.MEUpDown.Value;
+                            bpInfo.TE = (int)BVC.TEUpDown.Value;
+                            bpInfo.MaxRuns = (int)BVC.MaxRunsUpDown.Value;
+                            if ((int)BVC.MakeItemCombo.SelectedValue == 0)
+                            {
+                                bpInfo.Manufacture = false;
+                                bpInfo.React = false;
+                            }
+                            else if ((int)BVC.MakeItemCombo.SelectedValue == 1)
+                            {
+                                bpInfo.Manufacture = true;
+                                bpInfo.React = true;
+                            }
+                            if (BVC.StructureProfileCombo.SelectedValue != null)
+                            {
+                                bpInfo.StructureProfileId = (int)BVC.StructureProfileCombo.SelectedValue;
+                            }
+                            isLoading = true;
+                            e.Node.Nodes.Clear();
+                            TreeNode parentNode = e.Node;
+                            BuildChildNodes(bpInfo, ref parentNode);
+                            RunCalcs();
+                            isLoading = false;
+                        }
+                        BPTreeView.SelectedNode = null;
+                    }
                 }
             }
         }
@@ -1525,24 +1564,36 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (manufacturingBPs.Count > 0)
             {
+                List<TreeNode> bpGroupNodes = new List<TreeNode>();
                 manufacturingBPs = manufacturingBPs.OrderBy(x => x.BlueprintName).ToList();
+                manufacturingBPs = manufacturingBPs.FindAll(x => currentBuildPlan.FinalProducts.Find(y => y.blueprintOrReactionTypeId == x.BlueprintTypeId) == null);
                 TreeNode manufactureNode = new TreeNode();
                 manufactureNode.Text = "Blueprints";
+                manufactureNode.Expand();
                 TreeNode manuNode;
-                FinalProduct fp = null;
+                TreeNode groupNode;
+                InventoryType it;
                 foreach (BlueprintInfo bp in manufacturingBPs)
                 {
-                    fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bp.BlueprintTypeId);
-                    if (fp == null)
-                    {
-                        manuNode = new TreeNode();
-                        manuNode.Tag = bp.BlueprintTypeId;
-                        manuNode.Text = bp.BlueprintName;
-                        manuNode.Name = bp.BlueprintTypeId.ToString();
+                    it = CommonHelper.InventoryTypes.Find(x => x.typeId == bp.BlueprintTypeId);
 
-                        BuildChildNodes(bp, ref manuNode);
-                        manufactureNode.Nodes.Add(manuNode);
+                    groupNode = bpGroupNodes.Find(x => x.Tag.ToString() == $"Group:{it.groupId}");
+                    if (groupNode == null)
+                    {
+                        groupNode = new TreeNode();
+                        groupNode.Tag = $"Group:{it.groupId}";
+                        groupNode.Text = it.groupName;
+                        groupNode.Name = $"Group:{it.groupId}";
+                        bpGroupNodes.Add(groupNode);
+                        manufactureNode.Nodes.Add(groupNode);
                     }
+                    manuNode = new TreeNode();
+                    manuNode.Tag = bp.BlueprintTypeId;
+                    manuNode.Text = bp.BlueprintName;
+                    manuNode.Name = bp.BlueprintTypeId.ToString();
+
+                    BuildChildNodes(bp, ref manuNode);
+                    groupNode.Nodes.Add(manuNode);
                 }
                 BPTreeView.Nodes.Add(manufactureNode);
             }
@@ -1573,16 +1624,34 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
             if (reactions.Count > 0)
             {
+                List<TreeNode> reactionGroupNodes = new List<TreeNode>();
                 reactions = reactions.OrderBy(x => x.BlueprintName).ToList();
                 TreeNode ReactionsNode = new TreeNode();
                 ReactionsNode.Text = "Reactions";
                 TreeNode reactionNode;
                 FinalProduct fp = null;
+                TreeNode groupNode;
+                InventoryType it;
                 foreach (BlueprintInfo bp in reactions)
                 {
                     fp = currentBuildPlan.FinalProducts.Find(x => x.blueprintOrReactionTypeId == bp.BlueprintTypeId);
                     if (fp == null)
                     {
+
+                        it = CommonHelper.InventoryTypes.Find(x => x.typeId == bp.BlueprintTypeId);
+
+                        groupNode = reactionGroupNodes.Find(x => x.Tag.ToString() == $"Group:{it.groupId}");
+                        if (groupNode == null)
+                        {
+                            groupNode = new TreeNode();
+                            groupNode.Tag = $"Group:{it.groupId}";
+                            groupNode.Text = it.groupName;
+                            groupNode.Expand();
+                            groupNode.Name = $"Group:{it.groupId}";
+                            reactionGroupNodes.Add(groupNode);
+                            ReactionsNode.Nodes.Add(groupNode);
+                        }
+
                         reactionNode = new TreeNode();
                         reactionNode.Tag = bp.BlueprintTypeId;
                         reactionNode.Text = bp.BlueprintName;
@@ -1590,7 +1659,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
                         BuildChildNodes(bp, ref reactionNode);
 
-                        ReactionsNode.Nodes.Add(reactionNode);
+                        groupNode.Nodes.Add(reactionNode);
                     }
                 }
                 BPTreeView.Nodes.Add(ReactionsNode);
@@ -1986,6 +2055,28 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             this.isLoading = false;
             ProgressLabel.Text = "";
             MessageBox.Show("Build plan has been updated to be as profitable as possible", "Build Plan Updated"); ;
+        }
+
+        private void SetAlBPValusInGroup(BlueprintInfo blueprintInfo, int groupId)
+        {
+            InventoryType it;
+
+            foreach (BlueprintInfo bpInfo in this.currentBuildPlan.BlueprintStore)
+            {
+                it = CommonHelper.InventoryTypes.Find(x => x.typeId == bpInfo.BlueprintTypeId);
+                if (it != null)
+                {
+                    if (it.groupId == groupId)
+                    {
+                        bpInfo.ME = blueprintInfo.ME;
+                        bpInfo.TE = blueprintInfo.TE;
+                        bpInfo.MaxRuns = blueprintInfo.MaxRuns;
+                        bpInfo.Manufacture = blueprintInfo.Manufacture;
+                        bpInfo.React = blueprintInfo.React;
+                        bpInfo.StructureProfileId = blueprintInfo.StructureProfileId;
+                    }
+                }
+            }
         }
 
         #endregion

@@ -184,7 +184,7 @@
             // 
             CollateralNumeric.DecimalPlaces = 2;
             CollateralNumeric.Location = new Point(212, 57);
-            CollateralNumeric.Maximum = new decimal(new int[] { 1215752192, 23, 0, 0 });
+            CollateralNumeric.Maximum = new decimal(new int[] { 276447232, 23283, 0, 0 });
             CollateralNumeric.Name = "CollateralNumeric";
             CollateralNumeric.Size = new Size(120, 23);
             CollateralNumeric.TabIndex = 12;
