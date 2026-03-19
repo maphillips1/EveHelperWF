@@ -581,7 +581,7 @@ namespace EveHelperWF.ScreenHelper
             return taxAndFees;
         }
 
-        public static long CalculateManufacturingReactionJobTime(int bpReactionTypeID, 
+        public static decimal CalculateManufacturingReactionJobTime(int bpReactionTypeID, 
                                                                 long baseTime, 
                                                                 int TEValue, 
                                                                 bool isReaction,
@@ -592,10 +592,11 @@ namespace EveHelperWF.ScreenHelper
                                                                 int structureTypeId,
                                                                 int structureTERig,
                                                                 int solarSystemId,
-                                                                int manufacturingImplantTypeId)
+                                                                int manufacturingImplantTypeId,
+                                                                int runsNeeded)
         {
             //The base time passed in should be the numruns * time per run
-            decimal totalTime = (decimal)baseTime;
+            decimal totalTime = (decimal)baseTime * runsNeeded;
             if (isReaction)
             {
                 decimal ReactionSkillBonus = 1 - (((decimal)reactionSkillLevel * 4) / 100);
@@ -605,7 +606,6 @@ namespace EveHelperWF.ScreenHelper
                 totalTime = totalTime * ReactionSkillBonus;
                 totalTime *= reactionStructureBonus;
                 totalTime *= reactionRigBonus;
-                totalTime = Math.Ceiling(totalTime);
             }
             else
             {
@@ -624,9 +624,8 @@ namespace EveHelperWF.ScreenHelper
                 totalTime *= structureBonus;
                 totalTime *= structureRigFactor;
                 totalTime *= implantBonus;
-                totalTime = Math.Ceiling(totalTime);
             }
-            return Convert.ToInt64(totalTime);
+            return totalTime / runsNeeded;
         }
 
         private static decimal BPSpecificSkillFactor(int bpReactionTypeId, int specificAdvancedIndustrySkillLevel, int industrySkillLevel)

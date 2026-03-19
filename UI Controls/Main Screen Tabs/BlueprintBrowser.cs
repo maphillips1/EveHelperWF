@@ -39,14 +39,14 @@ namespace EveHelperWF
         private static List<Objects.IndustryActivityProduct> ReactionProds = null;
 
         //Time
-        private static Int64 ManufacturingTotalTime = 0;
-        private static Int64 ReactionTotalTime = 0;
-        private static Int64 InventionTotalTime = 0;
-        private static Int64 ResMETime = 0;
-        private static Int64 ResTETime = 0;
-        private static Int64 ResCopyTime = 0;
+        private static decimal ManufacturingTotalTime = 0;
+        private static decimal ReactionTotalTime = 0;
+        private static decimal InventionTotalTime = 0;
+        private static decimal ResMETime = 0;
+        private static decimal ResTETime = 0;
+        private static decimal ResCopyTime = 0;
         //Component Time
-        private static Int64 ManufacturingTotalComponentTime = 0;
+        private static decimal ManufacturingTotalComponentTime = 0;
         //Input Price
         private static decimal ManufacturingTotalInputPrice = 0;
         private static decimal ReactionTotalInputPrice = 0;
@@ -55,9 +55,9 @@ namespace EveHelperWF
         private static decimal TETotalInputPrice = 0;
         private static decimal CopyingTotalInputPrice = 0;
         //Run Time
-        private static Int64 TotalManufacturingJobTime = 0;
-        private static Int64 TotalReactionJobTime = 0;
-        private static Int64 TotalInventionJobTime = 0;
+        private static decimal TotalManufacturingJobTime = 0;
+        private static decimal TotalReactionJobTime = 0;
+        private static decimal TotalInventionJobTime = 0;
         //Job Cost
         private static Decimal TotalManufacturingJobCost = 0;
         private static Decimal TotalReactionJobCost = 0;

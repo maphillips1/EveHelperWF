@@ -657,7 +657,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static string FormatTimeAsString(Int64 time)
+        public static string FormatTimeAsString(decimal time)
         {
             string formattedTime = "";
 
@@ -691,7 +691,7 @@ namespace EveHelperWF.ScreenHelper
                 time -= (60 * minutes);
                 formattedTime = String.Concat(formattedTime, string.Format("{0}mi ", minutes));
             }
-            Int64 seconds = time;
+            decimal seconds = time;
 
             formattedTime = String.Concat(formattedTime, string.Format("{0}s ", seconds));
 
@@ -850,19 +850,20 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static Int64 CalculateManufacturingTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
+        public static decimal CalculateManufacturingTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
-            Int64 time = 0;
+            decimal time = 0;
 
             Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityName == Enums.Enums.ActivityManufacturing);
             if (industryActivity != null)
             {
-                time = industryActivity.time * helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, helperClass.TE, false, helperClass.ReactionsSkill, 
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, industryActivity.time, helperClass.TE, false, helperClass.ReactionsSkill, 
                                                                           helperClass.IndustrySkill, helperClass.AdvancedIndustrySkill, CommonHelper.GetSpecificAdvancedIndustrySkill(industryActivity.typeID, helperClass),
                                                                           helperClass.ManufacturingStructureTypeID, helperClass.ManufacturingStructureRigBonus.RigTEBonus, helperClass.ManufacturingSolarSystemID,
-                                                                          helperClass.ManufacturingImplantTypeID);
+                                                                          helperClass.ManufacturingImplantTypeID,
+                                                                          helperClass.Runs);
+                time = time * helperClass.Runs;
             }
 
             return time;
@@ -912,9 +913,9 @@ namespace EveHelperWF.ScreenHelper
             return childMaterials;
         }
 
-        public static Int64 GetComponentManufacturingTime(List<Objects.MaterialsWithMarketData> mats, Objects.CalculationHelperClass helperClass)
+        public static decimal GetComponentManufacturingTime(List<Objects.MaterialsWithMarketData> mats, Objects.CalculationHelperClass helperClass)
         {
-            Int64 time = 0;
+            decimal time = 0;
             List<Int32> handledMats = new List<int>();
 
             foreach (Objects.MaterialsWithMarketData childMat in mats)
@@ -962,21 +963,22 @@ namespace EveHelperWF.ScreenHelper
         #region "Reaction Methods"
 
 
-        public static Int64 CalculateReactionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
+        public static decimal CalculateReactionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
-            Int64 time = 0;
+            decimal time = 0;
 
             Objects.IndustryActivityTypes industryActivity = activityTypes.Find(x => x.activityName == Enums.Enums.ActivityReactions);
             if (industryActivity != null)
             {
                 time = industryActivity.time;
                 //Runs
-                time *= helperClass.Runs;
 
-                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, time, 0, true, helperClass.ReactionsSkill,
+                time = CommonHelper.CalculateManufacturingReactionJobTime(industryActivity.typeID, industryActivity.time, 0, true, helperClass.ReactionsSkill,
                                                                           0, 0, 0,
                                                                           helperClass.ReactionsStructureTypeID, helperClass.ReactionStructureRigBonus.RigTEBonus, helperClass.ReactionSolarSystemID,
-                                                                          0);
+                                                                          0,
+                                                                          helperClass.Runs);
+                time *= helperClass.Runs;
             }
 
             return time;
@@ -1031,7 +1033,7 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        public static Int64 CalculateInventionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
+        public static decimal CalculateInventionTime(List<Objects.IndustryActivityTypes> activityTypes, Objects.CalculationHelperClass helperClass)
         {
             Int64 time = 0;
             decimal structureTEBonus = GetInventionStructureTEBonus(helperClass);
@@ -1312,7 +1314,7 @@ namespace EveHelperWF.ScreenHelper
         #endregion
 
         #region "ME and TE Research Methods"
-        public static Int64 GetMeResearchTime(long baseTime, CalculationHelperClass helperClass)
+        public static decimal GetMeResearchTime(long baseTime, CalculationHelperClass helperClass)
         {
             Int64 seconds = 0;
             double implantBonus = 1;

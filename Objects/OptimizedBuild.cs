@@ -21,7 +21,7 @@ namespace EveHelperWF.Objects
         public decimal TotalBuildCost { get; set; }
         public int BatchesNeeded { get; set; }
         public int MaxRunsPerBatch { get; set; }
-        public long TimePerRun { get; set; }
+        public decimal TimePerRun { get; set; }
         public int ExtraOutput { get; set; }
         public decimal JobCost { get; set; }
         public decimal PricePerItem { get;set; }

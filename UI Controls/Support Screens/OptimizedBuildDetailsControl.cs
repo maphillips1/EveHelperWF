@@ -36,7 +36,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
         private void BuildTimeLabel()
         {
-            long timeNeeded = OptimizedBuild.RunsNeeded * OptimizedBuild.TimePerRun;
+            decimal timeNeeded = OptimizedBuild.RunsNeeded * OptimizedBuild.TimePerRun;
             TotalTimeLabel.Text = ScreenHelper.BlueprintBrowserHelper.FormatTimeAsString(timeNeeded);
         }
 

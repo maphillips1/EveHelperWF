@@ -843,7 +843,7 @@ namespace EveHelperWF.ScreenHelper
             IndustryActivityTypes manuActivity = activities.Find(x => x.activityName == activityName);
 
 
-            long timePerRun = 0;
+            decimal timePerRun = 0;
             if (bpInfo.IsReacted)
             {
                 timePerRun = CommonHelper.CalculateManufacturingReactionJobTime(bpInfo.BlueprintTypeId,
@@ -857,7 +857,8 @@ namespace EveHelperWF.ScreenHelper
                                                                                      CommonHelper.GetReactionStructureTypeId(buildPlan.IndustrySettings, bpInfo),
                                                                                      CommonHelper.GetReactionTERig(buildPlan.IndustrySettings, bpInfo),
                                                                                      CommonHelper.GetReactionSolarSystemId(buildPlan.IndustrySettings, bpInfo),
-                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID);
+                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID,
+                                                                                     optimizedBuild.RunsNeeded);
             }
             else
             {
@@ -872,7 +873,8 @@ namespace EveHelperWF.ScreenHelper
                                                                                      CommonHelper.GetManufacturingStructureTypeId(buildPlan.IndustrySettings, bpInfo),
                                                                                      CommonHelper.GetManufacturingTERig(buildPlan.IndustrySettings, bpInfo),
                                                                                      CommonHelper.GetManufacturingSolarSystemId(buildPlan.IndustrySettings, bpInfo),
-                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID);
+                                                                                     buildPlan.IndustrySettings.ManufacturingImplantTypeID,
+                                                                                     optimizedBuild.RunsNeeded);
             }
             //days * hours * minutes * seconds;
             long maxTime = (30 * 24 * 60 * 60);
