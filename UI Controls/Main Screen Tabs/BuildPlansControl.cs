@@ -1642,35 +1642,41 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         quantityNeeded -= currentInventory.quantity;
                         if (quantityNeeded < 0) { quantityNeeded = 0; }
                     }
-                    pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
-                    tn = new TreeNode();
-                    tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                    tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
-                    tn.Tag = mat.materialTypeID;
+                    if (quantityNeeded > 0)
+                    {
+                        pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
+                        tn = new TreeNode();
+                        tn.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(mat);
+                        tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
+                        tn.Tag = mat.materialTypeID;
 
-                    pricePer = new TreeNode();
-                    pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
-                    pricePer.ForeColor = Color.White;
-                    tn.Nodes.Add(pricePer);
+                        pricePer = new TreeNode();
+                        pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
+                        pricePer.ForeColor = Color.White;
+                        tn.Nodes.Add(pricePer);
 
-                    priceTotal = new TreeNode();
-                    priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
-                    priceTotal.ForeColor = Color.White;
-                    totalGroupPrice += (quantityNeeded * pricedMat.pricePer);
-                    tn.Nodes.Add(priceTotal);
+                        priceTotal = new TreeNode();
+                        priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
+                        priceTotal.ForeColor = Color.White;
+                        totalGroupPrice += (quantityNeeded * pricedMat.pricePer);
+                        tn.Nodes.Add(priceTotal);
 
-                    decimal volume = inventoryType.volume * mat.quantityTotal;
-                    volumeNode = new TreeNode();
-                    volumeNode.ForeColor = Color.White;
-                    volumeNode.Text = volume.ToString("N2") + " m3";
-                    tn.Nodes.Add(volumeNode);
-                    totalVolume += volume;
+                        decimal volume = inventoryType.volume * mat.quantityTotal;
+                        volumeNode = new TreeNode();
+                        volumeNode.ForeColor = Color.White;
+                        volumeNode.Text = volume.ToString("N2") + " m3";
+                        tn.Nodes.Add(volumeNode);
+                        totalVolume += volume;
 
-                    marketGroupNode.Nodes.Add(tn);
+                        marketGroupNode.Nodes.Add(tn);
+                    }
 
                 }
                 marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
-                MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                if(marketGroupNode.Nodes.Count > 0)
+                {
+                    MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                }
                 totalPrice += totalGroupPrice;
             }
             ShippingCostControl.SetVolumeAndPrice(totalVolume, totalPrice);
@@ -1683,6 +1689,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadCurrentInventoryPage()
         {
+            CurrentInventoryGrid.EditableColumns = "Quantity";
             CurrentInventoryGrid.DatabindGridView(this.currentBuildPlan.CurrentInventory);
         }
 

@@ -50,6 +50,7 @@
             Label label56;
             Label label2;
             Label label3;
+            Label label4;
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -60,7 +61,6 @@
             DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            Label label4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiBuildPlansControl));
             SummaryPage = new TabPage();
             DeleteFinalProduct = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
@@ -169,6 +169,7 @@
             CurrentInventoryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             SummaryButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             TotalPlanCostLabel = new Label();
+            AddFromFitButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             label1 = new Label();
             label9 = new Label();
             label21 = new Label();
@@ -465,9 +466,21 @@
             label3.TabIndex = 33;
             label3.Text = "Final Products";
             // 
+            // label4
+            // 
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(803, 61);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 21);
+            label4.TabIndex = 33;
+            label4.Text = "Shipping Cost";
+            // 
             // SummaryPage
             // 
             SummaryPage.BackColor = Color.FromArgb(21, 21, 21);
+            SummaryPage.Controls.Add(AddFromFitButton);
             SummaryPage.Controls.Add(DeleteFinalProduct);
             SummaryPage.Controls.Add(EditFinalProductButton);
             SummaryPage.Controls.Add(AddFinalProductButton);
@@ -488,7 +501,7 @@
             DeleteFinalProduct.FlatAppearance.BorderSize = 0;
             DeleteFinalProduct.FlatStyle = FlatStyle.Flat;
             DeleteFinalProduct.ForeColor = Color.FromArgb(234, 234, 234);
-            DeleteFinalProduct.Location = new Point(442, 69);
+            DeleteFinalProduct.Location = new Point(582, 69);
             DeleteFinalProduct.Name = "DeleteFinalProduct";
             DeleteFinalProduct.Size = new Size(142, 23);
             DeleteFinalProduct.TabIndex = 37;
@@ -501,7 +514,7 @@
             EditFinalProductButton.FlatAppearance.BorderSize = 0;
             EditFinalProductButton.FlatStyle = FlatStyle.Flat;
             EditFinalProductButton.ForeColor = Color.FromArgb(234, 234, 234);
-            EditFinalProductButton.Location = new Point(283, 69);
+            EditFinalProductButton.Location = new Point(423, 69);
             EditFinalProductButton.Name = "EditFinalProductButton";
             EditFinalProductButton.Size = new Size(142, 23);
             EditFinalProductButton.TabIndex = 36;
@@ -542,7 +555,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -1492,11 +1505,12 @@
             // CurrentInventoryGrid
             // 
             CurrentInventoryGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CurrentInventoryGrid.BackgroundColor = Color.Black;
+            CurrentInventoryGrid.BackgroundColor = Color.FromArgb(21, 21, 21);
+            CurrentInventoryGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.ForeColor = Color.Gold;
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
@@ -1506,19 +1520,20 @@
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.Black;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(234, 234, 234);
             dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             CurrentInventoryGrid.DefaultCellStyle = dataGridViewCellStyle6;
             CurrentInventoryGrid.EnableHeadersVisualStyles = false;
-            CurrentInventoryGrid.GridColor = Color.Black;
+            CurrentInventoryGrid.GridColor = Color.FromArgb(21, 21, 21);
             CurrentInventoryGrid.Location = new Point(5, 90);
             CurrentInventoryGrid.Name = "CurrentInventoryGrid";
+            CurrentInventoryGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = SystemColors.Control;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(21, 21, 21);
             dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.ForeColor = Color.Gold;
             dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
@@ -1546,6 +1561,8 @@
             // 
             // ClearInventoryButton
             // 
+            ClearInventoryButton.FlatAppearance.BorderSize = 0;
+            ClearInventoryButton.FlatStyle = FlatStyle.Flat;
             ClearInventoryButton.ForeColor = Color.FromArgb(234, 234, 234);
             ClearInventoryButton.Location = new Point(5, 21);
             ClearInventoryButton.Name = "ClearInventoryButton";
@@ -1790,16 +1807,18 @@
             TotalPlanCostLabel.Size = new Size(0, 21);
             TotalPlanCostLabel.TabIndex = 61;
             // 
-            // label4
+            // AddFromFitButton
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(803, 61);
-            label4.Name = "label4";
-            label4.Size = new Size(107, 21);
-            label4.TabIndex = 33;
-            label4.Text = "Shipping Cost";
+            AddFromFitButton.FlatAppearance.BorderSize = 0;
+            AddFromFitButton.FlatStyle = FlatStyle.Flat;
+            AddFromFitButton.ForeColor = Color.FromArgb(234, 234, 234);
+            AddFromFitButton.Location = new Point(272, 69);
+            AddFromFitButton.Name = "AddFromFitButton";
+            AddFromFitButton.Size = new Size(142, 23);
+            AddFromFitButton.TabIndex = 38;
+            AddFromFitButton.Text = "Add Products From Fit";
+            AddFromFitButton.UseVisualStyleBackColor = false;
+            AddFromFitButton.Click += AddFromFitButton_Click;
             // 
             // MultiBuildPlansControl
             // 
@@ -2002,5 +2021,6 @@
         private DataGridViewTextBoxColumn jitaBuyPrice;
         private Label TotalVolumeLabel;
         private Support_Screens.ShippingCalculator ShippingCostControl;
+        private Objects.Custom_Controls.EveHelperButton AddFromFitButton;
     }
 }

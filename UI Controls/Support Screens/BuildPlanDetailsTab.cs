@@ -210,18 +210,25 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
                     foreach (OptimizedBuild build in optimumBuildGroups[key].OrderBy(x => x.BuiltOrReactedName))
                     {
-                        treeNode = new TreeNode();
-                        treeNode.Text = build.TotalQuantityNeeded.ToString("N0") + " x " + build.BuiltOrReactedName + " | Runs Needed: " + build.RunsNeeded;
-                        treeNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(build);
-                        treeNode.Tag = build.BuiltOrReactedTypeId;
-                        treeNode.Checked = this.CompletedBuilds.Contains(build.BuiltOrReactedTypeId);
-                        if (build.BatchesNeeded > 1)
+                        if (build.RunsNeeded > 0)
                         {
-                            treeNode.Text += " | Max Runs/Batch " + build.MaxRunsPerBatch + " | Batches Needed | " + build.BatchesNeeded;
-                        }
+                            treeNode = new TreeNode();
+                            treeNode.Text = build.TotalQuantityNeeded.ToString("N0") + " x " + build.BuiltOrReactedName + " | Runs Needed: " + build.RunsNeeded;
+                            treeNode.ForeColor = BuildPlanHelper.GetForeColorForMaterialCategory(build);
+                            treeNode.Tag = build.BuiltOrReactedTypeId;
+                            treeNode.Checked = this.CompletedBuilds.Contains(build.BuiltOrReactedTypeId);
+                            if (build.BatchesNeeded > 1)
+                            {
+                                treeNode.Text += " | Max Runs/Batch " + build.MaxRunsPerBatch + " | Batches Needed | " + build.BatchesNeeded;
+                            }
 
-                        AddTreeNodesForInputMats(build.InputMaterials, ref treeNode);
-                        keyNode.Nodes.Add(treeNode);
+                            AddTreeNodesForInputMats(build.InputMaterials, ref treeNode);
+                            keyNode.Nodes.Add(treeNode);
+                        }
+                    }
+                    if (keyNode.Nodes.Count == 0)
+                    {
+                        keyNode.Text += " Completed";
                     }
                     OptimizedBuildTreeView.Nodes.Add(keyNode);
                 }

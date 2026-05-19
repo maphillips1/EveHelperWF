@@ -1176,8 +1176,8 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
         private void AddMaterialToInputs(IndustryActivityMaterials material)
         {
             MaterialsWithMarketData currentMat = this.currentBuildPlan.InputMaterials.Find(x => x.materialTypeID == material.materialTypeID);
-            if (currentMat == null) 
-            { 
+            if (currentMat == null)
+            {
                 currentMat = new MaterialsWithMarketData();
                 currentMat.materialTypeID = material.materialTypeID;
                 currentMat.materialName = material.materialName;
@@ -1416,7 +1416,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         }
 
                         fp.profit = profit;
-                        
+
                         totalPlanCost += (fp.TotalOutcome * fp.CostPerItem);
                     }
                 }
@@ -1462,35 +1462,40 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         quantityNeeded -= currentInventory.quantity;
                         if (quantityNeeded < 0) { quantityNeeded = 0; }
                     }
-                    pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
-                    tn = new TreeNode();
-                    tn.ForeColor = MultiBuildPlanHelper.GetForeColorForMaterialCategory(mat);
-                    tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
-                    tn.Tag = mat.materialTypeID;
+                    if (quantityNeeded > 0)
+                    {
+                        pricedMat = this.currentBuildPlan.AllItems.Find(x => x.materialTypeID == mat.materialTypeID);
+                        tn = new TreeNode();
+                        tn.ForeColor = MultiBuildPlanHelper.GetForeColorForMaterialCategory(mat);
+                        tn.Text = quantityNeeded.ToString("N0") + " x " + mat.materialName + " Needed";
+                        tn.Tag = mat.materialTypeID;
 
-                    pricePer = new TreeNode();
-                    pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
-                    pricePer.ForeColor = Color.White;
-                    tn.Nodes.Add(pricePer);
+                        pricePer = new TreeNode();
+                        pricePer.Text = "Price Per: " + CommonHelper.FormatIsk(pricedMat.pricePer);
+                        pricePer.ForeColor = Color.White;
+                        tn.Nodes.Add(pricePer);
 
-                    priceTotal = new TreeNode();
-                    priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
-                    priceTotal.ForeColor = Color.White;
-                    totalGroupPrice += (quantityNeeded * pricedMat.pricePer);
-                    tn.Nodes.Add(priceTotal);
+                        priceTotal = new TreeNode();
+                        priceTotal.Text = "Price Total: " + CommonHelper.FormatIsk(quantityNeeded * pricedMat.pricePer);
+                        priceTotal.ForeColor = Color.White;
+                        totalGroupPrice += (quantityNeeded * pricedMat.pricePer);
+                        tn.Nodes.Add(priceTotal);
 
-                    decimal volume = inventoryType.volume * mat.quantityTotal;
-                    volumeNode = new TreeNode();
-                    volumeNode.ForeColor = Color.White;
-                    volumeNode.Text = volume.ToString("N2") + " m3";
-                    tn.Nodes.Add(volumeNode);
-                    totalVolume += volume;
+                        decimal volume = inventoryType.volume * mat.quantityTotal;
+                        volumeNode = new TreeNode();
+                        volumeNode.ForeColor = Color.White;
+                        volumeNode.Text = volume.ToString("N2") + " m3";
+                        tn.Nodes.Add(volumeNode);
+                        totalVolume += volume;
 
-                    marketGroupNode.Nodes.Add(tn);
-
+                        marketGroupNode.Nodes.Add(tn);
+                    }
                 }
                 marketGroupNode.Text += " - " + CommonHelper.FormatIskShortened(totalGroupPrice);
-                MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                if (marketGroupNode.Nodes.Count > 0)
+                {
+                    MaterialsPriceTreeView.Nodes.Add(marketGroupNode);
+                }
                 totalPrice += totalGroupPrice;
             }
             TotalVolumeLabel.Text = $"Total Volume: {totalVolume.ToString("N2")} m3";
@@ -1506,6 +1511,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
 
         private void LoadCurrentInventoryPage()
         {
+            CurrentInventoryGrid.EditableColumns = "Quantity";
             CurrentInventoryGrid.DatabindGridView(this.currentBuildPlan.CurrentInventory);
         }
 
@@ -1517,7 +1523,6 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
             LoadFinalProductNode();
             LoadManufcaturingNodes();
             LoadReactionNodes();
-
         }
 
         private void LoadFinalProductNode()
@@ -2149,7 +2154,7 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         {
                             LoadUIForBuildPlan();
                         }
-                            this.Cursor = Cursors.Default;
+                        this.Cursor = Cursors.Default;
                     }
                 }
             }
@@ -2165,11 +2170,40 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     if (MessageBox.Show("Are you sure you want to delete this product?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         this.currentBuildPlan.FinalProducts.Remove(fp);
-                        
+
                         this.Cursor = Cursors.WaitCursor;
                         RunCalcs();
                         this.Cursor = Cursors.Default;
                     }
+                }
+            }
+        }
+
+        private void AddFromFitButton_Click(object sender, EventArgs e)
+        {
+            if (this.currentBuildPlan != null)
+            {
+                AddFromFitForm addFitForm = new AddFromFitForm();
+                if (addFitForm.ShowDialog() == DialogResult.OK)
+                {
+                    bool shouldRunCalcs = false;
+                    this.Cursor = Cursors.WaitCursor;
+                    List<FinalProduct> addedProducts = addFitForm.finalProductBlueprints;
+                    foreach (FinalProduct product in addedProducts)
+                    {
+                        if (this.currentBuildPlan.FinalProducts.Find(x => x.finalProductTypeId == product.finalProductTypeId) == null)
+                        {
+                            this.currentBuildPlan.FinalProducts.Add(product);
+                            shouldRunCalcs = true;
+                            MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, this.currentBuildPlan.InputMaterials);
+                            LoadInputMaterialsForProduct(product.blueprintOrReactionTypeId);
+                        }
+                    }
+                    if (shouldRunCalcs)
+                    {
+                        RunCalcs();
+                    }
+                    this.Cursor = Cursors.Default;
                 }
             }
         }
