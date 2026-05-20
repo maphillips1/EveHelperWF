@@ -2194,13 +2194,14 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                         if (this.currentBuildPlan.FinalProducts.Find(x => x.finalProductTypeId == product.finalProductTypeId) == null)
                         {
                             this.currentBuildPlan.FinalProducts.Add(product);
-                            shouldRunCalcs = true;
-                            MultiBuildPlanHelper.BuildBlueprintStore(ref this.currentBuildPlan, this.currentBuildPlan.InputMaterials);
+                            MultiBuildPlanHelper.GetBlueprintsForMats(ref currentBuildPlan, product.blueprintOrReactionTypeId, product.finalProductTypeId);
                             LoadInputMaterialsForProduct(product.blueprintOrReactionTypeId);
+                            shouldRunCalcs = true;
                         }
                     }
                     if (shouldRunCalcs)
                     {
+                        FinalProductGridView.DatabindGridView(this.currentBuildPlan.FinalProducts);
                         RunCalcs();
                     }
                     this.Cursor = Cursors.Default;

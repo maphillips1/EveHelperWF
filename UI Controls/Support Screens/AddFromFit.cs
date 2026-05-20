@@ -31,20 +31,22 @@ namespace EveHelperWF.UI_Controls.Support_Screens
 
                 string[] lines = FitTextBox.Text.Split("\r\n", StringSplitOptions.None);
 
+                bool isShipName = false;
                 foreach (string line in lines)
                 {
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        string itemName;
+                        string itemName = line;
                         string quantityRegex = "x[0-9]+";
                         Match regMatch = Regex.Match(line, quantityRegex);
+                        if (!isShipName && line.StartsWith("["))
+                        {
+                            isShipName = true;
+                            itemName = line.Replace("[", "").Replace("]", "").Split(",", StringSplitOptions.None)[0];
+                        }
                         if (regMatch.Success)
                         {
                             itemName = line.Substring(0, (line.Length - regMatch.Length));
-                        }
-                        else
-                        {
-                            itemName = line;
                         }
                         InventoryType inventoryType = CommonHelper.InventoryTypes.Find(x => x.typeName == itemName.Trim());
 
@@ -99,7 +101,7 @@ namespace EveHelperWF.UI_Controls.Support_Screens
                         }
                     }
                 }
-
+                FinalProductGrid.DatabindGridView(this.finalProductBlueprints);
                 formattingText = false;
             }
         }
@@ -116,20 +118,6 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             this.Close();
         }
 
-        private static bool IsMaterialReacted(int materialTypeID)
-        {
-            bool reacted = false;
-
-            List<IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(materialTypeID, Enums.Enums.ActivityReactions);
-
-            if (products.Count > 0)
-            {
-                reacted = true;
-            }
-
-            return reacted;
-        }
-
         private static bool IsMaterialManufactured(int materialTypeID)
         {
             bool manufactured = false;
@@ -142,6 +130,21 @@ namespace EveHelperWF.UI_Controls.Support_Screens
             }
 
             return manufactured;
+        }
+
+        private void DeleteItem_Click(object sender, EventArgs e)
+        {
+            if (finalProductBlueprints.Count > 0)
+            {
+                if (FinalProductGrid.SelectedRows.Count > 0)
+                {
+                    foreach (DataGridViewRow selectedRow in FinalProductGrid.SelectedRows)
+                    {
+                        finalProductBlueprints.RemoveAt(selectedRow.Index);
+                    }
+                    FinalProductGrid.DatabindGridView(finalProductBlueprints);
+                }
+            }
         }
     }
 }

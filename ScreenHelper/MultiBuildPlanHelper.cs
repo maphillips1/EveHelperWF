@@ -4,6 +4,7 @@ using EveHelperWF.Objects.ESI_Objects.Market_Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -222,11 +223,11 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
-        private static bool IsMaterialReacted(int materialTypeID)
+        private static bool IsMaterialReacted(int bpID)
         {
             bool reacted = false;
 
-            List<IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(materialTypeID, Enums.Enums.ActivityReactions);
+            List<IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(bpID, Enums.Enums.ActivityReactions);
 
             if (products.Count > 0)
             {
@@ -236,11 +237,11 @@ namespace EveHelperWF.ScreenHelper
             return reacted;
         }
 
-        private static bool IsMaterialManufactured(int materialTypeID)
+        private static bool IsMaterialManufactured(int bpId)
         {
             bool manufactured = false;
 
-            List<IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(materialTypeID, Enums.Enums.ActivityManufacturing);
+            List<IndustryActivityProduct> products = Database.SQLiteCalls.GetIndustryActivityProducts(bpId, Enums.Enums.ActivityManufacturing);
 
             if (products.Count > 0)
             {
@@ -1179,98 +1180,86 @@ namespace EveHelperWF.ScreenHelper
             }
         }
 
+        public static bool GetBlueprintsForMats(ref MultiBuildPlan currentBuildPlan, int matBPId, int productTypeId)
+        {
+            bool addedBlueprints = false;
+
+            BlueprintInfo bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == matBPId);
+            InventoryType invType = null;
+            if (bpInfo == null)
+            {
+                bpInfo = new BlueprintInfo();
+                invType = CommonHelper.InventoryTypes.Find(x => x.typeId == productTypeId);
+                bpInfo.BlueprintTypeId = matBPId;
+                bpInfo.ProductTypeId = productTypeId;
+                bpInfo.BlueprintName = invType.typeName;
+                bpInfo.IsManufactured = IsMaterialManufactured(matBPId);
+                bpInfo.IsReacted = IsMaterialReacted(matBPId);
+                bpInfo.MaxRuns = Database.SQLiteCalls.GetMaxRunsForBP(matBPId);
+                bpInfo.Manufacture = true;
+                bpInfo.React = true;
+                if (bpInfo.IsManufactured)
+                {
+                    bpInfo.ME = 10;
+                    bpInfo.TE = 20;
+                }
+                currentBuildPlan.BlueprintStore.Add(bpInfo);
+                addedBlueprints = true;
+            }
+
+            List<IndustryActivityMaterials> baseMaterials;
+            if (bpInfo.IsManufactured)
+            {
+                baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(matBPId, Enums.Enums.ActivityManufacturing);
+            }
+            else
+            {
+                baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(matBPId, Enums.Enums.ActivityReactions);
+            }
+
+            int childBpId = 0;
+            BlueprintInfo childBP = null;
+            foreach (IndustryActivityMaterials baseMat in baseMaterials)
+            {
+                childBpId = Database.SQLiteCalls.GetBlueprintByProductTypeID(baseMat.materialTypeID);
+                if (childBpId != 0)
+                {
+                    childBP = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == childBpId);
+
+                    if (childBP== null)
+                    {
+                        invType = CommonHelper.InventoryTypes.Find(x => x.typeId == baseMat.materialTypeID);
+                        childBP = new BlueprintInfo();
+                        childBP.BlueprintTypeId = childBpId;
+                        childBP.ProductTypeId = baseMat.materialTypeID;
+                        childBP.BlueprintName = invType.typeName;
+                        childBP.IsManufactured = IsMaterialManufactured(childBpId);
+                        childBP.IsReacted = IsMaterialReacted(childBpId);
+                        childBP.MaxRuns = Database.SQLiteCalls.GetMaxRunsForBP(childBpId);
+                        childBP.Manufacture = true;
+                        childBP.React = true;
+                        if (childBP.IsManufactured)
+                        {
+                            childBP.ME = 10;
+                            childBP.TE = 20;
+                        }
+                        currentBuildPlan.BlueprintStore.Add(childBP);
+                        addedBlueprints = true;
+                    }
+                    GetBlueprintsForMats(ref currentBuildPlan, childBpId, baseMat.materialTypeID);
+                }
+            }
+
+            return addedBlueprints;
+        }
+
         public static bool BuildBlueprintStore(ref MultiBuildPlan currentBuildPlan, List<MaterialsWithMarketData> currentMats)
         {
             bool addedBlueprint = false;
-            int blueprintTypeId = 0;
-            BlueprintInfo bpInfo;
-            InventoryType invType;
-            foreach (MaterialsWithMarketData mat in currentMats)
-            {
-                if (mat.Buildable || mat.Reactable)
-                {
-                    blueprintTypeId = Database.SQLiteCalls.GetBlueprintByProductTypeID(mat.materialTypeID);
-                    if (blueprintTypeId > 0)
-                    {
-                        bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == blueprintTypeId);
-                        if (bpInfo == null)
-                        {
-                            bpInfo = new BlueprintInfo();
-                            invType = CommonHelper.InventoryTypes.Find(x => x.typeId == blueprintTypeId);
-                            bpInfo.BlueprintTypeId = blueprintTypeId;
-                            bpInfo.ProductTypeId = mat.materialTypeID;
-                            bpInfo.BlueprintName = invType.typeName;
-                            bpInfo.IsManufactured = mat.Buildable;
-                            bpInfo.IsReacted = mat.Reactable;
-                            bpInfo.MaxRuns = 100000;
-                            if (mat.Buildable)
-                            {
-                                bpInfo.ME = 10;
-                                bpInfo.TE = 20;
-                            }
-                            currentBuildPlan.BlueprintStore.Add(bpInfo);
-                            addedBlueprint = true;
-                        }
-                    }
-                    List<MaterialsWithMarketData> inputMats = new List<MaterialsWithMarketData>();
-                    List<IndustryActivityMaterials> baseMaterials;
-                    if (mat.Buildable)
-                    {
-                        baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintTypeId, Enums.Enums.ActivityManufacturing);
-                    }
-                    else
-                    {
-                        baseMaterials = Database.SQLiteCalls.GetIndustryActivityMaterials(blueprintTypeId, Enums.Enums.ActivityReactions);
-                    }
-
-                    MaterialsWithMarketData outputMat;
-                    foreach (IndustryActivityMaterials baseMat in baseMaterials)
-                    {
-                        outputMat = inputMats.Find(x => x.materialTypeID == baseMat.materialTypeID);
-                        if (outputMat == null)
-                        {
-                            outputMat = new MaterialsWithMarketData();
-                            outputMat.materialTypeID = baseMat.materialTypeID;
-                            outputMat.materialName = baseMat.materialName;
-                            mat.ChildMaterials.Add(outputMat);
-                        }
-                        outputMat.quantity = baseMat.quantity;
-                        outputMat.Buildable = baseMat.isManufacturable;
-                        outputMat.Reactable = baseMat.isReactable;
-                        outputMat.quantityPerRun = baseMat.quantity; //This will be adjusted later by the ME calculations. For now, set it to base mat quantity
-                    }
-
-                    if (BuildBlueprintStore(ref currentBuildPlan, mat.ChildMaterials))
-                    {
-                        addedBlueprint = true;
-                    }
-                }
-            }
+           
             foreach (FinalProduct fp in currentBuildPlan.FinalProducts)
             {
-                int finalProdBPId = fp.blueprintOrReactionTypeId;
-                int finalProdId = fp.finalProductTypeId;
-                bpInfo = currentBuildPlan.BlueprintStore.Find(x => x.BlueprintTypeId == finalProdBPId);
-                if (bpInfo == null)
-                {
-                    invType = CommonHelper.InventoryTypes.Find(x => x.typeId == finalProdId);
-                    bpInfo = new BlueprintInfo();
-                    bpInfo.BlueprintTypeId = finalProdBPId;
-                    bpInfo.ProductTypeId = finalProdId;
-                    bpInfo.BlueprintName = invType.typeName;
-                    bpInfo.IsManufactured = IsMaterialManufactured(finalProdBPId);
-                    bpInfo.IsReacted = IsMaterialReacted(finalProdBPId);
-                    bpInfo.MaxRuns = 100000;
-                    bpInfo.Manufacture = true;
-                    bpInfo.React = true;
-                    if (bpInfo.IsManufactured)
-                    {
-                        bpInfo.ME = 10;
-                        bpInfo.TE = 20;
-                    }
-                    currentBuildPlan.BlueprintStore.Add(bpInfo);
-                    addedBlueprint = true;
-                }
+                addedBlueprint = (GetBlueprintsForMats(ref currentBuildPlan, fp.blueprintOrReactionTypeId, fp.finalProductTypeId) || addedBlueprint);
             }
             return addedBlueprint;
         }

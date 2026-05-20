@@ -664,6 +664,11 @@ namespace EveHelperWF.Database
         {
             return "select etn.en, TDA.typeId, da.name, tda.*\r\nfrom typeDogmaAttribute TDA\r\ninner join dogmaAttribute DA\r\n    on da.attributeId = tda.attributeId\r\ninner join eveTypeName etn\r\n    on etn.parenttypeid = tda.typeId\r\nwhere tda.attributeId = 1034";
         }
+
+        private static string GetMaxRunsForBlueprint(int blueprintTypeId)
+        {
+            return $"Select * from Blueprints where blueprintTypeID = {blueprintTypeId.ToString()}";
+        }
         #endregion
 
         #region "Public Functions"
@@ -1688,6 +1693,30 @@ namespace EveHelperWF.Database
             }
 
             return comboItems;
+        }
+
+        public static int GetMaxRunsForBP(int blueprintTypeId)
+        {
+            int maxruns = 1;
+
+            string dbpath = GetSQLitePath();
+            using (var db = new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand command = new SqliteCommand(GetMaxRunsForBlueprint(blueprintTypeId), db);
+
+                SqliteDataReader query = command.ExecuteReader();
+
+                ComboListItem comboItem = null;
+                while (query.Read())
+                {
+                    
+                    maxruns = query.GetInt32(1);
+                }
+            }
+
+            return maxruns;
         }
 
         public static List<List<Object>> RunCustomQuery(string queryToRun)
