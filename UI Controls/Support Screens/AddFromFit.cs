@@ -109,6 +109,10 @@ namespace EveHelperWF.UI_Controls.Support_Screens
         private void SaveButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
+            foreach (FinalProduct products in finalProductBlueprints)
+            {
+                products.NumOfCopies = (int)RunsUpDown.Value;
+            }
             this.Close();
         }
 

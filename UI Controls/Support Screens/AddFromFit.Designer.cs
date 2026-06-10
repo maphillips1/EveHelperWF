@@ -36,10 +36,13 @@
             SaveButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             CancelButton = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             FinalProductGrid = new EveHelperWF.Objects.Custom_Controls.EveHelperGridView();
-            DeleteItem = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
             finalProductTypeName = new DataGridViewTextBoxColumn();
+            DeleteItem = new EveHelperWF.Objects.Custom_Controls.EveHelperButton();
+            RunsUpDown = new NumericUpDown();
+            label1 = new Label();
             InfoLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)FinalProductGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)RunsUpDown).BeginInit();
             SuspendLayout();
             // 
             // InfoLabel
@@ -109,7 +112,7 @@
             FinalProductGrid.Columns.AddRange(new DataGridViewColumn[] { finalProductTypeName });
             FinalProductGrid.EnableHeadersVisualStyles = false;
             FinalProductGrid.GridColor = Color.FromArgb(21, 21, 21);
-            FinalProductGrid.Location = new Point(12, 360);
+            FinalProductGrid.Location = new Point(12, 312);
             FinalProductGrid.Name = "FinalProductGrid";
             FinalProductGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -124,12 +127,18 @@
             FinalProductGrid.Size = new Size(901, 299);
             FinalProductGrid.TabIndex = 4;
             // 
+            // finalProductTypeName
+            // 
+            finalProductTypeName.DataPropertyName = "finalProductTypeName";
+            finalProductTypeName.HeaderText = "Blueprint Name";
+            finalProductTypeName.Name = "finalProductTypeName";
+            // 
             // DeleteItem
             // 
             DeleteItem.FlatAppearance.BorderSize = 0;
             DeleteItem.FlatStyle = FlatStyle.Flat;
             DeleteItem.ForeColor = Color.FromArgb(234, 234, 234);
-            DeleteItem.Location = new Point(12, 331);
+            DeleteItem.Location = new Point(12, 283);
             DeleteItem.Name = "DeleteItem";
             DeleteItem.Size = new Size(197, 23);
             DeleteItem.TabIndex = 5;
@@ -137,17 +146,32 @@
             DeleteItem.UseVisualStyleBackColor = false;
             DeleteItem.Click += DeleteItem_Click;
             // 
-            // finalProductTypeName
+            // RunsUpDown
             // 
-            finalProductTypeName.DataPropertyName = "finalProductTypeName";
-            finalProductTypeName.HeaderText = "Blueprint Name";
-            finalProductTypeName.Name = "finalProductTypeName";
+            RunsUpDown.Location = new Point(112, 642);
+            RunsUpDown.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            RunsUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            RunsUpDown.Name = "RunsUpDown";
+            RunsUpDown.Size = new Size(120, 23);
+            RunsUpDown.TabIndex = 6;
+            RunsUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 644);
+            label1.Name = "label1";
+            label1.Size = new Size(94, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Number of Runs";
             // 
             // AddFromFitForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(933, 743);
+            Controls.Add(label1);
+            Controls.Add(RunsUpDown);
             Controls.Add(DeleteItem);
             Controls.Add(FinalProductGrid);
             Controls.Add(CancelButton);
@@ -160,6 +184,7 @@
             Name = "AddFromFitForm";
             Text = "Add From Fit";
             ((System.ComponentModel.ISupportInitialize)FinalProductGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)RunsUpDown).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -172,5 +197,7 @@
         private Objects.Custom_Controls.EveHelperGridView FinalProductGrid;
         private Objects.Custom_Controls.EveHelperButton DeleteItem;
         private DataGridViewTextBoxColumn finalProductTypeName;
+        private NumericUpDown RunsUpDown;
+        private Label label1;
     }
 }

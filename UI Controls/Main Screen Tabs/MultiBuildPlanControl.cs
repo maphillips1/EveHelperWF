@@ -2189,14 +2189,21 @@ namespace EveHelperWF.UI_Controls.Main_Screen_Tabs
                     bool shouldRunCalcs = false;
                     this.Cursor = Cursors.WaitCursor;
                     List<FinalProduct> addedProducts = addFitForm.finalProductBlueprints;
+                    FinalProduct currentFinalProduct = null;
                     foreach (FinalProduct product in addedProducts)
                     {
-                        if (this.currentBuildPlan.FinalProducts.Find(x => x.finalProductTypeId == product.finalProductTypeId) == null)
+                        currentFinalProduct = this.currentBuildPlan.FinalProducts.Find(x => x.finalProductTypeId == product.finalProductTypeId);
+                        if (currentFinalProduct == null)
                         {
                             this.currentBuildPlan.FinalProducts.Add(product);
                             MultiBuildPlanHelper.GetBlueprintsForMats(ref currentBuildPlan, product.blueprintOrReactionTypeId, product.finalProductTypeId);
                             LoadInputMaterialsForProduct(product.blueprintOrReactionTypeId);
                             shouldRunCalcs = true;
+                        }
+                        else
+                        {
+                            currentFinalProduct.NumOfCopies += product.NumOfCopies;
+                            currentFinalProduct.TotalOutcome = currentFinalProduct.RunsPerCopy * currentFinalProduct.NumOfCopies;
                         }
                     }
                     if (shouldRunCalcs)
